@@ -28,6 +28,7 @@
  * *** NOTE: this code has been altered to print out messages using the
  *           GNU `gettext' NLS functions. ***
  * Modified by Thomas Esken <esken@uni-muenster.de>, 17-Sep-1996, for Gcal.
+ * Modified by Thomas Esken <esken@uni-muenster.de>, 09-Feb-1999, for Gcal.
  */
 
 
@@ -41,17 +42,16 @@
 
 
 #if USE_RC
-#include "gcal.h"
-#include "regexp.h"
-#if !HAVE_STRCSPN
-IMPORT char *
-my_strcspn __P_((const char *s1,
-                 const char *s2));
-#endif /* !HAVE_STRCSPN */
+#  include "common.h"
+#  include "rc-defs.h"
+#  include "regexp.h"
+#  if !HAVE_STRCSPN
+IMPORT char *my_strcspn __P_((const char *s1, const char *s2));
+#  endif /* !HAVE_STRCSPN */
 
 #if 0
-#include <stdio.h>
-#include "regexp.h"
+#  include <stdio.h>
+#  include "regexp.h"
 char *strchr();
 #endif
 
@@ -251,7 +251,7 @@ char *exp;
 	/* Small enough for pointer-storage convention? */
 	if (regsize >= 32767L)		/* Probably could be 65535L. */
 #if USE_DE
-    FAIL("regul"AE"rer Ausdruck zu gro"SZ);
+		FAIL("regul"AE"rer Ausdruck zu gro"SZ);
 #else /* !USE_DE */
 		FAIL(_("regexp too big"));
 #endif /* !USE_DE */

@@ -1,8 +1,9 @@
 /*
-*  rc-utils.c:  Pool of special functions necessary for managing the fixed dates.
+*  rc-utils.c:  Pool of special functions necessary for managing
+*               the fixed dates.
 *
 *
-*  Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1994-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -35,7 +36,7 @@
 
 #if USE_RC
 #  ifdef RCSID
-static char rcsid[]="$Id: rc-utils.c 2.40 1997/04/19 02:04:00 tom Exp $";
+static char rcsid[]="$Id: rc-utils.c 3.00 2000/03/21 03:00:00 tom Exp $";
 #  endif
 
 
@@ -46,339 +47,46 @@ static char rcsid[]="$Id: rc-utils.c 2.40 1997/04/19 02:04:00 tom Exp $";
 #  if HAVE_CTYPE_H
 #    include <ctype.h>
 #  endif
+#  if HAVE_UNISTD_H
+#    include <unistd.h>
+#  endif
 #  if HAVE_MATH_H && HAVE_LIBM
 #    include <math.h>
 #  endif
-#  include "gcal.h"
+#  include "common.h"
+#  include "rc-defs.h"
+#  include "globals.h"
+#  include "file-io.h"
+#  include "hd-astro.h"
+#  include "hd-use.h"
+#  include "help.h"
+#  include "rc-astro.h"
+#  include "tty.h"
+#  include "utils.h"
+#  include "rc-utils.h"
 
 
 
 /*
-*  Function prototypes.
+*  LOCAL functions prototypes.
 */
-#  if __cplusplus
-extern "C"
-{
-#  endif
-/*
-************************************************** Defined in `help.c'.
-*/
-IMPORT char *
-usage_msg __P_((void));
-IMPORT void
-put_longopt_description __P_((FILE *fp));
-/*
-************************************************** Defined in `holiday.c'.
-*/
-IMPORT int
-eval_holiday __P_((      int  day,
-                   const int  month,
-                   const int  year,
-                   const int  wd,
-                   const Bool forwards));
-/*
-************************************************** Defined in `tty.c'.
-*/
-IMPORT void
-print_text __P_((FILE *fp,
-                 char *text_line));
-/*
-************************************************** Defined in `utils.c'.
-*/
-IMPORT VOID_PTR
-my_malloc __P_((const int   amount,
-                const int   exit_status,
-                const char *module_name,
-                const long  module_line,
-                const char *var_name,
-                const int   var_contents));
-IMPORT VOID_PTR
-my_realloc __P_((      VOID_PTR  ptr_memblock,
-                 const int       amount,
-                 const int       exit_status,
-                 const char     *module_name,
-                 const long      module_line,
-                 const char     *var_name,
-                 const int       var_contents));
-IMPORT void
-resize_all_strings __P_((const int   amount,
-                         const Bool  with_line_buffer,
-                         const char *module_name,
-                         const long  module_line));
-IMPORT void
-my_error __P_((const int   exit_status,
-               const char *module_name,
-               const long  module_line,
-               const char *var_name,
-               const int   var_contents));
-IMPORT void
-my_exit __P_((const int exit_status));
-IMPORT int
-my_atoi __P_((const char *s));
-IMPORT int
-compare_d_m_name __P_((const char       *s,
-                       const Cmode_enum  mode));
-IMPORT const char *
-month_name __P_((const int month));
-IMPORT Ulint
-date2num __P_((const int day,
-               const int month,
-               const int year));
-IMPORT Bool
-doy2date __P_((      int  doy,
-               const int  is_leap_year,
-                     int *day,
-                     int *month));
-IMPORT int
-weekday_of_date __P_((const int day,
-                      const int month,
-                      const int year));
-IMPORT int
-day_of_year __P_((const int day,
-                  const int month,
-                  const int year));
-IMPORT int
-days_of_february __P_((const int year));
-IMPORT Bool
-valid_date __P_((const int day,
-                 const int month,
-                 const int year));
-IMPORT int
-weekno2doy __P_((      int week,
-                 const int year));
-IMPORT int
-knuth_easter_formula __P_((const int year));
+__BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `rc-utils.c'.
 */
-#  if HAVE_V8_REGCOMP
-EXPORT void
-regerror __P_((char *msg));
-#  endif
-EXPORT Bool
-rc_valid_day __P_((const char *date_text,
-                   const int   day,
-                   const int   month,
-                   const int   year));
-EXPORT Bool
-rc_valid_period __P_((      char *date_text,
-                      const int   d,
-                      const int   m,
-                      const int   y,
-                      const int   incr_year,
-                      const int   decr_year));
-EXPORT void
-rc_clean_flags __P_((void));
-EXPORT Line_struct *
-rc_get_date __P_((      char        *the_line,
-                        Line_struct *lineptrs,
-                  const Bool         is_rc_file,
-                        Bool        *is_weekday_mode,
-                        int         *d,
-                        int         *m,
-                        int         *y,
-                        int         *n,
-                        int         *len,
-                        char        *hc,
-                        int         *hn,
-                        int         *hwd,
-                  const char        *filename,
-                  const long         line_number,
-                  const char        *line_buffer,
-                  const Bool         on_error_exit));
-EXPORT Bool
-precomp_nth_wd __P_((      int         diff,
-                     const int         wd,
-                           int        *n,
-                           int        *day,
-                           int        *month,
-                           int        *year,
-                     const Cmode_enum  mode));
-EXPORT Bool
-precomp_date __P_((      int         diff,
-                   const int         wd,
-                         int        *day,
-                         int        *month,
-                   const int         year,
-                   const Cmode_enum  mode));
-EXPORT Bool
-set_dvar __P_((const char        *line_buffer,
-                     Line_struct *lineptrs,
-               const char        *filename,
-               const long         line_number,
-               const Dvar_enum    mode));
-EXPORT Bool
-set_tvar __P_((const char      *line_buffer,
-               const Tvar_enum  mode));
-EXPORT void
-nth_weekday_of_month __P_((      int  *d,
-                                 int  *m,
-                                 int  *y,
-                           const int  *n,
-                                 Bool *is_weekday_mode));
-EXPORT Bool
-prev_date __P_((int *day,
-                int *month,
-                int *year));
-EXPORT Bool
-next_date __P_((int *day,
-                int *month,
-                int *year));
-EXPORT void
-num2date __P_((Ulint  julian_days,
-               int   *day,
-               int   *month,
-               int   *year));
-EXPORT Slint
-d_between __P_((const int d1,
-                const int m1,
-                const int y1,
-                const int d2,
-                const int m2,
-                const int y2));
-EXPORT Slint
-w_between __P_((const int d1,
-                const int m1,
-                const int y1,
-                const int d2,
-                const int m2,
-                const int y2));
-EXPORT Slint
-m_between __P_((const int m1,
-                const int y1,
-                const int m2,
-                const int y2));
-EXPORT void
-manage_leap_day __P_((      int  *day,
-                            int  *month,
-                            int   year,
-                      const char *line_buffer,
-                      const char *filename,
-                      const long  line_number));
-EXPORT char *
-biorhythm __P_((const Bool  create_bar,
-                      int   axis_len,
-                      char *string,
-                const int   day,
-                const int   month,
-                const int   year,
-                const int   birth_day,
-                const int   birth_month,
-                const int   birth_year,
-                const char *emo_text,
-                      int  *emo_phase,
-                      int  *emo_waxes,
-                const char *int_text,
-                      int  *int_phase,
-                      int  *int_waxes,
-                const char *phy_text,
-                      int  *phy_phase,
-                      int  *phy_waxes,
-                      int  *critical_day,
-                      int  *positive_day,
-                      int  *negative_day));
-#  if HAVE_LIBM
-LOCAL double
-kepler __P_((      double m,
-             const double ecc));
-LOCAL double
-phase __P_((const double julian_date));
-EXPORT int
-the_phase __P_((      Bool *is_full_new,
-                const int   day,
-                const int   month,
-                const int   year,
-                const int   hour,
-                const int   min));
-#  else /* !HAVE_LIBM */
-LOCAL double
-moonphase __P_((const int day,
-                const int month,
-                const int year,
-                const int hour,
-                const int min));
-EXPORT int
-the_moonphase __P_((      Bool *is_full_new,
-                          int   day,
-                          int   month,
-                          int   year,
-                    const int   hour,
-                    const int   min));
-#  endif /* !HAVE_LIBM */
-EXPORT void
-draw_moon __P_((const int    age,
-                const int    lines,
-                      char **string));
-LOCAL int
-moon_charpos __P_((const double x,
-                   const int    lines));
-#  if !HAVE_LIBM
-LOCAL Ulint
-my_fac __P_((Slint n));
-LOCAL double
-my_pow __P_((double x,
-             int    n));
-LOCAL double
-my_sqrt __P_((double x));
-LOCAL double
-my_sin __P_((double x));
-LOCAL double
-my_cos __P_((double x));
-#  endif /* !HAVE_LIBM */
 LOCAL void
-dvar_warning __P_((const int   exit_status,
-                   const int   dvar,
-                   const char *line_buffer,
-                   const char *filename,
-                   const long  line_number));
-#  if __cplusplus
-}
-#  endif
+var_warning __P_((const int   exit_status,
+                  const int   var_name,
+                  const char *line_buffer,
+                  const char *filename,
+                  const long  line_number));
+__END_DECLARATIONS
 
 
 
 /*
-*  Declare public(extern) variables.
+*  Function implementations.
 */
-IMPORT const int    dvec[];                  /* Amount of days in months */
-IMPORT const int    mvec[];                  /* Number of past days of month */
-IMPORT Greg_struct *greg;                    /* Points to the used Gregorian Reformation date */
-IMPORT Dvar_struct  rc_dvar[];               /* Date variables a[=`mmdd']...z[] (`yyyy'@{a|b|...|z}[[-]<n>]) */
-IMPORT Tvar_struct  rc_tvar[];               /* Text variables $a[=TEXT]...$z[] */
-IMPORT Line_struct *lptrs3;                  /* Pointers to different parts of a (resource file) line */
-IMPORT Uint         maxlen_max;              /* Actual size of all string vectors */
-IMPORT int          len_year_max;            /* String length of the maximum year able to compute */
-IMPORT int          warning_level;           /* --debug[=0...WARN_LVL_MAX] */
-IMPORT int          start_day;               /* -s<0,1...7|day name> */
-IMPORT int          day;                     /* Current day */
-IMPORT int          month;                   /* Current month */
-IMPORT int          year;                    /* Current year */
-IMPORT int          act_day;                 /* Actual day */
-IMPORT int          act_month;               /* Actual month */
-IMPORT int          fiscal_month;            /* Starting month of a fiscal year */
-IMPORT int          is_leap_year;            /* Is current year a leap year? */
-IMPORT char         hd_ldays[];              /* Vector of holiday dates (legal days) */
-IMPORT char         hd_mdays[];              /* Vector of holiday dates (memorial days) */
-IMPORT char        *prgr_name;               /* Stores the actual program name */
-IMPORT char        *s5;                      /* General purpose text buffer */
-IMPORT char        *rc_filter_text;          /* REGEX used for filtering fixed date */
-IMPORT Bool         rc_period_flag;          /* [-c]<<<<n>>[<d|w|+|-]>|`mmdd'|`mmww[w]'<n>> */
-IMPORT Bool         rc_period_list;          /* [-c]l */
-IMPORT Bool         rc_tomorrow_flag;        /* [-c]t */
-IMPORT Bool         rc_week_flag;            /* [-c]w */
-IMPORT Bool         rc_month_flag;           /* [-c]m */
-IMPORT Bool         rc_year_flag;            /* [-c]y */
-IMPORT Bool         rc_week_year_flag;       /* [-c<<n>>]w */
-IMPORT Bool         rc_forwards_flag;        /* [-c<<n>|w|m|y>]+ */
-IMPORT Bool         rc_backwards_flag;       /* [-c<<n>|w|m|y>]- */
-IMPORT Bool         rc_feb_29_to_feb_28;     /* `--leap-day=february' given */
-IMPORT Bool         rc_feb_29_to_mar_01;     /* `--leap-day=march' given */
-IMPORT Bool         is_3month_mode;          /* Argument is `.' or `.+' or `.-' */
-IMPORT Bool         is_3month_mode2;         /* Argument is `..' -> current quarter of actual year */
-IMPORT Bool         adate_set;               /* [-c]<n>w and actual date modified */
-
-
-
 #  if HAVE_V8_REGCOMP
    PUBLIC void
 regerror (msg)
@@ -387,7 +95,7 @@ regerror (msg)
    Enables terminating error message in case an illegal V8-REGEX pattern is specified.
 */
 {
-   my_error (104, msg, 0L, rc_filter_text, 0);
+   my_error (ERR_INVALID_REGEX_PATTERN, msg, 0L, rc_filter_text, 0);
 }
 #  endif /* HAVE_V8_REGCOMP */
 
@@ -416,7 +124,7 @@ rc_valid_day (date_text, day, month, year)
    static         Bool   exclusive_weekday_map[DAY_MAX+1];
 
 
-   for (i=1 ; i <= DAY_MAX ; i++)
+   for (i=DAY_MIN ; i <= DAY_MAX ; i++)
      inclusive_weekday_map[i] = !(exclusive_weekday_map[i] = TRUE);
    *inclusive_weekday_map = *exclusive_weekday_map = FALSE;
    while (*ptr_date_text)
@@ -446,7 +154,6 @@ rc_valid_day (date_text, day, month, year)
             {
               exclusive_weekday_map[wd] = FALSE;
               *exclusive_weekday_map = TRUE;
-              break;
             }
            break;
          case RC_EX_NLHDY_CHAR:
@@ -481,14 +188,14 @@ rc_valid_day (date_text, day, month, year)
            /*
               %exclude_monday special text found.
            */
-           exclusive_weekday_map[1] = FALSE;
+           exclusive_weekday_map[DAY_MIN] = FALSE;
            *exclusive_weekday_map = TRUE;
            break;
          case RC_EX_NMON_CHAR:
            /*
               %exclude_no_monday special text found.
            */
-           *inclusive_weekday_map=inclusive_weekday_map[1] = TRUE;
+           *inclusive_weekday_map=inclusive_weekday_map[DAY_MIN] = TRUE;
            break;
          case RC_EX_TUE_CHAR:
            /*
@@ -559,14 +266,14 @@ rc_valid_day (date_text, day, month, year)
            /*
               %exclude_sunday special text found.
            */
-           exclusive_weekday_map[7] = FALSE;
+           exclusive_weekday_map[DAY_MAX] = FALSE;
            *exclusive_weekday_map = TRUE;
            break;
          case RC_EX_NSUN_CHAR:
            /*
               %exclude_no_sunday special text found.
            */
-           *inclusive_weekday_map=inclusive_weekday_map[7] = TRUE;
+           *inclusive_weekday_map=inclusive_weekday_map[DAY_MAX] = TRUE;
            break;
          case RC_EX_MON_2_THU_CHAR:
            /*
@@ -688,7 +395,7 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
    /*
       Initialize the tables.
    */
-   for (i=1 ; i < DAY_LAST+2 ; i++)
+   for (i=DAY_MIN ; i < DAY_LAST+2 ; i++)
      inclusive_date_map[i] = !(exclusive_date_map[i] = TRUE);
    *inclusive_date_map = *exclusive_date_map = FALSE;
    while (*ptr_date_text)
@@ -722,15 +429,13 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
       if (yy == SPECIAL_VALUE)
        {
 #  if USE_DE
-         fprintf(stderr, "%s: ung%sltiges Datum angegeben -- %s\n%s\n",
-                 prgr_name, UE, date_text, usage_msg ());
+         fprintf(stderr, "%s: ung%sltiges Datum angegeben -- %s\n%s\n%s\n",
+                 prgr_name, UE, date_text, usage_msg (), lopt_msg ());
 #  else /* !USE_DE */
-         fprintf(stderr, _("%s: invalid date given -- %s\n%s\n"),
-                 prgr_name, date_text, usage_msg ());
+         fprintf(stderr, _("%s: invalid date given -- %s\n%s\n%s\n"),
+                 prgr_name, date_text, usage_msg (), lopt_msg ());
 #  endif /* !USE_DE */
-         put_longopt_description (stderr);
-         S_NEWLINE(stderr);
-         my_exit (126);
+         my_exit (ERR_INVALID_OPTION);
        }
       *ptr_date_text = ch;
       if (is_range)
@@ -751,15 +456,13 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
          if (ryy == SPECIAL_VALUE)
           {
 #  if USE_DE
-            fprintf(stderr, "%s: ung%sltiges Datum angegeben -- %s\n%s\n",
-                    prgr_name, UE, date_text, usage_msg ());
+            fprintf(stderr, "%s: ung%sltiges Datum angegeben -- %s\n%s\n%s\n",
+                    prgr_name, UE, date_text, usage_msg (), lopt_msg ());
 #  else /* !USE_DE */
-            fprintf(stderr, _("%s: invalid date given -- %s\n%s\n"),
-                    prgr_name, date_text, usage_msg ());
+            fprintf(stderr, _("%s: invalid date given -- %s\n%s\n%s\n"),
+                    prgr_name, date_text, usage_msg (), lopt_msg ());
 #  endif /* !USE_DE */
-            put_longopt_description (stderr);
-            S_NEWLINE(stderr);
-            my_exit (126);
+            my_exit (ERR_INVALID_OPTION);
           }
          *ptr_date_text = ch;
        }
@@ -846,16 +549,16 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
          default:
            if (islower(hhc))
             {
-              if (rc_dvar[IDX(hhc)].l.month)
+              if (rc_dvar[IDX(hhc)].dvar_local.dvar_month)
                {
-                 mm = (int)rc_dvar[IDX(hhc)].l.month;
-                 dd = (int)rc_dvar[IDX(hhc)].l.day;
+                 mm = (int)rc_dvar[IDX(hhc)].dvar_local.dvar_month;
+                 dd = (int)rc_dvar[IDX(hhc)].dvar_local.dvar_day;
                }
               else
-                if (rc_dvar[IDX(hhc)].g.month)
+                if (rc_dvar[IDX(hhc)].dvar_global.dvar_month)
                  {
-                   mm = (int)rc_dvar[IDX(hhc)].g.month;
-                   dd = (int)rc_dvar[IDX(hhc)].g.day;
+                   mm = (int)rc_dvar[IDX(hhc)].dvar_global.dvar_month;
+                   dd = (int)rc_dvar[IDX(hhc)].dvar_global.dvar_day;
                  }
               if (   !dflt_yy_set
                   && (fiscal_month > MONTH_MIN))
@@ -903,16 +606,16 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
          default:
            if (islower(rhc))
             {
-              if (rc_dvar[IDX(rhc)].l.month)
+              if (rc_dvar[IDX(rhc)].dvar_local.dvar_month)
                {
-                 rmm = (int)rc_dvar[IDX(rhc)].l.month;
-                 rdd = (int)rc_dvar[IDX(rhc)].l.day;
+                 rmm = (int)rc_dvar[IDX(rhc)].dvar_local.dvar_month;
+                 rdd = (int)rc_dvar[IDX(rhc)].dvar_local.dvar_day;
                }
               else
-                if (rc_dvar[IDX(rhc)].g.month)
+                if (rc_dvar[IDX(rhc)].dvar_global.dvar_month)
                  {
-                   rmm = (int)rc_dvar[IDX(rhc)].g.month;
-                   rdd = (int)rc_dvar[IDX(rhc)].g.day;
+                   rmm = (int)rc_dvar[IDX(rhc)].dvar_global.dvar_month;
+                   rdd = (int)rc_dvar[IDX(rhc)].dvar_global.dvar_day;
                  }
               if (   !dflt_ryy_set
                   && (fiscal_month > MONTH_MIN))
@@ -1041,7 +744,7 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
            rdd = dvec[rmm-1];
        }
       /*
-         If "n'th weekday of month" entry set, compute the according date.
+         If "N'th weekday of month" entry set, compute the according date.
       */
       if (nn)
         nth_weekday_of_month (&dd, &mm, &yy, &nn, &is_weekday_mode);
@@ -1076,7 +779,7 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
          /*
             If starting date of event not greater than ending
               date of event, mark the period in according map,
-              otherwise ignore the %... special text completely.
+              otherwise ignore the %?... special text completely.
          */
          num = d_between (dd, mm, yy, rdd, rmm, ryy);
          if (num >= 0L)
@@ -1176,18 +879,19 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
    const char        *line_buffer;
    const Bool         on_error_exit;
 /*
-   Converts the textual/string `date' of a RC-file line to a numerical date
+   Converts the textual/string `date' of a RC-file line into a numerical date
      and returns a pointer struct to the "day"-part and the "text"-part of the
      line indicating whether the "day"-part contains a list or a range of days;
      a char pointer to the "repeat"-field and to the "appears"-field if these
      exists, and/or if a @... or *... day is encoded in "date"-part and year
      is set to zero in the line, then this function returns holiday_mode_char
-     (==date variable) or upper case characters 'D' or 'W' in &hc, the day
-     displacement in &hn and a possible weekday name (mo...su) converted to a
-     number (1...7) in &hwd for further managing of such a line.  If any invalid
-     date is given in line, then this function either returns SPECIAL_VALUE in &y or leaves
-     the complete program with an error message (depending on mode of operation
-     resp., contents of `on_error_exit' variable).
+     (==date variable) or upper-case characters 'D' or 'W' in `&hc', the day
+     displacement in `&hn' and a possible weekday name (mo...su) converted to
+     a number (1...7) in `&hwd' for further managing of such a line.  If any
+     invalid date is given in `the_line', then this function either returns
+     SPECIAL_VALUE in &y or aborts the program with an error message
+     (depending on mode of operation resp., contents of `on_error_exit'
+     variable).
 */
 {
    register int    num_of_range_chars=0;
@@ -1256,7 +960,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
            Error, invalid month field.
         */
         if (on_error_exit)
-          my_error (122, filename, line_number, line_buffer, *m);
+          my_error (ERR_INVALID_MONTH_FIELD, filename, line_number, line_buffer, *m);
         *y = SPECIAL_VALUE;
       }
    /*
@@ -1295,8 +999,8 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
          }
     }
    /*
-      If the special value "99" for a month `m' is given,
-        set the month to 12 (december).
+      If the special value "99" for a month `&m' is given,
+        set the month to 12 (December).
    */
    if (*m == 99)
      *m = MONTH_MAX;
@@ -1317,13 +1021,13 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
          Error, invalid month field given.
       */
       if (on_error_exit)
-        my_error (122, filename, line_number, line_buffer, *m);
+        my_error (ERR_INVALID_MONTH_FIELD, filename, line_number, line_buffer, *m);
       *y = SPECIAL_VALUE;
     }
    /*
-      Get the day (maximum 3 characters in this case, template is either `dd', `ww'  or `www')
+      Get the day (maximum 3 characters in this case, template is either DD, WW  or WWW)
         resp., @... date variable or *... statement (maximum 7 characters in this case,
-        template is: [+|-]nnn`www').
+        template is: [+|-]NNNWWW).
    */
    ptr_char=lineptrs->day_part = the_line;
    i = 0;
@@ -1388,7 +1092,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
            /*
               Error, invalid list/range of days.
            */
-           my_error (123, filename, line_number, line_buffer, 0);
+           my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
          /*
             Check if a day variable is referenced.
          */
@@ -1401,18 +1105,18 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                  else try to assign a global date variable if there is set any,
                  otherwise we have to skip this part.
             */
-            if (   rc_dvar[IDX(*hc)].l.month
-                || rc_dvar[IDX(*hc)].g.month)
+            if (   rc_dvar[IDX(*hc)].dvar_local.dvar_month
+                || rc_dvar[IDX(*hc)].dvar_global.dvar_month)
              {
-               if (rc_dvar[IDX(*hc)].l.month)
+               if (rc_dvar[IDX(*hc)].dvar_local.dvar_month)
                 {
-                  *m = (int)rc_dvar[IDX(*hc)].l.month;
-                  *d = (int)rc_dvar[IDX(*hc)].l.day;
+                  *m = (int)rc_dvar[IDX(*hc)].dvar_local.dvar_month;
+                  *d = (int)rc_dvar[IDX(*hc)].dvar_local.dvar_day;
                 }
                else
                 {
-                  *m = (int)rc_dvar[IDX(*hc)].g.month;
-                  *d = (int)rc_dvar[IDX(*hc)].g.day;
+                  *m = (int)rc_dvar[IDX(*hc)].dvar_global.dvar_month;
+                  *d = (int)rc_dvar[IDX(*hc)].dvar_global.dvar_day;
                 }
              }
             else
@@ -1422,7 +1126,8 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                */
                if (   (warning_level >= 0)
                    && on_error_exit)
-                 dvar_warning (113, (int)*hc, line_buffer, filename, line_number);
+                 var_warning (ERR_INVALID_VAR_REFERENCE, (int)*hc,
+                              line_buffer, filename, line_number);
                *y = SPECIAL_VALUE;
              }
           }
@@ -1443,7 +1148,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
             Error, list/range of days is given in an expression it may not occur.
          */
          if (on_error_exit)
-           my_error (123, filename, line_number, line_buffer, 0);
+           my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
          *y = SPECIAL_VALUE;
        }
     }
@@ -1458,7 +1163,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
               it may not occur.
          */
          if (on_error_exit)
-           my_error (123, filename, line_number, line_buffer, 0);
+           my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
          *y = SPECIAL_VALUE;
        }
       else
@@ -1469,7 +1174,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
               Error, "repeat" or "appears" coding given twice or more.
            */
            if (on_error_exit)
-             my_error (123, filename, line_number, line_buffer, 0);
+             my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
            *y = SPECIAL_VALUE;
          }
       lineptrs->day_part = (char *)NULL;
@@ -1483,7 +1188,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
        {
          /*
             Check for simple textual day name (either two or three characters),
-              template `ww' or `www'.
+              template WW or WWW.
          */
          if (!*d)
           {
@@ -1506,7 +1211,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                      Error, invalid day field.
                   */
                   if (on_error_exit)
-                    my_error (121, filename, line_number, line_buffer, *d);
+                    my_error (ERR_INVALID_DAY_FIELD, filename, line_number, line_buffer, *d);
                   *y = SPECIAL_VALUE;
                 }
              }
@@ -1519,11 +1224,11 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                  Error, invalid day field.
               */
               if (on_error_exit)
-                my_error (121, filename, line_number, line_buffer, *d);
+                my_error (ERR_INVALID_DAY_FIELD, filename, line_number, line_buffer, *d);
               *y = SPECIAL_VALUE;
             }
          /*
-            Check whether a "n'th weekday of month" field exists.
+            Check whether a "N'th weekday of month" field exists.
          */
          if (   *the_line
              && !isspace(*the_line))
@@ -1537,10 +1242,10 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                       && (*n < 9))
                    {
                      /*
-                        Error, invalid "n'th weekday of month" field.
+                        Error, invalid "N'th weekday of month" field.
                      */
                      if (on_error_exit)
-                       my_error (117, filename, line_number, line_buffer, *n);
+                       my_error (ERR_INVALID_NWD_FIELD, filename, line_number, line_buffer, *n);
                      *y = SPECIAL_VALUE;
                    }
                 }
@@ -1550,10 +1255,11 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                   && (lineptrs->appears_part == (char *)NULL))
                {
                  /*
-                    Error, missing separator between "date"-part and "text"-part.
+                    Error, missing separator between "date"-part
+                      and "text"-part.
                  */
                  if (on_error_exit)
-                   my_error (116, filename, line_number, line_buffer, 0);
+                   my_error (ERR_NO_SEPARATOR_CHAR, filename, line_number, line_buffer, 0);
                  *y = SPECIAL_VALUE;
                }
             if (*the_line)
@@ -1567,7 +1273,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                   Error, missing separator between "date"-part and "text"-part.
                */
                if (on_error_exit)
-                 my_error (116, filename, line_number, line_buffer, 0);
+                 my_error (ERR_NO_SEPARATOR_CHAR, filename, line_number, line_buffer, 0);
                *y = SPECIAL_VALUE;
              }
             if (   *n
@@ -1575,10 +1281,11 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                     || *d > DAY_MAX))
              {
                /*
-                  Error, "n'th weekday of month" entry set but invalid day encoded.
+                  Error, "N'th weekday of month" entry set
+                    but invalid day encoded.
                */
                if (on_error_exit)
-                 my_error (121, filename, line_number, line_buffer, *d);
+                 my_error (ERR_INVALID_DAY_FIELD, filename, line_number, line_buffer, *d);
                *y = SPECIAL_VALUE;
              }
             (*len)++;
@@ -1602,16 +1309,17 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
              && (lineptrs->appears_part == (char *)NULL))
           {
             /*
-               Error, missing separator character between "date"-part and "text"-part.
+               Error, missing separator character between "date"-part
+                 and "text"-part.
             */
             if (on_error_exit)
-              my_error (116, filename, line_number, line_buffer, 0);
+              my_error (ERR_NO_SEPARATOR_CHAR, filename, line_number, line_buffer, 0);
             *y = SPECIAL_VALUE;
           }
          /*
             Compute the base date of '@' date variable "date"-part of line
-              or '*' n'th weekday of year/weekday `ww[w]' of n'th week
-              in case an explicit year `yyyy' is given in "date"-part.
+              or '*' N'th weekday of year/weekday WW[W] of N'th week
+              in case an explicit year YYYY is given in the "date"-part.
          */
          i = atoi(str7);
          ptr_char = str7;
@@ -1628,7 +1336,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                   Error, simple weekday name or invalid sign given.
                */
                if (on_error_exit)
-                 my_error (123, filename, line_number, line_buffer, 0);
+                 my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                *hc = '\0';
                *d = 0;
                *y = SPECIAL_VALUE;
@@ -1642,7 +1350,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                  Error, invalid sign given.
               */
               if (on_error_exit)
-                my_error (123, filename, line_number, line_buffer, 0);
+                my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
               *hc = '\0';
               *d = 0;
               *y = SPECIAL_VALUE;
@@ -1663,7 +1371,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                   Error, invalid textual short day name given.
                */
                if (on_error_exit)
-                 my_error (123, filename, line_number, line_buffer, 0);
+                 my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                *hc = '\0';
                *d = 0;
                *y = SPECIAL_VALUE;
@@ -1680,14 +1388,10 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                   if (!*y)
                    {
                      /*
-                        No explicit year `yyyy' given in "date"-part of line.
+                        No explicit year YYYY given in "date"-part of line.
                      */
                      *hn = i;
-                     if (*hc == RC_EASTER_CHAR)
-                      {
-                        *d = 0;
-                        *m = 0;
-                      }
+                     *d=(*m) = 0;
                    }
                   else
                    {
@@ -1707,27 +1411,27 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                {
                  /*
                     Try to assign a local date variable if there is set any,
-                      else try to assign a global date variable if there is set any,
-                      otherwise we have to skip this part.
+                      else try to assign a global date variable if there is
+                      set any, otherwise we have to skip this part.
                  */
-                 if (   rc_dvar[IDX(*hc)].l.month
-                     || rc_dvar[IDX(*hc)].g.month)
+                 if (   rc_dvar[IDX(*hc)].dvar_local.dvar_month
+                     || rc_dvar[IDX(*hc)].dvar_global.dvar_month)
                   {
-                    if (rc_dvar[IDX(*hc)].l.month)
+                    if (rc_dvar[IDX(*hc)].dvar_local.dvar_month)
                      {
-                       *m = (int)rc_dvar[IDX(*hc)].l.month;
-                       *d = (int)rc_dvar[IDX(*hc)].l.day;
+                       *m = (int)rc_dvar[IDX(*hc)].dvar_local.dvar_month;
+                       *d = (int)rc_dvar[IDX(*hc)].dvar_local.dvar_day;
                      }
                     else
                      {
-                       *m = (int)rc_dvar[IDX(*hc)].g.month;
-                       *d = (int)rc_dvar[IDX(*hc)].g.day;
+                       *m = (int)rc_dvar[IDX(*hc)].dvar_global.dvar_month;
+                       *d = (int)rc_dvar[IDX(*hc)].dvar_global.dvar_day;
                      }
                     if (!precomp_date (i, *hwd, d, m, *y, DVar))
                      {
                        if (!*y)
                          /*
-                            No explicit year `yyyy' given in "date"-part of line.
+                            No explicit year YYYY given in "date"-part of line.
                          */
                          *hn = i;
                        else
@@ -1750,7 +1454,8 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                     */
                     if (   (warning_level >= 0)
                         && on_error_exit)
-                      dvar_warning (113, (int)*hc, line_buffer, filename, line_number);
+                      var_warning (ERR_INVALID_VAR_REFERENCE, (int)*hc,
+                                   line_buffer, filename, line_number);
                     *hc = '\0';
                     *d = 0;
                     *y = SPECIAL_VALUE;
@@ -1761,13 +1466,13 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                     || *hc == 'W')
                  {
                    /*
-                      Try to compute the '*' n'th weekday of year resp.,
-                        weekday `ww[w]' of n'th week statement.
+                      Try to compute the '*' N'th weekday of year resp.,
+                        weekday WW[W] of N'th week statement.
                    */
                    if (*y == 0)
                     {
                       /*
-                         No explicit year `yyyy' given in "date"-part of line.
+                         No explicit year YYYY given in "date"-part of line.
                       */
                       *hn = i;
                       *d = 0;
@@ -1780,12 +1485,13 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
                  }
                 else
                   /*
-                     Error, either an invalid date variable character trails the holiday
-                       mode character '@', or an invalid character trails the "n'th weekday
-                       of year" resp., weekday `ww[w]' of "n'th week mode" character '*'.
+                     Error, either an invalid date variable character trails
+                       the holiday mode character '@', or an invalid character
+                       trails the "N'th weekday of year" resp., weekday
+                       WW[W] of "N'th week mode" character '*'.
                   */
                   if (on_error_exit)
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
           }
          if (   lineptrs->repeat_part != (char *)NULL
              || lineptrs->appears_part != (char *)NULL)
@@ -1800,11 +1506,11 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
        }
     }
    /*
-      Now let's allocate memory for all pointers to texts of the `lineptrs' structure
-        if we work on a resource/include file (except `text_part').  That's absolutely
-        necessary because after a potential resizing of "all strings" elsewhere in a later
-        part of the program, these pointers could get lost otherwise.  The caller has to
-        free this memory!
+      Now let's allocate memory for all pointers to texts of the `lineptrs'
+        structure if we work on a resource/include file (except `text_part').
+        That's absolutely necessary because after a potential resizing of
+        "all strings" elsewhere in a later part of the program, these pointers
+        could get lost otherwise.  The caller has to free this memory!
    */
    if (is_rc_file)
     {
@@ -1824,8 +1530,8 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
             ptr_char++;
           }
          ptr_char = lineptrs->day_part;
-         lineptrs->day_part = (char *)my_malloc (i+1,
-                                                 124, __FILE__, ((long)__LINE__)-1,
+         lineptrs->day_part = (char *)my_malloc (i+1, ERR_NO_MEMORY_AVAILABLE,
+                                                 __FILE__, ((long)__LINE__)-1L,
                                                  "lineptrs->day_part", 0);
          strncpy(lineptrs->day_part, ptr_char, i);
          lineptrs->day_part[i] = '\0';
@@ -1846,8 +1552,8 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
             ptr_char++;
           }
          ptr_char = lineptrs->repeat_part;
-         lineptrs->repeat_part = (char *)my_malloc (i+1,
-                                                    124, __FILE__, ((long)__LINE__)-1,
+         lineptrs->repeat_part = (char *)my_malloc (i+1, ERR_NO_MEMORY_AVAILABLE,
+                                                    __FILE__, ((long)__LINE__)-1L,
                                                     "lineptrs->repeat_part", 0);
          strncpy(lineptrs->repeat_part, ptr_char, i);
          lineptrs->repeat_part[i] = '\0';
@@ -1868,8 +1574,8 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
             ptr_char++;
           }
          ptr_char = lineptrs->appears_part;
-         lineptrs->appears_part = (char *)my_malloc (i+1,
-                                                     124, __FILE__, ((long)__LINE__)-1,
+         lineptrs->appears_part = (char *)my_malloc (i+1, ERR_NO_MEMORY_AVAILABLE,
+                                                     __FILE__, ((long)__LINE__)-1L,
                                                      "lineptrs->appears_part", 0);
          strncpy(lineptrs->appears_part, ptr_char, i);
          lineptrs->appears_part[i] = '\0';
@@ -1902,12 +1608,15 @@ precomp_nth_wd (diff, wd, n, day, month, year, mode)
          int        *year;
    const Cmode_enum  mode;
 /*
-   Precomputes the date of the "n'th absolute weekday" `wd' of the year
-     or the date on weekday `wd' of the "n'th absolute week" of the year,
-     and return TRUE in case date exits in year, otherwise FALSE.
+   Precomputes the date of the "N'th absolute weekday" `wd' of the year
+     or the date of weekday `wd' of the "N'th absolute week" of the year
+     (returned in `&day', `&month' and `&year'; if `&year' is not concrete
+     the computed `diff' is returned by `&n'), and returns TRUE in case such
+     a date exits in the year, otherwise FALSE.
 */
 {
-   register int  j=0;
+   register int  the_diff=diff;
+   register int  j=DAY_LAST+(days_of_february (*year)==29);
    auto     int  i=0;
 
 
@@ -1919,10 +1628,10 @@ precomp_nth_wd (diff, wd, n, day, month, year, mode)
          *month = MONTH_MIN;
          if (wd)
           {
-            if (   diff == WEEK_MAX+1
-                || diff == 99)
+            if (   the_diff == WEEK_MAX+1
+                || the_diff == 99)
              {
-               i = diff;
+               i = the_diff;
                diff = WEEK_MAX;
              }
           }
@@ -1932,20 +1641,40 @@ precomp_nth_wd (diff, wd, n, day, month, year, mode)
                If a special value "999" for `diff' is given,
                  set it to last day of year (365|366).
             */
-            if (diff == 999)
-              diff = DAY_LAST + (days_of_february (*year) == 29);
+            if (the_diff == 999)
+              diff = j;
             i = diff--;
           }
        }
       else
        {
+         register int  k=(iso_week_number) ? DAY_MIN : start_day;
+
+
          /*
             `mode' == WEek.
          */
-         j = diff;
-         diff=i = weekno2doy (diff, *year);
+         diff=i = weekno2doy (the_diff, *year, iso_week_number, k);
          if (diff > DAY_MIN)
-           diff--;
+          {
+            diff--;
+            k = j - diff;
+            if (iso_week_number)
+              j = wd;
+            else
+              j = SYEAR(wd, start_day);
+            /*
+               If a weekday of the LAST week (==99) is wanted, but this
+                 weekday doesn't exist anymore in the last week of the
+                 current year by reason it is already located in the next
+                 year, let's use the last date at which this weekday occurs
+                 in the current year instead.
+            */
+            if (   (the_diff == 99)
+                && (*year != YEAR_MAX)
+                && (j > k))
+                  diff -= DAY_MAX;
+          }
          else
            diff = 1;
          if (doy2date (diff, (days_of_february (*year)==29), day, month))
@@ -1957,7 +1686,7 @@ precomp_nth_wd (diff, wd, n, day, month, year, mode)
       if (!*year)
        {
          /*
-            No explicit year `yyyy' given in "date"-part of line.
+            No explicit year YYYY given in "date"-part of line.
          */
          *day = 0;
          *month = 0;
@@ -1984,12 +1713,12 @@ precomp_nth_wd (diff, wd, n, day, month, year, mode)
 
          if (i)
            for (diff=DAY_MIN ; diff <= DAY_MAX ; diff++)
-             next_date (day, month, year);
+             (void)next_date (day, month, year);
          if (   (   (*day <= DAY_MAX)
                  && (*year != year_old))
              || weekday_of_date (DAY_MIN, MONTH_MIN, *year) == wd)
            for (diff=DAY_MIN ; diff <= DAY_MAX ; diff++)
-             prev_date (day, month, year);
+             (void)prev_date (day, month, year);
          if (i == WEEK_MAX+1)
           {
             i = DAY_MIN;
@@ -1999,7 +1728,7 @@ precomp_nth_wd (diff, wd, n, day, month, year, mode)
                 && (weekday_of_date (DAY_MIN, MONTH_MIN, *year) != wd))
              {
                /*
-                  Error, no such 53rd weekday `ww[w]' of year.
+                  Error, no such 53rd weekday WW[W] of year.
                */
                *day = 0;
                *month = 0;
@@ -2014,7 +1743,7 @@ precomp_nth_wd (diff, wd, n, day, month, year, mode)
         */
         if (   !wd
             || i < DAY_MIN
-            || (   (j <= 1)
+            || (   (the_diff <= 1)
                 && (*day == DAY_MAX+1)
                 && (wd == DAY_MIN)))
          {
@@ -2029,7 +1758,7 @@ precomp_nth_wd (diff, wd, n, day, month, year, mode)
            if (*day < DAY_MIN)
             {
               /*
-                 Error, n'th week doesn't contain such a weekday `ww[w]'.
+                 Error, N'th week doesn't contain such a weekday WW[W].
               */
               *day = 0;
               *month = 0;
@@ -2054,9 +1783,10 @@ precomp_date (diff, wd, day, month, year, mode)
    const Cmode_enum  mode;
 /*
    Precomputes the date relative to Easter Sunday's date (mode==EAster),
-     relative to Today's date (mode==TOday) or relative to date variables
+     relative to today's date (mode==TOday) or relative to date variables
      date (mode==DVar) plus displacement `diff' or displacement `diff' `wd'
-     and return TRUE in case date exits in year, otherwise FALSE.
+     (returned in `&day' and `&month'), and returns TRUE in case such a date
+     exits in the year, otherwise FALSE.
 */
 {
    register int  i;
@@ -2078,6 +1808,7 @@ precomp_date (diff, wd, day, month, year, mode)
          case TOday:
            *day = act_day;
            *month = act_month;
+           /* Fallthrough. */
          default:
            if (!valid_date (*day, *month, year))
              /*
@@ -2131,7 +1862,7 @@ precomp_date (diff, wd, day, month, year, mode)
                   auto     int  y=year;
 
 
-                  doy2date (i, (days_of_february (y)==29), &d, &m);
+                  (void)doy2date (i, (days_of_february (y)==29), &d, &m);
                   act_wd = weekday_of_date (d, m, y);
                   if (act_wd != wd)
                    {
@@ -2142,7 +1873,7 @@ precomp_date (diff, wd, day, month, year, mode)
                         */
                         while (act_wd != wd)
                          {
-                           prev_date (&d, &m, &y);
+                           (void)prev_date (&d, &m, &y);
                            act_wd = weekday_of_date (d, m, y);
                            i--;
                          }
@@ -2155,7 +1886,7 @@ precomp_date (diff, wd, day, month, year, mode)
                         */
                         while (act_wd != wd)
                          {
-                           next_date (&d, &m, &y);
+                           (void)next_date (&d, &m, &y);
                            act_wd = weekday_of_date (d, m, y);
                            i++;
                          }
@@ -2195,88 +1926,97 @@ precomp_date (diff, wd, day, month, year, mode)
 
 
 
-   PUBLIC Bool
+   PUBLIC void
 set_dvar (line_buffer, lineptrs, filename, line_number, mode)
    const char        *line_buffer;
          Line_struct *lineptrs;
    const char        *filename;
    const long         line_number;
-   const Dvar_enum    mode;
+   const Var_enum     mode;
 /*
    Scans given string `line_buffer' and tries to detect a valid date variable
      reference, which can be:
-       1) `dvar'=           (NOTHING)  --> Undefine local `dvar' so we are able to use
-                                             its global value.  If `mode' is set to "GLobal",
-                                             this "empty" assignment results an error. 
-       2) `dvar'=`mmdd'                --> Assignment of a constant date expression `mmdd'.
-       3) `dvar'=`mmww[w]'<n>          --> Assignment of a dynamic date expression.
-                                             n'th weekday `ww[w]' of month `mm'.
-       4) `dvar'=*d<n>[`ww[w]']        --> Assignment of a dynamic date expression
-                                             n'th weekday `ww[w]' of year.
-       5) `dvar'=*w<n>[`ww[w]']        --> Assignment of a dynamic date expression
-                                             weekday `ww[w]' of n'th week of year.
-       6) `dvar'=`dvar'                --> Assignment of a date variable `dvar',
-                                             which must be already defined.
-       7) `dvar'=`dvar'[+|-]<n>        --> Assignment of a date variable `dvar', which must be already
-                                             defined, advanced by plus/minus <n> days.
-       8) `dvar'=`dvar'[+|-]<n>`ww[w]' --> Assignment of a date variable `dvar', which must be already
-                                             defined, advanced by plus/minus <n> weekdays `ww[w]'.
-       9) `dvar'++                     --> Simple incrementation.
-      10) `dvar'--                     --> Simple decrementation.
-      11) `dvar'+=<n>                  --> Addition of a constant numeric factor <n>.
-      12) `dvar'-=<n>                  --> Subtraction of a constant numeric factor <n>.
-      13) `dvar'+=<n>`ww[w]'           --> Addition of <n> weekdays `ww[w]'.
-      14) `dvar'-=<n>`ww[w]'           --> Subtraction of <n> weekdays `ww[w]'.
-     A date variable name is valid from a...d, f...s and u...z (24 variables totally,
-     case-insensitive), because the `e' variable is always reserved for the current
-     Easter Sunday's date and the `t' variable is always reserved for today's date,
-     so we must skip any reference to these variables.
+       1) DVAR=``NOTHING''     --> Undefine local DVAR so we are able to use
+                                     its global value.  If `mode' is set to
+                                     "GLobal", this "empty" assignment results
+                                     an error.
+       2) DVAR=MMDD            --> Assignment of a constant date expression
+                                     MMDD.
+       3) DVAR=MMWW[W]N        --> Assignment of a dynamic date expression
+                                     N'th weekday WW[W] of month MM.
+       4) DVAR=*dN[WW[W]]      --> Assignment of a dynamic date expression
+                                     N'th weekday WW[W] of year.
+       5) DVAR=*wN[WW[W]]      --> Assignment of a dynamic date expression
+                                     weekday WW[W] of N'th week of year.
+       6) DVAR=DVAR            --> Assignment of a date variable DVAR,
+                                     which must be already defined.
+       7) DVAR=DVAR[+|-]N      --> Assignment of a date variable DVAR,
+                                     which must be already defined, plus/minus
+                                     N days.
+       8) DVAR=DVAR[+|-]NWW[W] --> Assignment of a date variable DVAR,
+                                     which must be already defined, plus/minus
+                                     N weekdays WW[W].
+       9) DVAR++               --> Simple incrementation by one day.
+      10) DVAR--               --> Simple decrementation by one day.
+      11) DVAR+=[+|-]N         --> Addition of a constant numeric
+                                     factor [+|-]N.
+      12) DVAR-=[+|-]N         --> Subtraction of a constant numeric
+                                     factor [+|-]N.
+      13) DVAR+=[+|-]NWW[W]    --> Addition of [+|-]N weekdays WW[W].
+      14) DVAR-=[+|-]NWW[W]    --> Subtraction of [+|-]N weekdays WW[W].
+     A date variable name is valid from a...d, f...s and u...z (24 variables
+     totally, case-insensitive), because the `e' variable is always reserved
+     for the current Easter Sunday's date and the `t' variable is always
+     reserved for today's date, so we must skip any reference to these
+     variables.
      No whitespace characters may occur between the date variable, operator
      and value.  Stores assignment (1)...(8) at position `date variable'
      into global date variable vector `rc_dvar[]' (either the local or the
      global ones, depending on given `mode', which can be either "GLobal"
-     or "LOcal".  Assignments (1), (3)...(5), (7), (8) and operations (9)...(14)
-     may be used ONLY in local date variables.  Returns FALSE if an error
-     occurs, otherwise TRUE.
+     or "LOcal".  Assignment (1), (3)...(5), (7), (8) and operation
+     (9)...(14) may ONLY be used on local date variables.
 */
 {
-   auto         int    i;
-   auto         int    len;
-   auto         int    d=0;
-   auto         int    m=0;
-   auto         int    y=year;
-   auto         int    n;
-   auto         char   op;
-   auto         char   op2;
-   auto   const char  *ptr_char=line_buffer;
-   static       char   str20[21];
-   auto         Bool   is_error=FALSE;
-   auto         Bool   is_weekday_mode;
-   auto         Bool   dvar_with_displacement=FALSE;
-   auto         Bool   dvar_inc_dec=FALSE;
-   auto         Bool   dvar_add_sub=FALSE;
-   auto         Bool   skip_dvar_assign=FALSE;
+   register int   error=0;
+   auto     char  dvar='\0';
 
 
    /*
       Skip and return error if invalid date variable name is given.
    */
-   if (   isalpha(*ptr_char)
-       && (tolower(*ptr_char) != RC_EASTER_CHAR)
-       && (tolower(*ptr_char) != RC_TODAY_CHAR))
+   if (   isalpha(*line_buffer)
+       && (tolower(*line_buffer) != RC_EASTER_CHAR)
+       && (tolower(*line_buffer) != RC_TODAY_CHAR))
     {
+      auto         int    i;
+      auto         int    len;
+      auto         int    d=0;
+      auto         int    m=0;
+      auto         int    y=year;
+      auto         int    n;
+      auto   const char  *ptr_char=line_buffer;
+      auto         char   op;
+      auto         char   op2;
+      static       char   str20[21];
+      auto         Bool   is_weekday_mode;
+      auto         Bool   dvar_with_displacement=FALSE;
+      auto         Bool   dvar_add_sub=FALSE;
+      auto         Bool   dvar_inc_dec=FALSE;
+
+
       ptr_char++;
       /*
          Check if assignment (1)...(8) is given.
       */
-      if (*ptr_char != *RC_DVAR_ASSIGN)
+      if (*ptr_char != *RC_VAR_ASSIGN)
        {
-         if (   (*ptr_char != *RC_DVAR_ADD)
-             && (*ptr_char != *RC_DVAR_SUB))
+         if (   (*ptr_char != *RC_VAR_ADD)
+             && (*ptr_char != *RC_VAR_SUB))
            /*
-              Error, invalid first operator character found (no '+' or '-' given).
+              Error, invalid first operator character found
+                (neither '+' nor '-' given).
            */
-           is_error = TRUE;
+           error = ERR_ILLEGAL_VAR_DEFINITION;
          else
           {
             /*
@@ -2287,12 +2027,10 @@ set_dvar (line_buffer, lineptrs, filename, line_number, mode)
              {
                op2 = *ptr_char++;
                if (   op2 == op
-                   || op2 == *RC_DVAR_ASSIGN)
+                   || op2 == *RC_VAR_ASSIGN)
                 {
-                  if (mode == GLobal)
-                    m = (int)rc_dvar[IDX(*line_buffer)].g.month;
-                  else
-                    m = (int)rc_dvar[IDX(*line_buffer)].l.month;
+                  if (mode == LOcal)
+                    m = (int)rc_dvar[IDX(*line_buffer)].dvar_local.dvar_month;
                   if (m)
                    {
                      if (op == op2)
@@ -2303,43 +2041,68 @@ set_dvar (line_buffer, lineptrs, filename, line_number, mode)
                           /*
                              Error, found invalid trailing characters.
                           */
-                          is_error = TRUE;
+                          error = ERR_ILLEGAL_VAR_OPERATION;
                         else
                           /*
-                             Either 'dvar++' or 'dvar--' found.
+                             Either DVAR++ or DVAR-- found.
                           */
                           dvar_inc_dec = TRUE;
                       }
                      else
-                       /*
-                          Either 'dvar+=...' or 'dvar-=...' found.
-                       */
-                       dvar_add_sub = TRUE;
-                     if (!is_error)
+                      {
+                        /*
+                           Either DVAR+=... or DVAR-=... found.
+                        */
+                        dvar_add_sub = TRUE;
+                        /*
+                           Respect a trailing sign of the value.
+                        */
+                        if (   *ptr_char == *RC_VAR_ADD
+                            || *ptr_char == *RC_VAR_SUB)
+                         {
+                           if (op == *RC_VAR_SUB)
+                            {
+                              if (*ptr_char == *RC_VAR_ADD)
+                                op = *RC_VAR_SUB;
+                              else
+                                op = *RC_VAR_ADD;
+                            }
+                           else
+                             op = *ptr_char;
+                           ptr_char++;
+                         }
+                      }
+                     if (!error)
                        goto LABEL_compute_dvar;
                    }
                   else
                    {
-                     /*
-                        Error, date variable undefined.
-                     */
-                     skip_dvar_assign = TRUE;
-                     if (warning_level >= 0)
-                       dvar_warning (113, (int)*line_buffer, line_buffer, filename, line_number);
+                     if (mode == GLobal)
+                       /*
+                          Error, operation given in global mode.
+                       */
+                       error = ERR_ILLEGAL_VAR_OPERATION;
+                     else
+                       /*
+                          Error, date variable undefined.
+                       */
+                       error = ERR_INVALID_VAR_REFERENCE;
                    }
                 }
                else
                  /*
                     Error, invalid second operator character found
-                      (no '=', '+' or '-' given resp., illegal combination of '+' and '-').
+                      (no '=', '+' or '-' given resp.,
+                      illegal combination of '+' and '-').
                  */
-                 is_error = TRUE;
+                 error = ERR_ILLEGAL_VAR_OPERATION;
              }
             else
               /*
-                 Error, incomplete operator found (no '+=', '-=', '++' or '--' given).
+                 Error, incomplete operator found (neither '+=', '-=', '++'
+                   nor '--' given).
               */
-              is_error = TRUE;
+              error = ERR_ILLEGAL_VAR_OPERATION;
           }
        }
       else
@@ -2347,61 +2110,64 @@ set_dvar (line_buffer, lineptrs, filename, line_number, mode)
          /*
             Assignment (1)...(8) to date variable found (simple '=' given),
               scan expression part of date variable definition.  Assignments
-              (1), (3)...(5), (7), (8) are ONLY allowed for local date variables.
+              (1), (3)...(5), (7), (8) are ONLY allowed for local date
+              variables.
          */
          i = 0;
          ptr_char++;
          if (!*ptr_char)
           {
             /*
-               No date assigned ("empty" assignment), set the date variable slot to
-                 zero so we are able to use its possibly setted global value if this
-                 variable is referenced again at a later place within the sequence.
-                 This kind of assignment is allowed for local date variables only;
-                 for global date variables, we have to report an error instead.
+               No date assigned ("empty" assignment), set the date variable
+                 slot to zero so we are able to use its possibly set global
+                 value if this variable is referenced again at a later place
+                 within the sequence.  This kind of assignment is allowed for
+                 local date variables only; for global date variables, we
+                 have to report an error instead.
             */
             if (mode == GLobal)
               /*
-                 Error, empty assignment to a global date variable given.
+                 Error, "empty" assignment on a global date variable given.
               */
-              is_error = TRUE;
+              error = ERR_ILLEGAL_VAR_DEFINITION;
           }
          else
           {
             if (   isalpha(*ptr_char)
                 && !isalpha(*(ptr_char+1)))
              {
-               op = *ptr_char;
+               dvar=op = *ptr_char;
                ptr_char++;
                if (   !*ptr_char
                    || isspace(*ptr_char))
                 {
-                  if (   tolower(op) == RC_EASTER_CHAR
-                      || tolower(op) == RC_TODAY_CHAR)
-                   {
-                     /*
-                        Error, date variable is invalid.
-                     */
-                     skip_dvar_assign = TRUE;
-                     if (warning_level >= 0)
-                       dvar_warning (112, (int)*line_buffer, line_buffer, filename, line_number);
-                   }
+                  if (   tolower(dvar) == RC_EASTER_CHAR
+                      || tolower(dvar) == RC_TODAY_CHAR)
+                    /*
+                       Error, date variable is invalid.
+                    */
+                    error = ERR_INVALID_VAR_ASSIGNMENT;
                   else
                    {
                      /*
-                        If the character after '=' is alphabetic and is not trailed
-                          by digits, assume assignment (6) is given.
+                        If the character after '=' is alphabetic and is not
+                          trailed by digits, assume assignment (6) is given.
                      */
                      if (mode == GLobal)
                       {
-                        m = (int)rc_dvar[IDX(op)].g.month;
-                        d = (int)rc_dvar[IDX(op)].g.day;
+                        m = (int)rc_dvar[IDX(dvar)].dvar_global.dvar_month;
+                        d = (int)rc_dvar[IDX(dvar)].dvar_global.dvar_day;
                       }
                      else
                       {
-                        m = (int)rc_dvar[IDX(op)].l.month;
-                        d = (int)rc_dvar[IDX(op)].l.day;
+                        m = (int)rc_dvar[IDX(dvar)].dvar_local.dvar_month;
+                        d = (int)rc_dvar[IDX(dvar)].dvar_local.dvar_day;
                       }
+                     if (!m)
+                       /*
+                          Error, date variable undefined.
+                       */
+                       error = ERR_INVALID_VAR_REFERENCE;
                    }
                 }
                else
@@ -2421,7 +2187,7 @@ set_dvar (line_buffer, lineptrs, filename, line_number, mode)
                     /*
                        Error, invalid date variable name given.
                     */
-                    is_error = TRUE;
+                    error = ERR_ILLEGAL_VAR_DEFINITION;
                 }
              }
             else
@@ -2447,7 +2213,7 @@ LABEL_compute_dvar:
                      sprintf(s5, "%0*d%s", len_year_max, y, str20);
                /*
                   `rc_get_date()' arguments `len' and `i' are dummys
-                    only and must be given.  They are not respected!
+                    only and must be given.  They are not used further!
                */
                (void)rc_get_date (s5, lineptrs, FALSE, &is_weekday_mode, &d, &m, &y, &n, &len,
                                   &op, &i, &i, filename, line_number, line_buffer, TRUE);
@@ -2459,7 +2225,7 @@ LABEL_compute_dvar:
                   if (   (mode == GLobal)
                       && (   op
                           || is_weekday_mode))
-                    is_error = TRUE;
+                    error = ERR_ILLEGAL_VAR_OPERATION;
                   else
                    {
                      /*
@@ -2470,17 +2236,19 @@ LABEL_compute_dvar:
                        /*
                           Error, invalid month given.
                        */
-                       is_error = TRUE;
+                       error = ERR_ILLEGAL_VAR_DEFINITION;
                      else
                       {
                         i = dvec[m-1];
                         if (m == 2)
                           i += is_leap_year;
                         /*
-                           Check for assignment (3) `dvar'=`mmww[w]'<n> (`ww'=mo...su,
-                             `www'=mon...sun, n=1...5|9), e.g.:
-                             x=03mo3  sets `x' to date of 3rd Monday in March
-                             x=03mon3  sets `x' to date of 3rd Monday in March, too.
+                           Check for assignment (3) DVAR=MMWW[W]N
+                             (WW=mo...su, WWW=mon...sun, N=1...5|9),
+                             e.g.: x=03mo3  sets `x' to date of 3rd Monday
+                                   in March.
+                             e.g.: x=03mon3  sets `x' to date of 3rd Monday
+                                   in March, too.
                         */
                         if (is_weekday_mode)
                          {
@@ -2491,15 +2259,11 @@ LABEL_compute_dvar:
                               d = eval_holiday (DAY_MIN, m, year, d, TRUE);
                               d += (DAY_MAX * (n - 1));
                               if (d > i)
-                               {
-                                 /*
-                                    Month contains no such "n'th weekday of month",
-                                      ignore the assignment but produce NO error!!
-                                 */
-                                 skip_dvar_assign = TRUE;
-                                 if (warning_level >= 0)
-                                   dvar_warning (112, (int)*line_buffer, line_buffer, filename, line_number);
-                               }
+                                /*
+                                   Month contains no such "N'th weekday of
+                                     month", ignore the assignment.
+                                */
+                                error = ERR_INVALID_VAR_ASSIGNMENT;
                             }
                          }
                         else
@@ -2510,9 +2274,9 @@ LABEL_compute_dvar:
                            if (d == 99)
                              d = i;
                            /*
-                              We must avoid an assigment like `dvar'=0229
+                              We must avoid an assigment like DVAR=0229
                                 if we are in fiscal year mode and the next
-                                year is no leap year and no "--leap-day=ARG"
+                                year is no leap year and no `--leap-day=ARG'
                                 option is given!
                            */
                            if (   (fiscal_month > MONTH_MIN+1)
@@ -2521,15 +2285,10 @@ LABEL_compute_dvar:
                                && !rc_feb_29_to_mar_01
                                && (m == 2)
                                && (d == 29))
-                            {
-                              /*
-                                 Year contains no such date,
-                                   ignore the assignment but produce NO error!!
-                              */
-                              skip_dvar_assign = TRUE;
-                              if (warning_level >= 0)
-                                dvar_warning (112, (int)*line_buffer, line_buffer, filename, line_number);
-                            }
+                             /*
+                                Year contains no such date, ignore the assignment.
+                             */
+                             error = ERR_INVALID_VAR_ASSIGNMENT;
                            else
                             {
                               if (d > i)
@@ -2539,45 +2298,37 @@ LABEL_compute_dvar:
                                }
                               if (   d < DAY_MIN
                                   || d > i)
-                               {
-                                 /*
-                                    Error, invalid day given.
-                                 */
-                                 is_error = TRUE;
-                               }
+                                /*
+                                   Error, invalid day given.
+                                */
+                                error = ERR_ILLEGAL_VAR_DEFINITION;
                             }
                          }
                       }
                    }
                 }
                else
-                {
-                  /*
-                     Year contains no such date,
-                       ignore the assignment but produce NO error!!
-                  */
-                  skip_dvar_assign = TRUE;
-                  if (warning_level >= 0)
-                    dvar_warning (112, (int)*line_buffer, line_buffer, filename, line_number);
-                }
+                 /*
+                    Year contains no such date, ignore the assignment.
+                 */
+                 error = ERR_INVALID_VAR_ASSIGNMENT;
              }
           }
        }
-      if (   !is_error
-          && !skip_dvar_assign)
+      if (!error)
        {
          /*
             Store the assigned/calculated date.
          */
          if (mode == GLobal)
           {
-            rc_dvar[IDX(*line_buffer)].g.month = (char)m;
-            rc_dvar[IDX(*line_buffer)].g.day = (char)d;
+            rc_dvar[IDX(*line_buffer)].dvar_global.dvar_month = (char)m;
+            rc_dvar[IDX(*line_buffer)].dvar_global.dvar_day = (char)d;
           }
          else
           {
-            rc_dvar[IDX(*line_buffer)].l.month = (char)m;
-            rc_dvar[IDX(*line_buffer)].l.day = (char)d;
+            rc_dvar[IDX(*line_buffer)].dvar_local.dvar_month = (char)m;
+            rc_dvar[IDX(*line_buffer)].dvar_local.dvar_day = (char)d;
           }
        }
     }
@@ -2585,41 +2336,84 @@ LABEL_compute_dvar:
      /*
         Error, invalid date variable name given (not a...d, f...s, u...z).
      */
-     is_error = TRUE;
-
-   return((Bool)!is_error);
+     error = ERR_ILLEGAL_VAR_DEFINITION;
+   if (error)
+    {
+      if (   (mode == GLobal)
+          && (   error == ERR_ILLEGAL_VAR_DEFINITION
+              || error == ERR_ILLEGAL_VAR_OPERATION))
+        warning_level = WARN_LVL_MAX;
+      if (warning_level >= 0)
+       {
+         if (!dvar)
+           dvar = *line_buffer;
+         var_warning (error, (int)dvar, line_buffer, filename, line_number);
+      }
+    }
 }
 
 
 
-   PUBLIC Bool
-set_tvar (line_buffer, mode)
-   const char      *line_buffer;
-   const Tvar_enum  mode;
+   PUBLIC void
+set_tvar (line_buffer, filename, line_number, mode)
+   const char     *line_buffer;
+   const char     *filename;
+   const long      line_number;
+   const Var_enum  mode;
 /*
    Scans given string `line_buffer' and tries to detect a valid text variable
      reference, which is:
-       $`tvar'=[TEXT] --> Assignment of a constant text expression TEXT to `tvar'
-                          (TEXT may contain references to other `tvar's, which
-                          are always expanded recursively before the assignment
-                          is performed)!
+       1) $TVAR=[TEXT]  --> Assignment of a constant text expression TEXT
+                              to TVAR.  TEXT may contain references to
+                              other TVAR's, which are always expanded
+                              recursively before the assignment is performed!
+       2) $TVAR?COMMAND --> Interpreted assignment of that text to TVAR, which
+                              is created by the COMMAND on the STDOUT channel.
+                              The text may contain references to other TVAR's,
+                              which are expanded in case TVAR is referenced
+                              at a later place of program execution.
+       3) $TVAR:COMMAND --> Uninterpreted assignment of that text to TVAR, which
+                              is created by the COMMAND on the STDOUT channel.
+                              References to other TVAR's are not expanded!
+       4) $TVAR++       --> Simple incrementation by one (length preserved).
+       5) $TVAR--       --> Simple decrementation by one (length preserved).
+       6) $TVAR+=[+|-]N --> Addition of a constant numeric
+                              factor [+|-]N (length preserved).
+       7) $TVAR-=[+|-]N --> Subtraction of a constant numeric
+                              factor [+|-]N (length preserved).
      A text variable name is valid from $a...$z (totally 26 variables,
-     case-insensitve).  No whitespace characters may occur between the text
-     variable prefix character '$' and the text variable letter itself, the
-     assignment operator '=' and the TEXT value.  Stores the assigned TEXT at
-     position `text variable' into global text variable vector `rc_tvar[]' (either
-     the local or the global ones, depending on given `mode', which can be either
-     "GLobal" or "LOcal".  Returns FALSE if an error occurs, otherwise TRUE.
+     case-insensitve).  No whitespace characters may occur between the
+     text variable prefix character '$' and the text variable letter itself,
+     the operator and the value.
+     In general, assignment (1)...(3) is stored at position `text variable'
+     into the global text variable vector `rc_tvar[]' (either the local or
+     the  global ones, depending on given `mode', which can be either "GLobal"
+     or "LOcal".
+     Assignment (2) inserts the text created by the COMMAND into the TVAR as is,
+     but only if it is allowed (`--execute-command' option must be given).
+     Assignment (3) inserts the text created by the COMMAND into the TVAR
+     postprocessed by the Txt2gcal program, but only if it is allowed
+     (`--execute-command' option must be given).
+     Operation (4)...(7) may ONLY be used on local text variables (if they
+     contain integer values).
+     Uses the global text buffers `s5' and `s7' internally.
+     Returns FALSE if an error occurs, otherwise TRUE.
 */
 {
-   register       int    len;
-   auto           char   tvar;
-   auto     const char  *ptr_char=line_buffer;
-   auto           Bool   is_error=FALSE;
+   register int   error=0;
+   auto     char  tvar='\0';
 
 
-   if (*ptr_char == RC_TVAR_CHAR)
+   if (*line_buffer != RC_TVAR_CHAR)
+     /*
+        Error, no leading '$' character (text variable prefix) given.
+     */
+     error = ERR_ILLEGAL_VAR_DEFINITION;
+   else
     {
+      auto char  *ptr_char=(char *)line_buffer;
+
+
       /*
          Skip the trailing '$' character of a text variable by default.
       */
@@ -2627,27 +2421,58 @@ set_tvar (line_buffer, mode)
       /*
          Skip and return error if invalid text variable name is given.
       */
-      if (isalpha(*ptr_char))
+      if (!isalpha(*ptr_char))
+        /*
+           Error, invalid text variable name given (not a...z resp., A...Z).
+        */
+        error = ERR_ILLEGAL_VAR_DEFINITION;
+      else
        {
          tvar = *ptr_char++;
          /*
-            Check if an assignment is given.
+            Check if assignment (1)...(3) or operation (4)...(7) is given.
          */
-         if (*ptr_char == *RC_TVAR_ASSIGN)
+         if (   (*ptr_char != *RC_VAR_ASSIGN)
+             && (*ptr_char != *RC_TVAR_ICMD_ASSIGN)
+             && (*ptr_char != *RC_TVAR_UCMD_ASSIGN)
+             && (*ptr_char != *RC_VAR_ADD)
+             && (*ptr_char != *RC_VAR_SUB))
+           /*
+              Error, invalid first operator character found
+                (neither '=' nor '+' nor '-' nor '?' nor ':' given).
+           */
+           error = ERR_ILLEGAL_VAR_DEFINITION;
+         else
           {
-            register       int    i=0;
-            auto     const char  *ptr_tvar;
-            auto           Bool   is_quoted=FALSE;
+            register int    i=0;
+            register int    j;
+            register int    len=0;
+            auto     char  *ptr_tvar;
+            auto     char   op;
+            auto     char   op2='\0';
+            auto     char   op3=op2;
+            auto     Bool   is_quoted=FALSE;
+            auto     Bool   restore_tvar=FALSE;
 
 
-            ptr_char++;
+            op = *ptr_char++;
+            if (op)
+             {
+               op2 = *ptr_char;
+               if (op2)
+                 op3 = *(ptr_char + 1);
+             }
             /*
                Check if the assigned TEXT contains any references
-                 to other `tvar' variables, if so, insert their TEXTs.
+                 to other TVAR variables, if so, insert their TEXT's.
             */
             ptr_tvar = strchr(ptr_char, RC_TVAR_CHAR);
             if (ptr_tvar != (char *)NULL)
              {
+               auto Bool  global_tvar_defined;
+               auto Bool  local_tvar_set;
+
+
                do
                 {
                   len = (int)(ptr_tvar - ptr_char);
@@ -2666,54 +2491,60 @@ set_tvar (line_buffer, mode)
                   if (   !is_quoted
                       && isalpha(*ptr_tvar))
                    {
-                     register int  j=0;
-
-
+                     global_tvar_defined=local_tvar_set = FALSE;
+                     if (rc_tvar[IDX(*ptr_tvar)].tvar_global.tvar_text != (char *)NULL)
+                       global_tvar_defined = TRUE;
+                     if (rc_tvar[IDX(*ptr_tvar)].tvar_local.tvar_text != (char *)NULL)
+                       if (*rc_tvar[IDX(*ptr_tvar)].tvar_local.tvar_text)
+                         local_tvar_set = TRUE;
                      /*
-                        Try to insert the value of this `tvar' (this is its TEXT).
+                        Try to insert the value of this TVAR (that's its TEXT).
                      */
-                     if (   (mode == GLobal)
-                         && (rc_tvar[IDX(*ptr_tvar)].g.text != (char *)NULL))
+                     j = 0;
+                     if (   global_tvar_defined
+                         && (   mode == GLobal
+                             || (   (mode == LOcal)
+                                 && !local_tvar_set)))
                       {
-                        j = (int)strlen(rc_tvar[IDX(*ptr_tvar)].g.text);
+                        j = (int)strlen(rc_tvar[IDX(*ptr_tvar)].tvar_global.tvar_text);
                         if (j)
                          {
                            while ((Uint)i+j >= maxlen_max)
                              resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
-                           strcat(s5, rc_tvar[IDX(*ptr_tvar)].g.text);
+                           strcat(s5, rc_tvar[IDX(*ptr_tvar)].tvar_global.tvar_text);
                          }
                       }
                      else
                        if (   (mode == LOcal)
-                           && (rc_tvar[IDX(*ptr_tvar)].l.text != (char *)NULL))
+                           && local_tvar_set)
                         {
-                          j = (int)strlen(rc_tvar[IDX(*ptr_tvar)].l.text);
-                          if (j)
-                           {
-                             while ((Uint)i+j >= maxlen_max)
-                               resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
-                             strcat(s5, rc_tvar[IDX(*ptr_tvar)].l.text);
-                           }
+                          j = (int)strlen(rc_tvar[IDX(*ptr_tvar)].tvar_local.tvar_text);
+                          while ((Uint)i+j >= maxlen_max)
+                            resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
+                          strcat(s5, rc_tvar[IDX(*ptr_tvar)].tvar_local.tvar_text);
                         }
                      if (   (   (mode == GLobal)
-                             && (rc_tvar[IDX(*ptr_tvar)].g.text != (char *)NULL))
+                             && global_tvar_defined)
                          || (   (mode == LOcal)
-                             && (rc_tvar[IDX(*ptr_tvar)].l.text != (char *)NULL))
+                             && (   global_tvar_defined
+                                 || local_tvar_set))
                          || (   (tvar == *ptr_tvar)
                              && (   (   (mode == GLobal)
-                                     && (rc_tvar[IDX(*ptr_tvar)].g.text == (char *)NULL))
+                                     && !global_tvar_defined)
                                  || (   (mode == LOcal)
-                                     && (rc_tvar[IDX(*ptr_tvar)].l.text == (char *)NULL)))))
+                                     && !global_tvar_defined
+                                     && !local_tvar_set))))
                       {
                         /*
-                           Skip `tvar' name.
+                           Skip TVAR name.
                         */
                         len += 2;
                         if (j)
                           i += j;
                         else
                           /*
-                             If `tvar' is "empty", remove a possibly obsolete whitespace.
+                             If TVAR is "empty", remove a possibly
+                               obsolete whitespace character.
                           */
                           if (i)
                             if (   isspace(s5[i-1])
@@ -2721,40 +2552,32 @@ set_tvar (line_buffer, mode)
                               s5[--i] = '\0';
                       }
                      else
-                      {
-                        /*
-                           If `tvar' isn't defined, don't touch its name.
-                        */
-                        if ((Uint)i+2 >= maxlen_max)
-                          resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
-                        s5[i++] = RC_TVAR_CHAR;
-                        s5[i++] = *ptr_tvar;
-                        s5[i] = '\0';
-                        len += 2;
-                      }
+                       restore_tvar = TRUE;
                    }
                   else
+                    restore_tvar = TRUE;
+                  /*
+                     If TVAR isn't defined, or quoted, or an invalid
+                       TVAR name is found, don't touch it.
+                  */
+                  if (restore_tvar)
                    {
-                     /*
-                        If a quoted or an invalid `tvar' name is found, don't touch it.
-                     */
                      if ((Uint)i+1 >= maxlen_max)
                        resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
                      s5[i++] = RC_TVAR_CHAR;
-                     s5[i] = '\0';
                      len++;
                      if (*ptr_tvar)
                       {
                         if ((Uint)i+1 >= maxlen_max)
                           resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
                         s5[i++] = *ptr_tvar;
-                        s5[i] = '\0';
                         len++;
                       }
+                     s5[i] = '\0';
                    }
                   ptr_char += len;
                   ptr_tvar = strchr(ptr_char, RC_TVAR_CHAR);
-                  is_quoted = FALSE;
+                  restore_tvar=is_quoted = FALSE;
                 } while (ptr_tvar != (char *)NULL);
                /*
                   Add possibly trailing ordinary text.
@@ -2771,70 +2594,441 @@ set_tvar (line_buffer, mode)
              }
             else
               i = (int)strlen(ptr_char) + 1;
-            /*
-               Store TEXT to the according `tvar' text variable.
-            */
-            if (mode == GLobal)
+            if (   op == *RC_VAR_ASSIGN
+                || op == *RC_TVAR_ICMD_ASSIGN
+                || op == *RC_TVAR_UCMD_ASSIGN)
              {
-               if (rc_tvar[IDX(tvar)].g.text == (char *)NULL)
-                 rc_tvar[IDX(tvar)].g.text = (char *)my_malloc (i,
-                                                                124, __FILE__, ((long)__LINE__)-1,
-                                                                "rc_tvar[IDX(tvar)].g.text", IDX(tvar));
+               if (   rc_execute_command
+                   && (i > 1)
+                   && (   op == *RC_TVAR_ICMD_ASSIGN
+                       || op == *RC_TVAR_UCMD_ASSIGN))
+                {
+                  static char  *txt2gcal_prgr=(char *)NULL;
+                  auto   char  *ptr_tfn;
+                  auto   char  *the_command;
+
+
+                  /*
+                     Assignment (2)...(3) to text variable found,
+                       (':' or '?' given), so perform all necessary actions.
+                  */
+                  ptr_tfn = TMPFILENAME;
+                  if (ptr_tfn == (char *)NULL)
+                    my_error (ERR_INTERNAL_C_FUNC_FAILURE, __FILE__, ((long)__LINE__)-2L,
+                              "tmpnam()=", 0);
+                  rc_tvar_tfn = (char *)my_malloc (strlen(ptr_tfn)+1,
+                                                   ERR_NO_MEMORY_AVAILABLE,
+                                                   __FILE__, ((long)__LINE__)-2L,
+                                                   "rc_tvar_tfn", 0);
+                  strcpy(rc_tvar_tfn, ptr_tfn);
+                  rc_tvar_tfp = fopen(rc_tvar_tfn, "w");
+                  if (rc_tvar_tfp == (FILE *)NULL)
+                    my_error (ERR_WRITE_FILE, __FILE__, ((long)__LINE__)-2L, rc_tvar_tfn, 0);
+                  if (op == *RC_TVAR_ICMD_ASSIGN)
+                    i += (strlen(REDIRECT_OUT) + strlen(rc_tvar_tfn));
+                  else
+                   {
+                     if (txt2gcal_prgr == (char *)NULL)
+                      {
+                        /*
+                           Detect the name of the Txt2gcal executable.
+                        */
+#  if !defined(AMIGA) || defined(__GNUC__)
+                        txt2gcal_prgr = getenv(ENV_VAR_TXT2GCALPROG);
+                        if (txt2gcal_prgr != (char *)NULL)
+                         {
+                           if (!*txt2gcal_prgr)
+                             txt2gcal_prgr = TXT2GCAL_PRGR;
+                         }
+                        else
+#  endif /* !AMIGA || __GNUC__ */
+                          txt2gcal_prgr = TXT2GCAL_PRGR;
+                      }
+                     i += (  strlen(PIPELINE) + strlen(txt2gcal_prgr)
+                           + strlen(REDIRECT_OUT) + strlen(rc_tvar_tfn));
+                   }
+                  j = i;
+                  the_command = (char *)my_malloc (i, ERR_NO_MEMORY_AVAILABLE,
+                                                   __FILE__, ((long)__LINE__)-2L,
+                                                   "rc_tvar_tfn", 0);
+                  if (op == *RC_TVAR_ICMD_ASSIGN)
+                    sprintf(the_command, "%s%s%s", ptr_char, REDIRECT_OUT, rc_tvar_tfn);
+                  else
+                    sprintf(the_command, "%s%s%s%s%s", ptr_char,
+                            PIPELINE, txt2gcal_prgr, REDIRECT_OUT, rc_tvar_tfn);
+                  /*
+                     Execute the command and redirect the STDOUT output
+                       of it into TEMPFILE NOW.
+                  */
+                  i = my_system (the_command);
+                  if (warning_level >= 0)
+                   {
+                     while ((Uint)j+LEN_SINGLE_LINE >= maxlen_max)
+                       resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
+                     if (i == -1)
+                      {
+                        /*
+                           Error, `system()' function failed.
+                        */
+#  if USE_DE
+                        sprintf(s5, "Kommando kann nicht ausf%shrt werden in Datei `%s'\nZeile %ld: %s",
+                                UE, filename, line_number, the_command);
+#  else /* !USE_DE */
+                        sprintf(s5, _("Cannot execute command in file `%s'\nLine: %ld %s"),
+                                filename, line_number, the_command);
+#  endif /* !USE_DE */
+                        print_text (stderr, s5);
+                        if (warning_level >= WARN_LVL_MAX)
+                         {
+                           j = (int)strlen(the_command);
+                           if ((Uint)j >= maxlen_max-9)
+                             resize_all_strings (j+9, FALSE, __FILE__, (long)__LINE__);
+                           sprintf(s5, "system(%s)=", the_command);
+                           my_error (ERR_INTERNAL_C_FUNC_FAILURE, __FILE__, ((long)__LINE__)-22L, s5, i);
+                         }
+                        error = ERR_INVALID_VAR_ASSIGNMENT;
+                      }
+                     else
+                      {
+                        /*
+                           Report the exit code of command executed by the `system()' function.
+                        */
+#  if USE_DE
+                        sprintf(s5, "Kommando ausgef%shrt (Status=%d) in Datei `%s'\nZeile %ld: %s",
+                                UE, i, filename, line_number, the_command);
+#  else /* !USE_DE */
+                        sprintf(s5, _("Command executed (exit code=%d) in file `%s'\nLine %ld: %s"),
+                                i, filename, line_number, the_command);
+#  endif /* !USE_DE */
+                        print_text (stderr, s5);
+                        /*
+                           The command executed by the `system()' function returned
+                           a value not equal zero, so we terminate all further
+                           processing now with ERR_EXTERNAL_CMD_FAILURE exit status.
+                        */
+                        if (   i
+                            && (warning_level >= WARN_LVL_MAX))
+                          my_exit (ERR_EXTERNAL_CMD_FAILURE);
+                      }
+                   }
+                  free(the_command);
+                  if (!error)
+                   {
+                     auto   long   lnumber=0L;
+                     auto   int    llength;
+                     auto   int    in_pool=0;
+                     static char   rc_nl[2]={RC_NL_CHAR, '\0'};
+                     auto   char  *pool=(char *)NULL;
+                     auto   char  *ptr_pool=(char *)NULL;
+                     auto   Bool   b_dummy;   /* Necessary dummy for `file_read_line()' function. */
+
+
+                     /*
+                        Command executed successfully, we can close the
+                          TEMPFILE and re-open it.
+                     */
+                     if (fclose(rc_tvar_tfp) == EOF)
+                       my_error (ERR_WRITE_FILE, __FILE__, ((long)__LINE__)-1L, rc_tvar_tfn, 0);
+                     rc_tvar_tfp = fopen(rc_tvar_tfn, "r");
+                     if (rc_tvar_tfp == (FILE *)NULL)
+                       my_error (ERR_READ_FILE, __FILE__, ((long)__LINE__)-2L, rc_tvar_tfn, 0);
+                     /*
+                        Now process then contents of TEMPFILE according
+                          to the selected assignment mode.
+                     */
+                     pool = (char *)my_malloc (BUF_LEN+1,
+                                               ERR_NO_MEMORY_AVAILABLE,
+                                               __FILE__, ((long)__LINE__)-2L,
+                                               "pool", 0);
+                     j = 0;
+                     *s5 = '\0';
+                     while ((ptr_pool=file_read_line (rc_tvar_tfp, &s7, &in_pool, pool, ptr_pool,
+                                                      rc_tvar_tfn, &lnumber, &llength, COmmon,
+                                                      &b_dummy, &b_dummy, &b_dummy))
+                            != (char *)NULL)
+                      {
+                        if (op == *RC_TVAR_ICMD_ASSIGN)
+                         {
+                           /*
+                              Interpret the contents of TEMPFILE.
+                           */
+                           if ((Uint)j+llength+2 >= maxlen_max)
+                             resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
+                           if (*s7)
+                             strcat(s5, s7);
+                           strcat(s5, rc_nl);
+                           j += (llength + 1);
+                         }
+                        else
+                         {
+                           /*
+                              Do not interpret the contents of TEMPFILE,
+                                so skip the date-part which was created by
+                                the Txt2gcal executable.
+                           */
+                           i = 0;
+                           ptr_char = s7;
+                           while (!isspace(*ptr_char))
+                            {
+                              ptr_char++;
+                              i++;
+                            }
+                           ptr_char++;
+                           i = llength - i;
+                           break;
+                         }
+                      }
+                     free(pool);
+                     if (op == *RC_TVAR_ICMD_ASSIGN)
+                      {
+                        /*
+                           Remove the last RC_NL_CHAR of the line.
+                        */
+                        i = j;
+                        s5[i-1] = '\0';
+                        /*
+                           Check if the assigned TEXT contains any '\n'
+                             newline characters, if so, exchange them
+                             by Gcal's RC_NL_CHAR (=='~') characters.
+                        */
+                        ptr_char = strchr(s5, '\n');
+                        if (ptr_char != (char *)NULL)
+                          do
+                           {
+                             *ptr_char = RC_NL_CHAR;
+                             ptr_char = strchr(s5, '\n');
+                           } while (ptr_char != (char *)NULL);
+                        ptr_char = s5;
+                      }
+                     /*
+                        And do the necessary ending operations.
+                     */
+                     if (fclose(rc_tvar_tfp) == EOF)
+                       my_error (ERR_WRITE_FILE, __FILE__, ((long)__LINE__)-1L, rc_tvar_tfn, 0);
+                     j = unlink(rc_tvar_tfn);
+                     if (j)
+                       my_error (ERR_INTERNAL_C_FUNC_FAILURE, __FILE__, ((long)__LINE__)-2L,
+                                 "unlink(rc_tvar_tfn)=", j);
+                     free(rc_tvar_tfn);
+                     rc_tvar_tfn = (char *)NULL;
+                   }
+                }
+               /*
+                  Assignment (1)...(3) to text variable found,
+                    so store TEXT into the according TVAR text variable slot.
+               */
+               if (mode == GLobal)
+                {
+                  if (rc_tvar[IDX(tvar)].tvar_global.tvar_text == (char *)NULL)
+                    rc_tvar[IDX(tvar)].tvar_global.tvar_text
+                      = (char *)my_malloc (i, ERR_NO_MEMORY_AVAILABLE,
+                                           __FILE__, ((long)__LINE__)-1L,
+                                           "rc_tvar[IDX(tvar)].tvar_global.tvar_text", IDX(tvar));
+                  else
+                    rc_tvar[IDX(tvar)].tvar_global.tvar_text
+                      = (char *)my_realloc ((VOID_PTR)(rc_tvar[IDX(tvar)].tvar_global.tvar_text),
+                                            i, ERR_NO_MEMORY_AVAILABLE,
+                                            __FILE__, ((long)__LINE__)-2L,
+                                            "rc_tvar[IDX(tvar)].tvar_global.tvar_text", IDX(tvar));
+                  strcpy(rc_tvar[IDX(tvar)].tvar_global.tvar_text, ptr_char);
+                }
                else
-                 rc_tvar[IDX(tvar)].g.text = (char *)my_realloc ((VOID_PTR)(rc_tvar[IDX(tvar)].g.text), i,
-                                                                 124, __FILE__, ((long)__LINE__)-1,
-                                                                 "rc_tvar[IDX(tvar)].g.text", IDX(tvar));
-               strcpy(rc_tvar[IDX(tvar)].g.text, ptr_char);
-             }
-            else
-             {
-               if (i > 1)
                 {
                   /*
                      We have to store the assigned text.
-                  */ 
-                  if (rc_tvar[IDX(tvar)].l.text == (char *)NULL)
-                    rc_tvar[IDX(tvar)].l.text = (char *)my_malloc (i,
-                                                                   124, __FILE__, ((long)__LINE__)-1,
-                                                                   "rc_tvar[IDX(tvar)].l.text", IDX(tvar));
+                  */
+                  if (rc_tvar[IDX(tvar)].tvar_local.tvar_text == (char *)NULL)
+                    rc_tvar[IDX(tvar)].tvar_local.tvar_text
+                      = (char *)my_malloc (i, ERR_NO_MEMORY_AVAILABLE,
+                                           __FILE__, ((long)__LINE__)-1L,
+                                           "rc_tvar[IDX(tvar)].tvar_local.tvar_text", IDX(tvar));
                   else
-                    rc_tvar[IDX(tvar)].l.text = (char *)my_realloc ((VOID_PTR)(rc_tvar[IDX(tvar)].l.text), i,
-                                                                    124, __FILE__, ((long)__LINE__)-1,
-                                                                    "rc_tvar[IDX(tvar)].l.text", IDX(tvar));
-                  strcpy(rc_tvar[IDX(tvar)].l.text, ptr_char);
+                    rc_tvar[IDX(tvar)].tvar_local.tvar_text
+                      = (char *)my_realloc ((VOID_PTR)(rc_tvar[IDX(tvar)].tvar_local.tvar_text),
+                                            i, ERR_NO_MEMORY_AVAILABLE,
+                                            __FILE__, ((long)__LINE__)-2L,
+                                            "rc_tvar[IDX(tvar)].tvar_local.tvar_text", IDX(tvar));
+                  strcpy(rc_tvar[IDX(tvar)].tvar_local.tvar_text, ptr_char);
+                }
+             }
+            else
+             {
+               auto Bool  tvar_inc_dec=FALSE;
+
+
+               /*
+                  Check if operation (4)...(7) is given.
+               */
+               if (   op2 == op
+                   || op2 == *RC_VAR_ASSIGN)
+                {
+                  if (mode == LOcal)
+                   {
+                     if (rc_tvar[IDX(tvar)].tvar_local.tvar_text != (char *)NULL)
+                      {
+                        if (*rc_tvar[IDX(tvar)].tvar_local.tvar_text)
+                         {
+                           if (op == op2)
+                            {
+                              if (   op3
+                                  && !isspace(op3))
+                                /*
+                                   Error, invalid trailing character found.
+                                */
+                                error = ERR_ILLEGAL_VAR_OPERATION;
+                              else
+                               {
+                                 /*
+                                    Either TVAR++ or TVAR-- found, so
+                                      check if TVAR contains an integer value.
+                                 */
+                                 ptr_char = rc_tvar[IDX(tvar)].tvar_local.tvar_text;
+                                 /*
+                                    Eat one possibly leading sign.
+                                 */
+                                 if (   *ptr_char == *RC_VAR_ADD
+                                     || *ptr_char == *RC_VAR_SUB)
+                                   ptr_char++;
+                                 while (isdigit(*ptr_char))
+                                   ptr_char++;
+                                 if (*ptr_char)
+                                   /*
+                                      Error, TVAR contains no integer value.
+                                   */
+                                   error = ERR_ILLEGAL_VAR_OPERATION;
+                                 else
+                                   tvar_inc_dec = TRUE;
+                               }
+                            }
+                           else
+                            {
+                              /*
+                                 Either TVAR+=... or TVAR-=... found.
+                              */
+                              ptr_char++;
+                              /*
+                                 Respect a possibly leading sign of value.
+                              */
+                              if (   *ptr_char == *RC_VAR_ADD
+                                  || *ptr_char == *RC_VAR_SUB)
+                               {
+                                 if (op == *RC_VAR_SUB)
+                                  {
+                                    if (*ptr_char == *RC_VAR_ADD)
+                                      op = *RC_VAR_SUB;
+                                    else
+                                      op = *RC_VAR_ADD;
+                                  }
+                                 else
+                                   op = *ptr_char;
+                                 ptr_char++;
+                               }
+                            }
+                         }
+                        else
+                          /*
+                             Error, text variable unset.
+                          */
+                          error = ERR_INVALID_VAR_REFERENCE;
+                      }
+                     else
+                       /*
+                          Error, text variable undefined.
+                       */
+                       error = ERR_INVALID_VAR_REFERENCE;
+                   }
+                  else
+                    /*
+                       Error, operation given in global mode.
+                    */
+                    error = ERR_ILLEGAL_VAR_OPERATION;
                 }
                else
                  /*
-                    No text assigned ("empty" assignment), set the text variable slot to
-                      NULL so we are able to use its possibly setted global value if
-                      this variable is referenced again at a later place within the sequence.
+                    Error, invalid second operator character found (no '=',
+                      '+' or '-' given resp., illegal combination of '+'
+                      and '-').
                  */
-                 if (rc_tvar[IDX(tvar)].l.text != (char *)NULL)
-                  {
-                    free(rc_tvar[IDX(tvar)].l.text);
-                    rc_tvar[IDX(tvar)].l.text = (char *)NULL;
-                  }
+                 error = ERR_ILLEGAL_VAR_OPERATION;
+               if (!error)
+                {
+                  static Slint  num;
+
+
+                  /*
+                     Perform the operation and store the calculated value.
+                  */
+                  if (tvar_inc_dec)
+                   {
+                     len = strlen(rc_tvar[IDX(tvar)].tvar_local.tvar_text);
+                     num = atol(rc_tvar[IDX(tvar)].tvar_local.tvar_text);
+                     if (op == *RC_VAR_ADD)
+                       num++;
+                     else
+                       num--;
+                   }
+                  else
+                   {
+                     i = 0;
+                     while (isdigit(*ptr_char))
+                       s5[i++] = *ptr_char++;
+                     while (isspace(*ptr_char))
+                       ptr_char++;
+                     if (   i
+                         && !*ptr_char)
+                      {
+                        s5[i] = '\0';
+                        len = strlen(rc_tvar[IDX(tvar)].tvar_local.tvar_text);
+                        num = atol(rc_tvar[IDX(tvar)].tvar_local.tvar_text);
+                        if (op == *RC_VAR_ADD)
+                          num += atol(s5);
+                        else
+                          num -= atol(s5);
+                      }
+                     else
+                       /*
+                          Error, non-numerical value given.
+                       */
+                       error = ERR_ILLEGAL_VAR_OPERATION;
+                   }
+                  /*
+                     Store the calculated value.
+                  */
+                  if (!error)
+                   {
+                     sprintf(s5, "%0*ld", len, num);
+                     len = (int)strlen(s5);
+                     if (len != (int)strlen(rc_tvar[IDX(tvar)].tvar_local.tvar_text))
+                       rc_tvar[IDX(tvar)].tvar_local.tvar_text
+                         = (char *)my_realloc ((VOID_PTR)(rc_tvar[IDX(tvar)].tvar_local.tvar_text),
+                                               len+1, ERR_NO_MEMORY_AVAILABLE,
+                                               __FILE__, ((long)__LINE__)-2L,
+                                               "rc_tvar[IDX(tvar)].tvar_local.tvar_text", IDX(tvar));
+                     strcpy(rc_tvar[IDX(tvar)].tvar_local.tvar_text, s5);
+                   }
+                }
              }
           }
-         else
-           /*
-              Error, invalid operator character found (not '=' given).
-           */
-           is_error = TRUE;
        }
-      else
-        /*
-           Error, invalid text variable name given (not a...z).
-        */
-        is_error = TRUE;
     }
-   else
-     /*
-        Error, no leading '$' character (text variable prefix) given.
-     */
-     is_error = TRUE;
-
-   return((Bool)!is_error);
+   if (error)
+    {
+      if (   (mode == GLobal)
+          && (   error == ERR_ILLEGAL_VAR_DEFINITION
+              || error == ERR_ILLEGAL_VAR_OPERATION))
+        /*
+           These errors always cause termination of program in global mode.
+        */
+        warning_level = WARN_LVL_MAX;
+      if (warning_level >= 0)
+       {
+         if (*line_buffer == RC_TVAR_CHAR)
+           tvar = *(line_buffer + 1);
+         if (!tvar)
+           tvar = *line_buffer;
+         var_warning (error, (int)tvar, line_buffer, filename, line_number);
+      }
+    }
 }
 
 
@@ -2847,9 +3041,9 @@ nth_weekday_of_month (d, m, y, n, is_weekday_mode)
    const int  *n;
          Bool *is_weekday_mode;
 /*
-   If "n'th weekday of month" field is encoded:
-     Compute the according date and return it in &d, &m, &y.
-     If conversion error occurs, return &y==SPECIAL_VALUE (special value).
+   If "N'th weekday of month" field is encoded:
+     Compute the according date and return it in `&d', `&m' and `&y'.
+     If a conversion error occurs, return SPECIAL_VALUE in `&y'.
 */
 {
    register int   i;
@@ -2888,14 +3082,14 @@ nth_weekday_of_month (d, m, y, n, is_weekday_mode)
           {
             *m = month;
             /*
-               A [-c][<n>]w or [-c]t option set:
+               A `-c[N]w' or `-ct' option set:
                  Lookahead whether the week ends in the month it started.
             */
             if (   rc_week_flag
                 || rc_tomorrow_flag)
              {
                /*
-                  <0000|`yyyy'>00`ww[w]'<n> event is in last week of last month of previous year.
+                  <0000|YYYY>00WW[W]N event is in last week of last month of previous year.
                */
                if (   (*n > 3)
                    && (day < DAY_MIN))
@@ -2908,7 +3102,7 @@ nth_weekday_of_month (d, m, y, n, is_weekday_mode)
                  if (*n == 1)
                   {
                     /*
-                       <0000|`yyyy'>00`ww[w]'<n> event is in first week of next month of actual year.
+                       <0000|YYYY>00WW[W]N event is in first week of next month of actual year.
                     */
                     if (   (day+DAY_MAX-1 > 0)
                         && (day+DAY_MAX-1 < DAY_LAST+is_leap_year+1))
@@ -2916,7 +3110,7 @@ nth_weekday_of_month (d, m, y, n, is_weekday_mode)
                     else
                      {
                        /*
-                          <0000|`yyyy'>00`ww[w]'<n> event is in first week of first month of next year.
+                          <0000|YYYY>00WW[W]N event is in first week of first month of next year.
                        */
                        i = (days_of_february (year+1) == 29);
                        j = (day + DAY_MAX - 1) - (DAY_LAST + is_leap_year);
@@ -2966,14 +3160,14 @@ nth_weekday_of_month (d, m, y, n, is_weekday_mode)
             *d = eval_holiday (DAY_MIN, *m, *y, *d, TRUE);
             *d += (DAY_MAX * (*n - 1));
             /*
-               The "n'th weekday of month" doesn't occur in month:
+               The "N'th weekday of month" doesn't occur in month:
                  Skip it.
             */
             if (*d > i)
               *y = SPECIAL_VALUE;
           }
          /*
-            A [-c][<n>]w or [-c]t option set:
+            A `-c[N]w' or `-ct' option set:
               Correction for lookahead.
          */
          if (   mm
@@ -3015,7 +3209,7 @@ nth_weekday_of_month (d, m, y, n, is_weekday_mode)
                     *d = eval_holiday (DAY_MIN, *m, *y, dd, TRUE);
                     *d += (DAY_MAX * (*n - 1));
                     /*
-                       The "n'th weekday of month" doesn't occur in month:
+                       The "N'th weekday of month" doesn't occur in month:
                          Skip it
                     */
                     if (*d > dvec[MONTH_MAX-1])
@@ -3025,159 +3219,6 @@ nth_weekday_of_month (d, m, y, n, is_weekday_mode)
           }
        }
     }
-}
-
-
-
-   PUBLIC Bool
-prev_date (day, month, year)
-   int *day;
-   int *month;
-   int *year;
-/*
-   Sets a delivered date back by one day (to yesterday's date)
-     respecting the missing period of the Gregorian Reformation.
-     Returns FALSE in case a date was within the missing period
-       of Gregorian Reformation, otherwise TRUE;
-*/
-{
-   auto Bool  no_missing_date=TRUE;
-
-
-   if (   (*day <= greg->last_day+1)
-       && (*day >= greg->first_day)
-       && (*month == greg->month)
-       && (*year == greg->year))
-    {
-      no_missing_date = FALSE;
-      *day = greg->first_day - 1;
-    }
-   else
-    {
-      (*day)--;
-      if (   !*day
-          || !valid_date (*day, *month, *year))
-       {
-         (*month)--;
-         if (*month < MONTH_MIN)
-          {
-            *month = MONTH_MAX;
-            (*year)--;
-          }
-         if (*month == 2)
-           *day = days_of_february (*year);
-         else
-           *day = dvec[*month-1];
-       }
-    }
-
-   return(no_missing_date);
-}
-
-
-
-   PUBLIC Bool
-next_date (day, month, year)
-   int *day;
-   int *month;
-   int *year;
-/*
-   Sets the delivered date forwards by one day (to tomorrow's date)
-     respecting the missing period of the Gregorian Reformation.
-     Returns FALSE in case a date was in the missing period
-       of Gregorian Reformation, otherwise TRUE.
-*/
-{
-   auto Bool  no_missing_date=TRUE;
-
-
-   if (   (*day >= greg->first_day-1)
-       && (*day <= greg->last_day)
-       && (*month == greg->month)
-       && (*year == greg->year))
-    {
-      no_missing_date = FALSE;
-      *day = greg->last_day + 1;
-    }
-   else
-    {
-      (*day)++;
-      if (!valid_date (*day, *month, *year))
-       {
-         *day = DAY_MIN;
-         if (*month == MONTH_MAX)
-          {
-            *month = MONTH_MIN;
-            (*year)++;
-          }
-         else
-           (*month)++;
-       }
-    }
-
-   return(no_missing_date);
-}
-
-
-
-   PUBLIC void
-num2date (julian_days, day, month, year)
-   Ulint  julian_days;
-   int   *day;
-   int   *month;
-   int   *year;
-/*
-   Converts a delivered absolute number of days `julian_days' to a standard date
-     (since 00010101(==`yyyymmdd'), returned in &day, &month and &year)
-     respecting the missing period of the Gregorian Reformation.
-*/
-{
-   auto     double  x;
-   auto     Ulint   jdays=date2num (greg->first_day-1, greg->month, greg->year);
-   register int     i;
-
-
-   if (julian_days > jdays)
-     julian_days += (Ulint)(greg->last_day - greg->first_day + 1);
-   x = (double)julian_days / (DAY_LAST + 0.25);
-   i = (int)x;
-   if ((double)i != x)
-     *year = i + 1;
-   else
-    {
-      *year = i;
-      i--;
-    }
-   if (julian_days > jdays)
-    {
-      /*
-         Correction for Gregorian years.
-      */
-      julian_days -= (Ulint)((*year / 400) - (greg->year / 400));
-      julian_days += (Ulint)((*year / 100) - (greg->year / 100));
-      x = (double)julian_days / (DAY_LAST + 0.25);
-      i = (int)x;
-      if ((double)i != x)
-        *year = i + 1;
-      else
-       {
-         *year = i;
-         i--;
-       }
-      if (   (*year % 400)
-          && !(*year % 100))
-        julian_days--;
-    }
-   i = (int)(julian_days - (Ulint)(i * (DAY_LAST + 0.25)));
-   /*
-      Correction for Gregorian centuries.
-   */
-   if (   (*year > greg->year)
-       && (*year % 400)
-       && !(*year % 100)
-       && (i < ((*year/100)-(greg->year/100))-((*year/400)-(greg->year/400))))
-     i++;
-   (void)doy2date (i, (days_of_february (*year)==29), day, month);
 }
 
 
@@ -3192,7 +3233,7 @@ d_between (d1, m1, y1, d2, m2, y2)
    const int y2;
 /*
    Computes the amount of days between date1(base date) and date2
-     exclusive date1 and date2, and adds 1 to result.
+     exclusive date1 and date2, and adds 1 to the result.
 */
 {
    return(date2num (d2, m2, y2)-date2num (d1, m1, y1));
@@ -3210,13 +3251,13 @@ w_between (d1, m1, y1, d2, m2, y2)
    const int y2;
 /*
    Computes the amount of weeks between date1(base date) and date2
-     exclusive date1 and date2, and adds 1 to result.
+     exclusive date1 and date2, and adds 1 to the result.
 */
 {
-   auto     Ulint  date1=date2num (d1, m1, y1);
-   auto     Ulint  date2=date2num (d2, m2, y2);
-   auto     Slint  diff;
-   auto     Slint  result;
+   auto Ulint  date1=date2num (d1, m1, y1);
+   auto Ulint  date2=date2num (d2, m2, y2);
+   auto Slint  diff;
+   auto Slint  result;
 
 
    diff = (Slint)date2 - (date1 - (SYEAR(weekday_of_date (d1, m1, y1), start_day)) + 1);
@@ -3238,7 +3279,7 @@ m_between (m1, y1, m2, y2)
    const int y2;
 /*
    Computes the amount of months between date1(base date) and date2
-     exclusive date1 and date2, and adds 1 to result.
+     exclusive date1 and date2, and adds 1 to the result.
 */
 {
    return(((y2 - y1)*MONTH_MAX)+(m2 - m1));
@@ -3257,7 +3298,7 @@ manage_leap_day (day, month, year, line_buffer, filename, line_number)
 /*
    Tries to set the leap day (29-Feb) either to "28-Feb" or "1-Mar"
      and prints a informational message in case this date modification is
-     performed successfully (only if --debug[=ARG] is given).
+     performed successfully (only if `--debug[=ARG]' option is given).
 */
 {
    register int  action=0;
@@ -3298,7 +3339,7 @@ manage_leap_day (day, month, year, line_buffer, filename, line_number)
        {
          *s5 = '\0';
          print_text (stderr, s5);
-         action = (int)strlen(filename) + 100;
+         action = (int)strlen(filename) + LEN_SINGLE_LINE;
          if ((Uint)action >= maxlen_max)
            resize_all_strings (action+1, FALSE, __FILE__, (long)__LINE__);
 #  if USE_DE
@@ -3353,23 +3394,17 @@ biorhythm (create_bar, axis_len, string,
    Computes the biorhythm for a date and creates a text graphics bar line
      according to the computed values in case `create_bar' is set to TRUE.
      Uses the delivered `string' for storing such a line and returns it.
-     The caller has to guarantuee that enough `string' space is allocated.
+     The caller has to guarantee that enough `string' space is allocated.
      When used within Gcal, the maximum number of 100 that a single `axis_len'
      may have (100*2+6=>206) fits properly into the string vectors, which
      have 1024 Bytes by default.
-     Moreover, this function optionally uses the emulation functions for
-     computing sin() and cos()... OK, that's slow, I know.  The sin() and
-     cos() functions themselves needs pow() and fac(), which are likewise
-     replaced.  By reason of this, there is no real need for linking the
-     mathematical library (libm.a) to this source, in this sense, it is
-     optionally working stand-alone, and this is wanted for portability
-     purposes.
 */
 {
-   auto     Slint  diff=d_between (birth_day, birth_month, birth_year, day, month, year);
-   register int    yes_phase;
-   register int    yes_waxes;
-   register int    i;
+   auto     double  x;
+   auto     Slint   diff=d_between (birth_day, birth_month, birth_year, day, month, year);
+   register int     yes_phase;
+   register int     yes_waxes;
+   register int     i;
 
 
    (*critical_day)=(*positive_day)=(*negative_day)=(*emo_waxes)=(*int_waxes)=(*phy_waxes) = 0;
@@ -3389,7 +3424,7 @@ biorhythm (create_bar, axis_len, string,
       else
         while (100 % axis_len)
           axis_len--;
-#endif
+#endif /* 0 */
       /*
          Initialize the biorhythm text graphics bar.
       */
@@ -3410,17 +3445,12 @@ biorhythm (create_bar, axis_len, string,
    /*
       Manage the "emotional" phase value (cycle of 28 days).
    */
-#  if HAVE_LIBM
-   yes_phase = (int)ROUND(100.0 * sin(MY_TWO_PI*(double)(diff-1L)/28.0));
-   yes_waxes = SGN((int)ROUND(100.0 * cos(MY_TWO_PI*(double)(diff-1L)/28.0)));
-   *emo_phase = (int)ROUND(100.0 * sin(MY_TWO_PI*(double)diff/28.0));
-   *emo_waxes = SGN((int)ROUND(100.0 * cos(MY_TWO_PI*(double)diff/28.0)));
-#  else /* !HAVE_LIBM */
-   yes_phase = (int)ROUND(100.0 * my_sin (MY_TWO_PI*(double)(diff-1L)/28.0));
-   yes_waxes = SGN((int)ROUND(100.0 * my_cos (MY_TWO_PI*(double)(diff-1L)/28.0)));
-   *emo_phase = (int)ROUND(100.0 * my_sin (MY_TWO_PI*(double)diff/28.0));
-   *emo_waxes = SGN((int)ROUND(100.0 * my_cos (MY_TWO_PI*(double)diff/28.0)));
-#  endif /* !HAVE_LIBM */
+   x = MY_TWO_PI * (diff - 1L) / 28.0;
+   yes_phase = (int)ROUND(100.0 * sin(x));
+   yes_waxes = SGN((int)ROUND(100.0 * cos(x)));
+   x = MY_TWO_PI * diff / 28.0;
+   *emo_phase = (int)ROUND(100.0 * sin(x));
+   *emo_waxes = SGN((int)ROUND(100.0 * cos(x)));
    if (*emo_phase == 100)
      (*positive_day)++;
    else
@@ -3444,17 +3474,12 @@ biorhythm (create_bar, axis_len, string,
    /*
       Manage the "intellectual" phase value (cycle of 33 days).
    */
-#  if HAVE_LIBM
-   yes_phase = (int)ROUND(100.0 * sin(MY_TWO_PI*(double)(diff-1L)/33.0));
-   yes_waxes = SGN((int)ROUND(100.0 * cos(MY_TWO_PI*(double)(diff-1L)/33.0)));
-   *int_phase = (int)ROUND(100.0 * sin(MY_TWO_PI*(double)diff/33.0));
-   *int_waxes = SGN((int)ROUND(100.0 * cos(MY_TWO_PI*(double)diff/33.0)));
-#  else /* !HAVE_LIBM */
-   yes_phase = (int)ROUND(100.0 * my_sin (MY_TWO_PI*(double)(diff-1L)/33.0));
-   yes_waxes = SGN((int)ROUND(100.0 * my_cos (MY_TWO_PI*(double)(diff-1L)/33.0)));
-   *int_phase = (int)ROUND(100.0 * my_sin (MY_TWO_PI*(double)diff/33.0));
-   *int_waxes = SGN((int)ROUND(100.0 * my_cos (MY_TWO_PI*(double)diff/33.0)));
-#  endif /* !HAVE_LIBM */
+   x = MY_TWO_PI * (diff - 1L) / 33.0;
+   yes_phase = (int)ROUND(100.0 * sin(x));
+   yes_waxes = SGN((int)ROUND(100.0 * cos(x)));
+   x = MY_TWO_PI * diff / 33.0;
+   *int_phase = (int)ROUND(100.0 * sin(x));
+   *int_waxes = SGN((int)ROUND(100.0 * cos(x)));
    if (*int_phase == 100)
      (*positive_day)++;
    else
@@ -3478,17 +3503,12 @@ biorhythm (create_bar, axis_len, string,
    /*
       Manage the "physical" phase value (cycle of 23 days).
    */
-#  if HAVE_LIBM
-   yes_phase = (int)ROUND(100.0 * sin(MY_TWO_PI*(double)(diff-1L)/23.0));
-   yes_waxes = SGN((int)ROUND(100.0 * cos(MY_TWO_PI*(double)(diff-1L)/23.0)));
-   *phy_phase = (int)ROUND(100.0 * sin(MY_TWO_PI*(double)diff/23.0));
-   *phy_waxes = SGN((int)ROUND(100.0 * cos(MY_TWO_PI*(double)diff/23.0)));
-#  else /* !HAVE_LIBM */
-   yes_phase = (int)ROUND(100.0 * my_sin (MY_TWO_PI*(double)(diff-1L)/23.0));
-   yes_waxes = SGN((int)ROUND(100.0 * my_cos (MY_TWO_PI*(double)(diff-1L)/23.0)));
-   *phy_phase = (int)ROUND(100.0 * my_sin (MY_TWO_PI*(double)diff/23.0));
-   *phy_waxes = SGN((int)ROUND(100.0 * my_cos (MY_TWO_PI*(double)diff/23.0)));
-#  endif /* !HAVE_LIBM */
+   x = MY_TWO_PI * (diff - 1L) / 23.0;
+   yes_phase = (int)ROUND(100.0 * sin(x));
+   yes_waxes = SGN((int)ROUND(100.0 * cos(x)));
+   x = MY_TWO_PI * diff / 23.0;
+   *phy_phase = (int)ROUND(100.0 * sin(x));
+   *phy_waxes = SGN((int)ROUND(100.0 * cos(x)));
    if (*phy_phase == 100)
      (*positive_day)++;
    else
@@ -3556,697 +3576,220 @@ biorhythm (create_bar, axis_len, string,
 
 
 
-#  if HAVE_LIBM
-   LOCAL double
-kepler (m, ecc)
-         double m;
-   const double ecc;
+   PUBLIC double
+compute_distance (coor1, coor2)
+   const Coor_struct *coor1;
+   const Coor_struct *coor2;
 /*
-   Solves the equation of Kepler.
+   Returns the air line distance in Kilometers between the two geographical
+     point locations which are delivered in the COOR1 and COOR2 structures
+     if the member variable `the_mode' is set to zero.
+     If `the_mode' is set to 1, the course/direction angle in degrees from
+     COOR1 to COOR2 is returned (or SPECIAL_VALUE if an error occurs).
+     If `the_mode' is set to 2, the course/direction angle in degrees from
+     COOR2 to COOR1 is returned (or SPECIAL_VALUE if an error occurs).
+     The course/direction angle is that angle, which one needs to go from
+     the geographical point location given in one COOR? structure to the
+     geographical point location given in the other COOR? structure.
+     The angle values in degrees are:
+       * North :=   0.0 <= angle < 90.0
+       * East  :=  90.0 <= angle < 180.0
+       * South := 180.0 <= angle < 270.0
+       * West  := 270.0 <= angle < 0.0
+     The longitude coordinates west of the zero meridian have a positive sign.
+     The longitude coordinates east of the zero meridian have a negative sign.
+     The latitude coordinates north of the equator have a positive sign.
+     The latitude coordinates south of the equator have a negative sign.
+     For negative numbers, all three of `*_deg', `*_min' and `*_sec' should
+     be negative.  For example, the ISO 6709 coordinate `-202233+1100010'
+     (==+|-Latitude+|-Longitude) must be defined as `-20 -22 -33 -110 0 -10'.
+   The spheric trigonometric formula used to calculate the distance is:
+     R := 6371.221, the *mean* Earth radius
+     phi1 := Latitude of COOR1
+     phi2 := Latitude of COOR2
+     delta_lambda := Longitude of COOR1 - Longitude of COOR2
+     g := arc cosine (sine phi1 * sine phi2 + cosine phi1 * cosine phi2 * cosine delta_lambda)
+     => distance_in_km := 2 * Pi * R * degree(g) / 360
+     *** Gcal respects the flattening of the Earth in that it uses the true
+     *** Earth radii of the given locations instead of the mean Earth radius,
+     *** and their geocentric latitudes instead of their geodetic latitude!
+   The spheric trigonometric formula used to calculate the direction angle
+   for `the_mode==1' is:
+     y := sine delta_lambda
+     x := cosine phi1 * tangent phi2 - sine phi1 * cosine delta_lambda
+     => (1) direction_angle_in_degrees := degree(arc tangent (y / x))
+     An alternative formula is:
+     => (2) direction_angle_in_degrees := degree(arc sine (cos phi2 * sine delta_lambda / sine g))
+     Both formulaes do not move the direction angle into the correct quadrant
+     immediately.  For (1), this can be done by using the mathlib function
+     `atan2()' instead of the mathlib function `atan()'.
 */
 {
-   auto double  e;
-   auto double  delta;
+   auto double  lon_c1=TORAD(         coor1->lon_deg
+                             + MM2DEG(coor1->lon_min)
+                             + SS2DEG(coor1->lon_sec));
+   auto double  lat_c1=TORAD(         coor1->lat_deg
+                             + MM2DEG(coor1->lat_min)
+                             + SS2DEG(coor1->lat_sec));
+   auto double  lon_c2=TORAD(         coor2->lon_deg
+                             + MM2DEG(coor2->lon_min)
+                             + SS2DEG(coor2->lon_sec));
+   auto double  lat_c2=TORAD(         coor2->lat_deg
+                             + MM2DEG(coor2->lat_min)
+                             + SS2DEG(coor2->lat_sec));
+   auto double  delta_lambda;
+   auto double  x1;
+   auto double  x2;
 
 
-   e=m = TORAD(m);
-   do
+   switch (coor1->the_mode)
     {
-      delta = e - ecc * sin(e) - m;
-      e -= delta / (1.0 - ecc * cos(e));
-    } while (abs(delta)-KEPLER_EPSILON > 0.0);
-
-   return(e);
-}
-
-
-
-   LOCAL double
-phase (julian_date)
-   const double julian_date;
-/*
-   Calculates the phase of the Moon and returns the illuminated fraction of
-     the Moon's disc as a value within the range of -99.9~...0.0...+99.9~,
-     which has a negative sign in case the Moon wanes, otherwise the sign
-     is positive.  The New Moon phase is around the 0.0 value and the Full
-     Moon phase is around the +/-99.9~ value.  The argument is the time for
-     which the phase is requested, expressed as a Julian date and fraction.
-   This function is taken from the program "moontool" by John Walker,
-     February 1988, which is in the public domain.  So see it for more
-     information!  It is adapted (crippled) and `pretty-printed' to the
-     requirements of Gcal, which means it is lacking all the other useful
-     computations of astronomical values of the original code.
-
-   Here is the blurb from "moontool":
-   ... The algorithms used in this program to calculate the positions Sun
-   and Moon as seen from the Earth are given in the book "Practical Astronomy
-   With Your Calculator" by Peter Duffett-Smith, Second Edition,
-   Cambridge University Press, 1981. Ignore the word "Calculator" in the
-   title; this is an essential reference if you're interested in
-   developing software which calculates planetary positions, orbits,
-   eclipses, and the like. If you're interested in pursuing such
-   programming, you should also obtain:
-
-   "Astronomical Formulae for Calculators" by Jean Meeus, Third Edition,
-   Willmann-Bell, 1985. A must-have.
-
-   "Planetary Programs and Tables from -4000 to +2800" by Pierre
-   Bretagnon and Jean-Louis Simon, Willmann-Bell, 1986. If you want the
-   utmost (outside of JPL) accuracy for the planets, it's here.
-
-   "Celestial BASIC" by Eric Burgess, Revised Edition, Sybex, 1985. Very
-   cookbook oriented, and many of the algorithms are hard to dig out of
-   the turgid BASIC code, but you'll probably want it anyway.
-
-   Many of these references can be obtained from Willmann-Bell, P.O. Box
-   35025, Richmond, VA 23235, USA. Phone: (804) 320-7016. In addition
-   to their own publications, they stock most of the standard references
-   for mathematical and positional astronomy.
-
-   This program was written by:
-
-      John Walker
-      Autodesk, Inc.
-      2320 Marinship Way
-      Sausalito, CA 94965
-      (415) 332-2344 Ext. 829
-
-      Usenet: {sun!well}!acad!kelvin
-
-   This program is in the public domain: "Do what thou wilt shall be the
-   whole of the law". I'd appreciate receiving any bug fixes and/or
-   enhancements, which I'll incorporate in future versions of the
-   program. Please leave the original attribution information intact so
-   that credit and blame may be properly apportioned.
-*/
-{
-   auto double  date_within_epoch;
-   auto double  sun_eccent;
-   auto double  sun_mean_anomaly;
-   auto double  sun_perigree_co_ordinates_to_epoch;
-   auto double  sun_geocentric_elong;
-   auto double  moon_evection;
-   auto double  moon_variation;
-   auto double  moon_mean_anomaly;
-   auto double  moon_mean_longitude;
-   auto double  moon_annual_equation;
-   auto double  moon_correction_term1;
-   auto double  moon_correction_term2;
-   auto double  moon_correction_equation_of_center;
-   auto double  moon_corrected_anomaly;
-   auto double  moon_corrected_longitude;
-   auto double  moon_present_age;
-   auto double  moon_present_phase;
-   auto double  moon_present_longitude;
-
-
-   /*
-      Calculation of the Sun's position.
-   */
-   date_within_epoch = julian_date - EPOCH;
-   sun_mean_anomaly = FIXANGLE((360.0/365.2422)*date_within_epoch);
-   sun_perigree_co_ordinates_to_epoch = FIXANGLE(sun_mean_anomaly+SUN_ELONG_EPOCH-SUN_ELONG_PERIGEE);
-   sun_eccent = kepler (sun_perigree_co_ordinates_to_epoch, ECCENT_EARTH_ORBIT);
-   sun_eccent = sqrt((1.0+ECCENT_EARTH_ORBIT)/(1.0-ECCENT_EARTH_ORBIT))*tan(sun_eccent/2.0);
-   sun_eccent = 2.0 * TODEG(atan(sun_eccent));
-   sun_geocentric_elong = FIXANGLE(sun_eccent+SUN_ELONG_PERIGEE);
-   /*
-      Calculation of the Moon's position.
-   */
-   moon_mean_longitude = FIXANGLE(13.1763966*date_within_epoch+MOON_MEAN_LONGITUDE_EPOCH);
-   moon_mean_anomaly = FIXANGLE(moon_mean_longitude-0.1114041*date_within_epoch-MOON_MEAN_LONGITUDE_PERIGREE);
-   moon_evection = 1.2739 * sin(TORAD(2.0*(moon_mean_longitude-sun_geocentric_elong)-moon_mean_anomaly));
-   moon_annual_equation = 0.1858 * sin(TORAD(sun_perigree_co_ordinates_to_epoch));
-   moon_correction_term1 = 0.37 * sin(TORAD(sun_perigree_co_ordinates_to_epoch));
-   moon_corrected_anomaly = moon_mean_anomaly + moon_evection - moon_annual_equation - moon_correction_term1;
-   moon_correction_equation_of_center = 6.2886 * sin(TORAD(moon_corrected_anomaly));
-   moon_correction_term2 = 0.214 * sin(TORAD(2.0*moon_corrected_anomaly));
-   moon_corrected_longitude =   moon_mean_longitude + moon_evection + moon_correction_equation_of_center
-                              - moon_annual_equation + moon_correction_term2;
-   moon_variation = 0.6583 * sin(TORAD(2.0*(moon_corrected_longitude-sun_geocentric_elong)));
-   moon_present_longitude = moon_corrected_longitude + moon_variation;
-   moon_present_age = moon_present_longitude - sun_geocentric_elong;
-   moon_present_phase = 100.0 * ((1.0 - cos(TORAD(moon_present_age))) / 2.0);
-   if (FIXANGLE(moon_present_age)-180.0 > 0.0)
-     moon_present_phase = -moon_present_phase;
-
-   return(moon_present_phase);
-}
-
-
-
-   PUBLIC int
-the_phase (is_full_new, day, month, year, hour, min)
-         Bool *is_full_new;
-   const int   day;
-   const int   month;
-   const int   year;
-   const int   hour;
-   const int   min;
-/*
-   Computes yesterday's, today's and tomorrow's moonphase by calling the
-     `phase()' function for each day and sets `&is_full_moon' to TRUE
-     in case today's Moon is in the "Full" or in the "New" phase, otherwise
-     to FALSE.  Returns the illuminated fraction of the Moon's disc as an
-     integer value within the range of -100...0...+100, which has a negative
-     sign in case the Moon wanes, otherwise the sign is positive.
-*/
-{
-   auto double  the_date;
-   auto double  the_time=(double)hour*60.0+(double)min;
-   auto double  yes;
-   auto double  tod;
-   auto double  tom;
-
-
-   *is_full_new = FALSE;
-   the_date = (double)(date2num (day, month, year) + RC_MIN_BCE_TO_1_CE - (Ulint)2);
-   if (the_time > 0.0)
-     the_date += (1.0 / (1440.0 / the_time));
-   yes = phase (the_date);
-   the_date += 1.0;
-   tod = phase (the_date);
-   the_date += 1.0;
-   tom = phase (the_date);
-   if (   SGN(yes) != SGN(tod)
-       || SGN(tod) != SGN(tom))
-    {
-      if (   (SGN(tod) == -1)
-          && (SGN(tom) >= 0))
-       {
-         if (abs(tod)-abs(tom) <= 0.0)
-           *is_full_new = TRUE;
-       }
-      else
-        if (   (SGN(yes) == -1)
-            && (SGN(tom) >= 0))
+      case 0:
+        x1 = gd_latitude2gc_latitude (lat_c1, coor1->meters_above_sea_level, &lat_c1);
+        x2 = gd_latitude2gc_latitude (lat_c2, coor2->meters_above_sea_level, &lat_c2);
+        if (   SGN(lat_c1) == 0
+            || SGN(lat_c2) == 0
+            || SGN(lat_c1) == SGN(lat_c2))
          {
-           if (abs(tod)-abs(yes) <= 0.0)
-             *is_full_new = TRUE;
+           delta_lambda = (x1 + x2) * 0.5;
+           x1 = 2.0 * MAX(x1, delta_lambda) + MIN(x1, delta_lambda)
+             + 2.0 * MAX(x2, delta_lambda) + MIN(x2, delta_lambda);
          }
         else
-          if (   (SGN(tod) >= 0)
-              && (SGN(tom) == -1))
-           {
-             if ((100.0-tod)-(100.0+tom) <= 0.0)
-               *is_full_new = TRUE;
-           }
-          else
-            if (   (SGN(yes) >= 0)
-                && (SGN(tod) == -1))
-             {
-               if ((100.0+tod)-(100.0-yes) <= 0.0)
-                 *is_full_new = TRUE;
-             }
-      if (   !*is_full_new
-          && (   abs(floor(tod)) == 0.0
-              || abs(floor(tod)) == 100.0))
-        tod = ceil(tod);
-    }
-   tod = floor(tod);
-   if (   !*is_full_new
-       && (   abs(tod) == 0.0
-           || abs(tod) == 100.0))
-     tod += 1.0;
-
-   return((int)tod);
-}
-#  else /* !HAVE_LIBM */
-   LOCAL double
-moonphase (day, month, year, hour, min)
-   const int day;
-   const int month;
-   const int year;
-   const int hour;
-   const int min;
-/*
-   Calculates the phase of the Moon and returns the illuminated fraction of
-     the Moon's disc as a value within the range of -99.9~...0.0...+99.9~,
-     which has a negative sign in case the Moon wanes, otherwise the sign
-     is positive.  The New Moon phase is around the 0.0 value and the Full
-     Moon phase is around the +/-99.9~ value.  This function computes the
-     Moon phases only approximately, but it almost works fine when compared
-     with the functions of John Walker "moontool" program.
-*/
-{
-   auto       double  result;
-   auto       Ulint   delta;
-   auto       Ulint   offset;
-   auto const Ulint   length=(Ulint)(2551.0/60.0*1000.0+443.0/60.0);
-   auto const Ulint   diff=(Ulint)d_between (1, 1, 1978, day, month, year)+(Ulint)1;
-
-
-   offset = (diff * (Ulint)24 + hour) * (Ulint)60 + min;
-   delta = offset - ((Ulint)273 * (Ulint)24 + (Ulint)13) * (Ulint)60 + (Ulint)23;
-   offset = delta - (delta / length) * length;
-   result = (double)offset / length * 100.0;
-   result -= (((double)year / 1000.0) + 4.0);
-   if (result-50.0 > 0.0)
-     return (-(100.0-((result-50.0)*2.0)));
-
-   return(result*2.0);
-}
-
-
-
-   PUBLIC int
-the_moonphase (is_full_new, day, month, year, hour, min)
-         Bool *is_full_new;
-         int   day;
-         int   month;
-         int   year;
-   const int   hour;
-   const int   min;
-/*
-   Computes yesterday's, today's and tomorrow's moonphase by calling the
-     `moonphase()' function for each day and sets `&is_full_moon' to TRUE
-     in case today's Moon is in the "Full" or in the "New" phase, otherwise
-     to FALSE.  Returns the illuminated fraction of the Moon's disc as an
-     integer value within the range of -100...0...+100, which has a negative
-     sign in case the Moon wanes, otherwise the sign is positive.
-*/
-{
-   auto double  yes;
-   auto double  tod;
-   auto double  tom;
-
-
-   *is_full_new = FALSE;
-   (void)prev_date (&day, &month, &year);
-   yes = moonphase (day, month, year, hour, min);
-   (void)next_date (&day, &month, &year);
-   tod = moonphase (day, month, year, hour, min);
-   (void)next_date (&day, &month, &year);
-   tom = moonphase (day, month, year, hour, min);
-   if (   SGN(yes) != SGN(tod)
-       || SGN(tod) != SGN(tom))
-    {
-      if (   (SGN(tod) == -1)
-          && (SGN(tom) >= 0))
-       {
-         if (abs(tod)-abs(tom) <= 0.0)
-           *is_full_new = TRUE;
-       }
-      else
-        if (   (SGN(yes) == -1)
-            && (SGN(tom) >= 0))
-         {
-           if (abs(tod)-abs(yes) <= 0.0)
-             *is_full_new = TRUE;
-         }
-        else
-          if (   (SGN(tod) >= 0)
-              && (SGN(tom) == -1))
-           {
-             if ((100.0-tod)-(100.0+tom) <= 0.0)
-               *is_full_new = TRUE;
-           }
-          else
-            if (   (SGN(yes) >= 0)
-                && (SGN(tod) == -1))
-             {
-               if ((100.0+tod)-(100.0-yes) <= 0.0)
-                 *is_full_new = TRUE;
-             }
-    }
-
-   return((int)ROUND(tod));
-}
-#  endif /* !HAVE_LIBM */
-
-
-
-   PUBLIC void
-draw_moon (age, lines, string)
-   const int    age;
-   const int    lines;
-         char **string;
-/*
-   Creates a text graphics image of the moon according to its `age', which is
-     expressed as the illuminated fraction of the Moon's disc as a value within
-     the range of -100...0...+100, which has a negative sign in case the Moon
-     wanes, otherwise the sign is positive.  Uses the delivered `string' for
-     storing this image (each line with a leading newline character represented
-     by Gcal RC_NL_CHAR=='~') and returns it.  The caller has to guarantuee
-     that enough `string' space is allocated, which means there must be two
-     Bytes allocated minimum in this case, because this function increases
-     the `string' properly by reallocating it internally when used within Gcal.
-     Moreover, this function optionally uses the emulation functions for
-     computing sqrt() and cos()... OK, that's slow, I know.  The cos() function
-     itself needs pow() and fac(), which are likewise replaced.  By reason of
-     this, there is no real need for linking the mathematical library (libm.a)
-     to this source, in this sense, it is optionally working stand-alone, and
-     this is wanted for portability purposes.
-*/
-{
-   register       Uint     slen=0;
-   register       int      i;
-   register       int      j;
-   register       int      k;
-   register       int      end;
-   auto           double   counter=(double)age;
-   auto     const double   step=2.0/(double)lines;
-   auto           double   squisher;
-   auto           double   horizon;
-   auto           double   terminator;
-   static         char     buffer[80];   /* Proper if [MOONIMAGE_MIN]6<=lines<=30[MOONIMAGE_MAX] */
-   auto           char    *ptr_buffer;
-
-
-   **string = '\0';
-   if (counter < 0.0)
-     counter = -counter;
-   if (age < 0)
-     counter = (100.0 - (double)(((Uint)counter >> 1) + 50)) / 100.0;
-   else
-     counter /= 200.0;
-#  if !HAVE_LIBM
-   squisher = my_cos (counter*MY_TWO_PI);
-#  else /* HAVE_LIBM */
-   squisher = cos(counter*MY_TWO_PI);
-#  endif /* HAVE_LIBM */
-   for (counter=0.93 ; counter > -1.0 ; counter-=step)
-    {
-      sprintf(buffer, "%c", RC_NL_CHAR);
-      strcat(*string, buffer);
-      slen++;
-#  if !HAVE_LIBM
-      horizon = my_sqrt (1.0-counter*counter);
-#  else /* HAVE_LIBM */
-      horizon = sqrt(1.0-counter*counter);
-#  endif /* HAVE_LIBM */
-      i=j = moon_charpos (horizon, lines+6);
-      for (ptr_buffer=buffer ; i-- ; )
-        *ptr_buffer++ = ' ';
-      i = j;
-      slen += (i + 1);
-      buffer[i] = *MOONIMAGE_REDGE;
-      buffer[i+1] = '\0';
-      j = moon_charpos (-horizon, lines+6);
-      buffer[j] = *MOONIMAGE_LEDGE;
-      terminator = horizon * squisher;
-      if (abs(age) > 6)
-       {
-         k = moon_charpos (terminator, lines+6);
-         if (age > 0)
-          {
-            end = i;
-            i = k;
-          }
-         else
-          {
-            i = j;
-            end = k;
-          }
-         while (i <= end)
-           buffer[i++] = *MOONIMAGE_BRIGHT;
-       }
-      if (slen+1 >= maxlen_max)
-        resize_all_strings (maxlen_max<<1, FALSE, __FILE__, (long)__LINE__);
-      strcat(*string, buffer);
-    }
-}
-
-
-
-   LOCAL int
-moon_charpos (x, lines)
-   const double x;
-   const int    lines;
-/*
-   Computes the position where to place the next character
-     of the moon text graphics image.
-*/
-{
-   register int  i;
-
-
-   i = (int)(x * (double)lines - 0.5);
-   if (i+lines < 1)
-     i = 0;
-   else
-     i += lines;
-
-   return(i);
-}
-
-
-
-#  if !HAVE_LIBM
-   LOCAL Ulint
-my_fac (n)
-   Slint n;
-/*
-   Computes the factorial of a positive `n' recursively.
-
-             |  1        for  n = 0
-      n! :=  |
-             |  n*(n-1)  for  n >= 1
-*/
-{
-   if (n < 0L)
-     n = -n;
-
-   return((n <= 1L) ? 1L : n*my_fac (n-1L));
-}
-
-
-
-   LOCAL double
-my_pow (x, n)
-   double x;
-   int    n;
-/*
-                      ` n'
-   Computes the power  x   iteratively.
-*/
-{
-   auto     double  y;
-   register int     is_neg=n<0;
-
-
-   if (!n)
-     return(1.0);
-   if (is_neg)
-     n = -n;
-   while (!(n & 1))
-    {
-      x *= x;
-      n >>= 1;
-    }
-   y = x;
-   while (n >>= 1)
-    {
-      x *= x;
-      if (n & 1)
-        y *= x;
-    }
-
-   return((double)(is_neg) ? 1.0/y : y);
-}
-
-
-
-   LOCAL double
-my_sqrt (x)
-   double x;
-/*
-   Computes the "square root" of a given `x' by using Newton's iteration formula.
-
-   sqrt x ==  x    = x - ( f(x ) / f'(x ) ) , n=0,1,2,... , abs( (f(x) * f''(x)) / (f'(x))^2 ) < 1
-               n+1    n       n        n
-*/
-{
-   auto double  old_val;
-   auto double  new_val;
-
-
-
-   if (x == 0.0)
-     return(x);
-   if (x < 0.0)
-     x = -x;
-   old_val = x;
-   new_val = 1.0;
-   LOOP
-    {
-      new_val = (new_val + x / new_val) / 2.0;
-      if (new_val == old_val)
-        /*
-           Result does not change anymore, we have computed it with success.
-        */
+          x1 = 4.0 * EQUATOR_EARTH_RADIUS + x1 + x2;
+        delta_lambda = lon_c1 - lon_c2;
+        return(  DEG2DAY(TODEG(acos(  sin(lat_c1) * sin(lat_c2)
+                                    + cos(lat_c1) * cos(lat_c2) * cos(delta_lambda))))
+               * (x1 / 6000.0) * MY_TWO_PI);
+      case 1:
+        delta_lambda = lon_c1 - lon_c2;
+        x1 = cos(lat_c1) * tan(lat_c2) - sin(lat_c1) * cos(delta_lambda);
         break;
-      old_val = new_val;
+      case 2:
+        delta_lambda = lon_c2 - lon_c1;
+        x1 = cos(lat_c2) * tan(lat_c1) - sin(lat_c2) * cos(delta_lambda);
+        break;
+      default:
+        /*
+           This case MUST be an internal error!
+        */
+        abort();
     }
+   x2 = sin(delta_lambda);
+   /*
+      Emulate the mathlib function `atan2()' so we can handle an error properly.
+   */
+   if (x1 > 0.0)
+     delta_lambda = atan(x2/x1);
+   else
+     if (x1 < 0.0)
+       delta_lambda = atan(x2/x1) + MY_PI;
+     else
+       if (x2 > 0.0)
+         delta_lambda = MY_HALF_PI;
+       else
+         if (x2 < 0.0)
+           delta_lambda = -MY_HALF_PI;
+         else
+           /*
+              This case (x2==0 && x1==0) is treated as an error here
+                and is managed specially!
+           */
+           return(SPECIAL_VALUE);
+   if (SGN(delta_lambda) > 0)
+     delta_lambda = MY_TWO_PI - delta_lambda;
+   else
+     if (SGN(delta_lambda) < 0)
+       delta_lambda = -delta_lambda;
 
-   return(new_val);
+   return(TODEG(delta_lambda));
 }
-
-
-
-   LOCAL double
-my_sin (x)
-   double x;
-/*
-   Computes the "sine" of a given `x' iteratively by using a power-sequence
-     (Taylor) up to its fifth computed term (... + x^11/11!) and gives a good
-     approximation of it with an error less than 1E-3 in case this function
-     is used for computing `x' values within the range -1000.0<=x<=1000.0.
-
-     sin x == x^1/1! - x^3/3! + x^5/5! - + ... + (-1)^n * ((x^2n+1) / (2n+1)!) + ... , r=inf
-*/
-{
-   auto     double  new_val=x;
-   register int     i;
-   register int     sign=0;
-   auto     Bool    is_neg=x<0.0;
-
-
-   /*
-      Reduce the given `x' by multiples of Pi till it's less than Pi.
-   */
-   if (is_neg)
-    {
-      new_val = -new_val;
-      sign++;
-    }
-   x = MY_PI * 1000.0;
-   while (new_val-x >= 0.0)
-     new_val -= x;
-   x = MY_PI * 100.0;
-   while (new_val-x >= 0.0)
-     new_val -= x;
-   x = MY_PI * 10.0;
-   while (new_val-x >= 0.0)
-     new_val -= x;
-   while (new_val-MY_PI > 0.0)
-    {
-      new_val -= MY_PI;
-      sign++;
-    }
-   /*
-      Let's compute the sine now.
-   */
-   if (sign & 1)
-     new_val = -new_val;
-   x = new_val;
-   for (i=1 ; i <= 5 ; i++)
-    {
-      if (i & 1)
-        new_val -= (my_pow (x, (i<<1)+1) / my_fac ((Slint)(i<<1)+1));
-      else
-        new_val += (my_pow (x, (i<<1)+1) / my_fac ((Slint)(i<<1)+1));
-    }
-
-   return(new_val);
-}
-
-
-
-   LOCAL double
-my_cos (x)
-   double x;
-/*
-   Computes the "cosine" of a given `x' iteratively by using a power-sequence
-     (Taylor) up to its sixth computed term (... + x^12/12!) and gives a good
-     approximation of it with an error less than 1E-8 in case this function
-     is used for computing `x' values within the range -1000.0<=x<=1000.0.
-
-     cos x == 1 - x^2/2! + x^4/4! - + ... + (-1)^n * ((x^2n) / (2n)!) + ... , r=inf
-*/
-{
-   auto     double  new_val=x;
-   register int     i;
-   register int     sign=0;
-   auto     Bool    is_neg=x<0.0;
-
-
-   /*
-      Reduce the given `x' by multiples of Pi till it's less than Pi/2.
-   */
-   if (is_neg)
-    {
-      new_val = -new_val;
-      sign++;
-    }
-   x = MY_PI * 1000.0;
-   while (new_val-x >= 0.0)
-     new_val -= x;
-   x = MY_PI * 100.0;
-   while (new_val-x >= 0.0)
-     new_val -= x;
-   x = MY_PI * 10.0;
-   while (new_val-x >= 0.0)
-     new_val -= x;
-   while (new_val-(MY_PI/2.0) > 0.0)
-    {
-      new_val -= MY_PI;
-      sign++;
-    }
-   /*
-      Let's compute the cosine now.
-   */
-   x = new_val;
-   new_val = 1.0;
-   for (i=1 ; i <= 6 ; i++)
-    {
-      /*
-         Manage each single term.
-      */
-      if (i & 1)
-        new_val -= (my_pow (x, i<<1) / my_fac ((Slint)i<<1));
-      else
-        new_val += (my_pow (x, i<<1) / my_fac ((Slint)i<<1));
-    }
-   /*
-      Adjust the sign of the result.  (Not the smartest solution, I know, but it works!)
-   */
-   if (   (   is_neg
-           && !(sign & 1))
-       || (   !is_neg
-           && (sign & 1)))
-     new_val = -new_val;
-
-   return(new_val);
-}
-#  endif /* !HAVE_LIBM */
 
 
 
    LOCAL void
-dvar_warning (exit_status, dvar, line_buffer, filename, line_number)
+var_warning (exit_status, var_name, line_buffer, filename, line_number)
    const int   exit_status;
-   const int   dvar;
+   const int   var_name;
    const char *line_buffer;
    const char *filename;
    const long  line_number;
 /*
-   Prints an informational message in case an operation on a date variable
-     is invalid and terminates program if `warning_level' is set to "MAX" amount.
+   Prints an informational message on STDERR channel in case an operation
+     on a date or text variable is invalid.  Terminates the program if
+     `warning_level' is set to "WARN_LVL_MAX"  with delivered `exit_status'.
 */
 {
-   register int  i;
+   register int   i;
+   auto     Bool  with_usage=FALSE;
 
 
-   *s5 = '\0';
-   print_text (stderr, s5);
-   i = (int)strlen(filename) + 100;
+   if (!line_number)
+     S_NEWLINE(stderr);
+   else
+    {
+      *s5 = '\0';
+      print_text (stderr, s5);
+    }
+   if (warning_level >= WARN_LVL_MAX)
+#  if USE_DE
+     fprintf(stderr, "%s: Abbruch, ", prgr_name);
+#  else /* !USE_DE */
+     fprintf(stderr, _("%s: abort, "), prgr_name);
+#  endif /* !USE_DE */
+   i = (int)strlen(filename) + LEN_SINGLE_LINE;
    if ((Uint)i >= maxlen_max)
      resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
    switch (exit_status)
     {
-      case 113:
+      case ERR_ILLEGAL_VAR_DEFINITION:
+        if (line_number)
 #  if USE_DE
-        sprintf(s5, "Datumvariable `%c' undefiniert in Datei `%s'.", (char)dvar, filename);
+          sprintf(s5, "illegale Variablen-Definition in Datei `%s'", filename);
 #  else /* !USE_DE */
-        sprintf(s5, _("Date variable `%c' undefined in file `%s'."), (char)dvar, filename);
+          sprintf(s5, _("illegal variable definition in file `%s'"), filename);
+#  endif /* !USE_DE */
+        else
+#  if USE_DE
+          sprintf(s5, "illegale Definition der Variable `%c'", (char)var_name);
+#  else /* !USE_DE */
+          sprintf(s5, _("illegal definition of variable `%c'"), (char)var_name);
+#  endif /* !USE_DE */
+        if (!line_number)
+          with_usage = TRUE;
+        break;
+      case ERR_ILLEGAL_VAR_OPERATION:
+        if (line_number)
+#  if USE_DE
+          sprintf(s5, "illegale Variablen-Operation in Datei `%s'", filename);
+#  else /* !USE_DE */
+          sprintf(s5, _("illegal variable operation in file `%s'"), filename);
+#  endif /* !USE_DE */
+        else
+#  if USE_DE
+          sprintf(s5, "illegale Operation auf Variable `%c'", (char)var_name);
+#  else /* !USE_DE */
+          sprintf(s5, _("illegal operation on variable `%c'"), (char)var_name);
+#  endif /* !USE_DE */
+        if (!line_number)
+          with_usage = TRUE;
+        break;
+      case ERR_INVALID_VAR_REFERENCE:
+#  if USE_DE
+        sprintf(s5, "Variable `%c' undefiniert in Datei `%s'",
+                (char)var_name, filename);
+#  else /* !USE_DE */
+        sprintf(s5, _("variable `%c' undefined in file `%s'"),
+                (char)var_name, filename);
 #  endif /* !USE_DE */
         break;
-      case 112:
+      case ERR_INVALID_VAR_ASSIGNMENT:
 #  if USE_DE
-        sprintf(s5, "Datumwert ung%sltig (Variable `%c') in Datei `%s'.", UE, (char)dvar, filename);
+        sprintf(s5, "ung%sltiger Wert an Variable `%c' zugewiesen in Datei `%s'",
+                UE, (char)var_name, filename);
 #  else /* !USE_DE */
-        sprintf(s5, _("Invalid date value (variable `%c') in file `%s'."), (char)dvar, filename);
+        sprintf(s5, _("invalid value assigned to variable `%c' in file `%s'"),
+                (char)var_name, filename);
 #  endif /* !USE_DE */
         break;
       default:
@@ -4255,31 +3798,58 @@ dvar_warning (exit_status, dvar, line_buffer, filename, line_number)
         */
         abort();
     }
-   print_text (stderr, s5);
-   i = (int)strlen(line_buffer) + 100;
-   if ((Uint)i >= maxlen_max)
-     resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
-#  if USE_DE
+   if (warning_level < WARN_LVL_MAX)
+    {
+      *s5 = (char)toupper(*s5);
+      strcat(s5, ".");
+    }
    if (!line_number)
-     sprintf(s5, "Argument `%s' in Kommandozeile ignoriert", line_buffer);
+     fprintf(stderr, "%s\n", s5);
    else
-     sprintf(s5, "Zeile %ld ignoriert: %s", line_number, line_buffer);
-#  else /* !USE_DE */
-   if (!line_number)
-     sprintf(s5, _("Argument `%s' of command line ignored"), line_buffer);
-   else
-     sprintf(s5, _("Line %ld ignored: %s"), line_number, line_buffer);
-#  endif /* !USE_DE */
-   print_text (stderr, s5);
+     print_text (stderr, s5);
    if (warning_level >= WARN_LVL_MAX)
     {
+      if (!line_number)
 #  if USE_DE
-      strcpy(s5, "Abbruch!");
+        fprintf(stderr, "Ung%sltiges Argument in Kommandozeile angegeben -- %s",
+                UE, line_buffer);
 #  else /* !USE_DE */
-      strcpy(s5, _("Abort!"));
+        fprintf(stderr, _("Invalid argument in command line given -- %s"),
+                line_buffer);
 #  endif /* !USE_DE */
-      print_text (stderr, s5);
-      my_exit (exit_status);
+      else
+#  if USE_DE
+        fprintf(stderr, "Zeile %ld: %s", line_number, line_buffer);
+#  else /* !USE_DE */
+        fprintf(stderr, _("Line %ld: %s"), line_number, line_buffer);
+#  endif /* !USE_DE */
+      S_NEWLINE(stderr);
     }
+   else
+    {
+      i = (int)strlen(line_buffer) + LEN_SINGLE_LINE;
+      if ((Uint)i >= maxlen_max)
+        resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
+      if (!line_number)
+#  if USE_DE
+        sprintf(s5, "Argument `%s' in Kommandozeile ignoriert.", line_buffer);
+#  else /* !USE_DE */
+        sprintf(s5, _("Argument `%s' of command line ignored."), line_buffer);
+#  endif /* !USE_DE */
+      else
+#  if USE_DE
+        sprintf(s5, "Zeile %ld ignoriert: %s", line_number, line_buffer);
+#  else /* !USE_DE */
+        sprintf(s5, _("Line %ld ignored: %s"), line_number, line_buffer);
+#  endif /* !USE_DE */
+      if (!line_number)
+        fprintf(stderr, "%s\n", s5);
+      else
+        print_text (stderr, s5);
+    }
+   if (with_usage)
+     fprintf(stderr, "%s\n%s\n", usage_msg (), lopt_msg ());
+   if (warning_level >= WARN_LVL_MAX)
+     my_exit (exit_status);
 }
 #endif /* USE_RC */

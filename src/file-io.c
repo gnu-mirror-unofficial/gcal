@@ -2,7 +2,7 @@
 *  file-io.c:  Managing and accessing resource, include and response files.
 *
 *
-*  Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1994-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: file-io.c 2.40 1997/03/24 02:04:00 tom Exp $";
+static char rcsid[]="$Id: file-io.c 3.00 2000/03/26 03:00:00 tom Exp $";
 #endif
 
 
@@ -49,161 +49,47 @@ static char rcsid[]="$Id: file-io.c 2.40 1997/03/24 02:04:00 tom Exp $";
 #  endif
 #  include <sys/stat.h>
 #endif
-#include "gcal.h"
-
-
-
-/*
-*  Function prototypes.
-*/
-#if __cplusplus
-extern "C"
-{
-#endif
-/*
-************************************************** Defined in `gcal.c'.
-*/
-IMPORT int
-eval_longopt __P_((char *longopt,
-                   int  *longopt_symbolic));
+#include "common.h"
 #if USE_RC
-/*
-************************************************** Defined in `rc-utils.c'.
-*/
-IMPORT Bool
-set_dvar __P_((const char        *line_buffer,
-                     Line_struct *lineptrs,
-               const char        *filename,
-               const long         line_number,
-               const Dvar_enum    mode));
-IMPORT Bool
-set_tvar __P_((const char      *line_buffer,
-               const Tvar_enum  mode));
+#  include "rc-defs.h"
+#endif /* !USE_RC */
+#include "globals.h"
+#include "gcal.h"
+#include "hd-defs.h"
+#include "hd-use.h"
+#if USE_RC
+#  include "rc-utils.h"
 #endif
+#include "tty.h"
+#include "utils.h"
+#include "file-io.h"
+
+
+
 /*
-************************************************** Defined in `tty.c'.
+*  LOCAL functions prototypes.
 */
-IMPORT void
-print_text __P_((FILE *fp,
-                 char *text_line));
-/*
-************************************************** Defined in `utils.c'.
-*/
-IMPORT VOID_PTR
-my_malloc __P_((const int   amount,
-                const int   exit_status,
-                const char *module_name,
-                const long  module_line,
-                const char *var_name,
-                const int   var_contents));
-IMPORT VOID_PTR
-my_realloc __P_((      VOID_PTR  ptr_memblock,
-                 const int       amount,
-                 const int       exit_status,
-                 const char     *module_name,
-                 const long      module_line,
-                 const char     *var_name,
-                 const int       var_contents));
-IMPORT void
-resize_all_strings __P_((const int   amount,
-                         const Bool  with_line_buffer,
-                         const char *module_name,
-                         const long  module_line));
-IMPORT void
-my_error __P_((const int   exit_status,
-               const char *module_name,
-               const long  module_line,
-               const char *var_name,
-               const int   var_contents));
-IMPORT const char *
-short_month_name __P_((const int month));
-IMPORT int
-days_of_february __P_((const int year));
+__BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `file-io.c'.
 */
-EXPORT FILE *
-file_open __P_((      char       **filename,
-                const int          level,
-                const Fmode_enum   mode,
-                      Bool        *bad_sys_include));
-EXPORT char *
-file_read_line __P_((      FILE        *fp,
-                           char       **line_buffer,
-                           int         *in_pool,
-                           char        *pool,
-                           char        *ptr_pool,
-                     const char        *filename,
-                           long        *line_number,
-                           int         *line_length,
-                     const Fmode_enum   mode,
-                           Bool        *is_include,
-                           Bool        *is_dvar,
-                           Bool        *is_tvar));
-EXPORT char **
-insert_response_file __P_((      FILE *fp,
-                                 char *filename,
-                           const char *opt_list,
-                                 Uint *my_argc_max,
-                                 int  *my_argc,
-                                 char *my_argv[]));
-EXPORT void
-write_log_file __P_((const char       *filename,
-                     const Fmode_enum  mode,
-                     const char       *mode_txt,
-                     const char       *created_txt,
-                     const int         argc,
-                           char       *argv[]));
 LOCAL void
-make_absolute_filename __P_((const char *directory,
-                             const char *filename));
+make_absolute_filename __P_((      char **absolute_filename,
+                             const char  *directory,
+                             const char  *filename));
 LOCAL FILE *
 get_file_ptr __P_((      FILE       *fp,
                    const char       *filename,
                    const int         level,
                    const Fmode_enum  mode,
                          Bool       *is_first));
-#if __cplusplus
-}
-#endif
+__END_DECLARATIONS
 
 
 
 /*
-*  Declare public(extern) variables.
+*  Function implementations.
 */
-IMPORT const int    dvec[];            /* Amount of days in months */
-IMPORT Hls_struct   ehls1s;            /* Effective hls 1 start (current day) */
-IMPORT Hls_struct   ehls1e;            /* Effective hls 1 end (current day) */
-IMPORT Hls_struct   ehls2s;            /* Effective hls 2 start (holiday) */
-IMPORT Hls_struct   ehls2e;            /* Effective hls 2 end (holiday) */
-#if USE_RC
-IMPORT Tvar_struct  rc_tvar[];         /* Text variables $a[=TEXT]...$z[] */
-IMPORT Line_struct *lptrs3;            /* Pointers to different parts of a (resource file) line */
-#endif
-#ifdef DJG
-IMPORT Usint        testval;           /* Set to SHRT_MAX for checking the maximum table range */
-#else
-IMPORT Uint         testval;           /* Set to INT_MAX for checking the maximum table range */
-#endif
-IMPORT Uint         maxlen_max;        /* Actual size of all string vectors */
-IMPORT int          warning_level;     /* --debug[=0...WARN_LVL_MAX] */
-IMPORT int          year;              /* Current year */
-IMPORT int          act_sec;           /* Actual second */
-IMPORT int          act_min;           /* Actual minute */
-IMPORT int          act_hour;          /* Actual hour */
-IMPORT int          buf_ad;            /* Buffer of actual day */
-IMPORT int          buf_am;            /* Buffer of actual month */
-IMPORT int          buf_ay;            /* Buffer of actual year */
-IMPORT char        *prgr_name;         /* Stores the actual program name */
-IMPORT char        *tz;                /* Pointer to the $TZ (timezone) environment variable */
-IMPORT char        *s1;                /* General purpose text buffer */
-IMPORT char        *s2;                /* General purpose text buffer */
-IMPORT char        *s4;                /* General purpose text buffer */
-IMPORT char        *s5;                /* General purpose text buffer */
-
-
-
    PUBLIC FILE *
 file_open (filename, level, mode, bad_sys_include)
          char       **filename;
@@ -211,40 +97,45 @@ file_open (filename, level, mode, bad_sys_include)
    const Fmode_enum   mode;
          Bool        *bad_sys_include;
 /*
-   Tries to open a resource/response file (MODE-> `REsource', `REsponse')
+   Tries to open a resource/response file (MODE == `REsource', `REsponse')
      in the following order:
-       1) $HOME
-       2) $GCALPATH
-       3) $GCAL_USR_DATADIR (environment variable first; if unset then default name)
-       4) $GCAL_SYS_DATADIR (environment variable first; if unset then default name)
+       1) $GCALPATH
+       2) $HOME
+       3) $GCAL_USR_DATADIR (environment variable first; default name if unset)
+       4) $GCAL_SYS_DATADIR (environment variable first; default name if unset)
      and returns a file pointer to this file and it's MODIFIED name in some
      cases (due to this, it's necessary to reallocate the memory area of
-     `filename', which must be allocated on the heap), otherwise return a NULL pointer.
+     `&filename', which must be allocated on the heap), otherwise return a NULL pointer.
    If MODE is set to `USr_include', this function tries to open an
      include file (#include "file" directive found) in:
        1) actual directory
-       2) $HOME
-       3) $GCALPATH
-       4) $GCAL_USR_DATADIR (environment variable first; if unset then default name)
-       5) $GCAL_SYS_DATADIR (environment variable first; if unset then default name)
+       2) $GCALPATH
+       3) $HOME
+       4) $GCAL_USR_DATADIR (environment variable first; default name if unset)
+       5) $GCAL_SYS_DATADIR (environment variable first; default name if unset)
      and returns a file pointer to this file and it's MODIFIED name in some
      cases (due to this, it's necessary to reallocate the memory area of
-     `filename', which must be allocated on the heap), otherwise return a NULL pointer.
-     If a root directory based include file name is given, set `*bad_sys_include'
+     `&filename', which must be allocated on the heap), otherwise return a NULL pointer.
+     If a root directory based include file name is given, set `&bad_sys_include'
      to TRUE!
    If MODE is set to `SYs_include', this function tries to open an
      include file (#include <file> directive found) only in:
-       1) $GCAL_USR_DATADIR (environment variable first; if unset then default name)
-       2) $GCAL_SYS_DATADIR (environment variable first; if unset then default name)
+       1) $GCAL_USR_DATADIR (environment variable first; default name if unset)
+       2) $GCAL_SYS_DATADIR (environment variable first; default name if unset)
      and returns a file pointer to this file and it's MODIFIED name in some
      cases (due to this, it's necessary to reallocate the memory area of
-     `filename', which must be allocated on the heap), otherwise return a NULL pointer.
-     If a root directory based include file name is given, set `*bad_sys_include'
+     `&filename', which must be allocated on the heap), otherwise return a NULL pointer.
+     If a root directory based include file name is given, set `&bad_sys_include'
      to TRUE!
+   If MODE is set to `HEre', this function tries to open a
+     "here" file (`--here=ARG' option) in
+       1) actual directory
+     and returns a file pointer to this file and it's name,
+     otherwise return a NULL pointer.
    If MODE is set to `COmmon', this function tries to open a
      common file in
        1) $PATH
-     If success, return a file pointer to this file and it's name,
+     and returns a file pointer to this file and it's name,
      otherwise return a NULL pointer.
    Passes the nesting LEVEL only for informational purposes to other functions called here.
    NO informational messages will be emitted in `REsponse' and `COmmon' modes!!
@@ -258,7 +149,7 @@ file_open (filename, level, mode, bad_sys_include)
 #if USE_RC
    auto     Bool   is_root_based_filename=FALSE;
    auto     Bool   is_disk_given=FALSE;
-   auto     Bool   is_first=(Bool)((mode==REsource) ? TRUE : FALSE);
+   auto     Bool   is_first=(Bool)((mode == REsource) ? TRUE : FALSE);
 #else /* !USE_RC */
    auto     Bool   is_first=FALSE;
 #endif /* !USE_RC */
@@ -277,17 +168,17 @@ file_open (filename, level, mode, bad_sys_include)
          If a disk/drive is specified, this is like an absolute file name!
       */
       is_absolute_filename = TRUE;
-#if USE_RC
+#    if USE_RC
       is_disk_given = TRUE;
-#endif
+#    endif
       ptr_char++;
     }
    else
      ptr_char = *filename;
-#  endif
+#  endif /* DISK_SEP */
 #if USE_RC
    /*
-      Check if absolute file name given.
+      Check if an absolute file name is given.
    */
    if (   *ptr_char == *DIR_SEP
        || *ptr_char == *ACTUAL_DIR)
@@ -305,6 +196,13 @@ file_open (filename, level, mode, bad_sys_include)
       else
         is_absolute_filename = TRUE;
     }
+   else
+     /*
+        Check if STDIN channel is wanted.
+     */
+     if (   (*ptr_char == '-')
+         && (len == 1))
+       is_absolute_filename = TRUE;
    if (*ptr_char == *DIR_SEP)
      is_root_based_filename = TRUE;
    if (   (   is_disk_given
@@ -312,7 +210,7 @@ file_open (filename, level, mode, bad_sys_include)
        && (mode == SYs_include))
     {
       /*
-         Include file names, which are based by the root directory,
+         Include files names. which are based by the root directory,
            are not allowed in system include statements, e.g.:
            #include </foo>   or   #include </foo/bar>.
       */
@@ -326,13 +224,15 @@ file_open (filename, level, mode, bad_sys_include)
       if (mode != COmmon)
        {
          /*
-            Try to open the file (absolute file name USr_include file name given).
+            Try to open the file directly (either absolute file name,
+              USr_include file type or HEre file type given).
          */
          if (   is_absolute_filename
 #if USE_RC
              || mode == USr_include
+             || mode == HEre
 #endif
-             )
+            )
           {
             fp = get_file_ptr (fp, *filename, level, mode, &is_first);
             /*
@@ -341,54 +241,40 @@ file_open (filename, level, mode, bad_sys_include)
             if (fp != (FILE *)NULL)
               return(fp);
             else
-              if (is_absolute_filename)
+              if (   is_absolute_filename
+#if USE_RC
+                  || mode == HEre
+#endif
+                 )
                {
 #if USE_RC
                  if (   (fp == (FILE *)NULL)
                      && (warning_level >= WARN_LVL_MAX))
                    /*
-                      Error, the absolute file name isn't found.
+                      Terminate if `--debug=abort' option is given
+                        and the absolute file name or the `HEre' file
+                        name isn't found.
                    */
-                   my_error (118, *filename, 0L, *filename, 0);
+                   my_error (ERR_FILE_NOT_FOUND, *filename, 0L, *filename, 0);
 #endif
                  return(NULL);
                }
           }
        }
 #if !defined(AMIGA) || defined(__GNUC__)
-      if (mode != COmmon)
-       {
-         /*
-            Simple file name delivered and the file isn't found in
-              the actual directory; let's search the file.
-         */
-         if (fp == (FILE *)NULL)
-          {
-            /*
-               File not found in the actual directory:
-                 Search the file in the directory, which is
-                 stored in the environment variable of $HOME.
-            */
-            ptr_env = getenv(ENV_VAR_HOME);
-            if (ptr_env != (char *)NULL)
-              if (*ptr_env)
-               {
-                 make_absolute_filename (ptr_env, *filename);
-                 fp = get_file_ptr (fp, s1, level, mode, &is_first);
-               }
-          }
-       }
       if (fp == (FILE *)NULL)
        {
          /*
-            File not found in the $HOME directory:
-              Search the file in the directory(s), which are stored
-              in the environment variable of $GCALPATH.
+            Simple file name delivered and the file isn't found:
+              * Either search a COmmon file in the directory/ies,
+                which are stored in the environment variable $PATH
+              * Or search all other file types in the directory/ies,
+                which are stored in the environment variable $GCALPATH.
          */
          if (mode == COmmon)
            ptr_env = getenv(ENV_VAR_PATH);
          else
-           ptr_env = getenv(ENV_VAR_DPATH);
+           ptr_env = getenv(ENV_VAR_GCALPATH);
          if (ptr_env != (char *)NULL)
            if (*ptr_env)
             {
@@ -427,21 +313,38 @@ file_open (filename, level, mode, bad_sys_include)
                  strcpy(s2, ptr_char);
                }
               /*
-                 If a common file isn't found yet but the last character of the
-                   $PATH environment variable is a "PATH_SEP" character (which
-                   means the last search for the file must be done in the
-                   actual directory), perform this file access!
+                 If a file isn't found yet but the last character of the
+                   $[GCAL]PATH environment variable is a PATH_SEP character
+                   (which means the last search for the file must be done
+                   in the actual directory), perform this file access!
               */
-              if (   (mode == COmmon)
-                  && (fp == (FILE *)NULL)
+              if (   (fp == (FILE *)NULL)
                   && (*(ptr_env + strlen(ptr_env) - 1) == *PATH_SEP))
                 fp = get_file_ptr (fp, *filename, level, mode, &is_first);
             }
        }
+      if (mode != COmmon)
+       {
+         if (fp == (FILE *)NULL)
+          {
+            /*
+               File not found in the $GCALPATH directory:
+                 * Search the file in the directory, which is
+                   stored in the environment variable of $HOME.
+            */
+            ptr_env = getenv(ENV_VAR_HOME);
+            if (ptr_env != (char *)NULL)
+              if (*ptr_env)
+               {
+                 make_absolute_filename (&s1, ptr_env, *filename);
+                 fp = get_file_ptr (fp, s1, level, mode, &is_first);
+               }
+          }
+       }
     }
    /*
-      It's not necessary to perform further searches for common files in
-        the $GCAL_???_DATADIR directories!
+      It's not necessary to perform further searches for COmmon files
+        in the $GCAL_???_DATADIR directories!
    */
    if (mode == COmmon)
      return(fp);
@@ -449,9 +352,9 @@ file_open (filename, level, mode, bad_sys_include)
    if (fp == (FILE *)NULL)
     {
       /*
-         File not found in one of the directories, which are
-         stored in the environment variable $GCALPATH:
-           Search the file in the user library directory of $HOME/$GCAL_USR_DATADIR.
+         File not found in the $HOME directory:
+          * Search the file in the user's library directory of
+            $HOME/[$]GCAL_USR_DATADIR.
       */
       ptr_env = getenv(ENV_VAR_HOME);
       if (ptr_env != (char *)NULL)
@@ -459,28 +362,29 @@ file_open (filename, level, mode, bad_sys_include)
          {
            ptr_char = getenv(ENV_VAR_USR_DATADIR);
            /*
-              Search the file in the directory specified in the $GCAL_USR_DATADIR
-                environment variable first.
+              Search the file in the directory specified in the
+                $GCAL_USR_DATADIR environment variable first.
            */
            if (ptr_char != (char *)NULL)
             {
               if (*ptr_char)
                {
-                 make_absolute_filename (ptr_env, ptr_char);
+                 make_absolute_filename (&s1, ptr_env, ptr_char);
                  strcpy(s2, s1);
-                 make_absolute_filename (s2, *filename);
+                 make_absolute_filename (&s1, s2, *filename);
                  fp = get_file_ptr (fp, s1, level, mode, &is_first);
                }
             }
-           /*
-              If the $GCAL_USR_DATADIR environment variable is unset,
-                search the file in burned-in user library directory of $GCAL_USR_DATADIR.
-           */
-           if (fp == (FILE *)NULL)
+           else
             {
-              make_absolute_filename (ptr_env, GCAL_USR_DATADIR);
+              /*
+                 If the $GCAL_USR_DATADIR environment variable is unset,
+                   search the file in burned-in user's library directory of
+                   GCAL_USR_DATADIR.
+              */
+              make_absolute_filename (&s1, ptr_env, GCAL_USR_DATADIR);
               strcpy(s2, s1);
-              make_absolute_filename (s2, *filename);
+              make_absolute_filename (&s1, s2, *filename);
               fp = get_file_ptr (fp, s1, level, mode, &is_first);
             }
          }
@@ -488,80 +392,99 @@ file_open (filename, level, mode, bad_sys_include)
    if (fp == (FILE *)NULL)
     {
       /*
-         The file isn't found in user library directory of $HOME/GCAL_USR_DATADIR:
-           Search the file in the system library directory of GCAL_SYS_DATADIR.
+         The file isn't found in user library directory of
+         $HOME/[$]GCAL_USR_DATADIR:
+           * Search the file in the system's library directory of
+             $GCAL_SYS_DATADIR.
       */
       ptr_env = getenv(ENV_VAR_SYS_DATADIR);
       /*
-         Search the file in the directory specified in the $GCAL_SYS_DATADIR
-           environment variable first.
+         Search the file in the directory specified in the
+           $GCAL_SYS_DATADIR environment variable first.
       */
       if (ptr_env != (char *)NULL)
        {
          if (*ptr_env)
           {
-            make_absolute_filename (ptr_env, *filename);
+            make_absolute_filename (&s1, ptr_env, *filename);
             fp = get_file_ptr (fp, s1, level, mode, &is_first);
           }
+       }
+      else
+       {
+         /*
+            If the $GCAL_SYS_DATADIR environment variable is unset:
+              * Search the file in burned-in system's library directory of
+                GCAL_SYS_DATADIR.
+         */
+         make_absolute_filename (&s1, GCAL_SYS_DATADIR, *filename);
+         fp = get_file_ptr (fp, s1, level, mode, &is_first);
        }
     }
 #  endif /* USE_RC */
 #else /* AMIGA && !__GNUC__ */
       /*
-         It's not necessary to perform further searches for common files,
-           because the comiler/system doesn't support the `getenv()' function.
+         It's not necessary to perform further searches for COmmon files,
+           because the compiler/system doesn't support the `getenv()' function.
       */
       if (mode == COmmon)
         return(fp);
 #  if USE_RC
       /*
-         This part is for compilers/systems which don't support the `getenv()' function.
+         This part is for compilers/systems
+           which do not support the `getenv()' function.
       */
       if (fp == (FILE *)NULL)
        {
          /*
             The file isn't found in the actual directory:
-              Search the file in the burned-in user library directory of $GCAL_USR_DATADIR.
+              * Search the file in the burned-in user's library directory of
+                GCAL_USR_DATADIR.
          */
-         make_absolute_filename (GCAL_USR_DATADIR, *filename);
+         make_absolute_filename (&s1, GCAL_USR_DATADIR, *filename);
+         fp = get_file_ptr (fp, s1, level, mode, &is_first);
+       }
+      if (fp == (FILE *)NULL)
+       {
+         /*
+            The file isn't found in the user's library directory of
+            GCAL_USR_DATADIR:
+              * Search the file in the burned-in system's library directory of
+                GCAL_SYS_DATADIR.
+         */
+         make_absolute_filename (&s1, GCAL_SYS_DATADIR, *filename);
          fp = get_file_ptr (fp, s1, level, mode, &is_first);
        }
 #  endif /* USE_RC */
 #endif /* AMIGA && !__GNUC__ */
-#if USE_RC
-   if (fp == (FILE *)NULL)
-    {
-      /*
-         The file isn't found in the user library directory of $GCAL_USR_DATADIR:
-           Search the file in the burned-in system library directory of GCAL_SYS_DATADIR.
-      */
-      make_absolute_filename (GCAL_SYS_DATADIR, *filename);
-      fp = get_file_ptr (fp, s1, level, mode, &is_first);
-    }
-#endif /* USE_RC */
    /*
       If the file is found:
-        copy the real (absolute) name of the file to `filename'.
+        Copy the real (absolute) name of the file to `&filename'.
    */
    if (fp != (FILE *)NULL)
     {
       len = (int)strlen(s1);
       if ((int)strlen(*filename) < len)
         /*
-           Yeah, we MUST reallocate the memory area of `filename'!
+           We MUST reallocate the memory area of `&filename'!
         */
-        *filename = (char *)my_realloc ((VOID_PTR)*filename, len+1,
-                                        124, __FILE__, ((long)__LINE__)-1,
+        *filename = (char *)my_realloc ((VOID_PTR)*filename,
+                                        len+1,
+                                        ERR_NO_MEMORY_AVAILABLE,
+                                        __FILE__, ((long)__LINE__)-3L,
                                         "*filename", 0);
       strcpy(*filename, s1);
     }
 #if USE_RC
    else
+     /*
+        File not found!
+     */
      if (warning_level >= WARN_LVL_MAX)
        /*
-          Terminate if --debug=abort option is given.
+          Terminate if `--debug=abort' option is given.
        */
-       my_error (118, *filename, 0L, *filename, 0);
+       my_error (ERR_FILE_NOT_FOUND, *filename, 0L, *filename, 0);
 #endif
 
    return(fp);
@@ -572,52 +495,48 @@ file_open (filename, level, mode, bad_sys_include)
    PUBLIC char *
 file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                 line_number, line_length, mode, is_include, is_dvar, is_tvar)
-         FILE       *fp;
-         char      **line_buffer;
-         int        *in_pool;
-         char       *pool;
-         char       *ptr_pool;
-   const char       *filename;
-         long       *line_number;
-         int        *line_length;
-   const Fmode_enum  mode;
-         Bool       *is_include;
-         Bool       *is_dvar;
-         Bool       *is_tvar;
+         FILE        *fp;
+         char       **line_buffer;
+         int         *in_pool;
+         char        *pool;
+         char        *ptr_pool;
+   const char        *filename;
+         long        *line_number;
+         int         *line_length;
+   const Fmode_enum   mode;
+         Bool        *is_include;
+         Bool        *is_dvar;
+         Bool        *is_tvar;
 /*
-   Reads a line of a delivered resource/response file into `line_buffer'
-     using delivered char vector `pool', which must be allocated by caller
+   Reads a line of a delivered resource/response file into `&line_buffer'
+     using the delivered char vector `pool', which must be allocated by caller
      with size BUF_LEN+1 (BUF_LEN should be "A POWER OF 2", e.g., 4096).
      Returns the position in buffer of the character managed in next call
      by char pointer `ptr_pool', which must be defined by caller; or NULL
      if EOF is detected.
 */
 {
-   static   Uint   lbuf_max;
+   static   Uint   lbuf_max=MAXLEN_MAX;
    register int    i=1;
    auto     char  *ptr_char;
    auto     char   ch;
-   static   Bool   func_accessed=FALSE;
    auto     Bool   is_error=FALSE;
 #if USE_RC
    auto     Bool   is_rem=FALSE;
 #endif
 
 
-   if (!func_accessed)
-    {
-      func_accessed = TRUE;
-      lbuf_max = maxlen_max;
-    }
    /*
-      Ensure NOW that `line_buffer' is ALWAYS as large as all "other"
-        string vectors (s1...s7) are, because the `line_buffer' is not
+      Ensure NOW that `&line_buffer' is ALWAYS as large as all "other"
+        string vectors (s1...s7) are, because the `&line_buffer' is not
         resized in all cases when the "other" strings vectors are resized!
    */
    if (lbuf_max < maxlen_max)
     {
-      *line_buffer = (char *)my_realloc ((VOID_PTR)*line_buffer, maxlen_max,
-                                         124, __FILE__, ((long)__LINE__)-1,
+      *line_buffer = (char *)my_realloc ((VOID_PTR)*line_buffer,
+                                         maxlen_max,
+                                         ERR_NO_MEMORY_AVAILABLE,
+                                         __FILE__, ((long)__LINE__)-3L,
                                          "*line_buffer", maxlen_max);
       lbuf_max = maxlen_max;
     }
@@ -641,7 +560,7 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
           /*
              File read error.
           */
-          my_error (109, __FILE__, (long)__LINE__, filename, 0);
+          my_error (ERR_READ_FILE, __FILE__, (long)__LINE__, filename, 0);
       ptr_pool = pool;
     }
    if (*ptr_pool == '\n')
@@ -704,7 +623,7 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
              /*
                 File read error.
              */
-             my_error (109, __FILE__, (long)__LINE__, filename, 0);
+             my_error (ERR_READ_FILE, __FILE__, (long)__LINE__, filename, 0);
          ptr_pool = pool;
        }
       if (*ptr_pool == '\n')
@@ -728,7 +647,8 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
    /*
       Skip whole line.
    */
-   if (*ptr_pool == REM_CHAR)
+   if (   (mode != COmmon)
+       && (*ptr_pool == REM_CHAR))
     {
 #if USE_RC
       is_rem = TRUE;
@@ -757,7 +677,7 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                    /*
                       File read error.
                    */
-                   my_error (109, __FILE__, (long)__LINE__, filename, 0);
+                   my_error (ERR_READ_FILE, __FILE__, (long)__LINE__, filename, 0);
                ptr_pool = pool;
              }
             else
@@ -791,7 +711,7 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                    /*
                       File read error.
                    */
-                   my_error (109, __FILE__, (long)__LINE__, filename, 0);
+                   my_error (ERR_READ_FILE, __FILE__, (long)__LINE__, filename, 0);
                ptr_pool = pool;
              }
             (*line_number)++;
@@ -859,26 +779,27 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                  ptr_pool++;
              }
             else
-              /*
-                 Single NEWLINE character found:
-                   We must finish the line!
-              */
-              if (*ptr_pool == '\n')
-               {
-                 ptr_pool++;
-                 (*in_pool)--;
-                 break;
-               }
-              else
-               {
-                 ch = *ptr_pool++;
-                 if ((Uint)i >= maxlen_max)
-                  {
-                    resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
-                    ptr_char = *line_buffer + i - 1;
-                  }
-                 *ptr_char++ = ch;
-               }
+             {
+               ch = *ptr_pool++;
+               /*
+                  Single NEWLINE character found:
+                    We must finish the line!
+               */
+               if (ch == '\n')
+                {
+                  (*in_pool)--;
+                  break;
+                }
+               else
+                {
+                  if ((Uint)i >= maxlen_max)
+                   {
+                     resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
+                     ptr_char = *line_buffer + i - 1;
+                   }
+                  *ptr_char++ = ch;
+                }
+             }
             if (*in_pool)
               (*in_pool)--;
           }
@@ -903,7 +824,7 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                 /*
                    File read error.
                 */
-                my_error (109, __FILE__, (long)__LINE__, filename, 0);
+                my_error (ERR_READ_FILE, __FILE__, (long)__LINE__, filename, 0);
             ptr_pool = pool;
           }
        }
@@ -918,7 +839,16 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
        {
          if (i > 2)
           {
-            if (*(*line_buffer + 2) != *RC_TVAR_ASSIGN)
+            /*
+               If the line does not consist of a text variable
+                  assignment or operation, expand the text variable.
+            */
+            if (   isalpha(*(*line_buffer + 1))
+                && (*(*line_buffer + 2) != *RC_VAR_ASSIGN)
+                && (*(*line_buffer + 2) != *RC_TVAR_ICMD_ASSIGN)
+                && (*(*line_buffer + 2) != *RC_TVAR_UCMD_ASSIGN)
+                && (*(*line_buffer + 2) != *RC_VAR_ADD)
+                && (*(*line_buffer + 2) != *RC_VAR_SUB))
               *is_tvar = FALSE;
           }
          else
@@ -932,27 +862,61 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
          register int    len;
          register int    n;
          register int    k;
+         register int    x;
+         register int    l;
+         register int    flen=1;
+         auto     int    fstyle=FSTYLE_NONE;
+         auto     int    fwidth=SPECIAL_VALUE;
          auto     char  *ptr_tvar;
-         auto     Bool   ok=FALSE;
+         static   char   tvar[2];
+         static   char   the_tvar;
          auto     Bool   is_quoted=FALSE;
+         auto     Bool   restore_tvar=FALSE;
+         auto     Bool   ok=FALSE;
+         auto     Bool   is_cformat=FALSE;
+         auto     Bool   is_lformat=FALSE;
+         auto     Bool   is_sign=FALSE;
+         auto     Bool   is_lzero=FALSE;
+         auto     Bool   is_fformat=FALSE;
+         auto     Bool   is_suffix=FALSE;
 
 
          /*
             Analyse line till ALL referenced text variables are expanded.
          */
-         while (!ok)
+         do
           {
-            n=k = 0;
             ptr_char = *line_buffer;
             /*
                Check if the assigned TEXT contains any references
-                 to other `tvar' variables, if so, insert their TEXTs.
+                 to other TVAR variables, if so, insert their TEXTs.
             */
             ptr_tvar = strchr(ptr_char, RC_TVAR_CHAR);
             if (ptr_tvar != (char *)NULL)
              {
+               n = flen;
+               /*
+                  Buffer the name of the text variable respecting
+                    a possible TVAR format $[<|:|>[+][0]N[&]#|*]TVAR.
+               */
+               while (   *(ptr_tvar + n)
+                      && !isalpha(*(ptr_tvar + n)))
+                 n++;
+               the_tvar = *(ptr_tvar + n);
+               *tvar=tvar[1] = '\0';
+               n=k = 0;
                do
                 {
+                  /*
+                     Check for a TVAR format.
+                  */
+                  flen = decode_format (ptr_tvar, flen, &is_cformat,
+                                        &is_lformat, &is_sign, &is_lzero,
+                                        &is_suffix, &is_fformat, &fstyle, &fwidth);
+                  if (fwidth == SPECIAL_VALUE)
+                    flen = 1;
+                  *tvar = *(ptr_tvar + flen);
+                  tvar[1] = *(ptr_tvar + flen + 1);
                   len = (int)(ptr_tvar - ptr_char);
                   if (len)
                    {
@@ -968,19 +932,124 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                   if (k)
                     if (s5[k-1] == QUOTE_CHAR)
                       is_quoted = TRUE;
-                  ptr_tvar++;
                   if (   !is_quoted
-                      && isalpha(*ptr_tvar))
+                      && isalpha(*tvar))
                    {
                      register int  j=0;
+                     register int  j_buf;
 
 
                      /*
-                        Try to insert the value of this `tvar' (this is its TEXT).
+                        Try to insert the value of this TVAR (this is its TEXT).
                      */
-                     if (rc_tvar[IDX(*ptr_tvar)].l.text != (char *)NULL)
+                     if (   rc_tvar[IDX(*tvar)].tvar_local.tvar_text != (char *)NULL
+                         || rc_tvar[IDX(*tvar)].tvar_global.tvar_text != (char *)NULL)
                       {
-                        j = (int)strlen(rc_tvar[IDX(*ptr_tvar)].l.text);
+                        auto char  *buf;
+
+
+                        if (rc_tvar[IDX(*tvar)].tvar_local.tvar_text != (char *)NULL)
+                         {
+                           if (!*rc_tvar[IDX(*tvar)].tvar_local.tvar_text)
+                            {
+                              if (rc_tvar[IDX(*tvar)].tvar_global.tvar_text != (char *)NULL)
+                                buf = rc_tvar[IDX(*tvar)].tvar_global.tvar_text;
+                              else
+                                buf = rc_tvar[IDX(*tvar)].tvar_local.tvar_text;
+                            }
+                           else
+                             buf = rc_tvar[IDX(*tvar)].tvar_local.tvar_text;
+                         }
+                        else
+                          buf = rc_tvar[IDX(*tvar)].tvar_global.tvar_text;
+                        j_buf = (int)strlen(buf);
+                        if (fwidth != SPECIAL_VALUE)
+                         {
+                           if (is_fformat)
+                             j = fwidth;
+                           else
+                            {
+                              register int    num_hls=0;
+                              auto     char  *ptr_buf=buf;
+                              auto     char  *tvar_text;
+                              auto     Bool   quote=FALSE;
+
+
+                              /*
+                                 Scan contents of TVAR for special texts used for highlighting.
+                              */
+                              tvar_text = (char *)my_malloc (j_buf+1,
+                                                             ERR_NO_MEMORY_AVAILABLE,
+                                                             __FILE__, ((long)__LINE__)-2L,
+                                                             "tvar_text", 0);
+                              l=x = 0;
+                              LOOP
+                               {
+                                 if (*(ptr_buf + l))
+                                  {
+                                    if (*(ptr_buf + l) == RC_SPECIAL_TEXT_CHAR)
+                                     {
+                                       l++;
+                                       switch (*(ptr_buf + l))
+                                        {
+                                          case RC_HLS1S_CHAR:
+                                          case RC_HLS1E_CHAR:
+                                          case RC_HLS2S_CHAR:
+                                          case RC_HLS2E_CHAR:
+                                          case RC_HLS3S_CHAR:
+                                          case RC_HLS3E_CHAR:
+                                          case RC_HLS4S_CHAR:
+                                          case RC_HLS4E_CHAR:
+                                          case RC_HLS5S_CHAR:
+                                          case RC_HLS5E_CHAR:
+                                            if (quote)
+                                             {
+                                               quote = FALSE;
+                                               x--;
+                                               tvar_text[x++] = *(ptr_buf + l - 1);
+                                               tvar_text[x++] = *(ptr_buf + l);
+                                             }
+                                            else
+                                              num_hls++;
+                                            break;
+                                          default:
+                                            tvar_text[x++] = *(ptr_buf + l - 1);
+                                            tvar_text[x++] = *(ptr_buf + l);
+                                        }
+                                     }
+                                    else
+                                     {
+                                       if (*(ptr_buf + l) == QUOTE_CHAR)
+                                         quote = TRUE;
+                                       else
+                                         quote = FALSE;
+                                       tvar_text[x++] = *(ptr_buf + l);
+                                     }
+                                    l++;
+                                  }
+                                 else
+                                  {
+                                    tvar_text[x] = '\0';
+                                    break;
+                                  }
+                               }
+                              free(tvar_text);
+                              if (   highlight_flag
+                                  && (ehls1s.len == 1))
+                               {
+                                 fwidth += num_hls;
+                                 j = MAX(fwidth, j_buf);
+                               }
+                              else
+                               {
+                                 j_buf = x;
+                                 j = MAX(fwidth, j_buf);
+                                 j += (num_hls << 1);
+                               }
+                            }
+                         }
+                        else
+                          j = j_buf;
                         if (j)
                          {
                            while ((Uint)k+j >= maxlen_max)
@@ -988,85 +1057,63 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                               resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
                               ptr_char = *line_buffer + n;
                             }
-                           strcat(s5, rc_tvar[IDX(*ptr_tvar)].l.text);
+                           if (fwidth != SPECIAL_VALUE)
+                             (void)use_format (&s5, k, buf, atol(buf), is_sign | is_lzero | is_suffix,
+                                               is_cformat, is_lformat, is_sign, is_lzero,
+                                               is_suffix, is_fformat, fstyle, fwidth, j_buf);
+                           else
+                             strcat(s5, buf);
                          }
-                      }
-                     else
-                       if (rc_tvar[IDX(*ptr_tvar)].g.text != (char *)NULL)
-                        {
-                          j = (int)strlen(rc_tvar[IDX(*ptr_tvar)].g.text);
-                          if (j)
-                           {
-                             while ((Uint)k+j >= maxlen_max)
-                              {
-                                resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
-                                ptr_char = *line_buffer + n;
-                              }
-                             strcat(s5, rc_tvar[IDX(*ptr_tvar)].g.text);
-                           }
-                        }
-                     if (   rc_tvar[IDX(*ptr_tvar)].l.text != (char *)NULL
-                         || rc_tvar[IDX(*ptr_tvar)].g.text != (char *)NULL)
-                      {
                         /*
-                           Skip `tvar' name.
+                           Skip TVAR name.
                         */
-                        len += 2;
+                        len += (flen + 1);
                         if (j)
                           k += j;
                         else
                           /*
-                             If `tvar' is "empty", remove a possibly obsolete whitespace.
+                             If TVAR is "empty", remove a possibly obsolete whitespace.
                           */
                           if (   isspace(s5[k-1])
-                              && isspace(*(ptr_tvar + 1)))
+                              && isspace(tvar[1]))
                             s5[--k] = '\0';
                       }
                      else
-                      {
-                        /*
-                           If `tvar' isn't defined, don't touch its name.
-                        */
-                        if ((Uint)k+2 >= maxlen_max)
-                         {
-                           resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
-                           ptr_char = *line_buffer + n;
-                         }
-                        s5[k++] = RC_TVAR_CHAR;
-                        s5[k++] = *ptr_tvar;
-                        s5[k] = '\0';
-                        len += 2;
-                      }
+                       restore_tvar = TRUE;
                    }
                   else
+                    restore_tvar = TRUE;
+                  /*
+                     If TVAR isn't defined, or quoted, or an invalid
+                       TVAR name is found, don't touch it.
+                  */
+                  if (restore_tvar)
                    {
-                     /*
-                        If a quoted or an invalid `tvar' name is found, don't touch it.
-                     */
                      if ((Uint)k+1 >= maxlen_max)
                       {
                         resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
                         ptr_char = *line_buffer + n;
                       }
                      s5[k++] = RC_TVAR_CHAR;
-                     s5[k] = '\0';
                      len++;
-                     if (*ptr_tvar)
+                     if (   *tvar
+                         && (flen == 1))
                       {
                         if ((Uint)k+1 >= maxlen_max)
                          {
                            resize_all_strings (maxlen_max<<1, TRUE, __FILE__, (long)__LINE__);
                            ptr_char = *line_buffer + n;
                          }
-                        s5[k++] = *ptr_tvar;
-                        s5[k] = '\0';
+                        s5[k++] = *tvar;
                         len++;
                       }
+                     s5[k] = '\0';
                    }
                   n += len;
                   ptr_char += len;
                   ptr_tvar = strchr(ptr_char, RC_TVAR_CHAR);
-                  is_quoted = FALSE;
+                  flen = 1;
+                  restore_tvar=is_quoted = FALSE;
                 } while (ptr_tvar != (char *)NULL);
                /*
                   Add possibly trailing ordinary text.
@@ -1084,11 +1131,17 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                i = k++;
                strcpy(*line_buffer, s5);
                /*
-                  If the expansion results to a text variable assignment,
-                    skip the expansion loop and perform the assignment.
+                  If the expansion results to a text variable assignment
+                    or operation, skip the expansion loop and perform the
+                    assignment/operation.
                */
                if (   (**line_buffer == RC_TVAR_CHAR)
-                   && (*(*line_buffer + 2) == *RC_TVAR_ASSIGN))
+                   && isalpha(*(*line_buffer + 1))
+                   && (   *(*line_buffer + 2) == *RC_VAR_ASSIGN
+                       || *(*line_buffer + 2) == *RC_TVAR_ICMD_ASSIGN
+                       || *(*line_buffer + 2) == *RC_TVAR_UCMD_ASSIGN
+                       || *(*line_buffer + 2) == *RC_VAR_ADD
+                       || *(*line_buffer + 2) == *RC_VAR_SUB))
                  *is_tvar=ok = TRUE;
                /*
                   Now check whether we have to analyse the line again
@@ -1099,9 +1152,6 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                ptr_tvar = strchr(*line_buffer, RC_TVAR_CHAR);
                if (ptr_tvar != (char *)NULL)
                 {
-                  auto char  tvar;
-
-
                   do
                    {
                      if (   !n
@@ -1110,7 +1160,7 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                      else
                        if (n)
                          ptr_tvar--;
-                     tvar = *ptr_tvar;
+                     *tvar = *ptr_tvar;
                      if (   !n
                          && (**line_buffer != RC_TVAR_CHAR))
                        ptr_tvar++;
@@ -1119,18 +1169,33 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                          ptr_tvar++;
                      ptr_tvar++;
                      /*
+                        Check for a TVAR format.
+                     */
+                     flen = decode_format (ptr_tvar, 0, &is_cformat,
+                                           &is_lformat, &is_sign, &is_lzero,
+                                           &is_suffix, &is_fformat, &fstyle, &fwidth);
+                     if (fwidth != SPECIAL_VALUE)
+                       ptr_tvar += flen;
+                     /*
                         Check if a text variable reference is found
                           which needs to be expanded again.
                      */
-                     if (   (tvar != QUOTE_CHAR)
-                         && isalpha(*ptr_tvar))
+                     if (   (*tvar != QUOTE_CHAR)
+                         && isalpha(*ptr_tvar)
+                         && (   rc_tvar[IDX(*ptr_tvar)].tvar_local.tvar_text != (char *)NULL
+                             || rc_tvar[IDX(*ptr_tvar)].tvar_global.tvar_text != (char *)NULL))
                       {
-                        if (   rc_tvar[IDX(*ptr_tvar)].l.text != (char *)NULL
-                            || rc_tvar[IDX(*ptr_tvar)].g.text != (char *)NULL)
-                          /*
-                             Text variable reference found which needs to be expanded again.
-                          */
-                          break;
+                        /*
+                           Check if expansion results to invalid recursion.
+                        */
+                        if (*ptr_tvar == the_tvar)
+                          ok = TRUE;
+                        else
+                          flen = 1;
+                        /*
+                           Text variable reference found which needs to be expanded again.
+                        */
+                        break;
                       }
                      n = 1;
                      while (*ptr_tvar == RC_TVAR_CHAR)
@@ -1167,26 +1232,18 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
               */
               if (isalpha(**line_buffer))
                 *is_dvar=ok = TRUE;
-          }
+          } while (!ok);
        }
       /*
-         Check for a local date variable definition.
+         Check for a local date variable DVAR definition.
       */
       if (*is_dvar)
-        if (!set_dvar (*line_buffer, lptrs3, filename, *line_number, LOcal))
-          /*
-             Error, unable to store that date variable.
-          */
-          my_error (114, filename, *line_number, *line_buffer, 0);
+        set_dvar (*line_buffer, lptrs3, filename, *line_number, LOcal);
       /*
-         Check for a local text variable definition.
+         Check for a local text variable TVAR definition.
       */
       if (*is_tvar)
-        if (!set_tvar (*line_buffer, LOcal))
-          /*
-             Error, unable to store that text variable.
-          */
-          my_error (105, filename, *line_number, *line_buffer, 0);
+        set_tvar (*line_buffer, filename, *line_number, LOcal);
     }
 #endif
    if (is_error)
@@ -1196,16 +1253,19 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
         /*
            Error, invalid date-"part" given.
         */
-        i = 123;
+        i = ERR_INVALID_DATE_FIELD;
       else
 #endif
         /*
            Error, illegal NUL character found in file.
         */
-        i = 108;
+        i = ERR_ILLEGAL_CHAR_IN_FILE;
       my_error (i, filename, *line_number, *line_buffer, 0);
     }
-   *line_length = i - 1;
+   if (ch == '\n')
+     *line_length = i - 1;
+   else
+     *line_length = i;
 
    return(ptr_pool);
 }
@@ -1221,24 +1281,28 @@ insert_response_file (fp, filename, opt_list, my_argc_max, my_argc, my_argv)
          int  *my_argc;
          char *my_argv[];
 /*
-   Tries to manage a response file "@file" argument given in the command line.
-     Inserts the options and commands found in file "@file" (name delivered in
-     `filename' and its file pointer in `fp') into `my_argv[]' and sets delivered
-     `&my_argc' and perhaps `&my_argc_max' to according "new" values.  Uses the
-     global text buffer `s1' internally.  Returns the build `my_argv[]' ptr vector.
+   Tries to manage a response file @FILE argument given in the command line.
+     Inserts the options and commands found in file @FILE (name delivered
+     in `filename' and its file pointer in `fp') into `my_argv[]' and sets
+     delivered `&my_argc' and perhaps `&my_argc_max' to according "new"
+     values.  Uses the global text buffer `s1' internally.  Returns the
+     build `my_argv[]' ptr vector.
 */
 {
-   auto     long   line_number=0L;
-   auto     int    line_length;
-   auto     int    in_pool=0;
-   auto     char  *pool=(char *)NULL;
-   auto     char  *ptr_pool=(char *)NULL;
-   auto     Bool   b_dummy;   /* Necessary dummy for `file_read_line()' and `file_open()' functions */
+   auto long   line_number=0L;
+   auto int    line_length;
+   auto int    in_pool=0;
+   auto char  *pool=(char *)NULL;
+   auto char  *ptr_pool=(char *)NULL;
+   auto Bool   b_dummy;   /* Necessary dummy for `file_read_line()' function. */
 
 
-   pool = (char *)my_malloc (BUF_LEN+1, 124, __FILE__, (long)__LINE__, "pool", 0);
+   pool = (char *)my_malloc (BUF_LEN+1, ERR_NO_MEMORY_AVAILABLE,
+                             __FILE__, ((long)__LINE__)-1L,
+                             "pool", 0);
    while ((ptr_pool=file_read_line (fp, &s1, &in_pool, pool, ptr_pool, filename,
-                                    &line_number, &line_length, REsponse, &b_dummy, &b_dummy, &b_dummy))
+                                    &line_number, &line_length, REsponse,
+                                    &b_dummy, &b_dummy, &b_dummy))
           != (char *)NULL)
      if (*s1)
       {
@@ -1256,10 +1320,11 @@ insert_response_file (fp, filename, opt_list, my_argc_max, my_argc, my_argv)
 
 
              /*
-                Short-style option requires an argument, which could be separated
-                  by whitespace characters from the option character; respect this!
-                  This means all separating whitespace characters between the
-                  option character and argument will be eliminated.
+                Short-style option requires an argument, which could be
+                  separated by whitespace characters from the option character;
+                  respect this!  This means all separating whitespace
+                  characters between the option character and argument
+                  will be eliminated.
              */
              line_length = 2;
              while (   s1[line_length+spaces]
@@ -1309,12 +1374,15 @@ insert_response_file (fp, filename, opt_list, my_argc_max, my_argc, my_argv)
               *my_argc_max <<= 1;
               if (*my_argc_max*sizeof(char *) > testval)
                 (*my_argc_max)--;
-              my_argv = (char **)my_realloc ((VOID_PTR)my_argv, *my_argc_max*sizeof(char *),
-                                             124, __FILE__, ((long)__LINE__)-1,
+              my_argv = (char **)my_realloc ((VOID_PTR)my_argv,
+                                             *my_argc_max*sizeof(char *),
+                                             ERR_NO_MEMORY_AVAILABLE,
+                                             __FILE__, ((long)__LINE__)-3L,
                                              "my_argv[my_argc_max]", *my_argc_max);
             }
            my_argv[*my_argc] = (char *)my_malloc (line_length+1,
-                                                  124, __FILE__, ((long)__LINE__)-1,
+                                                  ERR_NO_MEMORY_AVAILABLE,
+                                                  __FILE__, ((long)__LINE__)-2L,
                                                   "my_argv[my_argc]", *my_argc);
            strcpy(my_argv[(*my_argc)++], s1);
          }
@@ -1355,13 +1423,13 @@ write_log_file (filename, mode, mode_txt, created_txt, argc, argv)
 #if USE_DE
            len = fprintf(fp, "%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
                          REM_CHAR, prgr_name, mode_txt, filename, created_txt,
-                         buf_ad, short_month_name (buf_am), buf_ay,
-                         act_hour, TIME_SEP, act_min, TIME_SEP, act_sec);
+                         true_day, short_month_name (true_month), true_year,
+                         act_hour, time_sep, act_min, time_sep, act_sec);
 #else /* !USE_DE */
            len = fprintf(fp, "%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
                          REM_CHAR, prgr_name, mode_txt, filename, created_txt,
-                         buf_ad, short_month_name (buf_am), buf_ay,
-                         act_hour, _(":"), act_min, _(":"), act_sec);
+                         true_day, short_month_name (true_month), true_year,
+                         act_hour, time_sep, act_min, time_sep, act_sec);
 #endif /* !USE_DE */
            if (tz != (char *)NULL)
              len = fprintf(fp, " %s", tz);
@@ -1373,25 +1441,25 @@ write_log_file (filename, mode, mode_txt, created_txt, argc, argv)
 #    if USE_DE
            len = fprintf(fp, "%c%s\n%c\n%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
                          *SHL_REM, SHELL, *SHL_REM, *SHL_REM, prgr_name, mode_txt, filename, created_txt,
-                         buf_ad, short_month_name (buf_am), buf_ay,
-                         act_hour, TIME_SEP, act_min, TIME_SEP, act_sec);
+                         true_day, short_month_name (true_month), true_year,
+                         act_hour, time_sep, act_min, time_sep, act_sec);
 #    else /* !USE_DE */
            len = fprintf(fp, "%c%s\n%c\n%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
                          *SHL_REM, SHELL, *SHL_REM, *SHL_REM, prgr_name, mode_txt, filename, created_txt,
-                         buf_ad, short_month_name (buf_am), buf_ay,
-                         act_hour, _(":"), act_min, _(":"), act_sec);
+                         true_day, short_month_name (true_month), true_year,
+                         act_hour, time_sep, act_min, time_sep, act_sec);
 #    endif /* !USE_DE */
 #  else /* !HAVE_SYS_INTERPRETER */
 #    if USE_DE
            len = fprintf(fp, "%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
                          *SHL_REM, prgr_name, mode_txt, filename, created_txt,
-                         buf_ad, short_month_name (buf_am), buf_ay,
-                         act_hour, TIME_SEP, act_min, TIME_SEP, act_sec);
+                         true_day, short_month_name (true_month), true_year,
+                         act_hour, time_sep, act_min, time_sep, act_sec);
 #    else /* !USE_DE */
            len = fprintf(fp, "%c `%s' %s `%s' --- %s %02d-%s-%04 %02d%s%02d%s%02d",
                          *SHL_REM, prgr_name, mode_txt, filename, created_txt,
-                         buf_ad, short_month_name (buf_am), buf_ay,
-                         act_hour, _(":"), act_min, _(":"), act_sec);
+                         true_day, short_month_name (true_month), true_year,
+                         act_hour, time_sep, act_min, time_sep, act_sec);
 #    endif /* !USE_DE */
 #  endif /* !HAVE_SYS_INTERPRETER */
            if (tz != (char *)NULL)
@@ -1428,8 +1496,8 @@ write_log_file (filename, mode, mode_txt, created_txt, argc, argv)
                if (*(argv[i]+1) == *SWITCH)
                 {
                   /*
-                     Detect whether the long-style option --response-file=ARG
-                       or --shell-script=ARG is given and if found,
+                     Detect whether the long-style option `--response-file=ARG'
+                       or `--shell-script=ARG' is given and if found,
                        don't write this option itself into the response file!
                   */
                   strcpy(s4, argv[i]+2);
@@ -1444,7 +1512,7 @@ write_log_file (filename, mode, mode_txt, created_txt, argc, argv)
              }
             if (*argv[i] == RSP_CHAR)
               /*
-                 Avoid to write a response file @file argument into the log file.
+                 Avoid to write a response file @FILE argument into the resulting file.
               */
               continue;
             switch (mode)
@@ -1483,19 +1551,21 @@ write_log_file (filename, mode, mode_txt, created_txt, argc, argv)
            && (warning_level == 2))
        || warning_level > 2)
     {
-      i = (int)strlen(filename) + MAX(ehls1s.len, ehls2s.len) + MAX(ehls1e.len, ehls2e.len) + 100;
+      i = (int)  strlen(filename)
+               + MAX(ehls1s.len, ehls2s.len)
+               + MAX(ehls1e.len, ehls2e.len) + LEN_SINGLE_LINE;
       if ((Uint)i >= maxlen_max)
         resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
 #if USE_DE
       sprintf(s4, "Versuche %s `%s' zu schreiben... %s%s%s", mode_txt, filename,
-              (ehls1s.len!=1) ? ((len==EOF) ? ehls2s.seq : ehls1s.seq) : "",
-              (len==EOF) ? "Versagt" : "Erfolg",
-              (ehls1s.len!=1) ? ((len==EOF) ? ehls2e.seq : ehls1e.seq) : "");
+              (ehls1s.len != 1) ? ((len == EOF) ? ehls2s.seq : ehls1s.seq) : "",
+              (len == EOF) ? "Versagt" : "Erfolg",
+              (ehls1s.len != 1) ? ((len == EOF) ? ehls2e.seq : ehls1e.seq) : "");
 #else /* !USE_DE */
       sprintf(s4, _("Try to write %s `%s'... %s%s%s"), mode_txt, filename,
-              (ehls1s.len!=1) ? ((len==EOF) ? ehls2s.seq : ehls1s.seq) : "",
-              (len==EOF) ? _("failed") : _("success"),
-              (ehls1s.len!=1) ? ((len==EOF) ? ehls2e.seq : ehls1e.seq) : "");
+              (ehls1s.len != 1) ? ((len == EOF) ? ehls2s.seq : ehls1s.seq) : "",
+              (len == EOF) ? _("failed") : _("success"),
+              (ehls1s.len != 1) ? ((len == EOF) ? ehls2e.seq : ehls1e.seq) : "");
 #endif /* !USE_DE */
       print_text (stderr, s4);
       /*
@@ -1503,7 +1573,7 @@ write_log_file (filename, mode, mode_txt, created_txt, argc, argv)
       */
       if (   (len == EOF)
           && (warning_level >= WARN_LVL_MAX))
-        my_error (115, __FILE__, (long)__LINE__, filename, 0);
+        my_error (ERR_WRITE_FILE, __FILE__, (long)__LINE__, filename, 0);
     }
 #ifdef GCAL_SHELL
    if (   (mode == SCript)
@@ -1519,9 +1589,35 @@ write_log_file (filename, mode, mode_txt, created_txt, argc, argv)
       /*
          And ignore any errors...
       */
-      (void)system(s4);
+      (void)my_system (s4);
     }
 #endif /* GCAL_SHELL */
+}
+
+
+
+   LOCAL void
+make_absolute_filename (absolute_filename, directory, filename)
+         char **absolute_filename;
+   const char  *directory;
+   const char  *filename;
+/*
+   Creates an absolute file name (directory+file name) of a delivered
+     file name and directory and returns it in delivered `&absolute_filename'.
+*/
+{
+   register int  dir_len=(int)strlen(directory);
+   register int  fil_len=(int)strlen(filename);
+
+
+   if (directory[dir_len-1] != *DIR_SEP)
+     dir_len++;
+   if ((Uint)dir_len+fil_len >= maxlen_max)
+     resize_all_strings (dir_len+fil_len+1, FALSE, __FILE__, (long)__LINE__);
+   strcpy(*absolute_filename, directory);
+   if (directory[dir_len-1] != *DIR_SEP)
+     strcat(*absolute_filename, DIR_SEP);
+   strcat(*absolute_filename, filename);
 }
 
 
@@ -1534,24 +1630,35 @@ get_file_ptr (fp, filename, level, mode, is_first)
    const Fmode_enum  mode;
          Bool       *is_first;
 /*
-   Tries to open the file (with optional diagnostic messages
-     --debug[=0...WARN_LVL_MAX]) and returns a valid file pointer of that file,
-     or NULL if this fails.
+   Tries to open the file (with optional diagnostic messages on STDERR channel
+     in case the `--debug[=0...WARN_LVL_MAX]' option is set) and returns a
+     valid file pointer of that file, or NULL if this fails.
 */
 {
 #  if HAVE_SYS_STAT_H && defined(S_IFMT) && defined(S_IFREG)
    auto struct stat  statbuf;
 
 
-   /*
-      Test if the file is a regular file, if not, ignore it!
-   */
    fp = (FILE *)NULL;
-   if (!stat(filename, &statbuf))
-     if ((statbuf.st_mode & S_IFMT) == S_IFREG)
-       fp = fopen(filename, "r");
+   /*
+      Check whether STDIN channel is wanted.
+   */
+   if (   (*filename == '-')
+       && (strlen(filename) == 1))
+     fp = stdin;
+   else
+     /*
+        Test if the file is a regular file, if not, ignore it!
+     */
+     if (!stat(filename, &statbuf))
+       if ((statbuf.st_mode & S_IFMT) == S_IFREG)
+         fp = fopen(filename, "r");
 #  else  /* !HAVE_SYS_STAT_H || !S_IFMT || !S_IFREG */
-   fp = fopen(filename, "r");
+   if (   (*filename == '-')
+       && (strlen(filename) == 1))
+     fp = stdin;
+   else
+     fp = fopen(filename, "r");
 #  endif  /* !HAVE_SYS_STAT_H || !S_IFMT || !S_IFREG */
    if (   (warning_level >= 0)
        && (mode != REsponse)
@@ -1569,7 +1676,7 @@ get_file_ptr (fp, filename, level, mode, is_first)
 
          /*
             If this function is entered the first time:
-              Print a leading NEWLINE character before any warning texts.
+              Print a leading NEWLINE character before any information texts.
          */
          if (*is_first)
           {
@@ -1577,37 +1684,39 @@ get_file_ptr (fp, filename, level, mode, is_first)
             *s4 = '\0';
             print_text (stderr, s4);
           }
-         i = (int)strlen(filename) + MAX(ehls1s.len, ehls2s.len) + MAX(ehls1e.len, ehls2e.len) + 100;
+         i = (int)  strlen(filename)
+                  + MAX(ehls1s.len, ehls2s.len)
+                  + MAX(ehls1e.len, ehls2e.len) + LEN_SINGLE_LINE;
          if ((Uint)i >= maxlen_max)
            resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
          if (   mode == REsource
              || mode == HEre)
 #  if USE_DE
            sprintf(s4, "Versuche%sRessourcendatei `%s' zu %sffnen... %s%s%s",
-                   (mode==REsource) ? " " : " `HIER' ", filename, OE,
-                   (ehls1s.len!=1) ? ((fp==(FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
-                   (fp==(FILE *)NULL) ? "Versagt" : "Erfolg",
-                   (ehls1s.len!=1) ? ((fp==(FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
+                   (mode == REsource) ? " " : " `HIER' ", filename, OE,
+                   (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
+                   (fp == (FILE *)NULL) ? "Versagt" : "Erfolg",
+                   (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
 #  else /* !USE_DE */
            sprintf(s4, _("Try to open%sresource file `%s'... %s%s%s"),
-                   (mode==REsource) ? " " : _(" `HERE' "), filename,
-                   (ehls1s.len!=1) ? ((fp==(FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
-                   (fp==(FILE *)NULL) ? _("failed") : _("success"),
-                   (ehls1s.len!=1) ? ((fp==(FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
+                   (mode == REsource) ? " " : _(" `HERE' "), filename,
+                   (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
+                   (fp == (FILE *)NULL) ? _("failed") : _("success"),
+                   (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
 #  endif /* !USE_DE */
          else
 #  if USE_DE
-           sprintf(s4, "Versuche (Ebene: %02d) Include-Datei `%s' zu %sffnen... %s%s%s",
-                   level, filename, OE,
-                   (ehls1s.len!=1) ? ((fp==(FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
-                   (fp==(FILE *)NULL) ? "Versagt" : "Erfolg",
-                   (ehls1s.len!=1) ? ((fp==(FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
+           sprintf(s4, "Versuche (Ebene: %02d) Einf%sgedatei `%s' zu %sffnen... %s%s%s",
+                   level, UE, filename, OE,
+                   (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
+                   (fp == (FILE *)NULL) ? "Versagt" : "Erfolg",
+                   (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
 #  else /* !USE_DE */
            sprintf(s4, _("Try to open (level: %02d) include file `%s'... %s%s%s"),
                    level, filename,
-                   (ehls1s.len!=1) ? ((fp==(FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
-                   (fp==(FILE *)NULL) ? _("failed") : _("success"),
-                   (ehls1s.len!=1) ? ((fp==(FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
+                   (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
+                   (fp == (FILE *)NULL) ? _("failed") : _("success"),
+                   (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
 #  endif /* !USE_DE */
          print_text (stderr, s4);
        }
@@ -1617,30 +1726,4 @@ get_file_ptr (fp, filename, level, mode, is_first)
 #endif /* !USE_RC */
 
    return(fp);
-}
-
-
-
-   LOCAL void
-make_absolute_filename (directory, filename)
-   const char *directory;
-   const char *filename;
-/*
-   Creates an absolute file name (directory+file name) of a delivered
-     file name and directory and returns this absolute file name via
-     the global variable `s1'.
-*/
-{
-   register int  dir_len=(int)strlen(directory);
-   register int  fil_len=(int)strlen(filename);
-
-
-   if (directory[dir_len-1] != *DIR_SEP)
-     dir_len++;
-   if ((Uint)dir_len+fil_len >= maxlen_max)
-     resize_all_strings (dir_len+fil_len+1, FALSE, __FILE__, (long)__LINE__);
-   strcpy(s1, directory);
-   if (directory[dir_len-1] != *DIR_SEP)
-     strcat(s1, DIR_SEP);
-   strcat(s1, filename);
 }

@@ -1,13 +1,15 @@
 # List of files containing translatable strings.
-# Copyright (C) 1996 Thomas Esken
+# Copyright (c) 1996, 2000 Thomas Esken
 
 # Package source files
 src/file-io.c
 src/gcal.c
+src/hd-astro.c
 src/hd-data.c
 src/hd-use.c
 src/help.c
 src/print.c
+src/rc-astro.c
 src/rc-check.c
 src/rc-insert.c
 src/rc-use.c

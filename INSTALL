@@ -1,5 +1,22 @@
 This is a generic INSTALL file for utilities distributions.
-Some features specific to `gcal' have been added.
+Some features specific to Gcal have been added to this file,
+so *please READ IT*.
+
+
+
+Table of Contents:
+* Basic Installation
+* Gcal Installation
+* Compilers and Options
+* Multiple Architectures
+* Installation Names
+* Optional Features
+* Specifying the System Type
+* Sharing Defaults
+* Operation Controls
+* Special Targets
+
+
 
 Basic Installation
 ==================
@@ -59,19 +76,20 @@ Gcal Installation
 
    These are `gcal' specific installation instructions.
 
-   You can set your private/local/site depending options in the make
+   You can set your private/local/site depending options in the `make'
 variables `DEFINES' and `DEFINES2'.  Choose and set these options
 *either* in the files `defines.h' and `tailor.h' *or* in the
 appropriate template Makefile `src/Makefile.in' (of which the
 `configure' shell script generates the site specific `src/Makefile')
 before compiling `gcal'; *or* use the `--enable-FEATURE' respectively
 `--disable-FEATURE' arguments of `configure'.  Type `configure --help'
-for an overview of all `configure' options.  For an overview of all
-Makefile targets, type `make help'.
+for an overview of all `configure' options.  After the successful run of
+`configure', type `make help' for an overview of all Makefile targets.
 
    Inspect the README files of the distribution and the enclosed
-documentation for more information, likewise *Note Special Targets::,
-and *Note Basic Installation::, of this file for more details.
+documentation for more information.  See the topics *Note Special
+Targets::, and *Note Basic Installation::, in this file for more
+details.
 
 Compilers and Options
 =====================
@@ -282,4 +300,26 @@ Special Targets
      Use:
 
           INSTALL="install-sh -c" ./configure
+
+   * On SCO Unix (ODT 2.0/3.2v4) and some other systems which use the
+     SysV regular expressions, there is a name clash with the
+     `libintl.a' library file!  The SysV regular expression functions
+     are stored in a library file by this name, and the GNU `gettext'
+     localization functions are also stored in a library file by this
+     name.  But both files are not equal, each manages a very special
+     task.  For using both concurrently, the SysV regexp functions and
+     the GNU `gettext' message text translations, use:
+
+          ./configure --with-included-gettext
+
+     This should avoid problems, by reason the Gcal package-internal GNU
+     `gettext' library file `./lib/libintl.a' is directly linked to the
+     object code, and also the regular expression functions in the
+     library file `libintl.a', which is accessed by using the standard
+     link-path.  Otherwise, the `configure' script (or more concrete,
+     the `aclocal.m4' macro `AM_GNU_GETTEXT') removes a `-lintl' entry
+     in the `LIBS' environment variable when testing whether a
+     `libintl.a' already found is *not* the GNU `gettext' library; and
+     this always happens when `configure' is called without the
+     `--with-included-gettext' option.
 

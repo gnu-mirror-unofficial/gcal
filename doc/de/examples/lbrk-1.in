@@ -1,0 +1,31 @@
+; lbrk-1.in
+;
+
+; The command(s) used within this example are prefixed with `%%%'.
+; The real call(s) of these command(s) are prefixed with `***'.
+;
+%%%cat lbrk-1.rc
+***cat ./lbrk-1.rc
+
+; The resource file line(s) used within this example are prefixed with `:::'.
+;
+:::; Hallo, ich bin `lbrk-1.rc' und jetzt lebendig
+:::;
+:::0 Ich weiss ich bin ein kurzer Text
+:::0 Ich hoffe ich bin lang genug~hier, ein Zeilenumbruch~\
+:::und noch einer~und nun zum letzten Mal...
+:::0 Ich hoffe ich bin auch lang genug^hier, ein Zeilenumbruch\
+:::~und noch einer^und nun zum letzten Mal...
+:::0 Bin ich ein kurzer Text? Weiss nicht...
+
+; Additionally leading Texinfo commands are prefixed with `+++'.
+;
++++example
++++group
++++cartouche
+
+; Additionally trailing Texinfo commands are prefixed with `---'.
+;
+---end cartouche
+---end group
+---end example

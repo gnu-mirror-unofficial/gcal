@@ -1,5 +1,5 @@
-/* finddomain.c -- handle list of needed message catalogs
-   Copyright (C) 1995, 1996 Free Software Foundation, Inc.
+/* Handle list of needed message catalogs
+   Copyright (C) 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
    Written by Ulrich Drepper <drepper@gnu.ai.mit.edu>, 1995.
 
    This program is free software; you can redistribute it and/or modify
@@ -39,11 +39,13 @@ void free ();
 # include <string.h>
 #else
 # include <strings.h>
+# ifndef memcpy
+#  define memcpy(Dst, Src, Num) bcopy (Src, Dst, Num)
+# endif
+#endif
+#if !HAVE_STRCHR && !defined _LIBC
 # ifndef strchr
 #  define strchr index
-# endif
-# ifndef memcpy
-#  define memcpy(Dst, Src, Num) bcopy ((Src), (Dst), (Num))
 # endif
 #endif
 
@@ -60,18 +62,6 @@ void free ();
 #endif
 
 /* @@ end of prolog @@ */
-
-#ifdef _LIBC
-/* Rename the non ANSI C functions.  This is required by the standard
-   because some ANSI C functions will require linking with this object
-   file and the name space must not be polluted.  */
-# define stpcpy(dest, src) __stpcpy(dest, src)
-#else
-# ifndef HAVE_STPCPY
-static char *stpcpy PARAMS ((char *dest, const char *src));
-# endif
-#endif
-
 /* List of already loaded domains.  */
 static struct loaded_l10nfile *_nl_loaded_domains;
 
@@ -80,6 +70,7 @@ static struct loaded_l10nfile *_nl_loaded_domains;
    the DOMAINNAME and CATEGORY parameters with respect to the currently
    established bindings.  */
 struct loaded_l10nfile *
+internal_function
 _nl_find_domain (dirname, locale, domainname)
      const char *dirname;
      char *locale;
@@ -103,11 +94,11 @@ _nl_find_domain (dirname, locale, domainname)
 
      and six parts for the CEN syntax:
 
-	language[_territory][+audience][+special][,sponsor][_revision]
+	language[_territory][+audience][+special][,[sponsor][_revision]]
 
-     Beside the first all of them are allowed to be missing.  If the
-     full specified locale is not found, the less specific one are
-     looked for.  The various part will be stripped of according to
+     Beside the first part all of them are allowed to be missing.  If
+     the full specified locale is not found, the less specific one are
+     looked for.  The various parts will be stripped off according to
      the following order:
 		(1) revision
 		(2) sponsor
@@ -152,12 +143,18 @@ _nl_find_domain (dirname, locale, domainname)
   alias_value = _nl_expand_alias (locale);
   if (alias_value != NULL)
     {
+#if defined _LIBC || defined HAVE_STRDUP
+      locale = strdup (alias_value);
+      if (locale == NULL)
+	return NULL;
+#else
       size_t len = strlen (alias_value) + 1;
       locale = (char *) malloc (len);
       if (locale == NULL)
 	return NULL;
 
       memcpy (locale, alias_value, len);
+#endif
     }
 
   /* Now we determine the single parts of the locale name.  First
@@ -168,7 +165,7 @@ _nl_find_domain (dirname, locale, domainname)
 			   &sponsor, &revision);
 
   /* Create all possible locale entries which might be interested in
-     generalzation.  */
+     generalization.  */
   retval = _nl_make_l10nflist (&_nl_loaded_domains, dirname,
 			       strlen (dirname) + 1, mask, language, territory,
 			       codeset, normalized_codeset, modifier, special,
@@ -198,20 +195,22 @@ _nl_find_domain (dirname, locale, domainname)
   return retval;
 }
 
-/* @@ begin of epilog @@ */
 
-/* We don't want libintl.a to depend on any other library.  So we
-   avoid the non-standard function stpcpy.  In GNU C Library this
-   function is available, though.  Also allow the symbol HAVE_STPCPY
-   to be defined.  */
-#if !_LIBC && !HAVE_STPCPY
-static char *
-stpcpy (dest, src)
-     char *dest;
-     const char *src;
+#ifdef _LIBC
+static void __attribute__ ((unused))
+free_mem (void)
 {
-  while ((*dest++ = *src++) != '\0')
-    /* Do nothing. */ ;
-  return dest - 1;
+  struct loaded_l10nfile *runp = _nl_loaded_domains;
+
+  while (runp != NULL)
+    {
+      struct loaded_l10nfile *here = runp;
+      if (runp->data != NULL)
+	_nl_unload_domain ((struct loaded_domain *) runp->data);
+      runp = runp->next;
+      free (here);
+    }
 }
+
+text_set_element (__libc_subfreeres, free_mem);
 #endif

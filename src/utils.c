@@ -2,7 +2,7 @@
 *  utils.c:  Pool of common functions.
 *
 *
-*  Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1994-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: utils.c 2.40 1997/04/22 02:04:00 tom Exp $";
+static char rcsid[]="$Id: utils.c 3.00 2000/03/26 03:00:00 tom Exp $";
 #endif
 
 
@@ -54,271 +54,48 @@ static char rcsid[]="$Id: utils.c 2.40 1997/04/22 02:04:00 tom Exp $";
 #    include <time.h>
 #  endif /* !HAVE_SYS_TIME_H */
 #endif /* !TIME_WITH_SYS_TIME */
-#include "gcal.h"
-
-
-
-/*
-*  Function prototypes.
-*/
-#if __cplusplus
-extern "C"
-{
-#endif
-/*
-************************************************** Defined in `holiday.c'.
-*/
-IMPORT int
-eval_holiday __P_((      int  day,
-                   const int  month,
-                   const int  year,
-                   const int  wd,
-                   const Bool forwards));
-/*
-************************************************** Defined in `help.c'.
-*/
-IMPORT char *
-usage_msg __P_((void));
-IMPORT void
-put_longopt_description __P_((FILE *fp));
+#include "common.h"
 #if USE_RC
-/*
-************************************************** Defined in `rc-utils.c'.
-*/
-IMPORT Line_struct *
-rc_get_date __P_((      char        *the_line,
-                        Line_struct *lineptrs,
-                  const Bool         is_rc_file,
-                        Bool        *is_weekday_mode,
-                        int         *d,
-                        int         *m,
-                        int         *y,
-                        int         *n,
-                        int         *len,
-                        char        *hc,
-                        int         *hn,
-                        int         *hwd,
-                  const char        *filename,
-                  const long         line_number,
-                  const char        *line_buffer,
-                  const Bool         on_error_exit));
-IMPORT Bool
-precomp_nth_wd __P_((      int         diff,
-                     const int         wd,
-                           int        *n,
-                           int        *day,
-                           int        *month,
-                           int        *year,
-                     const Cmode_enum  mode));
-IMPORT Bool
-precomp_date __P_((      int         diff,
-                   const int         wd,
-                         int        *day,
-                         int        *month,
-                   const int         year,
-                   const Cmode_enum  mode));
-IMPORT Bool
-prev_date __P_((int *day,
-                int *month,
-                int *year));
-IMPORT Bool
-next_date __P_((int *day,
-                int *month,
-                int *year));
+#  include "rc-defs.h"
 #endif /* USE_RC */
+#include "globals.h"
+#include "hd-defs.h"
+#include "hd-use.h"
+#if USE_RC
+#  include "rc-utils.h"
+#endif /* USE_RC */
+#include "utils.h"
+
+
+
+/*
+*  LOCAL functions prototypes.
+*/
+__BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `utils.c'.
 */
-EXPORT VOID_PTR
-my_malloc __P_((const int   amount,
-                const int   exit_status,
-                const char *module_name,
-                const long  module_line,
-                const char *var_name,
-                const int   var_contents));
-EXPORT VOID_PTR
-my_realloc __P_((      VOID_PTR  ptr_memblock,
-                 const int       amount,
-                 const int       exit_status,
-                 const char     *module_name,
-                 const long      module_line,
-                 const char     *var_name,
-                 const int       var_contents));
-EXPORT void
-allocate_all_strings __P_((const int   amount,
-                           const char *module_name,
-                           const long  module_line));
-EXPORT void
-resize_all_strings __P_((const int   amount,
-                         const Bool  with_line_buffer,
-                         const char *module_name,
-                         const long  module_line));
-EXPORT void
-my_error __P_((const int   exit_status,
-               const char *module_name,
-               const long  module_line,
-               const char *var_name,
-               const int   var_contents));
-#if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
-EXPORT RETSIGTYPE
-handle_signal __P_((int the_signal));
-#endif
-EXPORT void
-my_exit __P_((const int exit_status));
-EXPORT int
-my_atoi __P_((const char *string));
-#if !HAVE_STRSTR
-EXPORT char *
-my_strstr __P_((const char *text,
-                const char *pattern));
-#endif /* !HAVE_STRSTR */
-#if !HAVE_STRCSPN
-EXPORT char *
-my_strcspn __P_((const char *s1,
-                 const char *s2));
-#endif /* !HAVE_STRCSPN */
-#if !HAVE_STRCASECMP
-EXPORT int
-my_strcasecmp __P_((const char *s1,
-                    const char *s2));
-#endif /* !HAVE_STRCASECMP */
-#if !HAVE_STRNCASECMP
-EXPORT int
-my_strncasecmp __P_((const char *s1,
-                     const char *s2,
-                           int   len));
-#endif /* !HAVE_STRNCASECMP */
-EXPORT Bool
-get_actual_date __P_((void));
-EXPORT int
-compare_d_m_name __P_((const char       *string,
-                       const Cmode_enum  mode));
-EXPORT int
-asc_sort __P_((const char **a,
-               const char **b));
-EXPORT int
-des_sort __P_((const char **a,
-               const char **b));
-EXPORT Bool
-is_presorted __P_((char **table,
-                   int    elems));
-EXPORT void
-resort __P_((      char **table,
-             const int    elems));
-EXPORT const char *
-day_suffix __P_((int day));
-EXPORT const char *
-short3_day_name __P_((const int day));
-EXPORT const char *
-short_day_name __P_((const int day));
-EXPORT const char *
-day_name __P_((const int day));
-EXPORT const char *
-short_month_name __P_((const int month));
-EXPORT const char *
-month_name __P_((const int month));
-EXPORT Ulint
-date2num __P_((const int day,
-               const int month,
-               const int year));
-EXPORT Bool
-doy2date __P_((      int  doy,
-               const int  is_leap_year,
-                     int *day,
-                     int *month));
-EXPORT int
-weekday_of_date __P_((const int day,
-                      const int month,
-                      const int year));
-EXPORT int
-day_of_year __P_((const int day,
-                  const int month,
-                  const int year));
-EXPORT int
-days_of_february __P_((const int year));
-EXPORT Bool
-valid_date __P_((const int day,
-                 const int month,
-                 const int year));
-EXPORT int
-week_number __P_((const int day,
-                  const int month,
-                  const int year));
-EXPORT int
-weekno2doy __P_((      int week,
-                 const int year));
-EXPORT int
-knuth_easter_formula __P_((const int year));
-EXPORT int
-julian_gregorian_diff __P_((const int day,
-                            const int month,
-                            const int year));
+LOCAL void
+gregorian2julian __P_((int *day,
+                       int *month,
+                       int *year));
 LOCAL int
-raw_week_number __P_((const int day,
-                      const int month,
-                      const int year));
+raw_week_number __P_((const int  day,
+                      const int  month,
+                      const int  year,
+                      const Bool is_iso_week,
+                      const int  start_day_of_week));
 LOCAL const char *
 dflt_day_name __P_((const int day));
 LOCAL const char *
 dflt_month_name __P_((const int month));
-#if __cplusplus
-}
-#endif
+__END_DECLARATIONS
 
 
 
 /*
-*  Declare public(extern) variables.
+*  Function implementations.
 */
-IMPORT const int    dvec[];         /* Amount of days in months */
-IMPORT const int    mvec[];         /* Number of past days of month */
-IMPORT Greg_struct *greg;           /* Points to the used Gregorian Reformation date */
-#if USE_RC
-IMPORT Line_struct *lineptrs;       /* Pointers to different parts of a (resource file) line */
-IMPORT FILE        *rc_here_fp;     /* Temporary file used for managing `--here=ARG' options */
-#endif
-#ifdef GCAL_EMAIL
-IMPORT FILE        *tfp;            /* Temporary file which is send by the mailer */
-#endif
-#ifdef DJG
-IMPORT Usint        testval;        /* Set to SHRT_MAX for checking the maximum table range */
-#else
-IMPORT Uint         testval;        /* Set to INT_MAX for checking the maximum table range */
-#endif
-IMPORT Uint         maxlen_max;     /* Actual size of all string vectors */
-IMPORT int          len_year_max;   /* String length of the maximum year able to compute */
-IMPORT int          act_sec;        /* Actual second */
-IMPORT int          act_min;        /* Actual minute */
-IMPORT int          act_hour;       /* Actual hour */
-IMPORT int          act_day;        /* Actual day */
-IMPORT int          act_month;      /* Actual month */
-IMPORT int          act_year;       /* Actual year */
-IMPORT int          buf_ad;         /* Buffer of actual day */
-IMPORT int          buf_am;         /* Buffer of actual month */
-IMPORT int          buf_ay;         /* Buffer of actual year */
-IMPORT char        *prgr_name;      /* Stores the actual program name */
-IMPORT char        *s1;             /* General purpose text buffer */
-IMPORT char        *s2;             /* General purpose text buffer */
-IMPORT char        *s3;             /* General purpose text buffer */
-IMPORT char        *s4;             /* General purpose text buffer */
-#if USE_RC
-IMPORT char        *s5;             /* General purpose text buffer */
-IMPORT char        *s6;             /* General purpose text buffer */
-IMPORT char        *s7;             /* General purpose text buffer */
-IMPORT char        *line_buffer;    /* Text buffer of a line read from a resource file */
-IMPORT char        *rc_adate;       /* Text containing modified actual date %... */
-IMPORT char        *rc_here_fn;     /* Name of tempfile used for managing `--here=ARG' options */
-#endif
-#ifdef GCAL_EMAIL
-IMPORT char        *tfn;            /* Name of tempfile used by the mailer */
-#endif
-IMPORT Bool         orthodox_calendar;   /* -O (compute leap years as done by Eastern churches) */
-#ifdef GCAL_NLS
-IMPORT Bool         is_en;          /* Support of English language? */
-#endif
-
-
-
    PUBLIC VOID_PTR
 my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents)
    const int   amount;
@@ -328,9 +105,10 @@ my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents
    const char *var_name;
    const int   var_contents;
 /*
-   Allocates AMOUNT bytes of memory dynamically, with error checking.  Calls `my_error()'
-     and terminates program if any errors occur.  AMOUNT is limited to `int' range
-     instead of `size_t' range; this is wanted!
+   Allocates AMOUNT bytes of memory dynamically, with error checking.
+     Calls `my_error()' and terminates the program if any errors occur.
+     AMOUNT is limited to `int' range instead of `size_t' range;
+     this is wanted!
 */
 {
    auto VOID_PTR  ptr_memblock;
@@ -340,11 +118,11 @@ my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents
      /*
         Error, table size overflow!
      */
-     my_error (107, module_name, module_line, var_name, (int)testval);
+     my_error (ERR_INTERNAL_TABLE_CRASH, module_name, module_line, var_name, (int)testval);
    ptr_memblock = (VOID_PTR)malloc((int)amount);
    if (ptr_memblock == (VOID_PTR)NULL)
      /*
-        Error, `malloc()' have failed.
+        Error, `malloc()' function failed.
      */
      my_error (exit_status, module_name, module_line, var_name, var_contents);
 
@@ -363,23 +141,24 @@ my_realloc (ptr_memblock, amount, exit_status, module_name, module_line, var_nam
    const char     *var_name;
    const int       var_contents;
 /*
-   Changes the size of an allocated block of memory PTR_MEMBLOCK to AMOUNT bytes,
-     with error checking.  Calls `my_error()' and terminates program if any errors
-     occur.  AMOUNT is limited to `int' range instead of `size_t' range; this is
-     wanted!  If PTR_MEMBLOCK is NULL, `my_malloc()' is called instead.
+   Changes the size of an allocated block of memory PTR_MEMBLOCK to AMOUNT
+     bytes, with error checking.  Calls `my_error()' and terminates the program
+     if any errors occur.  AMOUNT is limited to `int' range instead of `size_t'
+     range; this is wanted!  If PTR_MEMBLOCK is NULL, `my_malloc()' is called
+     instead.
 */
 {
    if ((Uint)amount > testval)
      /*
         Error, table size overflow!
      */
-     my_error (107, module_name, module_line, var_name, (int)testval);
+     my_error (ERR_INTERNAL_TABLE_CRASH, module_name, module_line, var_name, (int)testval);
    if (ptr_memblock == (VOID_PTR)NULL)
      return(my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents));
    ptr_memblock = (VOID_PTR)realloc(ptr_memblock, (int)amount);
    if (ptr_memblock == (VOID_PTR)NULL)
      /*
-        Error, `realloc()' have failed.
+        Error, `realloc()' function failed.
      */
      my_error (exit_status, module_name, module_line, var_name, var_contents);
 
@@ -394,10 +173,10 @@ allocate_all_strings (amount, module_name, module_line)
    const char *module_name;
    const long  module_line;
 /*
-   Initially allocates AMOUNT bytes of memory dynamically for all string vectors used,
-     with error checking.  Calls `my_error()' indirectly and terminates program if any
-     errors occur.  AMOUNT is limited to `int' range instead of `size_t' range; this
-     is wanted!  Can only be called once!
+   Initially allocates AMOUNT bytes of memory dynamically for all string
+     vectors used, with error checking.  Calls `my_error()' indirectly and
+     terminates the program if any errors occur.  AMOUNT is limited to `int'
+     range instead of `size_t' range; this is wanted!  Can only be called once!
 */
 {
    static Bool  all_strings_initialized=FALSE;
@@ -405,15 +184,39 @@ allocate_all_strings (amount, module_name, module_line)
 
    if (!all_strings_initialized)
     {
-      s1 = (char *)my_malloc (amount, 124, module_name, module_line, "s1", 0);
-      s2 = (char *)my_malloc (amount, 124, module_name, module_line, "s2", 0);
-      s3 = (char *)my_malloc (amount, 124, module_name, module_line, "s3", 0);
-      s4 = (char *)my_malloc (amount, 124, module_name, module_line, "s4", 0);
+      s1 = (char *)my_malloc (amount,
+                              ERR_NO_MEMORY_AVAILABLE,
+                              module_name, module_line,
+                              "s1", 0);
+      s2 = (char *)my_malloc (amount,
+                              ERR_NO_MEMORY_AVAILABLE,
+                              module_name, module_line,
+                              "s2", 0);
+      s3 = (char *)my_malloc (amount,
+                              ERR_NO_MEMORY_AVAILABLE,
+                              module_name, module_line,
+                              "s3", 0);
+      s4 = (char *)my_malloc (amount,
+                              ERR_NO_MEMORY_AVAILABLE,
+                              module_name, module_line,
+                              "s4", 0);
 #if USE_RC
-      s5 = (char *)my_malloc (amount, 124, module_name, module_line, "s5", 0);
-      s6 = (char *)my_malloc (amount, 124, module_name, module_line, "s6", 0);
-      s7 = (char *)my_malloc (amount, 124, module_name, module_line, "s7", 0);
-      line_buffer = (char *)my_malloc (amount, 124, module_name, module_line, "line_buffer", 0);
+      s5 = (char *)my_malloc (amount,
+                              ERR_NO_MEMORY_AVAILABLE,
+                              module_name, module_line,
+                              "s5", 0);
+      s6 = (char *)my_malloc (amount,
+                              ERR_NO_MEMORY_AVAILABLE,
+                              module_name, module_line,
+                              "s6", 0);
+      s7 = (char *)my_malloc (amount,
+                              ERR_NO_MEMORY_AVAILABLE,
+                              module_name, module_line,
+                              "s7", 0);
+      line_buffer = (char *)my_malloc (amount,
+                                       ERR_NO_MEMORY_AVAILABLE,
+                                       module_name, module_line,
+                                       "line_buffer", 0);
 #endif
       all_strings_initialized = TRUE;
     }
@@ -428,9 +231,10 @@ resize_all_strings (amount, with_line_buffer, module_name, module_line)
    const char *module_name;
    const long  module_line;
 /*
-   Changes the size of all string vectors used to AMOUNT bytes, with error checking.
-     Calls `my_error()' indirectly and terminates program if any errors occur.
-     AMOUNT is limited to `int' range instead of `size_t' range; this is wanted!
+   Changes the size of all string vectors used to AMOUNT bytes, with error
+     checking.  Calls `my_error()' indirectly and terminates the program
+     if any errors occur. AMOUNT is limited to `int' range instead of `size_t'
+     range; this is wanted!
 */
 {
    if (   ((Uint)amount > testval)
@@ -438,17 +242,39 @@ resize_all_strings (amount, with_line_buffer, module_name, module_line)
      maxlen_max = testval;
    else
      maxlen_max = (Uint)amount;
-   s1 = (char *)my_realloc ((VOID_PTR)s1, maxlen_max, 124, module_name, module_line, "s1", maxlen_max);
-   s2 = (char *)my_realloc ((VOID_PTR)s2, maxlen_max, 124, module_name, module_line, "s2", maxlen_max);
-   s3 = (char *)my_realloc ((VOID_PTR)s3, maxlen_max, 124, module_name, module_line, "s3", maxlen_max);
-   s4 = (char *)my_realloc ((VOID_PTR)s4, maxlen_max, 124, module_name, module_line, "s4", maxlen_max);
+   s1 = (char *)my_realloc ((VOID_PTR)s1, maxlen_max,
+                            ERR_NO_MEMORY_AVAILABLE,
+                            module_name, module_line,
+                            "s1", maxlen_max);
+   s2 = (char *)my_realloc ((VOID_PTR)s2, maxlen_max,
+                            ERR_NO_MEMORY_AVAILABLE,
+                            module_name, module_line,
+                            "s2", maxlen_max);
+   s3 = (char *)my_realloc ((VOID_PTR)s3, maxlen_max,
+                            ERR_NO_MEMORY_AVAILABLE,
+                            module_name, module_line,
+                            "s3", maxlen_max);
+   s4 = (char *)my_realloc ((VOID_PTR)s4, maxlen_max,
+                            ERR_NO_MEMORY_AVAILABLE,
+                            module_name, module_line,
+                            "s4", maxlen_max);
 #if USE_RC
-   s5 = (char *)my_realloc ((VOID_PTR)s5, maxlen_max, 124, module_name, module_line, "s5", maxlen_max);
-   s6 = (char *)my_realloc ((VOID_PTR)s6, maxlen_max, 124, module_name, module_line, "s6", maxlen_max);
-   s7 = (char *)my_realloc ((VOID_PTR)s7, maxlen_max, 124, module_name, module_line, "s7", maxlen_max);
+   s5 = (char *)my_realloc ((VOID_PTR)s5, maxlen_max,
+                            ERR_NO_MEMORY_AVAILABLE,
+                            module_name, module_line,
+                            "s5", maxlen_max);
+   s6 = (char *)my_realloc ((VOID_PTR)s6, maxlen_max,
+                            ERR_NO_MEMORY_AVAILABLE,
+                            module_name, module_line,
+                            "s6", maxlen_max);
+   s7 = (char *)my_realloc ((VOID_PTR)s7, maxlen_max,
+                            ERR_NO_MEMORY_AVAILABLE,
+                            module_name, module_line,
+                            "s7", maxlen_max);
    if (with_line_buffer)
      line_buffer = (char *)my_realloc ((VOID_PTR)line_buffer, maxlen_max,
-                                       124, module_name, module_line,
+                                       ERR_NO_MEMORY_AVAILABLE,
+                                       module_name, module_line,
                                        "line_buffer", maxlen_max);
 #endif
 }
@@ -467,81 +293,73 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
      and terminates the program with status `exit_status'.
 */
 {
+   S_NEWLINE(stderr);
+   if (prgr_name == (char *)NULL)
+     prgr_name = PRGR_NAME;
 #if USE_DE
-   fprintf(stderr, "\n%s: Abbruch, ", prgr_name);
+   fprintf(stderr, "%s: Abbruch, ", prgr_name);
 #else /* !USE_DE */
-   fprintf(stderr, _("\n%s: abort, "), prgr_name);
+   fprintf(stderr, _("%s: abort, "), prgr_name);
 #endif /* !USE_DE */
    switch(exit_status)
     {
 #if USE_DE
-      case 125:
+      case ERR_INVALID_EASTER_DATE:
         fprintf(stderr, "unzul%sssiges Jahr f%sr Ostertagsberechnung\nJahr mu%s im Bereich (%d...%d) sein",
                 AE, UE, SZ, EASTER_MIN, EASTER_MAX);
         break;
-      case 124:
+      case ERR_NO_MEMORY_AVAILABLE:
         fprintf(stderr, "`%s' Zeile %ld: virtueller Speicher ersch%spft (%s=%d)",
                 module_name, module_line, OE, var_name, var_contents);
         break;
 #  if USE_RC
-      case 123:
+      case ERR_INVALID_DATE_FIELD:
         fprintf(stderr, "unzul%sssiger Datumeintrag in Datei `%s'\nZeile %ld: %s",
                 AE, module_name, module_line, var_name);
         break;
-      case 122:
+      case ERR_INVALID_MONTH_FIELD:
         fprintf(stderr, "ung%sltiger Monat(%02d) in Datei `%s'\nZeile %ld: %s",
                 UE, var_contents, module_name, module_line, var_name);
         break;
-      case 121:
+      case ERR_INVALID_DAY_FIELD:
         fprintf(stderr, "ung%sltiger Tag(%02d) in Datei `%s'\nZeile %ld: %s",
                 UE, var_contents, module_name, module_line, var_name);
         break;
-      case 120:
+      case ERR_MALFORMED_INCLUDE:
         fprintf(stderr, "mi%sgebildetes %s in Datei `%s'\nZeile %ld: %s",
                 SZ, RC_INCL_STMENT, module_name, module_line, var_name);
         break;
-      case 119:
+      case ERR_CYCLIC_INCLUDE:
         fprintf(stderr, "rekursives/zyklisches %s unzul%sssig in Datei `%s'\nZeile %ld: %s",
                 RC_INCL_STMENT, AE, module_name, module_line, var_name);
         break;
-      case 118:
+      case ERR_FILE_NOT_FOUND:
         fprintf(stderr, "Datei `%s' nicht gefunden", module_name);
         break;
-      case 117:
+      case ERR_INVALID_NWD_FIELD:
         fprintf(stderr, "ung%sltiges N'ter Wochentagfeld(%d) in Datei `%s'\nZeile %ld: %s",
                 UE, var_contents, module_name, module_line, var_name);
         break;
-      case 116:
+      case ERR_NO_SEPARATOR_CHAR:
         fprintf(stderr, "fehlendes `whitespace' Trennzeichen nach Datumteil in Datei `%s'\nZeile %ld: %s",
                 module_name, module_line, var_name);
         break;
-      case 114:
-        if (*module_name)
-          fprintf(stderr, "illegale Datumvariablen-Operation in Datei `%s'\nZeile %ld: %s",
-                  module_name, module_line, var_name);
-        else
-         {
-           fprintf(stderr, "illegale Datumvariablen-Operation (%s)\n%s\n",
-                   var_name, usage_msg ());
-           put_longopt_description (stderr);
-         }
-        break;
 #  endif /* USE_RC */
-      case 115:
+      case ERR_WRITE_FILE:
         fprintf(stderr, "kann Datei `%s' nicht schreiben\nSpeichermedium ist voll!",
                 var_name);
         break;
 #  ifdef GCAL_EMAIL
-      case 111:
-        fprintf(stderr, "versenden der eMail an `%s' hat versagt", var_name);
+      case ERR_EMAIL_SEND_FAILURE:
+        fprintf(stderr, "versenden der eMail an <%s> hat versagt", var_name);
 #    if HAVE_ERRNO_H
         fprintf(stderr, "\n`%s' Zeile %ld: ", module_name, module_line);
         perror("perror");
 #    endif
         break;
 #  endif
-#  if defined(GCAL_EPAGER) || USE_RC
-      case 110:
+#  if defined(GCAL_EPAGER) || defined(GCAL_EMAIL) || USE_RC
+      case ERR_INTERNAL_C_FUNC_FAILURE:
         fprintf(stderr, "`%s' Zeile %ld: (`%s') `%s%d' hat versagt",
                 module_name, module_line, INTERNAL_TXT, var_name, var_contents);
 #    if HAVE_ERRNO_H
@@ -549,157 +367,124 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 #    endif
         break;
 #  endif
-      case 109:
+      case ERR_READ_FILE:
         fprintf(stderr, "Lesefehler in Datei `%s'", var_name);
 #  if HAVE_ERRNO_H
         fprintf(stderr, "\n`%s' Zeile %ld: ", module_name, module_line);
         perror("perror");
 #  endif
         break;
-      case 108:
+      case ERR_ILLEGAL_CHAR_IN_FILE:
         fprintf(stderr, "illegales Zeichen in Antwortdatei `%s'\nZeile %ld: %s",
                 module_name, module_line, var_name);
         break;
-      case 107:
+      case ERR_INTERNAL_TABLE_CRASH:
         fprintf(stderr, "`%s' Zeile %ld: (`%s') ung%sltiger Wert f%sr Tabellengr%s%se `sizeof %s>%d'",
                 module_name, module_line, INTERNAL_TXT, UE, UE, OE, SZ, var_name, var_contents);
         break;
-      case 106:
+      case ERR_INVALID_DATE_FORMAT:
         fprintf(stderr, "(`%s') Datumformat `%s' ist ung%sltig", module_name, var_name, UE);
         break;
 #  if USE_RC
-      case 105:
+      case ERR_INVALID_REGEX_PATTERN:
         if (*module_name)
-          fprintf(stderr, "illegale Textvariablen-Definition in Datei `%s'\nZeile %ld: %s",
-                  module_name, module_line, var_name);
+          fprintf(stderr, "%s im Suchmuster `%s'", module_name, var_name);
         else
-         {
-           fprintf(stderr, "illegale Textvariablen-Definition (%s)\n%s\n",
-                   var_name, usage_msg ());
-           put_longopt_description (stderr);
-         }
+          fprintf(stderr, "ung%sltiges Suchmuster `%s' angegeben", UE, var_name);
         break;
-      case 104:
-       if (*module_name)
-         fprintf(stderr, "%s im Suchmuster `%s'", module_name, var_name);
-       else
-         fprintf(stderr, "ung%sltiges Suchmuster `%s' angegeben", UE, var_name);
-       break;
 #  endif
       default:
         fprintf(stderr, "`%s' Zeile %ld: (`%s') unbehandelter Fehler (%d)",
                 module_name, module_line, INTERNAL_TXT, exit_status);
 #else /* !USE_DE */
-      case 125:
+      case ERR_INVALID_EASTER_DATE:
         fprintf(stderr, _("invalid year for computing Easter Sundays date\nYear must be in range (%d...%d)"),
                 EASTER_MIN, EASTER_MAX);
         break;
-      case 124:
+      case ERR_NO_MEMORY_AVAILABLE:
         fprintf(stderr, _("`%s' line %ld: virtual memory exhausted (%s=%d)"),
                 module_name, module_line, var_name, var_contents);
         break;
 #  if USE_RC
-      case 123:
+      case ERR_INVALID_DATE_FIELD:
         fprintf(stderr, _("invalid date part in file `%s'\nLine %ld: %s"),
                 module_name, module_line, var_name);
         break;
-      case 122:
+      case ERR_INVALID_MONTH_FIELD:
         fprintf(stderr, _("invalid month field(%02d) in file `%s'\nLine %ld: %s"),
                 var_contents, module_name, module_line, var_name);
         break;
-      case 121:
+      case ERR_INVALID_DAY_FIELD:
         fprintf(stderr, _("invalid day field(%02d) in file `%s'\nLine %ld: %s"),
                 var_contents, module_name, module_line, var_name);
         break;
-      case 120:
+      case ERR_MALFORMED_INCLUDE:
         fprintf(stderr, _("malformed %s in file `%s'\nLine %ld: %s"),
                 RC_INCL_STMENT, module_name, module_line, var_name);
         break;
-      case 119:
+      case ERR_CYCLIC_INCLUDE:
         fprintf(stderr, _("invalid recursive/cyclic %s in file `%s'\nLine %ld: %s"),
                 RC_INCL_STMENT, module_name, module_line, var_name);
         break;
-      case 118:
+      case ERR_FILE_NOT_FOUND:
         fprintf(stderr, _("file `%s' not found"), module_name);
         break;
-      case 117:
+      case ERR_INVALID_NWD_FIELD:
         fprintf(stderr, _("invalid N'th weekday field(%d) in file `%s'\nLine %ld: %s"),
                 var_contents, module_name, module_line, var_name);
         break;
-      case 116:
+      case ERR_NO_SEPARATOR_CHAR:
         fprintf(stderr, _("missing `whitespace' character after date part in file `%s'\nLine %ld: %s"),
                 module_name, module_line, var_name);
         break;
-      case 114:
-        if (*module_name)
-          fprintf(stderr, _("illegal date variable operation in file `%s'\nLine %ld: %s"),
-                  module_name, module_line, var_name);
-        else
-         {
-           fprintf(stderr, _("illegal date variable operation (%s)\n%s\n"),
-                   var_name, usage_msg ());
-           put_longopt_description (stderr);
-         }
-        break;
 #  endif /* USE_RC */
-      case 115:
+      case ERR_WRITE_FILE:
         fprintf(stderr, _("file `%s' can't be written\nStorage media full!"),
                 var_name);
         break;
 #  ifdef GCAL_EMAIL
-      case 111:
-        fprintf(stderr, _("sending eMail to `%s' have failed"), var_name);
+      case ERR_EMAIL_SEND_FAILURE:
+        fprintf(stderr, _("sending eMail to <%s> failed"), var_name);
 #    if HAVE_ERRNO_H
         fprintf(stderr, _("\n`%s' line %ld: "), module_name, module_line);
         perror("perror");
 #    endif
         break;
 #  endif
-#  if defined(GCAL_EPAGER) || USE_RC
-      case 110:
-        fprintf(stderr, _("`%s' line %ld: (`%s') `%s%d' have failed"),
+#  if defined(GCAL_EPAGER) || defined(GCAL_EMAIL) || USE_RC
+      case ERR_INTERNAL_C_FUNC_FAILURE:
+        fprintf(stderr, _("`%s' line %ld: (`%s') `%s%d' failed"),
                 module_name, module_line, _("Internal"), var_name, var_contents);
 #    if HAVE_ERRNO_H
         perror("\nperror");
 #    endif
         break;
 #  endif
-      case 109:
+      case ERR_READ_FILE:
         fprintf(stderr, _("read error in file `%s'"), var_name);
 #  if HAVE_ERRNO_H
         fprintf(stderr, _("\n`%s' line %ld: "), module_name, module_line);
         perror("perror");
 #  endif
         break;
-      case 108:
+      case ERR_ILLEGAL_CHAR_IN_FILE:
         fprintf(stderr, _("illegal character in response file `%s'\nLine %ld: %s"),
                 module_name, module_line, var_name);
         break;
-      case 107:
+      case ERR_INTERNAL_TABLE_CRASH:
         fprintf(stderr, _("`%s' line %ld: (`%s') invalid value for table size `sizeof %s>%d'"),
                 module_name, module_line, _("Internal"), var_name, var_contents);
         break;
-      case 106:
+      case ERR_INVALID_DATE_FORMAT:
         fprintf(stderr, _("(`%s') date format `%s' is invalid"), module_name, var_name);
         break;
 #  if USE_RC
-      case 105:
+      case ERR_INVALID_REGEX_PATTERN:
         if (*module_name)
-          fprintf(stderr, _("illegal text variable definition in file `%s'\nLine %ld: %s"),
-                  module_name, module_line, var_name);
+          fprintf(stderr, _("%s in search pattern `%s'"), module_name, var_name);
         else
-         {
-           fprintf(stderr, _("illegal text variable definition (%s)\n%s\n"),
-                   var_name, usage_msg ());
-           put_longopt_description (stderr);
-         }
+          fprintf(stderr, _("invalid search pattern `%s' specified"), var_name);
         break;
-      case 104:
-       if (*module_name)
-         fprintf(stderr, _("%s in search pattern `%s'"), module_name, var_name);
-       else
-         fprintf(stderr, _("invalid search pattern `%s' specified"), var_name);
-       break;
 #  endif /* USE_RC */
       default:
         fprintf(stderr, _("`%s' line %ld: (`%s') unmanaged error (%d)"),
@@ -717,8 +502,9 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 handle_signal (the_signal)
    int the_signal;
 /*
-   Signal handler function which displays the numeric ID of the received signal
-     on stderr channel and terminates the program with an exit status 3.
+   Signal handler function which displays the numeric ID of the
+     received signal on STDERR channel and terminates the program
+     with ERR_TERMINATION_BY_SIGNAL exit status.
 */
 {
    fflush(stdout);
@@ -726,8 +512,8 @@ handle_signal (the_signal)
    fprintf(stderr, "\n%s: Programmabbruch durch Signal %d\n", prgr_name, the_signal);
 #else /* !USE_DE */
    fprintf(stderr, _("\n%s: program aborted by signal %d\n"), prgr_name, the_signal);
-#endif /* */  
-   my_exit (3);
+#endif /* !USE_DE */
+   my_exit (ERR_TERMINATION_BY_SIGNAL);
 }
 #endif /* HAVE_SIGNAL && (SIGINT || SIGTERM || SIGHUP) */
 
@@ -742,6 +528,10 @@ my_exit (exit_status)
 */
 {
 #if USE_RC
+   if (rc_tvar_tfp != (FILE *)NULL)
+     (void)fclose(rc_tvar_tfp);
+   if (rc_tvar_tfn != (char *)NULL)
+     (void)unlink(rc_tvar_tfn);
    if (rc_here_fp != (FILE *)NULL)
      (void)fclose(rc_here_fp);
    if (rc_here_fn != (char *)NULL)
@@ -774,6 +564,22 @@ my_atoi (string)
      return(0);
 
    return(atoi(string));
+}
+
+
+
+   PUBLIC int
+my_system (command)
+   const char *command;
+/*
+   Wrapper for the system() function.
+*/
+{
+#if HAVE_SYSTEM
+   return(((unsigned int)system(command) >> 8) & 0xff);
+#else /* !HAVE_SYSTEM */
+   return(-1);
+#endif /* !HAVE_SYSTEM */
 }
 
 
@@ -912,9 +718,9 @@ my_strncasecmp (s1, s2, len)
    PUBLIC Bool
 get_actual_date ()
 /*
-   Gets the actual date from the system resp.,
+   Gets the actual local/GMT date and time from the system resp.,
      evaluates the "actual" date from global `rc_adate'-ptr to string.
-     Returns TRUE if `rc_adate' could be evaluated, otherwise FALSE.
+     Returns TRUE if it's possible to evaluate `rc_adate', otherwise FALSE.
 */
 {
    auto   struct tm         *sys_date;
@@ -922,22 +728,27 @@ get_actual_date ()
    static Bool               got_time=FALSE;
 
 
-   sys_time  = time((MY_TIME_T *)NULL);
-   sys_date  = localtime(&sys_time);
+   sys_time = time((MY_TIME_T *)NULL);
+   sys_date = localtime(&sys_time);
+   true_day=act_day = sys_date->tm_mday;
+   true_month=act_month = sys_date->tm_mon + 1;
+   act_year = sys_date->tm_year;
+   if (act_year < CENTURY)
+     act_year += CENTURY;
+   true_year = act_year;
    if (!got_time)
     {
-      got_time = TRUE;
       act_sec  = sys_date->tm_sec;
       act_min  = sys_date->tm_min;
       act_hour = sys_date->tm_hour;
+      buf_ad = act_day;
+      buf_am = act_month;
+      buf_ay = act_year;
     }
-   buf_ad=act_day   = sys_date->tm_mday;
-   buf_am=act_month = sys_date->tm_mon + 1;
-   act_year  = sys_date->tm_year;
-   if (act_year < CENTURY)
-     act_year += CENTURY;
-   buf_ay = act_year;
 #if USE_RC
+   /*
+      Actual date modifier %DATE given.
+   */
    if (rc_adate != (char *)NULL)
     {
       auto int    d=0;
@@ -979,10 +790,10 @@ get_actual_date ()
           }
          else
 #  if USE_DE
-           (void)rc_get_date (rc_adate, lineptrs, FALSE, &b_dummy, &d, &m, &y, &n,
+           (void)rc_get_date (rc_adate, lptrs3, FALSE, &b_dummy, &d, &m, &y, &n,
                               &i_dummy, &hc, &hn, &hwd, INTERNAL_TXT, -1L, rc_adate, FALSE);
 #  else /* !USE_DE */
-           (void)rc_get_date (rc_adate, lineptrs, FALSE, &b_dummy, &d, &m, &y, &n,
+           (void)rc_get_date (rc_adate, lptrs3, FALSE, &b_dummy, &d, &m, &y, &n,
                               &i_dummy, &hc, &hn, &hwd, _("Internal"), -1L, rc_adate, FALSE);
 #  endif /* !USE_DE */
        }
@@ -996,7 +807,7 @@ get_actual_date ()
           {
             /*
                If a digit (1...5, 9) trails the textual weekday name,
-                 generate "n'th weekday of month" date.
+                 generate "N'th weekday of month" date.
             */
             c_dummy = rc_adate;
             while (isalpha(*c_dummy))
@@ -1006,7 +817,7 @@ get_actual_date ()
                n = atoi(c_dummy);
                if (!n)
                  /*
-                    Error, invalid "n'th weekday of month" given (must be 1...5, 9).
+                    Error, invalid "N'th weekday of month" given (must be 1...5, 9).
                  */
                  return(FALSE);
                /*
@@ -1015,7 +826,7 @@ get_actual_date ()
                c_dummy++;
                if (*c_dummy)
                  /*
-                    Error, invalid "n'th weekday of month" given.
+                    Error, invalid "N'th weekday of month" given.
                  */
                  return(FALSE);
              }
@@ -1030,13 +841,13 @@ get_actual_date ()
                if (d > i_dummy)
                  do
                   {
-                    next_date (&hn, &m, &y);
+                    (void)next_date (&hn, &m, &y);
                   } while (d != weekday_of_date (hn, m, y));
                else
                  if (d < i_dummy)
                    do
                     {
-                      prev_date (&hn, &m, &y);
+                      (void)prev_date (&hn, &m, &y);
                     } while (d != weekday_of_date (hn, m, y));
                d = hn;
              }
@@ -1109,7 +920,7 @@ get_actual_date ()
                  d = eval_holiday (DAY_MIN, m, y, d, TRUE);
                  d += (DAY_MAX * (n - 1));
                  /*
-                    The "n'th weekday of month" doesn't occur in month:
+                    The "N'th weekday of month" doesn't occur in month:
                       generate no "actual" date.
                  */
                  if (d > i_dummy)
@@ -1122,10 +933,10 @@ get_actual_date ()
            if (hc)
             {
               /*
-                 If no explicit year is given in actual date modifier
-                   %0@<e|t|`dvar'>[[-]<n>[`ww[w]']] resp., %0*d|w<n>[`ww[w]'],
-                   compute the date respecting the displacement, which was
-                   returned by function `rc_get_date()' in variable `hn' an `hwd'.
+                 If no explicit year is given in the actual date modifier %DATE,
+                   like %0@e|t|DVAR[[-]N[WW[W]]] resp., %0*d|wN[WW[W]], compute
+                   the date respecting the displacement, which was returned by
+                   the function `rc_get_date()' in variable `&hn' and `&hwd'.
               */
               switch (hc)
                {
@@ -1176,8 +987,43 @@ get_actual_date ()
         return(FALSE);
     }
 #endif /* USE_RC */
+   /*
+      If the period of the Gregorian Reformation is past the actual local
+        (Gregorian) system date, convert it to the proper Julian date.
+   */
+   gregorian2julian (&act_day, &act_month, &act_year);
+   if (!got_time)
+    {
+      got_time = TRUE;
+#if USE_RC
+      /*
+         Get the actual GMT and date.
+      */
+      sys_date = gmtime(&sys_time);
+      gmt_min  = sys_date->tm_min;
+      gmt_hour = sys_date->tm_hour;
+      buf_gd   = sys_date->tm_mday;
+      buf_gm   = sys_date->tm_mon + 1;
+      buf_gy   = sys_date->tm_year;
+      if (buf_gy < CENTURY)
+        buf_gy += CENTURY;
+      /*
+         If the period of the Gregorian Reformation is past the actual GMT
+           (Gregorian) system date, convert it to the proper Julian date.
+      */
+      gregorian2julian (&buf_gd, &buf_gm, &buf_gy);
+      /*
+         Compute the day difference between the actual GMT date
+           and the local time date.
+      */
+      gmt_loc_diff = (int)d_between (buf_ad, buf_am, buf_ay, buf_gd, buf_gm, buf_gy);
+#endif /* USE_RC */
+      buf_ad = act_day;
+      buf_am = act_month;
+      buf_ay = act_year;
+    }
 
-  return(TRUE);
+   return(TRUE);
 }
 
 
@@ -1188,9 +1034,9 @@ compare_d_m_name (string, mode)
    const Cmode_enum  mode;
 /*
    Compares the given day/month name `string' with built-in names and
-     returns (1...7|1...12) either if `string' matches partitially (until `\0'
+     returns (1...7|1...12) either if `string' matches partly (until `\0'
      or first digit found in `string') or `string' matches complete.
-     If `string'doesn't match or the length of `string' is less 2 for a day
+     If `string' doesn't match or the length of `string' is less 2 for a day
      name or less 3 for a month name (we need such lengths to distinguish in a
      save way!), the function returns 0 always.
      This function checks first if a native language day/month name is given,
@@ -1206,9 +1052,9 @@ compare_d_m_name (string, mode)
 */
 {
    register       int    len=(int)strlen(string);
-   register const int    len_min=(mode==DAy) ? TXTLEN_DAY : TXTLEN_MONTH;
+   register const int    len_min=(mode == DAy) ? TXTLEN_DAY : TXTLEN_MONTH;
    register       int    i;
-   register       int    imax=(mode==DAy) ? DAY_MAX : MONTH_MAX;
+   register       int    imax=(mode == DAy) ? DAY_MAX : MONTH_MAX;
    register       int    j=0;
    register       int    checks;
    auto     const char  *ptr_char=string;
@@ -1239,12 +1085,12 @@ compare_d_m_name (string, mode)
       if (j >= len_min)
         do
          {
-           for (i=(mode==DAy) ? DAY_MIN : MONTH_MIN ; i <= imax ; i++)
+           for (i=(mode == DAy) ? DAY_MIN : MONTH_MIN ; i <= imax ; i++)
             {
               if (checks == 2)
-                ptr_char = (mode==DAy) ? day_name (i) : month_name (i);
+                ptr_char = (mode == DAy) ? day_name (i) : month_name (i);
               else
-                ptr_char = (mode==DAy) ? dflt_day_name (i) : dflt_month_name (i);
+                ptr_char = (mode == DAy) ? dflt_day_name (i) : dflt_month_name (i);
               j = 0;
               while (   *(ptr_char + j)
                      && string[j])
@@ -1263,7 +1109,7 @@ compare_d_m_name (string, mode)
                             || *(ptr_char + j) == *UUE)))
                   j++;
                 else
-#endif 
+#endif
                   if (tolower(*(ptr_char+j)) == tolower(string[j]))
                     j++;
                   else
@@ -1317,7 +1163,7 @@ is_presorted (table, elems)
    char **table;
    int    elems;
 /*
-   Checks whether the textual entries in `table[]' are presorted in
+   Checks whether the textual entries in `&table[]' are presorted in
       ascending sort order.  Returns TRUE if the entries in `table'
       are presorted, otherwise FALSE.
 */
@@ -1344,12 +1190,13 @@ is_presorted (table, elems)
 
 
    PUBLIC void
-resort (table, elems)
+reverse_order (table, elems)
          char **table;
    const int    elems;
 /*
-   Rearranges (reverts) the sort order of the textual entries in `table[]' from
-     ascending sort order to descending sort order by swapping the `table' pointers.
+   Rearranges (reverts) the sort order of the textual entries in
+     `&table[]' from  ascending sort order to descending sort order
+     by swapping the `table' pointers.
 */
 {
    register int  right=elems-1;
@@ -1382,19 +1229,34 @@ day_suffix (day)
 #if USE_DE
    static   const char  *suffix[]={"'ter", "'ter", "'ter", "'ter"};
 #else /* !USE_DE */
-   static   const char  *suffix[]={N_("th"), N_("st"), N_("nd"), N_("rd")};
+   static   const char  *suffix[]={
+   /*
+      *** Translators, this text should be a proper abbreviation of "fourth...".
+   */
+                                    N_("th"),
+   /*
+      *** Translators, this text should be a proper abbreviation of "first".
+   */
+                                    N_("st"),
+   /*
+      *** Translators, this text should be a proper abbreviation of "second".
+   */
+                                    N_("nd"),
+   /*
+      *** Translators, this text should be a proper abbreviation of "third".
+   */
+                                    N_("rd")
+                                  };
 #endif /* !USE_DE */
    register       int    i=0;
 
 
-/*
-   Necessary for numbers > [9]9999.
-
+   if (day < 0)
+     day = -day;
    if (day > 10000)
      day %= 10000;
    if (day > 1000)
      day %= 1000;
-*/
    if (day > 100)
      day %= 100;
    if (   day < 11
@@ -1412,7 +1274,7 @@ day_suffix (day)
 short3_day_name (day)
    const int day;
 /*
-   Returns the short name of the day using the printf()/scanf() format "%-3s".
+   Returns the short name of the day using the `printf()' format "%-3s".
 */
 {
 #if USE_DE
@@ -1428,12 +1290,45 @@ short3_day_name (day)
 #else /* !USE_DE */
    static const char  *name[]={
                                 N_("invalid day"),
-                                N_("Mon"), N_("Tue"), N_("Wed"), N_("Thu"),
-                                N_("Fri"), N_("Sat"), N_("Sun")
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "Monday".
+   */
+                                N_("Mon"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "Tuesday".
+   */
+                                N_("Tue"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "Wednesday".
+   */
+                                N_("Wed"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "Thursday".
+   */
+                                N_("Thu"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "Friday".
+   */
+                                N_("Fri"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "Saturday".
+   */
+                                N_("Sat"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "Sunday".
+   */
+                                N_("Sun")
                               };
 #endif /* !USE_DE */
 
-   return(((day<DAY_MIN)||(day>DAY_MAX)) ? _(name[0]) : _(name[day]));
+   return(((day < DAY_MIN) || (day > DAY_MAX)) ? _(name[0]) : _(name[day]));
 }
 
 
@@ -1442,7 +1337,7 @@ short3_day_name (day)
 short_day_name (day)
    const int day;
 /*
-   Returns the short name of the day using the printf()/scanf() format "%-2s".
+   Returns the short name of the day using the `printf()' format "%-2s".
 */
 {
 #if USE_DE
@@ -1457,12 +1352,45 @@ short_day_name (day)
 #else /* !USE_DE */
    static const char  *name[]={
                                 N_("invalid day"),
-                                N_("Mo"), N_("Tu"), N_("We"), N_("Th"),
-                                N_("Fr"), N_("Sa"), N_("Su")
+   /*
+      *** Translators, please translate this as a fixed 2-character text.
+      *** This text should be a proper abbreviation of "Monday".
+   */
+                                N_("Mo"),
+   /*
+      *** Translators, please translate this as a fixed 2-character text.
+      *** This text should be a proper abbreviation of "Tuesday".
+   */
+                                N_("Tu"),
+   /*
+      *** Translators, please translate this as a fixed 2-character text.
+      *** This text should be a proper abbreviation of "Wednesday".
+   */
+                                N_("We"),
+   /*
+      *** Translators, please translate this as a fixed 2-character text.
+      *** This text should be a proper abbreviation of "Thursday".
+   */
+                                N_("Th"),
+   /*
+      *** Translators, please translate this as a fixed 2-character text.
+      *** This text should be a proper abbreviation of "Friday".
+   */
+                                N_("Fr"),
+   /*
+      *** Translators, please translate this as a fixed 2-character text.
+      *** This text should be a proper abbreviation of "Saturday".
+   */
+                                N_("Sa"),
+   /*
+      *** Translators, please translate this as a fixed 2-character text.
+      *** This text should be a proper abbreviation of "Sunday".
+   */
+                                N_("Su")
                               };
 #endif /* !USE_DE */
 
-   return(((day<DAY_MIN)||(day>DAY_MAX)) ? _(name[0]) : _(name[day]));
+   return(((day < DAY_MIN) || (day > DAY_MAX)) ? _(name[0]) : _(name[day]));
 }
 
 
@@ -1492,7 +1420,7 @@ day_name (day)
                               };
 #endif /* !USE_DE */
 
-   return(((day<DAY_MIN)||(day>DAY_MAX)) ? _(name[0]) : _(name[day]));
+   return(((day < DAY_MIN) || (day > DAY_MAX)) ? _(name[0]) : _(name[day]));
 }
 
 
@@ -1501,7 +1429,7 @@ day_name (day)
 short_month_name (month)
    const int month;
 /*
-   Returns the short name of the month using the printf()/scanf() format "%-3s".
+   Returns the short name of the month using the `printf()' format "%-3s".
 */
 {
 #if USE_DE
@@ -1523,12 +1451,70 @@ short_month_name (month)
 #else /* !USE_DE */
    static const char  *name[]={
                                 N_("invalid month"),
-                                N_("Jan"), N_("Feb"), N_("Mar"), N_("Apr"), N_("May"), N_("Jun"),
-                                N_("Jul"), N_("Aug"), N_("Sep"), N_("Oct"), N_("Nov"), N_("Dec")
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "January".
+   */
+                                N_("Jan"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "February".
+   */
+                                N_("Feb"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "March".
+   */
+                                N_("Mar"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "April".
+   */
+                                N_("Apr"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "May".
+   */
+                                N_("May"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "June".
+   */
+                                N_("Jun"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "July".
+   */
+                                N_("Jul"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "August".
+   */
+                                N_("Aug"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "September".
+   */
+                                N_("Sep"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "October".
+   */
+                                N_("Oct"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "November".
+   */
+                                N_("Nov"),
+   /*
+      *** Translators, please translate this as a fixed 3-character text.
+      *** This text should be a proper abbreviation of "December".
+   */
+                                N_("Dec")
                               };
 #endif /* !USE_DE */
 
-   return(((month<MONTH_MIN)||(month>MONTH_MAX)) ? _(name[0]) : _(name[month]));
+   return(((month < MONTH_MIN) || (month > MONTH_MAX)) ? _(name[0]) : _(name[month]));
 }
 
 
@@ -1541,33 +1527,75 @@ month_name (month)
 */
 {
 #if USE_DE
-   static const char  *name[]={
+   static char  *name[]={
 #  if USE_EASC
-                                "ung"UE"ltiger Monat",
+                          "ung"UE"ltiger Monat",
 #  else /* !USE_EASC */
-                                "ungueltiger Monat",
+                          "ungueltiger Monat",
 #  endif /* !USE_EASC */
-                                "Januar",  "Februar",
+                          "Januar",  "Februar",
 #  if USE_EASC
-                                "M"AE"rz",
+                          "M"AE"rz",
 #  else /* !USE_EASC */
-                                "Maerz",
+                          "Maerz",
 #  endif /* !USE_EASC */
-                                "April",   "Mai",      "Juni",
-                                "Juli",    "August",   "September",
-                                "Oktober", "November", "Dezember"
-                              };
+                          "April",   "Mai",      "Juni",
+                          "Juli",    "August",   "September",
+                          "Oktober", "November", "Dezember"
+                        };
 #else /* !USE_DE */
-   static const char  *name[]={
-                                N_("invalid month"),
-                                N_("January"), N_("February"), N_("March"),
-                                N_("April"),   N_("May"),      N_("June"),
-                                N_("July"),    N_("August"),   N_("September"),
-                                N_("October"), N_("November"), N_("December")
-                              };
+   static char  *name[]={
+                          N_("invalid month"),
+                          N_("January"), N_("February"),
+                          N_("March"),   N_("April"),
+   /*
+      *** Translators, please translate this as the complete month name "May".
+      *** This text contains a final BLANK character, otherwise it is not
+      *** distinguished from the 3-letter abbreviation of the complete month
+      *** name "May", which is also "May".
+      *** Your translation of this text should NOT contain any final BLANK
+      *** characters, even the abbreviated and complete month names are
+      *** the same in the language you are translating to.
+   */
+                          N_("May "),
+                          N_("June"),    N_("July"),
+                          N_("August"),  N_("September"),
+                          N_("October"), N_("November"), N_("December")
+                        };
+
+
+   if (month == 5)
+    {
+      static char  *mayname;
+      static Bool   is_initialized=FALSE;
+
+
+      /*
+         Now let's remove the trailing BLANK character
+           from the complete text for the month MAY.
+      */
+      if (!is_initialized)
+       {
+         register int    len;
+         auto     char  *s=_(name[month]);
+
+
+         len = (int)strlen(s) - 1;
+         mayname = (char *)my_malloc (len,
+                                      ERR_NO_MEMORY_AVAILABLE,
+                                      __FILE__, ((long)__LINE__)-2L,
+                                      "mayname", 0);
+         strcpy(mayname, s);
+         while (*(mayname + len) == ' ')
+           *(mayname + len--) = '\0';
+         is_initialized = TRUE;
+       }
+
+      return(mayname);
+    }
 #endif /* !USE_DE */
 
-   return(((month<MONTH_MIN)||(month>MONTH_MAX)) ? _(name[0]) : _(name[month]));
+   return(((month < MONTH_MIN) || (month > MONTH_MAX)) ? _(name[0]) : _(name[month]));
 }
 
 
@@ -1578,12 +1606,12 @@ date2num (day, month, year)
    const int month;
    const int year;
 /*
-   Computes the absolute number of days of the given date since
+   Returns the absolute number of days of the given date since
      00010101(==YYYYMMDD) respecting the missing period of the
      Gregorian Reformation.
 */
 {
-   auto Ulint  julian_days=(Ulint)((year-1)*(Ulint)(DAY_LAST)+((year-1)>>2));
+   auto Ulint  mjd=(Ulint)((year-1)*(Ulint)(DAY_LAST)+((year-1)>>2));
 
 
    if (   year > greg->year
@@ -1591,22 +1619,84 @@ date2num (day, month, year)
            && (   month > greg->month
                || (   (month == greg->month)
                    && (day > greg->last_day)))))
-     julian_days -= (Ulint)(greg->last_day - greg->first_day + 1);
+     mjd -= (Ulint)(greg->last_day - greg->first_day + 1);
    if (year > greg->year)
     {
-      julian_days += (((year - 1) / 400) - (greg->year / 400));
-      julian_days -= (((year - 1) / 100) - (greg->year / 100));
+      mjd += (((year - 1) / 400) - (greg->year / 400));
+      mjd -= (((year - 1) / 100) - (greg->year / 100));
       if (   !(greg->year % 100)
           && (greg->year % 400))
-        julian_days--;
+        mjd--;
     }
-   julian_days += (Ulint)mvec[month-1];
-   julian_days += day;
+   mjd += (Ulint)mvec[month-1];
+   mjd += day;
    if (   (days_of_february (year) == 29)
        && (month > 2))
-     julian_days++;
+     mjd++;
 
-   return(julian_days);
+   return(mjd);
+}
+
+
+
+   PUBLIC void
+num2date (mjd, day, month, year)
+   Ulint  mjd;
+   int   *day;
+   int   *month;
+   int   *year;
+/*
+   Converts a delivered absolute number of days `mjd' to a standard
+     date (since 00010101(==YYYYMMDD), returned in `&day', `&month' and `&year')
+     respecting the missing period of the Gregorian Reformation.
+*/
+{
+   auto     double  x;
+   auto     Ulint   jdays=date2num (greg->first_day-1, greg->month, greg->year);
+   register int     i;
+
+
+   if (mjd > jdays)
+     mjd += (Ulint)(greg->last_day - greg->first_day + 1);
+   x = (double)mjd / (DAY_LAST + 0.25);
+   i = (int)x;
+   if ((double)i != x)
+     *year = i + 1;
+   else
+    {
+      *year = i;
+      i--;
+    }
+   if (mjd > jdays)
+    {
+      /*
+         Correction for Gregorian years.
+      */
+      mjd -= (Ulint)((*year / 400) - (greg->year / 400));
+      mjd += (Ulint)((*year / 100) - (greg->year / 100));
+      x = (double)mjd / (DAY_LAST + 0.25);
+      i = (int)x;
+      if ((double)i != x)
+        *year = i + 1;
+      else
+       {
+         *year = i;
+         i--;
+       }
+      if (   (*year % 400)
+          && !(*year % 100))
+        mjd--;
+    }
+   i = (int)(mjd - (Ulint)(i * (DAY_LAST + 0.25)));
+   /*
+      Correction for Gregorian centuries.
+   */
+   if (   (*year > greg->year)
+       && (*year % 400)
+       && !(*year % 100)
+       && (i < ((*year/100)-(greg->year/100))-((*year/400)-(greg->year/400))))
+     i++;
+   (void)doy2date (i, (days_of_february (*year)==29), day, month);
 }
 
 
@@ -1619,7 +1709,7 @@ doy2date (doy, is_leap_year, day, month)
          int *month;
 /*
    Converts a given number of days of a year to a standard date
-     (returned in &day and &month) and returns:
+     (returned in `&day' and `&month') and returns:
        TRUE in case the `day_of_year' number is valid;
        FALSE otherwise.
 */
@@ -1632,7 +1722,7 @@ doy2date (doy, is_leap_year, day, month)
        || doy < DAY_MIN)
      return(FALSE);
    decrement_date = (Bool)(   is_leap_year
-                           && (doy > 59));
+                           && (doy > mvec[2]));
    if (decrement_date)
      doy--;
    for (i=MONTH_MIN ; i < MONTH_MAX ; i++)
@@ -1655,7 +1745,7 @@ doy2date (doy, is_leap_year, day, month)
    /*
       Alternative floating-point algorithm for managing this stuff:
       ...
-      if (doy-is_leap_year > 59)
+      if (doy-is_leap_year > mvec[2])
        {
          month = (int)((63 + doy - is_leap_year) / 30.61) - 1;
          day = (int)(63 + doy - is_leap_year - abs((int)((month + 1) * 30.61)));
@@ -1677,13 +1767,13 @@ weekday_of_date (day, month, year)
    const int month;
    const int year;
 /*
-   Computes the weekday of a Gregorian/Julian calendar date
+   Returns the weekday of a Gregorian/Julian calendar date
      (month must be 1...12) and returns 1...7 (1==mo, 2==tu...7==su).
 */
 {
-   auto Ulint  julian_days=date2num (day, month, year)%DAY_MAX;
+   auto Ulint  mjd=date2num (day, month, year)%DAY_MAX;
 
-   return((julian_days>2) ? (int)julian_days-2 : (int)julian_days+5);
+   return((mjd > 2) ? (int)mjd-2 : (int)mjd+5);
 }
 
 
@@ -1694,7 +1784,7 @@ day_of_year (day, month, year)
    const int month;
    const int year;
 /*
-   Computes the day of the year of a Gregorian or Julian calendar date
+   Returns the day of the year of a Gregorian or Julian calendar date
      (month must be 1...12) and returns 1...365|366.
 */
 {
@@ -1715,9 +1805,9 @@ day_of_year (day, month, year)
 days_of_february (year)
    const int year;
 /*
-   Computes the number of days in February --- respecting the Gregorian
+   Returns the number of days in February --- respecting the Gregorian
      Reformation period likewise the leap year rule as used by the
-     Eastern orthodox churches --- and returns them.
+     Eastern Orthodox churches.
 */
 {
    register int  day;
@@ -1730,12 +1820,12 @@ days_of_february (year)
                    && (greg->last_day >= 28)))))
     {
       if (orthodox_calendar)
-        day = (year&3) ? 28 : ((!(year%100)) ? (((year%9)==2||(year%9)==6) ? 29 : 28) : 29);
+        day = (year & 3) ? 28 : ((!(year % 100)) ? (((year % 9) == 2 || (year % 9) == 6) ? 29 : 28) : 29);
       else
-        day = (year&3) ? 28 : ((!(year%100)&&(year%400)) ? 28 : 29);
+        day = (year & 3) ? 28 : ((!(year % 100) && (year % 400)) ? 28 : 29);
     }
    else
-     day = (year&3) ? 28 : 29;
+     day = (year & 3) ? 28 : 29;
    /*
       Exception, the year 4 AD was historically NO leap year!
    */
@@ -1770,15 +1860,117 @@ valid_date (day, month, year)
 
 
 
+   PUBLIC Bool
+prev_date (day, month, year)
+   int *day;
+   int *month;
+   int *year;
+/*
+   Sets a delivered date back by one day (to yesterday's date)
+     respecting the missing period of the Gregorian Reformation.
+     Returns FALSE in case a date was within the missing period
+       of Gregorian Reformation, otherwise TRUE;
+*/
+{
+   auto Bool  no_missing_date=TRUE;
+
+
+   if (   (*day <= greg->last_day+1)
+       && (*day >= greg->first_day)
+       && (*month == greg->month)
+       && (*year == greg->year))
+    {
+      no_missing_date = FALSE;
+      *day = greg->first_day - 1;
+    }
+   else
+    {
+      (*day)--;
+      if (   !*day
+          || !valid_date (*day, *month, *year))
+       {
+         (*month)--;
+         if (*month < MONTH_MIN)
+          {
+            *month = MONTH_MAX;
+            (*year)--;
+          }
+         if (*month == 2)
+           *day = days_of_february (*year);
+         else
+           *day = dvec[*month-1];
+       }
+    }
+
+   return(no_missing_date);
+}
+
+
+
+   PUBLIC Bool
+next_date (day, month, year)
+   int *day;
+   int *month;
+   int *year;
+/*
+   Sets the delivered date forwards by one day (to tomorrow's date)
+     respecting the missing period of the Gregorian Reformation.
+     Returns FALSE in case a date was in the missing period
+       of Gregorian Reformation, otherwise TRUE.
+*/
+{
+   auto Bool  no_missing_date=TRUE;
+
+
+   if (   (*day >= greg->first_day-1)
+       && (*day <= greg->last_day)
+       && (*month == greg->month)
+       && (*year == greg->year))
+    {
+      no_missing_date = FALSE;
+      *day = greg->last_day + 1;
+    }
+   else
+    {
+      (*day)++;
+      if (!valid_date (*day, *month, *year))
+       {
+         *day = DAY_MIN;
+         if (*month == MONTH_MAX)
+          {
+            *month = MONTH_MIN;
+            (*year)++;
+          }
+         else
+           (*month)++;
+       }
+    }
+
+   return(no_missing_date);
+}
+
+
+
    PUBLIC int
-week_number (day, month, year)
-   const int day;
-   const int month;
-   const int year;
+week_number (day, month, year, is_iso_week, start_day_of_week)
+   const int  day;
+   const int  month;
+   const int  year;
+   const Bool is_iso_week;
+   const int  start_day_of_week;
 /*
    Returns either a ISO-8601:1988 standard week number of the given date
-   or a special value for marking a special event, which can be managed
-   by the caller in a special way if needed!  Return values are:
+     if the `is_iso_week' variable is TRUE, or a special value for marking
+     a special event, which can be managed by the caller in a special way
+     if needed!  Note that an ISO week starts on a Monday(=1) and ends on
+     a Sunday(=7), and the first week of a year is the one which includes
+     the first Thursday; equivalently, the one which includes 4th January.
+     If the `is_iso_week' variable is FALSE, either return a non-ISO week
+     number of the given date, or a special or a special value for marking
+     a special event, which can be managed by the caller in a special way
+     if needed!  Note that a non-ISO week can start on any weekday, and the
+     first week of a year is the one which includes the first starting day
+     of the week. The function return values are:
      -(WEEK_MAX+1) : Date appears both in 53rd (=last) week of previous year
                        and first days of year, BUT these first days of year
                        are NOT IN the first week of year.
@@ -1795,10 +1987,9 @@ week_number (day, month, year)
                        and first days of year, AND these first days of year
                        are IN the first week of year.
       1...WEEK_MAX : Date appears in the year.
-   Note that an ISO week starts with a monday(=1) and ends with a sunday(=7)!
 */
 {
-   register int  i=raw_week_number (day, month, year);
+   register int  i=raw_week_number (day, month, year, is_iso_week, start_day_of_week);
    register int  j;
    register int  wmax=WEEK_MAX;
 
@@ -1811,7 +2002,7 @@ week_number (day, month, year)
     {
       if (month == MONTH_MIN)
        {
-         j = raw_week_number (dvec[MONTH_MAX-1], MONTH_MAX, year-1);
+         j = raw_week_number (dvec[MONTH_MAX-1], MONTH_MAX, year-1, is_iso_week, start_day_of_week);
          if (i == j)
            i = -i;
          else
@@ -1819,7 +2010,7 @@ week_number (day, month, year)
        }
       else
        {
-         j = raw_week_number (DAY_MIN, MONTH_MIN, year+1);
+         j = raw_week_number (DAY_MIN, MONTH_MIN, year+1, is_iso_week, start_day_of_week);
          if (i == j)
            i = -i;
          else
@@ -1831,9 +2022,12 @@ week_number (day, month, year)
    else
      if (i == 1)
       {
-        if (weekday_of_date (DAY_MIN, MONTH_MIN, year) <= 4)
+        if (   (   is_iso_week
+                && (weekday_of_date (DAY_MIN, MONTH_MIN, year) <= 4))
+            || (   !is_iso_week
+                && (weekday_of_date (DAY_MIN, MONTH_MIN, year) <= start_day_of_week)))
          {
-           j = raw_week_number (dvec[MONTH_MAX-1], MONTH_MAX, year-1);
+           j = raw_week_number (dvec[MONTH_MAX-1], MONTH_MAX, year-1, is_iso_week, start_day_of_week);
            if (year-1 == greg->year)
              wmax = ((DAY_LAST + (days_of_february (greg->year) == 29)
                     - (greg->last_day - greg->first_day + 1)) / DAY_MAX) + 1;
@@ -1853,12 +2047,14 @@ week_number (day, month, year)
 
 
    PUBLIC int
-weekno2doy (week, year)
-         int week;
-   const int year;
+weekno2doy (week, year, is_iso_week, start_day_of_week)
+         int  week;
+   const int  year;
+   const Bool is_iso_week;
+   const int  start_day_of_week;
 /*
    Returns the "day_of_year" number of a Julian or Gregorian calendar year,
-   the given ISO-8601:1988 week number starts at.
+     the given week number (either ISO-8601:1988 or non-ISO) starts at.
      Week number may be:
        (a)  0           == Returns day_of_year number of first week of year.
                              resp., that dates, which occur both in last week
@@ -1867,8 +2063,8 @@ weekno2doy (week, year)
                               -5...0 indicating how many days+1 are in
                               the previous year).
        (b)  1...52      == Returns day_of_year number always.
-       (c) 53           == Returns day_of_year_number or if year has NO 53rd week,
-                             returns -WEEK_MAX [=special value]).
+       (c) 53           == Returns day_of_year_number or if year has
+                             NO 53rd week, returns -WEEK_MAX [=special value]).
        (d) 99           == Returns day_of_year number of last week of year.
      Return values are:
            -WEEK_MAX    == Event (c) has occurred and year has NO 53rd week.
@@ -1879,10 +2075,10 @@ weekno2doy (week, year)
 */
 {
    register int  wd=weekday_of_date (DAY_MIN, MONTH_MIN, year);
-   register int  ww=week_number (DAY_MIN, MONTH_MIN, year);
-   register int  wm=week_number (dvec[MONTH_MAX-1], MONTH_MAX, year);
+   register int  ww=week_number (DAY_MIN, MONTH_MIN, year, is_iso_week, start_day_of_week);
+   register int  wm=week_number (dvec[MONTH_MAX-1], MONTH_MAX, year, is_iso_week, start_day_of_week);
    register int  wmax=WEEK_MAX;
-   register int  i=1;
+   register int  i=DAY_MIN;
 
 
    if (wm < 0)
@@ -1894,10 +2090,10 @@ weekno2doy (week, year)
    if (ww < 0)
      ww = -ww;
    if (ww > 1)
-     i += (DAY_MAX - wd + 1);
+     i += SDAY(DAY_MAX-wd+1, start_day_of_week);
    else
      if (!ww)
-       i -= (wd - 1);
+       i -= SDAY(wd-1, start_day_of_week);
    if (   wm
        && (wm != wmax+1)
        && (week == wmax+1))
@@ -1908,11 +2104,11 @@ weekno2doy (week, year)
         week = wm;
         if (!wm)
           week = wmax + 1;
-        i += ((week - 1) * DAY_MAX);
+        i += (((week - 1) * DAY_MAX));
       }
      else
       {
-        i += ((week - 1) * DAY_MAX);
+        i += (((week - 1) * DAY_MAX));
         if (   !week
             && (i <= -(DAY_MAX-1)))
           i += DAY_MAX;
@@ -1937,24 +2133,24 @@ knuth_easter_formula (year)
 /*
    This procedure calculates the day and month of Easter giving the year.
    It returns the "actual day_of_year date" of Western Eastern (not the
-   Eastern Easter of the Eastern orthodox churches) after A.D.463.
+   Eastern Easter of the Eastern Orthodox churches) after AD 463.
    ***
    *** ANNOTATION by Thomas Esken <esken@uni-muenster.de>, 12-DEC-1996
    ***
    *** But in fact, this procedure works correctly for
-   *** calculating the Easter Sunday's date after A.D.29.
+   *** calculating the Easter Sunday's date after AD 29.
    *** (Ref.: Hans Lietzmann, Zeitrechnung, De gryter 1984, 4te Auflage)
    ***
    `golden_number' is the number of the year in the Metonic cycle, used
-   to determine the position of the calendar moon.
+   to determine the position of the calendar Moon.
    `gregorian_correction' is the number of preceding years like 1700, 1800,
    1900 when leap year was not held.
    `clavian_correction' is a correction for the Metonic cycle of about
    8 days every 2500 years.
-   `epact' is the age of the calendar moon at the beginning of the year.
+   `epact' is the age of the calendar Moon at the beginning of the year.
    `extra_days' specifies when Sunday occurs in March.  `epact' specifies
-   when full moon occurs.  Easter is the first Sunday following the first
-   full moon which occus on or after March 21.  (Ref.: De Morgan, A Budget
+   when Full Moon occurs.  Easter is the first Sunday following the first
+   Full Moon which occus on or after March 21.  (Ref.: De Morgan, A Budget
    of Paradoxes)
    This basic Algorithm was given by Don Knuth in CACM 5(1962), 209-210,
    and is altered accordingly for managing different Gregorian Reformation
@@ -2013,10 +2209,10 @@ LABEL_compute_gregorian:
    day = 44 - epact;
    if (day < 21)
      day += 30;
-   day += 7 - (int)((extra_days + day) % 7);
-   if (day > 31)
+   day += DAY_MAX - (int)((extra_days + day) % DAY_MAX);
+   if (day > MONTH_LAST)
     {
-      day -= 31;
+      day -= MONTH_LAST;
       month = 4;
     }
    else
@@ -2052,32 +2248,94 @@ julian_gregorian_diff (day, month, year)
    const int month;
    const int year;
 /*
-   Returns the day difference between given Gregorian calendar date
+   Returns the day difference between the given Gregorian calendar date
      and the according Julian calendar date, i.e. the amount of days,
      the Julian calendar is past the Gregorian calendar.
 */
 {
-   auto Ulint  julian_days=(Ulint)((year-1)*(Ulint)(DAY_LAST)+((year-1)>>2));
+   auto Ulint  mjd=(Ulint)((year-1)*(Ulint)(DAY_LAST)+((year-1)>>2));
 
 
-   julian_days += (Ulint)(mvec[month-1] + day);
-   if (   !(year & 3)
+   mjd += (Ulint)(mvec[month-1] + day);
+   if (   (days_of_february (year) == 29)
        && (month > 2))
-     julian_days++;
+     mjd++;
 
-   return((int)(julian_days-date2num (day, month, year)));
+   return((int)(mjd-date2num (day, month, year)));
+}
+
+
+
+   LOCAL void
+gregorian2julian (day, month, year)
+   int *day;
+   int *month;
+   int *year;
+/*
+   Converts a Gregorian date to a Julian date.
+*/
+{
+   if (   *year < greg->year
+       || (   (*year == greg->year)
+           && (   *month < greg->month
+               || (   (*month == greg->month)
+                   && (*day < greg->first_day)))))
+    {
+      auto     Greg_struct  tmp_greg;
+      auto     Ulint        mjd;
+      register int          diff;
+
+
+      /*
+         So first we need to buffer the Gregorian Reformation period actually used.
+      */
+      tmp_greg.first_day = greg->first_day;
+      tmp_greg.last_day = greg->last_day;
+      tmp_greg.month = greg->month;
+      tmp_greg.year = greg->year;
+      /*
+         Then we set the Gregorian Reformation period to the date
+           it has happened historically (this was 05-Oct-1582...14-Oct-1582).
+      */
+      greg->first_day = 5;
+      greg->last_day = 14;
+      greg->month = 10;
+      greg->year = 1582;
+      /*
+         Now let's adjust the date.
+      */
+      mjd = date2num (*day, *month, *year);
+      diff = julian_gregorian_diff (*day, *month, *year);
+      num2date (mjd-diff, day, month, year);
+      /*
+         And restore the buffered Gregorian Reformation date actually used.
+      */
+      greg->year = tmp_greg.year;
+      greg->month = tmp_greg.month;
+      greg->last_day = tmp_greg.last_day;
+      greg->first_day = tmp_greg.first_day;
+    }
 }
 
 
 
    LOCAL int
-raw_week_number (day, month, year)
-   const int day;
-   const int month;
-   const int year;
+raw_week_number (day, month, year, is_iso_week, start_day_of_week)
+   const int  day;
+   const int  month;
+   const int  year;
+   const Bool is_iso_week;
+   const int  start_day_of_week;
 /*
-   Returns the raw ISO-8601:1988 standard week number of delivered date ONLY
-     (week starts with monday(1) and ends with sunday(7)).
+   Returns either the raw ISO-8601:1988 standard week number of the given
+     date if the `is_iso_week' variable is TRUE.  Note that an ISO week
+     starts on a Monday(=1) and ends on a Sunday(=7), and the first week
+     of a year is the one which includes the first Thursday; equivalently,
+     the one which includes 4th January.
+     If the `is_iso_week' variable is FALSE, return a raw non-ISO week
+     number of the given date.  Note that a non-ISO week can start on any
+     weekday, and the first week of a year is the one which includes the
+     first starting day of the week.
 */
 {
    register int  jd=day_of_year (day, month, year);
@@ -2090,19 +2348,38 @@ raw_week_number (day, month, year)
            || (   (month == greg->month)
                && (day > greg->last_day))))
      jd -= (greg->last_day - greg->first_day + 1);
-   /*
-      Correct the computed day_of_year number of delivered date.
-   */
-   if (sd > 4)
-     /*
-        Starting day of year is Friday...Sunday.
-     */
-     jd -= ((DAY_MAX - sd) + 1);
+   if (is_iso_week)
+    {
+      /*
+         Correct the computed day_of_year number of delivered date.
+      */
+      if (sd > 4)
+        /*
+           Starting day of year is Friday...Sunday.
+        */
+        jd -= ((DAY_MAX - sd) + 1);
+      else
+        /*
+           Starting day of year is Monday...Thursday.
+        */
+        jd += (sd - 1);
+    }
    else
-     /*
-        Starting day of year is Monday...Thursday.
-     */
-     jd += (sd - 1);
+    {
+      /*
+         Correct the computed day_of_year number of delivered date.
+      */
+      if (sd > start_day_of_week)
+        /*
+           Starting day of year is greater the starting day of week.
+        */
+        jd -= (DAY_MAX - (sd - start_day_of_week));
+      else
+        /*
+           Starting day of year is less than the starting day of week.
+        */
+        jd += (sd - start_day_of_week);
+    }
    /*
       Compute week number of delivered date.
    */
@@ -2116,7 +2393,7 @@ raw_week_number (day, month, year)
         Date has week number of last week of previous year:
           Detect that week number by calling this function recursivly  ;)
      */
-     ww = raw_week_number (dvec[MONTH_MAX-1], MONTH_MAX, year-1);
+     ww = raw_week_number (dvec[MONTH_MAX-1], MONTH_MAX, year-1, is_iso_week, start_day_of_week);
 
    return(ww);
 }
@@ -2138,7 +2415,7 @@ dflt_day_name (day)
                                 "Friday", "Saturday", "Sunday"
                               };
 
-   return(((day<DAY_MIN)||(day>DAY_MAX)) ? name[0] : name[day]);
+   return(((day < DAY_MIN) || (day > DAY_MAX)) ? name[0] : name[day]);
 }
 
 
@@ -2160,5 +2437,5 @@ dflt_month_name (month)
                                 "October", "November", "December"
                               };
 
-   return(((month<MONTH_MIN)||(month>MONTH_MAX)) ? name[0] : name[month]);
+   return(((month < MONTH_MIN) || (month > MONTH_MAX)) ? name[0] : name[month]);
 }

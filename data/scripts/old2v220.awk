@@ -1,12 +1,11 @@
-#  $Id: old2v220.awk 0.03 1996/11/10 00:00:03 tom Exp $
+#  $Id: old2v220.awk 0.05 2000/01/12 00:00:05 tom Exp $
 #
 #  old2v220.awk:  Very simple, slow and silly AWK script for converting
 #                   resource files of former Gcal versions into the style
 #                   which is used by Gcal-2.20 or newer.
 #                   This means, all former `%s[DATE]' and `%e[DATE]'
 #                   special texts are converted into their according
-#                   `%i[STARTING_DATE][#[ENDING_DATE]]' equivalents,
-#                   and some new `%?' special texts are quoted.
+#                   `%i[STARTING_DATE][#[ENDING_DATE]]' equivalents.
 #
 #  *** WARNING ***
 #  This script is unable to manage `%s[DATE]' and `%e[DATE]' special texts
@@ -15,10 +14,10 @@
 #  *** WARNING ***
 #
 #
-#  Copyright (C) 1996  Thomas Esken      <esken@uni-muenster.de>
-#                      Im Hagenfeld 84
-#                      D-48147 M"unster
-#                      GERMANY
+#  Copyright (c) 1996, 2000  Thomas Esken      <esken@uni-muenster.de>
+#                            Im Hagenfeld 84
+#                            D-48147 M"unster
+#                            GERMANY
 #
 #  This software doesn't claim completeness, correctness or usability.
 #  On principle I will not be liable for ANY damages or losses (implicit
@@ -67,128 +66,123 @@ NR == 1 {
    }
 }
 #
-# Main block.
+#  Main block.
 #
 {
-   #
-   # Construct the line.
-   #
-   if (mode == 1)
-    {
-      is_s = 0
-      if ($0 ~ /[^\\]+%+[sS]/)
-        is_s = 1
-      is_e = 0
-      if ($0 ~ /[^\\]+%+[eE]/)
-        is_e = 1
-      is_other = 0
-      if ($0 ~ /[^\\]+%\)/)
-        is_other = 1
-      if (is_s == 1 || is_e == 1 || is_other == 1)
-       {
-         is_both = 0
-         if ((is_s == 1) && (is_e == 1))
-           is_both = 1
-         line = ""
-         s_old = ""
-         s_filled = 0
-         e_old = ""
-         e_filled = 0
-         len = length($0)
-         for (i=1; i <= len; i++)
-          {
-            ch = substr($0, i, 1)
-            if (ch == "\\")
-             {
-               line = line ch
-               if (i < len)
-                {
-                  i++
-                  line = line substr($0, i, 1)
-                }
-             }
-            else
-             {
-               if (ch == "%")
-                {
-                  if (substr($0, i+1, 1) == ")")
-                    line = line "\\"
-                  if (is_both == 1)
-                   {
-                     if (substr($0, i+1, 1) ~ /[sS]/)
-                      {
-                        i++
-                        for (j=1 ; j+i <= len ; j++)
-                         {
-                           ch2 = substr($0, j+i, 1)
-                           if (ch2 ~ /[ \t]/)
-                             break
-                           else
-                            {
-                              if (s_filled == 0)
-                                s_old = s_old ch2
-                            }
-                         }
-                        s_filled = 1
-                        i += j
-                      }
-                     else
-                      {
-                        if (substr($0, i+1, 1) ~ /[eE]/)
-                         {
-                           i++
-                           for (j=1 ; j+i <= len ; j++)
-                            {
-                              ch2 = substr($0, j+i, 1)
-                              if (ch2 ~ /[ \t]/)
-                                break
-                              else
-                               {
-                                 if (e_filled == 0)
-                                   e_old = e_old ch2
-                               }
-                            }
-                           e_filled = 1
-                           i += j
-                         }
-                        else
-                          line = line ch
-                      }
-                   }
-                  else
-                   {
-                     line = line ch
-                     if (i < len)
-                      {
-                        i++
-                        ch = substr($0, i, 1)
-                        if (ch ~ /[sS]/)
-                          ch = "i"
-                        else
-                         {
-                           if (ch ~ /[eE]/)
-                             ch = "i#"
-                         }
-                        line = line ch
-                      }
-                   }
-                }
-               else
-                 line = line ch
-             }
-          }
-         if (is_both == 1)
-           line = line "%i" s_old "#" e_old
-         print line
-       }
-      else
-        print $0
-    }
-   else
-    {
-      if (mode == 2)
-        mode = 1
-      else
-        print $0
-    }
+  if (mode == 1)
+   {
+     is_s = 0
+     if ($0 ~ /[^\\]+%+[sS]/)
+       is_s = 1
+     is_e = 0
+     if ($0 ~ /[^\\]+%+[eE]/)
+       is_e = 1
+     if (is_s == 1 || is_e == 1)
+      {
+        #
+        # Build the line.
+        #
+        is_both = 0
+        if ((is_s == 1) && (is_e == 1))
+          is_both = 1
+        line = ""
+        s_old = ""
+        s_filled = 0
+        e_old = ""
+        e_filled = 0
+        len = length($0)
+        for (i=1; i <= len; i++)
+         {
+           ch = substr($0, i, 1)
+           if (ch == "\\")
+            {
+              line = line ch
+              if (i < len)
+               {
+                 i++
+                 line = line substr($0, i, 1)
+               }
+            }
+           else
+            {
+              if (ch == "%")
+               {
+                 if (is_both == 1)
+                  {
+                    if (substr($0, i+1, 1) ~ /[sS]/)
+                     {
+                       i++
+                       for (j=1 ; j+i <= len ; j++)
+                        {
+                          ch2 = substr($0, j+i, 1)
+                          if (ch2 ~ /[ \t]/)
+                            break
+                          else
+                           {
+                             if (s_filled == 0)
+                               s_old = s_old ch2
+                           }
+                        }
+                       s_filled = 1
+                       i += j
+                     }
+                    else
+                     {
+                       if (substr($0, i+1, 1) ~ /[eE]/)
+                        {
+                          i++
+                          for (j=1 ; j+i <= len ; j++)
+                           {
+                             ch2 = substr($0, j+i, 1)
+                             if (ch2 ~ /[ \t]/)
+                               break
+                             else
+                              {
+                                if (e_filled == 0)
+                                  e_old = e_old ch2
+                              }
+                           }
+                          e_filled = 1
+                          i += j
+                        }
+                       else
+                         line = line ch
+                     }
+                  }
+                 else
+                  {
+                    line = line ch
+                    if (i < len)
+                     {
+                       i++
+                       ch = substr($0, i, 1)
+                       if (ch ~ /[sS]/)
+                         ch = "i"
+                       else
+                        {
+                          if (ch ~ /[eE]/)
+                            ch = "i#"
+                        }
+                       line = line ch
+                     }
+                  }
+               }
+              else
+                line = line ch
+            }
+         }
+        if (is_both == 1)
+          line = line "%i" s_old "#" e_old
+        print line
+      }
+     else
+       print $0
+   }
+  else
+   {
+     if (mode == 2)
+       mode = 1
+     else
+       print $0
+   }
 }

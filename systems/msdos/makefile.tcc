@@ -1,13 +1,13 @@
-#  $Id: makefile.tcc 0.14 1997/01/26 00:01:04 tom Exp $
+#  $Id: makefile.tcc 0.17 2000/03/05 00:01:07 tom Exp $
 ###############################################################################
 #
 #  Turbo-C (v1.0++)
 #  Makefile to create the extended `gcal' program.
 #
-#  Copyright (C) 1994-1997      Thomas Esken            <esken@uni-muenster.de>
-#                               Im Hagenfeld 84
-#                               D-48147 M"unster
-#                               GERMANY
+#  Copyright (c) 1994-1997, 2000  Thomas Esken          <esken@uni-muenster.de>
+#                                 Im Hagenfeld 84
+#                                 D-48147 M"unster
+#                                 GERMANY
 #
 ###############################################################################
 #
@@ -132,8 +132,8 @@ O = .obj
 C = .c
 H = .h
 #
-OBJA = gcal$(O) file-io$(O) hd-data$(O) hd-use$(O) help$(O) print$(O) rc-check$(O)
-OBJB = rc-insert$(O) rc-use$(O) rc-utils$(O) regexp$(O) tty$(O) utils$(O)
+OBJA = gcal$(O) file-io$(O) hd-astro$(O) hd-data$(O) hd-data1$(O) hd-use$(O) help$(O) print$(O)
+OBJB = rc-astro$(O) rc-check$(O) rc-insert$(O) rc-use$(O) rc-utils$(O) regexp$(O) tty$(O) utils$(O)
 OBJ2 = tcal$(O)
 OBJ3 = txt2gcal$(O)
 OBJ4 = gcal2txt$(O)

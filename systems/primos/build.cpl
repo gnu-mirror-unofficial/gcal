@@ -50,10 +50,17 @@ type 'Binding...'
   li ccmain
   load *>primos>obj>gcal
   load *>primos>obj>file-io
+  load *>primos>obj>hd-astro
   load *>primos>obj>hd-data
+  load *>primos>obj>hd-data1
+  load *>primos>obj>hd-data2
+  load *>primos>obj>hd-data3
+  load *>primos>obj>hd-data4
+  load *>primos>obj>hd-data5
   load *>primos>obj>hd-use
   load *>primos>obj>help
   load *>primos>obj>print
+  load *>primos>obj>rc-astro
   load *>primos>obj>rc-check
   load *>primos>obj>rc-insert
   load *>primos>obj>rc-use

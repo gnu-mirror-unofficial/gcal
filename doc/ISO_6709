@@ -1,0 +1,36 @@
+ISO 6709:1983 "Standard representation of latitude, longitude and altitude
+for geographic point locations" a format designed for usage in human
+readable compact file formats, protocols, etc. The standard allows
+both a minute/second representation as well as a decimal fraction
+representation.
+
+Latitude can be represented as
+
+  DD.DD          degrees and decimal degrees
+  DDMM.MMM       degrees, minutes and decimal minutes
+  DDMMSS.SS      degrees, minutes, seconds and decimal seconds
+
+Prefix with + north of and on equator, and with - south of equator.
+
+Likewise, longitude can be represented as
+
+  DDD.DD          degrees and decimal degrees
+  DDDMM.MMM       degrees, minutes, and decimal minutes
+  DDDMMSS.SS      degrees, minutes, seconds, and decimal seconds
+
+Prefix with + east of and on prime meridian (Greenwich), and with -
+west of Greenwich up to the 180th meridian.
+
+Leading zeros are required for latitude and longitude.
+
+Optionally, append altitude in meters (prefix with + above and on the
+geodetic reference datum and with - below it).
+
+If a termination character is needed in the format, / is recommended.
+
+Examples:
+
+  +40-075/
+  +401213.1-0750015.1+2.79/
+  +40.20361-075.00417/
+

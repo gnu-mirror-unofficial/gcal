@@ -1,8 +1,9 @@
 /*
-*  rc-use.c:  Central function, manages the resource file handling and displays the results.
+*  rc-use.c:  Central function, manages the resource file handling
+*             and displays the results.
 *
 *
-*  Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1994-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -35,7 +36,7 @@
 
 #if USE_RC
 #  ifdef RCSID
-static char rcsid[]="$Id: rc-use.c 2.40 1997/03/31 02:04:00 tom Exp $";
+static char rcsid[]="$Id: rc-use.c 3.00 2000/05/02 03:00:00 tom Exp $";
 #  endif
 
 
@@ -49,221 +50,31 @@ static char rcsid[]="$Id: rc-use.c 2.40 1997/03/31 02:04:00 tom Exp $";
 #  if HAVE_CTYPE_H
 #    include <ctype.h>
 #  endif
-#  include "gcal.h"
-/*
-*  The REGEX stuff.
-*/
-#  if HAVE_GNU_RE_COMPILE_PATTERN
-#    if HAVE_SYS_TYPES_H
-#      include <sys/types.h>
-#    endif
-#    if HAVE_REGEX_H
-#      include <regex.h>
-#    endif
+#  if HAVE_LIMITS_H
+#    include <limits.h>
 #  endif
-#  if HAVE_POSIX_REGCOMP
-#    if HAVE_SYS_TYPES_H
-#      include <sys/types.h>
-#    endif
-#    if HAVE_REGEX_H
-#      include <regex.h>
-#    endif
-#    ifdef REG_EXTENDED
-#      define REGCOMP_FLAG  REG_EXTENDED
-#    else
-#      define REGCOMP_FLAG  0
-#    endif
-#  endif
-#  if HAVE_RE_COMP
-IMPORT char *re_comp();
-#  endif
-#  if HAVE_REGCMP
-IMPORT char *regcmp();
-#  endif
-#  if HAVE_V8_REGCOMP
-#    include "regexp.h"
-#  endif
+#  include "common.h"
+#  include "rc-defs.h"
+#  include "globals.h"
+#  include "file-io.h"
+#  include "hd-defs.h"
+#  include "hd-use.h"
+#  include "rc-astro.h"
+#  include "rc-check.h"
+#  include "rc-utils.h"
+#  include "tty.h"
+#  include "utils.h"
+#  include "rc-use.h"
 
 
 
 /*
-*  Function prototypes.
+*  LOCAL functions prototypes.
 */
-#  if __cplusplus
-extern "C"
-{
-#  endif
-/*
-************************************************** Defined in `file-io.c'.
-*/
-IMPORT FILE *
-file_open __P_((      char       **filename,
-                const int          level,
-                const Fmode_enum   mode,
-                      Bool        *bad_sys_include));
-IMPORT char *
-file_read_line __P_((      FILE       *fp,
-                           char      **line_buffer,
-                           int        *in_pool,
-                           char       *pool,
-                           char       *ptr_pool,
-                     const char       *filename,
-                           long       *line_number,
-                           int        *line_length,
-                     const Fmode_enum  mode,
-                           Bool       *is_include,
-                           Bool       *is_dvar,
-                           Bool       *is_tvar));
-/*
-************************************************** Defined in `holiday.c'.
-*/
-IMPORT int
-decode_date_format __P_((      char  *format_txt,
-                               char **result_txt,
-                               int    day,
-                               int    month,
-                         const int    year,
-                         const int    doy,
-                         const Bool   hls1_set,
-                         const Bool   hls2_set,
-                         const Bool   fixed_length_names));
-IMPORT void
-print_all_holidays __P_((      Bool init_data,
-                         const Bool detect));
-/*
-************************************************** Defined in `rc-utils.c'.
-*/
-#  if HAVE_V8_REGCOMP
-IMPORT void
-regerror __P_((char *msg));
-#  endif
-IMPORT void
-rc_clean_flags __P_((void));
-IMPORT Line_struct *
-rc_get_date __P_((      char        *the_line,
-                        Line_struct *lineptrs,
-                  const Bool         is_rc_file,
-                        Bool        *is_weekday_mode,
-                        int         *d,
-                        int         *m,
-                        int         *y,
-                        int         *n,
-                        int         *len,
-                        char        *hc,
-                        int         *hn,
-                        int         *hwd,
-                  const char        *filename,
-                  const long         line_number,
-                  const char        *line_buffer,
-                  const Bool         on_error_exit));
-IMPORT Bool
-prev_date __P_((int *day,
-                int *month,
-                int *year));
-IMPORT Bool
-next_date __P_((int *day,
-                int *month,
-                int *year));
-/*
-************************************************** Defined in `rc-check.c'.
-*/
-IMPORT void
-rc_check __P_((      char *line_buffer,
-               const char *filename,
-               const long  line_number,
-               const int   line_length,
-                     int  *rc_elems,
-               const int   day,
-               const int   ed,
-               const int   wd));
-/*
-************************************************** Defined in `tty.c'.
-*/
-IMPORT void
-print_text __P_((FILE *fp,
-                 char *text_line));
-/*
-************************************************** Defined in `utils.c'.
-*/
-IMPORT VOID_PTR
-my_malloc __P_((const int   amount,
-                const int   exit_status,
-                const char *module_name,
-                const long  module_line,
-                const char *var_name,
-                const int   var_contents));
-IMPORT VOID_PTR
-my_realloc __P_((      VOID_PTR  ptr_memblock,
-                 const int       amount,
-                 const int       exit_status,
-                 const char     *module_name,
-                 const long      module_line,
-                 const char     *var_name,
-                 const int       var_contents));
-IMPORT void
-resize_all_strings __P_((const int   amount,
-                         const Bool  with_line_buffer,
-                         const char *module_name,
-                         const long  module_line));
-IMPORT void
-my_error __P_((const int   exit_status,
-               const char *module_name,
-               const long  module_line,
-               const char *var_name,
-               const int   var_contents));
-#  if !HAVE_STRNCASECMP
-IMPORT int
-my_strncasecmp __P_((const char *s1,
-                     const char *s2,
-                           int   len));
-#  endif /* !HAVE_STRNCASECMP */
-IMPORT int
-asc_sort __P_((const char **a,
-               const char **b));
-IMPORT int
-des_sort __P_((const char **a,
-               const char **b));
-IMPORT Bool
-is_presorted __P_((char **table,
-                   int   elems));
-IMPORT void
-resort __P_((      char **table,
-             const int    elems));
-IMPORT const char *
-short_day_name __P_((const int day));
-IMPORT const char *
-day_suffix __P_((int day));
-IMPORT const char *
-short3_day_name __P_((const int day));
-IMPORT const char *
-short_month_name __P_((const int month));
-IMPORT Bool
-doy2date __P_((      int  doy,
-               const int  is_leap_year,
-                     int *day,
-                     int *month));
-IMPORT int
-weekday_of_date __P_((const int day,
-                      const int month,
-                      const int year));
-IMPORT int
-day_of_year __P_((const int day,
-                  const int month,
-                  const int year));
-IMPORT int
-days_of_february __P_((const int year));
-IMPORT int
-week_number __P_((const int day,
-                  const int month,
-                  const int year));
-IMPORT int
-weekno2doy __P_((      int week,
-                 const int year));
+__BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `rc-use.c'.
 */
-EXPORT void
-rc_use __P_((void));
 LOCAL void
 try_to_include_file __P_((int ed,
                           int wd));
@@ -274,151 +85,399 @@ display_table __P_((const int tmp_ad,
                           int day,
                           int ed,
                           int wd));
-#  if __cplusplus
-}
-#  endif
+LOCAL int
+fn_asc_sort __P_((const char **a,
+                  const char **b));
+LOCAL int
+fn_des_sort __P_((const char **a,
+                  const char **b));
+__END_DECLARATIONS
 
 
 
 /*
-*  Declare public(extern) variables.
+*  GLOBAL variables definitions.
 */
-IMPORT const int    mvec[];              /* Number of past days of month */
-IMPORT Greg_struct *greg;                /* Points to the used Gregorian Reformation date */
-IMPORT Df_struct   *date_format;         /* Points to the used date format */
-#  ifdef DJG
-IMPORT Usint        testval;             /* Set to SHRT_MAX for checking the maximum table range */
-#  else
-IMPORT Uint         testval;             /* Set to INT_MAX for checking the maximum table range */
-#  endif
-IMPORT Uint         maxlen_max;          /* Actual size of all string vectors */
-IMPORT int          len_year_max;        /* String length of the maximum year able to compute */
-IMPORT int          start_day;           /* -s<0,1...7|day name> */
-IMPORT int          day;                 /* Current day */
-IMPORT int          month;               /* Current month */
-IMPORT int          year;                /* Current year */
-IMPORT int          act_day;             /* Actual day */
-IMPORT int          act_month;           /* Actual month */
-IMPORT int          act_year;            /* Actual year */
-IMPORT int          fiscal_month;        /* Starting month of a fiscal year */
-IMPORT int          is_leap_year;        /* Is current year a leap year? */
-IMPORT char         hd_ldays[];          /* Vector of holiday dates (legal days) */
-IMPORT char        *s1;                  /* General purpose text buffer */
-IMPORT char        *s2;                  /* General purpose text buffer */
-IMPORT char        *s3;                  /* General purpose text buffer */
-IMPORT char        *hd_table[];          /* Stores the eternal holiday list texts */
-IMPORT Bool         cal_special_flag;    /* -j */
-IMPORT Bool         holiday_flag;        /* -n|N */
+/* Date variables a[=MMDD]...z[] (YYYY@{a|b|...|z}[[-]N]). */
+PUBLIC Dvar_struct  rc_dvar[RC_DVAR_MAX];
+
+/* Text variables $a[=TEXT]...$z[]. */
+PUBLIC Tvar_struct  rc_tvar[RC_TVAR_MAX];
+
+/* Local co-ordinates used by both the %distance and %sun* special texts. */
+PUBLIC Coor_struct  lcoor1;
+
+/* Points to the local co-ordinates 1. */
+PUBLIC Coor_struct  *coor1=&lcoor1;
+
+/* Local co-ordinates used by the %distance special text. */
+PUBLIC Coor_struct  lcoor2;
+
+/* Points to the local co-ordinates 2. */
+PUBLIC Coor_struct  *coor2=&lcoor2;
+
+/* Pointers to different parts of a (resource file) line. */
+PUBLIC Line_struct  *lineptrs=(Line_struct *)NULL;
+
+/* Pointers to different parts of a (resource file) line. */
+PUBLIC Line_struct  *lptrs=(Line_struct *)NULL;
+
+/* Pointers to different parts of a (resource file) line. */
+PUBLIC Line_struct  *lptrs2=(Line_struct *)NULL;
+
+/* Pointers to different parts of a (resource file) line. */
+PUBLIC Line_struct  *lptrs3=(Line_struct *)NULL;
+
+/* Temporary file used when a command is assigned to a TVAR. */
+PUBLIC FILE  *rc_tvar_tfp=(FILE *)NULL;
+
+/* Temporary file used for managing `--here=ARG' options. */
+PUBLIC FILE  *rc_here_fp=(FILE *)NULL;
+
+/* Time displacement value in days used by %sun* and %moon*
+   (also used as cycle-starting time value for %sun* and %moon* special texts). */
+PUBLIC double  time_offset=0.0;
+
+/* Atmospheric pressure in millibar (`--atmosphere=PRESSURE,TEMPERATURE'). */
+PUBLIC double  atm_pressure=DEFAULT_PRESSURE;
+
+/* Atmospheric temperature in degrees Celsius (`--atmosphere=PRESSURE,TEMPERATURE'). */
+PUBLIC double  atm_temperature=DEFAULT_TEMPERATURE;
+
+/* Adjust rise/set-based reference altitude resp. shadow length factor (`--adjust-value=NUMBER'). */
+PUBLIC double  adjust_value=DEGS_PER_24_HOURS;
+
+/* Actual size of `rc_elems_table[]'. */
+PUBLIC Uint  rc_elems_max=RC_ELEMS_MAX;
+
+/* Amount of period of fixed dates. */
+PUBLIC int  rc_period=0;
+
+/* Amount of resource file entries. */
+PUBLIC int  rc_elems=0;
+
+/* Starting index of dummy resource file entries in table. */
+PUBLIC int  rc_zero_pos=0;
+
+/* `-cd'. */
+PUBLIC int  rc_have_today_in_list=0;
+
+/* Length of a single axis of a biorhythm text graphics bar. */
+PUBLIC int  rc_bio_axis_len=BIO_AXIS_DEF;
+
+/* Number of lines of a Moon phase text graphics image. */
+PUBLIC int  rc_moonimage_lines=MOONIMAGE_DEF;
+
+/* Filler length of week number text. */
+PUBLIC int  len_fil_wt=0;
+
+/* Actual size of text buffer of "text"-part of a line. */
+PUBLIC int  len_the_text=0;
+
+/* Cycle-ending time value in minutes for %sun* and %moon* special texts. */
+PUBLIC int  loop_end=SPECIAL_VALUE;
+
+/* Cycle-timestep value in minutes for %sun* and %moon* special texts. */
+PUBLIC int  loop_step=DEFAULT_CYCLE_STEP;
+
+/* Actual GMT minute. */
+PUBLIC int  gmt_min=0;
+
+/* Actual GMT hour. */
+PUBLIC int  gmt_hour=0;
+
+/* Buffer of actual GMT day. */
+PUBLIC int  buf_gd=0;
+
+/* Buffer of actual GMT month. */
+PUBLIC int  buf_gm=0;
+
+/* Buffer of actual GMT year. */
+PUBLIC int  buf_gy=0;
+
+/* Day difference of GMT and local date. */
+PUBLIC int  gmt_loc_diff=0;
+
+/* Indicates whether event also appears in next year. */
+PUBLIC int  incr_year=0;
+
+/* Indicates whether event also appears in previous year. */
+PUBLIC int  decr_year=0;
+
+/* Day of event found in line. */
+PUBLIC int  d=0;
+
+/* Month of event found in line. */
+PUBLIC int  m=0;
+
+/* Year of event found in line. */
+PUBLIC int  y=0;
+
+/* Buffered day of event. */
+PUBLIC int  d_buf=0;
+
+/* Buffered month of event. */
+PUBLIC int  m_buf=0;
+
+/* The `N'th weekday of month' displacement value. */
+PUBLIC int  hn=0;
+
+/* The weekday number of `N'th weekday of month'. */
+PUBLIC int  hwd=0;
+
+/* Name of tempfile used when a command is assigned to a TVAR. */
+PUBLIC char  *rc_tvar_tfn=(char *)NULL;
+
+/* Name of tempfile used for managing `--here=ARG' options. */
+PUBLIC char  *rc_here_fn=(char *)NULL;
+
+/* Text buffer of "text"-part of a line. */
+PUBLIC char  *the_text=(char *)NULL;
+
+/* General purpose text buffer 5. */
+PUBLIC char  *s5=(char *)NULL;
+
+/* General purpose text buffer 6. */
+PUBLIC char  *s6=(char *)NULL;
+
+/* General purpose text buffer 7. */
+PUBLIC char  *s7=(char *)NULL;
+
+/* Text buffer of a line read from a resource file. */
+PUBLIC char  *line_buffer=(char *)NULL;
+
+/* Stores the valid fixed date texts. */
+PUBLIC char  **rc_elems_table=(char **)NULL;
+
+/* Text of modified actual date %DATE. */
+PUBLIC char  *rc_adate=(char *)NULL;
+
+/* Name of alternative resource file(s) `-f|F<NAME[+...]>'. */
+PUBLIC char  *rc_filename=(char *)NULL;
+
+/* Argument used for filtering fixed date days. */
+PUBLIC char  *rc_filter_day=(char *)NULL;
+
+/* Argument used for filtering fixed date periods. */
+PUBLIC char  *rc_filter_period=(char *)NULL;
+
+/* REGEX used for filtering fixed date texts. */
+PUBLIC char  *rc_filter_text=(char *)NULL;
+
+/* Fixed date list grouping separator `-cg[TEXT]'. */
+PUBLIC char  *rc_grp_sep=(char *)NULL;
+
+/* The biorhythm's "Emo" text. */
+PUBLIC char  *rc_bio_emo_lit=(char *)NULL;
+
+/* The biorhythm's "Int" text. */
+PUBLIC char  *rc_bio_int_lit=(char *)NULL;
+
+/* The biorhythm's "Phy" text. */
+PUBLIC char  *rc_bio_phy_lit=(char *)NULL;
+
+/* The mode specifying character. */
+PUBLIC char  hc='\0';
+
+/* `-jc'. */
+PUBLIC Bool  rc_special_flag=FALSE;
+
+/* `-jcb'. */
+PUBLIC Bool  rc_both_dates_flag=FALSE;
+
+/* `-c'. */
+PUBLIC Bool  rc_use_flag=FALSE;
+
+/* `-C[]' or `-C[][T|W|M|Y]' or `-c[][T|W|M|Y]' or `-F<>'. */
+PUBLIC Bool  rc_all_dates_flag=FALSE;
+
+/* `-c-'. */
+PUBLIC Bool  rc_sort_des_flag=FALSE;
+
+/* `-ca'. */
+PUBLIC Bool  rc_enable_fn_flag=FALSE;
+
+/* `-cA'. */
+PUBLIC Bool  rc_alternative_format_flag=FALSE;
+
+/* `--execute-command'. */
+PUBLIC Bool  rc_execute_command=FALSE;
+
+/* `-ce'. */
+PUBLIC Bool  rc_enable_hda_flag=FALSE;
+
+/* `-cE'. */
+PUBLIC Bool  rc_enable_hdl_flag=FALSE;
+
+/* `-ck'. */
+PUBLIC Bool  rc_week_number_flag=FALSE;
+
+/* `-cl'. */
+PUBLIC Bool  rc_period_list=FALSE;
+
+/* `-co'. */
+PUBLIC Bool  rc_omit_date_flag=FALSE;
+
+/* `-cU'. */
+PUBLIC Bool  rc_suppr_date_part_flag=FALSE;
+
+/* `-cQ'. */
+PUBLIC Bool  rc_suppr_list_sep_flag=FALSE;
+
+/* `-cJ'. */
+PUBLIC Bool  rc_suppr_text_part_flag=FALSE;
+
+/* `-cx'. */
+PUBLIC Bool  rc_title_flag=TRUE;
+
+/* `-cz'. */
+PUBLIC Bool  rc_count_flag=FALSE;
+
+/* `-cZ'. */
+PUBLIC Bool  rc_zero_dates_flag=FALSE;
+
+/* `-cN[d|w|+|-]|MMDD|MMWW[W]N'. */
+PUBLIC Bool  rc_period_flag=FALSE;
+
+/* `-c]t'. */
+PUBLIC Bool  rc_tomorrow_flag=FALSE;
+
+/* `-c]w'. */
+PUBLIC Bool  rc_week_flag=FALSE;
+
+/* `-c]m'. */
+PUBLIC Bool  rc_month_flag=FALSE;
+
+/* `-c]y'. */
+PUBLIC Bool  rc_year_flag=FALSE;
+
+/* `-cNw'. */
+PUBLIC Bool  rc_week_year_flag=FALSE;
+
+/* `-c<N|w|m|y>+'. */
+PUBLIC Bool  rc_forwards_flag=FALSE;
+
+/* Buffers the state of `rc_forwards_flag'. */
+PUBLIC Bool  rc_fwdf_buffer=FALSE;
+
+/* `-c<N|w|m|y>-'. */
+PUBLIC Bool  rc_backwards_flag=FALSE;
+
+/* Buffers the state of `rc_backwards_flag'. */
+PUBLIC Bool  rc_bwdf_buffer=FALSE;
+
+/* `--leap-day=february'. */
+PUBLIC Bool  rc_feb_29_to_feb_28=FALSE;
+
+/* `--leap-day=march'. */
+PUBLIC Bool  rc_feb_29_to_mar_01=FALSE;
+
+/* `--precise' to display precise, non-rounded, times and data. */
+PUBLIC Bool  rc_precise=FALSE;
+
+/* `--export-date-variables'. */
+PUBLIC Bool  rc_export_ldvar_flag=FALSE;
+
+/* `--export-text-variables'. */
+PUBLIC Bool  rc_export_ltvar_flag=FALSE;
+
+/* `--ignore-case' to ignore case distinctions in PATTERN. */
+PUBLIC Bool  rc_ignore_case_flag=FALSE;
+
+/* `--limit' to calculate rise/set times limited to the current day only. */
+PUBLIC Bool  rc_limit=FALSE;
+
+/* `--revert-match' to select non-matching PATTERN lines. */
+PUBLIC Bool  rc_revert_match_flag=FALSE;
+
+/* Is a command (explicit date) given in the command line? */
+PUBLIC Bool  is_date_given=FALSE;
+
+/* Does the command enables a year implicitly? */
+PUBLIC Bool  date_enables_year=FALSE;
+
+/* Stores whether a %shell escape special text is run. */
+PUBLIC Bool  shell_escape_done=FALSE;
+
+/* `-cNw' and complete week is in month. */
+PUBLIC Bool  is_1month_mode=FALSE;
+
+/* `-cNw' and only part of week is in month. */
+PUBLIC Bool  is_2month_mode=FALSE;
+
+/* Reference to a date variable found in line. */
+PUBLIC Bool  is_2dvar=FALSE;
+
+/* Reference to Easter Sundays date found in line. */
+PUBLIC Bool  is_2easter=FALSE;
+
+/* `-cNw' and actual date modified. */
+PUBLIC Bool  adate_set=FALSE;
+
+/* Remove highlighting sequences before searching PATTERN? */
+PUBLIC Bool  remove_hls_in_regex=FALSE;
 
 
 
 /*
-   Define public(extern) variables.
-*/
-PUBLIC Dvar_struct  rc_dvar[RC_DVAR_MAX];             /* Date variables a[=mmdd]...z[] (`yyyy'@{a|b|...|z}[[-]<n>]) */
-PUBLIC Tvar_struct  rc_tvar[RC_TVAR_MAX];             /* Text variables $a[=TEXT]...$z[] */
-PUBLIC Line_struct *lineptrs=(Line_struct *)NULL;     /* Pointers to different parts of a (resource file) line */
-PUBLIC Line_struct *lptrs=(Line_struct *)NULL;        /* Pointers to different parts of a (resource file) line */
-PUBLIC Line_struct *lptrs2=(Line_struct *)NULL;       /* Pointers to different parts of a (resource file) line */
-PUBLIC Line_struct *lptrs3=(Line_struct *)NULL;       /* Pointers to different parts of a (resource file) line */
-PUBLIC FILE        *rc_here_fp=(FILE *)NULL;          /* Temporary file used for managing `--here=ARG' options */
-PUBLIC Uint         rc_elems_max=RC_ELEMS_MAX;        /* Actual size of `rc_elems_table[]' */
-PUBLIC int          rc_period;                        /* Amount of period of fixed dates */
-PUBLIC int          rc_elems;                         /* Amount of resource file entries */
-PUBLIC int          rc_zero_pos;                      /* Starting index of dummy resource file entries in table */
-PUBLIC int          rc_have_today_in_list=0;          /* [-c]d */
-PUBLIC int          rc_bio_axis_len=BIO_AXIS_DEF;     /* Length of a single axis of a biorhythm text graphics bar */
-PUBLIC int          rc_moonimage_lines=MOONIMAGE_DEF; /* Number of lines of a moonphase text graphics image */
-PUBLIC int          len_fil_wt;                       /* Filler length of week number text */
-PUBLIC int          len_the_text;                     /* Actual size of text buffer of "text-part" of a line */
-PUBLIC char        *the_text=(char *)NULL;            /* Text buffer of "text-part" of a line */
-PUBLIC char        *s5=(char *)NULL;                  /* General purpose text buffer */
-PUBLIC char        *s6=(char *)NULL;                  /* General purpose text buffer */
-PUBLIC char        *s7=(char *)NULL;                  /* General purpose text buffer */
-PUBLIC char        *line_buffer=(char *)NULL;         /* Text buffer of a line read from a resource file */
-PUBLIC char       **rc_elems_table=(char **)NULL;     /* Stores the valid fixed date texts */
-PUBLIC char        *rc_adate=(char *)NULL;            /* Text of modified actual date %... */
-PUBLIC char        *rc_filename=(char *)NULL;         /* Name of alternative resource file(s) -f|F<NAME[+...]> */
-PUBLIC char        *rc_here_fn=(char *)NULL;          /* Name of tempfile used for managing `--here=ARG' options */
-PUBLIC char        *rc_filter_day=(char *)NULL;       /* Argument used for filtering fixed date days */
-PUBLIC char        *rc_filter_period=(char *)NULL;    /* Argument used for filtering fixed date periods */
-PUBLIC char        *rc_filter_text=(char *)NULL;      /* REGEX used for filtering fixed date texts */
-PUBLIC char        *rc_grp_sep=(char *)NULL;          /* Fixed date list grouping separator [-c]g[text] */
-PUBLIC char        *rc_bio_emo_lit=(char *)NULL;      /* The biorhythm's "Emo" text */
-PUBLIC char        *rc_bio_int_lit=(char *)NULL;      /* The biorhythm's "Int" text */
-PUBLIC char        *rc_bio_phy_lit=(char *)NULL;      /* The biorhythm's "Phy" text */
-PUBLIC Bool         rc_special_flag=FALSE;            /* -jc */
-PUBLIC Bool         rc_both_dates_flag=FALSE;         /* -jcb */
-PUBLIC Bool         rc_use_flag=FALSE;                /* -c */
-PUBLIC Bool         rc_all_dates_flag=FALSE;          /* -C[] or -C[][T|W|M|Y] or -c[][T|W|M|Y] or -F<> */
-PUBLIC Bool         rc_sort_des_flag=FALSE;           /* [-c]- */
-PUBLIC Bool         rc_enable_fn_flag=FALSE;          /* [-c]a */
-PUBLIC Bool         rc_alternative_format_flag=FALSE; /* [-c]A */
-PUBLIC Bool         rc_bypass_shell_cmd=FALSE;        /* [-c]B */
-PUBLIC Bool         rc_enable_hda_flag=FALSE;         /* [-c]e */
-PUBLIC Bool         rc_enable_hdl_flag=FALSE;         /* [-c]E */
-PUBLIC Bool         rc_weekno_flag=FALSE;             /* [-c]k */
-PUBLIC Bool         rc_period_list=FALSE;             /* [-c]l */
-PUBLIC Bool         rc_omit_date_flag=FALSE;          /* [-c]o */
-PUBLIC Bool         rc_suppr_date_part_flag=FALSE;    /* [-c]U */
-PUBLIC Bool         rc_title_flag=TRUE;               /* [-c]x */
-PUBLIC Bool         rc_count_flag=FALSE;              /* [-c]z */
-PUBLIC Bool         rc_zero_dates_flag=FALSE;         /* [-c]Z */
-PUBLIC Bool         rc_period_flag=FALSE;             /* [-c]<<<<n>>[<d|w|+|-]>|`mmdd'|`mmww[w]'<n>> */
-PUBLIC Bool         rc_tomorrow_flag=FALSE;           /* [-c]t */
-PUBLIC Bool         rc_week_flag=FALSE;               /* [-c]w */
-PUBLIC Bool         rc_month_flag=FALSE;              /* [-c]m */
-PUBLIC Bool         rc_year_flag=FALSE;               /* [-c]y */
-PUBLIC Bool         rc_week_year_flag=FALSE;          /* [-c<<n>>]w */
-PUBLIC Bool         rc_forwards_flag=FALSE;           /* [-c<<n>|w|m|y>]+ */
-PUBLIC Bool         rc_fwdf_buffer=FALSE;             /* Buffers the state of `rc_forwards_flag' */
-PUBLIC Bool         rc_backwards_flag=FALSE;          /* [-c<<n>|w|m|y>]- */
-PUBLIC Bool         rc_bwdf_buffer=FALSE;             /* Buffers the state of `rc_backwards_flag' */
-PUBLIC Bool         rc_feb_29_to_feb_28=FALSE;        /* `--leap-day=february' given */
-PUBLIC Bool         rc_feb_29_to_mar_01=FALSE;        /* `--leap-day=march' given */
-PUBLIC Bool         rc_export_ldvar_flag=FALSE;       /* `--export-date-variables' given */
-PUBLIC Bool         rc_export_ltvar_flag=FALSE;       /* `--export-text-variables' given */
-PUBLIC Bool         is_date_given=FALSE;              /* Is a command (explicit date) given in the command line? */
-PUBLIC Bool         date_enables_year=FALSE;          /* Does the command enables a year implicitly? */
-PUBLIC Bool         shell_escape_done=FALSE;          /* Stores whether a %shell escape special text is run */
-PUBLIC Bool         is_1month_mode;                   /* [-c]<n>w and complete week is in month */
-PUBLIC Bool         is_2month_mode;                   /* [-c]<n>w and only part of week is in month */
-PUBLIC Bool         adate_set=FALSE;                  /* [-c]<n>w and actual date modified */
-/*
-*  The REGEX stuff; global variables that represent the "remembered" search pattern.
+*  The REGEX stuff; global variables that represent the "remembered" search PATTERN.
 */
 #  if HAVE_GNU_RE_COMPILE_PATTERN
-PUBLIC struct re_pattern_buffer   regpattern;
+PUBLIC struct re_pattern_buffer  regpattern;
+PUBLIC char  *gnu_fastmap_table=(char *)NULL;
+PUBLIC char  *gnu_translate_table=(char *)NULL;
 #  endif
+
 #  if HAVE_POSIX_REGCOMP
-PUBLIC regex_t                    regpattern;
+PUBLIC regex_t  regpattern;
 #  endif
+
 #  if HAVE_RE_COMP
-PUBLIC int                        re_pattern=0;
+PUBLIC int  re_pattern=0;
 #  endif
+
 #  if HAVE_REGCMP
-PUBLIC char                      *cpattern=(char *)NULL;
+PUBLIC char  *cpattern=(char *)NULL;
 #  endif
+
 #  if HAVE_V8_REGCOMP
-PUBLIC struct regexp             *regpattern=(struct regexp *)NULL;
+PUBLIC struct regexp  *regpattern=(struct regexp *)NULL;
 #  endif
 
 
 
 /*
-*  Define local(static) variables.
+*  LOCAL variables definitions.
 */
-LOCAL File_struct **rc_files_table=(File_struct **)NULL;   /* Table of resource/include file buffers */
-LOCAL Uint          rc_files_max=RC_FILES_MAX;             /* Actual size of `rc_files_table[]' */
-LOCAL int           rc_files;                              /* Amount of resource file buffers */
-LOCAL int           line_length;                           /* Number of characters in `line_buffer' */
-LOCAL Bool          is_include;                            /* An include statement is found in file */
-LOCAL Bool          is_dvar;                               /* A date variable statement is found in file */
-LOCAL Bool          is_tvar;                               /* A text variable statement is found in file */
-LOCAL Bool          bad_sys_include;                       /* File contains an invalid include file name? */
+/* Table of resource/include file buffers. */
+LOCAL File_struct  **rc_files_table=(File_struct **)NULL;
+
+/* Actual size of `rc_files_table[]'. */
+LOCAL Uint  rc_files_max=RC_FILES_MAX;
+
+/* Amount of resource file buffers. */
+LOCAL int  rc_files=0;
+
+/* Number of characters in `line_buffer'. */
+LOCAL int  line_length=0;
+
+/* An include statement is found in file. */
+LOCAL Bool  is_include=FALSE;
+
+/* A date variable statement is found in file. */
+LOCAL Bool  is_dvar=FALSE;
+
+/* A text variable statement is found in file. */
+LOCAL Bool  is_tvar=FALSE;
+
+/* File contains an invalid include file name? */
+LOCAL Bool  bad_sys_include=FALSE;
 
 
 
+/*
+*  Function implementations.
+*/
    PUBLIC void
 rc_use ()
 /*
@@ -426,22 +485,22 @@ rc_use ()
    dates found resp., the valid fixed dates of eternal holiday list.
 */
 {
-   register int   wd=weekday_of_date (act_day, act_month, act_year);
-   register int   ed;
-   register int   i;
-   register int   j;
-   register int   tmp_month=month;
-   register int   tmp_fiscal_month=fiscal_month;
-   register int   tmp_start_day=start_day;
-   register int   tmp_ad=act_day;
-   register int   tmp_am=act_month;
-   register int   tmp_ay=act_year;
-   register int   tindex=0;
+   register int    wd=weekday_of_date (act_day, act_month, act_year);
+   register int    ed;
+   register int    i;
+   register int    j;
+   register int    tmp_month=month;
+   register int    tmp_fiscal_month=fiscal_month;
+   register int    tmp_start_day=start_day;
+   register int    tmp_ad=act_day;
+   register int    tmp_am=act_month;
+   register int    tmp_ay=act_year;
+   register int    tindex=0;
+   auto     char  *ptr_char;
 #  if HAVE_ASSERT_H
-   static   Bool  is_table_range_checked=FALSE;
+   static   Bool   is_table_range_checked=FALSE;
 #  endif
-   static   Bool  tables_initialized=FALSE;
-
+   static   Bool   tables_initialized=FALSE;
 
 
    /*
@@ -452,7 +511,7 @@ rc_use ()
 #  if HAVE_ASSERT_H
    /*
       Check if the value for the maximum number of table entries
-        fits to the positive range of a signed int (INT_MAX)!
+        fits to the positive range of a signed int (INT_MAX/SHRT_MAX)!
    */
    if (!is_table_range_checked)
     {
@@ -468,15 +527,27 @@ rc_use ()
    if (!tables_initialized)
     {
       /*
-         Initialize the biorhythm's phase texts consisting of 3 characters each.
+         Initialize the biorhythms phase texts consisting of 3 characters each.
       */
 #  if USE_DE
       rc_bio_emo_lit = "Emo";
       rc_bio_int_lit = "Gei";
       rc_bio_phy_lit = "Phy";
 #  else /* !USE_DE */
+      /*
+         *** Translators, please translate this as a fixed 3-character text.
+         *** This text should be a proper abbreviation of "Emotional".
+      */
       rc_bio_emo_lit = _("Emo");
+      /*
+         *** Translators, please translate this as a fixed 3-character text.
+         *** This text should be a proper abbreviation of "Intellectual".
+      */
       rc_bio_int_lit = _("Int");
+      /*
+         *** Translators, please translate this as a fixed 3-character text.
+         *** This text should be a proper abbreviation of "Physical".
+      */
       rc_bio_phy_lit = _("Phy");
 #  endif /* !USE_DE */
       /*
@@ -484,35 +555,36 @@ rc_use ()
            which is needed if we have to parse and evaluate a line.
       */
       lptrs = (Line_struct *)my_malloc (sizeof(Line_struct),
-                                        124, __FILE__, ((long)__LINE__)-1,
+                                        ERR_NO_MEMORY_AVAILABLE,
+                                        __FILE__, ((long)__LINE__)-2L,
                                         "lptrs", 0);
       /*
          Initial memory allocation for an element of the `Line_struct' record
-           which is needed if we have to evaluate %... special texts.
+           which is needed if we have to evaluate %?... special texts.
       */
       lptrs2 = (Line_struct *)my_malloc (sizeof(Line_struct),
-                                         124, __FILE__, ((long)__LINE__)-1,
+                                         ERR_NO_MEMORY_AVAILABLE,
+                                         __FILE__, ((long)__LINE__)-2L,
                                          "lptrs2", 0);
-      lptrs3 = (Line_struct *)my_malloc (sizeof(Line_struct),
-                                         124, __FILE__, ((long)__LINE__)-1,
-                                         "lptrs3", 0);
       /*
          Initial memory allocation for `rc_files_table[]'.
       */
       rc_files_table = (File_struct **)my_malloc (RC_FILES_MAX*sizeof(File_struct *),
-                                                  124, __FILE__, ((long)__LINE__)-1,
+                                                  ERR_NO_MEMORY_AVAILABLE,
+                                                  __FILE__, ((long)__LINE__)-2L,
                                                   "rc_files_table[RC_FILES_MAX]", RC_FILES_MAX);
       /*
          Initial memory allocation for `rc_elems_table[]'.
       */
       rc_elems_table = (char **)my_malloc (RC_ELEMS_MAX*sizeof(char *),
-                                           124, __FILE__, ((long)__LINE__)-1,
+                                           ERR_NO_MEMORY_AVAILABLE,
+                                           __FILE__, ((long)__LINE__)-2L,
                                            "rc_elems_table[RC_ELEMS_MAX]", RC_ELEMS_MAX);
       /*
          Initial memory allocation for `the_text'.
       */
-      the_text = (char *)my_malloc (len_the_text,
-                                    124, __FILE__, ((long)__LINE__)-1,
+      the_text = (char *)my_malloc (len_the_text, ERR_NO_MEMORY_AVAILABLE,
+                                    __FILE__, ((long)__LINE__)-1L,
                                     "the_text", 0);
       /*
          The REGEX stuff in case `--filter-text=PATTERN' is given.
@@ -520,27 +592,75 @@ rc_use ()
       if (rc_filter_text != (char *)NULL)
        {
          /*
-            Compile `rc_filter_text' pattern.
+            Compile `rc_filter_text' PATTERN.
          */
-#  if HAVE_GNU_RE_COMPILE_PATTERN
+#  if !HAVE_GNU_RE_COMPILE_PATTERN
+         if (rc_ignore_case_flag)
+          {
+            /*
+               Set PATTERN to lower-case letters
+                 if we have to ignore case distinctions.
+            */
+            ptr_char = rc_filter_text;
+            for ( ; *ptr_char ; ptr_char++)
+              *ptr_char = (char)tolower(*ptr_char);
+          }
+#  else /* HAVE_GNU_RE_COMPILE_PATTERN */
+         /*
+            Compute the GNU Regex table size.
+         */
+#    ifndef CHAR_BIT
+         auto Uchar  bit;
+
+
+         for (i=0,bit=2 ; bit ; bit<<=1,i++)
+           ;  /* Void, nothing to do here! */
+#    else /* CHAR_BIT */
+         i = CHAR_BIT - 1;
+#    endif /* CHAR_BIT */
+         j = ((1 << i) - 1) + (1 << i);
+         /*
+            Initial memory allocation of GNU Regex fastmap table.
+         */
+         gnu_fastmap_table = (char *)my_malloc (j+1, ERR_NO_MEMORY_AVAILABLE,
+                                                __FILE__, ((long)__LINE__)-1L,
+                                                "gnu_fastmap_table", 0);
+         /*
+            Initial memory allocation and initialization of GNU Regex translate table.
+         */
+         gnu_translate_table = (char *)my_malloc (j+1, ERR_NO_MEMORY_AVAILABLE,
+                                                  __FILE__, ((long)__LINE__)-1L,
+                                                  "gnu_translate_table", 0);
+         if (rc_ignore_case_flag)
+           /*
+              Set PATTERN to lower-case letters
+                if we have to ignore case distinctions.
+           */
+           for (i=0 ; i <= j ; i++)
+             gnu_translate_table[i] = (char)tolower(i);
+         else
+           for (i=0 ; i <= j ; i++)
+             gnu_translate_table[i] = (char)i;
          (void)re_set_syntax(   (RE_SYNTAX_POSIX_EXTENDED | RE_BACKSLASH_ESCAPE_IN_LISTS)
                              & ~(RE_DOT_NOT_NULL));
+         regpattern.fastmap = gnu_fastmap_table;
+         regpattern.translate = gnu_translate_table;
          if (re_compile_pattern(rc_filter_text, (int)strlen(rc_filter_text), &regpattern) != (char *)NULL)
-           my_error (104, "", 0L, rc_filter_text, 0);
-#  endif
+           my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
+#  endif /* HAVE_GNU_RE_COMPILE_PATTERN */
 #  if HAVE_POSIX_REGCOMP
          if (regcomp(&regpattern, rc_filter_text, REGCOMP_FLAG))
-           my_error (104, "", 0L, rc_filter_text, 0);
+           my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
 #  endif
 #  if HAVE_RE_COMP
-         if (re_comp(rc_filter_text) != NULL)
-           my_error (104, "", 0L, rc_filter_text, 0);
+         if (re_comp(rc_filter_text) != (char *)NULL)
+           my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
          re_pattern = 1;
 #  endif
 #  if HAVE_REGCMP
          cpattern = regcmp(rc_filter_text, 0);
          if (cpattern == (char *)NULL)
-           my_error (104, "", 0L, rc_filter_text, 0);
+           my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
 #  endif
 #  if HAVE_V8_REGCOMP
          regpattern = regcomp(rc_filter_text);
@@ -548,6 +668,11 @@ rc_use ()
 #  if NO_REGEX
          ;   /* Void, nothing to do! */
 #  endif
+         /*
+            Is it necessary to remove highlighting sequences
+              in each text before searching the PATTERN?
+         */
+         remove_hls_in_regex = highlight_flag;
        }
       tables_initialized = TRUE;
     }
@@ -560,7 +685,7 @@ rc_use ()
     {
       /*
          NOT in simple month/year mode (an explicit date is given in the command line):
-           Compute the starting- and ending loop values of the requested period.
+           Compute the starting/ending loop values of the requested period.
       */
       ed = DAY_LAST + is_leap_year + 1;
       if (!month)
@@ -591,7 +716,7 @@ rc_use ()
       if (rc_tomorrow_flag)
        {
          /*
-            A [-c]t modifier found.
+            `-ct' option found.
          */
          rc_period_list = FALSE;
          ed += 2;
@@ -604,7 +729,7 @@ rc_use ()
         if (rc_week_flag)
          {
            /*
-              A [-c]w[+|-] modifier found.
+              `-cw[+|-]' option found.
            */
            rc_period_list = FALSE;
            if (   !rc_forwards_flag
@@ -631,7 +756,7 @@ rc_use ()
           if (rc_month_flag)
            {
              /*
-                A [-c]m[+|-] modifier found.
+                `-cm[+|-]' option found.
              */
              rc_period_list = FALSE;
              if (   !rc_forwards_flag
@@ -656,7 +781,7 @@ rc_use ()
             if (rc_year_flag)
              {
                /*
-                  A [-c]y[+|-] modifier found.
+                  `-cy[+|-]' option found.
                */
                rc_period_list = FALSE;
                if (   !rc_forwards_flag
@@ -678,20 +803,23 @@ rc_use ()
                  if (rc_week_year_flag)
                   {
                     /*
-                       A [-c]<n>w modifier found
-                         (those ISO-8601:1988 weeks starts at monday).
+                       `-cNw' option found
                     */
-                    wd=start_day = 1;
+                    if (iso_week_number)
+                      /*
+                         Those ISO-8601:1988 weeks starts on Monday.
+                      */
+                      wd=start_day = DAY_MIN;
                     /*
                        Compute the day number of year the week starts at.
                     */
-                    j=day = weekno2doy (rc_period, act_year);
+                    j=day = weekno2doy (rc_period, act_year, iso_week_number, start_day);
                     if (day != -WEEK_MAX)
                      {
                        if (rc_period_list)
                         {
                           /*
-                             A [-c]<n>w modifier found.
+                             `-cNw' option found.
                           */
                           if (day > ed)
                            {
@@ -705,7 +833,7 @@ rc_use ()
                                 */
                                 if (act_year == greg->year)
                                  {
-                                   doy2date (j, is_leap_year, &dd, &mm);
+                                   (void)doy2date (j, is_leap_year, &dd, &mm);
                                    for (i=j ; i < ed ; i++)
                                      if (!next_date (&dd, &mm, &yy))
                                       {
@@ -742,7 +870,7 @@ rc_use ()
                        else
                         {
                           /*
-                             A [-c]<n>w modifier found:
+                             `-cNw' option found:
                                Set actual date to Mondays date of week
                                and omit highlighting that date; boolean
                                `adate_set' is set to distinct this
@@ -755,7 +883,7 @@ rc_use ()
                           */
                           if (act_year == greg->year)
                            {
-                             doy2date (day, is_leap_year, &dd, &mm);
+                             (void)doy2date (day, is_leap_year, &dd, &mm);
                              for (i=day ; i < ed ; i++)
                                if (!next_date (&dd, &mm, &yy))
                                 {
@@ -785,12 +913,9 @@ rc_use ()
                   }
                  else
                    /*
-                      [-c]<n>d,
-                      [-c]`mmdd',
-                      [-c]`mmww[w]'<n>,
-                      [-c]*d|w<n>[`ww[w]'] and
-                      [-c]@<e|t|`dvar'>[[-]<n>]
-                        modifiers are implicitly managed in this subsection, too.
+                      `-cNd', `-cMMDD', `-cMMWW[W]N', `-c*d|wN[WW[W]' and
+                      `-c@e|t|DVAR[[-]N] options are implicitly managed in
+                      this subsection, too.
                    */
                    if (   rc_forwards_flag
                        && (day < DAY_LAST+is_leap_year))
@@ -798,7 +923,7 @@ rc_use ()
                       if (rc_period_list)
                        {
                          /*
-                            A [-c]l<n>+ modifier found (list of dates).
+                            `-clN+' option found (list of dates).
                          */
                          day += !rc_have_today_in_list;
                          /*
@@ -816,7 +941,7 @@ rc_use ()
                       else
                        {
                          /*
-                            A [-c]<n>+ modifier found (single date).
+                            `-cN+ option found (single date).
                          */
                          rc_forwards_flag = FALSE;
                          /*
@@ -845,7 +970,7 @@ rc_use ()
                         if (rc_period_list)
                          {
                            /*
-                              A [-c]l<n>- modifier found (list of dates).
+                              `-clN-' option found (list of dates).
                            */
                            day += rc_have_today_in_list;
                            /*
@@ -863,7 +988,7 @@ rc_use ()
                         else
                          {
                            /*
-                              A [-c]<n>- modifier found (single date).
+                              `-cN-' option found (single date).
                            */
                            rc_backwards_flag = FALSE;
                            /*
@@ -889,7 +1014,7 @@ rc_use ()
              else
               {
                  /*
-                    Only a simple -c (without any modifiers) found.
+                    Only a simple option `-c' (without any modifiers) found.
                  */
                  rc_period_list = FALSE;
                  ed++;
@@ -905,7 +1030,7 @@ rc_use ()
       */
       if (greg_correction)
        {
-         doy2date (day, is_leap_year, &dd, &mm);
+         (void)doy2date (day, is_leap_year, &dd, &mm);
          if (!prev_date (&dd, &mm, &yy))
            day -= greg_missing_days;
          else
@@ -913,7 +1038,7 @@ rc_use ()
             if (   !rc_forwards_flag
                 && !rc_backwards_flag)
              {
-               doy2date (day, is_leap_year, &dd, &mm);
+               (void)doy2date (day, is_leap_year, &dd, &mm);
                if (weekday_of_date (dd, mm, yy) != start_day)
                  day -= greg_missing_days;
                else
@@ -939,7 +1064,7 @@ rc_use ()
                if (   rc_backwards_flag
                    && ed_set)
                 {
-                  doy2date (day, is_leap_year, &dd, &mm);
+                  (void)doy2date (day, is_leap_year, &dd, &mm);
                   if (weekday_of_date (dd, mm, yy) != start_day)
                    {
                      day -= greg_missing_days;
@@ -952,13 +1077,16 @@ rc_use ()
     }
    if (day != ed)
     {
-      auto char  *ptr_char;
-      auto char  *tmp_rc_here_fn=rc_here_fn;
-      auto Bool   is_here_file;
-      auto Bool   ok;
+      auto     double   save_time_offset=time_offset;
+      register int      save_hour_offset=time_hour_offset;
+      register int      save_min_offset=time_min_offset;
+      register int      save_loop_end=loop_end;
+      auto     char    *tmp_rc_here_fn;
+      auto     Bool     cycle_increment=TRUE;
+      auto     Bool     is_here_file;
+      auto     Bool     ok;
 
 
-      ok=is_here_file = FALSE;
       /*
          Now include the eternal holidays, which are valid fixed dates,
            into `rc_elems_table[]'.
@@ -982,11 +1110,11 @@ rc_use ()
                  line_buffer[i--] = '\0';
                if (i > len_year_max+4)
 #  if USE_DE
-               rc_check (line_buffer, "`"HD_LIST_TITLE"'",
-                         (long)tindex, i, &rc_elems, day, ed, wd);
+                 rc_check (line_buffer, "`"HD_LIST_TITLE"'",
+                           (long)tindex, i, &rc_elems, day, ed, wd);
 #  else /* !USE_DE */
-               rc_check (line_buffer, _("`Eternal holiday list'"),
-                         (long)tindex, i, &rc_elems, day, ed, wd);
+                 rc_check (line_buffer, _("`Eternal holiday list'"),
+                           (long)tindex, i, &rc_elems, day, ed, wd);
 #  endif /* !USE_DE */
              }
             if (!holiday_flag)
@@ -1158,188 +1286,241 @@ rc_use ()
            (the main resource file is always buffered at position 0 in `rc_files_table[]').
       */
       rc_files_table[rc_files] = (File_struct *)my_malloc (sizeof(File_struct),
-                                                           124, __FILE__, ((long)__LINE__)-1,
+                                                           ERR_NO_MEMORY_AVAILABLE,
+                                                           __FILE__, ((long)__LINE__)-2L,
                                                            "rc_files_table[rc_files]", rc_files);
       rc_files_table[rc_files]->fp = (FILE *)NULL;
       rc_files_table[rc_files]->pool = (char *)my_malloc (BUF_LEN+1,
-                                                          124, __FILE__, ((long)__LINE__)-1,
+                                                          ERR_NO_MEMORY_AVAILABLE,
+                                                          __FILE__, ((long)__LINE__)-2L,
                                                           "rc_files_table[rc_files]->pool", rc_files);
-      while (!ok)
+      if (loop_end != SPECIAL_VALUE)
        {
          /*
-            Single file or list of resource file names given in the command line.
+            Set the cycle-starting time value for %sun* and %moon*.
          */
-         while (rc_files_table[rc_files]->fp == (FILE *)NULL)
+         tindex = HHMM2MM(time_hour_offset, time_min_offset);
+         /*
+            Reduce the given cycle-starting time value in minutes to a single day.
+         */
+         if (tindex < 0)
+           tindex = 0;
+         else
+           if (tindex >= MINS_PER_DAY)
+             tindex = MINS_PER_DAY - 1;
+         if (tindex > loop_end)
+           cycle_increment = FALSE;
+         time_hour_offset = MM2HH(tindex);
+         time_min_offset =  tindex % MINS_PER_HOUR;
+         time_offset = MM2DAY(tindex);
+       }
+      else
+        tindex = 0;
+      do
+       {
+         tmp_rc_here_fn = rc_here_fn;
+         ok=is_here_file = FALSE;
+         while (!ok)
           {
-            i = 0;
-            ptr_char = s3;
-            LOOP
-             {
-               if (*ptr_char == QUOTE_CHAR)
-                {
-                  if (   *(ptr_char + 1) == *CONNECT_SEP
-                      || *(ptr_char + 1) == QUOTE_CHAR)
-                    ptr_char++;
-                  s7[i++] = *ptr_char++;
-                }
-               else
-                 if (*ptr_char != *CONNECT_SEP)
-                   s7[i++] = *ptr_char++;
-               if (   !*ptr_char
-                   || *ptr_char == *CONNECT_SEP)
-                 break;
-             }
-            s7[i] = '\0';
             /*
-               Now check if the file exists.
+               Single file or list of resource file names given in the command line.
             */
-            rc_files_table[rc_files]->filename
-              = (char *)my_malloc (i+1,
-                                   124, __FILE__, ((long)__LINE__)-1,
-                                   "rc_files_table[rc_files]->filename", rc_files);
-            strcpy(rc_files_table[rc_files]->filename, s7);
-            rc_files_table[rc_files]->fp = file_open (&rc_files_table[rc_files]->filename, rc_files,
-                                                      (is_here_file) ? HEre : REsource, &bad_sys_include);
-            if (!*ptr_char)
+            while (rc_files_table[rc_files]->fp == (FILE *)NULL)
              {
+               i = 0;
+               ptr_char = s3;
+               LOOP
+                {
+                  if (*ptr_char == QUOTE_CHAR)
+                   {
+                     if (   *(ptr_char + 1) == *CONNECT_SEP
+                         || *(ptr_char + 1) == QUOTE_CHAR)
+                       ptr_char++;
+                     s7[i++] = *ptr_char++;
+                   }
+                  else
+                    if (*ptr_char != *CONNECT_SEP)
+                      s7[i++] = *ptr_char++;
+                  if (   !*ptr_char
+                      || *ptr_char == *CONNECT_SEP)
+                    break;
+                }
+               s7[i] = '\0';
                /*
-                  Finished, THE file respectively ALL files are managed
-                    so check whether any `--here=ARG' options must be processed
-                    at last coming from the temporary file already created.
+                  Now check if the file exists.
                */
-               if (tmp_rc_here_fn != (char *)NULL)
+               rc_files_table[rc_files]->filename
+                 = (char *)my_malloc (i+1, ERR_NO_MEMORY_AVAILABLE,
+                                      __FILE__, ((long)__LINE__)-1L,
+                                      "rc_files_table[rc_files]->filename", rc_files);
+               strcpy(rc_files_table[rc_files]->filename, s7);
+               rc_files_table[rc_files]->fp = file_open (&rc_files_table[rc_files]->filename, rc_files,
+                                                         (is_here_file) ? HEre : REsource, &bad_sys_include);
+               if (!*ptr_char)
                 {
                   /*
-                     Use the temporary "here" filename for processing next.
+                     Finished, THE file respectively ALL files are managed
+                       so check whether any `--here=ARG' options must be processed
+                       at last coming from the temporary file already created.
                   */
-                  i = (int)strlen(tmp_rc_here_fn);
-                  if ((Uint)i >= maxlen_max)
-                    resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
-                  strcpy(s3, tmp_rc_here_fn);
-                  tmp_rc_here_fn = (char *)NULL;
-                  is_here_file = !ok;   /* Nomen est Omen??? :-) */
+                  if (tmp_rc_here_fn != (char *)NULL)
+                   {
+                     /*
+                        Use the temporary "here" filename for processing next.
+                     */
+                     i = (int)strlen(tmp_rc_here_fn);
+                     if ((Uint)i >= maxlen_max)
+                       resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
+                     strcpy(s3, tmp_rc_here_fn);
+                     tmp_rc_here_fn = (char *)NULL;
+                     is_here_file = !ok;   /* Nomen est Omen??? :-) */
+                   }
+                  else
+                    ok = TRUE;
+                  break;
                 }
                else
-                 ok = TRUE;
-               break;
+                {
+                  /*
+                     Now skip a trailing '+' character of a file name list.
+                  */
+                  ptr_char++;
+                  /*
+                     Copy the rest of the file name list and start
+                       the file search again if the file was not found.
+                  */
+                  strcpy(s7, ptr_char);
+                  strcpy(s3, s7);
+                  if (rc_files_table[rc_files]->fp == (FILE *)NULL)
+                    free(rc_files_table[rc_files]->filename);
+                }
+             }
+            /*
+               Now read and check contents of a resource file `filename'
+                 and include valid fixed dates into `rc_elems_table[]'.
+            */
+            if (rc_files_table[rc_files]->fp != (FILE *)NULL)
+             {
+               rc_files_table[rc_files]->in_pool = 0;
+               rc_files_table[rc_files]->line_number = 0L;
+               /*
+                  First of all, copy the contents of the global date variables to the
+                    local variables (if one of these isn't defined) so we can perform
+                    local operations (++, --, +=, -=) on global variables.
+               */
+               for (i=0 ; i < RC_DVAR_MAX ; i++)
+                 if (   rc_dvar[i].dvar_global.dvar_month
+                     && !rc_dvar[i].dvar_local.dvar_month)
+                  {
+                    rc_dvar[i].dvar_local.dvar_month = rc_dvar[i].dvar_global.dvar_month;
+                    rc_dvar[i].dvar_local.dvar_day = rc_dvar[i].dvar_global.dvar_day;
+                  }
+               /*
+                  Then copy the contents of the global text variables to the
+                    local variables (if one of these isn't defined) so we can
+                    perform local operations (++, --, +=, -=) on global variables.
+               */
+               for (i=0 ; i < RC_TVAR_MAX ; i++)
+                 if (   (rc_tvar[i].tvar_global.tvar_text != (char *)NULL)
+                     && (rc_tvar[i].tvar_local.tvar_text == (char *)NULL))
+                  {
+                    rc_tvar[i].tvar_local.tvar_text
+                      = (char *)my_malloc (strlen(rc_tvar[i].tvar_global.tvar_text)+1,
+                                           ERR_NO_MEMORY_AVAILABLE,
+                                           __FILE__, ((long)__LINE__)-2L,
+                                           "rc_tvar[i].tvar_local.tvar_text", i);
+                    strcpy(rc_tvar[i].tvar_local.tvar_text, rc_tvar[i].tvar_global.tvar_text);
+                  }
+               while ((rc_files_table[rc_files]->ptr_pool=file_read_line (rc_files_table[rc_files]->fp,
+                                                                          &line_buffer,
+                                                                          &rc_files_table[rc_files]->in_pool,
+                                                                          rc_files_table[rc_files]->pool,
+                                                                          rc_files_table[rc_files]->ptr_pool,
+                                                                          rc_files_table[rc_files]->filename,
+                                                                          &rc_files_table[rc_files]->line_number,
+                                                                          &line_length,
+                                                                          REsource,
+                                                                          &is_include, &is_dvar, &is_tvar))
+                      != (char *)NULL)
+                {
+                  /*
+                     Check whether an "#include" statement is found.
+                  */
+                  if (is_include)
+                    /*
+                       We have to manage an include file.
+                    */
+                    try_to_include_file (ed, wd);
+                  else
+                    /*
+                       We are still in the main resource file.
+                    */
+                    if (   *line_buffer
+                        && !is_dvar
+                        && !is_tvar)
+                      rc_check (line_buffer, rc_files_table[rc_files]->filename,
+                                rc_files_table[rc_files]->line_number, line_length, &rc_elems, day, ed, wd);
+                }
+               if (rc_files_table[rc_files]->fp != stdin)
+                 (void)fclose(rc_files_table[rc_files]->fp);
+               rc_files_table[rc_files]->fp = (FILE *)NULL;
+               free(rc_files_table[rc_files]->filename);
+               /*
+                  Next file -> reset all local date variables to zero,
+                    if `--export-date-variables' flag set, don't reset them!
+               */
+               if (!rc_export_ldvar_flag)
+                 for (i=0 ; i < RC_DVAR_MAX ; i++)
+                   rc_dvar[i].dvar_local.dvar_month = (char)0;
+               /*
+                  Next file -> reset all local text variables to NULL,
+                    if `--export-text-variables' flag set, don't reset them!
+               */
+               if (!rc_export_ltvar_flag)
+                 for (i=0 ; i < RC_TVAR_MAX ; i++)
+                   if (rc_tvar[i].tvar_local.tvar_text != (char *)NULL)
+                    {
+                      free(rc_tvar[i].tvar_local.tvar_text);
+                      rc_tvar[i].tvar_local.tvar_text = (char *)NULL;
+                    }
              }
             else
-             {
-               /*
-                  Now skip a trailing '+' character of a file name list.
-               */
-               ptr_char++;
-               /*
-                  Copy the rest of the file name list and start
-                    the file search again if the file was not found.
-               */
-               strcpy(s7, ptr_char);
-               strcpy(s3, s7);
-               if (rc_files_table[rc_files]->fp == (FILE *)NULL)
-                 free(rc_files_table[rc_files]->filename);
-             }
+              /*
+                 Yeah, we have not found any main resource file so it's absolutely
+                   necessary to free the allocated memory area of the "file name",
+                   because it's possible that we enter this function again,
+                   e.g. if we produce month/year lists or ranges.
+              */
+              free(rc_files_table[rc_files]->filename);
           }
-         /*
-            Now read and check contents of a resource file `filename'
-              and include valid fixed dates into `rc_elems_table[]'.
-         */
-         if (rc_files_table[rc_files]->fp != (FILE *)NULL)
+         if (loop_end != SPECIAL_VALUE)
           {
-            rc_files_table[rc_files]->in_pool = 0;
-            rc_files_table[rc_files]->line_number = 0L;
             /*
-               First of all, copy the contents of the global date variables to the
-                 local variables (if one of these isn't defined) so we can perform
-                 local operations (++, --, +=, -=) on global variables.
+               Increase/decrease the cycle-time counter properly and set
+                 a ``new'' time value for the %sun* and %moon* special texts.
             */
-            for (i=0 ; i < RC_DVAR_MAX ; i++)
-              if (   rc_dvar[i].g.month
-                  && !rc_dvar[i].l.month)
-               {
-                 rc_dvar[i].l.month = rc_dvar[i].g.month;
-                 rc_dvar[i].l.day = rc_dvar[i].g.day;
-               }
-            /*
-               Then copy the contents of the global text variables to the
-                 local variables (if one of these isn't defined) so we can
-                 perform local assignments on global variables.
-            */
-            for (i=0 ; i < RC_TVAR_MAX ; i++)
-              if (   (rc_tvar[i].g.text != (char *)NULL)
-                  && (rc_tvar[i].l.text == (char *)NULL))
-               {
-                 rc_tvar[i].l.text = (char *)my_malloc (strlen(rc_tvar[i].g.text)+1,
-                                                        124, __FILE__, ((long)__LINE__)-1,
-                                                        "rc_tvar[i].l.text", i);
-                 strcpy(rc_tvar[i].l.text, rc_tvar[i].g.text);
-               }
-            while ((rc_files_table[rc_files]->ptr_pool=file_read_line (rc_files_table[rc_files]->fp,
-                                                                       &line_buffer,
-                                                                       &rc_files_table[rc_files]->in_pool,
-                                                                       rc_files_table[rc_files]->pool,
-                                                                       rc_files_table[rc_files]->ptr_pool,
-                                                                       rc_files_table[rc_files]->filename,
-                                                                       &rc_files_table[rc_files]->line_number,
-                                                                       &line_length,
-                                                                       REsource,
-                                                                       &is_include, &is_dvar, &is_tvar))
-                   != (char *)NULL)
-             {
-               /*
-                  Check whether an "#include" statement is found.
-               */
-               if (is_include)
-                 /*
-                    We have to manage an include file.
-                 */
-                 try_to_include_file (ed, wd);
-               else
-                 /*
-                    We are still in the main resource file.
-                 */
-                 if (   *line_buffer
-                     && !is_dvar
-                     && !is_tvar)
-                   rc_check (line_buffer, rc_files_table[rc_files]->filename,
-                             rc_files_table[rc_files]->line_number, line_length, &rc_elems, day, ed, wd);
-             }
-            fclose(rc_files_table[rc_files]->fp);
-            rc_files_table[rc_files]->fp = (FILE *)NULL;
-            free(rc_files_table[rc_files]->filename);
-            /*
-               Next file -> reset all local date variables to zero,
-                 if `--export-date-variables' flag set, don't reset them!
-            */
-            if (!rc_export_ldvar_flag)
-              for (i=0 ; i < RC_DVAR_MAX ; i++)
-                rc_dvar[i].l.month = (char)0;
-            /*
-               Next file -> reset all local text variables to NULL,
-                 if `--export-text-variables' flag set, don't reset them!
-            */
-            if (!rc_export_ltvar_flag)
-              for (i=0 ; i < RC_TVAR_MAX ; i++)
-                if (rc_tvar[i].l.text != (char *)NULL)
-                 {
-                   free(rc_tvar[i].l.text);
-                   rc_tvar[i].l.text = (char *)NULL;
-                 }
+            if (cycle_increment)
+              tindex += loop_step;
+            else
+              tindex -= loop_step;
+            time_hour_offset = MM2HH(tindex);
+            time_min_offset = tindex % MINS_PER_HOUR;
+            time_offset = MM2DAY(tindex);
           }
-         else
-           /*
-              Yeah, we have not found any main resource file so it's absolutely
-                necessary to free the allocated memory area of the "file name",
-                because it's possible that we enter this function again,
-                e.g. if we produce month/year lists or ranges.
-           */
-           free(rc_files_table[rc_files]->filename);
-       }
+       } while(   (   cycle_increment
+                   && (tindex <= loop_end))
+               || (   !cycle_increment
+                   && (tindex >= loop_end)));
+      time_hour_offset = save_hour_offset;
+      time_min_offset = save_min_offset;
+      time_offset = save_time_offset;
+      loop_end = save_loop_end;
       free(rc_files_table[rc_files]->pool);
       for (i=0 ; i < RC_TVAR_MAX ; i++)
-        if (rc_tvar[i].l.text != (char *)NULL)
+        if (rc_tvar[i].tvar_local.tvar_text != (char *)NULL)
          {
-           free(rc_tvar[i].l.text);
-           rc_tvar[i].l.text = (char *)NULL;
+           free(rc_tvar[i].tvar_local.tvar_text);
+           rc_tvar[i].tvar_local.tvar_text = (char *)NULL;
          }
       free((VOID_PTR)rc_files_table[rc_files]);
       fiscal_month = tmp_fiscal_month;
@@ -1383,7 +1564,7 @@ try_to_include_file (ed, wd)
      /*
         Error, misspelled "#include" directive found.
      */
-     my_error (120, rc_files_table[rc_files]->filename,
+     my_error (ERR_MALFORMED_INCLUDE, rc_files_table[rc_files]->filename,
                rc_files_table[rc_files]->line_number, line_buffer, 0);
    /*
       Skip any leading whitespace characters of the line.
@@ -1395,7 +1576,7 @@ try_to_include_file (ed, wd)
      /*
         Error, no include file "argument" encoded.
      */
-     my_error (120, rc_files_table[rc_files]->filename,
+     my_error (ERR_MALFORMED_INCLUDE, rc_files_table[rc_files]->filename,
                rc_files_table[rc_files]->line_number, line_buffer, 0);
    if (s7[i] == *RC_INCL_USR_ID)
      is_usr_file = TRUE;
@@ -1406,7 +1587,7 @@ try_to_include_file (ed, wd)
        /*
           Error, illegal leading include file name delimiter found.
        */
-       my_error (120, rc_files_table[rc_files]->filename,
+       my_error (ERR_MALFORMED_INCLUDE, rc_files_table[rc_files]->filename,
                  rc_files_table[rc_files]->line_number, line_buffer, 0);
    i++;
    j = 0;
@@ -1424,13 +1605,13 @@ try_to_include_file (ed, wd)
      /*
         Error, illegal trailing include file name delimiter found.
      */
-     my_error (120, rc_files_table[rc_files]->filename,
+     my_error (ERR_MALFORMED_INCLUDE, rc_files_table[rc_files]->filename,
                rc_files_table[rc_files]->line_number, line_buffer, 0);
    if (!j)
      /*
         Error, no include file "name" encoded.
      */
-     my_error (120, rc_files_table[rc_files]->filename,
+     my_error (ERR_MALFORMED_INCLUDE, rc_files_table[rc_files]->filename,
                rc_files_table[rc_files]->line_number, line_buffer, 0);
    /*
       Now we have the name of include file and the mode of operation.
@@ -1448,9 +1629,9 @@ try_to_include_file (ed, wd)
       if (*s7 == *rc_files_table[i]->filename)
         if (!strcmp(s7+1, rc_files_table[i]->filename+1))
           /*
-             Error, invalid recursive include statement found.
+             Error, invalid recursive/cyclic include statement found.
           */
-          my_error (119, rc_files_table[rc_files]->filename,
+          my_error (ERR_CYCLIC_INCLUDE, rc_files_table[rc_files]->filename,
                     rc_files_table[rc_files]->line_number, line_buffer, 0);
     }
    /*
@@ -1470,18 +1651,22 @@ try_to_include_file (ed, wd)
       rc_files_max <<= 1;
       if (rc_elems_max*sizeof(File_struct *) > testval)
         rc_files_max--;
-      rc_files_table = (File_struct **)my_realloc ((VOID_PTR)rc_files_table, rc_files_max*sizeof(File_struct *),
-                                                   124, __FILE__, ((long)__LINE__)-1,
+      rc_files_table = (File_struct **)my_realloc ((VOID_PTR)rc_files_table,
+                                                   rc_files_max*sizeof(File_struct *),
+                                                   ERR_NO_MEMORY_AVAILABLE,
+                                                   __FILE__, ((long)__LINE__)-3L,
                                                    "rc_files_table[rc_files_max]", rc_files_max);
     }
    /*
       Allocate the file buffers for an include file.
    */
    rc_files_table[rc_files] = (File_struct *)my_malloc (sizeof(File_struct),
-                                                        124, __FILE__, ((long)__LINE__)-1,
+                                                        ERR_NO_MEMORY_AVAILABLE,
+                                                        __FILE__, ((long)__LINE__)-2L,
                                                         "rc_files_table[rc_files]", rc_files);
    rc_files_table[rc_files]->filename = (char *)my_malloc (j+1,
-                                                           124, __FILE__, ((long)__LINE__)-1,
+                                                           ERR_NO_MEMORY_AVAILABLE,
+                                                           __FILE__, ((long)__LINE__)-2L,
                                                            "rc_files_table[rc_files]->filename", rc_files);
    strcpy(rc_files_table[rc_files]->filename, s7);
    /*
@@ -1494,7 +1679,7 @@ try_to_include_file (ed, wd)
         Error, invalid root directory based system include file name found
           in the include statement, e.g.:  #include </foo>   or   #include </foo/bar>.
      */
-     my_error (120, rc_files_table[rc_files-1]->filename,
+     my_error (ERR_MALFORMED_INCLUDE, rc_files_table[rc_files-1]->filename,
                rc_files_table[rc_files-1]->line_number, line_buffer, 0);
    /*
       If include file exists, read it.
@@ -1504,30 +1689,33 @@ try_to_include_file (ed, wd)
       rc_files_table[rc_files]->in_pool = 0;
       rc_files_table[rc_files]->line_number = 0L;
       rc_files_table[rc_files]->pool = (char *)my_malloc (BUF_LEN+1,
-                                                          124, __FILE__, ((long)__LINE__)-1,
+                                                          ERR_NO_MEMORY_AVAILABLE,
+                                                          __FILE__, ((long)__LINE__)-2L,
                                                           "rc_files_table[rc_files]->pool", rc_files);
       /*
          Buffer all local date variables of the include file.
       */
       for (i=0 ; i < RC_DVAR_MAX ; i++)
        {
-         rc_files_table[rc_files]->local_dvars[i].month = rc_dvar[i].l.month;
-         rc_files_table[rc_files]->local_dvars[i].day = rc_dvar[i].l.day;
+         rc_files_table[rc_files]->local_dvars[i].dvar_month = rc_dvar[i].dvar_local.dvar_month;
+         rc_files_table[rc_files]->local_dvars[i].dvar_day = rc_dvar[i].dvar_local.dvar_day;
        }
       /*
          Buffer all local text variables of the include file.
       */
       for (i=0 ; i < RC_TVAR_MAX ; i++)
        {
-         if (rc_tvar[i].l.text != (char *)NULL)
+         if (rc_tvar[i].tvar_local.tvar_text != (char *)NULL)
           {
-            rc_files_table[rc_files]->local_tvars[i].text = (char *)my_malloc (strlen(rc_tvar[i].l.text)+1,
-                                                                               124, __FILE__, ((long)__LINE__)-1,
-                                                                               "rc_tvar[i].l.text", i);
-            strcpy(rc_files_table[rc_files]->local_tvars[i].text, rc_tvar[i].l.text);
+            rc_files_table[rc_files]->local_tvars[i].tvar_text
+              = (char *)my_malloc (strlen(rc_tvar[i].tvar_local.tvar_text)+1,
+                                   ERR_NO_MEMORY_AVAILABLE,
+                                   __FILE__, ((long)__LINE__)-2L,
+                                   "rc_tvar[i].tvar_local.tvar_text", i);
+            strcpy(rc_files_table[rc_files]->local_tvars[i].tvar_text, rc_tvar[i].tvar_local.tvar_text);
           }
          else
-           rc_files_table[rc_files]->local_tvars[i].text = (char *)NULL;
+           rc_files_table[rc_files]->local_tvars[i].tvar_text = (char *)NULL;
        }
       while ((rc_files_table[rc_files]->ptr_pool=file_read_line (rc_files_table[rc_files]->fp,
                                                                  &line_buffer,
@@ -1557,34 +1745,38 @@ try_to_include_file (ed, wd)
               && !is_tvar)
             rc_check (line_buffer, rc_files_table[rc_files]->filename,
                       rc_files_table[rc_files]->line_number, line_length, &rc_elems, day, ed, wd);
-      fclose(rc_files_table[rc_files]->fp);
+      (void)fclose(rc_files_table[rc_files]->fp);
       free(rc_files_table[rc_files]->pool);
       /*
          Restore all local date variables of the include file.
       */
       for (i=0 ; i < RC_DVAR_MAX ; i++)
        {
-         rc_dvar[i].l.month = rc_files_table[rc_files]->local_dvars[i].month;
-         rc_dvar[i].l.day = rc_files_table[rc_files]->local_dvars[i].day;
+         rc_dvar[i].dvar_local.dvar_month = rc_files_table[rc_files]->local_dvars[i].dvar_month;
+         rc_dvar[i].dvar_local.dvar_day = rc_files_table[rc_files]->local_dvars[i].dvar_day;
        }
       /*
          Restore all local text variables of the include file.
       */
       for (i=0 ; i < RC_TVAR_MAX ; i++)
-        if (rc_files_table[rc_files]->local_tvars[i].text != (char *)NULL)
+        if (rc_files_table[rc_files]->local_tvars[i].tvar_text != (char *)NULL)
          {
-           j = (int)strlen(rc_files_table[rc_files]->local_tvars[i].text) + 1;
-           if (rc_tvar[i].l.text == (char *)NULL)
-             rc_tvar[i].l.text = (char *)my_malloc (j,
-                                                    124, __FILE__, ((long)__LINE__)-1,
-                                                    "rc_tvar[i].l.text", i);
+           if (rc_tvar[i].tvar_local.tvar_text == (char *)NULL)
+             rc_tvar[i].tvar_local.tvar_text
+               = (char *)my_malloc (strlen(rc_files_table[rc_files]->local_tvars[i].tvar_text)+1,
+                                    ERR_NO_MEMORY_AVAILABLE,
+                                    __FILE__, ((long)__LINE__)-2L,
+                                    "rc_tvar[i].tvar_local.tvar_text", i);
            else
-             rc_tvar[i].l.text = (char *)my_realloc ((VOID_PTR)(rc_tvar[i].l.text), j,
-                                                     124, __FILE__, ((long)__LINE__)-1,
-                                                      "rc_tvar[i].l.text", i);
-           strcpy(rc_tvar[i].l.text, rc_files_table[rc_files]->local_tvars[i].text);
-           free(rc_files_table[rc_files]->local_tvars[i].text);
-           rc_files_table[rc_files]->local_tvars[i].text = (char *)NULL;
+             rc_tvar[i].tvar_local.tvar_text
+               = (char *)my_realloc ((VOID_PTR)(rc_tvar[i].tvar_local.tvar_text),
+                                     strlen(rc_files_table[rc_files]->local_tvars[i].tvar_text)+1,
+                                     ERR_NO_MEMORY_AVAILABLE,
+                                     __FILE__, ((long)__LINE__)-3L,
+                                     "rc_tvar[i].tvar_local.tvar_text", i);
+           strcpy(rc_tvar[i].tvar_local.tvar_text, rc_files_table[rc_files]->local_tvars[i].tvar_text);
+           free(rc_files_table[rc_files]->local_tvars[i].tvar_text);
+           rc_files_table[rc_files]->local_tvars[i].tvar_text = (char *)NULL;
          }
     }
    /*
@@ -1663,7 +1855,7 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
           && !adate_set)
        {
          day = mvec[fiscal_month-1] + 1;
-         if (fiscal_month > MONTH_MIN + 1)
+         if (fiscal_month > 2)
            day += is_leap_year;
        }
       /*
@@ -1824,26 +2016,36 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
 
 
       /*
-         At last, sort the fixed dates only if they are not presorted
-           and not ONLY "empty" fixed dates shall be displayed.
+         At last, sort the fixed dates only if they are either not presorted
+           or contain no resource file name reference, and not ONLY "empty"
+           fixed dates shall be displayed.
       */
       if (   !rc_zero_dates_flag
           && (rc_elems > 1))
        {
-         if (!is_presorted (rc_elems_table, rc_elems))
+         if (rc_enable_fn_flag)
           {
             if (rc_sort_des_flag)
-              qsort((VOID_PTR)rc_elems_table, rc_elems, sizeof *rc_elems_table, (Cmp_func)des_sort);
+              qsort((VOID_PTR)rc_elems_table, rc_elems, sizeof *rc_elems_table, (Cmp_func)fn_des_sort);
             else
-              qsort((VOID_PTR)rc_elems_table, rc_elems, sizeof *rc_elems_table, (Cmp_func)asc_sort);
+              qsort((VOID_PTR)rc_elems_table, rc_elems, sizeof *rc_elems_table, (Cmp_func)fn_asc_sort);
           }
          else
-           if (rc_sort_des_flag)
-             /*
-                `rc_elems_table[]' is presorted and must be shown in descending sort order,
-                  rearrange its internal sort order from ascending to descending sort order.
-             */
-             resort (rc_elems_table, rc_elems);
+           if (!is_presorted (rc_elems_table, rc_elems))
+            {
+              if (rc_sort_des_flag)
+                qsort((VOID_PTR)rc_elems_table, rc_elems, sizeof *rc_elems_table, (Cmp_func)des_sort);
+              else
+                qsort((VOID_PTR)rc_elems_table, rc_elems, sizeof *rc_elems_table, (Cmp_func)asc_sort);
+            }
+           else
+             if (rc_sort_des_flag)
+               /*
+                  `rc_elems_table[]' is presorted and must be shown in
+                    descending sort order, rearrange its internal sort
+                    order from ascending to descending sort order.
+               */
+               reverse_order (rc_elems_table, rc_elems);
        }
       /*
          Copy `rc_grp_sep' [-c]g[] to text buffer variable `s3' for further use.
@@ -1919,13 +2121,14 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
             s3[i] = '\0';
           }
        }
+      (*s1)=(*s6) = '\0';
       /*
          Now display a leading NEWLINE character before the text/title.
       */
-      (*s1)=(*s6) = '\0';
-      print_text (stdout, s1);
+      if (!rc_suppr_list_sep_flag)
+        print_text (stdout, s1);
       /*
-         Now display a leading text/title.
+         Now display the leading title text of the fixed date list.
       */
       if (rc_title_flag)
        {
@@ -1986,8 +2189,9 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
             yy = y;
           }
          /*
-            Avoid displaying duplicate resource file entries by storing the actual
-              entry into `s6' and comparing it with the previous entry in line.
+            Avoid displaying duplicate resource file entries by storing
+              the actual entry into `s6' and comparing it with the previous
+              entry in line.
          */
          if (   tindex == tstart
              || (   (tindex != tstart)
@@ -2025,7 +2229,7 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                   if (rc_grp_sep != (char *)NULL)
                    {
                      /*
-                        Display constructed group separator `text' [-c]g[].
+                        Display constructed group separator text `-cg[TEXT]'.
                      */
                      strcpy(s2, s3);
                      print_text (stdout, s2);
@@ -2035,12 +2239,12 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
             /*
                Construct the leading (partitially highlighted) "date"-part of the fixed date.
             */
-            if (rc_weekno_flag)
+            if (rc_week_number_flag)
              {
-               j = week_number (day, m, y);
+               j = week_number (day, m, y, iso_week_number, start_day);
                /*
                   We convert the computed week number to a week number text
-                    (that looks nicer in output).
+                    (this looks nicer in output).
                */
                if (j < 0)
                  /*
@@ -2094,22 +2298,19 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                if (   (y == tmp_ay)
                    && (m == tmp_am)
                    && (wd == tmp_ad))
-                 hls_len = decode_date_format (date_format->format, &s1, day, m, y, d,
+                 hls_len = decode_date_format (date_format->df_format, &s1, day, m, y, d,
                                                TRUE, FALSE, !rc_alternative_format_flag);
                else
                 {
                   if (hd_ldays[((m-1)*MONTH_LAST)+(wd-1)])
-                    hls_len = decode_date_format (date_format->format, &s1, day, m, y, d,
+                    hls_len = decode_date_format (date_format->df_format, &s1, day, m, y, d,
                                                   FALSE, TRUE, !rc_alternative_format_flag);
                   else
-                    hls_len = decode_date_format (date_format->format, &s1, day, m, y, d,
+                    hls_len = decode_date_format (date_format->df_format, &s1, day, m, y, d,
                                                   FALSE, FALSE, !rc_alternative_format_flag);
                 }
-             }
-            if (!rc_suppr_date_part_flag)
-             {
                if (   rc_alternative_format_flag
-                   && rc_weekno_flag)
+                   && rc_week_number_flag)
                 {
 #  if USE_DE
                   sprintf(s2, " ; Woche %s", s7);
@@ -2123,7 +2324,7 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
             else
              {
                if (   rc_alternative_format_flag
-                   && rc_weekno_flag)
+                   && rc_week_number_flag)
                 {
 #  if USE_DE
                   sprintf(s2, "Woche %s", s7);
@@ -2191,26 +2392,36 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                */
                if (rc_enable_fn_flag)
                 {
+                  auto Bool  pseudo_quote_found=FALSE;
+
+
                   /*
-                     Add the length of the "file name"+3 (+3 because the file name
-                       itself is leaded by a blank character and is enclosed in parentheses
-                       --> " (%s)") to the number of leading blanks, which must be displayed
-                       if the line wrapped by a given `~'-TILDE.
+                     Add the length of the "file name"+3 (+3 because the file
+                       name itself is leaded by a blank character and is
+                       enclosed in PSEUDO_QUOTE characters to the number of
+                       leading blanks, which must be displayed if the line
+                       wrapped by a given `~'-TILDE.
                   */
                   ptr_char = lineptrs->text_part;
                   while (*ptr_char)
                    {
                      len_fn_part++;
-                     if (*ptr_char == ')')
-                       break;
+                     if (*ptr_char == PSEUDO_QUOTE)
+                      {
+                        if (!pseudo_quote_found)
+                          pseudo_quote_found = TRUE;
+                        else
+                          break;
+                      }
                      ptr_char++;
                    }
                   if (!*ptr_char)
                     /*
-                       Internal error, a maintainer has modified the output
-                         format of a line and forgots to respect this change here!
+                       Internal error, a maintainer has modified the internal
+                         format of a line and forgots to respect this
+                         modification here!
                     */
-                    my_error (99, __FILE__, (long)__LINE__, "", 0);
+                    my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
                   c_dummy = *++ptr_char;
                   if (*ptr_char)
                    {
@@ -2230,6 +2441,28 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                    }
                   len_text_part -= i;
                   lineptrs->text_part += i;
+                  /*
+                     Now exchange the first two PSEUDO_QUOTE characters
+                       -- which embrace the "file name" -- by parentheses.
+                  */
+                  ptr_char = strchr(s1, PSEUDO_QUOTE);
+                  if (ptr_char == (char *)NULL)
+                    /*
+                       Internal error, a maintainer has modified the internal
+                         format of a line and forgots to respect this
+                         modification here!
+                    */
+                    my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
+                  *ptr_char = '(';
+                  ptr_char = strchr(s1, PSEUDO_QUOTE);
+                  if (ptr_char == (char *)NULL)
+                    /*
+                       Internal error, a maintainer has modified the internal
+                         format of a line and forgots to respect this
+                         modification here!
+                    */
+                    my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
+                  *ptr_char = ')';
                   /*
                      Check if the FIRST character of the REAL "text"-part was a quoted
                        whitespace character (this is indicated by a PSEUDO_QUOTE
@@ -2393,12 +2626,224 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
        }
     }
    /*
-      Now deallocate all "non-empty" fixed dates in the table
+      Now deallocate all NON-"empty" fixed dates in the table
         in case only "empty" fixed dates were displayed.
    */
    if (   rc_zero_dates_flag
        && (rc_elems-rc_zero_pos))
      for (tindex=0 ; tindex < rc_zero_pos ; tindex++)
        free(rc_elems_table[tindex]);
+}
+
+
+
+   LOCAL int
+fn_asc_sort (a, b)
+   const char **a;
+   const char **b;
+/*
+   The (q)sort compare function for fixed dates which texts
+     have an included resource "file name"; ascending order.
+*/
+{
+   static Uint   previous_len;
+   static int    i;
+   static char  *a_text;
+   static char  *b_text;
+   static char  *ptr_char;
+   static Bool   is_initialized=FALSE;
+
+
+   /*
+      Don't sort on the included resource "file name",
+        sort on the REAL text of the fixed date  O N L Y  !!!
+   */
+   if (!is_initialized)
+    {
+      a_text = (char *)my_malloc (maxlen_max, ERR_NO_MEMORY_AVAILABLE,
+                                  __FILE__, ((long)__LINE__)-1L,
+                                  "a_text", 0);
+      b_text = (char *)my_malloc (maxlen_max, ERR_NO_MEMORY_AVAILABLE,
+                                  __FILE__, ((long)__LINE__)-1L,
+                                  "b_text", 0);
+      previous_len = maxlen_max;
+      is_initialized = TRUE;
+    }
+   else
+     if (previous_len < maxlen_max)
+      {
+        a_text = (char *)my_realloc ((VOID_PTR)a_text,
+                                     maxlen_max, ERR_NO_MEMORY_AVAILABLE,
+                                     __FILE__, ((long)__LINE__)-2L,
+                                     "a_text", maxlen_max);
+        b_text = (char *)my_realloc ((VOID_PTR)b_text,
+                                     maxlen_max, ERR_NO_MEMORY_AVAILABLE,
+                                     __FILE__, ((long)__LINE__)-2L,
+                                     "b_text", maxlen_max);
+        previous_len = maxlen_max;
+      }
+   i = len_year_max + 4;
+   /*
+      Copy the "date"-part AS IS.
+   */
+   strncpy(a_text, *a, i);
+   a_text[i] = '\0';
+   /*
+      Skip the filename part.
+   */
+   if (*(*a + i + 1) != PSEUDO_QUOTE)
+     /*
+        Internal error, a maintainer has modified the internal format
+          of a line and forgots to respect this modification here!
+     */
+     my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
+   ptr_char = strchr(*a+i+2, PSEUDO_QUOTE);
+   if (ptr_char == (char *)NULL)
+     /*
+        Internal error, a maintainer has modified the internal format
+          of a line and forgots to respect this modification here!
+     */
+     my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
+   ptr_char++;
+   /*
+      And concatenate the "text"-part.
+   */
+   if (*ptr_char)
+     strcat(a_text, ptr_char);
+   /*
+      Copy the "date"-part AS IS.
+   */
+   strncpy(b_text, *b, i);
+   b_text[i] = '\0';
+   /*
+      Skip the filename part.
+   */
+   if (*(*b + i + 1) != PSEUDO_QUOTE)
+     /*
+        Internal error, a maintainer has modified the internal format
+          of a line and forgots to respect this modification here!
+     */
+     my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
+   ptr_char = strchr(*b+i+2, PSEUDO_QUOTE);
+   if (ptr_char == (char *)NULL)
+     /*
+        Internal error, a maintainer has modified the internal format
+          of a line and forgots to respect this modification here!
+     */
+     my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
+   ptr_char++;
+   /*
+      And concatenate the "text"-part.
+   */
+   if (*ptr_char)
+     strcat(b_text, ptr_char);
+
+   return(strcmp(a_text, b_text));
+}
+
+
+
+   LOCAL int
+fn_des_sort (a, b)
+   const char **a;
+   const char **b;
+/*
+   The (q)sort compare function for fixed dates which texts
+     have an included resource "file name"; descending order.
+*/
+{
+   static Uint   previous_len;
+   static int    i;
+   static char  *a_text;
+   static char  *b_text;
+   static char  *ptr_char;
+   static Bool   is_initialized=FALSE;
+
+
+   /*
+      Don't sort on the included resource "file name",
+        sort on the REAL text of the fixed date  O N L Y  !!!
+   */
+   if (!is_initialized)
+    {
+      a_text = (char *)my_malloc (maxlen_max, ERR_NO_MEMORY_AVAILABLE,
+                                  __FILE__, ((long)__LINE__)-1L,
+                                  "a_text", 0);
+      b_text = (char *)my_malloc (maxlen_max, ERR_NO_MEMORY_AVAILABLE,
+                                  __FILE__, ((long)__LINE__)-1L,
+                                  "b_text", 0);
+      previous_len = maxlen_max;
+      is_initialized = TRUE;
+    }
+   else
+     if (previous_len < maxlen_max)
+      {
+        a_text = (char *)my_realloc ((VOID_PTR)a_text,
+                                     maxlen_max, ERR_NO_MEMORY_AVAILABLE,
+                                     __FILE__, ((long)__LINE__)-2L,
+                                     "a_text", maxlen_max);
+        b_text = (char *)my_realloc ((VOID_PTR)b_text,
+                                     maxlen_max, ERR_NO_MEMORY_AVAILABLE,
+                                     __FILE__, ((long)__LINE__)-2L,
+                                     "b_text", maxlen_max);
+        previous_len = maxlen_max;
+      }
+   i = len_year_max + 4;
+   /*
+      Copy the "date"-part AS IS.
+   */
+   strncpy(a_text, *a, i);
+   a_text[i] = '\0';
+   /*
+      Skip the filename part.
+   */
+   if (*(*a + i + 1) != PSEUDO_QUOTE)
+     /*
+        Internal error, a maintainer has modified the internal format
+          of a line and forgots to respect this modification here!
+     */
+     my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
+   ptr_char = strchr(*a+i+2, PSEUDO_QUOTE);
+   if (ptr_char == (char *)NULL)
+     /*
+        Internal error, a maintainer has modified the internal format
+          of a line and forgots to respect this modification here!
+     */
+     my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
+   ptr_char++;
+   /*
+      And concatenate the "text"-part.
+   */
+   if (*ptr_char)
+     strcat(a_text, ptr_char);
+   /*
+      Copy the "date"-part AS IS.
+   */
+   strncpy(b_text, *b, i);
+   b_text[i] = '\0';
+   /*
+      Skip the filename part.
+   */
+   if (*(*b + i + 1) != PSEUDO_QUOTE)
+     /*
+        Internal error, a maintainer has modified the internal format
+          of a line and forgots to respect this modification here!
+     */
+     my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
+   ptr_char = strchr(*b+i+2, PSEUDO_QUOTE);
+   if (ptr_char == (char *)NULL)
+     /*
+        Internal error, a maintainer has modified the internal format
+          of a line and forgots to respect this modification here!
+     */
+     my_error (ERR_MAINTAINER_FAILURE, __FILE__, (long)__LINE__, "", 0);
+   ptr_char++;
+   /*
+      And concatenate the "text"-part.
+   */
+   if (*ptr_char)
+     strcat(b_text, ptr_char);
+
+   return(strcmp(b_text, a_text));
 }
 #endif /* USE_RC */

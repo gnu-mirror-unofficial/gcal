@@ -1,7 +1,7 @@
 # Makefile for directory with message catalog handling in GNU NLS Utilities.
-# Copyright (C) 1995, 1996 Free Software Foundation, Inc.
+# Copyright (C) 1995, 1996, 1997, 1988 Free Software Foundation, Inc.
 #
-# Modified 23-Apr-1997 by Thomas Esken <esken@uni-muenster.de> for Gcal.
+# Modified 29-Jun-1999 by Thomas Esken <esken@uni-muenster.de> for Gcal.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -39,10 +39,12 @@ AR = ar
 CC = @CC@
 RANLIB = @RANLIB@
 
+X = @EXEEXT@
+O = @OBJEXT@
 
 DEFS = -DLOCALEDIR=\"$(localedir)\" -DGNULOCALEDIR=\"$(gnulocaledir)\" \
 -DLOCALE_ALIAS_PATH=\"$(aliaspath)\" @DEFS@
-
+CPPFLAGS = @CPPFLAGS@
 CFLAGS = @CFLAGS@
 
 
@@ -59,13 +61,13 @@ COMSRCS = bindtextdom.c dcgettext.c dgettext.c gettext.c \
   finddomain.c loadmsgcat.c localealias.c textdomain.c l10nflist.c \
   explodename.c
 
-OBJECTS = @INTLOBJS@ bindtextdom.o dcgettext.o dgettext.o gettext.o \
-  finddomain.o loadmsgcat.o localealias.o textdomain.o l10nflist.o \
-  explodename.o
+OBJECTS = @INTLOBJS@ bindtextdom$O dcgettext$O dgettext$O gettext$O \
+  finddomain$O loadmsgcat$O localealias$O textdomain$O l10nflist$O \
+  explodename$O
 
-CATOBJS = cat-compat.o ../po/cat-id-tbl.o
+CATOBJS = cat-compat$O ../po/cat-id-tbl$O
 
-GETTOBJS = intl-compat.o
+GETTOBJS = intl-compat$O
 
 DISTFILES.common = ChangeLog Makefile.in linux-msg.sed po2tbl.sed.in \
   xopen-msg.sed $(HEADERS) $(SOURCES)
@@ -74,9 +76,9 @@ DISTFILES = $(DISTFILES.common) VERSION
 
 
 .SUFFIXES:
-.SUFFIXES: .c .o
+.SUFFIXES: .c $O
 
-.c.o:
+.c$O:
 	$(COMPILE) $<
 
 INCLUDES = -I.. -I. -I$(top_srcdir)/intl
@@ -90,14 +92,14 @@ libintl.a: $(OBJECTS)
 	$(AR) cru $@ $(OBJECTS)
 	$(RANLIB) $@
 
-../po/cat-id-tbl.o: ../po/cat-id-tbl.c $(top_srcdir)/po/$(PACKAGE).pot
-	cd ../po && $(MAKE) cat-id-tbl.o
+../po/cat-id-tbl$O: ../po/cat-id-tbl.c $(top_srcdir)/po/$(PACKAGE).pot
+	cd ../po && $(MAKE) cat-id-tbl$O
 
 check install installbin install-strip: all
 
 $(OBJECTS): ../config.h libgettext.h
-bindtextdom.o finddomain.o loadmsgcat.o: gettextP.h gettext.h loadinfo.h
-dcgettext.o: gettextP.h gettext.h hash-string.h loadinfo.h
+bindtextdom$O finddomain$O loadmsgcat$O: gettextP.h gettext.h loadinfo.h
+dcgettext$O: gettextP.h gettext.h hash-string.h loadinfo.h
 
 tags: TAGS
 
@@ -113,7 +115,7 @@ all-no installdirs uninstall:
 	@echo "Nothing to be done for \`$@'"
 
 mostlyclean:
-	rm -f *.a *.o core core.*
+	rm -f *.a *$O core core.*
 
 clean: mostlyclean
 
@@ -127,7 +129,7 @@ maintainer-clean: realclean
 	@echo "This command is intended for maintainers to use;"
 	@echo "it deletes files that may require special tools to rebuild."
 
-dist dist-gcal distzip distzoo distlha distshar: Makefile $(DISTFILES)
+dist dist-$(PACKAGE) distzip distzoo distlha distshar MANIFEST: Makefile $(DISTFILES)
 
 Makefile: $(srcdir)/Makefile.in ../config.status
 	cd .. \

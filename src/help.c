@@ -2,7 +2,7 @@
 *  help.c:  The help, version and license screens.
 *
 *
-*  Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1994-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: help.c 2.40 1997/04/09 02:04:00 tom Exp $";
+static char rcsid[]="$Id: help.c 3.00 2000/05/22 03:00:00 tom Exp $";
 #endif
 
 
@@ -38,77 +38,32 @@ static char rcsid[]="$Id: help.c 2.40 1997/04/09 02:04:00 tom Exp $";
 #if HAVE_CTYPE_H
 #  include <ctype.h>
 #endif
-#include "gcal.h"
+#include "common.h"
+#if USE_RC
+#  include "rc-defs.h"
+#endif /* USE_RC */
+#include "globals.h"
+#include "hd-defs.h"
+#include "tty.h"
+#include "utils.h"
+#include "help.h"
 
 
 
 /*
-*  Function prototypes.
+*  LOCAL functions prototypes.
 */
-#if __cplusplus
-extern "C"
-{
-#endif
-/*
-************************************************** Defined in `tty.c'.
-*/
-IMPORT void
-print_text __P_((FILE *fp,
-                 char *text_line));
-/*
-************************************************** Defined in `utils.c'.
-*/
-IMPORT VOID_PTR
-my_malloc __P_((const int   amount,
-                const int   exit_status,
-                const char *module_name,
-                const long  module_line,
-                const char *var_name,
-                const int   var_contents));
-IMPORT VOID_PTR
-my_realloc __P_((      VOID_PTR  ptr_memblock,
-                 const int       amount,
-                 const int       exit_status,
-                 const char     *module_name,
-                 const long      module_line,
-                 const char     *var_name,
-                 const int       var_contents));
-#if !HAVE_STRNCASECMP
-IMPORT int
-my_strncasecmp __P_((const char *s1,
-                     const char *s2,
-                           int   len));
-#endif /* !HAVE_STRNCASECMP */
-IMPORT const char *
-short_day_name __P_((const int day));
-IMPORT const char *
-short3_day_name __P_((const int day));
-IMPORT const char *
-short_month_name __P_((const int month));
+__BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `help.c'.
 */
-EXPORT void
-my_help_on_help __P_((      FILE *fp,
-                      const char *longopt,
-                      const Bool  lopt_ambig,
-                      const int   cols));
-EXPORT void
-my_extended_help __P_((      FILE *fp,
-                       const int   longopt_symbolic));
-EXPORT void
-my_basic_help __P_((FILE *fp));
-EXPORT void
-my_license __P_((FILE *fp));
-EXPORT void
-my_version __P_((FILE *fp));
-EXPORT char *
-usage_msg __P_((void));
-EXPORT void
-put_longopt_description __P_((FILE *fp));
+LOCAL int
+gmt_timezone_value __P_((int hour));
 LOCAL const char *
 get_longopt_description __P_((const int  longopt_symbolic,
                               const Bool with_larglist));
+LOCAL void
+my_bug_report_address __P_((FILE *fp));
 LOCAL void
 my_copyright __P_((      FILE *fp,
                    const Bool  with_short_licence));
@@ -118,62 +73,152 @@ LOCAL void
 my_help_tail_text __P_((FILE *fp));
 LOCAL void
 print_compiler_info __P_((FILE *fp));
-#if __cplusplus
-}
-#endif
+__END_DECLARATIONS
 
 
 
 /*
-*  Declare public(extern) variables.
+*  LOCAL variables definitions.
 */
-IMPORT const Lopt_struct  lopt[];               /* The table of long-style options */
-IMPORT const Cc_struct  cc_holidays[];          /* The table of country specific holidays */
-#if USE_RC
-IMPORT const Ed_struct  info_exclusive_day[];   /* The table of info of %? special texts for day exclusion */
-#endif
-IMPORT const Df_struct  info_date_format[];     /* The table of info of supported date formats */
-IMPORT Df_struct    supported_date_format[];    /* The table of supported date formats */
-IMPORT Df_struct   *date_format;                /* Points to the used date format */
-IMPORT Greg_struct  greg_reform_date[];         /* The table of Gregorian Reformation dates */
-IMPORT Greg_struct *greg;                       /* Points to the used Gregorian Reformation date */
-IMPORT Hls_struct   ehls1s;                     /* Effective hls 1 start (current day) */
-IMPORT Hls_struct   ehls1e;                     /* Effective hls 1 end (current day) */
-IMPORT Hls_struct   ehls2s;                     /* Effective hls 2 start (holiday) */
-IMPORT Hls_struct   ehls2e;                     /* Effective hls 2 end (holiday) */
-IMPORT int          len_year_max;               /* String length of the maximum year able to compute */
-IMPORT int          act_year;                   /* Actual year */
-IMPORT int          is_tty;                     /* Is output displayed on a terminal? */
-IMPORT int          len_prgr_name;              /* Length of actual program name */
-IMPORT char        *yy_lit;                     /* The "yy" text */
-IMPORT char        *yyyy_lit;                   /* The "yyyy" text */
-IMPORT char        *mm_lit;                     /* The "mm" text */
-IMPORT char        *www_lit;                    /* The "www" text */
-IMPORT char        *dd_lit;                     /* The "dd" text */
-IMPORT char        *larg_lit;                   /* The "ARG" text */
-IMPORT char        *s1;                         /* General purpose text buffer */
-IMPORT char        *s2;                         /* General purpose text buffer */
-IMPORT char        *prgr_name;                  /* Stores the actual program name */
-#ifdef GCAL_EPAGER
-IMPORT char        *ext_pager;                  /* Name of external pager program */
-#endif
-IMPORT Bool         use_short3_day_name;        /* 3 char day name format specifier given in date format? */
-IMPORT Bool         emu_hls;                    /* Must we emulate the highlighting sequences? */
-IMPORT Bool         highlight_flag;             /* -H<yes> or -H<no> */
-
-
-
-/*
-*  Define local(static) variables.
-*/
+/* Compiler infotext. */
 #if USE_DE
-LOCAL const char *compiler_info[]={"Kompiliert mit %s%s f"UE"r %s%s%s%s"};   /* Compiler infotext */
+LOCAL const char *compiler_info[]={"Kompiliert mit %s%s f%sr %s%s%s%s"};
 #else /* !USE_DE */
-LOCAL const char *compiler_info[]={N_("Compiled with %s%s for %s%s%s%s")};    /* Compiler infotext */
+LOCAL const char *compiler_info[]={N_("Compiled with %s%s for %s%s%s%s")};
 #endif /* !USE_DE */
 
+/*
+   The table used to inform about the supported date formats is a vector of
+     `Di_struct' terminated by an element containing a `di_info' which is zero!
+*/
+LOCAL const Di_struct  info_date_format[]=
+{
+/*
+  { char *di_info, char di_1format, char di_2format },
+*/
+#if USE_DE
+  { "# Tagesnummer (mu"SZ" definiert werden)",                           DFORMAT_CHAR, DAYNR_CHAR },
+  { "# Jahresnummer (mu"SZ" definiert werden)",                          DFORMAT_CHAR, YEARNR_CHAR },
+  { "# Wochentagsname (darf definiert werden)",                          DFORMAT_CHAR, WDNAME_CHAR },
+  { "Monat-Gruppe (genau ein Mitglied mu"SZ" definiert werden):",        '\0',         '\0'},
+  { "# Monatsnummer",                                                    DFORMAT_CHAR, MONTHNR_CHAR },
+  { "# Monatsname",                                                      DFORMAT_CHAR, MONTHNAME_CHAR },
+  { "Hervorhebung-Gruppe (alle Mitglieder m"UE"ssen definiert werden):", '\0',         '\0'},
+  { "Start von Hervorhebungssequenz/Markierungszeichen",                 DFORMAT_CHAR, HLS1S_CHAR },
+  { "Ende von Hervorhebungssequenz/Markierungszeichen",                  DFORMAT_CHAR, HLS1E_CHAR },
+  { "Zeichenersetzung:",                                                 '\0',         '\0' },
+  { "Leerzeichen ('%c')",                                                PSEUDO_BLANK, ' ' },
+  { "Unterstrichzeichen ('%c')",                                         QUOTE_CHAR,   PSEUDO_BLANK },
+  { "Prozentzeichen ('%c')",                                             QUOTE_CHAR,   DFORMAT_CHAR },
+  { "Backslashzeichen ('%c')",                                           QUOTE_CHAR,   QUOTE_CHAR },
+  { "Alle mit # markierten Formatelemente d"UE"rfen optional noch",      '\0',         '\0' },
+  { "eine Formatanweisung enthalten, deren Schablone wie folgt ist:",    '\0',         '\0' },
+  { "[AUSRICHTUNG [VORZEICHEN] [NULL] BREITE [STIL] [ANHANG] FORMAT]",   '\0',         '\0' },
+  { "AUSRICHTUNG-Gruppe (genau ein Mitglied mu"SZ" definiert werden):",  '\0',         '\0' },
+  { "Feldinhalt linksb"UE"ndig stellen im Feld der Breite BREITE",       FLEFT_CHAR,   ' ' },
+  { "Feldinhalt mittig stellen im Feld der Breite BREITE",               FCENTER_CHAR, ' ' },
+  { "Feldinhalt rechtsb"UE"ndig stellen im Feld der Breite BREITE",      FRIGHT_CHAR,  ' ' },
+  { "VORZEICHEN (darf definiert werden):",                               '\0',         '\0' },
+  { "Numerischen Wert mit f"UE"hrendem Vorzeichen ausstatten",           FSIGN_CHAR,   ' ' },
+  { "NULL (darf definiert werden):",                                     '\0',         '\0' },
+  { "Numerischen Wert mit f"UE"hrenden Nullen auff"UE"llen",             FLZERO_CHAR,  ' ' },
+  { "BREITE (mu"SZ" definiert werden):",                                 '\0',         '\0' },
+  { "Feld hat die Breite N (%d...%d)",                                   'N',          '\0' },
+  { "STIL-Gruppe (genau ein Mitglied darf definiert werden):",           '\0',         '\0' },
+  { "Feldinhalt in Gro"SZ"buchstaben umwandeln",                         FUPPER_CHAR,  ' ' },
+  { "Feldinhalt in Kleinbuchstaben umwandeln",                           FLOWER_CHAR,  ' ' },
+  { "Feldinhalt in Wortgro"SZ"schreibung umwandeln",                     FWORD_CHAR,   ' ' },
+  { "ANHANG (darf definiert werden):",                                   '\0',         '\0' },
+  { "Numerischen Wert mit Ordnungszahlanhang ausstatten",                FSUFFIX_CHAR, ' ' },
+  { "FORMAT-Gruppe (genau ein Mitglied mu"SZ" definiert werden):",       '\0',         '\0' },
+  { "Feldinhalt wird nicht nach Position BREITE abgeschnitten",          FVAR_CHAR,    ' ' },
+  { "Feldinhalt wird nach Position BREITE abgeschnitten",                FFIX_CHAR,    ' ' },
+#else /* !USE_DE */
+  { N_("# Day number (must be defined)"),                              DFORMAT_CHAR, DAYNR_CHAR },
+  { N_("# Year number (must be defined)"),                             DFORMAT_CHAR, YEARNR_CHAR },
+  { N_("# Weekday name (may be defined)"),                             DFORMAT_CHAR, WDNAME_CHAR },
+  { N_("Month group (exactly one member must be defined):"),           '\0',         '\0'},
+  { N_("# Month number"),                                              DFORMAT_CHAR, MONTHNR_CHAR },
+  { N_("# Month name"),                                                DFORMAT_CHAR, MONTHNAME_CHAR },
+  { N_("Highlighting group (all members must be defined):"),           '\0',         '\0'},
+  { N_("Start of highlighting sequence/marking character"),            DFORMAT_CHAR, HLS1S_CHAR },
+  { N_("End of highlighting sequence/marking character"),              DFORMAT_CHAR, HLS1E_CHAR },
+  { N_("Character replacement:"),                                      '\0',         '\0' },
+  { N_("Space/blank ('%c') character"),                                PSEUDO_BLANK, ' ' },
+  { N_("Underscore ('%c') character"),                                 QUOTE_CHAR,   PSEUDO_BLANK },
+  { N_("Percent ('%c') character"),                                    QUOTE_CHAR,   DFORMAT_CHAR },
+  { N_("Backslash ('%c') character"),                                  QUOTE_CHAR,   QUOTE_CHAR },
+  { N_("All format elements marked by # may optionally"),              '\0',         '\0' },
+  { N_("contain a format instruction, which template is like:"),       '\0',         '\0' },
+  { N_("[ALIGNMENT [SIGN] [ZERO] WIDTH [STYLE] [SUFFIX] FORMAT]"),     '\0',         '\0' },
+  { N_("ALIGNMENT group (exactly one member must be defined):"),       '\0',         '\0' },
+  { N_("Field contents placed at the left margin using width WIDTH"),  FLEFT_CHAR,   ' ' },
+  { N_("Field contents placed in centered manner using width WIDTH"),  FCENTER_CHAR, ' ' },
+  { N_("Field contents placed at the right margin using width WIDTH"), FRIGHT_CHAR,  ' ' },
+  { N_("SIGN (may be defined):"),                                      '\0',         '\0' },
+  { N_("Numerical value is provided with leading sign"),               FSIGN_CHAR,   ' ' },
+  { N_("ZERO (may be defined):"),                                      '\0',         '\0' },
+  { N_("Numerical value is filled with leading zero(es)"),             FLZERO_CHAR,  ' ' },
+  { N_("WIDTH (must be defined):"),                                    '\0',         '\0' },
+  { N_("Field has the width N (%d...%d)"),                             'N',          '\0' },
+  { N_("STYLE group (exactly one member may be defined):"),            '\0',         '\0' },
+  { N_("Field contents is converted to upper-case letters"),           FUPPER_CHAR,  ' ' },
+  { N_("Field contents is converted to lower-case letters"),           FLOWER_CHAR,  ' ' },
+  { N_("Field contents is converted to capitalized words"),            FWORD_CHAR,   ' ' },
+  { N_("SUFFIX (may be defined):"),                                    '\0',         '\0' },
+  { N_("Numerical value is provided with an ordinal number suffix"),   FSUFFIX_CHAR, ' ' },
+  { N_("FORMAT group (exactly one member must be defined):"),          '\0',         '\0' },
+  { N_("Field contents is not cut after position WIDTH"),              FVAR_CHAR,    ' ' },
+  { N_("Field contents is cut after position WIDTH"),                  FFIX_CHAR,    ' ' },
+#endif /* !USE_DE */
+  { NULL, '\0', '\0' }
+};
+
+#if USE_RC
+/*
+   The table used to inform about the characters used in the
+     %? inclusive/exclusive day special texts is a vector of
+     `Ed_struct' terminated by an element containing an `ed_info' which is zero!
+*/
+LOCAL const Ed_struct  info_exclusive_day[]=
+{
+/*
+  { char ed_id, char *ed_info },
+*/
+#  if USE_DE
+  { RC_EX_LHDY_CHAR,      "gesetzlichen Feiertage" },
+  { RC_EX_AHDY_CHAR,      "Feiertage" },
+  { RC_EX_MON_CHAR,       "Montage" },
+  { RC_EX_TUE_CHAR,       "Dienstage" },
+  { RC_EX_WED_CHAR,       "Mittwoche" },
+  { RC_EX_THU_CHAR,       "Donnerstage" },
+  { RC_EX_FRI_CHAR,       "Freitage" },
+  { RC_EX_SAT_CHAR,       "Samstage" },
+  { RC_EX_SUN_CHAR,       "Sonntage" },
+  { RC_EX_MON_2_THU_CHAR, "Montage...Donnerstage" },
+  { RC_EX_MON_2_FRI_CHAR, "Montage...Freitage" },
+#  else /* !USE_DE */
+  { RC_EX_LHDY_CHAR,      N_("legal holidays") },
+  { RC_EX_AHDY_CHAR,      N_("holidays") },
+  { RC_EX_MON_CHAR,       N_("Mondays") },
+  { RC_EX_TUE_CHAR,       N_("Tuesdays") },
+  { RC_EX_WED_CHAR,       N_("Wednesdays") },
+  { RC_EX_THU_CHAR,       N_("Thursdays") },
+  { RC_EX_FRI_CHAR,       N_("Fridays") },
+  { RC_EX_SAT_CHAR,       N_("Saturdays") },
+  { RC_EX_SUN_CHAR,       N_("Sundays") },
+  { RC_EX_MON_2_THU_CHAR, N_("Mondays...Thursdays") },
+  { RC_EX_MON_2_FRI_CHAR, N_("Mondays...Fridays") },
+#  endif /* !USE_DE */
+  { '\0', NULL }
+};
+#endif
 
 
+
+/*
+*  Function implementations.
+*/
    PUBLIC void
 my_help_on_help (fp, longopt, lopt_ambig, cols)
          FILE *fp;
@@ -182,7 +227,7 @@ my_help_on_help (fp, longopt, lopt_ambig, cols)
    const int   cols;
 /*
    Prints the "help on help" text to file `fp' using the central output
-     function `print_text()' and uses global text buffer `s1' internally.
+     function `print_text()', and uses the global text buffer `s1' internally.
      If delivered `lopt_ambig' is TRUE, only display the names of all
      longoptions stored in `lopt' structure member `long_name', which
      are equal to delivered `longopt'.
@@ -249,7 +294,7 @@ my_extended_help (fp, longopt_symbolic)
    const int   longopt_symbolic;
 /*
    Prints the "extended help" text to file `fp' using the central
-     output function `print_text()' and uses global text buffer
+     output function `print_text()', and uses the global text buffers
      `s1' and `s2' internally.
      If `longopt_symbolic' is set to SYM_NIL, the complete text
      is shown, otherwise the text corresponding to SYM_??? only!
@@ -259,39 +304,17 @@ my_extended_help (fp, longopt_symbolic)
    auto const Ed_struct    *ptr_info_exclusive_day=info_exclusive_day;
 #endif
    auto const Cc_struct    *ptr_cc_holidays=cc_holidays;
-   auto const Df_struct    *ptr_info_date_format=info_date_format;
    auto       Df_struct    *ptr_date_format=supported_date_format;
+   auto const Di_struct    *ptr_info_date_format=info_date_format;
    auto       Greg_struct  *ptr_greg=greg_reform_date;
    auto       char         *ptr_env;
-   auto       Bool          print_hls=(Bool)(is_tty&&highlight_flag&&!emu_hls);
 
 
    if (longopt_symbolic == SYM_NIL)
     {
       my_help_head_text (fp);
-#if USE_RC
-#  if USE_DE
-      sprintf(s1, "Aufruf: %s [[OPTION...] [%cDATUM] [%cDATEI...]] [KOMMANDO]",
-              prgr_name, RC_ADATE_CHAR, RSP_CHAR);
-#  else /* !USE_DE */
-      sprintf(s1, _("Usage:  %s [[OPTION...] [%cDATE] [%cFILE...]] [COMMAND]"),
-              prgr_name, RC_ADATE_CHAR, RSP_CHAR);
-#  endif /* !USE_DE */
-#else /* !USE_RC */
-#  if USE_DE
-      sprintf(s1, "Aufruf: %s [[OPTION...] [%cDATEI...]] [KOMMANDO]", prgr_name, RSP_CHAR);
-#  else /* !USE_DE */
-      sprintf(s1, _("Usage:  %s [[OPTION...] [%cFILE...]] [COMMAND]"), prgr_name, RSP_CHAR);
-#  endif /* !USE_DE */
-#endif /* !USE_RC */
       print_text (fp, s1);
-      print_text (fp, s1);
-      print_text (fp, s1);
-      if (print_hls)
-        strcpy(s1, ehls2s.seq);
-      strcat(s1, _("OPTION"));
-      if (print_hls)
-        strcat(s1, ehls2e.seq);
+      strcpy(s1, _("OPTION"));
       print_text (fp, s1);
     }
 #if USE_DE
@@ -307,6 +330,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_LONG_HELP1:
       case SYM_LONG_HELP2:
@@ -320,6 +344,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_LICENSE1:
       case SYM_LICENSE2:
@@ -334,14 +359,26 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_VERSION:
         sprintf(s1, "%sV        %s", SWITCH, get_longopt_description (SYM_VERSION, TRUE));
         print_text (fp, s1);
-        strcpy(s1, "          Versionsnummer ausgeben und Programm beenden");
+        strcpy(s1, "          Versionsinformation ausgeben und Programm beenden");
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_EXIT_STAT_HELP_NON_ZERO:
+        sprintf(s1, "          %s", get_longopt_description (SYM_EXIT_STAT_HELP_NON_ZERO, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Setze Programm EXIT Status auf %d bei `%s' etc.",
+                ERR_EXIT_INFO_TEXTS_NON_ZERO, get_longopt_description (SYM_HELP, FALSE));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_RESPONSE_FILE:
         sprintf(s1, "%sR %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_RESPONSE_FILE, TRUE));
@@ -352,6 +389,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  ifdef GCAL_SHELL
       case SYM_SCRIPT_FILE:
@@ -363,22 +401,24 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  endif
 #  if USE_RC
       case SYM_DATE_VARIABLE:
         sprintf(s1, "%sv %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_DATE_VARIABLE, TRUE));
         print_text (fp, s1);
-        strcpy(s1, "          Globale Datumvariable(n) \"dvar->a...d|f...s|u...|z\" definieren");
+        strcpy(s1, "          Globale Datumvariable(n) \"DVAR->a...d|f...s|u...|z\" definieren");
         print_text (fp, s1);
-        sprintf(s1, "   %-3s    = Definitionen der Form \"dvar%s`%s%s'\" getrennt durch `%s' Zeichen",
-                larg_lit, RC_DVAR_ASSIGN, mm_lit, dd_lit, SEP);
+        sprintf(s1, "   %-3s    = \"DVAR%s%s%s\" Definitionen getrennt durch `%s' Zeichen",
+                larg_lit, RC_VAR_ASSIGN, mm_lit, dd_lit, SEP);
         print_text (fp, s1);
-        sprintf(s1, "            z.B.  %sv a%s1127%sb%s054   Setze `a' auf 27 Nov und `b' auf 4 Mai",
-                SWITCH, RC_DVAR_ASSIGN, SEP, RC_DVAR_ASSIGN);
+        sprintf(s1, "            Z.B.  %sv a%s1127%sb%s054   Setze `a' auf 27 Nov und `b' auf 4 Mai",
+                SWITCH, RC_VAR_ASSIGN, SEP, RC_VAR_ASSIGN);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_EXPORT_LOCAL_DVARS:
         sprintf(s1, "          %s", get_longopt_description (SYM_EXPORT_LOCAL_DVARS, TRUE));
@@ -387,22 +427,30 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_TEXT_VARIABLE:
         sprintf(s1, "%sr %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_TEXT_VARIABLE, TRUE));
         print_text (fp, s1);
-        sprintf(s1, "          Globale Textvariable(n) \"tvar->%ca...%cz\" definieren",
+        sprintf(s1, "          Globale Textvariable(n) \"TVAR->%ca...%cz\" definieren",
                 RC_TVAR_CHAR, RC_TVAR_CHAR);
         print_text (fp, s1);
-        sprintf(s1, "   %-3s    = Definitionen der Form \"tvar%s`text'\" getrennt durch `%s' Zeichen",
-                larg_lit, RC_TVAR_ASSIGN, SEP);
+        sprintf(s1, "   %-3s    = \"TVAR%sTEXT\" Definitonen getrennt durch `%s' Zeichen",
+                larg_lit, RC_VAR_ASSIGN, SEP);
         print_text (fp, s1);
-        sprintf(s1, "            z.B.  %sr %ca%sfoo%s%cb%sbar   Setze `%ca' auf `foo' und `%cb' auf `bar'",
-                SWITCH, RC_TVAR_CHAR, RC_TVAR_ASSIGN, SEP, RC_TVAR_CHAR, RC_TVAR_ASSIGN,
+        sprintf(s1, "            Z.B.  %sr %ca%sfoo%s%cb%sbar   Setze `%ca' auf `foo' und `%cb' auf `bar'",
+                SWITCH, RC_TVAR_CHAR, RC_VAR_ASSIGN, SEP, RC_TVAR_CHAR, RC_VAR_ASSIGN,
                 RC_TVAR_CHAR, RC_TVAR_CHAR);
+        print_text (fp, s1);
+        sprintf(s1, "          = \"TVAR[%s|%c%s]KOMMANDO\" Definitionen getrennt durch `%s' Zeichen",
+                RC_TVAR_ICMD_ASSIGN, QUOTE_CHAR, RC_TVAR_UCMD_ASSIGN, SEP);
+        print_text (fp, s1);
+        sprintf(s1, "            Z.B.  %sr %ca%sfoo   Ausgabe von Kommando `foo' an `%ca' zuweisen",
+                SWITCH, RC_TVAR_CHAR, RC_TVAR_ICMD_ASSIGN, RC_TVAR_CHAR);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_EXPORT_LOCAL_TVARS:
         sprintf(s1, "          %s", get_longopt_description (SYM_EXPORT_LOCAL_TVARS, TRUE));
@@ -411,6 +459,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_FILTER_DAY:
         sprintf(s1, "%sD %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_FILTER_DAY, TRUE));
@@ -419,16 +468,17 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         sprintf(s1, "   %-3s    = Eines oder mehrere der folgenden Zeichen.  Wenn Zeichen ein", larg_lit);
         print_text (fp, s1);
-        sprintf(s1, "            KLEINBUCHSTABE ist, so bedeutet das einen `nicht'-Ausschlu%s!", SZ);
+        sprintf(s1, "            KLEINBUCHSTABE ist, so bedeutet das einen Nichtausschlu%s!", SZ);
         print_text (fp, s1);
         do
          {
            sprintf(s1, "            %c = Ausschlu%s aller %s",
-                   ptr_info_exclusive_day->id, SZ, ptr_info_exclusive_day->info);
+                   ptr_info_exclusive_day->ed_id, SZ, ptr_info_exclusive_day->ed_info);
            print_text (fp, s1);
-         } while ((++ptr_info_exclusive_day)->info != (char *)NULL);
+         } while ((++ptr_info_exclusive_day)->ed_info != (char *)NULL);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_FILTER_PERIOD:
         sprintf(s1, "%sP %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_FILTER_PERIOD, TRUE));
@@ -443,6 +493,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_FILTER_TEXT:
         sprintf(s1, "%sI %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_FILTER_TEXT, TRUE));
@@ -459,6 +510,29 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_IGNORE_CASE:
+        sprintf(s1, "          %s", get_longopt_description (SYM_IGNORE_CASE, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Unterschied zwischen Gro%s- und Kleinschreibung", SZ);
+        print_text (fp, s1);
+        sprintf(s1, "          bei Benutzung der `%s' Option ignorieren",
+                get_longopt_description (SYM_FILTER_TEXT, FALSE));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_REVERT_MATCH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_REVERT_MATCH, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Den Sinn des Vergleichs der `%s' Option umkehren",
+                get_longopt_description (SYM_FILTER_TEXT, FALSE));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  endif /* USE_RC */
       case SYM_DEBUG:
@@ -478,6 +552,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_TYPE_OF_CALENDAR:
         sprintf(s1, "%si[MOD]   %s", SWITCH, get_longopt_description (SYM_TYPE_OF_CALENDAR, TRUE));
@@ -488,6 +563,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_ORTHODOX_CALENDAR:
         sprintf(s1, "%sO        %s", SWITCH, get_longopt_description (SYM_ORTHODOX_CALENDAR, TRUE));
@@ -496,14 +572,30 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_CALENDAR_WITH_WEEKNO:
-        sprintf(s1, "%sK        %s", SWITCH, get_longopt_description (SYM_CALENDAR_WITH_WEEKNO, TRUE));
+      case SYM_CALENDAR_WITH_WEEK_NUMBER:
+        sprintf(s1, "%sK        %s", SWITCH, get_longopt_description (SYM_CALENDAR_WITH_WEEK_NUMBER, TRUE));
         print_text (fp, s1);
-        strcpy(s1, "          Kalenderblatt mit ISO-Wochennummern ausstatten");
+        strcpy(s1, "          Kalenderblatt mit Wochennummern ausstatten");
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ISO_WEEK_NUMBER:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ISO_WEEK_NUMBER, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Art der Wochennummern bestimmen (aktuell:  %s)",
+                (iso_week_number) ? "ISO-8601:1988" : "Standard");
+        print_text (fp, s1);
+        sprintf(s1, "   %-3s    = yes   ISO-8601:1988 Wochennummern", larg_lit);
+        print_text (fp, s1);
+        strcpy(s1, "          = no    Standard-Wochennummern");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_SUPPRESS_CALENDAR:
         sprintf(s1, "%su        %s", SWITCH, get_longopt_description (SYM_SUPPRESS_CALENDAR, TRUE));
@@ -512,6 +604,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  if USE_PAGER
       case SYM_PAGER:
@@ -529,6 +622,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  endif /* USE_PAGER */
       case SYM_DISABLE_HIGHLIGHTING:
@@ -540,6 +634,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_FORCE_HIGHLIGHTING:
         sprintf(s1, "%sH yes    %s", SWITCH, get_longopt_description (SYM_FORCE_HIGHLIGHTING, TRUE));
@@ -550,6 +645,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_HIGHLIGHTING:
         sprintf(s1, "%sH %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_HIGHLIGHTING, TRUE));
@@ -559,24 +655,27 @@ my_extended_help (fp, longopt_symbolic)
         sprintf(s1, "   %-3s    = Durch `%s' Zeichen getrennte Hervorhebungssequenz-Paare",
                 larg_lit, SEP);
         print_text (fp, s1);
-        sprintf(s1, "            z.B.  %sH \\x2%s\\xAE   Benutze Hex-Wert 2 und AE f%sr Sequenz 1",
+        sprintf(s1, "            Z.B.  %sH \\x2%s\\xAE   Benutze Hex-Wert 2 und AE f%sr Sequenz 1",
                 SWITCH, SEP, UE);
         print_text (fp, s1);
-        sprintf(s1, "            z.B.  %sH %s%s*%s*      Benutze Zeichen `*' und `*' f%sr Sequenz 2",
+        sprintf(s1, "            Z.B.  %sH %s%s*%s*      Benutze Zeichen `*' und `*' f%sr Sequenz 2",
                 SWITCH, SEP, SEP, SEP, UE);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_BLOCKS:
         sprintf(s1, "%sb %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_BLOCKS, TRUE));
         print_text (fp, s1);
         strcpy(s1, "          Format des Jahreskalenders festlegen");
         print_text (fp, s1);
-        sprintf(s1, "   %-3s    = 1|2|3|4|6|12   Anzahl der Bl%scke", larg_lit, OE);
+        sprintf(s1, "   %-3s    = 1|2|3|4|6|12   Anzahl der Bl%scke (aktuell:  %d)",
+                larg_lit, OE, out_rows);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_CALENDAR_DATES:
         sprintf(s1, "%sj[MOD]   %s", SWITCH, get_longopt_description (SYM_CALENDAR_DATES, TRUE));
@@ -587,6 +686,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_HOLIDAY_DATES:
         sprintf(s1, "%sjn[MOD]  %s", SWITCH, get_longopt_description (SYM_HOLIDAY_DATES, TRUE));
@@ -597,6 +697,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #if USE_RC
       case SYM_FIXED_DATES:
@@ -608,12 +709,14 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #endif
       case SYM_STARTING_DAY:
         sprintf(s1, "%ss %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_STARTING_DAY, TRUE));
         print_text (fp, s1);
-        strcpy(s1, "          Starttag der Woche festlegen");
+        sprintf(s1, "          Starttag der Woche festlegen (aktuell:  %s)",
+                (use_short3_day_name) ? short3_day_name (start_day) : short_day_name (start_day));
         print_text (fp, s1);
         if (use_short3_day_name)
           sprintf(s1, "   %-3s    = 0|today | %d|%s | %d|%s | ... | %d|%s",
@@ -628,26 +731,57 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  ifdef GCAL_EMAIL
       case SYM_MAIL:
         sprintf(s1, "          %s", get_longopt_description (SYM_MAIL, TRUE));
         print_text (fp, s1);
-        ptr_env = MAIL_PRGR;
 #    if !defined(AMIGA) || defined(__GNUC__)
         ptr_env = getenv(ENV_VAR_MAILPROG);
-        if (ptr_env == (char *)NULL)
-          ptr_env = MAIL_PRGR;
+        if (ptr_env != (char *)NULL)
+         {
+           if (!*ptr_env)
+             ptr_env = MAIL_PRGR;
+         }
         else
-          if (!*ptr_env)
-            ptr_env = MAIL_PRGR;
 #    endif /* AMIGA && !__GNUC__ */
+          ptr_env = MAIL_PRGR;
         sprintf(s1, "          Versenden der Ausgabe via `%s' Programm an Benutzer", ptr_env);
         print_text (fp, s1);
-        sprintf(s1, "   %-3s    = eMail Adresse", larg_lit);
+        if (email_adr != (char *)NULL)
+          ptr_env = email_adr;
+#    if !defined(AMIGA) || defined(__GNUC__)
+        else
+          ptr_env = getenv(ENV_VAR_MAILTO);
+        if (ptr_env != (char *)NULL)
+         {
+           if (!*ptr_env)
+             ptr_env = getenv(ENV_VAR_USER);
+         }
+        else
+          ptr_env = getenv(ENV_VAR_USER);
+        if (ptr_env != (char *)NULL)
+         {
+           if (!*ptr_env)
+             ptr_env = getenv(ENV_VAR_LOGNAME);
+         }
+        else
+          ptr_env = getenv(ENV_VAR_LOGNAME);
+        if (ptr_env != (char *)NULL)
+         {
+           if (!*ptr_env)
+             ptr_env = (char *)NULL;
+         }
+#    endif /* AMIGA && !__GNUC__ */
+        if (ptr_env == (char *)NULL)
+          ptr_env = "UNBEKANNT";
+        sprintf(s1, "  [%-3s]   = eMail Adresse, sonst eMail-Versand an Benutzer `%s'",
+                larg_lit, ptr_env);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  endif /* GCAL_EMAIL */
       case SYM_HOLIDAY_LIST:
@@ -667,6 +801,16 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_SUPPRESS_HDLIST_SEP:
+        sprintf(s1, "%sG        %s", SWITCH, get_longopt_description (SYM_SUPPRESS_HDLIST_SEP, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Ewige Feiertagsliste ohne anf%shrende Leerzeile ausgeben", UE);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_EXCLUDE_HD_TITLE:
         sprintf(s1, "%sX        %s", SWITCH, get_longopt_description (SYM_EXCLUDE_HD_TITLE, TRUE));
@@ -675,14 +819,79 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_STANDARD_HDY:
-        sprintf(s1, "          %s", get_longopt_description (SYM_STANDARD_HDY, TRUE));
+      case SYM_ASTRONOMICAL_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ASTRONOMICAL_HDY, TRUE));
         print_text (fp, s1);
-        strcpy(s1, "          Ewige Feiertagsliste ohne Standardfeiertage ausstatten");
+        strcpy(s1, "          Ewige Feiertagsliste mit astronomischen Daten ausstatten");
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_BAHAI_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_BAHAI_HDY, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Ewige Feiertagsliste mit Bah%s'i Feiertagen ausstatten", ARA);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_BAHAI_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_BAHAI_MTH, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Ewige Feiertagsliste mit Bah%s'i Monaten ausstatten", ARA);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CELTIC_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CELTIC_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit keltischen Feiertagen ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CHINESE_FLEXIBLE_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CHINESE_FLEXIBLE_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit flexiblen chinesischen Feiertagen ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CHINESE_FLEXIBLE_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CHINESE_FLEXIBLE_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit flexiblen chinesischen Monaten ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CHINESE_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CHINESE_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit chinesischen Feiertagen ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CHINESE_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CHINESE_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit chinesischen Monaten ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_CHRISTIAN_HDY:
         sprintf(s1, "          %s", get_longopt_description (SYM_CHRISTIAN_HDY, TRUE));
@@ -691,28 +900,349 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_COPTIC_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_COPTIC_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit koptischen Monaten ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ETHIOPIC_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ETHIOPIC_MTH, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Ewige Feiertagsliste mit %sthiopischen Monaten ausstatten", AE);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_FRENCH_REVOLUTIONARY_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_FRENCH_REVOLUTIONARY_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit franz. Revolutionskalendermonaten ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_HEBREW_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_HEBREW_HDY, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Ewige Feiertagsliste mit hebr%sischen Feiertagen ausstatten", AE);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_HEBREW_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_HEBREW_MTH, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Ewige Feiertagsliste mit hebr%sischen Monaten ausstatten", AE);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_INDIAN_CIVIL_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_INDIAN_CIVIL_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit indischen Monaten ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ISLAMIC_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ISLAMIC_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit islamischen Feiertagen ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ISLAMIC_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ISLAMIC_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit islamischen Monaten ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_JAPANESE_FLEXIBLE_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_JAPANESE_FLEXIBLE_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit flexiblen japanischen Feiertagen ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_JAPANESE_FLEXIBLE_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_JAPANESE_FLEXIBLE_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit flexiblen japanischen Monaten ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_JAPANESE_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_JAPANESE_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit japanischen Feiertagen ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_JAPANESE_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_JAPANESE_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit japanischen Monaten ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_MULTICULTURAL_NEW_YEAR_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_MULTICULTURAL_NEW_YEAR_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit multikulturellen Neujahren ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_OLD_ARMENIC_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_OLD_ARMENIC_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit alt-armenischen Monaten ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_OLD_EGYPTIC_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_OLD_EGYPTIC_MTH, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Ewige Feiertagsliste mit alt-%sgyptischen Monaten ausstatten", AE);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ORTHODOX_NEW_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ORTHODOX_NEW_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit neu-orthodoxen Feiertagen ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ORTHODOX_OLD_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ORTHODOX_OLD_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit alt-orthodoxen Feiertagen ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_PERSIAN_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_PERSIAN_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit persischen Feiertagen ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_PERSIAN_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_PERSIAN_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit persischen Monaten ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ZODIACAL_MARKER_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ZODIACAL_MARKER_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          Ewige Feiertagsliste mit Tierkreiszeichen ausstatten");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_CC_HDY:
         sprintf(s1, "%sq %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_CC_HDY, TRUE));
         print_text (fp, s1);
         strcpy(s1, "          Ewige Feiertagsliste mit landesspezifischen Feiertagen ausstatten");
         print_text (fp, s1);
-        sprintf(s1, "   %-3s    = Einzelner Landeskode oder Liste von Landeskodes,", larg_lit);
+        sprintf(s1, "   %-3s    = Einzelner Landes- oder Territoriumskode bzw. Liste dieser,", larg_lit);
         print_text (fp, s1);
-        sprintf(s1, "            die durch `%s' Zeichen verbunden werden", CONNECT_SEP);
+        sprintf(s1, "            die durch `%s' Zeichen verbunden werden. Alle mit # markierten", CONNECT_SEP);
+        print_text (fp, s1);
+        sprintf(s1, "            L%snder/Territorien haben nur unvollst%sndig erfasste Feiertage", AE, AE);
         print_text (fp, s1);
         do
          {
-           sprintf(s1, "            %s = %s Feiertage", ptr_cc_holidays->id, ptr_cc_holidays->info);
+           sprintf(s1, "            %-*s = Feiertage in %s",
+#  if HD_TOP20CC
+                   2,
+#  else /* !HD_TOP20CC */
+                   5,
+#  endif /* !HD_TOP20CC */
+                   ptr_cc_holidays->cc_id, ptr_cc_holidays->cc_info);
            print_text (fp, s1);
-         } while ((++ptr_cc_holidays)->info != (char *)NULL);
+         } while ((++ptr_cc_holidays)->cc_info != (char *)NULL);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+#  if USE_RC
+      case SYM_ADJUST_VALUE:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ADJUST_VALUE, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Referenzwert f%sr Auf-/Untergangszeit bzw. Schattenl%snge festlegen",
+                UE, AE);
+        print_text (fp, s1);
+        sprintf(s1, "   %-3s    = Winkelwert bzw. Faktor im Bereich:  %+.1f...%+.1f",
+                larg_lit, -DEGS_PER_06_HOURS, DEGS_PER_06_HOURS);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ATMOSPHERE:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ATMOSPHERE, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Basisdaten der Erdatmosph%sre festlegen", AE);
+        print_text (fp, s1);
+        sprintf(s1, "   %-3s    = Luftdruck und Temperatur getrennt durch `%s' Zeichen",
+                larg_lit, SPLIT_SEP);
+        print_text (fp, s1);
+        sprintf(s1, "            Luftdruck in Millibar (aktuell:  %.3f)", atm_pressure/100.0);
+        print_text (fp, s1);
+        sprintf(s1, "            Lufttemperatur in Grad Celsius (aktuell:  %+.3f)",
+                atm_temperature);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_LIMIT:
+        sprintf(s1, "          %s", get_longopt_description (SYM_LIMIT, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Auf-/Untergangszeiten der Sonne auf den Tag beschr%snken", AE);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_PRECISE:
+        sprintf(s1, "          %s", get_longopt_description (SYM_PRECISE, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Astronomische Zeiten und Daten mit h%schster Genauigkeit darstellen", OE);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_EXECUTE_COMMAND:
+        sprintf(s1, "          %s", get_longopt_description (SYM_EXECUTE_COMMAND, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          `%c%c[%s]' Shell-Kommandos und",
+                RC_SPECIAL_TEXT_CHAR, RC_SHELL_ESC_CHAR, larg_lit);
+        print_text (fp, s1);
+        sprintf(s1, "          \"TVAR[%s|%c%s]KOMMANDO\" Zuweisungen ausf%shren",
+                RC_TVAR_ICMD_ASSIGN, QUOTE_CHAR, RC_TVAR_UCMD_ASSIGN, UE);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        print_text (fp, s1);
+#  endif
+      case SYM_TIME_OFFSET:
+        sprintf(s1, "          %s", get_longopt_description (SYM_TIME_OFFSET, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Basiszeit der astronomischen Funktionen %sndern" , AE);
+        print_text (fp, s1);
+#if USE_RC
+        sprintf(s1, "          beziehungsweise Zyklus-Startzeit %sndern" , AE);
+        print_text (fp, s1);
+#endif
+        if (time_hour_offset)
+          sprintf(s2, "%+d", gmt_timezone_value (time_hour_offset));
+        else
+          *s2 = '\0';
+#  if USE_RC
+        sprintf(s1, "   %-3s    = %c|%c|[%c|%c][%s|%s]MMMM|HH%s[MM]   Zeitversatzwert (aktuell:  %s%02d%s%02d == GMT%s)",
+                larg_lit, RC_TIME_CHAR, RC_GMTIME_CHAR, RC_TIME_CHAR, RC_GMTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
+                (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
+                abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
+#  else /* !USE_RC */
+        sprintf(s1, "   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Zeitversatzwert (aktuell:  %s%02d%s%02d == GMT%s)",
+                larg_lit, LOCALTIME_CHAR, LOCALTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
+                (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
+                abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
+#  endif /* !USE_RC */
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+#if USE_RC
+      case SYM_CYCLE_END:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CYCLE_END, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Zyklus-Endezeit %sndern" , AE);
+        print_text (fp, s1);
+        sprintf(s1, "   %-3s    = %c|%c|[%c|%c][%s|%s]MMMM|HH%s[MM]   Endezeitwert (aktuell:  %02d%s%02d)",
+                larg_lit, RC_TIME_CHAR, RC_GMTIME_CHAR, RC_TIME_CHAR, RC_GMTIME_CHAR,
+                ASC_LIT, DES_LIT, time_sep, (int)MM2HH(loop_end), time_sep,
+                (loop_end>SPECIAL_VALUE) ? loop_end%MINS_PER_HOUR : 0);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CYCLE_STEP:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CYCLE_STEP, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Zyklus-Schrittweite %sndern" , AE);
+        print_text (fp, s1);
+        sprintf(s1, "   %-3s    = MMMM|HH%s[MM]   Schrittweitenwert (aktuell:  %02d%s%02d)",
+                larg_lit, time_sep, (int)MM2HH(loop_step), time_sep, loop_step%MINS_PER_HOUR);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+#endif
+      case SYM_TRANSFORM_YEAR:
+        sprintf(s1, "          %s", get_longopt_description (SYM_TRANSFORM_YEAR, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          Basisjahr des Kalenders %sndern", AE);
+        print_text (fp, s1);
+        sprintf(s1, "   %-3s    = [%s|%s]JJJJ   Jahrversatzwert (aktuell:  %d)",
+                larg_lit, ASC_LIT, DES_LIT, (transform_year) ? transform_year : YEAR_MIN);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_GREG_REFORM:
         sprintf(s1, "          %s", get_longopt_description (SYM_GREG_REFORM, TRUE));
         print_text (fp, s1);
-        strcpy(s1, "          Setze Zeitraum der Gregorianischen Reformation");
+        strcpy(s1, "          Zeitraum der Gregorianischen Reformation setzen");
         print_text (fp, s1);
         sprintf(s1, "          Aktuell ber%scksichtigter Zeitraum:  %02d-%02d %s %0*d", UE,
                 greg->first_day, greg->last_day, short_month_name (greg->month),
@@ -726,45 +1256,72 @@ my_extended_help (fp, longopt_symbolic)
                    short_month_name (ptr_greg->month), len_year_max, ptr_greg->year);
            print_text (fp, s1);
          } while ((++ptr_greg)->year);
-        sprintf(s1, "   %-3s    = %s%s%s%s%s%s%s   Setze Zeitraum explizit",
-                larg_lit, yyyy_lit, SPLIT_SEP, mm_lit, SPLIT_SEP, dd_lit, SPLIT_SEP, dd_lit);
+        sprintf(s1, "   %-3s    = %s%c%s%s%s%s%s%s   Setze Zeitraum explizit",
+                larg_lit, yyyy_lit, *yyyy_lit, SPLIT_SEP, mm_lit, SPLIT_SEP, dd_lit, SPLIT_SEP, dd_lit);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_DATE_FORMAT:
         sprintf(s1, "          %s", get_longopt_description (SYM_DATE_FORMAT, TRUE));
         print_text (fp, s1);
         sprintf(s1, "          Anordnung der Datumelemente mit dem Formattext %s festlegen", larg_lit);
         print_text (fp, s1);
-        sprintf(s1, "          Aktuelles Format:  (%s) `%s' (%s)",
-                (date_format->id==(char *)NULL) ? "Selbstdefiniert" : date_format->id,
-                date_format->format, date_format->info);
+        sprintf(s1, "          Aktuell:  (%s) `%s' (%s)",
+                (date_format->df_id == (char *)NULL) ? "Selbstdefiniert" : date_format->df_id,
+                date_format->df_format, date_format->df_info);
         print_text (fp, s1);
         do
          {
-           sprintf(s1, "   %-6s = Setze Format auf:  `%s' (%s)", ptr_date_format->id,
-                   ptr_date_format->format, ptr_date_format->info);
+           sprintf(s1, "   %-6s = Format ist:  `%s' (%s)", ptr_date_format->df_id,
+                   ptr_date_format->df_format, ptr_date_format->df_info);
            print_text (fp, s1);
-         } while ((++ptr_date_format)->info != (char *)NULL);
+         } while ((++ptr_date_format)->df_info != (char *)NULL);
         sprintf(s1, "   %-3s    = Eigenes Format definieren. Ber%scksichtigte Formatelemente sind:",
                 larg_lit, UE);
         print_text (fp, s1);
         do
          {
-           if (*ptr_info_date_format->format == '\0')
-             sprintf(s1, "               %s", ptr_info_date_format->info);
+           if (!ptr_info_date_format->di_1format)
+             sprintf(s1, "               %s", ptr_info_date_format->di_info);
            else
-             sprintf(s1, "            %-2s = %s", ptr_info_date_format->format, ptr_info_date_format->info);
+            {
+              if (ptr_info_date_format->di_1format != DFORMAT_CHAR)
+               {
+                 if (ptr_info_date_format->di_2format)
+                   sprintf(s2, ptr_info_date_format->di_info, ptr_info_date_format->di_2format);
+                 else
+                   sprintf(s2, ptr_info_date_format->di_info, FWIDTH_MIN, FWIDTH_MAX);
+                 sprintf(s1, "            %c%c = %s", ptr_info_date_format->di_1format,
+                         (ptr_info_date_format->di_2format) ? ptr_info_date_format->di_2format : ' ', s2);
+               }
+              else
+                sprintf(s1, "            %c%c = %s", ptr_info_date_format->di_1format,
+                        ptr_info_date_format->di_2format, ptr_info_date_format->di_info);
+            }
            print_text (fp, s1);
-         } while ((++ptr_info_date_format)->info != (char *)NULL);
+         } while ((++ptr_info_date_format)->di_info != (char *)NULL);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_EXIT_STAT_HELP_127:
-        sprintf(s1, "          %s", get_longopt_description (SYM_EXIT_STAT_HELP_127, TRUE));
+      case SYM_TRANSLATE_STRING:
+        sprintf(s1, "          %s", get_longopt_description (SYM_TRANSLATE_STRING, TRUE));
         print_text (fp, s1);
-        strcpy(s1, "          Setze Programm EXIT Status auf 127 bei --help, --version etc.");
+        sprintf(s1, "          Zu %sbersetzende landesspezifische Sonderzeichenpaare definieren", UE);
+        print_text (fp, s1);
+        sprintf(s1, "   %-3s    = GRO%sBUCHSTABE\"\"KLEINBUCHSTABE... Definitionen",
+                larg_lit, SZ);
+        print_text (fp, s1);
+        sprintf(s1, "            Z.B. bewirkt ein `%s%s%s%s%s%s%s%s' %-3s die korrekte Umsetzung vorstehender",
+                AAE, AE, OOE, OE, UUE, UE, SZ, SZ, larg_lit);
+        print_text (fp, s1);
+        strcpy(s1, "            Sonderzeichen in einem selbstdefinierten Datumformat, welches eine");
+        print_text (fp, s1);
+        strcpy(s1, "            STIL-Formatanweisungskomponente aufweist, und zwar so, wie sie von");
+        print_text (fp, s1);
+        strcpy(s1, "            dem in Deutschland benutzten Zeichensatz verwendet werden");
         print_text (fp, s1);
       default:
         ;   /* Void */
@@ -825,6 +1382,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       default:
         ;   /* Void */
@@ -848,6 +1406,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_MOONIMAGE_LINES:
         sprintf(s1, "          %s", get_longopt_description (SYM_MOONIMAGE_LINES, TRUE));
@@ -859,6 +1418,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_INCLUDE_FILENAME:
         sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_FILENAME, TRUE));
@@ -867,6 +1427,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_ALTERNATIVE_FORMAT:
         sprintf(s1, "          %s", get_longopt_description (SYM_ALTERNATIVE_FORMAT, TRUE));
@@ -875,15 +1436,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
-        print_text (fp, s1);
-      case SYM_BYPASS_SHELL_CMD:
-        sprintf(s1, "          %s", get_longopt_description (SYM_BYPASS_SHELL_CMD, TRUE));
-        print_text (fp, s1);
-        sprintf(s1, "          # B            = `%c%c[%s]' Shell-Kommandos nicht ausf%shren",
-                RC_SPECIAL_TEXT_CHAR, RC_SHELL_ESC_CHAR, larg_lit, UE);
-        print_text (fp, s1);
-        if (longopt_symbolic != SYM_NIL)
-          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_INCLUDE_HOLIDAY:
         sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_HOLIDAY, TRUE));
@@ -894,14 +1447,16 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_INCLUDE_WEEK_NO:
-        sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_WEEK_NO, TRUE));
+      case SYM_INCLUDE_WEEK_NUMBER:
+        sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_WEEK_NUMBER, TRUE));
         print_text (fp, s1);
-        strcpy(s1, "          # k            = ISO-Wochennummer ausgeben");
+        strcpy(s1, "          # k            = Wochennummer ausgeben");
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_OMIT_DATE_PART:
         sprintf(s1, "          %s", get_longopt_description (SYM_OMIT_DATE_PART, TRUE));
@@ -910,6 +1465,16 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_SUPPRESS_FDLIST_SEP:
+        sprintf(s1, "          %s", get_longopt_description (SYM_SUPPRESS_FDLIST_SEP, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "          # Q            = Terminliste ohne anf%shrende Leerzeile ausgeben", UE);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_SUPPRESS_DATE_PART:
         sprintf(s1, "          %s", get_longopt_description (SYM_SUPPRESS_DATE_PART, TRUE));
@@ -918,6 +1483,16 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_SUPPRESS_TEXT_PART:
+        sprintf(s1, "          %s", get_longopt_description (SYM_SUPPRESS_TEXT_PART, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, "          # J            = Textfeld nicht ausgeben");
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_EXCLUDE_RC_TITLE:
         sprintf(s1, "          %s", get_longopt_description (SYM_EXCLUDE_RC_TITLE, TRUE));
@@ -926,14 +1501,16 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_INCLUDE_CONS_NO:
-        sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_CONS_NO, TRUE));
+      case SYM_INCLUDE_CONS_NUMBER:
+        sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_CONS_NUMBER, TRUE));
         print_text (fp, s1);
         strcpy(s1, "          # z            = Fortlaufende Postennummer ausgeben");
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_ZERO_DATES:
         sprintf(s1, "          %s", get_longopt_description (SYM_ZERO_DATES, TRUE));
@@ -955,24 +1532,17 @@ my_extended_help (fp, longopt_symbolic)
       case SYM_LEAP_DAY:
         sprintf(s1, "          %s", get_longopt_description (SYM_LEAP_DAY, TRUE));
         print_text (fp, s1);
-        strcpy(s1, "                         = Den `29-FEBRUAR' in Nicht-Schaltjahren handhaben");
+        strcpy(s1, "                         = Den `29-FEBRUAR' in Nichtschaltjahren handhaben");
         print_text (fp, s1);
-        /*
-           *** Translators, please don't translate the word `february',
-           *** because it is used textually AS IS as an option argument.
-        */
         sprintf(s1, "                           %-3s = february   Am `28-FEBRUAR' ber%scksichtigen",
                 larg_lit, UE);
         print_text (fp, s1);
-        /*
-           *** Translators, please don't translate the word `march',
-           *** because it is used textually AS IS as an option argument.
-        */
         sprintf(s1, "                           %-3s = march      Am `01-M%sRZ' ber%scksichtigen",
                 larg_lit, AAE, UE);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_INCLUDE_TODAY:
         sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_TODAY, TRUE));
@@ -981,6 +1551,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_LIST_MODE:
         sprintf(s1, "          %s", get_longopt_description (SYM_LIST_MODE, TRUE));
@@ -989,6 +1560,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       default:
         ;   /* Void */
@@ -1022,47 +1594,47 @@ my_extended_help (fp, longopt_symbolic)
         strcpy(s1, "                           N = 99       Letzte Woche");
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, "          # `%s%s'       = Einzelner Tag `%s' im Monat `%s'",
+        sprintf(s1, "          # %s%s         = Einzelner Tag %s im Monat %s",
                 mm_lit, dd_lit, dd_lit, mm_lit);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, "          # `%s%s'N     = Einzelner N'ter Wochentag `%s' im Monat `%s'",
+        sprintf(s1, "          # %s%sN       = Einzelner N'ter Wochentag %s im Monat %s",
                 mm_lit, www_lit, www_lit, mm_lit);
         print_text (fp, s1);
-        sprintf(s1, "                           N = 1...4   1'ter...4'ter Wochentag `%s' (stets)", www_lit);
+        sprintf(s1, "                           N = 1...4   1'ter...4'ter Wochentag %s (stets)", www_lit);
         print_text (fp, s1);
-        sprintf(s1, "                           N = 5       5'ter Wochentag `%s' (manchmal)", www_lit);
+        sprintf(s1, "                           N = 5       5'ter Wochentag %s (manchmal)", www_lit);
         print_text (fp, s1);
-        sprintf(s1, "                           N = 9       Letzter Wochentag `%s'", www_lit);
+        sprintf(s1, "                           N = 9       Letzter Wochentag %s", www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, "          # %cdN`%s'     = Einzelner N'ter Wochentag `%s'",
+        sprintf(s1, "          # %cdN%s       = Einzelner N'ter Wochentag %s",
                 RC_NWD_CHAR, www_lit, www_lit);
         print_text (fp, s1);
-        sprintf(s1, "                           N = 1...51   1'ter...51'ter Wochentag `%s' (stets)", www_lit);
+        sprintf(s1, "                           N = 1...51   1'ter...51'ter Wochentag %s (stets)", www_lit);
         print_text (fp, s1);
-        sprintf(s1, "                           N = 52|53    52|53'ter Wochentag `%s' (manchmal)", www_lit);
+        sprintf(s1, "                           N = 52|53    52|53'ter Wochentag %s (manchmal)", www_lit);
         print_text (fp, s1);
-        sprintf(s1, "                           N = 99       Letzter Wochentag `%s'", www_lit);
+        sprintf(s1, "                           N = 99       Letzter Wochentag %s", www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, "          # %cwN`%s'     = Einzelner Wochentag `%s' der N'ten Woche",
+        sprintf(s1, "          # %cwN%s       = Einzelner Wochentag %s der N'ten Woche",
                 RC_NWD_CHAR, www_lit, www_lit);
         print_text (fp, s1);
-        sprintf(s1, "                           N = 0        `%s' der nicht in der 1'ten Woche ist", www_lit);
+        sprintf(s1, "                           N = 0        %s der nicht in der 1'ten Woche ist", www_lit);
         print_text (fp, s1);
-        sprintf(s1, "                           N = 1...51   `%s' der 1'ten...51'ten Woche (stets)", www_lit);
+        sprintf(s1, "                           N = 1...51   %s der 1'ten...51'ten Woche (stets)", www_lit);
         print_text (fp, s1);
-        sprintf(s1, "                           N = 52|53    `%s' der 52|53'ten Woche (manchmal)", www_lit);
+        sprintf(s1, "                           N = 52|53    %s der 52|53'ten Woche (manchmal)", www_lit);
         print_text (fp, s1);
-        sprintf(s1, "                           N = 99       `%s' der letzten Woche", www_lit);
+        sprintf(s1, "                           N = 99       %s der letzten Woche", www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
         sprintf(s1, "          # %c%c[[%s|%s]N]   = Einzelner Tag N relativ zu Ostersonntag",
                 RC_HDY_CHAR, RC_EASTER_CHAR, ASC_LIT, DES_LIT);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, "          # %c%c[%s|%s]N`%s'= Einzelner N'ter Wochentag relativ zu Ostersonntag",
+        sprintf(s1, "          # %c%c[%s|%s]N%s  = Einzelner N'ter Wochentag relativ zu Ostersonntag",
                 RC_HDY_CHAR, RC_EASTER_CHAR, ASC_LIT, DES_LIT, www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
@@ -1070,7 +1642,7 @@ my_extended_help (fp, longopt_symbolic)
                 RC_HDY_CHAR, RC_TODAY_CHAR, ASC_LIT, DES_LIT);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, "          # %c%c[%s|%s]N`%s'= Einzelner N'ter Wochentag relativ zu heute",
+        sprintf(s1, "          # %c%c[%s|%s]N%s  = Einzelner N'ter Wochentag relativ zu heute",
                 RC_HDY_CHAR, RC_TODAY_CHAR, ASC_LIT, DES_LIT, www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
@@ -1078,7 +1650,7 @@ my_extended_help (fp, longopt_symbolic)
                 RC_HDY_CHAR, ASC_LIT, DES_LIT);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, "          # %c?[%s|%s]N`%s'= Einzelner N'ter Wochentag relativ zur Datumvariablen",
+        sprintf(s1, "          # %c?[%s|%s]N%s  = Einzelner N'ter Wochentag relativ zur Datumvariablen",
                 RC_HDY_CHAR, ASC_LIT, DES_LIT, www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
@@ -1089,6 +1661,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic == SYM_TOMORROW)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_WEEK:
       case SYM_END_OF_WEEK:
@@ -1111,6 +1684,7 @@ my_extended_help (fp, longopt_symbolic)
             || longopt_symbolic == SYM_END_OF_WEEK
             || longopt_symbolic == SYM_START_OF_WEEK)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_MONTH:
       case SYM_END_OF_MONTH:
@@ -1133,6 +1707,7 @@ my_extended_help (fp, longopt_symbolic)
             || longopt_symbolic == SYM_END_OF_MONTH
             || longopt_symbolic == SYM_START_OF_MONTH)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_YEAR:
       case SYM_END_OF_YEAR:
@@ -1170,6 +1745,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_HERE_FILE:
         sprintf(s1, "%s# %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_HERE_FILE, TRUE));
@@ -1185,16 +1761,11 @@ my_extended_help (fp, longopt_symbolic)
     {
       print_text (fp, s1);
       print_text (fp, s1);
-      if (print_hls)
-        strcpy(s1, ehls2s.seq);
-      sprintf(s2, "%cDATUM", RC_ADATE_CHAR);
-      strcat(s1, s2);
-      if (print_hls)
-        strcat(s1, ehls2e.seq);
+      sprintf(s1, "%cDATUM", RC_ADATE_CHAR);
       print_text (fp, s1);
       strcpy(s1, "Vorgegebenes `DATUM' anstelle heutiges Datum verwenden");
       print_text (fp, s1);
-      sprintf(s1, "Datumformat:  %s[%s[%s|%s[N]]], %s%c%c|%c|dvar[[%s|%s]N[%s]], %s%cdN[%s]",
+      sprintf(s1, "Datumformat:  %s[%s[%s|%s[N]]], %s%c%c|%c|DVAR[[%s|%s]N[%s]], %s%cdN[%s]",
               yyyy_lit, mm_lit, dd_lit, www_lit, yyyy_lit, RC_HDY_CHAR, RC_EASTER_CHAR, RC_TODAY_CHAR,
               ASC_LIT, DES_LIT, www_lit, yyyy_lit, RC_NWD_CHAR, www_lit);
       print_text (fp, s1);
@@ -1207,22 +1778,13 @@ my_extended_help (fp, longopt_symbolic)
     {
       print_text (fp, s1);
       print_text (fp, s1);
-      if (print_hls)
-        strcpy(s1, ehls2s.seq);
-      sprintf(s2, "%cDATEI", RSP_CHAR);
-      strcat(s1, s2);
-      if (print_hls)
-        strcat(s1, ehls2e.seq);
+      sprintf(s1, "%cDATEI", RSP_CHAR);
       print_text (fp, s1);
       sprintf(s1, "L%sdt Optionen und Kommandos aus `DATEI' vor", AE);
       print_text (fp, s1);
       print_text (fp, s1);
       print_text (fp, s1);
-      if (print_hls)
-        strcpy(s1, ehls2s.seq);
-      strcat(s1, "KOMMANDO");
-      if (print_hls)
-        strcat(s1, ehls2e.seq);
+      strcpy(s1, "KOMMANDO");
       print_text (fp, s1);
       sprintf(s1, "%s       = Monat im Bereich:  %d...%d", mm_lit, MONTH_MIN, MONTH_MAX);
       print_text (fp, s1);
@@ -1246,8 +1808,9 @@ my_extended_help (fp, longopt_symbolic)
       sprintf(s1, "           Liste:    [%s%s]%s%s...%s[%s%s]%s",
               mm_lit, FYEAR_SEP, yyyy_lit, YLIST_SEP, YLIST_SEP, mm_lit, FYEAR_SEP, yyyy_lit);
       print_text (fp, s1);
-      sprintf(s1, "           Bereich:  [%s%s]%s%s[%s%s]%s",
-              mm_lit, FYEAR_SEP, yyyy_lit, YRANGE_SEP, mm_lit, FYEAR_SEP, yyyy_lit);
+      sprintf(s1, "           Bereich:  [%s%s]%s%s[%s%s]%s | %s%s%s %s%s%s",
+              mm_lit, FYEAR_SEP, yyyy_lit, YRANGE_SEP, mm_lit, FYEAR_SEP, yyyy_lit,
+              mm_lit, MRANGE_SEP, mm_lit, yyyy_lit, YRANGE_SEP, yyyy_lit);
     }
 #else /* !USE_DE */
    switch (longopt_symbolic)
@@ -1262,6 +1825,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_LONG_HELP1:
       case SYM_LONG_HELP2:
@@ -1275,6 +1839,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_LICENSE1:
       case SYM_LICENSE2:
@@ -1289,14 +1854,26 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_VERSION:
         sprintf(s1, "%sV        %s", SWITCH, get_longopt_description (SYM_VERSION, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("          Display version number and quit program"));
+        strcpy(s1, _("          Display version information and quit program"));
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_EXIT_STAT_HELP_NON_ZERO:
+        sprintf(s1, "          %s", get_longopt_description (SYM_EXIT_STAT_HELP_NON_ZERO, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, _("          Set EXIT status of program to %d on `%s' etc."),
+                ERR_EXIT_INFO_TEXTS_NON_ZERO, get_longopt_description (SYM_HELP, FALSE));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_RESPONSE_FILE:
         sprintf(s1, "%sR %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_RESPONSE_FILE, TRUE));
@@ -1307,6 +1884,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  ifdef GCAL_SHELL
       case SYM_SCRIPT_FILE:
@@ -1318,22 +1896,24 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  endif
 #  if USE_RC
       case SYM_DATE_VARIABLE:
         sprintf(s1, "%sv %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_DATE_VARIABLE, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("          Define global date variable(s) \"dvar->a...d|f...s|u...|z\""));
+        strcpy(s1, _("          Define global date variable(s) \"DVAR->a...d|f...s|u...|z\""));
         print_text (fp, s1);
-        sprintf(s1, _("   %-3s    = Definition of \"dvar%s`%s%s'\" separated by `%s' characters"),
-                larg_lit, RC_DVAR_ASSIGN, mm_lit, dd_lit, SEP);
+        sprintf(s1, _("   %-3s    = \"DVAR%s%s%s\" definitions separated by `%s' characters"),
+                larg_lit, RC_VAR_ASSIGN, mm_lit, dd_lit, SEP);
         print_text (fp, s1);
-        sprintf(s1, _("            e.g.  %sv a%s1127%sb%s054   Set `a' to Nov 27 and `b' to May 4"),
-                SWITCH, RC_DVAR_ASSIGN, SEP, RC_DVAR_ASSIGN);
+        sprintf(s1, _("            E.g.  %sv a%s1127%sb%s054   Set `a' to Nov 27 and `b' to May 4"),
+                SWITCH, RC_VAR_ASSIGN, SEP, RC_VAR_ASSIGN);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_EXPORT_LOCAL_DVARS:
         sprintf(s1, "          %s", get_longopt_description (SYM_EXPORT_LOCAL_DVARS, TRUE));
@@ -1342,22 +1922,30 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_TEXT_VARIABLE:
         sprintf(s1, "%sr %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_TEXT_VARIABLE, TRUE));
         print_text (fp, s1);
-        sprintf(s1, _("          Define global text variable(s) \"tvar->%ca...%cz\""),
+        sprintf(s1, _("          Define global text variable(s) \"TVAR->%ca...%cz\""),
                 RC_TVAR_CHAR, RC_TVAR_CHAR);
         print_text (fp, s1);
-        sprintf(s1, _("   %-3s    = Definition of \"tvar%s`text'\" separated by `%s' characters"),
-                larg_lit, RC_TVAR_ASSIGN, SEP);
+        sprintf(s1, _("   %-3s    = \"TVAR%sTEXT\" definitions separated by `%s' characters"),
+                larg_lit, RC_VAR_ASSIGN, SEP);
         print_text (fp, s1);
-        sprintf(s1, _("            e.g.  %sr %ca%sfoo%s%cb%sbar   Set `%ca' to `foo' and `%cb' to `bar'"),
-                SWITCH, RC_TVAR_CHAR, RC_TVAR_ASSIGN, SEP, RC_TVAR_CHAR, RC_TVAR_ASSIGN,
+        sprintf(s1, _("            E.g.  %sr %ca%sfoo%s%cb%sbar   Set `%ca' to `foo' and `%cb' to `bar'"),
+                SWITCH, RC_TVAR_CHAR, RC_VAR_ASSIGN, SEP, RC_TVAR_CHAR, RC_VAR_ASSIGN,
                 RC_TVAR_CHAR, RC_TVAR_CHAR);
+        print_text (fp, s1);
+        sprintf(s1, _("          = \"TVAR[%s|%c%s]COMMAND\" definitions separated by `%s' characters"),
+                RC_TVAR_ICMD_ASSIGN, QUOTE_CHAR, RC_TVAR_UCMD_ASSIGN, SEP);
+        print_text (fp, s1);
+        sprintf(s1, _("            E.g.  %sr %ca%sfoo   Assign output of command `foo' to `%ca'"),
+                SWITCH, RC_TVAR_CHAR, RC_TVAR_ICMD_ASSIGN, RC_TVAR_CHAR);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_EXPORT_LOCAL_TVARS:
         sprintf(s1, "          %s", get_longopt_description (SYM_EXPORT_LOCAL_TVARS, TRUE));
@@ -1366,29 +1954,33 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_FILTER_DAY:
         sprintf(s1, "%sD %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_FILTER_DAY, TRUE));
         print_text (fp, s1);
-        sprintf(s1, _("          Display only those fixed dates, whose date is not excluded by %s"), larg_lit);
+        sprintf(s1, _("          Display only those fixed dates, whose date is not excluded by %s"),
+                larg_lit);
         print_text (fp, s1);
         sprintf(s1, _("   %-3s    = One or more of the following characters.  If character"), larg_lit);
         print_text (fp, s1);
-        strcpy(s1, _("            is a LOWER CASE LETTER, it means a `non'-exclusion!"));
+        strcpy(s1, _("            is a LOWER-CASE-LETTER, it means a non-exclusion!"));
         print_text (fp, s1);
         do
          {
            sprintf(s1, _("            %c = Exclusion of all %s"),
-                   ptr_info_exclusive_day->id, _(ptr_info_exclusive_day->info));
+                   ptr_info_exclusive_day->ed_id, _(ptr_info_exclusive_day->ed_info));
            print_text (fp, s1);
-         } while ((++ptr_info_exclusive_day)->info != (char *)NULL);
+         } while ((++ptr_info_exclusive_day)->ed_info != (char *)NULL);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_FILTER_PERIOD:
         sprintf(s1, "%sP %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_FILTER_PERIOD, TRUE));
         print_text (fp, s1);
-        sprintf(s1, _("          Display only those fixed dates, whose date is not excluded by %s"), larg_lit);
+        sprintf(s1, _("          Display only those fixed dates, whose date is not excluded by %s"),
+                larg_lit);
         print_text (fp, s1);
         sprintf(s1, _("   %-3s    = List of `%c[DATE][%c[DATE]]' and/or `%c[DATE][%c[DATE]]'"),
                 larg_lit, RC_IDATE_CHAR, RC_DRANGE_CHAR, RC_EDATE_CHAR, RC_DRANGE_CHAR);
@@ -1397,6 +1989,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_FILTER_TEXT:
         sprintf(s1, "%sI %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_FILTER_TEXT, TRUE));
@@ -1411,25 +2004,68 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_IGNORE_CASE:
+        sprintf(s1, "          %s", get_longopt_description (SYM_IGNORE_CASE, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, _("          Ignore case distinctions if `%s' option is given"),
+                get_longopt_description (SYM_FILTER_TEXT, FALSE));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_REVERT_MATCH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_REVERT_MATCH, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, _("          Revert the sense of matching of the `%s' option"),
+                get_longopt_description (SYM_FILTER_TEXT, FALSE));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  endif /* USE_RC */
       case SYM_DEBUG:
         sprintf(s1, "          %s", get_longopt_description (SYM_DEBUG, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("          Display some debug informations"));
+        strcpy(s1, _("          Display some debug information"));
         print_text (fp, s1);
-        sprintf(s1, _("  [%-3s]   = internal    Informations if program internal maximums are reached"), larg_lit);
+        /*
+           *** Translators, please don't translate the word `internal',
+           *** because it is used textually AS IS as an option argument.
+        */
+        sprintf(s1, _("  [%-3s]   = internal    Information if program internal maximums are reached"),
+                larg_lit);
         print_text (fp, s1);
+        /*
+           *** Translators, please don't translate the words `handled' and `internal',
+           *** because they are used textually AS IS as an option argument.
+        */
         strcpy(s1, _("          = handled     Like `internal' and file names which are handled"));
         print_text (fp, s1);
+        /*
+           *** Translators, please don't translate the words `unhandled' and `internal',
+           *** because they are used textually AS IS as an option argument.
+        */
         strcpy(s1, _("          = unhandled   Like `internal' and file names which are unhandled"));
         print_text (fp, s1);
+        /*
+           *** Translators, please don't translate the words `all', `handled' and `unhandled',
+           *** because they are used textually AS IS as an option argument.
+        */
         strcpy(s1, _("          = all         Like `handled' and `unhandled' together"));
         print_text (fp, s1);
+        /*
+           *** Translators, please don't translate the words `abort' and `all',
+           *** because they are used textually AS IS as an option argument.
+        */
         strcpy(s1, _("          = abort       Like `all' and abort if file name can't be handled"));
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_TYPE_OF_CALENDAR:
         sprintf(s1, "%si[MOD]   %s", SWITCH, get_longopt_description (SYM_TYPE_OF_CALENDAR, TRUE));
@@ -1440,22 +2076,47 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_ORTHODOX_CALENDAR:
         sprintf(s1, "%sO        %s", SWITCH, get_longopt_description (SYM_ORTHODOX_CALENDAR, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("          Use leap year rule of Eastern orthodox churches"));
+        strcpy(s1, _("          Use leap year rule of Eastern Orthodox churches"));
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_CALENDAR_WITH_WEEKNO:
-        sprintf(s1, "%sK        %s", SWITCH, get_longopt_description (SYM_CALENDAR_WITH_WEEKNO, TRUE));
+      case SYM_CALENDAR_WITH_WEEK_NUMBER:
+        sprintf(s1, "%sK        %s", SWITCH, get_longopt_description (SYM_CALENDAR_WITH_WEEK_NUMBER, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("          Provide calendar sheet with ISO week numbers"));
+        strcpy(s1, _("          Provide calendar sheet with week numbers"));
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ISO_WEEK_NUMBER:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ISO_WEEK_NUMBER, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, _("          Determine type of week numbers (actual:  %s)"),
+                (iso_week_number) ? "ISO-8601:1988" : _("Standard"));
+        print_text (fp, s1);
+        /*
+           *** Translators, please don't translate the word `yes',
+           *** because it is used textually AS IS as an option argument.
+        */
+        sprintf(s1, _("   %-3s    = yes   ISO-8601:1988 week numbers"), larg_lit);
+        print_text (fp, s1);
+        /*
+           *** Translators, please don't translate the word `no',
+           *** because it is used textually AS IS as an option argument.
+        */
+        strcpy(s1, _("          = no    Standard week numbers"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_SUPPRESS_CALENDAR:
         sprintf(s1, "%su        %s", SWITCH, get_longopt_description (SYM_SUPPRESS_CALENDAR, TRUE));
@@ -1464,6 +2125,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  if USE_PAGER
       case SYM_PAGER:
@@ -1481,6 +2143,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  endif /* USE_PAGER */
       case SYM_DISABLE_HIGHLIGHTING:
@@ -1492,6 +2155,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_FORCE_HIGHLIGHTING:
         sprintf(s1, "%sH yes    %s", SWITCH, get_longopt_description (SYM_FORCE_HIGHLIGHTING, TRUE));
@@ -1502,6 +2166,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_HIGHLIGHTING:
         sprintf(s1, "%sH %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_HIGHLIGHTING, TRUE));
@@ -1511,24 +2176,27 @@ my_extended_help (fp, longopt_symbolic)
         sprintf(s1, _("   %-3s    = Highlighting sequence pairs separated by `%s' characters"),
                 larg_lit, SEP);
         print_text (fp, s1);
-        sprintf(s1, _("            e.g.  %sH \\x2%s\\xAE   Use hex values 2 and AE for sequence 1"),
+        sprintf(s1, _("            E.g.  %sH \\x2%s\\xAE   Use hex values 2 and AE for sequence 1"),
                 SWITCH, SEP);
         print_text (fp, s1);
-        sprintf(s1, _("            e.g.  %sH %s%s*%s*      Use characters `*' and `*' for sequence 2"),
+        sprintf(s1, _("            E.g.  %sH %s%s*%s*      Use characters `*' and `*' for sequence 2"),
                 SWITCH, SEP, SEP, SEP);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_BLOCKS:
         sprintf(s1, "%sb %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_BLOCKS, TRUE));
         print_text (fp, s1);
         strcpy(s1, _("          Modify format of year calendar"));
         print_text (fp, s1);
-        sprintf(s1, _("   %-3s    = 1|2|3|4|6|12   Number of blocks"), larg_lit);
+        sprintf(s1, _("   %-3s    = 1|2|3|4|6|12   Number of blocks (actual:  %d)"),
+                larg_lit, out_rows);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_CALENDAR_DATES:
         sprintf(s1, "%sj[MOD]   %s", SWITCH, get_longopt_description (SYM_CALENDAR_DATES, TRUE));
@@ -1539,6 +2207,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_HOLIDAY_DATES:
         sprintf(s1, "%sjn[MOD]  %s", SWITCH, get_longopt_description (SYM_HOLIDAY_DATES, TRUE));
@@ -1549,6 +2218,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #if USE_RC
       case SYM_FIXED_DATES:
@@ -1560,12 +2230,14 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #endif
       case SYM_STARTING_DAY:
         sprintf(s1, "%ss %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_STARTING_DAY, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("          Set starting day of week"));
+        sprintf(s1, _("          Set starting day of week (actual:  %s)"),
+                (use_short3_day_name) ? short3_day_name (start_day) : short_day_name (start_day));
         print_text (fp, s1);
         if (use_short3_day_name)
           sprintf(s1, "   %-3s    = 0|today | %d|%s | %d|%s | ... | %d|%s",
@@ -1580,26 +2252,57 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  ifdef GCAL_EMAIL
       case SYM_MAIL:
         sprintf(s1, "          %s", get_longopt_description (SYM_MAIL, TRUE));
         print_text (fp, s1);
-        ptr_env = MAIL_PRGR;
 #    if !defined(AMIGA) || defined(__GNUC__)
         ptr_env = getenv(ENV_VAR_MAILPROG);
-        if (ptr_env == (char *)NULL)
-          ptr_env = MAIL_PRGR;
+        if (ptr_env != (char *)NULL)
+         {
+           if (!*ptr_env)
+             ptr_env = MAIL_PRGR;
+         }
         else
-          if (!*ptr_env)
-            ptr_env = MAIL_PRGR;
 #    endif /* AMIGA && !__GNUC__ */
+          ptr_env = MAIL_PRGR;
         sprintf(s1, _("          Send output via `%s' program to user"), ptr_env);
         print_text (fp, s1);
-        sprintf(s1, _("   %-3s    = Email address"), larg_lit);
+        if (email_adr != (char *)NULL)
+          ptr_env = email_adr;
+#    if !defined(AMIGA) || defined(__GNUC__)
+        else
+          ptr_env = getenv(ENV_VAR_MAILTO);
+        if (ptr_env != (char *)NULL)
+         {
+           if (!*ptr_env)
+             ptr_env = getenv(ENV_VAR_USER);
+         }
+        else
+          ptr_env = getenv(ENV_VAR_USER);
+        if (ptr_env != (char *)NULL)
+         {
+           if (!*ptr_env)
+             ptr_env = getenv(ENV_VAR_LOGNAME);
+         }
+        else
+          ptr_env = getenv(ENV_VAR_LOGNAME);
+        if (ptr_env != (char *)NULL)
+         {
+           if (!*ptr_env)
+             ptr_env = (char *)NULL;
+         }
+#    endif /* AMIGA && !__GNUC__ */
+        if (ptr_env == (char *)NULL)
+          ptr_env = _("UNKNOWN");
+        sprintf(s1, _("  [%-3s]   = Email address, otherwise eMail is send to user `%s'"),
+                larg_lit, ptr_env);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
 #  endif /* GCAL_EMAIL */
       case SYM_HOLIDAY_LIST:
@@ -1619,6 +2322,16 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_SUPPRESS_HDLIST_SEP:
+        sprintf(s1, "%sG        %s", SWITCH, get_longopt_description (SYM_SUPPRESS_HDLIST_SEP, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Suppress leading blank line of eternal holiday list"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_EXCLUDE_HD_TITLE:
         sprintf(s1, "%sX        %s", SWITCH, get_longopt_description (SYM_EXCLUDE_HD_TITLE, TRUE));
@@ -1627,39 +2340,425 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_STANDARD_HDY:
-        sprintf(s1, "          %s", get_longopt_description (SYM_STANDARD_HDY, TRUE));
+      case SYM_ASTRONOMICAL_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ASTRONOMICAL_HDY, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("          Provide eternal holiday list without standard holidays"));
+        strcpy(s1, _("          Provide eternal holiday list with astronomical data"));
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_BAHAI_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_BAHAI_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Bahá'i calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_BAHAI_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_BAHAI_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Bahá'i calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CELTIC_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CELTIC_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Celtic calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CHINESE_FLEXIBLE_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CHINESE_FLEXIBLE_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Chinese flexible calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CHINESE_FLEXIBLE_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CHINESE_FLEXIBLE_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Chinese flexible calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CHINESE_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CHINESE_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Chinese calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CHINESE_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CHINESE_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Chinese calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_CHRISTIAN_HDY:
         sprintf(s1, "          %s", get_longopt_description (SYM_CHRISTIAN_HDY, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("          Provide eternal holiday list with Christian holidays"));
+        strcpy(s1, _("          Provide eternal holiday list with Christian Western calendar holidays"));
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_COPTIC_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_COPTIC_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Coptic calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ETHIOPIC_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ETHIOPIC_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Ethiopic calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_FRENCH_REVOLUTIONARY_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_FRENCH_REVOLUTIONARY_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with French Revolutionary calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_HEBREW_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_HEBREW_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Hebrew calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_HEBREW_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_HEBREW_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Hebrew calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_INDIAN_CIVIL_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_INDIAN_CIVIL_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Indian civil-calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ISLAMIC_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ISLAMIC_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Islamic civil-calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ISLAMIC_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ISLAMIC_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Islamic civil-calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_JAPANESE_FLEXIBLE_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_JAPANESE_FLEXIBLE_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Japanese flexible calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_JAPANESE_FLEXIBLE_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_JAPANESE_FLEXIBLE_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Japanese flexible calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_JAPANESE_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_JAPANESE_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Japanese calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_JAPANESE_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_JAPANESE_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Japanese calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_MULTICULTURAL_NEW_YEAR_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_MULTICULTURAL_NEW_YEAR_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with multicultural New Year holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_OLD_ARMENIC_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_OLD_ARMENIC_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Old-Armenic calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_OLD_EGYPTIC_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_OLD_EGYPTIC_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Old-Egyptic calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ORTHODOX_NEW_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ORTHODOX_NEW_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Orthodox new-calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ORTHODOX_OLD_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ORTHODOX_OLD_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Orthodox old-calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_PERSIAN_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_PERSIAN_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Persian Jalaali-calendar holidays"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_PERSIAN_MTH:
+        sprintf(s1, "          %s", get_longopt_description (SYM_PERSIAN_MTH, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with Persian Jalaali-calendar months"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ZODIACAL_MARKER_HDY:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ZODIACAL_MARKER_HDY, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Provide eternal holiday list with zodiacal marker data"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_CC_HDY:
         sprintf(s1, "%sq %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_CC_HDY, TRUE));
         print_text (fp, s1);
         strcpy(s1, _("          Provide eternal holiday list with country specific holidays"));
         print_text (fp, s1);
-        sprintf(s1, _("   %-3s    = Single country code or list of country codes"), larg_lit);
+        sprintf(s1, _("   %-3s    = Single country resp., territory code or a list of these,"), larg_lit);
         print_text (fp, s1);
-        sprintf(s1, _("            which are connected by `%s' characters"), CONNECT_SEP);
+        sprintf(s1, _("            which are connected by `%s' characters. Countries/territories,"), CONNECT_SEP);
+        print_text (fp, s1);
+        strcpy(s1, _("            marked by # have an incomplete recording of holidays"));
         print_text (fp, s1);
         do
          {
-           sprintf(s1, _("            %s = %s holidays"), ptr_cc_holidays->id, _(ptr_cc_holidays->info));
+           sprintf(s1, _("            %-*s = Holidays in %s"),
+#  if HD_TOP20CC
+                   2,
+#  else /* !HD_TOP20CC */
+                   5,
+#  endif /* !HD_TOP20CC */
+                   ptr_cc_holidays->cc_id, _(ptr_cc_holidays->cc_info));
            print_text (fp, s1);
-         } while ((++ptr_cc_holidays)->info != (char *)NULL);
+         } while ((++ptr_cc_holidays)->cc_info != (char *)NULL);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+#  if USE_RC
+      case SYM_ADJUST_VALUE:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ADJUST_VALUE, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Set reference value for rise/set time respectively shadow length"));
+        print_text (fp, s1);
+        sprintf(s1, _("   %-3s    = Angular value respectively factor in range:  %+.1f...%+.1f"),
+                larg_lit, -DEGS_PER_06_HOURS, DEGS_PER_06_HOURS);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_ATMOSPHERE:
+        sprintf(s1, "          %s", get_longopt_description (SYM_ATMOSPHERE, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Set base data of Earth's atmosphere"));
+        print_text (fp, s1);
+        sprintf(s1, _("   %-3s    = Air pressure and temperature separated by `%s' character"),
+                larg_lit, SPLIT_SEP);
+        print_text (fp, s1);
+        sprintf(s1, _("            Air pressure in Millibar (actual:  %.3f)"), atm_pressure/100.0);
+        print_text (fp, s1);
+        sprintf(s1, _("            Air temperature in degrees Celsius (actual:  %+.3f)"),
+                atm_temperature);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_LIMIT:
+        sprintf(s1, "          %s", get_longopt_description (SYM_LIMIT, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Limit rise/set times of Sun to the day"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_PRECISE:
+        sprintf(s1, "          %s", get_longopt_description (SYM_PRECISE, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Represent astronomical times and data with utmost precision"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_EXECUTE_COMMAND:
+        sprintf(s1, "          %s", get_longopt_description (SYM_EXECUTE_COMMAND, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, _("          Execute `%c%c[%s]' shell commands"),
+                RC_SPECIAL_TEXT_CHAR, RC_SHELL_ESC_CHAR, larg_lit);
+        print_text (fp, s1);
+        sprintf(s1, _("          and \"TVAR[%s|%c%s]COMMAND\" assigments"),
+                RC_TVAR_ICMD_ASSIGN, QUOTE_CHAR, RC_TVAR_UCMD_ASSIGN);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+#  endif
+      case SYM_TIME_OFFSET:
+        sprintf(s1, "          %s", get_longopt_description (SYM_TIME_OFFSET, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Change base time of astronomical functions"));
+        print_text (fp, s1);
+#if USE_RC
+        strcpy(s1, _("          respectively, change cycle-starting time"));
+        print_text (fp, s1);
+#endif
+        if (time_hour_offset)
+          sprintf(s2, "%+d", gmt_timezone_value (time_hour_offset));
+        else
+          *s2 = '\0';
+#  if USE_RC
+        sprintf(s1, _("   %-3s    = %c|%c|[%c|%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  %s%02d%s%02d == GMT%s)"),
+                larg_lit, RC_TIME_CHAR, RC_GMTIME_CHAR, RC_TIME_CHAR, RC_GMTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
+                (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
+                abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
+#  else /* !USE_RC */
+        sprintf(s1, _("   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  %s%02d%s%02d == GMT%s)"),
+                larg_lit, LOCALTIME_CHAR, LOCALTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
+                (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
+                abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
+#  endif /* !USE_RC */
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+#if USE_RC
+      case SYM_CYCLE_END:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CYCLE_END, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Change cycle-ending time"));
+        print_text (fp, s1);
+        sprintf(s1, _("   %-3s    = %c|%c|[%c|%c][%s|%s]MMMM|HH%s[MM]   Ending time value (actual:  %02d%s%02d)"),
+                larg_lit, RC_TIME_CHAR, RC_GMTIME_CHAR, RC_TIME_CHAR, RC_GMTIME_CHAR,
+                ASC_LIT, DES_LIT, time_sep, (int)MM2HH(loop_end), time_sep,
+                (loop_end>SPECIAL_VALUE) ? loop_end%MINS_PER_HOUR : 0);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_CYCLE_STEP:
+        sprintf(s1, "          %s", get_longopt_description (SYM_CYCLE_STEP, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Change cycle-timestep"));
+        print_text (fp, s1);
+        sprintf(s1, _("   %-3s    = MMMM|HH%s[MM]   Timestep value (actual:  %02d%s%02d)"),
+                larg_lit, time_sep, (int)MM2HH(loop_step), time_sep, loop_step%MINS_PER_HOUR);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+#endif
+      case SYM_TRANSFORM_YEAR:
+        sprintf(s1, "          %s", get_longopt_description (SYM_TRANSFORM_YEAR, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          Change base year of calendar"));
+        print_text (fp, s1);
+        sprintf(s1, _("   %-3s    = [%s|%s]YYYY   Year offset value (actual:  %d)"),
+                larg_lit, ASC_LIT, DES_LIT, (transform_year) ? transform_year : YEAR_MIN);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_GREG_REFORM:
         sprintf(s1, "          %s", get_longopt_description (SYM_GREG_REFORM, TRUE));
@@ -1678,44 +2777,72 @@ my_extended_help (fp, longopt_symbolic)
                    short_month_name (ptr_greg->month), len_year_max, ptr_greg->year);
            print_text (fp, s1);
          } while ((++ptr_greg)->year);
-        sprintf(s1, _("   %-3s    = %s%s%s%s%s%s%s   Set period explicitly"),
-                larg_lit, yyyy_lit, SPLIT_SEP, mm_lit, SPLIT_SEP, dd_lit, SPLIT_SEP, dd_lit);
+        sprintf(s1, _("   %-3s    = %s%c%s%s%s%s%s%s   Set period explicitly"),
+                larg_lit, yyyy_lit, *yyyy_lit, SPLIT_SEP, mm_lit, SPLIT_SEP, dd_lit, SPLIT_SEP, dd_lit);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_DATE_FORMAT:
         sprintf(s1, "          %s", get_longopt_description (SYM_DATE_FORMAT, TRUE));
         print_text (fp, s1);
         sprintf(s1, _("          Set order of date elements using the %s format text"), larg_lit);
         print_text (fp, s1);
-        sprintf(s1, _("          Actual format:  (%s) `%s' (%s)"),
-                (date_format->id==(char *)NULL) ? _("self-defined") : date_format->id,
-                date_format->format, _(date_format->info));
+        sprintf(s1, _("          Actual:  (%s) `%s' (%s)"),
+                (date_format->df_id == (char *)NULL) ? _("self-defined") : date_format->df_id,
+                date_format->df_format, _(date_format->df_info));
         print_text (fp, s1);
         do
          {
-           sprintf(s1, _("   %-6s = Set format to:  `%s' (%s)"), ptr_date_format->id,
-                   ptr_date_format->format, _(ptr_date_format->info));
+           sprintf(s1, _("   %-6s = Format is:  `%s' (%s)"), ptr_date_format->df_id,
+                   ptr_date_format->df_format, _(ptr_date_format->df_info));
            print_text (fp, s1);
-         } while ((++ptr_date_format)->info != (char *)NULL);
-        sprintf(s1, _("   %-3s    = Define personal format. Respected format elements are:"), larg_lit);
+         } while ((++ptr_date_format)->df_info != (char *)NULL);
+        sprintf(s1, _("   %-3s    = Define individual format. Respected format elements are:"),
+                larg_lit);
         print_text (fp, s1);
         do
          {
-           if (*ptr_info_date_format->format == '\0')
-             sprintf(s1, "               %s", _(ptr_info_date_format->info));
+           if (!ptr_info_date_format->di_1format)
+             sprintf(s1, "               %s", _(ptr_info_date_format->di_info));
            else
-             sprintf(s1, "            %-2s = %s", ptr_info_date_format->format, _(ptr_info_date_format->info));
+            {
+              if (ptr_info_date_format->di_1format != DFORMAT_CHAR)
+               {
+                 if (ptr_info_date_format->di_2format)
+                   sprintf(s2, _(ptr_info_date_format->di_info), ptr_info_date_format->di_2format);
+                 else
+                   sprintf(s2, _(ptr_info_date_format->di_info), FWIDTH_MIN, FWIDTH_MAX);
+                 sprintf(s1, "            %c%c = %s", ptr_info_date_format->di_1format,
+                         (ptr_info_date_format->di_2format) ? ptr_info_date_format->di_2format : ' ', s2);
+               }
+              else
+                sprintf(s1, "            %c%c = %s", ptr_info_date_format->di_1format,
+                        ptr_info_date_format->di_2format, _(ptr_info_date_format->di_info));
+            }
            print_text (fp, s1);
-         } while ((++ptr_info_date_format)->info != (char *)NULL);
+         } while ((++ptr_info_date_format)->di_info != (char *)NULL);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_EXIT_STAT_HELP_127:
-        sprintf(s1, "          %s", get_longopt_description (SYM_EXIT_STAT_HELP_127, TRUE));
+      case SYM_TRANSLATE_STRING:
+        sprintf(s1, "          %s", get_longopt_description (SYM_TRANSLATE_STRING, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("          Set EXIT status of program to 127 on --help, --version etc."));
+        strcpy(s1, _("          Define translatable country specific special character pairs"));
+        print_text (fp, s1);
+        sprintf(s1, _("   %-3s    = UPPER-CASE-LETTER\"\"LOWER-CASE-LETTER... definitions"),
+                larg_lit);
+        print_text (fp, s1);
+        sprintf(s1, _("            E.g. a `%s%s%s%s%s%s%s%s' %-3s causes the correct conversion of"),
+                AAE, AE, OOE, OE, UUE, UE, SZ, SZ, larg_lit);
+        print_text (fp, s1);
+        strcpy(s1, _("            the preceding special characters in an individual date format,"));
+        print_text (fp, s1);
+        strcpy(s1, _("            which has a STYLE format instruction component, and that, how"));
+        print_text (fp, s1);
+        strcpy(s1, _("            they are used by the character set used in Germany"));
         print_text (fp, s1);
       default:
         ;   /* Void */
@@ -1776,6 +2903,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       default:
         ;   /* Void */
@@ -1799,17 +2927,19 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_MOONIMAGE_LINES:
         sprintf(s1, "          %s", get_longopt_description (SYM_MOONIMAGE_LINES, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("                         = Set height of the moonphase text graphics"));
+        strcpy(s1, _("                         = Set height of the Moon phase text graphics"));
         print_text (fp, s1);
         sprintf(s1, _("                           %-3s = %d...%d   Total number of lines"),
                 larg_lit, MOONIMAGE_MIN, MOONIMAGE_MAX);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_INCLUDE_FILENAME:
         sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_FILENAME, TRUE));
@@ -1818,6 +2948,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_ALTERNATIVE_FORMAT:
         sprintf(s1, "          %s", get_longopt_description (SYM_ALTERNATIVE_FORMAT, TRUE));
@@ -1826,15 +2957,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
-        print_text (fp, s1);
-      case SYM_BYPASS_SHELL_CMD:
-        sprintf(s1, "          %s", get_longopt_description (SYM_BYPASS_SHELL_CMD, TRUE));
-        print_text (fp, s1);
-        sprintf(s1, _("          # B            = Don't execute `%c%c[%s]' shell commands"),
-                RC_SPECIAL_TEXT_CHAR, RC_SHELL_ESC_CHAR, larg_lit);
-        print_text (fp, s1);
-        if (longopt_symbolic != SYM_NIL)
-          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_INCLUDE_HOLIDAY:
         sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_HOLIDAY, TRUE));
@@ -1845,14 +2968,16 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_INCLUDE_WEEK_NO:
-        sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_WEEK_NO, TRUE));
+      case SYM_INCLUDE_WEEK_NUMBER:
+        sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_WEEK_NUMBER, TRUE));
         print_text (fp, s1);
-        strcpy(s1, _("          # k            = Display ISO week number"));
+        strcpy(s1, _("          # k            = Display week number"));
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_OMIT_DATE_PART:
         sprintf(s1, "          %s", get_longopt_description (SYM_OMIT_DATE_PART, TRUE));
@@ -1861,6 +2986,16 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_SUPPRESS_FDLIST_SEP:
+        sprintf(s1, "          %s", get_longopt_description (SYM_SUPPRESS_FDLIST_SEP, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          # Q            = Suppress leading blank line of fixed dates list"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_SUPPRESS_DATE_PART:
         sprintf(s1, "          %s", get_longopt_description (SYM_SUPPRESS_DATE_PART, TRUE));
@@ -1869,6 +3004,16 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
+        print_text (fp, s1);
+      case SYM_SUPPRESS_TEXT_PART:
+        sprintf(s1, "          %s", get_longopt_description (SYM_SUPPRESS_TEXT_PART, TRUE));
+        print_text (fp, s1);
+        strcpy(s1, _("          # J            = Suppress text part of fixed dates"));
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_EXCLUDE_RC_TITLE:
         sprintf(s1, "          %s", get_longopt_description (SYM_EXCLUDE_RC_TITLE, TRUE));
@@ -1877,14 +3022,16 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_INCLUDE_CONS_NO:
-        sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_CONS_NO, TRUE));
+      case SYM_INCLUDE_CONS_NUMBER:
+        sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_CONS_NUMBER, TRUE));
         print_text (fp, s1);
         strcpy(s1, _("          # z            = Display consecutive number of fixed date"));
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_ZERO_DATES:
         sprintf(s1, "          %s", get_longopt_description (SYM_ZERO_DATES, TRUE));
@@ -1922,6 +3069,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_INCLUDE_TODAY:
         sprintf(s1, "          %s", get_longopt_description (SYM_INCLUDE_TODAY, TRUE));
@@ -1930,6 +3078,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_LIST_MODE:
         sprintf(s1, "          %s", get_longopt_description (SYM_LIST_MODE, TRUE));
@@ -1938,6 +3087,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       default:
         ;   /* Void */
@@ -1971,47 +3121,47 @@ my_extended_help (fp, longopt_symbolic)
         strcpy(s1, _("                           N = 99       Last week"));
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, _("          # `%s%s'       = Single day `%s' of month `%s'"),
+        sprintf(s1, _("          # %s%s         = Single day %s of month %s"),
                 mm_lit, dd_lit, dd_lit, mm_lit);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, _("          # `%s%s'N     = Single N'th weekday `%s' of month `%s'"),
+        sprintf(s1, _("          # %s%sN       = Single N'th weekday %s of month %s"),
                 mm_lit, www_lit, www_lit, mm_lit);
         print_text (fp, s1);
-        sprintf(s1, _("                           N = 1...4   1st...4th weekday `%s' (always)"), www_lit);
+        sprintf(s1, _("                           N = 1...4   1st...4th weekday %s (always)"), www_lit);
         print_text (fp, s1);
-        sprintf(s1, _("                           N = 5       5th weekday `%s' (sometimes)"), www_lit);
+        sprintf(s1, _("                           N = 5       5th weekday %s (sometimes)"), www_lit);
         print_text (fp, s1);
-        sprintf(s1, _("                           N = 9       Last weekday `%s'"), www_lit);
+        sprintf(s1, _("                           N = 9       Last weekday %s"), www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, _("          # %cdN`%s'     = Single N'th weekday `%s'"),
+        sprintf(s1, _("          # %cdN%s       = Single N'th weekday %s"),
                 RC_NWD_CHAR, www_lit, www_lit);
         print_text (fp, s1);
-        sprintf(s1, _("                           N = 1...51   1st...51st weekday `%s' (always)"), www_lit);
+        sprintf(s1, _("                           N = 1...51   1st...51st weekday %s (always)"), www_lit);
         print_text (fp, s1);
-        sprintf(s1, _("                           N = 52|53    52|53rd weekday `%s' (sometimes)"), www_lit);
+        sprintf(s1, _("                           N = 52|53    52|53rd weekday %s (sometimes)"), www_lit);
         print_text (fp, s1);
-        sprintf(s1, _("                           N = 99       Last weekday `%s'"), www_lit);
+        sprintf(s1, _("                           N = 99       Last weekday %s"), www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, _("          # %cwN`%s'     = Single weekday `%s' of N'th week"),
+        sprintf(s1, _("          # %cwN%s       = Single weekday %s of N'th week"),
                 RC_NWD_CHAR, www_lit, www_lit);
         print_text (fp, s1);
-        sprintf(s1, _("                           N = 0        `%s' which isn't located in 1st week"), www_lit);
+        sprintf(s1, _("                           N = 0        %s which isn't located in 1st week"), www_lit);
         print_text (fp, s1);
-        sprintf(s1, _("                           N = 1...51   `%s' of 1st...51st week (always)"), www_lit);
+        sprintf(s1, _("                           N = 1...51   %s of 1st...51st week (always)"), www_lit);
         print_text (fp, s1);
-        sprintf(s1, _("                           N = 52|53    `%s' of 52|53rd week (sometimes)"), www_lit);
+        sprintf(s1, _("                           N = 52|53    %s of 52|53rd week (sometimes)"), www_lit);
         print_text (fp, s1);
-        sprintf(s1, _("                           N = 99       `%s' of last week"), www_lit);
+        sprintf(s1, _("                           N = 99       %s of last week"), www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
         sprintf(s1, _("          # %c%c[[%s|%s]N]   = Single day N relative to Easter Sunday"),
                 RC_HDY_CHAR, RC_EASTER_CHAR, ASC_LIT, DES_LIT);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, _("          # %c%c[%s|%s]N`%s'= Single N'th weekday relative to Easter Sunday"),
+        sprintf(s1, _("          # %c%c[%s|%s]N%s  = Single N'th weekday relative to Easter Sunday"),
                 RC_HDY_CHAR, RC_EASTER_CHAR, ASC_LIT, DES_LIT, www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
@@ -2019,7 +3169,7 @@ my_extended_help (fp, longopt_symbolic)
                 RC_HDY_CHAR, RC_TODAY_CHAR, ASC_LIT, DES_LIT);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, _("          # %c%c[%s|%s]N`%s'= Single N'th weekday relative to today's date"),
+        sprintf(s1, _("          # %c%c[%s|%s]N%s  = Single N'th weekday relative to today's date"),
                 RC_HDY_CHAR, RC_TODAY_CHAR, ASC_LIT, DES_LIT, www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
@@ -2027,7 +3177,7 @@ my_extended_help (fp, longopt_symbolic)
                 RC_HDY_CHAR, ASC_LIT, DES_LIT);
         print_text (fp, s1);
         print_text (fp, s1);
-        sprintf(s1, _("          # %c?[%s|%s]N`%s'= Single N'th weekday relative to date variable"),
+        sprintf(s1, _("          # %c?[%s|%s]N%s  = Single N'th weekday relative to date variable"),
                 RC_HDY_CHAR, ASC_LIT, DES_LIT, www_lit);
         print_text (fp, s1);
         print_text (fp, s1);
@@ -2038,6 +3188,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic == SYM_TOMORROW)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_WEEK:
       case SYM_END_OF_WEEK:
@@ -2060,6 +3211,7 @@ my_extended_help (fp, longopt_symbolic)
             || longopt_symbolic == SYM_END_OF_WEEK
             || longopt_symbolic == SYM_START_OF_WEEK)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_MONTH:
       case SYM_END_OF_MONTH:
@@ -2082,6 +3234,7 @@ my_extended_help (fp, longopt_symbolic)
             || longopt_symbolic == SYM_END_OF_MONTH
             || longopt_symbolic == SYM_START_OF_MONTH)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_YEAR:
       case SYM_END_OF_YEAR:
@@ -2102,6 +3255,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_RESOURCE_FILE:
         sprintf(s1, "%sf|F %-3s  %s", SWITCH, larg_lit, get_longopt_description (SYM_RESOURCE_FILE, TRUE));
@@ -2119,6 +3273,7 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
+        /* Fallthrough. */
         print_text (fp, s1);
       case SYM_HERE_FILE:
         sprintf(s1, "%s# %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_HERE_FILE, TRUE));
@@ -2134,16 +3289,11 @@ my_extended_help (fp, longopt_symbolic)
     {
       print_text (fp, s1);
       print_text (fp, s1);
-      if (print_hls)
-        strcpy(s1, ehls2s.seq);
-      sprintf(s2, _("%cDATE"), RC_ADATE_CHAR);
-      strcat(s1, s2);
-      if (print_hls)
-        strcat(s1, ehls2e.seq);
+      sprintf(s1, _("%cDATE"), RC_ADATE_CHAR);
       print_text (fp, s1);
       strcpy(s1, _("Use given `DATE' instead of today's date"));
       print_text (fp, s1);
-      sprintf(s1, _("Date format:  %s[%s[%s|%s[N]]], %s%c%c|%c|dvar[[%s|%s]N[%s]], %s%cdN[%s]"),
+      sprintf(s1, _("Date format:  %s[%s[%s|%s[N]]], %s%c%c|%c|DVAR[[%s|%s]N[%s]], %s%cdN[%s]"),
               yyyy_lit, mm_lit, dd_lit, www_lit, yyyy_lit, RC_HDY_CHAR, RC_EASTER_CHAR, RC_TODAY_CHAR,
               ASC_LIT, DES_LIT, www_lit, yyyy_lit, RC_NWD_CHAR, www_lit);
       print_text (fp, s1);
@@ -2156,22 +3306,13 @@ my_extended_help (fp, longopt_symbolic)
     {
       print_text (fp, s1);
       print_text (fp, s1);
-      if (print_hls)
-        strcpy(s1, ehls2s.seq);
-      sprintf(s2, _("%cFILE"), RSP_CHAR);
-      strcat(s1, s2);
-      if (print_hls)
-        strcat(s1, ehls2e.seq);
+      sprintf(s1, _("%cFILE"), RSP_CHAR);
       print_text (fp, s1);
       strcpy(s1, _("Preload options and commands from `FILE'"));
       print_text (fp, s1);
       print_text (fp, s1);
       print_text (fp, s1);
-      if (print_hls)
-        strcpy(s1, ehls2s.seq);
-      strcat(s1, _("COMMAND"));
-      if (print_hls)
-        strcat(s1, ehls2e.seq);
+      strcpy(s1, _("COMMAND"));
       print_text (fp, s1);
       sprintf(s1, _("%s        = Month in range:  %d...%d"), mm_lit, MONTH_MIN, MONTH_MAX);
       print_text (fp, s1);
@@ -2195,8 +3336,9 @@ my_extended_help (fp, longopt_symbolic)
       sprintf(s1, _("            List:   [%s%s]%s%s...%s[%s%s]%s"),
               mm_lit, FYEAR_SEP, yyyy_lit, YLIST_SEP, YLIST_SEP, mm_lit, FYEAR_SEP, yyyy_lit);
       print_text (fp, s1);
-      sprintf(s1, _("            Range:  [%s%s]%s%s[%s%s]%s"),
-              mm_lit, FYEAR_SEP, yyyy_lit, YRANGE_SEP, mm_lit, FYEAR_SEP, yyyy_lit);
+      sprintf(s1, _("            Range:  [%s%s]%s%s[%s%s]%s | %s%s%s %s%s%s"),
+              mm_lit, FYEAR_SEP, yyyy_lit, YRANGE_SEP, mm_lit, FYEAR_SEP, yyyy_lit,
+              mm_lit, MRANGE_SEP, mm_lit, yyyy_lit, YRANGE_SEP, yyyy_lit);
     }
 #endif /* !USE_DE */
    if (longopt_symbolic == SYM_NIL)
@@ -2215,168 +3357,70 @@ my_basic_help (fp)
 /*
    Prints the "basic help" text to file `fp' using the central
      output function `print_text()' and uses global text buffer
-     `s1' and `s2' internally.
+     `s1' internally.
 */
 {
    my_help_head_text (fp);
 #if USE_DE
-   sprintf(s1, "%sh|hh   = Hilfetext; %sL = Lizenz; %sV = Version; %su = Kalender unterdr%scken",
-           SWITCH, SWITCH, SWITCH, SWITCH, UE);
+   sprintf(s1, "  %sh,  %s          Diesen Hilfetext ausgeben und Programm beenden",
+           SWITCH, get_longopt_description (SYM_HELP, TRUE));
    print_text (fp, s1);
-   sprintf(s1, "%si[-]   = Spezial-Kalenderformat; ", SWITCH);
+   sprintf(s1, "  %shh, %s   Erweiterten Hilfetext ausgeben und Programm beenden",
+           SWITCH, get_longopt_description (SYM_LONG_HELP2, TRUE));
+   print_text (fp, s1);
+   sprintf(s1, "  %sL,  %s       Softwarelizenz ausgeben und Programm beenden",
+           SWITCH, get_longopt_description (SYM_LICENSE1, TRUE));
+   print_text (fp, s1);
+   sprintf(s1, "  %sV,  %s       Versionsinformation ausgeben und Programm beenden",
+           SWITCH, get_longopt_description (SYM_VERSION, TRUE));
+   print_text (fp, s1);
 #  if USE_PAGER
-   sprintf(s2, "%sp = Paginierer; ", SWITCH);
-   strcat(s1, s2);
-#  endif
-   /*
-      *** Translators, please don't translate the word `yes',
-      *** because it is used textually AS IS as an option argument.
-   */
-   sprintf(s2, "%sH yes = Mit Hervorhebungen", SWITCH);
-   strcat(s1, s2);
-   print_text (fp, s1);
-   /*
-      *** Translators, please don't translate the word `no',
-      *** because it is used textually AS IS as an option argument.
-   */
-   sprintf(s1, "%sb %-3s  = Jahreskalender in 1|2|3|4|6|12 Bl%scken; %sH no = Ohne Hervorhebungen",
-           SWITCH, larg_lit, OE, SWITCH);
-   print_text (fp, s1);
-   sprintf(s1, "%sj[]    = Fortlaufenden Tag des Jahres ausgeben (Modifizierer: [b n nb",
-           SWITCH);
-#  if USE_RC
-   strcat(s1, " c cb])");
-#  else /* !USE_RC */
-   strcat(s1, "])");
-#  endif /* !USE_RC */
-   print_text (fp, s1);
-   if (use_short3_day_name)
-     /*
-        *** Translators, please don't translate the word `today',
-        *** because it is used textually AS IS as an option argument.
-     */
-     sprintf(s1, "%ss %-3s  = Starttag der Woche (%s = 0|today | %d|%s | %d|%s | ... | %d|%s)",
-             SWITCH, larg_lit, larg_lit, DAY_MIN, short3_day_name (DAY_MIN), DAY_MIN+1,
-             short3_day_name (DAY_MIN+1), DAY_MAX, short3_day_name (DAY_MAX));
+#    ifdef GCAL_EPAGER
+   if (ext_pager != (char *)NULL)
+     sprintf(s1, "  %sp,  %s         Ausgabe durch externen `%s' Paginierer lenken",
+             SWITCH, get_longopt_description (SYM_PAGER, TRUE),
+             (*ext_pager == *DIR_SEP) ? strrchr(ext_pager, *DIR_SEP)+1 : ext_pager);
    else
-     /*
-        *** Translators, please don't translate the word `today',
-        *** because it is used textually AS IS as an option argument.
-     */
-     sprintf(s1, "%ss %-3s  = Starttag der Woche (%s = 0|today | %d|%s | %d|%s | ... | %d|%s)",
-             SWITCH, larg_lit, larg_lit, DAY_MIN, short_day_name (DAY_MIN), DAY_MIN+1,
-             short_day_name (DAY_MIN+1), DAY_MAX, short_day_name (DAY_MAX));
-   print_text (fp, s1);
-   sprintf(s1, "%sn|N[%s] = Ewige Feiertagsliste ausgeben (Jahr im Bereich: %d...%d)",
-           SWITCH, DES_LIT, EASTER_MIN, EASTER_MAX);
-   print_text (fp, s1);
-#  if USE_RC
-#    ifdef GCAL_SHELL
-   sprintf(s1, "%sc|C[]  = Terminliste aus Datei `.%s%s'; %sf|F %s[%s%s%s...]=Benutze Datei %s",
-           SWITCH, PRGR_NAME, RC_SUFFIX, SWITCH, larg_lit, CONNECT_SEP, larg_lit, CONNECT_SEP, larg_lit);
-#    else /* !GCAL_SHELL */
-   sprintf(s1, "%sc|C[]  = Terminliste aus Datei `%s%s'; %sf|F %s[%s%s%s...]=Benutze Datei %s",
-           SWITCH, PRGR_NAME, RC_SUFFIX, SWITCH, larg_lit, CONNECT_SEP, larg_lit, CONNECT_SEP, larg_lit);
-#    endif /* !GCAL_SHELL */
-   print_text (fp, s1);
-   sprintf(s1, "    ^^--> [g[] | [%saABdeEkloUxzZ][N[d|w|%s|%s]|`%s%s'|`%s%s'N|t|[w|m|y[%s|%s]]]]",
-           DES_LIT, ASC_LIT, DES_LIT, mm_lit, dd_lit, mm_lit, www_lit, ASC_LIT, DES_LIT);
-   print_text (fp, s1);
-#  endif
-   sprintf(s1, "%s   = Monat im Bereich: %d...%d               Liste:   %s[%s%s]%s...%s%s[%s%s]",
-           mm_lit, MONTH_MIN, MONTH_MAX, mm_lit, YEAR_SEP, yyyy_lit, MLIST_SEP, MLIST_SEP, mm_lit,
-           YEAR_SEP, yyyy_lit);
-   print_text (fp, s1);
-   sprintf(s1, "                   oder: Monatsname|%s[%s|%s|%s]  Bereich: %s[%s%s]%s%s[%s%s]",
-           MONTH3_LIT, MONTH3_LIT, ASC_LIT, DES_LIT, mm_lit, YEAR_SEP, yyyy_lit, MRANGE_SEP,
-           mm_lit, YEAR_SEP, yyyy_lit);
-   print_text (fp, s1);
-   sprintf(s1, "%s = Jahr  im Bereich: %d...%d%*s%*s         Liste:   [%s%s]%s%s...%s[%s%s]%s",
-           yyyy_lit, YEAR_MIN, YEAR_MAX, 6-len_year_max, "", 6-len_year_max, "", mm_lit,
-           FYEAR_SEP, yyyy_lit, YLIST_SEP, YLIST_SEP, mm_lit, FYEAR_SEP, yyyy_lit);
-   print_text (fp, s1);
-   sprintf(s1, "                                              Bereich: [%s%s]%s%s[%s%s]%s",
-           mm_lit, FYEAR_SEP, yyyy_lit, YRANGE_SEP, mm_lit, FYEAR_SEP, yyyy_lit);
+     sprintf(s1, "  %sp,  %s         Ausgabe durch einfachen internen Paginierer lenken",
+             SWITCH, get_longopt_description (SYM_PAGER, TRUE));
+#    else /* !GCAL_EPAGER */
+   sprintf(s1, "  %sp,  %s         Ausgabe durch einfachen internen Paginierer lenken",
+           SWITCH, get_longopt_description (SYM_PAGER, TRUE));
+#    endif /* !GCAL_EPAGER */
+#  endif /* USE_PAGER */
 #else /* !USE_DE */
-   sprintf(s1, _("%sh|hh   = Help screen; %sL = License; %sV = Version; %su = Suppress calendar sheet"),
-           SWITCH, SWITCH, SWITCH, SWITCH);
+   sprintf(s1, _("  %sh,  %s          Display this help text and quit program"),
+           SWITCH, get_longopt_description (SYM_HELP, TRUE));
    print_text (fp, s1);
-   sprintf(s1, _("%si[-]   = Special calendar format; "), SWITCH);
+   sprintf(s1, _("  %shh, %s   Display extended help text and quit program"),
+           SWITCH, get_longopt_description (SYM_LONG_HELP2, TRUE));
+   print_text (fp, s1);
+   sprintf(s1, _("  %sL,  %s       Display software license and quit program"),
+           SWITCH, get_longopt_description (SYM_LICENSE1, TRUE));
+   print_text (fp, s1);
+   sprintf(s1, _("  %sV,  %s       Display version information and quit program"),
+           SWITCH, get_longopt_description (SYM_VERSION, TRUE));
+   print_text (fp, s1);
 #  if USE_PAGER
-   sprintf(s2, _("%sp = Simple pager; "), SWITCH);
-   strcat(s1, s2);
-#  endif
-   /*
-      *** Translators, please don't translate the word `yes',
-      *** because it is used textually AS IS as an option argument.
-   */
-   sprintf(s2, _("%sH yes = Use highlighting"), SWITCH);
-   strcat(s1, s2);
-   print_text (fp, s1);
-   /*
-      *** Translators, please don't translate the word `no',
-      *** because it is used textually AS IS as an option argument.
-   */
-   sprintf(s1, _("%sb %-3s  = Year calendar with 1|2|3|4|6|12 blocks; %sH no = Disable highlighting"),
-           SWITCH, larg_lit, SWITCH);
-   print_text (fp, s1);
-   sprintf(s1, _("%sj[]    = Output of consecutive day of year (Modifiers: [b n nb"),
-           SWITCH);
-#  if USE_RC
-   strcat(s1, " c cb])");
-#  else /* !USE_RC */
-   strcat(s1, "])");
-#  endif /* !USE_RC */
-   print_text (fp, s1);
-   if (use_short3_day_name)
-     /*
-        *** Translators, please don't translate the word `today',
-        *** because it is used textually AS IS as an option argument.
-     */
-     sprintf(s1, _("%ss %-3s  = Starting day of week (%s = 0|today | %d|%s | %d|%s | ... | %d|%s)"),
-             SWITCH, larg_lit, larg_lit, DAY_MIN, short3_day_name (DAY_MIN), DAY_MIN+1,
-             short3_day_name (DAY_MIN+1), DAY_MAX, short3_day_name (DAY_MAX));
+#    ifdef GCAL_EPAGER
+   if (ext_pager != (char *)NULL)
+     sprintf(s1, _("  %sp,  %s         Direct output through external `%s' pager"),
+             SWITCH, get_longopt_description (SYM_PAGER, TRUE),
+             (*ext_pager == *DIR_SEP) ? strrchr(ext_pager, *DIR_SEP)+1 : ext_pager);
    else
-     /*
-        *** Translators, please don't translate the word `today',
-        *** because it is used textually AS IS as an option argument.
-     */
-     sprintf(s1, _("%ss %-3s  = Starting day of week (%s = 0|today | %d|%s | %d|%s | ... | %d|%s)"),
-             SWITCH, larg_lit, larg_lit, DAY_MIN, short_day_name (DAY_MIN), DAY_MIN+1,
-             short_day_name (DAY_MIN+1), DAY_MAX, short_day_name (DAY_MAX));
-   print_text (fp, s1);
-   sprintf(s1, _("%sn|N[%s] = Display eternal holiday list (Year in range: %d...%d)"),
-           SWITCH, DES_LIT, EASTER_MIN, EASTER_MAX);
-   print_text (fp, s1);
-#  if USE_RC
-#    ifdef GCAL_SHELL
-   sprintf(s1, _("%sc|C[]  = Fixed date list of file `.%s%s'; %sf|F %s[%s%s%s...]=Use file %s"),
-           SWITCH, PRGR_NAME, RC_SUFFIX, SWITCH, larg_lit, CONNECT_SEP, larg_lit, CONNECT_SEP, larg_lit);
-#    else /* !GCAL_SHELL */
-   sprintf(s1, _("%sc|C[]  = Fixed date list of file `%s%s'; %sf|F %s[%s%s%s...]=Use file %s"),
-           SWITCH, PRGR_NAME, RC_SUFFIX, SWITCH, larg_lit, CONNECT_SEP, larg_lit, CONNECT_SEP, larg_lit);
-#    endif /* !GCAL_SHELL */
-   print_text (fp, s1);
-   sprintf(s1, "    ^^--> [g[] | [%saABdeEkloUxzZ][N[d|w|%s|%s]|`%s%s'|`%s%s'N|t|[w|m|y[%s|%s]]]]",
-           DES_LIT, ASC_LIT, DES_LIT, mm_lit, dd_lit, mm_lit, www_lit, ASC_LIT, DES_LIT);
-   print_text (fp, s1);
-#  endif
-   sprintf(s1, _("%s    = Month in range: %d...%d                 List:  %s[%s%s]%s...%s%s[%s%s]"),
-           mm_lit, MONTH_MIN, MONTH_MAX, mm_lit, YEAR_SEP, yyyy_lit, MLIST_SEP, MLIST_SEP, mm_lit,
-           YEAR_SEP, yyyy_lit);
-   print_text (fp, s1);
-   sprintf(s1, _("                    or: month name|%s[%s|%s|%s]    Range: %s[%s%s]%s%s[%s%s]"),
-           MONTH3_LIT, MONTH3_LIT, ASC_LIT, DES_LIT, mm_lit, YEAR_SEP, yyyy_lit, MRANGE_SEP,
-           mm_lit, YEAR_SEP, yyyy_lit);
-   print_text (fp, s1);
-   sprintf(s1, _("%s  = Year  in range: %d...%d%*s%*s           List:  [%s%s]%s%s...%s[%s%s]%s"),
-           yyyy_lit, YEAR_MIN, YEAR_MAX, 6-len_year_max, "", 6-len_year_max, "", mm_lit,
-           FYEAR_SEP, yyyy_lit, YLIST_SEP, YLIST_SEP, mm_lit, FYEAR_SEP, yyyy_lit);
-   print_text (fp, s1);
-   sprintf(s1, _("                                               Range: [%s%s]%s%s[%s%s]%s"),
-           mm_lit, FYEAR_SEP, yyyy_lit, YRANGE_SEP, mm_lit, FYEAR_SEP, yyyy_lit);
+     sprintf(s1, _("  %sp,  %s         Direct output through simple internal pager"),
+             SWITCH, get_longopt_description (SYM_PAGER, TRUE));
+#    else /* !GCAL_EPAGER */
+   sprintf(s1, _("  %sp,  %s         Direct output through simple internal pager"),
+           SWITCH, get_longopt_description (SYM_PAGER, TRUE));
+#    endif /* !GCAL_EPAGER */
+#  endif /* USE_PAGER */
 #endif /* !USE_DE */
-   my_help_tail_text (fp);
+   print_text (fp, s1);
+   print_text (fp, s1);
+   strcpy(s1, lopt_msg ());
+   print_text (fp, s1);
+   my_bug_report_address (fp);
 }
 
 
@@ -2385,21 +3429,22 @@ my_basic_help (fp)
 my_license (fp)
    FILE *fp;
 /*
-   Prints the program-id and the license text to file `fp' using the central
-     output function `print_text()', uses global text buffer `s1' internally.
+   Prints the program-id and the license text to file `fp' using
+     the central output function `print_text()', and uses the global
+     text buffer `s1' internally.
 */
 {
    my_copyright (fp, FALSE);
 #if USE_DE
    sprintf(s1, "Diese Software erhebt keinen Anspruch auf Vollst%sndigkeit,", AE);
    print_text (fp, s1);
-   sprintf(s1, "Verwendungsf%shigkeit oder Korrektheit. F%sr JEDWEDE Sch%sden oder", AE, UE, AE);
+   sprintf(s1, "Verwendungsf%shigkeit oder Korrektheit.  F%sr JEDWEDE Sch%sden oder", AE, UE, AE);
    print_text (fp, s1);
    strcpy(s1, "Verluste (implizit oder explizit), die aus Nutzung oder Handhabung");
    print_text (fp, s1);
    sprintf(s1, "meiner Software hervorgehen, wird grunds%stzlich keine Haftung", AE);
    print_text (fp, s1);
-   sprintf(s1, "%sbernommen. Bei Verwendung dieser Software erkl%srt sich der Benutzer", UE, AE);
+   sprintf(s1, "%sbernommen.  Bei Verwendung dieser Software erkl%srt sich der Benutzer", UE, AE);
    print_text (fp, s1);
    strcpy(s1, "mit dieser Vereinbarung in vollem Umfang einverstanden.");
    print_text (fp, s1);
@@ -2457,14 +3502,18 @@ my_license (fp)
 my_version (fp)
    FILE *fp;
 /*
-   Prints the program-id and all compilation flags to file `fp' using the central
-     output function `print_text()', uses global text buffer `s1' internally.
+   Prints the program-id and all compilation flags to file `fp'
+     using the central output function `print_text()', and
+     uses the global text buffers `s1' and `s2' internally.
 */
 {
-   register int    i=0;
+   auto     const Cc_struct  *ptr_cc_holidays=cc_holidays;
+   register       int         i=0;
 #if USE_RC
-   auto     char  *ptr_env;
-   auto     char  *ptr_home;
+   auto           char       *ptr_env;
+#  if !defined(AMIGA) || defined(__GNUC__)
+   auto           char       *ptr_home;
+#  endif
 #endif
 
 
@@ -2478,6 +3527,10 @@ my_version (fp)
 #endif /* !USE_DE */
 #ifdef GCAL_NLS
    strcat(s1, " NLS");
+   i++;
+#endif
+#if !HAVE_LIBM
+   strcat(s1, " LIBM_EMU");
    i++;
 #endif
 #if USE_EASC
@@ -2530,15 +3583,15 @@ my_version (fp)
 #if USE_RC
 #  if !defined(AMIGA) || defined(__GNUC__)
    ptr_env = getenv(ENV_VAR_SYS_DATADIR);
-   if (ptr_env == (char *)NULL)
-     ptr_env = GCAL_SYS_DATADIR;
+   if (ptr_env != (char *)NULL)
+    {
+      if (!*ptr_env)
+        ptr_env = GCAL_SYS_DATADIR;
+    }
    else
-     if (!*ptr_env)
-       ptr_env = GCAL_SYS_DATADIR;
+#  endif /* !AMIGA || __GNUC__ */
+     ptr_env = GCAL_SYS_DATADIR;
    sprintf(s1, "GCAL_SYS_DATADIR=%s", ptr_env);
-#  else /* AMIGA && !__GNUC__ */
-   sprintf(s1, "GCAL_SYS_DATADIR=%s", GCAL_SYS_DATADIR);
-#  endif /* AMIGA && !__GNUC__ */
    print_text (fp, s1);
 #  if !defined(AMIGA) || defined(__GNUC__)
    ptr_env = getenv(ENV_VAR_USR_DATADIR);
@@ -2570,6 +3623,28 @@ my_version (fp)
    print_text (fp, s1);
 #endif /* USE_RC */
 #if USE_DE
+   sprintf(s1, "Starttag der Woche: %s", day_name (start_day));
+#else /* !USE_DE */
+   sprintf(s1, _("Starting day of week: %s"), day_name (start_day));
+#endif /* USE_DE */
+   print_text (fp, s1);
+#if USE_DE
+   sprintf(s1, "Art der Wochennummern: %s",
+           (iso_week_number) ? "ISO-8601:1988" : "Standard");
+#else /* !USE_DE */
+   sprintf(s1, _("Type of week numbers: %s"),
+           (iso_week_number) ? "ISO-8601:1988" : _("Standard"));
+#endif /* USE_DE */
+   print_text (fp, s1);
+#if USE_DE
+   sprintf(s1, "Basisjahr des Kalenders: %d",
+           (transform_year) ? transform_year : YEAR_MIN);
+#else /* !USE_DE */
+   sprintf(s1, _("Base year of calendar: %d"),
+           (transform_year) ? transform_year : YEAR_MIN);
+#endif /* USE_DE */
+   print_text (fp, s1);
+#if USE_DE
    sprintf(s1, "Gregorianische Reformation: %02d-%02d %s %0*d", greg->first_day,
            greg->last_day, short_month_name (greg->month), len_year_max, greg->year);
 #else /* !USE_DE */
@@ -2579,25 +3654,38 @@ my_version (fp)
    print_text (fp, s1);
 #if USE_DE
    sprintf(s1, "Datumformat: (%s) `%s' (%s)",
-           (date_format->id==(char *)NULL) ? "Selbstdefiniert" : date_format->id,
-           date_format->format, date_format->info);
+           (date_format->df_id == (char *)NULL) ? "Selbstdefiniert" : date_format->df_id,
+           date_format->df_format, date_format->df_info);
 #else /* !USE_DE */
    sprintf(s1, _("Date format: (%s) `%s' (%s)"),
-           (date_format->id==(char *)NULL) ? _("self-defined") : date_format->id,
-           date_format->format, _(date_format->info));
+           (date_format->df_id == (char *)NULL) ? _("self-defined") : date_format->df_id,
+           date_format->df_format, _(date_format->df_info));
 #endif /* !USE_DE */
    print_text (fp, s1);
-   print_text (fp, s1);
+   i = 1;
+   while ((++ptr_cc_holidays)->cc_info != (char *)NULL)
+     i++;
 #if USE_DE
-   strcpy(s1, "Fehlerberichte via eMail an <esken@uni-muenster.de>");
-   print_text (fp, s1);
-   sprintf(s1, "oder (falls das fehlschl%sgt) an <bug-gnu-utils@prep.ai.mit.edu>.", AE);
+   sprintf(s1, "Ber%scksichtigte L%snder/Territorien: %d", UE, AE, i);
 #else /* !USE_DE */
-   strcpy(s1, _("Email bug reports to <esken@uni-muenster.de>"));
-   print_text (fp, s1);
-   strcpy(s1, _("or (if this fails) to <bug-gnu-utils@prep.ai.mit.edu>."));
+   sprintf(s1, _("Respected countries/territories: %d"), i);
 #endif /* !USE_DE */
    print_text (fp, s1);
+   if (time_hour_offset)
+     sprintf(s2, "%+d", gmt_timezone_value (time_hour_offset));
+   else
+     *s2 = '\0';
+#if USE_DE
+   sprintf(s1, "Zeitversatzwert der astronomischen Funktionen: %s%02d%s%02d == GMT%s",
+           (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
+           abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
+#else /* !USE_DE */
+   sprintf(s1, _("Time offset value of astronomical functions: %s%02d%s%02d == GMT%s"),
+           (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
+           abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
+#endif /* !USE_DE */
+   print_text (fp, s1);
+   my_bug_report_address (fp);
 }
 
 
@@ -2605,7 +3693,7 @@ my_version (fp)
    PUBLIC char *
 usage_msg ()
 /*
-   Creates the usage text `usage_text' and includes the actual program name.
+   Creates the usage text `usg_text' and includes the actual program name.
 */
 {
    static char  *usg_text;
@@ -2614,7 +3702,9 @@ usage_msg ()
 
    if (!is_initialized)
     {
-      usg_text = (char *)my_malloc (120, 124, __FILE__, ((long)__LINE__)-1, "usg_text", 0);
+      usg_text = (char *)my_malloc (LEN_SINGLE_LINE, ERR_NO_MEMORY_AVAILABLE,
+                                    __FILE__, ((long)__LINE__)-1L,
+                                    "usg_text", 0);
 #if USE_DE
       sprintf(usg_text, "Aufruf: %s [%s|%s{[?|h|??|hh|L|V]|{%sHKNOR%sXb%sijn%sq%ssu%s}}] [[%s] [%s]]",
               prgr_name, SWITCH, SWITCH2, USAGE_RC1, USAGE_SHELL, USAGE_RC2, USAGE_PAGER,
@@ -2632,24 +3722,69 @@ usage_msg ()
 
 
 
-   PUBLIC void
-put_longopt_description (fp)
-   FILE *fp;
+   PUBLIC char *
+lopt_msg ()
 /*
-   Puts a description text of the long-style options to file `fp'.
+   Returns the `lopt_text' description text of the long-style options
+     including the actual program name, and uses the global text
+     buffer `s3' internally.
 */
 {
+   static char  *lopt_text;
+   static Bool   is_initialized=FALSE;
+
+
+   if (!is_initialized)
+    {
+      lopt_text = (char *)my_malloc (LEN_SINGLE_LINE, ERR_NO_MEMORY_AVAILABLE,
+                                     __FILE__, ((long)__LINE__)-1L,
+                                     "lopt_text", 0);
 #if USE_DE
-   fprintf(fp, "Benutze `%s %s' oder ",
-           prgr_name, get_longopt_description (SYM_HELP, TRUE));
-   fprintf(fp, "`%s %s|[%s?]' f%sr mehr Information.",
-           prgr_name, get_longopt_description (SYM_LONG_HELP2, TRUE), LARG_SEP, UE);
+      sprintf(lopt_text, "Benutze `%s %s|[%s?]",
+              prgr_name, get_longopt_description (SYM_LONG_HELP2, TRUE), LARG_SEP);
 #else /* !USE_DE */
-   fprintf(fp, _("Use `%s %s' or "),
-           prgr_name, get_longopt_description (SYM_HELP, TRUE));
-   fprintf(fp, _("`%s %s|[%s?]' for more information."),
-           prgr_name, get_longopt_description (SYM_LONG_HELP2, TRUE), LARG_SEP);
+      sprintf(lopt_text, _("Use `%s %s|[%s?]"),
+              prgr_name, get_longopt_description (SYM_LONG_HELP2, TRUE), LARG_SEP);
 #endif /* !USE_DE */
+#if USE_PAGER
+      sprintf(s3, " %s' ", get_longopt_description (SYM_PAGER, TRUE));
+      strcat(lopt_text, s3);
+#else /* !USE_PAGER */
+      strcat(lopt_text, "' ");
+#endif /* !USE_PAGER */
+#if USE_DE
+      sprintf(s3, "f%sr mehr Information.", UE);
+      strcat(lopt_text, s3);
+#else /* !USE_DE */
+      strcat(lopt_text, _("for more information."));
+#endif /* !USE_DE */
+      is_initialized = TRUE;
+    }
+
+   return(lopt_text);
+}
+
+
+
+   LOCAL int
+gmt_timezone_value (hour)
+   int hour;
+/*
+   Returns the given HOUR offset value as an offset value N
+     within the range -12...-1...[0]...+1...+12, which is
+     based on the Greenwich Mean Time timezone `GMT[[+|-]N]'.
+*/
+{
+   register int  sign=-SGN(hour);
+
+
+   hour = abs(hour);
+   while (hour > HOURS_PER_DAY)
+     hour -= HOURS_PER_DAY;
+   if (hour > HOURS_PER_HALF_DAY)
+     hour -= (HOURS_PER_DAY + 1);
+
+   return(hour*sign);
 }
 
 
@@ -2662,7 +3797,8 @@ get_longopt_description (longopt_symbolic, with_larglist)
    Returns a description text of given `longopt_symbolic' long-style option
      in global text buffer `s2'.  If `with_larglist' is TRUE, the returned
      description text contains the argument list text (if any) too, otherwise
-     the returned description text contains the complete name of the long option only!
+     the returned description text contains the complete name of the
+     long option only!
 */
 {
    auto     const Lopt_struct  *ptr_lopt=lopt;
@@ -2718,12 +3854,36 @@ get_longopt_description (longopt_symbolic, with_larglist)
 
 
    LOCAL void
+my_bug_report_address (fp)
+   FILE *fp;
+/*
+   Prints the bug report address to file `fp' using the central output
+   function `print_text()', and uses the global text buffer `s1' internally.
+*/
+{
+   print_text (fp, s1);
+#if USE_DE
+   sprintf(s1, "Fehlerberichte via eMail an <%s>", BUG_REPORT_ADR1);
+   print_text (fp, s1);
+   sprintf(s1, "oder (falls das fehlschl%sgt) an <%s>.", AE, BUG_REPORT_ADR2);
+#else /* !USE_DE */
+   sprintf(s1, _("Email bug reports to <%s>"), BUG_REPORT_ADR1);
+   print_text (fp, s1);
+   sprintf(s1, _("or (if this fails) to <%s>."), BUG_REPORT_ADR2);
+#endif /* !USE_DE */
+   print_text (fp, s1);
+}
+
+
+
+   LOCAL void
 my_copyright (fp, with_short_license)
          FILE *fp;
    const Bool  with_short_license;
 /*
-   Prints the program-id and copyright text to file `fp' using the central
-     output function `print_text()' and uses global text buffer `s1' internally.
+   Prints the program-id and copyright text to file `fp' using
+     the central output function `print_text()', and uses the global
+     text buffer `s1' internally.
 */
 {
    sprintf(s1, "%s (GNU cal) %s", prgr_name, VERSION_NO);
@@ -2759,32 +3919,37 @@ my_help_head_text (fp)
    FILE *fp;
 /*
    Prints the help header text to file `fp' using the central
-     output function `print_text()' and uses global text buffer
-     `s1' and `s2' internally.
+     output function `print_text()', and uses the global text buffer
+     `s1' internally.
 */
 {
-   auto Bool  print_hls=(Bool)(is_tty&&highlight_flag&&!emu_hls);
-
-
-   *s1 = '\0';
-   if (print_hls)
-     strcpy(s1, ehls2s.seq);
-   strcat(s1, prgr_name);
-   if (print_hls)
-     strcat(s1, ehls2e.seq);
 #if USE_DE
-   sprintf(s2, ":%*s Das GNU Kalenderprogramm  (", 6-len_prgr_name, "");
+   sprintf(s1, "%s: Das Gregorianische Kalenderprogramm (GNU cal) %s",
+           prgr_name, VERSION_NO);
 #else /* !USE_DE */
-   sprintf(s2, _(":%*s The GNU calendar program  ("), 6-len_prgr_name, "");
+   sprintf(s1, _("%s: The Gregorian calendar program (GNU cal) %s"),
+           prgr_name, VERSION_NO);
 #endif /* !USE_DE */
-   strcat(s1, s2);
-   if (print_hls)
-     strcat(s1, ehls2s.seq);
-   strcat(s1, VERSION_NO);
-   if (print_hls)
-     strcat(s1, ehls2e.seq);
-   strcat(s1, ")  ");
+   print_text (fp, s1);
+   print_text (fp, s1);
    strcat(s1, COPYRIGHT_TXT);
+   print_text (fp, s1);
+   print_text (fp, s1);
+#if USE_RC
+#  if USE_DE
+   sprintf(s1, "Aufruf: %s [[OPTION...] [%cDATUM] [%cDATEI...]] [KOMMANDO]",
+           prgr_name, RC_ADATE_CHAR, RSP_CHAR);
+#  else /* !USE_DE */
+   sprintf(s1, _("Usage:  %s [[OPTION...] [%cDATE] [%cFILE...]] [COMMAND]"),
+           prgr_name, RC_ADATE_CHAR, RSP_CHAR);
+#  endif /* !USE_DE */
+#else /* !USE_RC */
+#  if USE_DE
+   sprintf(s1, "Aufruf: %s [[OPTION...] [%cDATEI...]] [KOMMANDO]", prgr_name, RSP_CHAR);
+#  else /* !USE_DE */
+   sprintf(s1, _("Usage:  %s [[OPTION...] [%cFILE...]] [COMMAND]"), prgr_name, RSP_CHAR);
+#  endif /* !USE_DE */
+#endif /* !USE_RC */
    print_text (fp, s1);
    print_text (fp, s1);
    strcpy(s1, usage_msg ());
@@ -2798,14 +3963,11 @@ my_help_head_text (fp)
 my_help_tail_text (fp)
    FILE *fp;
 /*
-   Prints the help tail text to file `fp' using the central
-     output function `print_text()' and uses global text buffer
-     `s1' internally.
+   Prints the help tail text to file `fp' using the central output function
+     `print_text()', and uses the global text buffer `s1' internally.
 */
 {
-   auto Bool  print_hls=(Bool)(is_tty&&highlight_flag&&!emu_hls);
-
-
+   *s1 = '\0';
    print_text (fp, s1);
 #if USE_DE
    sprintf(s1, "   +++  Bei zweistelliger Jahresangabe wird NICHT von %2d%s ausgegangen  +++",
@@ -2820,59 +3982,14 @@ my_help_tail_text (fp)
 #endif /* !USE_DE */
    print_text (fp, s1);
    print_text (fp, s1);
-   if (print_hls)
-     strcat(s1, ehls2s.seq);
-   strcat(s1, "------------------------oOO      \\\\\\_''/      OOo---------------------------");
-   if (print_hls)
-     strcat(s1, ehls2e.seq);
+   strcpy(s1, "------------------------oOO      \\\\\\_''/      OOo---------------------------");
    print_text (fp, s1);
-   strcpy(s1, "Thomas Esken               ");
-   if (print_hls)
-     strcat(s1, ehls2s.seq);
-   strcat(s1, "O     (/");
-   if (print_hls)
-    {
-      strcat(s1, ehls2e.seq);
-      strcat(s1, ehls1s.seq);
-    }
-   strcat(s1, "o");
-   if (print_hls)
-    {
-      strcat(s1, ehls1e.seq);
-      strcat(s1, ehls2s.seq);
-    }
-   strcat(s1, "-");
-   if (print_hls)
-    {
-      strcat(s1, ehls2e.seq);
-      strcat(s1, ehls1s.seq);
-    }
-   strcat(s1, "o");
-   if (print_hls)
-    {
-      strcat(s1, ehls1e.seq);
-      strcat(s1, ehls2s.seq);
-    }
-   strcat(s1, "\\)     O");
-   if (print_hls)
-     strcat(s1, ehls2e.seq);
-   strcat(s1, "  eMail: esken@uni-muenster.de");
+   strcpy(s1, "Thomas Esken               O     (/o-o\\)     O  eMail: ");
+   strcat(s1, BUG_REPORT_ADR1);
    print_text (fp, s1);
-   strcpy(s1, "Im Hagenfeld 84             ");
-   if (print_hls)
-     strcat(s1, ehls2s.seq);
-   strcat(s1, "    ((  ^  ))    ");
-   if (print_hls)
-     strcat(s1, ehls2e.seq);
-   strcat(s1, "   Phone: +49 251 232585");
+   strcpy(s1, "Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585");
    print_text (fp, s1);
-   strcpy(s1, "D-48147 Muenster; Germany    ");
-   if (print_hls)
-     strcat(s1, ehls2s.seq);
-   strcat(s1, "\\____) ~ (____/");
-   if (print_hls)
-     strcat(s1, ehls2e.seq);
-   strcat(s1, "    MotD : 2old2live, 2young2die");
+   strcpy(s1, "D-48147 Muenster; Germany    \\____) ~ (____/    MotD : 2old2live, 2young2die");
    print_text (fp, s1);
 }
 
@@ -2880,9 +3997,9 @@ my_help_tail_text (fp)
 
 /*
    Writes an informational text to "fp" using the central output function
-     showing the date, compiler and operating system used.  Uses global
-     text buffer `s1' internally.  Code taken from `zip21' source package
-     and adjusted to gcal's needs.
+     showing the date, compiler and operating system used.  Uses the global
+     text buffer `s1' internally.  The code is taken from `zip21' source
+     package and adjusted to Gcal's needs.
    Special thanks to the Info-ZIP group (`http://quest.jpl.nasa.gov/Info-ZIP/'),
      which merely granted the permission to use their `version_local()' function
      of `zip-2.1' in a modified way for Gcal (the `print_compiler_info()' function
@@ -2893,13 +4010,12 @@ my_help_tail_text (fp)
 print_compiler_info (fp)
    FILE *fp;
 {
-#if defined(__DJGPP__) || defined(__WATCOMC__) || \
-    (defined(_MSC_VER) && (_MSC_VER != 800))
+#if defined(__DJGPP__) || defined(__WATCOMC__) || (defined(_MSC_VER) && (_MSC_VER != 800))
    char buf[80];
 #endif
 
 
-    sprintf(s1, _(*compiler_info),
+   sprintf(s1, _(*compiler_info),
 
 #ifdef __GNUC__
 #  ifdef __DJGPP__
@@ -3019,6 +4135,9 @@ print_compiler_info (fp)
 #  endif /* __WATCOMC__ */
 #endif /* __GNUC__ */
 
+#if USE_DE
+   UE,
+#endif
    "MS-DOS",
 
 #if (defined(__GNUC__) || (defined(__WATCOMC__) && defined(__386__)))
@@ -3051,15 +4170,11 @@ print_compiler_info (fp)
 #  endif
 #endif
 
-#ifdef __DATE__
-#  if USE_DE
+#if USE_DE
    " am ", __DATE__
-#  else /* !USE_DE */
+#else /* !USE_DE */
    _(" on "), __DATE__
-#  endif /* !USE_DE */
-#else
-   "", ""
-#endif
+#endif /* !USE_DE */
    );
 
    print_text (fp, s1);
@@ -3170,17 +4285,16 @@ print_compiler_info (fp)
 #  endif /* !USE_DE */
 #endif
 
+#if USE_DE
+   UE,
+#endif
    "\n\tWindows 95 / Windows NT", " (32-bit)",
 
-#ifdef __DATE__
-#  if USE_DE
+#if USE_DE
    " am ", __DATE__
-#  else /* !USE_DE */
+#else /* !USE_DE */
    _(" on "), __DATE__
-#  endif /* !USE_DE */
-#else
-   "", ""
-#endif
+#endif /* !USE_DE */
    );
 
    print_text (fp, s1);
@@ -3300,6 +4414,9 @@ print_compiler_info (fp)
 #  endif /* __IBMC__ */
 #endif /* __GNUC__ */
 
+#if USE_DE
+   UE,
+#endif
    "OS/2",
 
 /* GRR:  does IBM C/2 identify itself as IBM rather than Microsoft? */
@@ -3333,15 +4450,11 @@ print_compiler_info (fp)
    " 2.x (32-bit)",
 #endif
 
-#ifdef __DATE__
-#  if USE_DE
+#if USE_DE
    " am ", __DATE__
-#  else /* !USE_DE */
+#else /* !USE_DE */
    _(" on "), __DATE__
-#  endif /* !USE_DE */
-#else
-   "", ""
-#endif
+#endif /* !USE_DE */
    );
 
    print_text (fp, s1);
@@ -3364,19 +4477,19 @@ print_compiler_info (fp)
 #  endif
 #endif
 
+#if USE_DE
+   UE,
+#endif
+
    "RISC OS",
 
    " (Acorn Computers Ltd)",
 
-#ifdef __DATE__
-#  if USE_DE
+#if USE_DE
    " am ", __DATE__
-#  else /* !USE_DE */
+#else /* !USE_DE */
    _(" on "), __DATE__
-#  endif /* !USE_DE */
-#else
-   "", ""
-#endif
+#endif /* !USE_DE */
    );
 
    print_text (fp, s1);
@@ -3389,7 +4502,10 @@ print_compiler_info (fp)
  *        default, by kickstart during startup)
  */
 int WBversion = (int)
+/*
 #include "ENV:Workbench"
+*/
+10
 ;
 
    LOCAL void
@@ -3398,10 +4514,9 @@ print_compiler_info (fp)
 {
 /* Define buffers. */
 
-   char buf1[16];  /* compiler name */
-   char buf2[16];  /* revstamp */
-   char buf3[16];  /* OS */
-   char buf4[16];  /* Date */
+   char buf1[40];  /* compiler name */
+   char buf2[40];  /* revstamp */
+   char buf3[40];  /* OS version*/
 
 /* format "with" name strings */
 
@@ -3414,16 +4529,18 @@ print_compiler_info (fp)
 #    ifdef AZTEC_C
    strcpy(buf1, "Manx Aztec C ");
 #    else
-#      if USE_DE
+#      ifdef __GNUC__
+   strcpy(buf1, "gcc ");
+#      else
+#        if USE_DE
    strcpy(buf1, "unbekannt ");
-#      else /* !USE_DE */
+#        else /* !USE_DE */
    strcpy(buf1, _("unknown "));
-#      endif /* !USE_DE */
+#        endif /* !USE_DE */
+#      endif
 #    endif
 #  endif
 #endif
-/* "under" */
-   sprintf(buf3, "AmigaDOS v%d", WBversion);
 
 /* Define revision, date, and time strings.
  * NOTE:  Do not calculate run time, be sure to use time compiled.
@@ -3452,21 +4569,17 @@ print_compiler_info (fp)
 #  endif
 #endif
 
-#ifdef __DATE__
-#  if USE_DE
-   sprintf(buf4, " am %s", __DATE__);
-#  else /* !USE_DE */
-   sprintf(buf4, _(" on %s"), __DATE__);
-#  endif /* !USE_DE */
-#else
-#  if USE_DE
-   strcpy(buf4, " unbekanntes Datum");
-#  else /* !USE_DE */
-   strcpy(buf4, _(" unknown date"));
-#  endif /* !USE_DE */
-#endif
+/* "under" */
+/*
+   strcpy(buf3, "AmigaDOS ");
+*/
+   sprintf(buf3, "v%d", WBversion);
 
-   sprintf(s1, _(*compiler_info), buf1, buf2, buf3, buf4, "", "");
+#if USE_DE
+   sprintf(s1, _(*compiler_info), buf1, buf2, UE, "AmigaDOS", buf3, " am ", __DATE__);
+#else /* !USE_DE */
+   sprintf(s1, _(*compiler_info), buf1, buf2, "AmigaDOS", buf3, _(" on "), __DATE__);
+#endif /* !USE_DE */
 
    print_text (fp, s1);
 }
@@ -3480,12 +4593,13 @@ print_compiler_info (fp)
    char buf[40];
 #endif
 
+
    sprintf(s1, _(*compiler_info),
 
 #ifdef __GNUC__
    "gcc ", __VERSION__,
 #else
-#  if 0
+#  ifdef __any_other_unix_like_compiler__   /* !!! FIXME */
 #    if USE_DE
    "cc ", (sprintf(buf, "Version %d", _RELEASE), buf),
 #    else /* !USE_DE */
@@ -3504,6 +4618,10 @@ print_compiler_info (fp)
 #  endif
 #endif
 
+#if USE_DE
+   UE,
+#endif
+
 #ifdef __MINT__
    "Atari TOS/MiNT",
 #else
@@ -3512,15 +4630,11 @@ print_compiler_info (fp)
 
    " (Atari ST/TT/Falcon030)",
 
-#ifdef __DATE__
-#  if USE_DE
+#if USE_DE
    " am ", __DATE__
-#  else /* !USE_DE */
+#else /* !USE_DE */
    _(" on "), __DATE__
-#  endif /* !USE_DE */
-#else
-   "", ""
-#endif
+#endif /* !USE_DE */
    );
 
    print_text (fp, s1);
@@ -3539,19 +4653,19 @@ print_compiler_info (fp)
    "cc", "",
 #endif
 
+#if USE_DE
+   UE,
+#endif
+
    "PRIMOS",
 
    " (Prime Computer Inc)",
 
-#ifdef __DATE__
-#  if USE_DE
+#if USE_DE
    " am ", __DATE__
-#  else /* !USE_DE */
+#else /* !USE_DE */
    _(" on "), __DATE__
-#  endif /* !USE_DE */
-#else
-   "", ""
-#endif
+#endif /* !USE_DE */
    );
 
    print_text (fp, s1);
@@ -3602,6 +4716,10 @@ print_compiler_info (fp)
 #  endif
 #endif
 
+#if USE_DE
+   UE,
+#endif
+
 #ifdef VMS_VERSION
 #  if defined(__alpha)
    "OpenVMS",   /* version has trailing spaces ("V6.1   "), so truncate: */
@@ -3611,7 +4729,7 @@ print_compiler_info (fp)
    (sprintf(buf, _(" (%.4s for Alpha)"), VMS_VERSION), buf),
 #    endif /* !USE_DE */
 #  else /* VAX */
-   (VMS_VERSION[1] >= '6')? "OpenVMS" : "VMS",
+   (VMS_VERSION[1] >= '6') ? "OpenVMS" : "VMS",
 #    if USE_DE
    (sprintf(buf, " (%.4s f%sr VAX)", VMS_VERSION), buf, UE),
 #    else /* !USE_DE */
@@ -3622,22 +4740,17 @@ print_compiler_info (fp)
    "VMS", "",
 #endif /* ?VMS_VERSION */
 
-#ifdef __DATE__
-#  if USE_DE
+#if USE_DE
    " am ", __DATE__
-#  else /* !USE_DE */
+#else /* !USE_DE */
    _(" on "), __DATE__
-#  endif /* !USE_DE */
-#else
-   "", ""
-#endif
+#endif /* !USE_DE */
    );
 
    print_text (fp, s1);
 }
 #              else /* default: UNIX */
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__386BSD__) || \
-    defined(__bsdi__)
+#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__386BSD__) || defined(__bsdi__)
 #include <sys/param.h> /* for the BSD4_4 define */
 #endif
 
@@ -3659,7 +4772,7 @@ print_compiler_info (fp)
 #  ifdef NX_CURRENT_COMPILER_RELEASE
    (sprintf(buf1, "NeXT DevKit %d.%02d ", NX_CURRENT_COMPILER_RELEASE/100,
     NX_CURRENT_COMPILER_RELEASE%100), buf1),
-    (strlen(__VERSION__) > 8)? "(gcc)" :
+    (strlen(__VERSION__) > 8) ? "(gcc)" :
      (sprintf(buf2, "(gcc %s)", __VERSION__), buf2),
 #  else
    "gcc ", __VERSION__,
@@ -3678,6 +4791,10 @@ print_compiler_info (fp)
    "cc", "",
 #    endif
 #  endif
+#endif
+
+#if USE_DE
+   UE,
 #endif
 
    "Unix",
@@ -3779,9 +4896,9 @@ print_compiler_info (fp)
 #                                    endif
 #                                  else
 #                                    if USE_DE
-   (BSD4_4 == 0.5)? " (NetBSD vor 0.9)" : " (NetBSD 1.2 oder neuer)",
+   (BSD4_4 == 0.5) ? " (NetBSD vor 0.9)" : " (NetBSD 1.2 oder neuer)",
 #                                    else /* !USE_DE */
-   (BSD4_4 == 0.5)? _(" (NetBSD before 0.9)") : _(" (NetBSD 1.2 or later)"),
+   (BSD4_4 == 0.5) ? _(" (NetBSD before 0.9)") : _(" (NetBSD 1.2 or later)"),
 #                                    endif /* !USE_DE */
 #                                  endif
 #                                endif
@@ -3790,20 +4907,20 @@ print_compiler_info (fp)
 #                          else
 #                            ifdef __FreeBSD__
 #                              if USE_DE
-   (BSD4_4 == 0.5)? " (FreeBSD 1.x)" : " (FreeBSD 2.0 oder neuer)",
+   (BSD4_4 == 0.5) ? " (FreeBSD 1.x)" : " (FreeBSD 2.0 oder neuer)",
 #                              else /* !USE_DE */
-   (BSD4_4 == 0.5)? " (FreeBSD 1.x)" : _(" (FreeBSD 2.0 or later)"),
+   (BSD4_4 == 0.5) ? " (FreeBSD 1.x)" : _(" (FreeBSD 2.0 or later)"),
 #                              endif /* !USE_DE */
 #                            else
 #                              ifdef __bsdi__
 #                                if USE_DE
-   (BSD4_4 == 0.5)? " (BSD/386 1.0)" : " (BSD/386 1.1 oder neuer)",
+   (BSD4_4 == 0.5) ? " (BSD/386 1.0)" : " (BSD/386 1.1 oder neuer)",
 #                                else /* !USE_DE */
-   (BSD4_4 == 0.5)? " (BSD/386 1.0)" : _(" (BSD/386 1.1 or later)"),
+   (BSD4_4 == 0.5) ? " (BSD/386 1.0)" : _(" (BSD/386 1.1 or later)"),
 #                                endif /* !USE_DE */
 #                              else
 #                                ifdef __386BSD__
-   (BSD4_4 == 1)? " (386BSD, post-4.4 release)" : " (386BSD)",
+   (BSD4_4 == 1) ? " (386BSD, post-4.4 release)" : " (386BSD)",
 #                                else
 #                                  if defined(i486) || defined(__i486) || defined(__i486__)
    " (Intel 486)",
@@ -3860,15 +4977,11 @@ print_compiler_info (fp)
 #  endif /* Sun */
 #endif /* SGI */
 
-#ifdef __DATE__
-#  if USE_DE
+#if USE_DE
    " am ", __DATE__
-#  else /* !USE_DE */
+#else /* !USE_DE */
    _(" on "), __DATE__
-#  endif /* !USE_DE */
-#else
-   "", ""
-#endif
+#endif /* !USE_DE */
    );
 
    print_text (fp, s1);

@@ -1,182 +1,970 @@
-This is Info file ./de/gcal.info, produced by Makeinfo version 1.67
-from the input file ./de/gcal.texi.
+Dies ist gcal.info, hergestellt von Makeinfo Version 4.0 aus gcal.texi.
 
 INFO-DIR-SECTION GNU Pakete
 START-INFO-DIR-ENTRY
-* Gcal: (gcal).                         Das GNU Kalenderprogramm.
-* tcal: (gcal)Aufruf von tcal.          Gcal mit morgigem Datum aufrufen.
-* txt2gcal: (gcal)Aufruf von txt2gcal.  Textdatei zu Ressourcendatei wandeln.
-* gcal2txt: (gcal)Aufruf von gcal2txt.  Ressourcendatei zu Textdatei wandeln.
+* Gcal: (gcal).                        GNU Kalenderprogramm.
+* Tcal: (gcal)Aufruf von tcal.         Gcal mit morgigem Datum aufrufen.
+* Txt2gcal: (gcal)Aufruf von txt2gcal. Kalendertext zu Ressourcendatei wandeln.
+* Gcal2txt: (gcal)Aufruf von gcal2txt. Kalenderressource zu Textdatei wandeln.
 END-INFO-DIR-ENTRY
 
-Diese Datei beschreibt Gcal, ein Programm um Kalender auszugeben.  Gcal
-gibt Monatskalender und Jahreskalender, ewige Feiertagslisten sowie
-Terminlisten auf viele verschiedene Arten und Weisen aus.  Es
-ber"ucksichtigt diejenigen Daten korrekt, welche "ubergangen wurden,
-als der derzeitig g"ultige Gregorianische Kalender den vormals g"ultigen
-Julianischen Kalender abl"oste.
+Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
+auszugeben.
 
-Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+Copyright (c) 1994-1997, 2000 Thomas Esken
 
-Das ist die zweite Ausgabe der Gcal Dokumentation.
+Diese Ausgabe ist für Gcal Version 3.00.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
 Copyrightvermerk und diesem Genehmigungsvermerk ausgestattet sind und
 vorgenannte Vermerke erhalten bleiben.
 
-Hiermit wird die Erlaubnis erteilt, ver"anderte Kopien dieses Handbuchs
-wie unter den Bedingungen f"ur wortgetreue Kopien zu erstellen und zu
-vertreiben, sofern die ausgef"uhrten Arbeiten in Ableitung und
-Gesamtheit innerhalb der Bestimmungen eines Genehmigungsvermerks liegen
-und zudem mit diesem ausgestattet sind, welcher mit diesem hier
-identisch ist.
+Hiermit wird die Erlaubnis erteilt, veränderte Kopien dieses Handbuchs
+wie unter den Bedingungen für wortgetreue Kopien zu erstellen und zu
+vertreiben, sofern die ausgeführten Arbeiten in Ableitung und Gesamtheit
+innerhalb der Bestimmungen eines Genehmigungsvermerks liegen und zudem
+mit diesem ausgestattet sind, welcher mit diesem hier identisch ist.
 
 Hiermit wird die Erlaubnis erteilt, wie unter den vorgenannten
-Bedingungen f"ur ver"anderte Versionen "Ubersetzungen dieses Handbuchs
-in eine andere Sprache zu erstellen und zu vertreiben, mit der
-Ausnahme, dass dieser Genehmigungsvermerk in einer "Ubersetzung
-angegeben sein darf, welche von der Free Software Foundation gebilligt
-wird.
+Bedingungen für veränderte Versionen Übersetzungen dieses Handbuchs in
+eine andere Sprache zu erstellen und zu vertreiben, mit der Ausnahme,
+daß dieser Genehmigungsvermerk in einer Übersetzung angegeben sein
+darf, welche von der Free Software Foundation gebilligt wird.
 
-Jedwede Vorschl"age, Verbesserungen, Erweiterungen, Fehlerberichte,
-Geld- und Sachspenden, Programmierauftr"age usw. sind stets willkommen.
-Bitte senden Sie diese direkt an meine eMail Adresse.  Wenn Sie dieses
-Werkzeug m"ogen, so w"urde ich mich sehr "uber eine Postkarte von Ihnen
-freuen!
+Jedwede Vorschläge, Verbesserungen, Erweiterungen, Fehlerberichte, Geld-
+und Sachspenden, Programmieraufträge usw. sind stets willkommen.  Bitte
+senden Sie diese direkt an meine eMail Adresse <esken@gmx.net>.  Wenn
+Sie dieses Werkzeug mögen, so würde ich mich sehr über eine Postkarte
+von Ihnen freuen!
 
 ------------------------oOO      \\\_''/      OOo---------------------------
-Thomas Esken               O     (/o-o\)     O  eMail: esken@uni-muenster.de
+Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
 Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 
 
-File: gcal.info,  Node: Regexps (kurz),  Next: Spezialtexte (lang),  Prev: Regulaere Ausdruecke,  Up: Top
+File: gcal.info,  Node: Aufruf von gcal2txt,  Prev: Aufruf von txt2gcal,  Up: Gcal Hilfsprogramme
 
-Zusammenfassung aller regul"aren Ausdr"ucke
-*******************************************
+Aufruf von `gcal2txt'
+=====================
 
-Regul"are Ausdr"ucke basieren auf den POSIX ERAs (Erweiterte Regul"are
-Ausdr"ucke).  Regexps werden aus Zeichen zusammengesetzt.  Hier ist
-eine Kurzliste aller dieser Zeichen:
+Gcal2txt ist ein Programm, welches aus einer Gcal Ressourcendatei eine
+wortgetreue Textdatei erzeugt.  Seine Argumente sind wie folgt:
 
-`C'
-     passt auf das Zeichen C (in der Annahme, das C keines der
-     nachfolgend aufgef"uhrten Zeichen ist).
+     gcal2txt [--help | --version] | [RESSOURCENDATEI | -]
 
-`\C'
-     passt auf das textliche Zeichen C.
+Wird keine RESSOURCENDATEI oder aber ein einzelnes `-' Zeichen als
+Argument angegeben, so liest und verarbeitet das Programm alle Eingaben,
+die vom _Standardeingabe-Gerätekanal_ kommen.  Alle Ergebnisse werden
+stets auf dem _Standardausgabe-Gerätekanal_ ausgegeben.  Ein
+Programmendestatus 0 bedeutet, daß die Verarbeitung erfolgreich war,
+ein anderer Endestatus verweist auf einen Fehler während der
+Verarbeitung.
 
-`.'
-     passt auf jedes Zeichen.
+Sinn und Zweck von Gcal2txt ist, all das, was vom Txt2gcal Programm in
+die Ausgabe eingebracht wurde, wieder rückgängig zu machen!
+
+Das Programm akzeptiert die folgenden Optionen:
+
+`--help'
+     Ausgabe eines Hilfetextes, der alle verfügbaren Optionen aufzeigt;
+     sodann erfolgreiche Beendigung des Programms.
+
+`--version'
+     Ausgabe der Versionsnummer; sodann erfolgreiche Beendigung des
+     Programms.
+
+Und nun ebenfalls zu einem Beispiel, welches den Einsatz von Gcal2txt
+näher erläutern soll.  Dazu wird die Ressourcendatei mit dem Namen
+`tdemo-1.rc' benutzt, welche im vorherigen Abschnitt mittels des
+Txt2gcal Programms aus einer Textdatei erzeugt wurde (*note Aufruf von
+`txt2gcal': Aufruf von txt2gcal.), und die ja wie folgt aussieht:
+
+     $ txt2gcal tdemo-1.txt 0*d1#999 > tdemo-1.rc
+     $ cat tdemo-1.rc
+     -| 0*d1#999 \        Hallo Freunde,~\
+     -| ~\
+     -| Ich bin der Demotext, der lustige Zeichen und Zeichensequenzen~\
+     -| enthaelt wie \~\~ \\~ % %% \$a $1 %%%\ ~\
+     -| %\ \%s %\%foo \%bar \\%Baz \\\~ \\~\ und so weiter...~\
+     -| Ich bin gespannt darauf, wie ich von `txt2gcal' umgesetzt werde.~\
+
+Nun zur Betrachtung, wie diese Ressourcendatei von Gcal2txt verarbeitet
+wird:
+
+     $ gcal2txt tdemo-1.rc
+     -|         Hallo Freunde,
+     -|
+     -| Ich bin der Demotext, der lustige Zeichen und Zeichensequenzen
+     -| enthaelt wie ~~ \~ % %% $a $1 %%%\
+     -| %\ %s %%foo %bar \%Baz \\~ \~\ und so weiter...
+     -| Ich bin gespannt darauf, wie ich von `txt2gcal' umgesetzt werde.
+
+
+File: gcal.info,  Node: Internationalisierung,  Next: Metasymbole,  Prev: Gcal Hilfsprogramme,  Up: Top
+
+Gesichtspunkte zur Internationalisierung
+****************************************
+
+Gcal besitzt ab Version 2.00 die Fähigkeit, Meldungstexte nicht mehr nur
+allein in englischer Landessprache auszugeben, sondern auch in
+beliebigen anderen Landessprachen, da Bestandteile des GNU `gettext'
+Pakets in die Software integriert worden sind.  *Note Introduction:
+(gettext)Top, für weitere Details.
+
+Gcal ist intern so eingestellt, daß es die englische Landessprache zur
+Ausgabe aller Meldungstexte verwendet, sofern keine andere Landessprache
+verwendet werden soll.  Werden Meldungstexte in einer anderen
+Landessprache gewünscht, so werden diese von Gcal aus einem so
+genannten _message catalog_ zur Laufzeit eingelesen.  Die folgenden
+Landessprachen werden von Gcal 3.00 unterstützt:
+
+*Landessprache*          *Sprachkode*
+
+Englisch                 `en'
+Deutsch                  `de'
+Französisch              `fr'
+Niederländisch           `nl'
+Polnisch                 `pl'
+Russisch                 `ru'
+Schwedisch               `sv'
+
+Um eine andere Landessprache anstelle der englischen Landessprache
+vorzuwählen, so braucht nur in einer der Umgebungsvariablen(1) (*note
+Internationalisierung-Footnote-1::):
+
+1.  `LANGUAGE'
+2.  `LC_ALL'
+3.  `LC_MESSAGES'
+4.  `LANG'
+
+ein entsprechender Sprachkode eingetragen zu werden.
+
+Endanwender benutzen normalerweise nur die `LANG' Umgebungsvariable um
+Gcal mitzuteilen, welche Landessprache zur Laufzeit verwendet werden
+soll.  Angenommen, Benutzer möchten Gcal mit Meldungstexten in deutscher
+Landessprache betreiben, so können diese die shell dazu veranlassen,
+die Umgebungsvariable `LANG' mit dem Inhalt `de' zu besetzen, und zwar
+durch `setenv LANG de' (bei Benutzung der `csh' shell) oder durch
+`export LANG; LANG=de' (bei Benutzung der `sh' shell).
+Selbstverständlich kann dieser Befehl auch in der `.login' bzw.
+`.profile' Datei beim Endanwender enthalten sein.  *Note The User's
+View: (gettext)Users, für weitere Details.
+
+Wie zuvor dargestellt reicht bereits der simple Eintrag von `de' in der
+Umgebungsvariablen `LANG' aus, um die Ausgabe deutscher Meldungstexte zu
+veranlassen.  `de' ist der aus zwei Buchstaben bestehende Sprachkode
+für Deutsch, der in der ISO-639:1988 definiert ist, und im weiteren
+Verlauf als "einfache Sprachkode-Information" bezeichnet wird.  Andere
+Sprachkodes können dieser ISO-Norm entnommen werden(2) (*note
+Internationalisierung-Footnote-2::).
+
+Da Gcal als Kalenderprogramm auch den Eigenheiten der verwendeten
+Landessprache hinsichtlich der Anordnung von Tag, Monat und Jahr (und
+weiterem) in einem dargestellten Datum, dem Zeitraum der Gregorianischen
+Reform, der Art der Wochennummern und der Darstellungsweise von
+Kalenderblättern, nachkommen muß, sind diese Kriterien ebenfalls an den
+Sprachkode gebunden(3) (*note Internationalisierung-Footnote-3::).
+
+So bewirkt ein `en' Sprachkode folgende interne Grundeinstellungen
+vorgenannter Kriterien:
+
+   * US amerikanisches Datumformat
+
+   * Gregorianische Reformation war 1752
+
+   * Starttag der Woche ist Sonntag
+
+   * Standard-Wochennummern
+
+   * Kalenderblattdarstellung
+
+             September 1994
+          So Mo Di Mi Do Fr Sa
+                       1  2  3
+           4  5  6  7  8  9 10
+          11 12 13 14 15 16 17
+          18 19 20 21 22 23 24
+          25 26 27 28 29 30
+
+Und ein `de' Sprachkode(4) (*note Internationalisierung-Footnote-4::)
+bewirkt folgende interne Grundeinstellungen:
+
+   * Deutsches Datumformat
+
+   * Gregorianische Reformation war 1582
+
+   * Starttag der Woche ist Montag
+
+   * ISO-8601:1988 Wochennummern
+
+   * Kalenderblattdarstellung
+
+          September 1994
+          
+          Montag           5 12 19 26
+          Dienstag         6 13 20 27
+          Mittwoch         7 14 21 28
+          Donnerstag    1  8 15 22 29
+          Freitag       2  9 16 23 30
+          Samstag       3 10 17 24
+          Sonntag       4 11 18 25
+
+Alle diese internen Grundeinstellungen sind durch die Angabe der
+Optionen `--date-format', `--gregorian-reform', `--starting-day',
+`--iso-week-number' und `--type' veränderbar.
+
+Falls kein Sprachkode vorgefunden wird, so nimmt Gcal die interne
+Grundeinstellung des `en' Sprachkodes an(5) (*note
+Internationalisierung-Footnote-5::).
+
+Falls ein Sprachkode angegeben ist, für den kein _message catalog_
+installiert wurde, so nimmt Gcal die internen Grundeinstellungen des
+`de' Sprachkodes an, gibt aber die Meldungstexte in der englischen
+Landessprache aus.  Dieses Verhalten erscheint mir im Augenblick als
+die zweckmäßigste Lösung in einem solchen Fall.  Da die englische
+Landessprache weltweit stärker verbreitet ist als die deutsche oder
+andere Landessprachen, macht es in einem solchen Fall durchaus Sinn,
+die Meldungstexte in der englischen Landessprache auszugeben.
+Allerdings sind die sonstigen Kriterien, die an die englische
+Landessprache gebunden sind, so speziell für Benutzer anderer
+Landessprachen, daß es aber durchaus Sinn macht, diese Kriterien an die
+internen Grundeinstellungen des `de' Sprachkodes anzulehnen, da in den
+meisten europäischen Ländern (die ich hier zum Maßstab mache) im
+wesentlichen die internen Grundeinstellungen des `de' Sprachkodes
+verwendet werden.
+
+Nun werden sich britische Endanwender sicherlich fragen, ob auch ihr
+Datumformat als interne Grundeinstellung benutzt werden kann(6) (*note
+Internationalisierung-Footnote-6::).  Die Antwort lautet schlicht und
+ergreifend `ja', allerdings muß dieser Benutzerkreis anstelle einer
+einfachen Sprachkode-Information eine "erweiterte
+Sprachkode-Information" in der Umgebungsvariable `LANG' angeben.
+
+Die übliche Schablone einer erweiterten Sprachkode-Information ist wie
+folgt aufgebaut:
+
+   * Nach XPG Syntax (X/Open Portability Guide):
+
+          LANDESSPRACHE[_TERRITORIUM][.ZEICHENSATZ][@MODIFIZIERER]
+
+   * Nach CEN Syntax (Comité Europén de Normalisation):
+
+          LANDESSPRACHE[_TERRITORIUM][+PUBLIKUM][+SPEZIAL][,SPONSOR][_ÜBERARBEITUNG]
+
+Beide Syntaxen enthalten die Bestandteile LANDESSPRACHE und
+TERRITORIUM, welche von Gcal zur Auswahl der Landessprache und der
+sonstigen Kriterien verwendet werden.  Der Bestandteil LANDESSPRACHE
+entspricht der einfachen Sprachkode-Information, und der Bestandteil
+TERRITORIUM ist ein aus zwei Buchstaben bestehender Territoriumskode,
+wie er in der ISO-3166 definiert ist, z.B. `GB' für Großbritannien oder
+`US' für die USA.  Für weitere Einzelheiten hierzu sei auf die
+einschlägige Fachliteratur verwiesen.  Britische Endanwender brauchen
+nur die shell dazu veranlassen, die Umgebungsvariable `LANG' mit dem
+Inhalt `en_GB' zu besetzen, sodann können diese das britische
+Datumformat als interne Grundeinstellung benutzen.
+
+
+File: gcal.info,  Node: Internationalisierung-Footnotes,  Up: Internationalisierung
+
+(1) Hier in absteigender Priorität ihrer Berücksichtigung aufgestellt.
+
+(2) Wie zum Beispiel `fr' für Französisch, `es' für Spanisch....
+
+(3) Genaugenommen an eine erweiterte Sprachkode-Information.
+
+(4) Oder andere Sprachkodes, für welche in Zukunft ein _message
+catalog_ erstellt und mit ausgeliefert wird.
+
+(5) Besser gesagt der erweiterten Sprachkode-Information `en_US'.
+
+(6) Alle anderen internen Grundeinstellungen der einfachen `en'
+Sprachkode-Information entsprechen ja sonst bereits ihren Kriterien.
+
+
+File: gcal.info,  Node: Metasymbole,  Next: Regulaere Ausdruecke,  Prev: Internationalisierung,  Up: Top
+
+Metasymbole
+***********
+
+Folgende _metasprachliche_ Konventionen werden bei der Darstellung von
+Optionen, Kommandos, Argumenten und Schablonen innerhalb dieses
+Dokuments verwendet:
+
+`N'
+     Nichtoptionales Argument, N muß eine zulässige Zahl sein.
+
+`e|t|DVAR'
+     Nichtoptionales Argument, welches ein einzelnes alphabetisches
+     Zeichen sein muß.
+
+`$TVAR'
+     Nichtoptionales Argument, welches ein einzelnes alphabetisches
+     Zeichen sein muß, das von einem `$' Zeichen angeführt wird.
+
+`[TEXT]'
+     Optionales Argument, TEXT ist eine zulässige
+     Zeichenkettenkonstante.
+
+`[AB]'
+     Optionale Argumente, deren Anzahl und Anordnung beliebig ist, z.B.:
+
+          NICHTS, A, B, AB, BA ...
+
+`{AB}'
+     Nichtoptionale Argumente, deren Anordnung beliebig ist und von
+     denen mindestens eins bis hin zu einer beliebigen Anzahl angegeben
+     werden kann, z.B.:
+
+          A, B, AB, BA ...
+
+`[A|B]'
+     Optionale Argumente, entweder A oder B, aber nicht beide.
+
+`A|B'
+     Nichtoptionale Argumente, entweder A oder B, aber nicht beide.
+
+`[A[B]]'
+     Optionale Argumentliste, entweder A oder AB, aber nicht B.
+
+`[A|B[C]]'
+     Optionale Argumentliste, entweder A oder B oder AC oder BC, aber
+     nicht C.
+
+`[A|BC]'
+     Optionale Argumentliste, entweder AC oder BC, aber nicht A oder B
+     oder C.
+
+`[A]|[B]'
+     Optionale Argumentlisten, entweder Liste A oder Liste B, aber
+     nicht beide.
+
+`[...]'
+     Zusätzliche Argumente dürfen angegeben werden und sind optional.
+
+
+File: gcal.info,  Node: Regulaere Ausdruecke,  Next: Regexp (kurz),  Prev: Metasymbole,  Up: Top
+
+Reguläre Ausdrücke
+******************
+
+* Menu:
+
+* Benutzung von Regexp::  Wie reguläre Ausdrücke benutzt werden können.
+* Regexp Operatoren::     Was sind regulär-Ausdruck Operatoren?
+
+Dieser Anhang ist aus den `gawk-3.0.0' und `regex-0.12' Handbüchern
+abgeleitet.
+
+Ein "regulärer Ausdruck", oder "regexp", ist ein Weg zur Beschreibung
+einer Klasse von Zeichenketten, oder "strings".  Der einfachste
+reguläre Ausdruck ist eine Folge von Buchstaben, Zahlen, oder beidem.
+Solch ein regexp paßt auf jedwede Zeichenkette, die eine solche Folge
+enthält.  Deswegen stimmt der regexp `foo' mit jeder Zeichenkette
+überein, die `foo' enthält.  Andere Arten von regulären Ausdrücken
+erlauben eine weitaus kompliziertere Angabe von string-Klassen.
+
+Gcal benutzt genau eine der folgenden regulär-Ausdruck
+Programmbibliotheken bzw. Methoden, welche zur Konfigurationszeit, oder
+genaugenommen, Kompilationszeit der Software ausgewählt wird; und die
+hier in absteigender Priorität hinsichtlich ihrer Auswahl angegeben
+sind:
+
+*Nr.**Funktion*                                             *Symbol*
+
+1.   GNU `re_compile_pattern()' und `regex.h'               `GNU-REGEX'
+2.   POSIX `regcomp()' und `regex.h'                        `POSIX-REGEX'
+3.   BSD `re_comp()'                                        `BSD-REGEX'
+4.   System V `regcmp()'                                    `SysV-REGEX'
+5.   Henry Spencer V8 `regcomp()' und `regexp.h'            `V8-REGEX'
+6.   Mustererkennung wird unterstützt, aber ohne            `NO-REGEX'
+     Metazeichen                                            
+
+Benutzen Sie `gcal --version' um festzustellen, welche Art von
+regulär-Ausdruck Programmbibliothek bzw. Methode in Ihr Gcal Programm
+eingebrannt ist!
+
+
+File: gcal.info,  Node: Benutzung von Regexp,  Next: Regexp Operatoren,  Prev: Regulaere Ausdruecke,  Up: Regulaere Ausdruecke
+
+Benutzung von regulären Ausdrücken
+==================================
+
+Ein regulärer Ausdruck kann als Suchmuster benutzt werden, wenn bei
+Aufruf von Gcal die `--filter-text=SUCHMUSTER' Option angegeben wird.
+
+*Note Termin Option `--filter-text=SUCHMUSTER': x-filter-text, für
+weitere Details.
+
+Der reguläre Ausdruck wird mit dem gesamten, vollständig expandierten
+Text jedes *gültigen* Termins verglichen, und der Termin wird nur dann
+ausgegeben, falls das Suchmuster mit dem Text(1) (*note Benutzung von
+Regexp-Footnote-1::) übereinstimmt.
+
+
+File: gcal.info,  Node: Benutzung von Regexp-Footnotes,  Up: Benutzung von Regexp
+
+(1) Für einen erfolgreichen Vergleich wird normalerweise nur eine
+Übereinstimmung mit einem Teil des Textes benötigt.
+
+
+File: gcal.info,  Node: Regexp Operatoren,  Prev: Benutzung von Regexp,  Up: Regulaere Ausdruecke
+
+Regulär-Ausdruck Operatoren
+===========================
+
+Reguläre Ausdrücke können mit den folgenden Zeichen kombiniert werden,
+welche als "regulär-Ausdruck Operatoren" oder "Metazeichen" bezeichnet
+werden, um die Leistungsfähigkeit und Vielseitigkeit von regulären
+Ausdrücken zu erhöhen.
+
+Hier ist eine Tabelle dieser Metazeichen.  Alle Zeichen, die nicht in
+dieser Tabelle aufgeführt sind, stehen für sich selbst.
+
+`\'
+     Wird benutzt um die Spezialbedeutung eines Zeichens während des
+     Vergleichs zu unterdrücken.  Zum Beispiel:
+
+          \$
+
+     paßt auf das Zeichen `$'.
 
 `^'
-     passt auf den Anfang einer Zeichenkette.
+     Paßt auf den Anfang einer Zeichenkette.  Zum Beispiel:
+
+          ^@chapter
+
+     paßt auf `@chapter' zu Anfang einer Zeichenkette, und kann dazu
+     benutzt werden, um Kapitelanfänge in Texinfo Quellentextdateien zu
+     identifizieren.  Das `^' Zeichen wird als ein "Anker" bezeichnet,
+     da es das Suchmuster dergestalt verankert, daß es nur zu
+     Übereinstimmungen kommen kann, die zu Anfang einer Zeichenkette
+     auftreten.
 
 `$'
-     passt auf das Ende einer Zeichenkette.
+     Ähnlich wie `^', paßt aber nur auf das Ende einer Zeichenkette.
+     Zum Beispiel:
+
+          p$
+
+     paßt auf einen string, der mit `p' endet.  Das `$' Metazeichen ist
+     auch ein Anker.
+
+`.'
+     Der Punkt paßt auf jedes Einzelzeichen.  Zum Beispiel:
+
+          .P
+
+     führt zu Übereinstimmungen jedes Einzelzeichens, welches von einem
+     `P' in einer Zeichenkette gefolgt wird.  Mittels Verkettung kann
+     beispielsweise ein regulärer Ausdruck wie `U.A' erzeugt werden,
+     welcher auf jede 3-Zeichen Folge paßt, die mit `U' beginnt und mit
+     einem `A' endet.
+
+`[...]'
+     Wird als "Zeichenliste" bezeichnet.  Diese paßt auf jedes
+     _Einzelzeichen_, welches in den eckigen Klammern angegeben wird.
+     Zum Beispiel:
+
+          [MVX]
+
+     paßt auf jedes einzelne `M', `V' oder `X' Zeichen in einem string.
+
+     Bereiche von Zeichen werden unter Benutzung eines Bindestrichs
+     zwischen den Start- und Endezeichen vereinbart, und das ganze wird
+     von eckigen Klammern umschlossen.  Zum Beispiel:
+
+          [0-9]
+
+     paßt auf jede Ziffer.  Mehrfache Bereiche sind erlaubt.  Zum
+     Beispiel ist die Liste `[A-Za-z0-9]' ein üblicher Weg, um den
+     Gedanken "aller alphanumerischen Zeichen" auszudrücken.
+
+     Um eines der `\', `[', `]', `-' oder `^' Zeichen in eine
+     Zeichenliste einzufügen, ist es notwendig, diese mit einem
+     anführenden `\' Zeichen auszustatten.  Zum Beispiel:
+
+          [d\]]
+
+     paßt entweder auf `d' oder `]'.
+
+     "Zeichenklassen" sind ein neues Merkmal, die im POSIX Standard
+     eingeführt sind.  Eine Zeichenklasse ist eine spezielle
+     Bezeichnung, um Zeichenlisten, die mit speziellen Eigenschaften
+     ausgestattet sind, zu beschreiben, wohingegen sich aber die
+     aktuellen Zeichen selbst von Land zu Land und/oder Zeichensatz zu
+     Zeichensatz verändern.  Zum Beispiel unterscheidet sich der
+     Begriff, was unter einem alphabetischen Zeichen zu verstehen ist,
+     in den USA und in Frankreich.
+
+     Eine Zeichenklasse ist in einem regexp nur _innerhalb_ der Klammern
+     einer Zeichenliste gültig.  Zeichenklassen bestehen aus `[:'
+     --einem Schlüsselwort, daß die Klasse bezeichnet-- und `:]'.  Es
+     folgen nun die Zeichenklassen, welche durch den POSIX Standard
+     definiert werden:
+
+    `[:alnum:]'
+          Alphanumerische Zeichen.
+
+    `[:alpha:]'
+          Alphabetische Zeichen.
+
+    `[:blank:]'
+          Leerzeichen und Tabulatorzeichen.
+
+    `[:cntrl:]'
+          Steuerzeichen.
+
+    `[:digit:]'
+          Numerische Zeichen.
+
+    `[:graph:]'
+          Zeichen, die druckbar und zugleich sichtbar sind(1) (*note
+          Regexp Operatoren-Footnote-1::).
+
+    `[:lower:]'
+          Kleinbuchstaben.
+
+    `[:print:]'
+          Druckbare Zeichen(2) (*note Regexp Operatoren-Footnote-2::).
+
+    `[:punct:]'
+          Interpunktionszeichen(3) (*note Regexp
+          Operatoren-Footnote-3::).
+
+    `[:space:]'
+          Leerzeichen(4) (*note Regexp Operatoren-Footnote-4::).
+
+    `[:upper:]'
+          Großbuchstaben.
+
+    `[:xdigit:]'
+          Hexadezimalziffern.
+
+     Zum Beispiel mußte vor Einführung des POSIX Standards
+     `[A-Za-z0-9]' geschrieben werden, um eine Übereinstimmung mit
+     allen alphanumerischen Zeichen zu erhalten.  Falls der verwendete
+     Zeichensatz nun aber andere alphabetische Zeichen enthält, so würde
+     vorstehendes Suchmuster keine Übereinstimmung mit diesen erbringen.
+     Mit den POSIX Zeichenklassen kann nun aber `[[:alnum:]]'
+     geschrieben werden, mit dem Resultat, daß _alle_ alphabetischen
+     und numerischen Zeichen des verwendeten Zeichensatzes
+     Übereinstimmungen erbringen würden.
+
+     Zwei zusätzliche Spezialfolgen können in Zeichenlisten auftreten.
+     Diese lassen sich auf Nicht-ASCII Zeichensätze anwenden, welche
+     einzelne Symbole haben können (auch "vergleichende Elemente"(5)
+     (*note Regexp Operatoren-Footnote-5::) genannt), die mit mehr als
+     einem Zeichen dargestellt werden, ebensogut wie zahlreiche Zeichen,
+     die gleichwertig für Vergleichs- oder Sortierungszwecke benutzt
+     werden können.  (Zum Beispiel sind im Französischen das einfache
+     `e' und ein _grave_ akzentuiertes `è' identisch.)
+
+    Vergleichende Symbole
+          Ein "vergleichendes Symbol"(6) (*note Regexp
+          Operatoren-Footnote-6::) ist ein Multizeichen vergleichendes
+          Element, das mit `[.' und `.]' umschlossen wird.  Wenn
+          beispielsweise `ch' ein vergleichendes Element ist, so ist
+          `[[.ch.]]' ein regexp, der auf dieses vergleichende Element
+          paßt, wohingegen `[ch]' ein regexp ist, der entweder auf `c'
+          oder auf `h' paßt.
+
+    Gleichwertigkeitsklassen in regexp
+          Eine "Gleichwertigkeitsklasse"(7) (*note Regexp
+          Operatoren-Footnote-7::) ist eine Liste von gleichwertigen
+          Zeichen, die mit `[=' und `=]' umschlossen sind.  Deswegen ist
+          `[[=eè=]]' ein regexp, der entweder auf `e' oder `è' paßt.
+
+     Diese Besonderheiten sind ein sehr wertvolles Hilfsmittel in nicht
+     englischsprachig ausgerichteten Umgebungen.
+
+     *Vorsicht:*
+
+     Die Bibliotheksfunktionen, die von Gcal für die regulär-Ausdruck
+     Vergleiche benutzt werden, erkennen derzeit nur POSIX
+     Zeichenklassen (möglicherweise); sie erkennen weder vergleichende
+     Elemente noch Gleichwertigkeitsklassen.
+
+`[^ ...]'
+     Bezeichnet eine "negierte Zeichenliste" bzw. "komplementäre
+     Zeichenliste".  Das erste Zeichen nach der `[' Klammer _muß_ das
+     `^' Zeichen sein.  Diese Zeichenliste paßt auf jedes Zeichen, das
+     _nicht_ innerhalb der eckigen Klammern aufgeführt ist.  Zum
+     Beispiel:
+
+          [^0-9]
+
+     paßt auf jedes Zeichen, das keine Ziffer ist.
+
+`|'
+     Das ist der "Auswahloperator", und dieser wird benutzt, um
+     Alternativen zu vereinbaren.  Zum Beispiel:
+
+          ^P|[0-9]
+
+     paßt auf jeden string, der entweder mit `^P' oder mit `[0-9]'
+     übereinstimmt.  Das bedeutet, daß Übereinstimmungen mit jeder
+     Zeichenkette bestehen, die mit `P' beginnt oder eine Ziffer
+     enthält.
+
+     Die Alternative gilt für den größtmöglichen regulär-Ausdruck auf
+     der jeweiligen Seite.  Mit anderen Worten, `|' hat den geringsten
+     Vorrang aller regulär-Ausdruck Operatoren.
+
+`(...)'
+     Runde Klammern werden in regulären Ausdrücken genauso zum
+     Gruppieren verwendet, wie in der Arithmetik.  Diese können benutzt
+     werden, um reguläre Ausdrücke zu verketten, die den `|'
+     Auswahloperator enthalten.
+     Zum Beispiel paßt `@(samp|code)\{[^}]+\}' beiderseits auf
+     `@code{foo}' und auf `@samp{bar}'.  (Das sind Texinfo
+     Steueranweisungen zur Textformatierung.)
+
+`*'
+     Dieses Symbol bedeutet, daß der vorangehende reguläre Ausdruck so
+     oft wiederholt wird, wie es notwendig ist, um eine Übereinstimmung
+     zu finden.  Zum Beispiel:
+
+          ph*
+
+     verwendet das `*' Symbol zum vorangehenden `h', und prüft auf
+     Übereinstimmungen, die sich aus einem `p', welches von einer
+     beliebigen Anzahl von `h''s gefolgt wird, ergeben.  `ph*' paßt
+     auch auf ein einzelnes `p', falls keine `h''s vorhanden sind.
+
+     Das `*' Metazeichen wiederholt den _geringstmöglichen_
+     vorangehenden Ausdruck.  (Benutzen Sie die runden Klammern, falls
+     ein größerer Ausdruck wiederholt werden soll.)  Es werden so viele
+     Wiederholungen wie möglich gefunden.  Zum Beispiel:
+
+          gcal --filter-text='\(c[ad][ad]*r x\)' -f sample.rc -y
+
+     gibt jeden Termin aus `sample.rc' aus, der einen Termintext der
+     Form `(car x)', `(cdr x)', `(cadr x)', usw. enthält.  Beachten Sie
+     das Entwerten der runden Klammern durch Voranstellen eines `\'
+     Zeichens an diese.
+
+`+'
+     Dieses Symbol ist ähnlich wie `*', nur muß der vorangehende
+     Ausdruck letztlich einmal gepaßt haben.  Das bedeutet, daß:
+
+          ul+m
+
+     zwar auf `ulm' und `ullm' passen würde, aber nicht auf `um',
+     wohingegen `ul*m' auf alle drei vorstehenden Zeichenketten passen
+     würde.  Hier ist eine einfachere Art, wie das letzte `*' Beispiel
+     geschrieben werden kann:
+
+          gcal --filter-text='\(c[ad]+r x\)' -f sample.rc -y
+
+`?'
+     Dieses Symbol ist ähnlich wie `*', aber der vorangehende Ausdruck
+     kann entweder einmal gepaßt haben, oder nicht in Gänze.  Zum
+     Beispiel:
+
+          fe?d
+
+     paßt nur auf `fed' und `fd', und nichts anderes.
+
+`{N}'
+`{N,}'
+`{N,M}'
+     Eine oder zwei Zahlen innerhalb geschweifter Klammern bezeichnen
+     einen "Intervall-Ausdruck", der im POSIX Standard verfügbar ist.
+     Falls eine Zahl in den Klammern vorhanden ist, so wird der
+     vorangehende regexp N-fach wiederholt.  Wenn zwei Zahlen
+     --separiert durch ein Komma-- in den Klammern vorhanden sind, so
+     wird der vorangehende regexp N bis M-fach wiederholt.  Nun, falls
+     eine Zahl --gefolgt von einem Komma-- in den Klammern vorhanden
+     ist, dann wird der vorangehende regexp letztlich N-fach wiederholt.
+
+    `ul{3}m'
+          paßt auf `ulllm', aber nicht auf `ulm' oder `ullllm'.
+
+    `ul{3,5}m'
+          paßt nur auf `ulllm' oder `ullllm' oder `ulllllm'.
+
+    `ul{2,}m'
+          paßt auf `ullm' oder `ulllm' und so weiter.
+
+GNU Software, die mit regulären Ausdrücken umgeht, unterstützt
+zusätzlich weitere regulär-Ausdruck Operatoren.  Diese Operatoren sind
+hier beschrieben.
+
+Die meisten der zusätzlichen Operatoren sind geschaffen worden, damit
+Übereinstimmungen in Wörtern festgestellt werden können.  Für unsere
+Zwecke ist ein "Wort" eine Folge von einem oder mehreren Buchstaben,
+Zahlen oder Unterstrichzeichen (`_').
+
+`\w'
+     Dieser Operator paßt auf jedes Zeichen, welches ein Wort
+     konstituiert, d.h. jeder Buchstabe, Zahl oder Unterstrich.  Denken
+     Sie es sich als eine Abkürzung für `[A-Za-z0-9_]' oder
+     `[[:alnum:]_]'.
+
+`\W'
+     Dieser Operator paßt auf jedes Zeichen, welches kein Wort
+     konstituiert.  Denken Sie es sich als eine Abkürzung für
+     `[^A-Za-z0-9_]' oder `[^[:alnum:]_]'.
+
+`\<'
+     Dieser Operator paßt auf jeden leeren string zu Anfang eines
+     Wortes.  Beispielsweise paßt `\<kennen' auf `kennen', aber nicht
+     auf `erkennen'.
+
+`\>'
+     Dieser Operator paßt auf jede leere Zeichenkette zu Ende eines
+     Wortes.  Zum Beispiel paßt `er\>' auf `er', aber nicht auf
+     `erkennen'.
+
+`\b'
+     Dieser Operator paßt auf einen leeren string, der entweder zu
+     Anfang oder zu Ende eines Wortes auftritt.  Zum Beispiel paßt
+     `\bFalle?\b' entweder auf das einzelne Wort `Fall' oder auf das
+     einzelne Wort `Falle'.
+
+`\B'
+     Dieser Operator paßt auf eine leere Zeichenkette, die innerhalb
+     eines Wortes auftritt.  Mit anderen Worten, `\B' paßt auf einen
+     leeren string, der zwischen zwei Zeichen auftritt, die ein Wort
+     konstituieren.  Beispielsweise paßt `\Brechnet\B' auf
+     `berechnete', aber es paßt nicht auf `so rechnet man'.  `\B' ist
+     im Grunde genommen das genaue Gegenteil von `\b'.
+
+Es gibt noch zwei weitere Operatoren, die auf einen Puffer anwendbar
+sind.  Im Emacs ist ein "Puffer" natürlich ein Emacs Puffer.  In anderen
+Programmen betrachten die regulär-Ausdruck Bibliotheksfunktionen, die
+von Gcal benutzt werden, die gesamte Zeichenkette, welche auf
+Übereinstimmungen hin untersucht werden soll, als den Puffer(8) (*note
+Regexp Operatoren-Footnote-8::).
+
+Für Gcal erbringen diese Operatoren keine neuen Fähigkeiten, da die `^'
+und `$' Operatoren benutzt werden können, um Übereinstimmungen zu
+Anfang und zu Ende von Zeichenketten festzustellen.  Sie sind nur
+zwecks Kompatibilität zu anderer GNU Software bereitgestellt.
+
+`\`'
+     Dieser Operator paßt auf eine leere Zeichenkette zu Anfang eines
+     Puffers.
+
+`\''
+     Dieser Operator paßt auf eine leere Zeichenkette zu Ende eines
+     Puffers.
+
+Die `*', `+' und `?' Operatoren und die geschweiften Klammern `{' und
+`}' haben den höchsten Vorrang in regulären Ausdrücken, gefolgt von der
+Verkettung, und abschließend dem `|' Operator.  Wie in der Arithmetik
+üblich, so kann auch hier mittels Klammerung (runde Klammern) die
+Gruppierung der Operatoren verändert werden.
+
+Die Groß-/ Kleinschreibung ist normalerweise von Bedeutung in regulären
+Ausdrücken, und zwar beiderseits beim Aufspüren von gewöhnlichen Zeichen
+(d.h. Nicht-Metazeichen), und innerhalb Zeichenklassen.  Deswegen paßt
+ein `w' in einem regulären Ausdruck nur auf einen `w' Kleinbuchstaben,
+und nicht etwa auf einen `W' Großbuchstaben.
+
+Der einfachste Weg, um ein groß-/ kleinschreibungsunabhängiges Zeichen
+aufzuspüren, ist die Benutzung einer Zeichenliste: `[Ww]'.  Wie auch
+immer, so kann es doch sehr lästig sein, falls soetwas des öfteren
+gebraucht wird; und unglücklicherweise kann der reguläre Ausdruck
+dadurch schwer lesbar werden.  Abhilfe bietet hier Gcal's
+`--ignore-case' Option, welche die Unterschiede zwischen Groß- und
+Kleinschreibung sowohl im regulären Ausdruck als auch im gesamten,
+vollständig expandierten Text eines jeden *gültigen* Termins ignoriert.
+*Note Termin Option `--ignore-case': x-ignore-case.
+
+
+File: gcal.info,  Node: Regexp Operatoren-Footnotes,  Up: Regexp Operatoren
+
+(1) Ein Leerzeichen ist zwar druckbar, aber nicht sichtbar, während ein
+`a' Zeichen beides ist.
+
+(2) Zeichen, die nicht Steuerzeichen sind.
+
+(3) Zeichen, die weder Buchstabe, Zahl, Steuerzeichen noch Leerzeichen
+sind.
+
+(4) Solche wie das Leerzeichen, Tabulatorzeichen und
+Seitenvorschubzeichen, um ein paar zu nennen.
+
+(5) Im Englischen mit `collating elements' bezeichnet.
+
+(6) Im Englischen mit `collating symbol' bezeichnet.
+
+(7) Im Englischen mit `equivalence class' bezeichnet.
+
+(8) Das ist der _Textteil_ einer Gcal Ressourcendateizeile.
+
+
+File: gcal.info,  Node: Regexp (kurz),  Next: Spezialtexte (lang),  Prev: Regulaere Ausdruecke,  Up: Top
+
+Zusammenfassung aller regulären Ausdrücke
+*****************************************
+
+Reguläre Ausdrücke basieren auf den POSIX ERAs (Erweiterte Reguläre
+Ausdrücke).  Regexps werden aus Zeichen zusammengesetzt.  Hier ist eine
+Kurzliste aller dieser Zeichen:
+
+`C'
+     paßt auf das Zeichen C (in der Annahme, das C keines der
+     nachfolgend aufgeführten Zeichen ist).
+
+`\C'
+     paßt auf das textliche Zeichen C.
+
+`.'
+     paßt auf jedes Zeichen.
+
+`^'
+     paßt auf den Anfang einer Zeichenkette.
+
+`$'
+     paßt auf das Ende einer Zeichenkette.
 
 `[ABC...]'
-     passt auf jedes der Zeichen ABC... (Zeichenliste).
+     paßt auf jedes der Zeichen ABC... (Zeichenliste).
 
-`[[:KLASSE:]]'
-     passt auf jedes Zeichen in der Zeichenklasse KLASSE.  Erlaubte
-     Klassen sind `alnum', `alpha', `blank', `cntrl', `digit', `graph',
-     `lower', `print', `punct', `space', `upper' und `xdigit'.
+`[[:SCHLüSSELWORT:]]'
+     paßt auf jedes Zeichen in der Zeichenklasse SCHLüSSELWORT.
+     Erlaubte Klassen sind `alnum', `alpha', `blank', `cntrl', `digit',
+     `graph', `lower', `print', `punct', `space', `upper' und `xdigit'.
 
-`[[.SYMBOL.]]'
-     passt auf das Multi-Zeichen vergleichende Element SYMBOL.  `gcal'
-     unterst"utzt gegenw"artig keine vergleichenden Elemente.
+`[[.ELEMENT.]]'
+     paßt auf das Multizeichen vergleichende ELEMENT.  Gcal unterstützt
+     gegenwärtig keine vergleichenden Elemente.
 
-`[[=ZEICHEN=]]'
-     passt auf jedes der gleichwertigen Zeichen in ZEICHEN.  `gcal'
-     unterst"utzt gegenw"artig keine Gleichwertigkeitsklassen.
+`[[=LISTE=]]'
+     paßt auf jedes der gleichwertigen Zeichen in LISTE.  Gcal
+     unterstützt gegenwärtig keine Gleichwertigkeitsklassen.
 
 `[^ABC...]'
-     passt auf jedes Zeichen, ausgenommen ABC... (negierte bzw.
-     komplement"are Zeichenliste).
+     paßt auf jedes Zeichen, ausgenommen ABC... (negierte bzw.
+     komplementäre Zeichenliste).
 
 `R1|R2'
-     passt entweder auf R1 oder auf R2 (Alternative).
+     paßt entweder auf R1 oder auf R2 (Alternative).
 
 `R1R2'
-     passt auf R1, und dann auf R2 (Verkettung).
+     paßt auf R1, und dann auf R2 (Verkettung).
 
 `R+'
-     passt auf ein R oder auf mehrere R's.
+     paßt auf ein R oder auf mehrere R's.
 
 `R*'
-     passt auf kein R oder auf mehrere R's.
+     paßt auf kein R oder auf mehrere R's.
 
 `R?'
-     passt auf kein R oder auf genau ein R.
+     paßt auf kein R oder auf genau ein R.
 
 `(R)'
-     passt auf R (Gruppierung).
+     paßt auf R (Gruppierung).
 
 `R{N}'
 `R{N,}'
 `R{N,M}'
-     passt auf letztlich N, N bis hin zu jeder Anzahl, oder N bis M
-     Vorkommen von R (Intervall-Ausdr"ucke).
+     paßt auf letztlich N, N bis hin zu jeder Anzahl, oder N bis M
+     Vorkommen von R (Intervall-Ausdrücke).
 
 `\b'
-     passt auf eine leere Zeichenkette entweder zu Anfang oder zu Ende
+     paßt auf eine leere Zeichenkette entweder zu Anfang oder zu Ende
      eines Wortes.
 
 `\B'
-     passt auf die leere Zeichenkette innerhalb eines Wortes.
+     paßt auf die leere Zeichenkette innerhalb eines Wortes.
 
 `\<'
-     passt auf die leere Zeichenkette zu Anfang eines Wortes.
+     paßt auf die leere Zeichenkette zu Anfang eines Wortes.
 
 `\>'
-     passt auf die leere Zeichenkette zu Ende eines Wortes.
+     paßt auf die leere Zeichenkette zu Ende eines Wortes.
 
 `\w'
-     passt auf jedes Zeichen, welches ein Wort konstituiert
+     paßt auf jedes Zeichen, welches ein Wort konstituiert
      (Alphanumerische Zeichen und der Unterstrich).
 
 `\W'
-     passt auf jedes Zeichen, welches kein Wort konstituiert.
+     paßt auf jedes Zeichen, welches kein Wort konstituiert.
 
 `\`'
-     passt auf die leere Zeichenkette zu Anfang eines Puffers (1).
+     paßt auf die leere Zeichenkette zu Anfang eines Puffers(1) (*note
+     Regexp (kurz)-Footnote-1::).
 
 `\''
-     passt auf die leere Zeichenkette zu Ende eines Puffers.
-
-  ---------- Footnotes ----------
-
-  (1)  Identisch mit dem *Textteil* einer Ressourcendateizeile von
-`gcal'.
+     paßt auf die leere Zeichenkette zu Ende eines Puffers.
 
 
-File: gcal.info,  Node: Spezialtexte (lang),  Next: Spezialtexte (kurz),  Prev: Regexps (kurz),  Up: Top
+File: gcal.info,  Node: Regexp (kurz)-Footnotes,  Up: Regexp (kurz)
+
+(1) Identisch mit dem _Textteil_ einer Ressourcendateizeile von Gcal.
+
+
+File: gcal.info,  Node: Spezialtexte (lang),  Next: Spezialtexte (kurz),  Prev: Regexp (kurz),  Up: Top
 
 Beschreibung aller `%?'... Spezialtexte
 ***************************************
 
 * Menu:
 
-* Ausschliessen::   Datum ausschliessen.
+* Ausschliessen::   Datum ausschließen.
 * Ersetzen::        Texte ersetzen.
-* Shell Kommando::  Shell Kommando ausf"uhren.
+* Shell Kommando::  Shell Kommando ausführen.
 
 Die im Textteil einer Zeile der Gcal Ressourcendatei verwendbaren
-`%?'... Spezialtexte k"onnen grob in drei Kategorien eingeteilt werden.
+`%?'... Spezialtexte können grob in drei Kategorien eingeteilt werden.
 So gibt es Spezialtexte, welche die Ausgabe von Terminen in bestimmten
-F"allen unterdr"ucken.  Andere werden durch besondere Texte ersetzt,
-und noch andere veranlassen die shell dazu, externe Kommandos
-auszuf"uhren.  *Note `%?'... Spezialtexte: Spezialtexte, f"ur eine
-allgemeine Beschreibung der Spezialtexte, die im Textteil einer Zeile
-von Gcal Ressourcendateien auftreten d"urfen.
+Fällen unterdrücken.  Andere werden durch besondere Texte ersetzt, und
+noch andere veranlassen die shell dazu, externe Kommandos auszuführen.
+*Note `%?'... Spezialtexte: Spezialtexte, für eine allgemeine
+Beschreibung der Spezialtexte, die im Textteil einer Zeile von Gcal
+Ressourcendateien auftreten dürfen.
 
-Bei einigen dieser Spezialtexte darf noch optional ein einfaches oder
-besonderes Datumargument (im weiteren mit DATUM bezeichnet) oder ein
-sonstiges Argument (im weiteren mit ARGUMENT bezeichnet) angegeben
-werden.  Wenn ein Spezialtext direkt von einem DATUM Argument gefolgt
-wird, so muss DATUM einem der nachstehenden Datumformate entsprechen:
+Bei einigen dieser Spezialtexte darf noch optional eine Formatanweisung
+(im weiteren mit FORMAT bezeichnet) angegeben werden, welche die
+Darstellung des expandierten Spezialtextes beeinflußt.  *Note
+Formatanweisung::, für die ausführliche Beschreibung der
+Formatanweisung und ihrer Komponenten.  Bei Spezialtexten, die kein
+FORMAT aufweisen dürfen, wird eine eventuell angegebene Formatanweisung
+von Gcal ignoriert und nicht ausgegeben.
+
+Aber auch solche Spezialtexte können mittels einer Formatanweisung von
+Gcal besonders dargestellt werden, und zwar durch eine indirekte
+Methode.  Man weist einfach einer Textvariablen den Spezialtext
+exklusiv zu und gibt diese dann, mit einer Formatanweisung versehen,
+aus.  Allerdings ist dabei zu beachten, daß die Feldbreitenkomponente
+der Formatanweisung so zu wählen ist, daß sie sich auf den zugewiesenen
+Inhalt der Textvariablen bezieht, sofern die Formatanweisung eine
+Festformat-Komponente aufweist.  Der zugewiesene Inhalt an die
+Textvariable ist nämlich nur der Spezialtext, und nicht dessen
+expandiertes Ergebnis.  Gcal muß derart vorgehen, da ja der in der
+Textvariablen verborgene Spezialtext nicht nur auf ein bestimmtes Datum
+angewendet (hier: ausgegeben) werden soll, sondern unter Umständen auch
+auf mehrere, und zwar angepaßt an das jeweilige Datum, an dem er
+referenziert wird.  Somit befindet sich in der Textvariablen ein
+Spezialtext, der eine bestimmte Länge hat, und es existiert eine
+Formatanweisung, dessen Feldbreitenkomponente auf das expandierte
+Ergebnis des Spezialtextes wirken soll.  Allerdings weiß Gcal zum
+Zeitpunkt der Zuweisung des Spezialtextes an die Textvariable nicht,
+wie lang das expandierte Ergebnis sein wird, da diese Expansion erst zu
+einem sehr viel späteren Zeitpunkt im Programmablauf stattfindet.  Von
+daher sollte in einem solchen Fall die Feldbreitenkomponente der
+Formatanweisung mindestens die Länge des Spezialtextes betragen,
+andernfalls wird dieser durch die internen Mechanismen, die die
+Expansion bewirken, verkrüppelt und nicht korrekt expandiert und
+dargestellt.
+
+Bei denjenigen Spezialtexten, deren expandierte Darstellung durch ein
+optionales FORMAT beeinflußt werden kann, sind in diesem Anhang
+natürlich nicht alle Möglichkeiten aufgeführt, welche die
+Formatanweisung hinsichtlich der Darstellung bietet, sondern nur einige
+wenige exemplarisch.
+
+Und bei einigen dieser Spezialtexte darf auch noch optional ein
+einfaches oder besonderes Datumargument (im weiteren mit DATUM
+bezeichnet) oder ein sonstiges Argument (im weiteren mit ARGUMENT
+bezeichnet) angegeben werden.  Wenn ein Spezialtext direkt von einem
+DATUM Argument gefolgt wird, so muß DATUM einem der nachstehenden
+Datumformate entsprechen:
 
    * `JJJJ[MM[TT|WWWN]]'
 
@@ -184,50 +972,50 @@ wird, so muss DATUM einem der nachstehenden Datumformate entsprechen:
 
    * `JJJJ@e|t|DVAR[[+|-]N[WWW]]'
 
-Spezialtexte, die ein DATUM Argument annehmen d"urfen, *m"ussen* stets
-von einem *whitespace* Zeichen gefolgt werden, welches seinerseits in
-der Ausgabe entfernt wird, und zwar unabh"angig davon, ob DATUM
+Spezialtexte, die ein DATUM Argument annehmen dürfen, *müssen* stets
+von einem _whitespace_ Zeichen gefolgt werden, welches seinerseits in
+der Ausgabe entfernt wird, und zwar unabhängig davon, ob DATUM
 angegeben wurde oder nicht!
 
 *Note Zusammenfassung aller `%?'... Spezialtexte: Spezialtexte (kurz),
-f"ur eine Kurzdarstellung aller verwendbaren Spezialtexte.
+für eine Kurzdarstellung aller verwendbaren Spezialtexte.
 
 
 File: gcal.info,  Node: Ausschliessen,  Next: Ersetzen,  Prev: Spezialtexte (lang),  Up: Spezialtexte (lang)
 
-`%?'... Spezialtexte um Datum auszuschliessen
-=============================================
+`%?'... Spezialtexte um Datum auszuschließen
+============================================
 
 * Menu:
 
 * Ausschliessen mit Datumargument::
 * Ausschliessen ohne Argument::
 
-`%?'... Spezialtexte zum Ausschliessen von Zeitpunkten oder Zeitr"aumen
-sind sehr n"utzlich, wenn sie zusammen mit Datumbereichen verwendet
-werden (*note Bereiche von Tagen::.).  Wird der Termintext ausgegeben,
-so wird stets der gesamte Spezialtext in der Ausgabe unterdr"uckt.
+`%?'... Spezialtexte zum Ausschließen von Zeitpunkten oder Zeiträumen
+sind sehr nützlich, wenn sie zusammen mit Datumbereichen verwendet
+werden (*note Bereiche von Tagen::).  Wird der Termintext ausgegeben,
+so wird stets der gesamte Spezialtext in der Ausgabe unterdrückt.
 
 
 File: gcal.info,  Node: Ausschliessen mit Datumargument,  Next: Ausschliessen ohne Argument,  Prev: Ausschliessen,  Up: Ausschliessen
 
-Ausschliessen mit Datumargument `%?[DATUM]' Spezialtexte
---------------------------------------------------------
+Ausschließen mit Datumargument `%?[DATUM]' Spezialtexte
+-------------------------------------------------------
 
 * Menu:
 
 * Inklusive Datum Zeitraum::
 * Exklusive Datum Zeitraum::
 
-Zun"achst einmal kann ein "inklusive Datum" Zeitraum `%?[DATUM]'
-Spezialtext angegeben werden, mit der Wirkung, dass nur die Termine,
-die in diesem Zeitraum liegen, ausgegeben werden.  Und die Angabe eines
-"exklusive Datum" Zeitraums `%?[DATUM]' Spezialtexts bewirkt, dass alle
+Zunächst einmal kann ein "inklusive Datum" Zeitraum `%?[DATUM]'
+Spezialtext angegeben werden, mit der Wirkung, daß nur die Termine, die
+in diesem Zeitraum liegen, ausgegeben werden.  Und die Angabe eines
+"exklusive Datum" Zeitraums `%?[DATUM]' Spezialtexts bewirkt, daß alle
 Termine, die in diesem Zeitraum liegen, nicht ausgegeben werden.
 
 Geschickt kombiniert, bieten sich diese Spezialtexte als wirksame Filter
-an, mit deren Hilfe sich spezielle Zeitr"aume sehr flexibel definieren
-lassen k"onnen, zum Beispiel:
+an, mit deren Hilfe sich spezielle Zeiträume sehr flexibel definieren
+lassen können, zum Beispiel:
 
      0*d1#999 Jeder Tag des Jahres: Von Januar...August ausgenommen April\
               %i00001#00008 %e00004#00004
@@ -243,62 +1031,62 @@ Inklusive Datum Zeitraum `%i[DATUM][#[DATUM]]' Spezialtext
 ..........................................................
 
 `%i[DATUM][#[DATUM]]' bezeichnet einen inklusive Datum Zeitraum, d.h.
-alle Daten, die in dem gegebenen Zeitraum liegen, sind g"ultig und
-werden ausgegeben.  Das bedeutet nat"urlich, dass alle Termine, die
-nicht in diesem Zeitraum liegen, ung"ultig sind und somit auch nicht
+alle Daten, die in dem gegebenen Zeitraum liegen, sind gültig und
+werden ausgegeben.  Das bedeutet natürlich, daß alle Termine, die nicht
+in diesem Zeitraum liegen, ungültig sind und somit auch nicht
 ausgegeben werden.
 
 Das erste angegebene Datum bestimmt das "Startdatum" eines Termins,
-d.h. das erste Datum, an dem dieser Termin auftreten darf.  F"ur das
+d.h. das erste Datum, an dem dieser Termin auftreten darf.  Für das
 Startdatum gelten folgende Regeln hinsichtlich bestimmter
 Auslassungswerte, verdeutlicht am `JJJJ[MM[TT|WWWN]]' Datumformat:
 
-   * Falls JJJJ auf den Wert 0000 gesetzt ist, so wird das laufende Jahr
-     als Jahr angenommen.
+   * Falls JJJJ auf den Wert `0000' gesetzt ist, so wird das laufende
+     Jahr als Jahr angenommen.
 
-   * Falls MM nicht angegeben ist, so wird 01 (==Januar) als Monat
+   * Falls MM nicht angegeben ist, so wird `01' (==Januar) als Monat
      angenommen.
 
-   * Falls MM auf den Wert 00 gesetzt ist, so wird der laufende Monat
-     als Monat angenommen, bei 99 der Dezember.
+   * Falls MM auf den Wert `00' gesetzt ist, so wird der laufende Monat
+     als Monat angenommen, bei `99' der Dezember.
 
-   * Falls TT|WWW nicht angegeben ist, so wird 01 als Tag angenommen.
+   * Falls TT|WWW nicht angegeben ist, so wird `01' als Tag angenommen.
 
-   * Falls TT auf den Wert 00 gesetzt ist, so wird der laufende Tag als
-     Tag angenommen, bei 99 der letzte Tag des Monats MM.
+   * Falls TT auf den Wert `00' gesetzt ist, so wird der laufende Tag
+     als Tag angenommen, bei `99' der letzte Tag des Monats MM.
 
-   * Falls das N Feld angegeben ist (Bereich 1...5 oder 9), so muss
+   * Falls das N Feld angegeben ist (Bereich `1...5' oder `9'), so muß
      auch ein WWW Feld angegeben sein.
 
 Das zweite angegebene Datum bestimmt das "Endedatum" eines Termins,
-d.h. das letzte Datum, an dem dieser Termin auftreten darf.  F"ur das
+d.h. das letzte Datum, an dem dieser Termin auftreten darf.  Für das
 Endedatum gelten folgende Regeln hinsichtlich bestimmter
 Auslassungswerte, ebenfalls verdeutlicht am `JJJJ[MM[TT|WWWN]]'
 Datumformat:
 
-   * Falls JJJJ auf den Wert 0000 gesetzt ist, so wird das laufende Jahr
-     als Jahr angenommen.
+   * Falls JJJJ auf den Wert `0000' gesetzt ist, so wird das laufende
+     Jahr als Jahr angenommen.
 
-   * Falls MM nicht angegeben ist, so wird 12 (==Dezember) als Monat
+   * Falls MM nicht angegeben ist, so wird `12' (==Dezember) als Monat
      angenommen.
 
-   * Falls MM auf den Wert 00 gesetzt ist, so wird der laufende Monat
-     als Monat angenommen, bei 99 der Dezember.
+   * Falls MM auf den Wert `00' gesetzt ist, so wird der laufende Monat
+     als Monat angenommen, bei `99' der Dezember.
 
    * Falls TT|WWW nicht angegeben ist, so wird der letzte Tag des
      Monats MM als Tag angenommen.
 
-   * Falls TT auf den Wert 00 gesetzt ist, so wird der laufende Tag als
-     Tag angenommen, bei 99 der letzte Tag des Monats MM.
+   * Falls TT auf den Wert `00' gesetzt ist, so wird der laufende Tag
+     als Tag angenommen, bei `99' der letzte Tag des Monats MM.
 
-   * Falls das N Feld angegeben ist (Bereich 1...5 oder 9), so muss
+   * Falls das N Feld angegeben ist (Bereich `1...5' oder `9'), so muß
      auch ein WWW Feld angegeben sein.
 
-F"ur die anderen erlaubten Datumformate gelten die vorstehenden Regeln
-sinngem"ass!
+Für die anderen erlaubten Datumformate gelten die vorstehenden Regeln
+sinngemäß!
 
-Wenn das Startdatum, welches im `%i...' Spezialtext kodiert ist,
-gr"osser dem Endedatum ist, so wird der `%i...' Spezialtext ignoriert.
+Wenn das Startdatum, welches im `%i...' Spezialtext kodiert ist, größer
+dem Endedatum ist, so wird der `%i...' Spezialtext ignoriert.
 
 Ist weder Startdatum noch Endedatum angegeben, also nur `%i', so gilt
 der implizite Zeitraum 1'ter Januar 1...31'ter Dezember 9999
@@ -334,62 +1122,62 @@ Exklusive Datum Zeitraum `%e[DATUM][#[DATUM]]' Spezialtext
 ..........................................................
 
 `%e[DATUM][#[DATUM]]' bezeichnet einen exklusive Datum Zeitraum, d.h.
-alle Daten, die in dem gegebenen Zeitraum liegen, sind ung"ultig und
-werden nicht ausgegeben.  Das bedeutet nat"urlich, dass alle Termine,
-die nicht in diesem Zeitraum liegen, g"ultig sind und somit auch
-ausgegeben werden.
+alle Daten, die in dem gegebenen Zeitraum liegen, sind ungültig und
+werden nicht ausgegeben.  Das bedeutet natürlich, daß alle Termine, die
+nicht in diesem Zeitraum liegen, gültig sind und somit auch ausgegeben
+werden.
 
 Das erste angegebene Datum bestimmt das Startdatum eines Termins, d.h.
-das erste Datum, an dem dieser Termin auftreten darf.  F"ur das
+das erste Datum, an dem dieser Termin auftreten darf.  Für das
 Startdatum gelten folgende Regeln hinsichtlich bestimmter
 Auslassungswerte, verdeutlicht am `JJJJ[MM[TT|WWWN]]' Datumformat:
 
-   * Falls JJJJ auf den Wert 0000 gesetzt ist, so wird das laufende Jahr
-     als Jahr angenommen.
+   * Falls JJJJ auf den Wert `0000' gesetzt ist, so wird das laufende
+     Jahr als Jahr angenommen.
 
-   * Falls MM nicht angegeben ist, so wird 01 (==Januar) als Monat
+   * Falls MM nicht angegeben ist, so wird `01' (==Januar) als Monat
      angenommen.
 
-   * Falls MM auf den Wert 00 gesetzt ist, so wird der laufende Monat
-     als Monat angenommen, bei 99 der Dezember.
+   * Falls MM auf den Wert `00' gesetzt ist, so wird der laufende Monat
+     als Monat angenommen, bei `99' der Dezember.
 
-   * Falls TT|WWW nicht angegeben ist, so wird 01 als Tag angenommen.
+   * Falls TT|WWW nicht angegeben ist, so wird `01' als Tag angenommen.
 
-   * Falls TT auf den Wert 00 gesetzt ist, so wird der laufende Tag als
-     Tag angenommen, bei 99 der letzte Tag des Monats MM.
+   * Falls TT auf den Wert `00' gesetzt ist, so wird der laufende Tag
+     als Tag angenommen, bei `99' der letzte Tag des Monats MM.
 
-   * Falls das N Feld angegeben ist (Bereich 1...5 oder 9), so muss
+   * Falls das N Feld angegeben ist (Bereich `1...5' oder `9'), so muß
      auch ein WWW Feld angegeben sein.
 
 Das zweite angegebene Datum bestimmt das Endedatum eines Termins, d.h.
-das letzte Datum, an dem dieser Termin auftreten darf.  F"ur das
+das letzte Datum, an dem dieser Termin auftreten darf.  Für das
 Endedatum gelten folgende Regeln hinsichtlich bestimmter
 Auslassungswerte, ebenfalls verdeutlicht am `JJJJ[MM[TT|WWWN]]'
 Datumformat:
 
-   * Falls JJJJ auf den Wert 0000 gesetzt ist, so wird das laufende Jahr
-     als Jahr angenommen.
+   * Falls JJJJ auf den Wert `0000' gesetzt ist, so wird das laufende
+     Jahr als Jahr angenommen.
 
-   * Falls MM nicht angegeben ist, so wird 12 (==Dezember) als Monat
+   * Falls MM nicht angegeben ist, so wird `12' (==Dezember) als Monat
      angenommen.
 
-   * Falls MM auf den Wert 00 gesetzt ist, so wird der laufende Monat
-     als Monat angenommen, bei 99 der Dezember.
+   * Falls MM auf den Wert `00' gesetzt ist, so wird der laufende Monat
+     als Monat angenommen, bei `99' der Dezember.
 
    * Falls TT|WWW nicht angegeben ist, so wird der letzte Tag des
      Monats MM als Tag angenommen.
 
-   * Falls TT auf den Wert 00 gesetzt ist, so wird der laufende Tag als
-     Tag angenommen, bei 99 der letzte Tag des Monats MM.
+   * Falls TT auf den Wert `00' gesetzt ist, so wird der laufende Tag
+     als Tag angenommen, bei `99' der letzte Tag des Monats MM.
 
-   * Falls das N Feld angegeben ist (Bereich 1...5 oder 9), so muss
+   * Falls das N Feld angegeben ist (Bereich `1...5' oder `9'), so muß
      auch ein WWW Feld angegeben sein.
 
-F"ur die anderen erlaubten Datumformate gelten die vorstehenden Regeln
-sinngem"ass!
+Für die anderen erlaubten Datumformate gelten die vorstehenden Regeln
+sinngemäß!
 
-Wenn das Startdatum, welches im `%e...' Spezialtext kodiert ist,
-gr"osser dem Endedatum ist, so wird der `%e...' Spezialtext ignoriert.
+Wenn das Startdatum, welches im `%e...' Spezialtext kodiert ist, größer
+dem Endedatum ist, so wird der `%e...' Spezialtext ignoriert.
 
 Ist weder Startdatum noch Endedatum angegeben, also nur `%e', so gilt
 der implizite Zeitraum 1'ter Januar 1...31'ter Dezember 9999
@@ -421,22 +1209,22 @@ Zum Beispiel:
 
 File: gcal.info,  Node: Ausschliessen ohne Argument,  Prev: Ausschliessen mit Datumargument,  Up: Ausschliessen
 
-Ausschliessen ohne Argument `%?' Spezialtexte
----------------------------------------------
+Ausschließen ohne Argument `%?' Spezialtexte
+--------------------------------------------
 
 * Menu:
 
 * Inklusive Tag Zeitraum::
 * Exklusive Tag Zeitraum::
 
-Zun"achst einmal kann ein "inklusive Tag" Zeitraum `%?' Spezialtext
-angegeben werden, mit der Wirkung, dass nur die Termine, die in diesem
+Zunächst einmal kann ein "inklusive Tag" Zeitraum `%?' Spezialtext
+angegeben werden, mit der Wirkung, daß nur die Termine, die in diesem
 Zeitraum liegen, ausgegeben werden.  Und die Angabe eines "exklusive
-Tag" Zeitraums `%?' Spezialtexts bewirkt, dass alle die Termine, die
+Tag" Zeitraums `%?' Spezialtexts bewirkt, daß alle die Termine, die
 nicht in diesem Zeitraum liegen, ausgegeben werden.
 
 Geschickt kombiniert, bieten auch diese Spezialtexte wirksame Filter,
-mit deren Hilfe sehr spezielle Zeitr"aume definiert werden k"onnen, zum
+mit deren Hilfe sehr spezielle Zeiträume definiert werden können, zum
 Beispiel:
 
      0*d1#999 Jeder Tag des Jahres: Von Montags...Freitags\
@@ -452,55 +1240,55 @@ File: gcal.info,  Node: Inklusive Tag Zeitraum,  Next: Exklusive Tag Zeitraum,  
 Inklusive Tag Zeitraum `%?' Spezialtexte
 ........................................
 
-Folgende inklusive Tag Zeitr"aume `%?' Spezialtexte werden
-ber"ucksichtigt, wobei in diesem Zusammenhang mit *inklusive* der
+Folgende inklusive Tag Zeiträume `%?' Spezialtexte werden
+berücksichtigt, wobei in diesem Zusammenhang mit _inklusive_ der
 Zeitraum gemeint ist, welcher nicht ausgeschlossen wird:
 
 `%v'
-     Bewirkt den Ausschluss eines Termins, falls dieser nicht als
-     gesetzlicher Feiertag in der *ewigen Feiertagsliste* aufgef"uhrt
+     Bewirkt den Ausschluß eines Termins, falls dieser nicht als
+     gesetzlicher Feiertag in der _ewigen Feiertagsliste_ aufgeführt
      ist.
 
 `%x'
-     Bewirkt den Ausschluss eines Termins, falls dieser weder als
-     gesetzlicher Feiertag noch als Gedenktag in der *ewigen
-     Feiertagsliste* aufgef"uhrt ist.
+     Bewirkt den Ausschluß eines Termins, falls dieser weder als
+     gesetzlicher Feiertag noch als Gedenktag in der _ewigen
+     Feiertagsliste_ aufgeführt ist.
 
 `%a'
-     Bewirkt den Ausschluss eines Termins, falls dieser nicht auf einen
-     Montag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser nicht auf einen
+     Montag fällt.
 
 `%c'
-     Bewirkt den Ausschluss eines Termins, falls dieser nicht auf einen
-     Dienstag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser nicht auf einen
+     Dienstag fällt.
 
 `%f'
-     Bewirkt den Ausschluss eines Termins, falls dieser nicht auf einen
-     Mittwoch f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser nicht auf einen
+     Mittwoch fällt.
 
 `%g'
-     Bewirkt den Ausschluss eines Termins, falls dieser nicht auf einen
-     Donnerstag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser nicht auf einen
+     Donnerstag fällt.
 
 `%h'
-     Bewirkt den Ausschluss eines Termins, falls dieser nicht auf einen
-     Freitag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser nicht auf einen
+     Freitag fällt.
 
 `%l'
-     Bewirkt den Ausschluss eines Termins, falls dieser nicht auf einen
-     Samstag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser nicht auf einen
+     Samstag fällt.
 
 `%p'
-     Bewirkt den Ausschluss eines Termins, falls dieser nicht auf einen
-     Sonntag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser nicht auf einen
+     Sonntag fällt.
 
 `%q'
-     Bewirkt den Ausschluss eines Termins, falls dieser nicht auf einen
-     Montag...Donnerstag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser nicht auf einen
+     Montag...Donnerstag fällt.
 
 `%r'
-     Bewirkt den Ausschluss eines Termins, falls dieser nicht auf einen
-     Montag...Freitag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser nicht auf einen
+     Montag...Freitag fällt.
 
 
 File: gcal.info,  Node: Exklusive Tag Zeitraum,  Prev: Inklusive Tag Zeitraum,  Up: Ausschliessen ohne Argument
@@ -508,55 +1296,55 @@ File: gcal.info,  Node: Exklusive Tag Zeitraum,  Prev: Inklusive Tag Zeitraum,  
 Exklusive Tag Zeitraum `%?' Spezialtexte
 ........................................
 
-Folgende exklusive Tag Zeitr"aume `%?' Spezialtexte werden
-ber"ucksichtigt, wobei in diesem Zusammenhang mit *exklusive* der
+Folgende exklusive Tag Zeiträume `%?' Spezialtexte werden
+berücksichtigt, wobei in diesem Zusammenhang mit _exklusive_ der
 Zeitraum gemeint ist, welcher ausgeschlossen wird:
 
 `%V'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen Tag
-     f"allt, der als gesetzlicher Feiertag in der *ewigen
-     Feiertagsliste* aufgef"uhrt ist.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen Tag
+     fällt, der als gesetzlicher Feiertag in der _ewigen
+     Feiertagsliste_ aufgeführt ist.
 
 `%X'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen Tag
-     f"allt, der entweder als gesetzlicher Feiertag oder als Gedenktag
-     in der *ewigen Feiertagsliste* aufgef"uhrt ist.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen Tag
+     fällt, der entweder als gesetzlicher Feiertag oder als Gedenktag
+     in der _ewigen Feiertagsliste_ aufgeführt ist.
 
 `%A'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen Montag
-     f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen Montag
+     fällt.
 
 `%C'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen
-     Dienstag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen
+     Dienstag fällt.
 
 `%F'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen
-     Mittwoch f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen
+     Mittwoch fällt.
 
 `%G'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen
-     Donnerstag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen
+     Donnerstag fällt.
 
 `%H'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen
-     Freitag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen Freitag
+     fällt.
 
 `%L'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen
-     Samstag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen Samstag
+     fällt.
 
 `%P'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen
-     Sonntag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen Sonntag
+     fällt.
 
 `%Q'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen
-     Montag...Donnerstag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen
+     Montag...Donnerstag fällt.
 
 `%R'
-     Bewirkt den Ausschluss eines Termins, falls dieser auf einen
-     Montag...Freitag f"allt.
+     Bewirkt den Ausschluß eines Termins, falls dieser auf einen
+     Montag...Freitag fällt.
 
 
 File: gcal.info,  Node: Ersetzen,  Next: Shell Kommando,  Prev: Ausschliessen,  Up: Spezialtexte (lang)
@@ -572,757 +1360,14 @@ File: gcal.info,  Node: Ersetzen,  Next: Shell Kommando,  Prev: Ausschliessen,  
 
 `%?'... Spezialtexte, die zur Programmlaufzeit durch besonderen Text
 ersetzt werden, bewirken das Einstreuen von Daten in den Termintext,
-deren Auspr"agung im wesentlichen von den Kommandozeilenargumenten
-abh"angen, welche bei Programmausf"uhrung angegeben worden sind.  Wird
+deren Ausprägung im wesentlichen von den Kommandozeilenargumenten
+abhängen, welche bei Programmausführung angegeben worden sind.  Wird
 der Termintext ausgegeben, so wird stets der gesamte Spezialtext in der
 Ausgabe entsprechend ersetzt.
 
 Geschickt kombiniert, bieten sich auch diese Spezialtexte als wirksame
 Mechanismen an, mit deren Hilfe sich spezielle Texte sehr flexibel
-erzeugen lassen k"onnen, zum Beispiel:
+erzeugen lassen können, zum Beispiel:
 
-     0*d1#999 Jeder Tag des Jahres: Heute ist %o, der %n (%+)
-
-
-File: gcal.info,  Node: Ersetzen mit Datumargument,  Next: Ersetzen mit anderem Argument,  Prev: Ersetzen,  Up: Ersetzen
-
-Ersetzen mit Datumargument `%?[DATUM]' Spezialtexte
----------------------------------------------------
-
-* Menu:
-
-* Wochentagsname::
-* Wochentag::
-* Tageszahl::
-* Tag::
-* Woche::
-* Monatsname::
-* Monat::
-* Jahr::
-* Mondphase::
-* Biorhythmus::
-* Differenzwert::
-
-Neben verschiedenen Darstellungen von einem Wochentagsnamen kann auch
-dessen Wochentagsnummer erzeugt werden.  Ebenso kann der laufende Tag
-des Jahres, die Tagesnummer, die Wochennummer, der Monatsname, die
-Monatsnummer, die Jahresnummer, die Mondphase und der Biorhythmus
-produziert werden, sowie einige n"utzliche Differenzwerte.
-
-F"ur das DATUM, dass diese `%?[DATUM]' Spezialtexte annehmen d"urfen,
-gelten folgende Regeln hinsichtlich bestimmter Auslassungswerte,
-verdeutlicht am `JJJJ[MM[TT|WWWN]]' Datumformat (1):
-
-   * Falls JJJJ... nicht angegeben ist (==*kein* Datum kodiert), so
-     wird das laufende Datum als Datum angenommen.
-
-   * Falls JJJJ auf den Wert 0000 gesetzt ist, so wird das laufende Jahr
-     als Jahr angenommen.
-
-   * Falls MM nicht angegeben oder auf den Wert 00 gesetzt ist, so wird
-     der laufende Monat als Monat angenommen, bei 99 der Dezember.
-
-   * Falls TT|WWW nicht angegeben oder auf den Wert 00 gesetzt ist, so
-     wird der laufende Tag als Tag angenommen, bei 99 der letzte Tag
-     des Monats MM.
-
-   * Falls das N Feld angegeben ist (Bereich 1...5 oder 9), so muss
-     auch ein WWW Feld angegeben sein.
-
-  ---------- Footnotes ----------
-
-  (1)  F"ur die anderen erlaubten Datumformate gelten die nachfolgenden
-Regeln sinngem"ass.
-
-
-File: gcal.info,  Node: Wochentagsname,  Next: Wochentag,  Prev: Ersetzen mit Datumargument,  Up: Ersetzen mit Datumargument
-
-Wochentagsname `%?[DATUM]' Spezialtexte
-.......................................
-
-Folgende Wochentagsname `%?[DATUM]' Spezialtexte werden ber"ucksichtigt:
-
-`%o[DATUM]'
-     Wird in einen vollst"andigen *Wochentagsnamen* f"ur den laufenden
-     Tag umgesetzt, z.B.:
-
-          Der Text `Heute ist %o , der %n' wird umgesetzt in
-          ==> `Heute ist Montag, der 10-Jun-1996', falls das aktuelle
-          Systemdatum der 10'te Juni 1996 ist.
-
-`%O[DATUM]'
-     Wird in einen 3-Buchstaben *Wochentagsnamen* f"ur den laufenden Tag
-     umgesetzt, z.B.:
-
-          Der Text `Heute ist %O0@t+1 , der %n+1' wird umgesetzt in
-          ==> `Heute ist Die, der 11-Jun-1996', falls das aktuelle
-          Systemdatum der 10'te Juni 1996 ist.
-
-`%K[DATUM]'
-     Wird in einen 2-Buchstaben *Wochentagsnamen* f"ur den laufenden Tag
-     umgesetzt, z.B.:
-
-          Der Text `Heute ist %K , der %n' wird umgesetzt in
-          ==> `Heute ist Mo, der 10-Jun-1996', falls das aktuelle
-          Systemdatum der 10'te Juni 1996 ist.
-
-
-File: gcal.info,  Node: Wochentag,  Next: Tageszahl,  Prev: Wochentagsname,  Up: Ersetzen mit Datumargument
-
-Wochentag `%?[DATUM]' Spezialtexte
-..................................
-
-Folgende Wochentagsnummer `%?[DATUM]' Spezialtexte werden
-ber"ucksichtigt:
-
-`%S[DATUM]'
-     Wird in eine *Wochentagsnummer* f"ur den laufenden Tag umgesetzt,
-     die nach der `Montag==1...Sonntag==7' Z"ahlweise ermittelt wird,
-     z.B.:
-
-          Der Text `Heute ist Wochentag %S , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 1, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 ist.
-
-`%I[DATUM]'
-     Wird in eine *Wochentagsnummer* mit nachfolgendem
-     Ordnungszahlanhang f"ur den laufenden Tag umgesetzt, die nach der
-     `Montag==1...Sonntag==7' Z"ahlweise ermittelt wird, z.B.:
-
-          Der Text `Heute ist Wochentag %I0@t+1 , der %n+1' wird
-          umgesetzt in
-          ==> `Heute ist Wochentag 2'ter, der 11-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 ist.
-
-`%E[DATUM]'
-     Wird in eine *Wochentagsnummer* f"ur den laufenden Tag umgesetzt,
-     die nach der `Montag==0...Sonntag==6' Z"ahlweise ermittelt wird,
-     z.B.:
-
-          Der Text `Heute ist Wochentag %E , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 0, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 ist.
-
-`%J[DATUM]'
-     Wird in eine *Wochentagsnummer* mit nachfolgendem
-     Ordnungszahlanhang f"ur den laufenden Tag umgesetzt, die nach der
-     `Montag==0...Sonntag==6' Z"ahlweise ermittelt wird, z.B.:
-
-          Der Text `Heute ist Wochentag %J , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 0'ter, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 ist.
-
-`%([DATUM]'
-     Wird in eine *Wochentagsnummer* f"ur den laufenden Tag umgesetzt,
-     die nach der `Sonntag==1...Samstag==7' Z"ahlweise ermittelt wird,
-     z.B.:
-
-          Der Text `Heute ist Wochentag %( , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 2, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 ist.
-
-`%<[DATUM]'
-     Wird in eine *Wochentagsnummer* mit nachfolgendem
-     Ordnungszahlanhang f"ur den laufenden Tag umgesetzt, die nach der
-     `Sonntag==1...Samstag==7' Z"ahlweise ermittelt wird, z.B.:
-
-          Der Text `Heute ist Wochentag %< , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 2'ter, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 ist.
-
-`%)[DATUM]'
-     Wird in eine *Wochentagsnummer* f"ur den laufenden Tag umgesetzt,
-     die nach der `Sonntag==0...Samstag==6' Z"ahlweise ermittelt wird,
-     z.B.:
-
-          Der Text `Heute ist Wochentag %) , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 1, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 ist.
-
-`%>[DATUM]'
-     Wird in eine *Wochentagsnummer* mit nachfolgendem
-     Ordnungszahlanhang f"ur den laufenden Tag umgesetzt, die nach der
-     `Sonntag==0...Samstag==6' Z"ahlweise ermittelt wird, z.B.:
-
-          Der Text `Heute ist Wochentag %> , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 1'ter, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 ist.
-
-`%[[DATUM]'
-     Wird in eine *Wochentagsnummer* f"ur den laufenden Tag umgesetzt,
-     die nach der `STARTTAG DER WOCHE==1...ENDETAG DER WOCHE==7'
-     Z"ahlweise ermittelt wird (*note `--starting-day=ARGUMENT':
-     Kalender Optionen.), z.B.:
-
-          Der Text `Heute ist Wochentag %[ , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 4, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 und der Starttag der
-          Woche ein Freitag (==5) ist.
-
-`%{[DATUM]'
-     Wird in eine *Wochentagsnummer* mit nachfolgendem
-     Ordnungszahlanhang f"ur den laufenden Tag umgesetzt, die nach der
-     `STARTTAG DER WOCHE==1...ENDETAG DER WOCHE==7' Z"ahlweise
-     ermittelt wird
-     (*note `--starting-day=ARGUMENT': Kalender Optionen.), z.B.:
-
-          Der Text `Heute ist Wochentag %{ , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 4'ter, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 und der Starttag der
-          Woche ein Freitag (==5) ist.
-
-`%][DATUM]'
-     Wird in eine *Wochentagsnummer* f"ur den laufenden Tag umgesetzt,
-     die nach der `STARTTAG DER WOCHE==0...ENDETAG DER WOCHE==6'
-     Z"ahlweise ermittelt wird (*note `--starting-day=ARGUMENT':
-     Kalender Optionen.), z.B.:
-
-          Der Text `Heute ist Wochentag %] , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 3, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 und der Starttag der
-          Woche ein Freitag (==5) ist.
-
-`%}[DATUM]'
-     Wird in eine *Wochentagsnummer* mit nachfolgendem
-     Ordnungszahlanhang f"ur den laufenden Tag umgesetzt, die nach der
-     `STARTTAG DER WOCHE==0...ENDETAG DER WOCHE==6' Z"ahlweise
-     ermittelt wird
-     (*note `--starting-day=ARGUMENT': Kalender Optionen.), z.B.:
-
-          Der Text `Heute ist Wochentag %} , der %n' wird umgesetzt in
-          ==> `Heute ist Wochentag 3'ter, der 10-Jun-1996', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 und der Starttag der
-          Woche ein Freitag (==5) ist.
-
-
-File: gcal.info,  Node: Tageszahl,  Next: Tag,  Prev: Wochentag,  Up: Ersetzen mit Datumargument
-
-Tageszahl `%?[DATUM]' Spezialtexte
-..................................
-
-Folgende Tageszahl `%?[DATUM]' Spezialtexte werden ber"ucksichtigt:
-
-`%+[DATUM]'
-     Wird in eine *Tageszahl* f"ur den laufenden Tag im Jahr umgesetzt,
-     z.B.:
-
-          Der Text `Tag %+  des Jahres, der %n' wird umgesetzt in
-          ==> `Tag 53 des Jahres, der 22-Feb-1996', falls das aktuelle
-          Systemdatum der 22'te Februar 1996 ist.
-
-`%*[DATUM]'
-     Wird in eine dreiziffrige *Tageszahl* mit f"uhrenden Nullen f"ur
-     den laufenden Tag im Jahr umgesetzt, z.B.:
-
-          Der Text `Tag %*0@t-1  des Jahres, der %n-1' wird umgesetzt in
-          ==> `Tag 052 des Jahres, der 21-Feb-1996', falls das aktuelle
-          Systemdatum der 22'te Februar 1996 ist.
-
-`%&[DATUM]'
-     Wird in eine *Tageszahl* mit nachfolgendem Ordnungszahlanhang f"ur
-     den laufenden Tag im Jahr umgesetzt, z.B.:
-
-          Der Text `Tag %&  des Jahres, der %n' wird umgesetzt in
-          ==> `Tag 53'ter des Jahres, der 22-Feb-1996', falls das
-          aktuelle Systemdatum der 22'te Februar 1996 ist.
-
-`%#[DATUM]'
-     Wird in eine dreiziffrige *Tageszahl* mit f"uhrenden Nullen und
-     nachfolgendem Ordnungszahlanhang f"ur den laufenden Tag im Jahr
-     umgesetzt, z.B.:
-
-          Der Text `Tag %#  des Jahres, der %n' wird umgesetzt in
-          ==> `Tag 053'ter des Jahres, der 22-Feb-1996', falls das
-          aktuelle Systemdatum der 22'te Februar 1996 ist.
-
-
-File: gcal.info,  Node: Tag,  Next: Woche,  Prev: Tageszahl,  Up: Ersetzen mit Datumargument
-
-Tag `%?[DATUM]' Spezialtexte
-............................
-
-Folgende Tag `%?[DATUM]' Spezialtexte werden ber"ucksichtigt:
-
-`%D[DATUM]'
-     Wird in eine *Tageszahl* f"ur den laufenden Tag im Monat umgesetzt,
-     z.B.:
-
-          Der Text `Tag %D , %n' wird umgesetzt in
-          ==> `Tag 2, 02-Feb-1996', falls das aktuelle Systemdatum der
-          2'te Februar 1996 ist.
-
-`%N[DATUM]'
-     Wird in eine zweiziffrige *Tageszahl* mit f"uhrender Null f"ur den
-     laufenden Tag im Monat umgesetzt, z.B.:
-
-          Der Text `Tag %N0@t-1 , %n-1' wird umgesetzt in
-          ==> `Tag 01, 01-Feb-1996', falls das aktuelle Systemdatum der
-          2'te Februar 1996 ist.
-
-`%s[DATUM]'
-     Wird in eine *Tageszahl* mit nachfolgendem Ordnungszahlanhang f"ur
-     den laufenden Tag im Monat umgesetzt, z.B.:
-
-          Der Text `Tag %s , %n' wird umgesetzt in
-          ==> `Tag 2'ter, 02-Feb-1996', falls das aktuelle Systemdatum
-          der 2'te Februar 1996 ist.
-
-`%u[DATUM]'
-     Wird in eine zweiziffrige *Tageszahl* mit f"uhrender Null und
-     nachfolgendem Ordnungszahlanhang f"ur den laufenden Tag im Monat
-     umgesetzt, z.B.:
-
-          Der Text `Tag %u , %n' wird umgesetzt in
-          ==> `Tag 02'ter, 02-Feb-1996', falls das aktuelle Systemdatum
-          der 2'te Februar 1996 ist.
-
-
-File: gcal.info,  Node: Woche,  Next: Monatsname,  Prev: Tag,  Up: Ersetzen mit Datumargument
-
-Woche `%?[DATUM]' Spezialtext
-.............................
-
-Folgender Woche `%?[DATUM]' Spezialtext wird ber"ucksichtigt:
-
-`%k[DATUM]'
-     Wird in eine *ISO-Wochennummer* f"ur die laufende Woche im Jahr
-     umgesetzt, z.B.:
-
-          Der Text `Heute ist %o  der Kalenderwoche %k' wird umgesetzt
-          in
-          ==> `Heute ist Montag der Kalenderwoche 24', falls das
-          aktuelle Systemdatum der 10'te Juni 1996 ist.
-
-
-File: gcal.info,  Node: Monatsname,  Next: Monat,  Prev: Woche,  Up: Ersetzen mit Datumargument
-
-Monatsname `%?[DATUM]' Spezialtexte
-...................................
-
-Folgende Monatsname `%?[DATUM]' Spezialtexte werden ber"ucksichtigt:
-
-`%M[DATUM]'
-     Wird in einen vollst"andigen *Monatsnamen* f"ur den laufenden Monat
-     im Jahr umgesetzt, z.B.:
-
-          Der Text `Heute ist %M , %n' wird umgesetzt in
-          ==> `Heute ist Juni, 10-Jun-1996', falls das aktuelle
-          Systemdatum der 10'te Juni 1996 ist.
-
-`%T[DATUM]'
-     Wird in einen 3-Buchstaben *Monatsnamen* f"ur den laufenden Monat
-     im Jahr umgesetzt, z.B.:
-
-          Der Text `Heute ist %T19961010 , %n' wird umgesetzt in
-          ==> `Heute ist Okt, 10-Jun-1996', falls das aktuelle
-          Systemdatum der 10'te Juni 1996 ist.
-
-
-File: gcal.info,  Node: Monat,  Next: Jahr,  Prev: Monatsname,  Up: Ersetzen mit Datumargument
-
-Monat `%?[DATUM]' Spezialtexte
-..............................
-
-Folgende Monat `%?[DATUM]' Spezialtexte werden ber"ucksichtigt:
-
-`%U[DATUM]'
-     Wird in eine *Monatszahl* f"ur den laufenden Monat im Jahr
-     umgesetzt, z.B.:
-
-          Der Text `Monat %U , %n' wird umgesetzt in
-          ==> `Monat 2, 22-Feb-1996', falls das aktuelle Systemdatum
-          der 22'te Februar 1996 ist.
-
-`%W[DATUM]'
-     Wird in eine zweiziffrige *Monatszahl* mit f"uhrender Null f"ur
-     den laufenden Monat im Jahr umgesetzt, z.B.:
-
-          Der Text `Monat %W000001 , %n' wird umgesetzt in
-          ==> `Monat 01, 22-Feb-1996', falls das aktuelle Systemdatum
-          der 22'te Februar 1996 ist.
-
-`%z[DATUM]'
-     Wird in eine *Monatszahl* mit nachfolgendem Ordnungszahlanhang
-     f"ur den laufenden Monat im Jahr umgesetzt, z.B.:
-
-          Der Text `Monat %z , %n' wird umgesetzt in
-          ==> `Monat 2'ter, 22-Feb-1996', falls das aktuelle
-          Systemdatum der 22'te Februar 1996 ist.
-
-`%Z[DATUM]'
-     Wird in eine zweiziffrige *Monatszahl* mit f"uhrender Null und
-     nachfolgendem Ordnungszahlanhang f"ur den laufenden Monat im Jahr
-     umgesetzt, z.B.:
-
-          Der Text `Monat %Z , %n' wird umgesetzt in
-          ==> `Monat 02'ter, 22-Feb-1996', falls das aktuelle
-          Systemdatum der 22'te Februar 1996 ist.
-
-
-File: gcal.info,  Node: Jahr,  Next: Mondphase,  Prev: Monat,  Up: Ersetzen mit Datumargument
-
-Jahr `%?[DATUM]' Spezialtexte
-.............................
-
-Folgende Jahr `%?[DATUM]' Spezialtexte werden ber"ucksichtigt:
-
-`%Y[DATUM]'
-     Wird in eine *Jahreszahl* f"ur das laufende Jahr umgesetzt, z.B.:
-
-          Der Text `Jahr %Y , %n' wird umgesetzt in
-          ==> `Jahr 933, 22-Feb-0933', falls das aktuelle Systemdatum
-          der 22'te Februar 933 ist.
-
-`%=[DATUM]'
-     Wird in eine vierziffrige *Jahreszahl* mit f"uhrenden Nullen f"ur
-     das laufende Jahr umgesetzt, z.B.:
-
-          Der Text `Jahr %=0015 , %n' wird umgesetzt in
-          ==> `Jahr 0015, 22-Feb-0933', falls das aktuelle Systemdatum
-          der 22'te Februar 933 ist.
-
-
-File: gcal.info,  Node: Mondphase,  Next: Biorhythmus,  Prev: Jahr,  Up: Ersetzen mit Datumargument
-
-Mondphase `%?[DATUM]' Spezialtexte
-..................................
-
-Gcal benutzt eine sehr einfache Rechenvorschrift um die Mondphase zu
-ermitteln, welche ihrerseits nur N"aherungswerte liefert.  Die
-Mondphase wird stets um 0 Uhr Weltzeit berechnet.  Folgende Mondphase
-`%?[DATUM]' Spezialtexte werden ber"ucksichtigt:
-
-`%-[DATUM]'
-     Wird in einen *Mondphasentext* f"ur den laufenden Tag im Jahr
-     umgesetzt, z.B.:
-
-          Der Text `Mondphase %- , %n' wird umgesetzt in
-          ==> `Mondphase 94%+, 22-Dez-1996', falls das aktuelle
-          Systemdatum der 22'te Dezember 1996 ist.
-
-     Der konstruierte Mondphasentext besteht aus einem Prozentwert, der
-     "uber den beleuchteten Bruchteil der Mondscheibe informiert, und
-     ein nachfolgendes Zeichen, das etwas "uber den Status des Mondes
-     aussagt.  Ein nachfolgendes `+' Zeichen bezeichnet einen
-     zunehmenden Mond, ein `-' Zeichen einen abnehmenden Mond, ein `@'
-     Zeichen steht f"ur eine Vollmondphase, und ein `!' Zeichen f"ur
-     eine Neumondphase.
-
-`%_[DATUM]'
-     Wird in einen dreiziffrigen *Mondphasentext* mit f"uhrenden Nullen
-     f"ur den laufenden Tag im Jahr umgesetzt, z.B.:
-
-          Der Text `Mondphase %_0@t+1 , %n+1' wird umgesetzt in
-          ==> `Mondphase 098%+, 23-Dez-1996', falls das aktuelle
-          Systemdatum der 22'te Dezember 1996 ist.
-
-     Der konstruierte Mondphasentext besteht aus einem Prozentwert, der
-     "uber den beleuchteten Bruchteil der Mondscheibe informiert, und
-     ein nachfolgendes Zeichen, das etwas "uber den Status des Mondes
-     aussagt.  Ein nachfolgendes `+' Zeichen bezeichnet einen
-     zunehmenden Mond, ein `-' Zeichen einen abnehmenden Mond, ein `@'
-     Zeichen steht f"ur eine Vollmondphase, und ein `!' Zeichen f"ur
-     eine Neumondphase.
-
-`%:[DATUM]'
-     Wird in eine *Mondphasen-Textgrafik* f"ur den laufenden Tag im
-     Jahr umgesetzt, z.B.:
-
-          Der Text `Datum %n %:  --- Mondphase %_ ~Text' wird umgesetzt
-          in
-          ==> `Datum 08-Mar-1995 '
-          ==> `           (       @@@@@@'
-          ==> `      (              @@@@@@@@@'
-          ==> `    (                @@@@@@@@@@@'
-          ==> `  (                   @@@@@@@@@@@@'
-          ==> ` (                    @@@@@@@@@@@@@'
-          ==> `(                      @@@@@@@@@@@@@'
-          ==> `(                      @@@@@@@@@@@@@'
-          ==> ` (                    @@@@@@@@@@@@@'
-          ==> `  (                   @@@@@@@@@@@@'
-          ==> `   (                  @@@@@@@@@@@'
-          ==> `      (             @@@@@@@@@'
-          ==> `           (        @@@@@@@ --- Mondphase 041%+'
-          ==> `Text', falls das aktuelle Systemdatum der 8'te M"arz
-          1995 ist.
-
-     *Note `--moonimage-lines=ANZAHL': Termin Optionen, wo erkl"art
-     wird, wie die Gr"osse einer Mondphasen-Textgrafik ge"andert werden
-     kann.
-
-
-File: gcal.info,  Node: Biorhythmus,  Next: Differenzwert,  Prev: Mondphase,  Up: Ersetzen mit Datumargument
-
-Biorhythmus `%?[DATUM]' Spezialtexte
-....................................
-
-Gcal besitzt die F"ahigkeit, f"ur jedes angegebene Geburtsdatum einen
-"Biorhythmus" zu erzeugen.  Der erzeugte Text zeigt die drei
-Standard-Biorhythmuszyklen, und zwar den 28 Tage w"ahrenden emotionalen
-Zyklus, den 33 Tage w"ahrenden geistigen Zyklus, und den 23 Tage
-w"ahrenden physischen Zyklus.  Der emotionale Zyklus wird vom
-Empfindungsverm"ogen, der geistigen Gesundheit, der Gem"utsverfassung
-und der Kreativit"at beherrscht.  Der geistige Zyklus spiegelt
-Intelligenz, Ged"achtnis, geistige Wachheit und analytisches
-Denkverm"ogen wider.  Der physische Zyklus stellt die K"orperkraft,
-Ausdauer,  Leistungs- und Widerstandsf"ahigkeit dar.  Alle Zyklen
-beginnen im Nullpunkt am Geburtsdatum und schwingen wie Sinuskurven
-zwischen ihren positiven und negativen Maximalwerten.  Die Zeitr"aume
-oberhalb des Nullpunktes zeigen die Tage voller Lebenskraft und
-Leistungsf"ahigkeit an, w"ahrend die Zeitr"aume unterhalb des
-Nullpunktes die Tage verringerter Leistungsf"ahigkeit darstellen.  Der
-Biorhythmus wurde nur zu Unterhaltungszwecken eingebaut!  Die
-Interpretation der Biorhythmustexte liegt in den H"anden des Benutzers.
-
-Gcal z"ahlt "kritische" Tage, "positive" ebenso wie "negative" Tage.
-Kritische Tage sind solche Tage, an denen eine oder mehrere der
-biologischen Zyklen den Nullpunkt "uberqueren.  Zu einem solchen
-Zeitpunkt, so wird gesagt, soll sich der Organismus in einem Stadium
-des Umbruchs befinden, und es scheint angebracht zu sein, Vorsicht
-walten zu lassen.  Positive Tage sind solche Tage, an denen eine oder
-mehrere der biologischen Zyklen einen positiven Maximalwert haben.  Zu
-einem solchen Zeitpunkt, so wird gesagt, soll sich der Organismus in
-einem gesteigerten Stadium befinden.  Negative Tage sind solche Tage,
-an denen eine oder mehrere der biologischen Zyklen einen negativen
-Maximalwert haben.  Zu einem solchen Zeitpunkt, so wird gesagt, soll
-sich der Organismus in einem verminderten Stadium befinden.
-
-Folgende Biorhythmus `%?[DATUM]' Spezialtexte werden ber"ucksichtigt:
-
-`%,[DATUM]'
-     Wird in einen *Biorhythmustext* f"ur den laufenden Tag im Jahr
-     umgesetzt, z.B.:
-
-          Der Text `%,19620921' wird umgesetzt in
-          ==> `1! 0+ 0- , Emo=+022%- Gei=-091%+ Phy=-014%-', falls das
-          aktuelle Systemdatum der 12'te Dezember 1996 ist.
-
-     Das vorangehende Beispiel zeigt den berechneten Biorhythmus als
-     eine Folge von Werten f"ur eine Person an, die am 21'ten September
-     1962 geboren ist.  Der konstruierte Text besteht aus zwei Teilen,
-     und zwar einerseits aus einem Tripel von Gesamtwerten, welches den
-     kritischen, positiven und negativen Tag bezeichnet.  Und aus einem
-     weiteren Tripel von Werten, welches den emotionalen, geistigen und
-     physischen Zyklus bezeichnet.
-
-     Im ersten Tripel von Gesamtwerten bezeichnet ein nachgestelltes `!'
-     Zeichen einen kritischen Tag, ein `+' einen positiven Tag, und ein
-     `-' Anhang markiert einen negativen Tag.
-
-     Im zweiten Tripel von Werten besteht jeder einzelne
-     Zyklus-Prozentwert aus einem anf"uhrenden positiven oder negativen
-     Vorzeichen, welches etwas "uber die Distanz dieses Wertes zum
-     Nullpunkt aussagt, und einem nachgestellten Zeichen, das etwas
-     "uber den Status jedes einzelnen Zyklus' aussagt.  Ein
-     nachfolgendes `+' Zeichen markiert eine zunehmende Phase, ein `-'
-     Anhang bezeichnet eine abnehmende Phase, und ein `@' Kennzeichen
-     den Maximalwert einer Phase.
-
-`%;[DATUM]'
-     Wird in eine *Biorhythmus-Textgrafik* f"ur den laufenden Tag im
-     Jahr umgesetzt, z.B.:
-
-          Der Text `%;19620921' wird umgesetzt in
-          ==> `0-  G               P 1   E                +0', falls
-          das aktuelle Systemdatum der 12'te Dezember 1996 ist.
-
-     Das vorhergehende Beispiel zeigt den berechneten Biorhythmus als
-     eine Zeile einer Textgrafik f"ur eine Person an, die am 21'ten
-     September 1962 geboren ist.  Die konstruierte Zeile ist ein Balken
-     mit einer negativen und positiven Achse von einstellbarer L"ange
-     (*note `--biorhythm-axis=ANZAHL': Termin Optionen.), dessen linke
-     Grenze durch den Gesamtwert der negativen Tage dargestellt wird
-     (die `0-' in diesem Fall), und dessen rechte Grenze durch den
-     Gesamtwert der positiven Tage repr"asentiert wird (die `+0' in
-     diesem Fall).  Der Nullpunkt der Koordinaten wird durch den
-     Gesamtwert der kritischen Tage dargestellt, welcher in diesem Fall
-     die `1' ist.  Der emotionale, geistige und der physische
-     Phasenwert wird entsprechend skaliert auf dem Balken abgetragen,
-     und zwar dargestellt durch den Anfangsbuchstaben des jeweiligen
-     Zyklus' (`E', `G' und `P').  Zusammenfallende Phasenwerte werden
-     durch ein `@' Zeichen markiert.
-
-
-File: gcal.info,  Node: Differenzwert,  Prev: Biorhythmus,  Up: Ersetzen mit Datumargument
-
-Differenzwert `%?[DATUM]' Spezialtexte
-......................................
-
-Folgende Differenzwert `%?[DATUM]' Spezialtexte werden ber"ucksichtigt:
-
-`%yDATUM'
-     Wird in einen *Jahresdifferenzwert* umgesetzt, z.B.:
-
-          Der Text `Silvester 1912 liegt %y1912  Jahre zur"uck' wird
-          umgesetzt in
-          ==> `Silvester 1912 liegt -82 Jahre zur"uck', falls das
-          aktuelle Jahr 1994 ist.
-
-`%b[DATUM]'
-     Wird in einen *Alterswert* umgesetzt, z.B.:
-
-          Der Text `Mein %b1962  Geburtstag%i1952#2062' wird umgesetzt
-          in
-          ==> `Mein 32 Geburtstag', falls das aktuelle Jahr 1994 ist.
-
-     Der Alterswert wird nur dann ausgegeben, wenn sich bei dessen
-     Berechnung ein Wert gr"osser Null ergibt.  Zudem wird der Termin
-     in diesem vorangehenen Beispiel nur w"ahrend der Jahre 1952 bis
-     2062 (einschliesslich) ausgegeben.
-
-`%B[DATUM]'
-     Wird in einen *Alterswert* mit nachfolgendem Ordnungszahlanhang
-     umgesetzt, z.B.:
-
-          Der Text `Mein %B1962  Geburtstag%i1952#2062' wird umgesetzt
-          in
-          ==> `Mein 32'ter Geburtstag', falls das aktuelle Jahr 1994
-          ist.
-
-     Der Alterswert wird nur dann ausgegeben, wenn sich bei dessen
-     Berechnung ein Wert gr"osser Null ergibt.  Zudem wird der Termin
-     in diesem vorangehenen Beispiel nur w"ahrend der Jahre 1952 bis
-     2062 (einschliesslich) ausgegeben.
-
-
-File: gcal.info,  Node: Ersetzen mit anderem Argument,  Next: Ersetzen ohne Argument,  Prev: Ersetzen mit Datumargument,  Up: Ersetzen
-
-Ersetzen mit anderem Argument `%?[ARGUMENT]' Spezialtexte
----------------------------------------------------------
-
-* Menu:
-
-* Aktuelle Uhrzeit::
-* Textliches Datum::
-* Julianische Tageszahl::
-
-Neben verschiedenen Darstellungen der aktuellen Systemuhrzeit kann auch
-ein fester Datumtext erzeugt werden.  Zudem kann eine Tageszahl
-produziert werden, deren Basisdatum ausgehend vom Julianischen Datum
-beliebig verlagert werden kann.
-
-F"ur das ARGUMENT, dass diese `%?[ARGUMENT]' Spezialtexte annehmen
-d"urfen, gelten keine besonderen Regeln hinsichtlich bestimmter
-Auslassungswerte.
-
-
-File: gcal.info,  Node: Aktuelle Uhrzeit,  Next: Textliches Datum,  Prev: Ersetzen mit anderem Argument,  Up: Ersetzen mit anderem Argument
-
-Aktuelle Uhrzeit `%t[ARGUMENT]' Spezialtext
-...........................................
-
-`%t[12|24]' bezeichnet die *aktuelle Systemuhrzeit*, z.B.:
-
-     Der Text `Uhrzeit: %t --> Zahnarzttermin um 10.00 Uhr' wird
-     umgesetzt in
-     ==> `Uhrzeit: 07.32 --> Zahnarzttermin um 10.00 Uhr', falls die
-     aktuelle Systemuhrzeit 07.32 Uhr (hh.mm) ist.
-
-Wenn nur `%t' angegeben ist, so wird der Systemuhrzeitwert implizit im
-*24-Stunden* Format ausgegeben (==`%t24').  Um im *12-Stunden* Format
-auszugeben, muss die Zahl 12 direkt hinter `%t' angegeben werden, z.B.
-`%t12'.
-
-
-File: gcal.info,  Node: Textliches Datum,  Next: Julianische Tageszahl,  Prev: Aktuelle Uhrzeit,  Up: Ersetzen mit anderem Argument
-
-Textliches Datum `%n[ARGUMENT]' Spezialtext
-...........................................
-
-`%n[[+|-]N]' bezeichnet die laufende bzw. abgefragte *Tagesnummer*
-relativ zum laufenden Datum `+/-' N Tagen und wird in einen, sich auf
-ein absolutes Datum beziehenden *Datumtext* im `TT-MMM-JJJJ' Format
-umgesetzt, z.B.:
-
-     Die Ressourcendateizeile `1962Sep21 10000 Tage alt: %n+10000' wird
-     umgesetzt in
-     ==> `10000 Tage alt: 06-Feb-1990', falls Gcal mit der einfachen
-     `-c' Option und dem `sep 1962' Kommando aufgerufen wird (*note `MM
-     JJJJ': Einfache Kommandos.).
-
-
-File: gcal.info,  Node: Julianische Tageszahl,  Prev: Textliches Datum,  Up: Ersetzen mit anderem Argument
-
-Julianische Tageszahl `%j[ARGUMENT]' Spezialtext
-................................................
-
-`%j[[-]N]' bezeichnet die laufende bzw. abgefragte *Julianische
-Tageszahl* relativ zum aktuellen Systemdatum (==heute).  Diese
-Tageszahl bezieht sich auf das Datum 1'ter Januar 4713 vor Christus,
-welches f"ur astronomische Berechnungen als der Tag Null einer
-durchlaufenden Tagesz"ahlung angesehen wird und als das Julianisches
-Datum (J.D.) bekannt ist.  Der exakte Nullpunkt von diesem Datum ist um
-12 Uhr Weltzeit; der Tageswechsel erfolgt also nicht um Mitternacht,
-sondern um Mittag Weltzeit.  Da Gcal gegen"artig nicht die Zeitzone des
-vom Rechner gelieferten Systemdatum auswertet, wird diese Tageszahl nur
-ganzzahlig dargestellt in der Annahme, dass der Tageswechsel bereits
-Mittags stattgefunden hat.  Wer den Tageswechsel als Mittags noch nicht
-bereits vollzogen haben m"ochte, der soll die sich aus dem Spezialtext
-ergebende Julianische Tageszahl stets um den Faktor eins vermindern,
-z.B. `%j-1'.
-
-Zum Beispiel:
-
-     Die Ressourcendateizeile
-     `0 Julianischer Tag %j seit 01-Jan-4713 v.Chr.' wird umgesetzt in
-     ==> `Julianischer Tag 2437929 seit 01-Jan-4713 v.Chr.', falls Gcal
-     mit den Optionen `-c %19620921' sowie keinem Kommando aufgerufen
-     wird.
-
-Wenn dem `%j' Text eine Zahl direkt folgt, so wird diese Zahl von der
-tats"achlichen Julianischen Tageszahl stets subtrahiert (1), so dass im
-Text mit beliebigen Bezugsgr"ossen gearbeitet werden kann, z.B.:
-
-     Die Ressourcendateizeile
-     `0 Julianischer Tag %j-2415021 seit 01-Jan-1900' wird umgesetzt in
-     ==> `Julianischer Tag 4 seit 01-Jan-1900', falls Gcal mit den
-     Optionen `-c %19000105' sowie keinem Kommando aufgerufen wird.
-
-  ---------- Footnotes ----------
-
-  (1)  Ein negatives Vorzeichen kann der besseren Lesbarkeit wegen
-angegeben werden.
-
-
-File: gcal.info,  Node: Ersetzen ohne Argument,  Prev: Ersetzen mit anderem Argument,  Up: Ersetzen
-
-Ersetzen ohne Argument `%?' Spezialtexte
-----------------------------------------
-
-* Menu:
-
-* Andere Differenzwerte::
-* Hervorhebung::
-
-Neben weiteren n"utzlichen Differenzwerten kann der Termintext auch mit
-verschiedenen Hervorhebungen ausgestattet werden.
-
-
-File: gcal.info,  Node: Andere Differenzwerte,  Next: Hervorhebung,  Prev: Ersetzen ohne Argument,  Up: Ersetzen ohne Argument
-
-Differenzwert `%?' Spezialtexte
-...............................
-
-Folgende andere Differenzwert `%?' Spezialtexte werden ber"ucksichtigt:
-
-`%d'
-     Bezeichnet den laufenden bzw. abgefragten *Tag* relativ zum
-     aktuellen Systemdatum (==heute), z.B.:
-
-          Die Ressourcendateizeile `0 %d Tage vergangen' wird umgesetzt
-          in
-          ==> `-10 Tage vergangen', falls Gcal mit der Option `-c10-'
-          und keinem Kommando aufgerufen wird.
-
-`%w'
-     Bezeichnet die laufende bzw. abgefragte *Woche* relativ zum
-     aktuellen Systemdatum (==heute).
-
-`%m'
-     Bezeichnet den laufenden bzw. abgefragten *Monat* relativ zum
-     aktuellen Systemdatum (==heute).
-
-`%y'
-     Bezeichnet das laufende bzw. abgefragte *Jahr* relativ zum
-     aktuellen Systemdatum (==heute).
+     0*d1#999 Jeder Tag des Jahres: Heute ist %K, der %n (%N)
 

@@ -1,0 +1,12 @@
+; swtim-1.rc, Sommerzeit/Winterzeit BRD
+;
+$a=zeitumstellung am Sonntag
+;
+a=03sun9
+0@a-2#+2 Sommer$a~+1 Std. (02:00 --> 03:00 Uhr)%i1981
+;
+a=09sun9
+0@a-2#+2 Winter$a~-1 Std. (03:00 --> 02:00 Uhr)%i1981#1995
+;
+a=10sun9
+0@a-2#+2 Winter$a~-1 Std. (03:00 --> 02:00 Uhr)%i1996

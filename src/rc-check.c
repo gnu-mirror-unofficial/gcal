@@ -1,8 +1,9 @@
 /*
-*  rc-check.c:  Checks if a line (of a resource file) must be inserted into `rc_elems_table[]'.
+*  rc-check.c:  Checks if a line (of a resource file)
+*               must be inserted into `rc_elems_table[]'.
 *
 *
-*  Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1994-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -35,7 +36,7 @@
 
 #if USE_RC
 #  ifdef RCSID
-static char rcsid[]="$Id: rc-check.c 2.40 1997/03/17 02:04:00 tom Exp $";
+static char rcsid[]="$Id: rc-check.c 3.00 2000/03/04 03:00:00 tom Exp $";
 #  endif
 
 
@@ -46,128 +47,23 @@ static char rcsid[]="$Id: rc-check.c 2.40 1997/03/17 02:04:00 tom Exp $";
 #  if HAVE_CTYPE_H
 #    include <ctype.h>
 #  endif
-#  include "gcal.h"
+#  include "common.h"
+#  include "rc-defs.h"
+#  include "globals.h"
+#  include "rc-insert.h"
+#  include "rc-utils.h"
+#  include "utils.h"
+#  include "rc-check.h"
 
 
 
 /*
-*  Function prototypes.
+*  LOCAL functions prototypes.
 */
-#  if __cplusplus
-extern "C"
-{
-#  endif
-/*
-************************************************** Defined in `rc-insert.c'.
-*/
-IMPORT void
-insert_line_into_table __P_((      char *line_buffer,
-                             const char *filename,
-                             const long  line_number,
-                                   int  *rc_elems,
-                                   int   len_date,
-                                   int   print_twice));
-/*
-************************************************** Defined in `rc-utils.c'.
-*/
-IMPORT Line_struct *
-rc_get_date __P_((      char        *the_line,
-                        Line_struct *lineptrs,
-                  const Bool         is_rc_file,
-                        Bool        *is_weekday_mode,
-                        int         *d,
-                        int         *m,
-                        int         *y,
-                        int         *n,
-                        int         *len,
-                        char        *hc,
-                        int         *hn,
-                        int         *hwd,
-                  const char        *filename,
-                  const long         line_number,
-                  const char        *line_buffer,
-                  const Bool         on_error_exit));
-IMPORT Bool
-precomp_nth_wd __P_((      int         diff,
-                     const int         wd,
-                           int        *n,
-                           int        *day,
-                           int        *month,
-                           int        *year,
-                     const Cmode_enum  mode));
-IMPORT Bool
-precomp_date __P_((      int         diff,
-                   const int         wd,
-                         int        *day,
-                         int        *month,
-                   const int         year,
-                   const Cmode_enum  mode));
-IMPORT void
-nth_weekday_of_month __P_((      int  *d,
-                                 int  *m,
-                                 int  *y,
-                           const int  *n,
-                                 Bool *is_weekday_mode));
-IMPORT Bool
-prev_date __P_((int *day,
-                int *month,
-                int *year));
-IMPORT Bool
-next_date __P_((int *day,
-                int *month,
-                int *year));
-IMPORT void
-manage_leap_day __P_((      int  *day,
-                            int  *month,
-                            int   year,
-                      const char *line_buffer,
-                      const char *filename,
-                      const long  line_number));
-/*
-************************************************** Defined in `utils.c'.
-*/
-IMPORT void
-my_error __P_((const int   exit_status,
-               const char *module_name,
-               const long  module_line,
-               const char *var_name,
-               const int   var_contents));
-IMPORT int
-compare_d_m_name __P_((const char       *string,
-                       const Cmode_enum  mode));
-IMPORT Bool
-doy2date __P_((      int  doy,
-               const int  is_leap_year,
-                     int *day,
-                     int *month));
-IMPORT int
-weekday_of_date __P_((const int day,
-                      const int month,
-                      const int year));
-IMPORT int
-day_of_year __P_((const int day,
-                  const int month,
-                  const int year));
-IMPORT int
-days_of_february __P_((const int year));
-IMPORT Bool
-valid_date __P_((const int day,
-                 const int month,
-                 const int year));
-IMPORT int
-knuth_easter_formula __P_((const int year));
+__BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `rc-check.c'.
 */
-EXPORT void
-rc_check __P_((      char *line_buffer,
-               const char *filename,
-               const long  line_number,
-               const int   line_length,
-                     int  *rc_elems,
-               const int   day,
-               const int   ed,
-               const int   wd));
 LOCAL Bool
 date_matches_period __P_((      int *print_twice,
                                 int  day,
@@ -175,71 +71,24 @@ date_matches_period __P_((      int *print_twice,
                           const int  wd));
 LOCAL int
 get_number __P_((char **string));
-#  if __cplusplus
-}
-#  endif
+__END_DECLARATIONS
 
 
 
 /*
-*  Declare public(extern) variables.
+*  LOCAL variables definitions.
 */
-IMPORT const int    dvec[];                  /* Amount of days in months */
-IMPORT Greg_struct *greg;                    /* Points to the used Gregorian Reformation date */
-IMPORT Line_struct *lineptrs;                /* Pointers to different parts of a (resource file) line */
-IMPORT Line_struct *lptrs;                   /* Pointers to different parts of a (resource file) line */
-IMPORT int          start_day;               /* -s1<0,1...7|day name> */
-IMPORT int          month;                   /* Current month */
-IMPORT int          year;                    /* Current year */
-IMPORT int          rc_have_today_in_list;   /* [-c]d */
-IMPORT int          act_day;                 /* Actual day */
-IMPORT int          act_month;               /* Actual month */
-IMPORT int          act_year;                /* Actual year */
-IMPORT int          fiscal_month;            /* Starting month of a fiscal year */
-IMPORT int          is_leap_year;            /* Is current year a leap year? */
-IMPORT char        *s6;                      /* General purpose text buffer */
-IMPORT Bool         rc_period_list;          /* [-c]l */
-IMPORT Bool         rc_period_flag;          /* [-c]<<<<n>>[<d|w|+|-]>|`mmdd'|`mmww[w]'<n>> */
-IMPORT Bool         rc_tomorrow_flag;        /* [-c]t */
-IMPORT Bool         rc_week_flag;            /* [-c]w */
-IMPORT Bool         rc_month_flag;           /* [-c]m */
-IMPORT Bool         rc_year_flag;            /* [-c]y */
-IMPORT Bool         rc_week_year_flag;       /* [-c<<n>>]w */
-IMPORT Bool         rc_forwards_flag;        /* [-c<<n>|w|m|y>]+ */
-IMPORT Bool         rc_backwards_flag;       /* [-c<<n>|w|m|y>]- */
-IMPORT Bool         is_date_given;           /* Is a command (explicit date) given in the command line? */
-IMPORT Bool         is_3month_mode;          /* Argument is "." or ".+" or ".-" */
-IMPORT Bool         is_3month_mode2;         /* Argument is ".." -> current quarter of actual year */
-IMPORT Bool         adate_set;               /* [-c]<n>w and actual date modified */
+/* Textual weekday name is found and must be respected. */
+LOCAL Bool  is_weekday_mode=FALSE;
+
+/* No explicit month command is given in the command line. */
+LOCAL Bool  changed_month=FALSE;
 
 
 
 /*
-*  Define public(extern) variables.
+*  Function implementations.
 */
-PUBLIC int   incr_year;         /* Indicates whether event appears in next year too */
-PUBLIC int   decr_year;         /* Indicates whether event appears in previous year too */
-PUBLIC int   d;                 /* Day of event found in line */
-PUBLIC int   m;                 /* Month of event found in line */
-PUBLIC int   y;                 /* Year of event found in line */
-PUBLIC int   d_buf;             /* Buffered day of event */
-PUBLIC int   m_buf;             /* Buffered month of event */
-PUBLIC int   hn;                /* The `N'th weekday of month' displacement value */
-PUBLIC int   hwd;               /* The weekday number of `N'th weekday of month'*/
-PUBLIC char  hc;                /* The mode specifying character */
-PUBLIC Bool  is_2dvar;          /* Reference to a date variable found in line */
-PUBLIC Bool  is_2easter;        /* Reference to Easter Sundays date found in line */
-
-
-
-/*
-   Define local(static) variables.
-*/
-LOCAL Bool  is_weekday_mode;   /* Textual weekday name is found and must be respected */
-LOCAL Bool  changed_month;     /* No explicit month command is given in the command line */
-
-
-
    PUBLIC void
 rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed, wd)
          char *line_buffer;
@@ -251,7 +100,8 @@ rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed, wd
    const int   ed;
    const int   wd;
 /*
-   Checks whether a single line of a resource file resp., eternal holiday must be displayed.
+   Checks whether a single line of a resource file resp.,
+     eternal holiday must be displayed.
 */
 {
    register int  i;
@@ -295,13 +145,13 @@ rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed, wd
      /*
         Error, invalid date field given.
      */
-     my_error (123, filename, line_number, line_buffer, 0);
+     my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
    if (   (len_date < line_length)
        && !*lineptrs->text_part)
      /*
         Error, missing whitespace character between "date"-part and "text"-part.
      */
-     my_error (116, filename, line_number, line_buffer, 0);
+     my_error (ERR_NO_SEPARATOR_CHAR, filename, line_number, line_buffer, 0);
    if (!month)
     {
       month = act_month;
@@ -373,12 +223,12 @@ rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed, wd
                 && (   !is_first
                     || !islower(hc)))
               /*
-                 Error, an empty list element given (e.g.:  dd,,dd or ww[w],,ww[w]N).
+                 Error, an empty list element given (e.g.:  DD,,DD or WW[W],,WW[W]N).
                    The only place where an empty list element may occur is the
-                   trailing character after a @e|t|`dvar' text, e.g.:  @e,+10,-3fr ...,
+                   trailing character after a @e|t|DVAR text, e.g.:  @e,+10,-3fr ...,
                    which means -> first evaluate  @e  and then  @e+10  and then  @e-3fr.
               */
-              my_error (123, filename, line_number, line_buffer, 0);
+              my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
             is_first = FALSE;
             ptr2_char = s6;
             if (   hc
@@ -396,7 +246,7 @@ rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed, wd
                     /*
                        Error, simple weekday name or invalid sign given.
                     */
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                 }
                else
                  if (   *ptr2_char == *ASC_LIT
@@ -404,7 +254,7 @@ rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed, wd
                    /*
                       Error, invalid sign given.
                    */
-                   my_error (123, filename, line_number, line_buffer, 0);
+                   my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                /*
                   Now eat all digits.
                */
@@ -432,7 +282,7 @@ rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed, wd
                            /*
                               Error, invalid textual month name given.
                            */
-                           my_error (123, filename, line_number, line_buffer, 0);
+                           my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                          }
                         ptr2_char++;
                       }
@@ -447,7 +297,7 @@ rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed, wd
                           /*
                              Error, invalid month number (mm) given.
                           */
-                          my_error (123, filename, line_number, line_buffer, 0);
+                          my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                         s6[2] = ch;
                       }
                      ptr2_char += 2;
@@ -463,18 +313,18 @@ LABEL_list_day_name_given:
                   else
                     if (isdigit(*ptr2_char))
                       /*
-                         Error, invalid day number (dd) given.
+                         Error, invalid day number (DD) given.
                       */
-                      my_error (123, filename, line_number, line_buffer, 0);
+                      my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                 }
                if (!isdigit(*ptr2_char))
                 {
                   d = compare_d_m_name (ptr2_char, DAy);
                   if (!d)
                     /*
-                       Error, invalid textual day name (ww[w]) given.
+                       Error, invalid textual day name (WW[W]) given.
                     */
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                 }
              }
             if (   !is_month_given
@@ -489,16 +339,16 @@ LABEL_list_day_name_given:
                    {
                      if (isdigit(s6[i-2]))
                        /*
-                          Error, "n'th weekday of month" field contains more than one digit.
+                          Error, "N'th weekday of month" field contains more than one digit.
                        */
-                       my_error (123, filename, line_number, line_buffer, 0);
+                       my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                      n = CHR2DIG(s6[i-1]);
                      /*
-                        Error, invalid "n'th weekday of month" number given.
+                        Error, invalid "N'th weekday of month" number given.
                      */
                      if (   (n > 5)
                          && (n < 9))
-                       my_error (117, filename, line_number, line_buffer, n);
+                       my_error (ERR_INVALID_NWD_FIELD, filename, line_number, line_buffer, n);
                    }
                   if (!n)
                     is_weekday_mode = TRUE;
@@ -549,10 +399,10 @@ LABEL_list_day_name_given:
              {
                if (is_weekday_mode)
                  /*
-                    Error, it's invalid to specify a simple weekday name
-                      with a "repeat" or "appears" coding (e.g.: www:10,www.3,www:10.3 ...).
+                    Error, it's invalid to specify a simple weekday name WWW
+                      with a "repeat" or "appears" coding (e.g.: WWW:10,WWW.3,WWW:10.3 ...).
                  */
-                 my_error (123, filename, line_number, line_buffer, 0);
+                 my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                else
                 {
                   register int  num_repeat=0;
@@ -580,7 +430,7 @@ LABEL_list_day_name_given:
                        Error, either "repeat" or "appears" coding given twice
                          or invalid by other reasons (a number > 999 given).
                     */
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                   if (appears)
                     appears--;
                   /*
@@ -606,7 +456,7 @@ LABEL_list_day_name_given:
                    Error, invalid "repeat" or "appears" coding given
                      (one of the fields contains invalid characters).
                 */
-                my_error (123, filename, line_number, line_buffer, 0);
+                my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
           }
          else
           /*
@@ -617,7 +467,7 @@ LABEL_list_day_name_given:
               /*
                  Error, a "repeat" coding makes no sense in ranges of days.
               */
-              my_error (123, filename, line_number, line_buffer, 0);
+              my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
             /*
                Copy the starting element of the range into `s6'.
             */
@@ -628,7 +478,7 @@ LABEL_list_day_name_given:
               /*
                  Error, a "appears" coding may only be given last to a range of days.
               */
-              my_error (123, filename, line_number, line_buffer, 0);
+              my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
             ptr2_char = s6;
             /*
                Skip THE separating character of the range of days.
@@ -647,9 +497,9 @@ LABEL_list_day_name_given:
                       || *ptr2_char == *DES_LIT
                       || isalpha(*ptr2_char))
                     /*
-                       Error, simple weekday name or invalid sign given.
+                       Error, simple weekday name WWW or invalid sign given.
                     */
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                 }
                else
                  if (   *ptr2_char == *ASC_LIT
@@ -657,7 +507,7 @@ LABEL_list_day_name_given:
                    /*
                       Error, invalid sign given.
                    */
-                   my_error (123, filename, line_number, line_buffer, 0);
+                   my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                /*
                   Now eat all digits.
                */
@@ -675,18 +525,18 @@ LABEL_list_day_name_given:
                   else
                     if (isdigit(*ptr2_char))
                       /*
-                         Error, invalid day number (== 0) given.
+                         Error, invalid day number (==0) given.
                       */
-                      my_error (123, filename, line_number, line_buffer, 0);
+                      my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                 }
                if (!isdigit(*ptr2_char))
                 {
                   buf_d=d = compare_d_m_name (ptr2_char, DAy);
                   if (!d)
                     /*
-                       Error, invalid textual day name (ww[w]) given.
+                       Error, invalid weekday name (WW[W]) given.
                     */
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                 }
                if (!is_day_given)
                 {
@@ -695,16 +545,16 @@ LABEL_list_day_name_given:
                    {
                      if (isdigit(s6[i-2]))
                        /*
-                          Error, "n'th weekday of month" field contains more than one digit.
+                          Error, "N'th weekday of month" field contains more than one digit.
                        */
-                       my_error (123, filename, line_number, line_buffer, 0);
+                       my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                      n = CHR2DIG(s6[i-1]);
                      /*
-                        Error, invalid "n'th weekday of month" number given.
+                        Error, invalid "N'th weekday of month" number given.
                      */
                      if (   (n > 5)
                          && (n < 9))
-                       my_error (117, filename, line_number, line_buffer, n);
+                       my_error (ERR_INVALID_NWD_FIELD, filename, line_number, line_buffer, n);
                      if (n)
                       {
                         is_range = TRUE;
@@ -826,7 +676,7 @@ LABEL_list_day_name_given:
                     /*
                        Error, simple weekday name or invalid sign given.
                     */
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                 }
                else
                  if (   *ptr2_char == *ASC_LIT
@@ -834,7 +684,7 @@ LABEL_list_day_name_given:
                    /*
                       Error, invalid sign given.
                    */
-                   my_error (123, filename, line_number, line_buffer, 0);
+                   my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                /*
                   Now eat all digits.
                */
@@ -871,7 +721,7 @@ LABEL_list_day_name_given:
                            /*
                               Error, invalid textual month name given.
                            */
-                           my_error (123, filename, line_number, line_buffer, 0);
+                           my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                          }
                         s6[3] = ch;
                         ptr2_char++;
@@ -885,9 +735,9 @@ LABEL_list_day_name_given:
                           tmp_m = MONTH_MAX;
                         if (tmp_m > MONTH_MAX)
                           /*
-                             Error, invalid month number (mm) given.
+                             Error, invalid month number (MM) given.
                           */
-                          my_error (123, filename, line_number, line_buffer, 0);
+                          my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                         s6[2] = ch;
                       }
                      ptr2_char += 2;
@@ -906,9 +756,9 @@ LABEL_range_day_name_given:
                   buf_d=tmp_d = compare_d_m_name (ptr2_char, DAy);
                   if (!tmp_d)
                     /*
-                       Error, invalid textual day name (ww[w]) given.
+                       Error, invalid textual day name (WW[W]) given.
                     */
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                 }
                if (!is_day_given)
                 {
@@ -916,9 +766,9 @@ LABEL_range_day_name_given:
                    {
                      if (isdigit(s6[i-2]))
                        /*
-                          Error, "n'th weekday of month" field contains more than one digit.
+                          Error, "N'th weekday of month" field contains more than one digit.
                        */
-                       my_error (123, filename, line_number, line_buffer, 0);
+                       my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                      tmp_n = CHR2DIG(s6[i-1]);
                    }
                   if (   !hc
@@ -926,11 +776,11 @@ LABEL_range_day_name_given:
                       && is_range)
                    {
                      /*
-                        Error, invalid "n'th weekday of month" number given.
+                        Error, invalid "N'th weekday of month" number given.
                      */
                      if (   (tmp_n > 5)
                          && (tmp_n < 9))
-                       my_error (117, filename, line_number, line_buffer, tmp_n);
+                       my_error (ERR_INVALID_NWD_FIELD, filename, line_number, line_buffer, tmp_n);
                      if (!is_month_given)
                        tmp_m = buf_m;
                      tmp_y = buf_y;
@@ -953,16 +803,16 @@ LABEL_range_day_name_given:
                          && (   tmp_n
                              || is_range))
                        /*
-                          Error, mixed range of days given (dd#ww[w], ww[w]#ww[w]N or ww[w]N#www[w]).
+                          Error, mixed range of days given (DD#WW[W], WW[W]#WW[W]N or WW[W]N#WW[w]).
                        */
-                       my_error (123, filename, line_number, line_buffer, 0);
+                       my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                      else
                        if (   !tmp_hn
                            && is_range)
                          /*
-                            Error, invalid range of days given (Nww[w]#www[w]).
+                            Error, invalid range of days given (NWW[W]#WW[W]).
                          */
-                         my_error (123, filename, line_number, line_buffer, 0);
+                         my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                        else
                          tmp_hwd = tmp_d;
                    }
@@ -972,9 +822,9 @@ LABEL_range_day_name_given:
                   if (   is_day_given
                       && !is_range)
                     /*
-                       Error, invalid range of days given (ww[w]#dd).
+                       Error, invalid range of days given (WW[W]#DD).
                     */
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                   if (   !tmp_m
                       && is_coded_month
                       && (   rc_year_flag
@@ -983,8 +833,8 @@ LABEL_range_day_name_given:
                           || is_3month_mode2
                           || fiscal_month > MONTH_MIN))
                     /*
-                       If the month of a final day is coded like: ...#mmdd
-                         or ...#mmww[w]N, but mm is explicitly set to zero (== 00 coded)
+                       If the month of a final day is coded like: ...#MMDD
+                         or ...#MMWW[W]N, but MM is explicitly set to zero (==00 coded)
                          and we are in one of these modes, exit the loop.
                     */
                     break;
@@ -996,7 +846,7 @@ LABEL_range_day_name_given:
             else
               tmp_hwd = 0;
             /*
-               We have to avoid constructions like: yyyy00dd|ww[w]N#mmdd|ww[w]N
+               We have to avoid constructions like: YYYY00DD|WW[W]N#MMDD|WW[W]N
                  which means, no starting month but a final month is given and
                  if both months differ after pre-evaluating the starting month
                  (which is set to the current month), exit the loop.
@@ -1060,7 +910,7 @@ LABEL_range_day_name_given:
                  /*
                     Error, invalid "appears" field given.
                  */
-                 my_error (123, filename, line_number, line_buffer, 0);
+                 my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                appears--;
              }
             /*
@@ -1086,12 +936,12 @@ LABEL_range_day_name_given:
                   else
                     tmp_d = dvec[tmp_m-1];
                 }
-               if (   d > 31
-                   || tmp_d > 31)
+               if (   d > MONTH_LAST
+                   || tmp_d > MONTH_LAST)
                  /*
-                    Error, invalid day number (>31) is given.
+                    Error, invalid day number (>MONTH_LAST) is given.
                  */
-                 my_error (123, filename, line_number, line_buffer, 0);
+                 my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                if (!buf_y)
                 {
                   if (buf_m)
@@ -1124,9 +974,9 @@ LABEL_range_day_name_given:
                     d--;
                   else
                     /*
-                       Error, invalid date given (e.g.: yyyy0230 or yyyy0931).
+                       Error, invalid date given (e.g.: YYYY0230 or YYYY0931).
                     */
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                 }
                while (!valid_date (tmp_d, tmp_m, tmp_y))
                 {
@@ -1136,9 +986,9 @@ LABEL_range_day_name_given:
                     tmp_d--;
                   else
                     /*
-                       Error, invalid date given (e.g.: yyyy0230 or yyyy0931).
+                       Error, invalid date given (e.g.: YYYY0230 or YYYY0931).
                     */
-                    my_error (123, filename, line_number, line_buffer, 0);
+                    my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                 }
                /*
                   Compute the raw number of 1xN productions.
@@ -1165,7 +1015,7 @@ LABEL_range_day_name_given:
                    {
                      if (appears)
                       {
-                        register int  k=i;
+                        register int  k;
 
 
                         /*
@@ -1173,6 +1023,7 @@ LABEL_range_day_name_given:
                         */
                         do
                          {
+                           k = i;
                            (void)doy2date (i+appears+1, (days_of_february (y)==29), &d, &m);
                            i = day_of_year (d, m, y);
                            if (i == k)
@@ -1204,10 +1055,10 @@ LABEL_range_day_name_given:
              {
                if (is_month_given)
                  /*
-                    Error, simple textual weekday ranges (ww[w]#ww[w]) may
-                      not have a specified final month like: ww[w]#mmww[w].
+                    Error, simple textual weekday ranges (WW[W]#WW[W]) may
+                      not have a specified final month like: WW[W]#MMWW[W].
                  */
-                 my_error (123, filename, line_number, line_buffer, 0);
+                 my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                /*
                   Compute the number of 1xN productions for simple weekdays!
                */
@@ -1240,9 +1091,9 @@ LABEL_range_day_name_given:
                   && !n)
                 /*
                    Error, "repeat" or "appears" coding given to a
-                     simple weekday name (e.g.: yyyymmwww:10.3 ...).
+                     simple weekday name (e.g.: YYYYMMWW[W]:10.3 ...).
                 */
-                my_error (123, filename, line_number, line_buffer, 0);
+                my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
               if (lptrs->repeat_part != (char *)NULL)
                {
                  repeat = get_number (&lptrs->repeat_part);
@@ -1253,7 +1104,7 @@ LABEL_range_day_name_given:
                    /*
                       Error, invalid "repeat" field given.
                    */
-                   my_error (123, filename, line_number, line_buffer, 0);
+                   my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                }
               if (lptrs->appears_part != (char *)NULL)
                {
@@ -1265,7 +1116,7 @@ LABEL_range_day_name_given:
                    /*
                       Error, invalid "appears" field given.
                    */
-                   my_error (123, filename, line_number, line_buffer, 0);
+                   my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
                }
             }
            if (!repeat)
@@ -1302,7 +1153,7 @@ LABEL_range_day_name_given:
          incr_year=decr_year=d_buf=m_buf = 0;
          /*
             Default is a 1x1 production of a line
-              (except some cases the -c[...]t "tomorrow" flag is given).
+              (except some cases the `-c[]t' "tomorrow" flag is given).
          */
          print_twice = 1;
          if (!is_range)
@@ -1340,10 +1191,10 @@ LABEL_range_day_name_given:
                                        && (month == 2)))
                                && (d == 29))
                            || (   !m
-                               && (d <= 31))))
+                               && (d <= MONTH_LAST))))
                    || (   y
                        && !m
-                       && (d <= 31)))
+                       && (d <= MONTH_LAST)))
                  /*
                     If no month/year entry given, ignore that date.
                  */
@@ -1352,10 +1203,10 @@ LABEL_range_day_name_given:
                  /*
                     Invalid date field given.
                  */
-                 my_error (123, filename, line_number, line_buffer, 0);
+                 my_error (ERR_INVALID_DATE_FIELD, filename, line_number, line_buffer, 0);
              }
             /*
-               If a "n'th weekday of month" field is given, compute the according date.
+               If a "N'th weekday of month" field is given, compute the according date.
             */
             if (n)
              {
@@ -1377,7 +1228,7 @@ LABEL_range_day_name_given:
                    /*
                       FIXME!
                       Actually it's not possible to evaluate events, which
-                        occur in every year and are set to a "n'th weekday"
+                        occur in every year and are set to a "N'th weekday"
                         displacement, and the mode of operation is generally
                         for fiscal years or for weeks, which have left the
                         bounds of the actual year and are related to the Easter
@@ -1432,7 +1283,7 @@ LABEL_range_day_name_given:
                                 else
                                  {
                                    /*
-                                      Check whether this single event occurs in the next year, too.
+                                      Check whether this single event also occurs in the next year.
                                    */
                                    j = day_of_year (i, fiscal_month-1, year+1);
                                    if (   !is_3month_mode
@@ -1484,8 +1335,8 @@ LABEL_range_day_name_given:
                         }
                        else
                          /*
-                            Manage -c0w request resp.,
-                              -cw in case date is in first days of January.
+                            Manage `-c0w' request resp.,
+                              `-cw' in case date is in first days of January.
                          */
                          if (day < DAY_MIN)
                           {
@@ -1509,8 +1360,8 @@ LABEL_range_day_name_given:
                           }
                          else
                            /*
-                              Manage -c99w (-c52w | -c53w) request resp.,
-                                -ct or -cw in case date is in last days of December.
+                              Manage `-c99w' (`-c52w' | `-c53w') request resp.,
+                                `-ct' or `-cw' in case date is in last days of December.
                            */
                            if (ed > DAY_LAST+is_leap_year+1)
                             {
@@ -1541,7 +1392,7 @@ LABEL_range_day_name_given:
                      }
                     else
                       /*
-                         If @t|`dvar'... "date"-part is given, compute the according date.
+                         If @t|DVAR... "date"-part is given, compute the according date.
                       */
                       if (islower(hc))
                        {
@@ -1574,7 +1425,7 @@ LABEL_range_day_name_given:
                                else
                                 {
                                   /*
-                                     Check whether this single event occurs in in next year, too.
+                                     Check whether this single event also occurs in in next year.
                                   */
                                   j = day_of_year (i, fiscal_month-1, year+1);
                                   if (   !is_3month_mode
@@ -1635,7 +1486,7 @@ LABEL_range_day_name_given:
                        }
                       else
                         /*
-                           If 0*d|w<n>[ww[w]] "date"-part is given, compute the according date.
+                           If a 0*d|wN[WW[W]] "date"-part is given, compute the according date.
                         */
                         if (   hc == 'D'
                             || hc == 'W')
@@ -1663,7 +1514,7 @@ LABEL_range_day_name_given:
                                  if (date_dvar >= j)
                                   {
                                     /*
-                                       Check whether this single event occurs in the next year, too
+                                       Check whether this single event also occurs in the next year
                                     */
                                     j = day_of_year (i, fiscal_month-1, year+1);
                                     if (   !is_3month_mode
@@ -1763,7 +1614,7 @@ LABEL_range_day_name_given:
                   productions -= appears;
                 }
                else
-                 next_date (&d, &m, &y);
+                 (void)next_date (&d, &m, &y);
                /*
                   If we evaluate a list of days and found "repeat" or "appears" fields
                     in it and made all necessary productions, we must manage this
@@ -1870,7 +1721,7 @@ date_matches_period (print_twice, day, ed, wd)
     {
       /*
          NOT in simple month-/year mode (an explicit date is given in command line):
-           Manage -c[...] arguments.
+           Manage `-c[]' arguments.
       */
       if (   d
           && !is_weekday_mode)
@@ -1945,7 +1796,7 @@ date_matches_period (print_twice, day, ed, wd)
     {
       /*
          Simple month-/year mode (NO explicit date is given in command line):
-           Manage [-c[...]]w|m|y[+|-] arguments.
+           Manage `-c[]w|m|y[+|-]' arguments.
       */
       if (   (   rc_period_flag
               || rc_week_flag
@@ -2015,7 +1866,7 @@ date_matches_period (print_twice, day, ed, wd)
                      || d)))
           {
             /*
-               Respect short day name entry `yyyymmww[w]' ... (ww[w]==short dayname).
+               Respect short day name entry YYYYMMWW[W] ... (WW[W]==short dayname).
             */
             if (   rc_week_flag
                 && is_weekday_mode)
@@ -2085,21 +1936,21 @@ date_matches_period (print_twice, day, ed, wd)
                    }
                   if (rc_forwards_flag)
                     for (i=0 ; i < wday_list.dst[d-1] ; i++)
-                      next_date (&dd, &mm, &yy);
+                      (void)next_date (&dd, &mm, &yy);
                   else
                     if (rc_backwards_flag)
                       for (i=1 ; i < wday_list.dst[d-1] ; i++)
-                        prev_date (&dd, &mm, &yy);
+                        (void)prev_date (&dd, &mm, &yy);
                     else
                      {
                        i = SYEAR(d, start_day);
                        j = SYEAR(wd, start_day);
                        if (i-j <= 0)
                          for (i=1 ; i < wday_list.dst[d-1] ; i++)
-                           prev_date (&dd, &mm, &yy);
+                           (void)prev_date (&dd, &mm, &yy);
                        else
                          for (i=0 ; i < wday_list.dst[d-1] ; i++)
-                           next_date (&dd, &mm, &yy);
+                           (void)next_date (&dd, &mm, &yy);
                      }
                   if (   (   !m
                           || m == mm)
@@ -2309,13 +2160,13 @@ date_matches_period (print_twice, day, ed, wd)
          {
            /*
               Simple month-/year month mode (NO explicit date is given in command line):
-                Manage -c[...] or -c[...]t arguments.
+                Manage `-c[]' or `-c[]t' arguments.
            */
            dd = act_day;
            mm = month;
            yy = year;
            if (rc_tomorrow_flag)
-             next_date (&dd, &mm, &yy);
+             (void)next_date (&dd, &mm, &yy);
            if (   (   !y
                    || y == year
                    || (   rc_tomorrow_flag
@@ -2336,7 +2187,7 @@ date_matches_period (print_twice, day, ed, wd)
               if (is_weekday_mode)
                {
                  /*
-                    Respect short day name entry `yyyymmww[w]' ... (ww[w]==short dayname).
+                    Respect short day name entry YYYYMMWW[W] ... (WW[W]==short dayname).
                  */
                  i = weekday_of_date (act_day, month, year);
                  j = 0;
@@ -2538,7 +2389,8 @@ get_number (string)
         s6[i++] = *((*string)++);
       s6[i] = '\0';
       /*
-         Make sure we return values in range 1...366 or 0 if an error have occurred.
+         Make sure we return values in range 1...366
+           or 0 if an error has occurred.
       */
       if (i > 3)
         return(0);

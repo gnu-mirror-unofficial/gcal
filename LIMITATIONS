@@ -1,4 +1,4 @@
-LIMITATIONS file for `gcal'.
+LIMITATIONS file for Gcal.
 
 Here are all internal limitations of `gcal':
 
@@ -29,6 +29,9 @@ Here are all internal limitations of `gcal':
 
    * Number of managed highlighting sequence pairs
         == 2
+
+   * Bytesize of Termcap buffer
+        == 4096
 
    * Number of characters in a string (inclusive `\0')
         == INT_MAX
@@ -61,9 +64,34 @@ Here are all internal limitations of `gcal':
    * Range of months given in the command line
         == 1/1...12/9999  (== 9999*12 => 119,988 program cycles maximum)
 
-   * Maximum number of managed *external pager* programs
+   * Maximum number of managed _external pager_ programs
         == 3
 
-   * Maximum number of burned-in *eternal holiday* dates
-        == 512
+   * Maximum number of burned-in _eternal holiday_ dates
+        == 1280 if `HD_TOP20CC' is set, otherwise 8192
+
+   * Maximum number of clocktime cycle steps during a day for determing
+     dynamical Sun and Moon data and times
+        == 1440
+
+   * Maximum number of dynamical Sun and Moon data and times for
+     different locations that can be calculated for a definite clocktime
+        == more than 4.7e+17
+
+   * Maximum number of dynamical Sun and Moon data and times for
+     different locations that can be calculated for a whole day
+        == more than 6.7e+20
+
+   * Maximum number of dynamical Sun and Moon data and times for
+     different locations that can be calculated for a whole year
+        == more than 2.4e+23
+
+   * Maximum number of dynamical Sun and Moon data and times for
+     different locations that can be calculated for the year range
+     1...9999
+        == more than 2.4e+27
+
+   * Maximum number of different locations for which course angles and
+     air line distance values, respectively, can be calculated
+        == more than 2.8e+32
 

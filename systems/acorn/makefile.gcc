@@ -1,13 +1,13 @@
-#  $Id: makefile.gcc 0.14 1996/10/17 00:01:04 tom Exp $
+#  $Id: makefile.gcc 0.17 2000/03/05 00:01:07 tom Exp $
 ###############################################################################
 #
 #  Acorn GNU-C
 #  Makefile to create the extended `gcal' program.
 #
-#  Copyright (C) 1994-1996      Thomas Esken            <esken@uni-muenster.de>
-#                               Im Hagenfeld 84
-#                               D-48147 M"unster
-#                               GERMANY
+#  Copyright (c) 1994-1996, 2000  Thomas Esken          <esken@uni-muenster.de>
+#                                 Im Hagenfeld 84
+#                                 D-48147 M"unster
+#                                 GERMANY
 #
 ###############################################################################
 #
@@ -125,9 +125,10 @@ O =
 C = _c
 H = _h
 
-SRC1 = gcal$(C) file-io$(C) hd-data$(C) hd-use$(C) help$(C) print$(C) \
-  rc-check$(C) rc-insert$(C) rc-use$(C) rc-utils$(C) regexp$(C) tty$(C) \
-  utils$(C)
+SRC1 = gcal$(C) file-io$(C) hd-astro$(C) hd-data$(C) hd-data1$(C) \
+  hd-data2$(C) hd-data3($C) hd-data4$(C) hd-data5($C) hd-use$(C) help$(C) \
+  print$(C) rc-astro$(C) rc-check$(C) rc-insert$(C) rc-use$(C) rc-utils$(C) \
+  regexp$(C) tty$(C) utils$(C)
 SRC2 = tcal$(C)
 SRC3 = txt2gcal$(C)
 SRC4 = gcal2txt$(C)

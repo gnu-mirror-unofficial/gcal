@@ -1,11 +1,17 @@
-BUGS file for `gcal'.
+BUGS file for Gcal.
 
-Here are all known bugs of `gcal'; some will be corrected in future:
+Here are all known bugs of `gcal'; some will be corrected in the future:
+
+   * It is still possible to create weird output in case the optional
+     format instruction which can be used by text variables in a
+     resource file line now, is set to a non-numerical fixed format and
+     is used by a text variable, which contains any highlighting
+     sequences that are managed by Gcal itself.
 
    * By reason of setting the Gregorian Reformation period by a command
      line option, it is possible to corrupt the calendars likewise the
      fixed date feature logically (which works correctly now for the
-     year in which the Gregorian Reformation have occured) if this
+     year in which the Gregorian Reformation has occured) if this
      option is not used with care.
 
    * Fixed dates (inclusive lists or ranges of days, or repeated dates)

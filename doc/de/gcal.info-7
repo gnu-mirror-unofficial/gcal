@@ -1,1200 +1,2442 @@
-This is Info file ./de/gcal.info, produced by Makeinfo version 1.67
-from the input file ./de/gcal.texi.
+Dies ist gcal.info, hergestellt von Makeinfo Version 4.0 aus gcal.texi.
 
 INFO-DIR-SECTION GNU Pakete
 START-INFO-DIR-ENTRY
-* Gcal: (gcal).                         Das GNU Kalenderprogramm.
-* tcal: (gcal)Aufruf von tcal.          Gcal mit morgigem Datum aufrufen.
-* txt2gcal: (gcal)Aufruf von txt2gcal.  Textdatei zu Ressourcendatei wandeln.
-* gcal2txt: (gcal)Aufruf von gcal2txt.  Ressourcendatei zu Textdatei wandeln.
+* Gcal: (gcal).                        GNU Kalenderprogramm.
+* Tcal: (gcal)Aufruf von tcal.         Gcal mit morgigem Datum aufrufen.
+* Txt2gcal: (gcal)Aufruf von txt2gcal. Kalendertext zu Ressourcendatei wandeln.
+* Gcal2txt: (gcal)Aufruf von gcal2txt. Kalenderressource zu Textdatei wandeln.
 END-INFO-DIR-ENTRY
 
-Diese Datei beschreibt Gcal, ein Programm um Kalender auszugeben.  Gcal
-gibt Monatskalender und Jahreskalender, ewige Feiertagslisten sowie
-Terminlisten auf viele verschiedene Arten und Weisen aus.  Es
-ber"ucksichtigt diejenigen Daten korrekt, welche "ubergangen wurden,
-als der derzeitig g"ultige Gregorianische Kalender den vormals g"ultigen
-Julianischen Kalender abl"oste.
+Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
+auszugeben.
 
-Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+Copyright (c) 1994-1997, 2000 Thomas Esken
 
-Das ist die zweite Ausgabe der Gcal Dokumentation.
+Diese Ausgabe ist für Gcal Version 3.00.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
 Copyrightvermerk und diesem Genehmigungsvermerk ausgestattet sind und
 vorgenannte Vermerke erhalten bleiben.
 
-Hiermit wird die Erlaubnis erteilt, ver"anderte Kopien dieses Handbuchs
-wie unter den Bedingungen f"ur wortgetreue Kopien zu erstellen und zu
-vertreiben, sofern die ausgef"uhrten Arbeiten in Ableitung und
-Gesamtheit innerhalb der Bestimmungen eines Genehmigungsvermerks liegen
-und zudem mit diesem ausgestattet sind, welcher mit diesem hier
-identisch ist.
+Hiermit wird die Erlaubnis erteilt, veränderte Kopien dieses Handbuchs
+wie unter den Bedingungen für wortgetreue Kopien zu erstellen und zu
+vertreiben, sofern die ausgeführten Arbeiten in Ableitung und Gesamtheit
+innerhalb der Bestimmungen eines Genehmigungsvermerks liegen und zudem
+mit diesem ausgestattet sind, welcher mit diesem hier identisch ist.
 
 Hiermit wird die Erlaubnis erteilt, wie unter den vorgenannten
-Bedingungen f"ur ver"anderte Versionen "Ubersetzungen dieses Handbuchs
-in eine andere Sprache zu erstellen und zu vertreiben, mit der
-Ausnahme, dass dieser Genehmigungsvermerk in einer "Ubersetzung
-angegeben sein darf, welche von der Free Software Foundation gebilligt
-wird.
+Bedingungen für veränderte Versionen Übersetzungen dieses Handbuchs in
+eine andere Sprache zu erstellen und zu vertreiben, mit der Ausnahme,
+daß dieser Genehmigungsvermerk in einer Übersetzung angegeben sein
+darf, welche von der Free Software Foundation gebilligt wird.
 
-Jedwede Vorschl"age, Verbesserungen, Erweiterungen, Fehlerberichte,
-Geld- und Sachspenden, Programmierauftr"age usw. sind stets willkommen.
-Bitte senden Sie diese direkt an meine eMail Adresse.  Wenn Sie dieses
-Werkzeug m"ogen, so w"urde ich mich sehr "uber eine Postkarte von Ihnen
-freuen!
+Jedwede Vorschläge, Verbesserungen, Erweiterungen, Fehlerberichte, Geld-
+und Sachspenden, Programmieraufträge usw. sind stets willkommen.  Bitte
+senden Sie diese direkt an meine eMail Adresse <esken@gmx.net>.  Wenn
+Sie dieses Werkzeug mögen, so würde ich mich sehr über eine Postkarte
+von Ihnen freuen!
 
 ------------------------oOO      \\\_''/      OOo---------------------------
-Thomas Esken               O     (/o-o\)     O  eMail: esken@uni-muenster.de
+Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
 Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 
 
-File: gcal.info,  Node: Hervorhebung,  Prev: Andere Differenzwerte,  Up: Ersetzen ohne Argument
+File: gcal.info,  Node: Ersetzen mit Datumargument,  Next: Ersetzen mit anderem Argument,  Prev: Ersetzen,  Up: Ersetzen
 
-Hervorhebung `%?' Spezialtexte
-..............................
+Ersetzen mit Datumargument `%?[DATUM]' Spezialtexte
+---------------------------------------------------
 
-Folgende Hervorhebung `%?' Spezialtexte werden ber"ucksichtigt:
+* Menu:
 
-`%1'
-     `%1' wird ersetzt durch die Start-Hervorhebungssequenz bzw.  das
-     Start-Markierungszeichen, welches zur Hervorhebung des aktuellen
-     Tages benutzt wird (*note `--highlighting=TEXT': Globale
-     Optionen.).  Damit wird erreicht, dass der diesem Spezialtext
-     nachfolgende Text der Zeile in gleicher Weise ausgegeben wird, wie
-     der hervorgehobene bzw. markierte aktuelle Tag.  `%1' wird in
-     Verbindung mit dem `%2' Spezialtext benutzt, welcher die mit `%1'
-     eingeschaltete Hervorhebung wieder ausschaltet bzw. ein
-     Ende-Markierungszeichen produziert.  Sollte einem `%1' Text kein
-     `%2' Text auf der Zeile nachfolgen, so f"ugt Gcal automatisch
-     einen solchen `%2' Text am Zeilenende ein.
+* Wochentagsname::
+* Wochentagsnummer::
+* Tag-des-Jahres Nummer::
+* Tagesnummer::
+* Wochennummer::
+* Monatsname::
+* Monatsnummer::
+* Jahresnummer::
+* Mondphase::
+* Biorhythmus::
+* Differenzwert::
 
-     Zum Beispiel:
+Neben verschiedenen Darstellungen von einem Wochentagsnamen kann auch
+dessen Wochentagsnummer erzeugt werden.  Ebenso kann der laufende Tag
+des Jahres, die Tagesnummer, die Wochennummer, der Monatsname, die
+Monatsnummer, die Jahresnummer, die Mondphase und der Biorhythmus
+produziert werden, sowie einige nützliche Differenzwerte.
 
-          In dieser Zeile wird nur %1DIESES%2 Wort hervorgehoben.
-          %1In dieser Zeile wird alles bis hierhin%2 hervorgehoben.
-          Alles ab %1hier bis zum Zeilenende wird hervorgehoben.
+Für das DATUM, daß diese `%?[DATUM]' Spezialtexte annehmen dürfen,
+gelten folgende Regeln hinsichtlich bestimmter Auslassungswerte,
+verdeutlicht am `JJJJ[MM[TT|WWWN]]' Datumformat(1) (*note Ersetzen mit
+Datumargument-Footnote-1::):
 
-`%2'
-     `%2' wird ersetzt durch die Ende-Hervorhebungssequenz bzw. das
-     Ende-Markierungszeichen, welches zur Hervorhebung des aktuellen
-     Tages benutzt wird.  Damit wird erreicht, dass ab der Stelle des
-     Auftretens dieses Spezialtexts eine m"oglicherweise aktive
-     Hervorhebung, entsprechend der des aktuellen Tages, wieder
-     abgeschaltet bzw. ein Ende-Markierungszeichen produziert wird.
-     `%2' wird in Verbindung mit dem `%1' Spezialtext benutzt.  Sollte
-     vor einem `%2' Text kein `%1' Text auf der Zeile vorgefunden
-     werden, so hat der `%2' Text keinerlei Wirkung.
+   * Falls JJJJ... nicht angegeben ist (==*kein* Datum kodiert), so
+     wird das laufende Datum als Datum angenommen.
 
-`%3'
-     `%3' wird ersetzt durch die Start-Hervorhebungssequenz bzw.  das
-     Start-Markierungszeichen, welches zur Hervorhebung eines
-     Feiertages benutzt wird (*note `--highlighting=TEXT': Globale
-     Optionen.).  Damit wird erreicht, dass der diesem Spezialtext
-     nachfolgende Text der Zeile in gleicher Weise ausgegeben wird, wie
-     ein hervorgehobener bzw. markierter Feiertag.  `%3' wird in
-     Verbindung mit dem `%4' Spezialtext benutzt, welcher die mit `%3'
-     eingeschaltete Hervorhebung wieder ausschaltet bzw.  ein
-     Ende-Markierungszeichen produziert.  Sollte einem `%3' Text kein
-     `%4' Text auf der Zeile nachfolgen, so f"ugt Gcal automatisch einen
-     solchen `%4' Text am Zeilenende ein.
+   * Falls JJJJ auf den Wert `0000' gesetzt ist, so wird das laufende
+     Jahr als Jahr angenommen.
 
-     Zum Beispiel:
+   * Falls MM nicht angegeben oder auf den Wert `00' gesetzt ist, so
+     wird der laufende Monat als Monat angenommen, bei `99' der
+     Dezember.
 
-          In dieser Zeile wird nur %3DIESES%4 Wort hervorgehoben.
-          %3In dieser Zeile wird alles bis hierhin%4 hervorgehoben.
-          Alles ab %3hier bis zum Zeilenende wird hervorgehoben.
+   * Falls TT|WWW nicht angegeben oder auf den Wert `00' gesetzt ist,
+     so wird der laufende Tag als Tag angenommen, bei `99' der letzte
+     Tag des Monats MM.
 
-`%4'
-     `%4' wird ersetzt durch die Ende-Hervorhebungssequenz bzw. das
-     Ende-Markierungszeichen, welches zur Hervorhebung eines Feiertages
-     benutzt wird.  Damit wird erreicht, dass ab der Stelle des
-     Auftretens dieses Spezialtexts eine m"oglicherweise aktive
-     Hervorhebung, entsprechend der eines Feiertages, wieder
-     abgeschaltet bzw. ein Ende-Markierungszeichen produziert wird.
-     `%4' wird in Verbindung mit dem `%3' Spezialtext benutzt.  Sollte
-     vor einem `%4' Text kein `%3' Text auf der Zeile vorgefunden
-     werden, so hat der `%4' Text keinerlei Wirkung.
-
-`%5'
-     `%5' wird ersetzt durch die Start-Hervorhebungssequenz bzw. das
-     Start-Markierungszeichen, welches zur Hervorhebung des aktuellen
-     Tages benutzt wird, falls ein Termin auf das heutige Datum f"allt
-     (*note `--highlighting=TEXT': Globale Optionen.).  Damit wird
-     erreicht, dass der diesem Spezialtext nachfolgende Text der Zeile
-     in gleicher Weise ausgegeben wird, wie der hervorgehobene bzw.
-     markierte aktuelle Tag.  `%5' wird in Verbindung mit dem `%6'
-     Spezialtext benutzt, welcher die mit `%5' eingeschaltete
-     Hervorhebung wieder ausschaltet bzw. ein Ende-Markierungszeichen
-     produziert.  Sollte einem `%5' Text kein `%6' Text auf der Zeile
-     nachfolgen, so f"ugt Gcal automatisch einen solchen `%6' Text am
-     Zeilenende ein.
-
-`%6'
-     `%6' wird ersetzt durch die Ende-Hervorhebungssequenz bzw. das
-     Ende-Markierungszeichen, welches zur Hervorhebung des aktuellen
-     Tages benutzt wird, falls ein Termin auf das heutige Datum f"allt.
-     Damit wird erreicht, dass ab der Stelle des Auftretens dieses
-     Spezialtexts eine m"oglicherweise aktive Hervorhebung,
-     entsprechend der des aktuellen Tages, wieder abgeschaltet bzw. ein
-     Ende-Markierungszeichen produziert wird.  `%6' wird in Verbindung
-     mit dem `%5' Spezialtext benutzt.  Sollte vor einem `%6' Text kein
-     `%5' Text auf der Zeile vorgefunden werden, so hat der `%6' Text
-     keinerlei Wirkung.
-
-`%7'
-     `%7' wird ersetzt durch die Start-Hervorhebungssequenz bzw. das
-     Start-Markierungszeichen, welches zur Hervorhebung eines Feiertages
-     benutzt wird, falls ein Termin auf einen gesetzlichen Feiertag
-     f"allt (*note `--highlighting=TEXT': Globale Optionen.).  Damit
-     wird erreicht, dass der diesem Spezialtext nachfolgende Text der
-     Zeile in gleicher Weise ausgegeben wird, wie ein hervorgehobener
-     bzw. markierter Feiertag.  `%7' wird in Verbindung mit dem `%8'
-     Spezialtext benutzt, welcher die mit `%7' eingeschaltete
-     Hervorhebung wieder ausschaltet bzw.  ein Ende-Markierungszeichen
-     produziert.  Sollte einem `%7' Text kein `%8' Text auf der Zeile
-     nachfolgen, so f"ugt Gcal automatisch einen solchen `%8' Text am
-     Zeilenende ein.
-
-`%8'
-     `%8' wird ersetzt durch die Ende-Hervorhebungssequenz bzw. das
-     Ende-Markierungszeichen, welches zur Hervorhebung eines Feiertages
-     benutzt wird, falls ein Termin auf einen gesetzlichen Feiertag
-     f"allt.  Damit wird erreicht, dass ab der Stelle des Auftretens
-     dieses Spezialtexts eine m"oglicherweise aktive Hervorhebung,
-     entsprechend der eines Feiertages, wieder abgeschaltet bzw. ein
-     Ende-Markierungszeichen produziert wird.  `%8' wird in Verbindung
-     mit dem `%7' Spezialtext benutzt.  Sollte vor einem `%8' Text kein
-     `%7' Text auf der Zeile vorgefunden werden, so hat der `%8' Text
-     keinerlei Wirkung.
-
-`%9'
-     `%9' wird ersetzt durch die Start-Hervorhebungssequenz bzw. das
-     Start-Markierungszeichen, welches zur Hervorhebung des aktuellen
-     Tages benutzt wird, falls ein Termin auf das heutige Datum f"allt;
-     sonst wird `%9' durch die Start-Hervorhebungssequenz bzw. das
-     Start-Markierungszeichen ersetzt, welches zur Hervorhebung eines
-     Feiertages benutzt wird, falls ein Termin auf einen gesetzlichen
-     Feiertag f"allt (*note `--highlighting=TEXT': Globale Optionen.).
-     Damit wird erreicht, dass der diesem Spezialtext nachfolgende Text
-     der Zeile in gleicher Weise ausgegeben wird, wie ein
-     hervorgehobener bzw. markierter aktueller Tag oder Feiertag.  `%9'
-     wird in Verbindung mit dem `%0' Spezialtext benutzt, welcher die
-     mit `%9' eingeschaltete Hervorhebung wieder ausschaltet bzw. ein
-     Ende-Markierungszeichen produziert.  Sollte einem `%9' Text kein
-     `%0' Text auf der Zeile nachfolgen, so f"ugt Gcal automatisch
-     einen solchen `%0' Text am Zeilenende ein.
-
-`%0'
-     `%0' wird ersetzt durch die Ende-Hervorhebungssequenz bzw. das
-     Ende-Markierungszeichen, welches zur Hervorhebung des aktuellen
-     Tages benutzt wird, falls ein Termin auf das heutige Datum f"allt;
-     sonst wird `%0' durch die Ende-Hervorhebungssequenz bzw. das
-     Ende-Markierungszeichen ersetzt, welches zur Hervorhebung eines
-     Feiertages benutzt wird, falls ein Termin auf einen gesetzlichen
-     Feiertag f"allt.  Damit wird erreicht, dass ab der Stelle des
-     Auftretens dieses Spezialtexts eine m"oglicherweise aktive
-     Hervorhebung, entsprechend der des aktuellen Tages oder eines
-     Feiertages, wieder abgeschaltet bzw. ein Ende-Markierungszeichen
-     produziert wird.  `%0' wird in Verbindung mit dem `%9' Spezialtext
-     benutzt.  Sollte vor einem `%0' Text kein `%9' Text auf der Zeile
-     vorgefunden werden, so hat der `%0' Text keinerlei Wirkung.
+   * Falls das N Feld angegeben ist (Bereich `1...5' oder `9'), so muß
+     auch ein WWW Feld angegeben sein.
 
 
-File: gcal.info,  Node: Shell Kommando,  Prev: Ersetzen,  Up: Spezialtexte (lang)
+File: gcal.info,  Node: Ersetzen mit Datumargument-Footnotes,  Up: Ersetzen mit Datumargument
 
-Shell Kommando `%![ARGUMENT]' Spezialtext
-=========================================
-
-Das ARGUMENT, das `%!' bis zum Ende der Zeile folgt, wird der shell als
-Kommando zur weiteren Verarbeitung "ubergeben.  Zuvor werden allerdings
-noch alle `%?'... Spezialtexte zum Textersatz, die im ARGUMENT
-auftreten, von Gcal interpretiert.  *Note `%?'... Spezialtexte zum
-Textersatz: Ersetzen.  Falls Text vor dem `%!' Spezialtext angegeben
-ist, so wird dieser von Gcal wie "ublich verarbeitet.  Wenn die
-einfache `--debug' bzw. `--debug=internal' Option bei Programmstart
-angegeben wurde, so wird ein Text auf dem *Standardfehler-Ger"atekanal*
-ausgegeben, der mit Informationen zum ausgef"uhrten Kommando und dessen
-*exit*-Kode ausgestattet ist (*note `--debug=internal': Globale
-Optionen.).
-
-Falls die `--debug=abort' Option angegeben wurde und sich ein
-*exit*-Kode ungleich Null bei der Ausf"uhrung des Kommandos ergab, so
-wird das Gcal-Programm mit Fehlerkode abgebrochen.  *Note 2:
-Fehlerkodes, sowie *Note `--debug=abort': Globale Optionen, f"ur
-weitere Informationen.
-
-Wenn die `--bypass-shell-command' Option benutzt wird, so werden alle
-`%![ARGUMENT]' Spezialtexte rein textlich ausgegeben und nicht von der
-shell ausgef"uhrt.  *Note `--bypass-shell-command': Termin Optionen,
-f"ur weitere Details.
+(1) Für die anderen erlaubten Datumformate gelten die nachfolgenden
+Regeln sinngemäß.
 
 
-File: gcal.info,  Node: Spezialtexte (kurz),  Next: Kodierschema,  Prev: Spezialtexte (lang),  Up: Top
+File: gcal.info,  Node: Wochentagsname,  Next: Wochentagsnummer,  Prev: Ersetzen mit Datumargument,  Up: Ersetzen mit Datumargument
 
-Zusammenfassung aller `%?'... Spezialtexte
-******************************************
+Wochentagsname `%[FORMAT]K[DATUM]' Spezialtext
+..............................................
 
-Hier ist eine Kurzliste aller `%?'... Spezialtexte, die im Textteil
-einer Zeile von Gcal Ressourcendateien benutzt werden k"onnen:
+`%K[DATUM]'
+     Wird in einen vollständigen *Wochentagsnamen* für den laufenden Tag
+     umgesetzt, z.B.:
 
-`%i[DATUM][#[DATUM]]'
-     Ausschluss aller nicht inklusive Datum Zeitr"aume
+          Der Text `Heute ist %K , der %n' wird umgesetzt in
+          ==> `Heute ist Montag, der 10-Jun-1996', falls das aktuelle
+          Systemdatum der 10'te Juni 1996 ist.
 
-`%e[DATUM][#[DATUM]]'
-     Ausschluss aller exklusive Datum Zeitr"aume
+`%>3#K[DATUM]'
+     Wird in einen 3-Buchstaben *Wochentagsnamen* für den laufenden Tag
+     umgesetzt, z.B.:
 
-`%?' Inklusive Tag Zeitraum
-    `%v'
-          Ausschluss aller nicht gesetzlichen Feiertage
+          Der Text `Heute ist %>3#K0@t+1 , der %n+1' wird umgesetzt in
+          ==> `Heute ist Die, der 11-Jun-1996', falls das aktuelle
+          Systemdatum der 10'te Juni 1996 ist.
 
-    `%x'
-          Ausschluss aller Nicht-Feiertage
+`%>2#K[DATUM]'
+     Wird in einen 2-Buchstaben *Wochentagsnamen* für den laufenden Tag
+     umgesetzt, z.B.:
 
-    `%a'
-          Ausschluss aller Nicht-Montage
+          Der Text `Heute ist %>2#K , der %n' wird umgesetzt in
+          ==> `Heute ist Mo, der 10-Jun-1996', falls das aktuelle
+          Systemdatum der 10'te Juni 1996 ist.
 
-    `%c'
-          Ausschluss aller Nicht-Dienstage
+
+File: gcal.info,  Node: Wochentagsnummer,  Next: Tag-des-Jahres Nummer,  Prev: Wochentagsname,  Up: Ersetzen mit Datumargument
 
-    `%f'
-          Ausschluss aller Nicht-Mittwoche
+Wochentagsnummer `%[FORMAT]?[DATUM]' Spezialtexte
+.................................................
 
-    `%g'
-          Ausschluss aller Nicht-Donnerstage
+Folgende Wochentagsnummer `%[FORMAT]?[DATUM]' Spezialtexte werden
+berücksichtigt, z.B.:
 
-    `%h'
-          Ausschluss aller Nicht-Freitage
+`%W[DATUM]'
+     Wird in eine *Wochentagsnummer* für den laufenden Tag umgesetzt,
+     die nach der `Montag==1...Sonntag==7' Zählweise ermittelt wird,
+     z.B.:
 
-    `%l'
-          Ausschluss aller Nicht-Samstage
+          Der Text `Heute ist Wochentag %W , der %n' wird umgesetzt in
+          ==> `Heute ist Wochentag 1, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 ist.
 
-    `%p'
-          Ausschluss aller Nicht-Sonntage
+`%>1&*W[DATUM]'
+     Wird in eine *Wochentagsnummer* mit nachfolgendem
+     Ordnungszahlanhang für den laufenden Tag umgesetzt, die nach der
+     `Montag==1...Sonntag==7' Zählweise ermittelt wird, z.B.:
 
-    `%q'
-          Ausschluss aller Nicht-Montage...Donnerstage
+          Der Text `Heute ist Wochentag %>1&*W0@t+1 , der %n+1' wird
+          umgesetzt in
+          ==> `Heute ist Wochentag 2'ter, der 11-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 ist.
 
-    `%r'
-          Ausschluss aller Nicht-Montage...Freitage
+`%E[DATUM]'
+     Wird in eine *Wochentagsnummer* für den laufenden Tag umgesetzt,
+     die nach der `Montag==0...Sonntag==6' Zählweise ermittelt wird,
+     z.B.:
 
-`%?' Exklusive Tag Zeitraum
-    `%V'
-          Ausschluss aller gesetzlichen Feiertage
+          Der Text `Heute ist Wochentag %E , der %n' wird umgesetzt in
+          ==> `Heute ist Wochentag 0, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 ist.
 
-    `%X'
-          Ausschluss aller Feiertage
+`%>1&*E[DATUM]'
+     Wird in eine *Wochentagsnummer* mit nachfolgendem
+     Ordnungszahlanhang für den laufenden Tag umgesetzt, die nach der
+     `Montag==0...Sonntag==6' Zählweise ermittelt wird, z.B.:
 
-    `%A'
-          Ausschluss aller Montage
+          Der Text `Heute ist Wochentag %>1&*E , der %n' wird umgesetzt
+          in
+          ==> `Heute ist Wochentag 0'ter, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 ist.
 
-    `%C'
-          Ausschluss aller Dienstage
+`%I[DATUM]'
+     Wird in eine *Wochentagsnummer* für den laufenden Tag umgesetzt,
+     die nach der `Sonntag==1...Samstag==7' Zählweise ermittelt wird,
+     z.B.:
 
-    `%F'
-          Ausschluss aller Mittwoche
+          Der Text `Heute ist Wochentag %I , der %n' wird umgesetzt in
+          ==> `Heute ist Wochentag 2, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 ist.
 
-    `%G'
-          Ausschluss aller Donnerstage
+`%>1&*I[DATUM]'
+     Wird in eine *Wochentagsnummer* mit nachfolgendem
+     Ordnungszahlanhang für den laufenden Tag umgesetzt, die nach der
+     `Sonntag==1...Samstag==7' Zählweise ermittelt wird, z.B.:
 
-    `%H'
-          Ausschluss aller Freitage
+          Der Text `Heute ist Wochentag %>1&*I , der %n' wird umgesetzt
+          in
+          ==> `Heute ist Wochentag 2'ter, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 ist.
 
-    `%L'
-          Ausschluss aller Samstage
+`%J[DATUM]'
+     Wird in eine *Wochentagsnummer* für den laufenden Tag umgesetzt,
+     die nach der `Sonntag==0...Samstag==6' Zählweise ermittelt wird,
+     z.B.:
 
-    `%P'
-          Ausschluss aller Sonntage
+          Der Text `Heute ist Wochentag %J , der %n' wird umgesetzt in
+          ==> `Heute ist Wochentag 1, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 ist.
 
-    `%Q'
-          Ausschluss aller Montage...Donnerstage
+`%>1&*J[DATUM]'
+     Wird in eine *Wochentagsnummer* mit nachfolgendem
+     Ordnungszahlanhang für den laufenden Tag umgesetzt, die nach der
+     `Sonntag==0...Samstag==6' Zählweise ermittelt wird, z.B.:
 
-    `%R'
-          Ausschluss aller Montage...Freitage
+          Der Text `Heute ist Wochentag %>1&*J , der %n' wird umgesetzt
+          in
+          ==> `Heute ist Wochentag 1'ter, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 ist.
 
-`%?[DATUM]' Wochentagsname
-    `%o[DATUM]'
-          Vollst"andiger Wochentagsname
+`%S[DATUM]'
+     Wird in eine *Wochentagsnummer* für den laufenden Tag umgesetzt,
+     die nach der `STARTTAG DER WOCHE==1...ENDETAG DER WOCHE==7'
+     Zählweise ermittelt wird (*note Kalender Option
+     `--starting-day=ARGUMENT': x-starting-day.), z.B.:
 
-    `%O[DATUM]'
-          3-Buchstaben Wochentagsname
+          Der Text `Heute ist Wochentag %S , der %n' wird umgesetzt in
+          ==> `Heute ist Wochentag 4, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 und der Starttag der
+          Woche ein Freitag (==5) ist.
 
-    `%K[DATUM]'
-          2-Buchstaben Wochentagsname
+`%>1&*S[DATUM]'
+     Wird in eine *Wochentagsnummer* mit nachfolgendem
+     Ordnungszahlanhang für den laufenden Tag umgesetzt, die nach der
+     `STARTTAG DER WOCHE==1...ENDETAG DER WOCHE==7' Zählweise ermittelt
+     wird
+     (*note Kalender Option `--starting-day=ARGUMENT': x-starting-day.),
+     z.B.:
 
-`%?[DATUM]' Wochentag
-    `%S[DATUM]'
-          Wochentagsnummer, Mon==1...Son==7
+          Der Text `Heute ist Wochentag %>1&*S , der %n' wird umgesetzt
+          in
+          ==> `Heute ist Wochentag 4'ter, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 und der Starttag der
+          Woche ein Freitag (==5) ist.
 
-    `%I[DATUM]'
-          Wochentagsnummer, Mon==1...Son==7, Ordnungszahlanhang
+`%T[DATUM]'
+     Wird in eine *Wochentagsnummer* für den laufenden Tag umgesetzt,
+     die nach der `STARTTAG DER WOCHE==0...ENDETAG DER WOCHE==6'
+     Zählweise ermittelt wird (*note Kalender Option
+     `--starting-day=ARGUMENT': x-starting-day.), z.B.:
 
-    `%E[DATUM]'
-          Wochentagsnummer, Mon==0...Son==6
+          Der Text `Heute ist Wochentag %T , der %n' wird umgesetzt in
+          ==> `Heute ist Wochentag 3, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 und der Starttag der
+          Woche ein Freitag (==5) ist.
 
-    `%J[DATUM]'
-          Wochentagsnummer, Mon==0...Son==6, Ordnungszahlanhang
+`%>1&*T[DATUM]'
+     Wird in eine *Wochentagsnummer* mit nachfolgendem
+     Ordnungszahlanhang für den laufenden Tag umgesetzt, die nach der
+     `STARTTAG DER WOCHE==0...ENDETAG DER WOCHE==6' Zählweise ermittelt
+     wird
+     (*note Kalender Option `--starting-day=ARGUMENT': x-starting-day.),
+     z.B.:
 
-    `%([DATUM]'
-          Wochentagsnummer, Son==1...Sam==7
+          Der Text `Heute ist Wochentag %>1&*T , der %n' wird umgesetzt
+          in
+          ==> `Heute ist Wochentag 3'ter, der 10-Jun-1996', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 und der Starttag der
+          Woche ein Freitag (==5) ist.
 
-    `%<[DATUM]'
-          Wochentagsnummer, Son==1...Sam==7, Ordnungszahlanhang
+
+File: gcal.info,  Node: Tag-des-Jahres Nummer,  Next: Tagesnummer,  Prev: Wochentagsnummer,  Up: Ersetzen mit Datumargument
 
-    `%)[DATUM]'
-          Wochentagsnummer, Son==0...Sam==6, Ordnungszahlanhang
+Tag-des-Jahres Nummer `%[FORMAT]N[DATUM]' Spezialtext
+.....................................................
 
-    `%>[DATUM]'
-          Wochentagsnummer, Son==0...Sam==6, Ordnungszahlanhang
+`%N[DATUM]'
+     Wird in eine *Tag-des-Jahres Nummer* für den laufenden Tag im Jahr
+     umgesetzt, z.B.:
 
-    `%[[DATUM]'
-          Wochentagsnummer, STARTTAG DER WOCHE==1
+          Der Text `Tag %N  des Jahres, der %n' wird umgesetzt in
+          ==> `Tag 53 des Jahres, der 22-Feb-1996', falls das aktuelle
+          Systemdatum der 22'te Februar 1996 ist.
 
-    `%{[DATUM]'
-          Wochentagsnummer, STARTTAG DER WOCHE==1, Ordnungszahlanhang
+`%>03*N[DATUM]'
+     Wird in eine dreiziffrige *Tag-des-Jahres Nummer* mit führenden
+     Nullen für den laufenden Tag im Jahr umgesetzt, z.B.:
 
-    `%][DATUM]'
-          Wochentagsnummer, STARTTAG DER WOCHE==0
+          Der Text `Tag %>03*N0@t-1  des Jahres, der %n-1' wird
+          umgesetzt in
+          ==> `Tag 052 des Jahres, der 21-Feb-1996', falls das aktuelle
+          Systemdatum der 22'te Februar 1996 ist.
 
-    `%}[DATUM]'
-          Wochentagsnummer, STARTTAG DER WOCHE==0, Ordnungszahlanhang
+`%>1&*N[DATUM]'
+     Wird in eine *Tag-des-Jahres Nummer* mit nachfolgendem
+     Ordnungszahlanhang für den laufenden Tag im Jahr umgesetzt, z.B.:
 
-`%?[DATUM]' Tageszahl
-    `%+[DATUM]'
-          Tageszahl
+          Der Text `Tag %>1&*N  des Jahres, der %n' wird umgesetzt in
+          ==> `Tag 53'ter des Jahres, der 22-Feb-1996', falls das
+          aktuelle Systemdatum der 22'te Februar 1996 ist.
 
-    `%*[DATUM]'
-          Tageszahl, zweiziffrig mit f"uhrender Null
+`%>03&*N[DATUM]'
+     Wird in eine dreiziffrige *Tag-des-Jahres Nummer* mit führenden
+     Nullen und nachfolgendem Ordnungszahlanhang für den laufenden Tag
+     im Jahr umgesetzt, z.B.:
 
-    `%&[DATUM]'
-          Tageszahl, Ordnungszahlanhang
+          Der Text `Tag %>03&*N  des Jahres, der %n' wird umgesetzt in
+          ==> `Tag 053'ter des Jahres, der 22-Feb-1996', falls das
+          aktuelle Systemdatum der 22'te Februar 1996 ist.
 
-    `%#[DATUM]'
-          Tageszahl, zweiziffrig mit f"uhrender Null, Ordnungszahlanhang
+
+File: gcal.info,  Node: Tagesnummer,  Next: Wochennummer,  Prev: Tag-des-Jahres Nummer,  Up: Ersetzen mit Datumargument
 
-`%?[DATUM]' Tag
-    `%D[DATUM]'
-          Tag
+Tagesnummer `%[FORMAT]D[DATUM]' Spezialtext
+...........................................
 
-    `%N[DATUM]'
-          Tag, zweiziffrig mit f"uhrender Null
+`%D[DATUM]'
+     Wird in eine *Tagesnummer* für den laufenden Tag im Monat
+     umgesetzt, z.B.:
 
-    `%s[DATUM]'
-          Tag, Ordnungszahlanhang
+          Der Text `Tag %D , %n' wird umgesetzt in
+          ==> `Tag 2, 02-Feb-1996', falls das aktuelle Systemdatum der
+          2'te Februar 1996 ist.
 
-    `%u[DATUM]'
-          Tag, zweiziffrig mit f"uhrender Null, Ordnungszahlanhang
+`%>02*D[DATUM]'
+     Wird in eine zweiziffrige *Tagesnummer* mit führender Null für den
+     laufenden Tag im Monat umgesetzt, z.B.:
+
+          Der Text `Tag %>02*D0@t-1 , %n-1' wird umgesetzt in
+          ==> `Tag 01, 01-Feb-1996', falls das aktuelle Systemdatum der
+          2'te Februar 1996 ist.
+
+`%>1&*D[DATUM]'
+     Wird in eine *Tagesnummer* mit nachfolgendem Ordnungszahlanhang für
+     den laufenden Tag im Monat umgesetzt, z.B.:
+
+          Der Text `Tag %>1&*D , %n' wird umgesetzt in
+          ==> `Tag 2'ter, 02-Feb-1996', falls das aktuelle Systemdatum
+          der 2'te Februar 1996 ist.
+
+`%>02&*D[DATUM]'
+     Wird in eine zweiziffrige *Tagesnummer* mit führender Null und
+     nachfolgendem Ordnungszahlanhang für den laufenden Tag im Monat
+     umgesetzt, z.B.:
+
+          Der Text `Tag %>02&*D , %n' wird umgesetzt in
+          ==> `Tag 02'ter, 02-Feb-1996', falls das aktuelle Systemdatum
+          der 2'te Februar 1996 ist.
+
+
+File: gcal.info,  Node: Wochennummer,  Next: Monatsname,  Prev: Tagesnummer,  Up: Ersetzen mit Datumargument
+
+Wochennummer `%k[DATUM]' Spezialtext
+....................................
 
 `%k[DATUM]'
-     ISO-Wochennummer
+     Wird entweder in eine zweiziffrige *ISO-Wochennummer* oder
+     *Standard-Wochennummer* mit führender Null, oder in einen vier
+     Zeichen langen alphanumerischen Text für die laufende Woche im
+     Jahr umgesetzt
+     (siehe *Note Kalender Option `--starting-day=ARGUMENT':
+     x-starting-day, *Note Kalender Option `--iso-week-number=yes|no':
+     x-iso-week-number, und *Note Gesichtspunkte zur
+     Internationalisierung: Internationalisierung, für weitere
+     Details), z.B.:
 
-`%?[DATUM]' Monatsname
-    `%M[DATUM]'
-          Vollst"andiger Monatsname
-
-    `%T[DATUM]'
-          3-Buchstaben Monatsname
-
-`%?[DATUM]' Monat
-    `%U[DATUM]'
-          Monat
-
-    `%W[DATUM]'
-          Monat, zweiziffrig mit f"uhrender Null
-
-    `%z[DATUM]'
-          Monat, Ordnungszahlanhang
-
-    `%Z[DATUM]'
-          Monat, zweiziffrig mit f"uhrender Null, Ordnungszahlanhang
-
-`%?[DATUM]' Jahr
-    `%Y[DATUM]'
-          Jahr
-
-    `%=[DATUM]'
-          Jahr, vierziffrig mit f"uhrenden Nullen
-
-`%?[DATUM]' Mondphase
-    `%-[DATUM]'
-          Mondphasentext
-
-    `%_[DATUM]'
-          Mondphasentext, dreiziffrig mit f"uhrenden Nullen
-
-    `%:[DATUM]'
-          Mondphasen-Textgrafik
-
-`%?[DATUM]' Biorhythmus
-    `%,[DATUM]'
-          Biorhythmustext (Folge von Werten)
-
-    `%;[DATUM]'
-          Biorhythmus-Textgrafik (Balken)
-
-`%?[DATUM]' Differenzwert
-    `%yDATUM'
-          Relative Jahreszahl
-
-    `%b[DATUM]'
-          Geburtstag (Alterswert)
-
-    `%B[DATUM]'
-          Geburtstag (Alterswert), Ordnungszahlanhang
-
-`%t[12|24]'
-     Aktuelle Uhrzeit
-
-`%n[[+|-]N]'
-     Textliches Datum im `TT-MMM-JJJJ' Format
-
-`%j[[-]N]'
-     Julianische Tageszahl
-
-`%?' Differenzwert
-    `%d'
-          Relative Tageszahl
-
-    `%w'
-          Relative Wochenzahl
-
-    `%m'
-          Relative Monatszahl
-
-    `%y'
-          Relative Jahreszahl
-
-`%?' Hervorhebung
-    `%1'
-          Start-Hervorhebung 1
-
-    `%2'
-          Ende-Hervorhebung 1
-
-    `%3'
-          Start-Hervorhebung 2
-
-    `%4'
-          Ende-Hervorhebung 2
-
-    `%5'
-          Start-Hervorhebung 1, falls ein Termin auf das heutige Datum
-          f"allt
-
-    `%6'
-          Ende-Hervorhebung 1, falls ein Termin auf das heutige Datum
-          f"allt
-
-    `%7'
-          Start-Hervorhebung 2, falls ein Termin auf einen gesetzlichen
-          Feiertag f"allt
-
-    `%8'
-          Ende-Hervorhebung 2, falls ein Termin auf einen gesetzlichen
-          Feiertag f"allt
-
-    `%9'
-          Start-Hervorhebung 1, falls ein Termin auf das heutige Datum
-          f"allt, sonst Start-Hervorhebung 2, falls ein Termin auf
-          einen gesetzlichen Feiertag f"allt
-
-    `%0'
-          Ende-Hervorhebung 1, falls ein Termin auf das heutige Datum
-          f"allt, sonst Ende-Hervorhebung 2, falls ein Termin auf einen
-          gesetzlichen Feiertag f"allt
-
-`%![ARGUMENT]'
-     Shell f"uhrt ARGUMENT als Kommando aus
+          Der Text `Heute ist %K  der Kalenderwoche %k' wird umgesetzt
+          in
+          ==> `Heute ist Montag der Kalenderwoche 24', falls das
+          aktuelle Systemdatum der 10'te Juni 1996 ist.
 
 
-File: gcal.info,  Node: Kodierschema,  Next: Umgebungsvariablen,  Prev: Spezialtexte (kurz),  Up: Top
+File: gcal.info,  Node: Monatsname,  Next: Monatsnummer,  Prev: Wochennummer,  Up: Ersetzen mit Datumargument
 
-Kodierschema
-************
+Monatsname `%[FORMAT]U[DATUM]' Spezialtext
+..........................................
+
+`%U[DATUM]'
+     Wird in einen vollständigen *Monatsnamen* für den laufenden Monat
+     im Jahr umgesetzt, z.B.:
+
+          Der Text `Heute ist %U , %n' wird umgesetzt in
+          ==> `Heute ist Juni, 10-Jun-1996', falls das aktuelle
+          Systemdatum der 10'te Juni 1996 ist.
+
+`%>3#U[DATUM]'
+     Wird in einen 3-Buchstaben *Monatsnamen* für den laufenden Monat
+     im Jahr umgesetzt, z.B.:
+
+          Der Text `Heute ist %>3#U19961010 , %n' wird umgesetzt in
+          ==> `Heute ist Okt, 10-Jun-1996', falls das aktuelle
+          Systemdatum der 10'te Juni 1996 ist.
+
+
+File: gcal.info,  Node: Monatsnummer,  Next: Jahresnummer,  Prev: Monatsname,  Up: Ersetzen mit Datumargument
+
+Monatsnummer `%[FORMAT]M[DATUM]' Spezialtext
+............................................
+
+`%M[DATUM]'
+     Wird in eine *Monatsnummer* für den laufenden Monat im Jahr
+     umgesetzt, z.B.:
+
+          Der Text `Monat %M , %n' wird umgesetzt in
+          ==> `Monat 2, 22-Feb-1996', falls das aktuelle Systemdatum
+          der 22'te Februar 1996 ist.
+
+`%>02*M[DATUM]'
+     Wird in eine zweiziffrige *Monatsnummer* mit führender Null für
+     den laufenden Monat im Jahr umgesetzt, z.B.:
+
+          Der Text `Monat %>02*M000001 , %n' wird umgesetzt in
+          ==> `Monat 01, 22-Feb-1996', falls das aktuelle Systemdatum
+          der 22'te Februar 1996 ist.
+
+`%>1&*M[DATUM]'
+     Wird in eine *Monatsnummer* mit nachfolgendem Ordnungszahlanhang
+     für den laufenden Monat im Jahr umgesetzt, z.B.:
+
+          Der Text `Monat %>1&*M , %n' wird umgesetzt in
+          ==> `Monat 2'ter, 22-Feb-1996', falls das aktuelle
+          Systemdatum der 22'te Februar 1996 ist.
+
+`%>02&*M[DATUM]'
+     Wird in eine zweiziffrige *Monatsnummer* mit führender Null und
+     nachfolgendem Ordnungszahlanhang für den laufenden Monat im Jahr
+     umgesetzt, z.B.:
+
+          Der Text `Monat %>02&*M , %n' wird umgesetzt in
+          ==> `Monat 02'ter, 22-Feb-1996', falls das aktuelle
+          Systemdatum der 22'te Februar 1996 ist.
+
+
+File: gcal.info,  Node: Jahresnummer,  Next: Mondphase,  Prev: Monatsnummer,  Up: Ersetzen mit Datumargument
+
+Jahresnummer `%[FORMAT]Y[DATUM]' Spezialtext
+............................................
+
+`%Y[DATUM]'
+     Wird in eine *Jahresnummer* für das laufende Jahr umgesetzt, z.B.:
+
+          Der Text `Jahr %Y , %n' wird umgesetzt in
+          ==> `Jahr 933, 22-Feb-0933', falls das aktuelle Systemdatum
+          der 22'te Februar 933 ist.
+
+`%>04*Y[DATUM]'
+     Wird in eine vierziffrige *vollständige Jahresnummer* mit
+     führenden Nullen für das laufende Jahr umgesetzt, z.B.:
+
+          Der Text `Jahr %>04*Y0015 , %n' wird umgesetzt in
+          ==> `Jahr 0015, 22-Feb-0933', falls das aktuelle Systemdatum
+          der 22'te Februar 933 ist.
+
+
+File: gcal.info,  Node: Mondphase,  Next: Biorhythmus,  Prev: Jahresnummer,  Up: Ersetzen mit Datumargument
+
+Mondphase `%[FORMAT]?[DATUM]' Spezialtexte
+..........................................
+
+Gcal benutzt eine sehr einfache Rechenvorschrift um die Mondphase zu
+ermitteln, welche ihrerseits nur Näherungswerte liefert.  Die Mondphase
+wird stets für die Basiszeit 0 Uhr Weltzeit (UTC/GMT) berechnet.  *Note
+Kalender Option `--time-offset=ARGUMENT': x-time-offset, wie die
+Basiszeit, für welche die Mondphase berechnet wird, geändert werden
+kann.  Folgende Mondphase `%[FORMAT]?[DATUM]' Spezialtexte werden
+berücksichtigt, z.B.:
+
+`%O[DATUM]'
+     Wird in einen *Mondphasentext* für den laufenden Tag im Jahr
+     umgesetzt, z.B.:
+
+          Der Text `Mondphase %O , %n' wird umgesetzt in
+          ==> `Mondphase 94%+, 22-Dez-1996', falls das aktuelle
+          Systemdatum der 22'te Dezember 1996 ist.
+
+     Der konstruierte Mondphasentext besteht aus einem Prozentwert, der
+     über den beleuchteten Bruchteil der Mondscheibe informiert, und
+     ein nachfolgendes Zeichen, das etwas über den Status des Mondes
+     aussagt.  Ein nachfolgendes `+' Zeichen bezeichnet einen
+     zunehmenden Mond, ein `-' Zeichen einen abnehmenden Mond, ein `@'
+     Zeichen steht für eine Vollmondphase, und ein `!' Zeichen für eine
+     Neumondphase.
+
+`%>03*O[DATUM]'
+     Wird in einen dreiziffrigen *Mondphasentext* mit führenden Nullen
+     für den laufenden Tag im Jahr umgesetzt, z.B.:
+
+          Der Text `Mondphase %>03*O0@t+1 , %n+1' wird umgesetzt in
+          ==> `Mondphase 098%+, 23-Dez-1996', falls das aktuelle
+          Systemdatum der 22'te Dezember 1996 ist.
+
+     Der konstruierte Mondphasentext besteht aus einem Prozentwert, der
+     über den beleuchteten Bruchteil der Mondscheibe informiert, und
+     ein nachfolgendes Zeichen, das etwas über den Status des Mondes
+     aussagt.  Ein nachfolgendes `+' Zeichen bezeichnet einen
+     zunehmenden Mond, ein `-' Zeichen einen abnehmenden Mond, ein `@'
+     Zeichen steht für eine Vollmondphase, und ein `!' Zeichen für eine
+     Neumondphase.
+
+`%Z[DATUM]'
+     Wird in eine *Mondphasen-Textgrafik* für den laufenden Tag im Jahr
+     umgesetzt, z.B.:
+
+          Der Text `Datum %n %Z  --- Mondphase %>03*O ~Text' wird
+          umgesetzt in
+          ==> `Datum 08-Mar-1995 '
+          ==> `           (       @@@@@@'
+          ==> `      (              @@@@@@@@@'
+          ==> `    (                @@@@@@@@@@@'
+          ==> `  (                   @@@@@@@@@@@@'
+          ==> ` (                    @@@@@@@@@@@@@'
+          ==> `(                      @@@@@@@@@@@@@'
+          ==> `(                      @@@@@@@@@@@@@'
+          ==> ` (                    @@@@@@@@@@@@@'
+          ==> `  (                   @@@@@@@@@@@@'
+          ==> `   (                  @@@@@@@@@@@'
+          ==> `      (             @@@@@@@@@'
+          ==> `           (        @@@@@@@ --- Mondphase 041%+'
+          ==> `Text', falls das aktuelle Systemdatum der 8'te März 1995
+          ist.
+
+     *Note Termin Option `--moonimage-lines=ANZAHL': x-moonimage-lines,
+     wo erklärt wird, wie die Größe einer Mondphasen-Textgrafik geändert
+     werden kann.
+
+     Ein eventuell angegebenes FORMAT wird bei diesem Spezialtext von
+     Gcal ignoriert.
+
+
+File: gcal.info,  Node: Biorhythmus,  Next: Differenzwert,  Prev: Mondphase,  Up: Ersetzen mit Datumargument
+
+Biorhythmus `%?[DATUM]' Spezialtexte
+....................................
+
+Gcal besitzt die Fähigkeit, für jedes angegebene Geburtsdatum einen
+"Biorhythmus" zu erzeugen.  Der erzeugte Text zeigt die drei
+Standard-Biorhythmuszyklen, und zwar den 28 Tage währenden emotionalen
+Zyklus, den 33 Tage währenden geistigen Zyklus, und den 23 Tage
+währenden physischen Zyklus.  Der emotionale Zyklus wird vom
+Empfindungsvermögen, der geistigen Gesundheit, der Gemütsverfassung und
+der Kreativität beherrscht.  Der geistige Zyklus spiegelt Intelligenz,
+Gedächtnis, geistige Wachheit und analytisches Denkvermögen wider.  Der
+physische Zyklus stellt die Körperkraft, Ausdauer,  Leistungs- und
+Widerstandsfähigkeit dar.  Alle Zyklen beginnen im Nullpunkt am
+Geburtsdatum und schwingen wie Sinuskurven zwischen ihren positiven und
+negativen Maximalwerten.  Die Zeiträume oberhalb des Nullpunktes zeigen
+die Tage voller Lebenskraft und Leistungsfähigkeit an, während die
+Zeiträume unterhalb des Nullpunktes die Tage verringerter
+Leistungsfähigkeit darstellen.  Der Biorhythmus wurde nur zu
+Unterhaltungszwecken eingebaut!  Die Interpretation der
+Biorhythmustexte liegt in den Händen des Benutzers.
+
+Gcal zählt "kritische" Tage, "positive" ebenso wie "negative" Tage.
+Kritische Tage sind solche Tage, an denen eine oder mehrere der
+biologischen Zyklen den Nullpunkt überqueren.  Zu einem solchen
+Zeitpunkt, so wird gesagt, soll sich der Organismus in einem Stadium
+des Umbruchs befinden, und es scheint angebracht zu sein, Vorsicht
+walten zu lassen.  Positive Tage sind solche Tage, an denen eine oder
+mehrere der biologischen Zyklen einen positiven Maximalwert haben.  Zu
+einem solchen Zeitpunkt, so wird gesagt, soll sich der Organismus in
+einem gesteigerten Stadium befinden.  Negative Tage sind solche Tage,
+an denen eine oder mehrere der biologischen Zyklen einen negativen
+Maximalwert haben.  Zu einem solchen Zeitpunkt, so wird gesagt, soll
+sich der Organismus in einem verminderten Stadium befinden.
+
+Folgende Biorhythmus `%?[DATUM]' Spezialtexte werden berücksichtigt:
+
+`%,[DATUM]'
+     Wird in einen *Biorhythmustext* für den laufenden Tag im Jahr
+     umgesetzt, z.B.:
+
+          Der Text `%,19620921' wird umgesetzt in
+          ==> `1! 0+ 0- , Emo=+022%- Gei=-091%+ Phy=-014%-', falls das
+          aktuelle Systemdatum der 12'te Dezember 1996 ist.
+
+     Das vorangehende Beispiel zeigt den berechneten Biorhythmus als
+     eine Folge von Werten für eine Person an, die am 21'ten September
+     1962 geboren ist.  Der konstruierte Text besteht aus zwei Teilen,
+     und zwar einerseits aus einem Tripel von Gesamtwerten, welches den
+     kritischen, positiven und negativen Tag bezeichnet.  Und aus einem
+     weiteren Tripel von Werten, welches den emotionalen, geistigen und
+     physischen Zyklus bezeichnet.
+
+     Im ersten Tripel von Gesamtwerten bezeichnet ein nachgestelltes `!'
+     Zeichen einen kritischen Tag, ein `+' einen positiven Tag, und ein
+     `-' Anhang markiert einen negativen Tag.
+
+     Im zweiten Tripel von Werten besteht jeder einzelne
+     Zyklusprozentwert aus einem anführenden positiven oder negativen
+     Vorzeichen, welches etwas über die Distanz dieses Wertes zum
+     Nullpunkt aussagt, und einem nachgestellten Zeichen, das etwas
+     über den Status jedes einzelnen Zyklus' aussagt.  Ein
+     nachfolgendes `+' Zeichen markiert eine zunehmende Phase, ein `-'
+     Anhang bezeichnet eine abnehmende Phase, und ein `@' Kennzeichen
+     den Maximalwert einer Phase.
+
+`%;[DATUM]'
+     Wird in eine *Biorhythmus-Textgrafik* für den laufenden Tag im
+     Jahr umgesetzt, z.B.:
+
+          Der Text `%;19620921' wird umgesetzt in
+          ==> `0-  G               P 1   E                +0', falls
+          das aktuelle Systemdatum der 12'te Dezember 1996 ist.
+
+     Das vorhergehende Beispiel zeigt den berechneten Biorhythmus als
+     eine Zeile einer Textgrafik für eine Person an, die am 21'ten
+     September 1962 geboren ist.  Die konstruierte Zeile ist ein Balken
+     mit einer negativen und positiven Achse von einstellbarer Länge
+     (*note Termin Option `--biorhythm-axis=ANZAHL': x-biorhythm-axis.),
+     dessen linke Grenze durch den Gesamtwert der negativen Tage
+     dargestellt wird (die `0-' in diesem Fall), und dessen rechte
+     Grenze durch den Gesamtwert der positiven Tage repräsentiert wird
+     (die `+0' in diesem Fall).  Der Nullpunkt der Koordinaten wird
+     durch den Gesamtwert der kritischen Tage dargestellt, welcher in
+     diesem Fall die `1' ist.  Der emotionale, geistige und der
+     physische Phasenwert wird entsprechend skaliert auf dem Balken
+     abgetragen, und zwar dargestellt durch den Anfangsbuchstaben des
+     jeweiligen Zyklus' (`E', `G' und `P').  Zusammenfallende
+     Phasenwerte werden durch ein `@' Zeichen markiert.
+
+
+File: gcal.info,  Node: Differenzwert,  Prev: Biorhythmus,  Up: Ersetzen mit Datumargument
+
+Differenzwert `%[FORMAT]?[DATUM]' Spezialtexte
+..............................................
+
+Folgende Differenzwert `%[FORMAT]?[DATUM]' Spezialtexte werden
+berücksichtigt, z.B.:
+
+`%yDATUM'
+     Wird in einen *Jahresdifferenzwert* umgesetzt, z.B.:
+
+          Der Text `Silvester 1912 liegt %y1912  Jahre zurück' wird
+          umgesetzt in
+          ==> `Silvester 1912 liegt -82 Jahre zurück', falls das
+          aktuelle Jahr 1994 ist.
+
+`%B[DATUM]'
+     Wird in einen *Alterswert* umgesetzt, z.B.:
+
+          Der Text `Mein %B1962  Geburtstag%i1952#2062' wird umgesetzt
+          in
+          ==> `Mein 32 Geburtstag', falls das aktuelle Jahr 1994 ist.
+
+     Der Alterswert wird nur dann ausgegeben, wenn sich bei dessen
+     Berechnung ein Wert größer Null ergibt.  Zudem wird der Termin in
+     diesem vorangehenden Beispiel nur während der Jahre 1952 bis 2062
+     (einschließlich) ausgegeben.
+
+`%>1&*B[DATUM]'
+     Wird in einen *Alterswert* mit nachfolgendem Ordnungszahlanhang
+     umgesetzt, z.B.:
+
+          Der Text `Mein %>1&*B1962  Geburtstag%i1952#2062' wird
+          umgesetzt in
+          ==> `Mein 32'ter Geburtstag', falls das aktuelle Jahr 1994
+          ist.
+
+     Der Alterswert wird nur dann ausgegeben, wenn sich bei dessen
+     Berechnung ein Wert größer Null ergibt.  Zudem wird der Termin in
+     diesem vorangehenden Beispiel nur während der Jahre 1952 bis 2062
+     (einschließlich) ausgegeben.
+
+
+File: gcal.info,  Node: Ersetzen mit anderem Argument,  Next: Ersetzen ohne Argument,  Prev: Ersetzen mit Datumargument,  Up: Ersetzen
+
+Ersetzen mit anderem Argument `%[FORMAT]?[ARGUMENT]' Spezialtexte
+-----------------------------------------------------------------
 
 * Menu:
 
-* Kodierschema Tabelle 1::
-* Kodierschema Tabelle 2::
+* Aktuelle Uhrzeit::
+* Textliches Datum::
+* Julianische Tageszahl::
+* Geographische Distanz und Kurswinkel::
+* Sonnendaten::
+* Monddaten::
+* Inhalt von Umgebungsvariable::
 
-Es folgt nun die tabellarische Aufstellung des Kodierschemas, welches
-f"ur den *Datumteil* (JJJJ...) einer Zeile der Ressourcendatei
-verwendet werden kann, und der Modifizierer, welche die Kurzoption
-`-c|C[]' annehmen darf, bzw. die Argumente, welche die Langoption
-`--period-of-fixed-dates=ARGUMENT' annehmen darf.  Aus diesen Tabellen
-kann ersehen werden, welche *Terminargumente* mit welchem *Datumteil*
-einer Zeile der Ressourcendatei korrespondieren, d.h. bei Anwahl eines
-*Terminarguments* ber"ucksichtigt werden; da Gcal eben nicht alle
-vorhandenen Eintr"age in einer Ressourcendatei ber"ucksichtigt, sondern
-nur solche, die in einem bestimmten Verh"altnis zum *Terminargument*
-stehen, und somit die Ausgabe "uberfl"ussiger Informationen verhindert
-wird.
+Neben verschiedenen Darstellungen der aktuellen Systemuhrzeit kann auch
+ein fester Datumtext erzeugt werden.  Zudem kann eine Tageszahl
+produziert werden, deren Basisdatum ausgehend vom Julianischen Datum
+beliebig verlagert werden kann.  Weiterhin kann die ungefähre Distanz
+und der Kurswinkel zwischen zwei beliebigen geographischen Orten, und
+verschiedene sonnen- und mondbezogene Daten und Zeiten für einen
+beliebigen geographischen Ort erzeugt werden.  Es ist ebenfalls
+möglich, den Inhalt von Umgebungsvariablen im Termintext auszuweisen.
 
-Im *Datumteil* `JJJJ...':
-
-JJJJ
-     steht f"ur jede Jahreszahl (0001...9999).
-
-MM
-     steht f"ur jede Monatszahl (01...12 oder 99) bzw. jeden Monatsnamen
-     im 3-Buchstaben Kurzformat (Jan, Feb...).
-
-TT
-     steht f"ur jede Tageszahl (1...28, 29, 30, 31 oder 99).
-
-WWW
-     steht f"ur jeden Wochentagsnamen im 2...3-Buchstaben Kurzformat
-     (Mon...Son).
-
-?
-     steht f"ur jeden Einzelbuchstaben des Alphabets (Gross- bzw.
-     Kleinbuchstaben werden nicht unterschieden).
-
-N
-     steht f"ur jede positive Ganzzahl (eine oder mehrere Ziffern).
+Für das ARGUMENT, daß diese `%?[ARGUMENT]' Spezialtexte annehmen
+dürfen, gelten keine besonderen Regeln hinsichtlich bestimmter
+Auslassungswerte.
 
 
-File: gcal.info,  Node: Kodierschema Tabelle 1,  Next: Kodierschema Tabelle 2,  Prev: Kodierschema,  Up: Kodierschema
+File: gcal.info,  Node: Aktuelle Uhrzeit,  Next: Textliches Datum,  Prev: Ersetzen mit anderem Argument,  Up: Ersetzen mit anderem Argument
 
-Kodierschema Tabelle 1
-======================
+Aktuelle Uhrzeit `%[FORMAT]?[ARGUMENT]' Spezialtexte
+....................................................
 
-In dieser Tabelle werden alle m"oglichen Kodierungen von einem Datum im
-*Datumteil* einer Ressourcendatei mit allen dazu m"oglichen Kodierungen
-der Modifizierer der Kurzoption `-c|C[]' gegen"ubergestellt.
+Gcal ist in der Lage, die aktuelle Uhrzeit sowohl als
+Ortszeit/Zonenzeit als auch als Weltzeit (UTC/GMT) darzustellen, sowie
+zusätzlich noch den numerischen Weltzeit-Zeitzonenversatzwert und den
+aktuellen numerischen Ortszeit-Zeitzonenversatzwert im RFC-822(1)
+(*note Aktuelle Uhrzeit-Footnote-1::) Stil.  *Note Aktuelle Ortszeit
+`%t[ARGUMENT]' Spezialtext: x-Aktuelle-Ortszeit, für die ausführliche
+Beschreibung aller Komponenten des ARGUMENTS, das den aktuelle Uhrzeit
+`%[FORMAT]?[ARGUMENT]' Spezialtexten folgen darf.  Alle aktuelle Uhrzeit
+`%[FORMAT]?[ARGUMENT]' Spezialtexte *müssen* stets von einem
+_whitespace_ Zeichen gefolgt werden, welches seinerseits in der Ausgabe
+entfernt wird!  Folgende aktuelle Uhrzeit `%[FORMAT]?[ARGUMENT]'
+Spezialtexte werden berücksichtigt:
 
-*Bitte beachten:*
-Die `-c', `-ct', `-cNd', `-c*d|wN[WWW]', `-c@?[[+|-]N[WWW]]', `-cMMTT'
-und `-cMMWWWN' Optionen ber"ucksichtigen *alle* Kodiervariationen des
-*Datumteils*!
+`%t[ARGUMENT]'
+     `%t[*][[+|-]MMMM|HH:[MM]]' bezeichnet die *aktuelle Ortszeit*, die
+     im `HH:MM' Format ausgegeben wird, z.B.:
 
-*Datumteil*               *Kurzoption `-c|C[]'*                           
-`00000000'                `-cN+|-'                                        
-`000000TT'                `-cNw|+|-', `-cw[+|-]', `-cm[+|-]'              
-`0000MM00'                `-cN+|-'                                        
-`0000MMTT'                `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]', 
-                          `-clNd|w|+|-', `-cl*d|wN[WWW]',                 
-                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'    
-`JJJJ0000'                `-cN+|-'                                        
-`JJJJ00TT'                `-cNw|+|-', `-cw[+|-]', `-cm[+|-]'              
-`JJJJMM00'                `-cN+|-'                                        
-`JJJJMMTT'                `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]', 
-                          `-clNd|w|+|-', `-cl*d|wN[WWW]',                 
-                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'    
-`000000WWWN'              `-cNw|+|-', `-cw[+|-]', `-cm[+|-]'              
-`0000MMWWWN'              `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]', 
-                          `-clNd|w|+|-', `-cl*d|wN[WWW]',                 
-                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'    
-`JJJJ00WWWN'              `-cNw|+|-', `-cw[+|-]', `-cm[+|-]'              
-`JJJJMMWWWN'              `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]', 
-                          `-clNd|w|+|-', `-cl*d|wN[WWW]',                 
-                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'    
-`0000*dN[WWW]'            `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]', 
-                          `-clNd|w|+|-', `-cl*d|wN[WWW]',                 
-                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'    
-`JJJJ*dN[WWW]'            `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]', 
-                          `-clNd|w|+|-', `-cl*d|wN[WWW]',                 
-                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'    
-`0000*wN[WWW]'            `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]', 
-                          `-clNd|w|+|-', `-cl*d|wN[WWW]',                 
-                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'    
-`JJJJ*wN[WWW]'            `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]', 
-                          `-clNd|w|+|-', `-cl*d|wN[WWW]',                 
-                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'    
-`0000@?[+|-]N[WWW]'       `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]', 
-                          `-clNd|w|+|-', `-cl*d|wN[WWW]',                 
-                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'    
-`JJJJ@?[+|-]N[WWW]'       `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]', 
-                          `-clNd|w|+|-', `-cl*d|wN[WWW]',                 
-                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'    
+          Der Text `Ortszeit: %t  --> Zahnarzttermin um 10:00 Uhr' wird
+          umgesetzt in
+          ==> `Ortszeit: 07:32 --> Zahnarzttermin um 10:00 Uhr', falls
+          die aktuelle Ortszeit 07:32 Uhr (`HH:MM') ist.
 
-
-File: gcal.info,  Node: Kodierschema Tabelle 2,  Prev: Kodierschema Tabelle 1,  Up: Kodierschema
+     Wenn nur `%t' angegeben ist, so wird der Wert der Ortszeit implizit
+     im _24-Stunden_ Format ausgegeben.  Um im _12-Stunden_ Format
+     auszugeben, muß ein `*' Zeichen direkt hinter `%t' angegeben
+     werden, z.B. `%t*'.
 
-Kodierschema Tabelle 2
-======================
+     Dem `%t' Spezialtext darf ein Versatzwert folgen, der entweder im
+     `[+|-]MMMM' Format oder im `[+|-]HH:[MM]' Format angegeben werden
+     muß.  `[+|-]MMMM' addiert bzw. subtrahiert die angegebene Anzahl
+     von Minuten MMMM vom Wert der Ortszeit (Bereich `0...9999'),
+     während `[+|-]HH:[MM]' die angegebene Anzahl von Stunden HH
+     (Bereich `0...99') und Minuten MM (Bereich `0...59') vom Wert der
+     Ortszeit addiert bzw.  subtrahiert.  Der Versatzwert wird stets
+     zum Wert der Ortszeit addiert, wenn er kein `+|-' Vorzeichen
+     aufweist.  Falls Gcal nicht imstande ist, die aktuelle Ortszeit im
+     `HH:MM' Format zu berechnen, da das ARGUMENT fehlerhaft angegeben
+     wurde, so wird anstelle der aktuellen Ortszeit im `HH:MM' Format
+     ein `??:??' Text erzeugt.
 
-In dieser Tabelle werden alle m"oglichen Kodierungen der Modifizierer
-der Kurzoption `-c|C[]' mit allen dazu m"oglichen Kodierungen von einem
-Datum im *Datumteil* einer Ressourcendatei gegen"ubergestellt.
+          Der Text `Ortszeit: %t-3:  --> Zahnarzttermin um 10:00 Uhr'
+          wird umgesetzt in
+          ==> `Ortszeit: 04:32 --> Zahnarzttermin um 10:00 Uhr', falls
+          die aktuelle Ortszeit 07:32 Uhr (`HH:MM') ist.
 
-*Kurzoption `-c|C[]'*     *Datumteil*                                     
-`-c'                                                                      
-`-ct'                                                                     
-`-cNd|+|-'                                                                
-`-cMMTT'                                                                  
-`-cMMWWWN'                                                                
-`-c*d|wN[WWW]'                                                            
-`-c@?[[+|-]N[WWW]]'       `00000000', `0000MM00', `JJJJ0000', `JJJJMM00', 
-                          `000000TT', `0000MMTT', `JJJJ00TT', `JJJJMMTT', 
-                          `000000WWWN', `0000MMWWWN', `JJJJ00WWWN',       
-                          `JJJJMMWWWN', `0000*dN', `0000*dNWWW',          
-                          `JJJJ*dN', `JJJJ*dNWWW', `0000*wN',             
-                          `0000*wNWWW', `JJJJ*wN', `JJJJ*wNWWW',          
-                          `0000@?[+|-]N', `0000@?[+|-]NWWW',              
-                          `JJJJ@?[+|-]N', `JJJJ@?[+|-]NWWW'               
-`-cNw'                                                                    
-`-cw[+|-]'                `000000TT', `0000MMTT', `JJJJ00TT', `JJJJMMTT', 
-                          `000000WWWN', `0000MMWWWN', `JJJJ00WWWN',       
-                          `JJJJMMWWWN', `0000*dN', `0000*dNWWW',          
-                          `JJJJ*dN', `JJJJ*dNWWW', `0000*wN',             
-                          `0000*wNWWW', `JJJJ*wN', `JJJJ*wNWWW',          
-                          `0000@?[+|-]N', `0000@?[+|-]NWWW',              
-                          `JJJJ@?[+|-]N', `JJJJ@?[+|-]NWWW'               
-`-cm[+|-]'                `000000TT', `0000MMTT', `JJJJ00TT', `JJJJMMTT', 
-                          `000000WWWN', `0000MMWWWN', `JJJJ00WWWN',       
-                          `JJJJMMWWWN', `0000*dN', `0000*dNWWW',          
-                          `JJJJ*dN', `JJJJ*dNWWW', `0000*wN',             
-                          `0000*wNWWW', `JJJJ*wN', `JJJJ*wNWWW',          
-                          `0000@?[+|-]N', `0000@?[+|-]NWWW',              
-                          `JJJJ@?[+|-]N', `JJJJ@?[+|-]NWWW'               
-`-cy[+|-]'                                                                
-`-clNd|w|+|-'                                                             
-`-clMMTT'                                                                 
-`-clMMWWWN'                                                               
-`-cl*d|wN[WWW]'                                                           
-`-cl@?[[+|-]N[WWW]]'      `0000MMTT', `JJJJMMTT', `0000MMWWWN',           
-                          `JJJJMMWWWN', `0000*dN', `0000*dNWWW',          
-                          `JJJJ*dN', `JJJJ*dNWWW', `0000*wN',             
-                          `0000*wNWWW', `JJJJ*wN', `JJJJ*wNWWW',          
-                          `0000@?[+|-]N', `0000@?[+|-]NWWW',              
-                          `JJJJ@?[+|-]N', `JJJJ@?[+|-]NWWW'               
+`%[FORMAT]'[ARGUMENT]'
+     `%[FORMAT]'[[+|-]MMMM|HH:[MM]]' bezeichnet die *aktuelle Ortszeit
+     in Minuten seit Mitternacht*, die im M[M...] Format ausgegeben
+     wird, z.B.:
 
-
-File: gcal.info,  Node: Umgebungsvariablen,  Next: Fehlerkodes,  Prev: Kodierschema,  Up: Top
+          Der Text `Ortszeit: %'  --> Zahnarzttermin um 10:00 Uhr' wird
+          umgesetzt in
+          ==> `Ortszeit: 452 --> Zahnarzttermin um 10:00 Uhr', falls
+          die aktuelle Ortszeit 07:32 Uhr (`HH:MM') ist.
 
-Umgebungsvariablen
-******************
+     Falls Gcal nicht imstande ist, die aktuelle Ortszeit im M[M...]
+     Format zu berechnen, da das ARGUMENT fehlerhaft angegeben wurde,
+     so wird anstelle der aktuellen Ortszeit im M[M...] Format ein `??'
+     Text erzeugt.
 
-Hier ist eine Liste aller Umgebungsvariablen, die von Gcal benutzt
-werden:
+`%[FORMAT]_[ARGUMENT]'
+     `%[FORMAT]_[*][[+|-]MMMM|HH:[MM]]' bezeichnet die *aktuelle
+     Ortszeitstunde*, die im H[H...] Format ausgegeben wird, z.B.:
 
-`COLUMNS'
-`CO'
-     Setzt die Anzahl der Spalten des Bildschirms.  Hat Vorrang vor der
-     Anzahl der Spalten, welche die `TERM' Umgebungsvariable oder das
-     System selbst definiert.
+          Der Text `Ortszeitstunde: %_-1:' wird umgesetzt in
+          ==> `Ortszeitstunde: 6', falls die aktuelle Ortszeit
+          07:32 Uhr (`HH:MM') ist.
 
-`GCAL'
-     Argumente, die an Gcal automatisch "ubergeben werden.
+     Falls Gcal nicht imstande ist, die aktuelle Ortszeitstunde zu
+     berechnen, da das ARGUMENT fehlerhaft angegeben wurde, so wird
+     anstelle der aktuellen Ortszeitstunde H[H...] ein `??' Text
+     erzeugt.
 
-`GCALANSI'
-     Wenn definiert oder gesetzt, so werden ANSI
-     Escape-Hervorhebungssequenzen als Grundeinstellung benutzt bzw.
-     erg"anzt, falls keine anderen Hervorhebungssequenzen mittels
-     Kommandozeilenoption definiert werden oder in der Termcap
-     Bibliotheksdatei aufgefunden werden.
+`%[FORMAT]?[ARGUMENT]'
+     `%[FORMAT]?[[+|-]MMMM|HH:[MM]]' bezeichnet die *aktuelle
+     Ortszeitminute*, die im M[M...] Format ausgegeben wird, z.B.:
 
-`GCAL_DATE_FORMAT'
-     Enth"alt den Datumformattext, der die Anordnung von einem
-     auszugebenden Datum bestimmt.  Hat Vorrang vor dem
-     Grundeinstellungs-Datumformattext.
+          Der Text `Ortszeitminute: %>04*?+:2' wird umgesetzt in
+          ==> `Ortszeitminute: 0034', falls die aktuelle Ortszeit
+          07:32 Uhr (`HH:MM') ist.
 
-`GCALPATH'
-     Durch (`:') Doppelpunkt separierte Liste von Dateiverzeichnissen,
-     welche durchsucht werden, um die `.gcalrc' Datei zu finden.  Hat
-     Vorrang vor `GCAL_USR_DATADIR' und `GCAL_SYS_DATADIR'.
+     Falls Gcal nicht imstande ist, die aktuelle Ortszeitminute zu
+     berechnen, da das ARGUMENT fehlerhaft angegeben wurde, so wird
+     anstelle der aktuellen Ortszeitminute M[M...] ein `??' Text
+     erzeugt.
 
-`GCALPROG'
-     Enth"alt den Dateinamen des ausf"uhrbaren Gcal Programms, welcher
-     vom Programm `tcal' benutzt wird, um Gcal aufzurufen.  Hat Vorrang
-     vor dem beim Kompilationsvorgang in `tcal' eingebrannten Dateinamen
-     `gcal'.
+`%[FORMAT]{[ARGUMENT]'
+     `%[FORMAT]{[[+|-]MMMM|HH:[MM]]' bezeichnet den *aktuellen
+     12-Stunden Format Ortszeitanhang*, der als `am|pm' ausgeben wird,
+     z.B.:
 
-`GCAL_USR_DATADIR'
-     Name eines Dateiverzeichnisses relativ zum `HOME' Dateiverzeichnis,
-     in welchem der Benutzer seine pers"onlichen bzw. *privaten*
-     Ressourcendateien (Termindateien) speichert.  Hat Vorrang vor
-     `GCAL_SYS_DATADIR'.
+          Der Text `Ortszeitanhang: %{' wird umgesetzt in
+          ==> `Ortszeitanhang: am', falls die aktuelle Ortszeit
+          07:32 Uhr (`HH:MM') ist.
 
-`GCAL_SYS_DATADIR'
-     Name eines Dateiverzeichnisses absolut zum *Wurzel*/*$(prefix)*
-     Dateiverzeichnis, in welchem der Systemadministrator allgemeine
-     bzw.  *"offentliche* Ressourcendateien (Termindateien) speichert.
+     Falls Gcal nicht imstande ist, den aktuellen 12-Stunden Format
+     Ortszeitanhang zu berechnen, da das ARGUMENT fehlerhaft angegeben
+     wurde, so wird anstelle des aktuellen 12-Stunden Format
+     Ortszeitanhangs `am|pm' ein `??' Text erzeugt.
 
-`HOME'
-     Name des Heimatverzeichnisses des Benutzers.  Dieses wird benutzt,
-     um die `.gcalrc' Datei zu finden.  Hat Vorrang vor `GCALPATH',
-     `GCAL_USR_DATADIR' und `GCAL_SYS_DATADIR'.
+`%@[ARGUMENT]'
+     `%@[*][[+|-]MMMM|HH:[MM]]' bezeichnet die *aktuelle Weltzeit*
+     (UTC/GMT), die im `HH:MM/DATUM' Format ausgegeben wird, z.B.:
 
-`LANGUAGE'
-     Die Landessprache und sonstige kulturspezifische Konventionen, die
-     Gcal zur Laufzeit verwenden soll.  Hat Vorrang vor `LC_ALL',
-     `LC_MESSAGES' und `LANG'.
+          Der Text `Weltzeit: %@*-3:' wird umgesetzt in
+          ==> `Weltzeit: 03:32am/15-Feb-1999', falls das aktuelle Datum
+          der 15'te Februar 1999 und die aktuelle Weltzeit 06:32 Uhr
+          (`HH:MM') ist.
 
-`LC_ALL'
-     Die Landessprache und sonstige kulturspezifische Konventionen, die
-     Gcal zur Laufzeit verwenden soll.  Hat Vorrang vor `LC_MESSAGES'
-     und `LANG'.
+     Falls Gcal nicht imstande ist, die aktuelle Weltzeit im
+     `HH:MM/DATUM' Format zu berechnen, da das ARGUMENT fehlerhaft
+     angegeben wurde, so wird anstelle der aktuellen Weltzeit im
+     `HH:MM/DATUM' Format ein `??:??/??-???-????' Text erzeugt.
 
-`LC_MESSAGES'
-     Die Landessprache und sonstige kulturspezifische Konventionen, die
-     Gcal zur Laufzeit verwenden soll.  Hat Vorrang vor `LANG'.
+`%[FORMAT]`[ARGUMENT]'
+     `%[FORMAT]`[[+|-]MMMM|HH:[MM]]' bezeichnet die *aktuelle Weltzeit
+     in Minuten seit Mitternacht* (UTC/GMT), die im `M[M...]/DATUM'
+     Format ausgegeben wird, z.B.:
 
-`LANG'
-     Die Landessprache und sonstige kulturspezifische Konventionen, die
-     Gcal zur Laufzeit verwenden soll.
+          Der Text `Weltzeit: %>06*`-3:' wird umgesetzt in
+          ==> `Weltzeit: 000212/15-Feb-1999', falls das aktuelle Datum
+          der 15'te Februar 1999 und die aktuelle Weltzeit 06:32 Uhr
+          (`HH:MM') ist.
 
-`LINES'
-`LI'
-     Setzt die Anzahl der Zeilen des Bildschirms.  Hat Vorrang vor der
-     Anzahl der Zeilen, welche die `TERM' Umgebungsvariable oder das
-     System selbst definiert.
+     Falls Gcal nicht imstande ist, die aktuelle Weltzeit im
+     `M[M...]/DATUM' Format zu berechnen, da das ARGUMENT fehlerhaft
+     angegeben wurde, so wird anstelle der aktuellen Weltzeit im
+     `M[M...]/DATUM' Format ein `??/??-???-????' Text erzeugt.
 
-`MAILPROG'
-     Der Name des Mailprogramms, das verwendet wird, wenn Postversand
-     gew"unscht wird.  *Note `--mail=ADRESSE': Globale Optionen, f"ur
-     weitere Details.
+`%[FORMAT].[ARGUMENT]'
+     `%[FORMAT].[*][[+|-]MMMM|HH:[MM]]' bezeichnet die *aktuelle
+     Weltzeitstunde* (UTC/GMT), die im H[H...] Format ausgegeben wird,
+     z.B.:
 
-`PAGER'
-     Der Name des externen Paginiererprogramms, das verwendet wird, wenn
-     Paginierung gew"unscht wird.  *Note `--pager': Globale Optionen,
-     f"ur weitere Details.
+          Der Text `Weltzeitstunde: %.-1:' wird umgesetzt in
+          ==> `Weltzeitstunde: 5', falls die aktuelle Weltzeit
+          06:32 Uhr (`HH:MM') ist.
 
-`PATH'
-     Durch (`:') Doppelpunkt separierte Liste von Dateiverzeichnissen,
-     welche durchsucht werden, um das "externe" Paginiererprogramm zu
-     finden.  *Note `--pager': Globale Optionen, f"ur weitere Details.
+     Falls Gcal nicht imstande ist, die aktuelle Weltzeitstunde zu
+     berechnen, da das ARGUMENT fehlerhaft angegeben wurde, so wird
+     anstelle der aktuellen Weltzeitstunde H[H...] ein `??' Text
+     erzeugt.
 
-`TERM'
-     Der Terminaltyp, auf dem Gcal zum Ablauf kommt.
+`%[FORMAT]/[ARGUMENT]'
+     `%[FORMAT]/[[+|-]MMMM|HH:[MM]]' bezeichnet die *aktuelle
+     Weltzeitminute* (UTC/GMT), die im M[M...] Format ausgegeben wird,
+     z.B.:
 
-`TZ'
-     Die Zeitzoneninformation, mit dem der Datumtext in versandten
-     eMails, erzeugten Anwortdateien und erzeugten shell script Dateien
-     versehen wird.
+          Der Text `Weltzeitminute: %>04*/+:2' wird umgesetzt in
+          ==> `Weltzeitminute: 0034', falls die aktuelle Weltzeit
+          06:32 Uhr (`HH:MM') ist.
 
-
-File: gcal.info,  Node: Fehlerkodes,  Next: Argumentenindex,  Prev: Umgebungsvariablen,  Up: Top
+     Falls Gcal nicht imstande ist, die aktuelle Weltzeitminute zu
+     berechnen, da das ARGUMENT fehlerhaft angegeben wurde, so wird
+     anstelle der aktuellen Weltzeitminute M[M...] ein `??' Text
+     erzeugt.
 
-Fehlerkodes
-***********
+`%[FORMAT]}[ARGUMENT]'
+     `%[FORMAT]}[[+|-]MMMM|HH:[MM]]' bezeichnet den *aktuellen
+     12-Stunden Format Weltzeitanhang* (UTC/GMT), der als `am|pm'
+     ausgeben wird, z.B.:
 
-Gcal erzeugt folgende *exit*-Kodes:
+          Der Text `Weltzeitanhang: %>1w*}+10:' wird umgesetzt in
+          ==> `Weltzeitanhang: Pm', falls die aktuelle Weltzeit
+          06:32 Uhr (`HH:MM') ist.
 
-`127'
-     Hilfeseite, Softwarelizenz bzw. Versionsnummer angefordert
-     (einstellbar).
+     Falls Gcal nicht imstande ist, den aktuellen 12-Stunden Format
+     Weltzeitanhang zu berechnen, da das ARGUMENT fehlerhaft angegeben
+     wurde, so wird anstelle des aktuellen 12-Stunden Format
+     Weltzeitanhangs `am|pm' ein `??' Text erzeugt.
 
-`126'
-     Unzul"assige Option bei Programmaufruf.
+`%"[ARGUMENT]'
+     `%"[[+|-]MMMM|HH:[MM]]' bezeichnet den *numerischen
+     Weltzeit-Zeitzonenversatzwert* im RFC-822 Stil, der im `+|-HHMM'
+     Format ausgegeben wird, z.B.:
 
-`125'
-     Jahr ausserhalb zul"assigen Bereichs bei Ermittlung des
-     Ostersonntags.
+          Der Text `Weltzeit-Zeitzonenversatzwert: %"-90' wird
+          umgesetzt in
+          ==> `Weltzeit-Zeitzonenversatzwert: -0130', wobei stets die
+          Weltzeit-Zeitzone UTC/GMT als Basiszeitzone für die
+          Berechnung zugrundegelegt wird.
 
-`124'
-     Virtueller Speicher ersch"opft.
+     Falls Gcal nicht imstande, ist den numerischen
+     Weltzeit-Zeitzonenversatzwert zu berechnen, da das ARGUMENT
+     fehlerhaft angegeben wurde, so wird anstelle des numerischen
+     Weltzeit-Zeitzonenversatzwertes `+|-HHMM' ein `+????' Text erzeugt.
 
-`123'
-     Unzul"assiger Datumeintrag in Ressourcen- bzw. Includedatei.
+`%=[ARGUMENT]'
+     `%=[[+|-]MMMM|HH:[MM]]' bezeichnet den *aktuellen numerischen
+     Ortszeit-Zeitzonenversatzwert* im RFC-822 Stil, der im `+|-HHMM'
+     Format ausgegeben wird, z.B.:
 
-`122'
-     Ung"ultiger Monatseintrag in Ressourcen- bzw. Includedatei.
+          Der Text `Ortszeit-Zeitzonenversatzwert: %=-10' wird
+          umgesetzt in
+          ==> `Ortszeit-Zeitzonenversatzwert: +0050', falls die
+          aktuelle Zeitzone der Mitteleuropäischen Winterzeit MEWT/MET
+          (`+HHMM') entspricht.  Es wird stets die Zeitzone der Ortszeit
+          als Basiszeitzone für die Berechnung zugrundegelegt.
 
-`121'
-     Ung"ultiger Tageseintrag in Ressourcen- bzw. Includedatei.
-
-`120'
-     Missgebildete *#include* Anweisung in Ressourcen- bzw.
-     Includedatei.
-
-`119'
-     Unzul"assige rekursive/zyklische *#include* Anweisung in
-     Ressourcen- bzw. Includedatei.
-
-`118'
-     Ressourcen- bzw. Includedatei nicht gefunden.
-
-`117'
-     Ung"ultiges N'ter Wochentagsfeld (nur 1...5 oder 9 erlaubt).
-
-`116'
-     Fehlendes *whitespace* Trennzeichen zwischen *Datumteil* und
-     *Textteil*.
-
-`115'
-     Antwortdatei bzw. shell script kann nicht geschrieben werden.
-
-`114'
-     Illegale Datumvariablen-Operation.
-
-`113'
-     Datumvariable undefiniert.
-
-`112'
-     Zuweisung von ung"ultigem Datumwert an Datumvariable.
-
-`111'
-     Versenden der Ausgabe an eMail Adresse hat versagt.
-
-`110'
-     Interner Fehler, C Funktion pipe(), fork(), execlp() oder unlink()
-     hat versagt.
-
-`109'
-     Fehler beim Lesen der Ressourcen-, Include- bzw. Antwortdatei
-     aufgetreten.
-
-`108'
-     Illegales Zeichen in Antwortdatei vorgefunden.
-
-`107'
-     Interner Fehler, ung"ultiger Wert f"ur die Gr"osse einer internen
-     Tabelle aufgetreten.
-
-`106'
-     Ung"ultiger Datumformattext angegeben.
-
-`105'
-     Illegale Textvariablen-Definition.
-
-`104'
-     Ung"ultiges regul"ar-Ausdruck Suchmuster angegeben.
-
-`3'
-     Programmabbruch durch Signal.
-
-`2'
-     *Exit*-Kode ungleich Null bei Kommandoausf"uhrung aufgetreten.
-
-`1'
-     Keine Ausgabe von Terminen obwohl Option `-c|C[]',
-     `-f|F DATEINAME[+...]' oder `-# ZEILE' aktiviert.
-
-`0'
-     Fehlerfreier Programmlauf.
+     Falls Gcal nicht imstande ist, den aktuellen numerischen
+     Ortszeit-Zeitzonenversatzwert zu berechnen, da das ARGUMENT
+     fehlerhaft angegeben wurde, so wird anstelle des aktuellen
+     numerischen Ortszeit-Zeitzonenversatzwertes `+|-HHMM' ein `+????'
+     Text erzeugt.
 
 
-File: gcal.info,  Node: Argumentenindex,  Next: Variablenindex,  Prev: Fehlerkodes,  Up: Top
+File: gcal.info,  Node: Aktuelle Uhrzeit-Footnotes,  Up: Aktuelle Uhrzeit
 
-Index von Kommandozeilenargumenten
-**********************************
+(1) RFC ist die Abkürzung für `Request for Comments'.
 
-Hier ist eine alphabetische Liste der Kommandozeilenargumente, die von
-Gcal verarbeitet werden:
+
+File: gcal.info,  Node: Textliches Datum,  Next: Julianische Tageszahl,  Prev: Aktuelle Uhrzeit,  Up: Ersetzen mit anderem Argument
 
-* Menu:
+Textliches Datum `%n[ARGUMENT]' Spezialtext
+...........................................
 
-* %DATUM:                                Datummodifizierer.
-* -# ZEILE:                              Termin Optionen.
-* -*dN:                                  Termin Optionen.
-* -*dNWWW:                               Termin Optionen.
-* -*wN[WWW]:                             Termin Optionen.
-* --alternative-format:                  Termin Optionen.
-* --biorhythm-axis=ANZAHL:               Termin Optionen.
-* --blocks=1:                            Kalender Optionen.
-* --blocks=12:                           Kalender Optionen.
-* --blocks=2:                            Kalender Optionen.
-* --blocks=3:                            Kalender Optionen.
-* --blocks=4:                            Kalender Optionen.
-* --blocks=6:                            Kalender Optionen.
-* --blocks=ANZAHL:                       Kalender Optionen.
-* --bypass-shell-command:                Termin Optionen.
-* --calendar-dates=both:                 Kalender Optionen.
-* --calendar-dates=special:              Kalender Optionen.
-* --calendar-dates=special|both:         Kalender Optionen.
-* --cc-holidays=CC[+...]:                Kalender Optionen.
-* --christian-holidays:                  Kalender Optionen.
-* --copyleft:                            Allgemeine Optionen.
-* --copyright:                           Allgemeine Optionen.
-* --date-format=de|us|gb|TEXT:           Kalender Optionen.
-* --date-variable=ARGUMENT:              Termin Optionen.
-* --debug=abort:                         Globale Optionen.
-* --debug=all:                           Globale Optionen.
-* --debug=handled:                       Globale Optionen.
-* --debug=internal:                      Globale Optionen.
-* --debug=unhandled:                     Globale Optionen.
-* --debug[=internal|handled|unhandled|all|abort]: Globale Optionen.
-* --descending-fixed-dates=long:         Termin Optionen.
-* --descending-fixed-dates=short:        Termin Optionen.
-* --descending-fixed-dates[=short|long]: Termin Optionen.
-* --descending-holiday-list=long:        Kalender Optionen.
-* --descending-holiday-list=short:       Kalender Optionen.
-* --descending-holiday-list[=long|short]: Kalender Optionen.
-* --disable-highlighting:                Globale Optionen.
-* --end-of-month:                        Termin Optionen.
-* --end-of-week:                         Termin Optionen.
-* --end-of-year:                         Termin Optionen.
-* --exclude-fixed-dates-list-title:      Termin Optionen.
-* --exclude-holiday-list-title:          Kalender Optionen.
-* --exit-status-help-127:                Allgemeine Optionen.
-* --export-date-variables <1>:           Termin Optionen.
-* --export-date-variables:               Datumvariablen.
-* --export-text-variables <1>:           Termin Optionen.
-* --export-text-variables:               Textvariablen.
-* --filter-day=ARGUMENT:                 Termin Optionen.
-* --filter-period=ARGUMENT:              Termin Optionen.
-* --filter-text=SUCHMUSTER:              Termin Optionen.
-* --fixed-dates=both:                    Kalender Optionen.
-* --fixed-dates=special:                 Kalender Optionen.
-* --fixed-dates=special|both:            Kalender Optionen.
-* --force-highlighting:                  Globale Optionen.
-* --gregorian-reform=1582|1700|1752|1753|ARGUMENT: Kalender Optionen.
-* --grouping-text[=TEXT]:                Termin Optionen.
-* --help <1>:                            Allgemeine Optionen.
-* --help <2>:                            Aufruf von gcal2txt.
-* --help <3>:                            Aufruf von tcal.
-* --help:                                Aufruf von txt2gcal.
-* --here=ZEILE:                          Termin Optionen.
-* --highlighting=no:                     Globale Optionen.
-* --highlighting=TEXT:                   Globale Optionen.
-* --highlighting=yes:                    Globale Optionen.
-* --holiday-dates=both:                  Kalender Optionen.
-* --holiday-dates=special:               Kalender Optionen.
-* --holiday-dates=special|both:          Kalender Optionen.
-* --holiday-list=long:                   Kalender Optionen.
-* --holiday-list=short:                  Kalender Optionen.
-* --holiday-list[=long|short]:           Kalender Optionen.
-* --include-consecutive-number:          Termin Optionen.
-* --include-holidays=long:               Termin Optionen.
-* --include-holidays=short:              Termin Optionen.
-* --include-resource-file-name:          Termin Optionen.
-* --include-today:                       Termin Optionen.
-* --include-week-number:                 Termin Optionen.
-* --leap-day=february:                   Termin Optionen.
-* --leap-day=february|march:             Termin Optionen.
-* --leap-day=march:                      Termin Optionen.
-* --license:                             Allgemeine Optionen.
-* --list-mode:                           Termin Optionen.
-* --list-of-fixed-dates=long:            Termin Optionen.
-* --list-of-fixed-dates=short:           Termin Optionen.
-* --list-of-fixed-dates[=short|long]:    Termin Optionen.
-* --long-help=?:                         Allgemeine Optionen.
-* --long-help[=ARGUMENT]:                Allgemeine Optionen.
-* --mail=ADRESSE:                        Globale Optionen.
-* --month:                               Termin Optionen.
-* --moonimage-lines=ANZAHL:              Termin Optionen.
-* --omit-multiple-date-part:             Termin Optionen.
-* --orthodox-calendar:                   Kalender Optionen.
-* --pager:                               Globale Optionen.
-* --period-of-fixed-dates=ARGUMENT:      Termin Optionen.
-* --resource-file=DATEINAME[+...]:       Termin Optionen.
-* --response-file=DATEINAME:             Globale Optionen.
-* --shell-script=DATEINAME:              Globale Optionen.
-* --shift=[+|-]ZAHL:                     Aufruf von tcal.
-* --start-of-month:                      Termin Optionen.
-* --start-of-week:                       Termin Optionen.
-* --start-of-year:                       Termin Optionen.
-* --starting-day=ARGUMENT:               Kalender Optionen.
-* --suppress-calendar:                   Kalender Optionen.
-* --suppress-date-part:                  Termin Optionen.
-* --text-variable=ARGUMENT:              Termin Optionen.
-* --today:                               Termin Optionen.
-* --tomorrow:                            Termin Optionen.
-* --type=special|standard:               Kalender Optionen.
-* --usage=?:                             Allgemeine Optionen.
-* --usage[=ARGUMENT]:                    Allgemeine Optionen.
-* --version <1>:                         Aufruf von txt2gcal.
-* --version <2>:                         Aufruf von tcal.
-* --version <3>:                         Aufruf von gcal2txt.
-* --version:                             Allgemeine Optionen.
-* --week:                                Termin Optionen.
-* --with-week-number:                    Kalender Optionen.
-* --without-standard-holidays:           Kalender Optionen.
-* --year:                                Termin Optionen.
-* --zero-dates-only:                     Termin Optionen.
-* -?:                                    Allgemeine Optionen.
-* -??:                                   Allgemeine Optionen.
-* -@DVAR[+|-]NWWW:                       Termin Optionen.
-* -@DVAR[[+|-]N]:                        Termin Optionen.
-* -@e[+|-]NWWW:                          Termin Optionen.
-* -@e[[+|-]N]:                           Termin Optionen.
-* -@t[+|-]NWWW:                          Termin Optionen.
-* -@t[[+|-]N]:                           Termin Optionen.
-* -A:                                    Termin Optionen.
-* -a:                                    Termin Optionen.
-* -B:                                    Termin Optionen.
-* -b 1:                                  Kalender Optionen.
-* -b 12:                                 Kalender Optionen.
-* -b 2:                                  Kalender Optionen.
-* -b 3:                                  Kalender Optionen.
-* -b 4:                                  Kalender Optionen.
-* -b 6:                                  Kalender Optionen.
-* -b ANZAHL:                             Kalender Optionen.
-* -C:                                    Termin Optionen.
-* -c:                                    Termin Optionen.
-* -c*dN:                                 Termin Optionen.
-* -c*dNWWW:                              Termin Optionen.
-* -c*wN[WWW]:                            Termin Optionen.
-* -c-:                                   Termin Optionen.
-* -C-:                                   Termin Optionen.
-* -c@DVAR[+|-]NWWW:                      Termin Optionen.
-* -c@DVAR[[+|-]N]:                       Termin Optionen.
-* -c@e[+|-]NWWW:                         Termin Optionen.
-* -c@e[[+|-]N]:                          Termin Optionen.
-* -c@t[+|-]NWWW:                         Termin Optionen.
-* -c@t[[+|-]N]:                          Termin Optionen.
-* -c[m|M[+|-]]:                          Termin Optionen.
-* -c[t|T]:                               Termin Optionen.
-* -c[w|W[+|-]]:                          Termin Optionen.
-* -c[y|Y[+|-]]:                          Termin Optionen.
-* -cA:                                   Termin Optionen.
-* -ca:                                   Termin Optionen.
-* -cB:                                   Termin Optionen.
-* -cd:                                   Termin Optionen.
-* -ce:                                   Termin Optionen.
-* -cE:                                   Termin Optionen.
-* -cg[TEXT]:                             Termin Optionen.
-* -ck:                                   Termin Optionen.
-* -cl:                                   Termin Optionen.
-* -cl*dN:                                Termin Optionen.
-* -cl*dNWWW:                             Termin Optionen.
-* -cl*wN[WWW]:                           Termin Optionen.
-* -cl@DVAR[+|-]NWWW:                     Termin Optionen.
-* -cl@DVAR[[+|-]N]:                      Termin Optionen.
-* -cl@e[+|-]NWWW:                        Termin Optionen.
-* -cl@e[[+|-]N]:                         Termin Optionen.
-* -cl@t[+|-]NWWW:                        Termin Optionen.
-* -cl@t[[+|-]N]:                         Termin Optionen.
-* -clMMTT:                               Termin Optionen.
-* -clMMWWWN:                             Termin Optionen.
-* -clN+|-:                               Termin Optionen.
-* -clNd:                                 Termin Optionen.
-* -clNw:                                 Termin Optionen.
-* -cm:                                   Termin Optionen.
-* -cm+:                                  Termin Optionen.
-* -cm-:                                  Termin Optionen.
-* -cMMTT:                                Termin Optionen.
-* -cMMWWWN:                              Termin Optionen.
-* -cN+|-:                                Termin Optionen.
-* -cNd:                                  Termin Optionen.
-* -cNw:                                  Termin Optionen.
-* -co:                                   Termin Optionen.
-* -ct:                                   Termin Optionen.
-* -cT:                                   Termin Optionen.
-* -cU:                                   Termin Optionen.
-* -cw:                                   Termin Optionen.
-* -cw+:                                  Termin Optionen.
-* -cw-:                                  Termin Optionen.
-* -cx:                                   Termin Optionen.
-* -cy:                                   Termin Optionen.
-* -cy+:                                  Termin Optionen.
-* -cy-:                                  Termin Optionen.
-* -cZ:                                   Termin Optionen.
-* -cz:                                   Termin Optionen.
-* -c|C[-]:                               Termin Optionen.
-* -d:                                    Termin Optionen.
-* -D ARGUMENT:                           Termin Optionen.
-* -E:                                    Termin Optionen.
-* -e:                                    Termin Optionen.
-* -f|F DATEINAME[+...]:                  Termin Optionen.
-* -g[TEXT]:                              Termin Optionen.
-* -h:                                    Allgemeine Optionen.
-* -H no:                                 Globale Optionen.
-* -H TEXT:                               Globale Optionen.
-* -H yes:                                Globale Optionen.
-* -hh:                                   Allgemeine Optionen.
-* -i:                                    Kalender Optionen.
-* -I SUCHMUSTER:                         Termin Optionen.
-* -i[-]:                                 Kalender Optionen.
-* -j:                                    Kalender Optionen.
-* -j[b]:                                 Kalender Optionen.
-* -jb:                                   Kalender Optionen.
-* -jc:                                   Kalender Optionen.
-* -jc[b]:                                Kalender Optionen.
-* -jcb:                                  Kalender Optionen.
-* -jn:                                   Kalender Optionen.
-* -jn[b]:                                Kalender Optionen.
-* -jnb:                                  Kalender Optionen.
-* -k:                                    Termin Optionen.
-* -K:                                    Kalender Optionen.
-* -L:                                    Allgemeine Optionen.
-* -l:                                    Termin Optionen.
-* -l*dN:                                 Termin Optionen.
-* -l*dNWWW:                              Termin Optionen.
-* -l*wN[WWW]:                            Termin Optionen.
-* -l@DVAR[+|-]NWWW:                      Termin Optionen.
-* -l@DVAR[[+|-]N]:                       Termin Optionen.
-* -l@e[+|-]NWWW:                         Termin Optionen.
-* -l@e[[+|-]N]:                          Termin Optionen.
-* -l@t[+|-]NWWW:                         Termin Optionen.
-* -l@t[[+|-]N]:                          Termin Optionen.
-* -lMMTT:                                Termin Optionen.
-* -lMMWWWN:                              Termin Optionen.
-* -lN+|-:                                Termin Optionen.
-* -lNd:                                  Termin Optionen.
-* -lNw:                                  Termin Optionen.
-* -m:                                    Termin Optionen.
-* -M:                                    Termin Optionen.
-* -m:                                    Termin Optionen.
-* -m+:                                   Termin Optionen.
-* -m-:                                   Termin Optionen.
-* -m[+|-]:                               Termin Optionen.
-* -M[+|-]:                               Termin Optionen.
-* -m|M[+|-]:                             Termin Optionen.
-* -n:                                    Kalender Optionen.
-* -N:                                    Kalender Optionen.
-* -N-:                                   Kalender Optionen.
-* -n-:                                   Kalender Optionen.
-* -n|N[-]:                               Kalender Optionen.
-* -O:                                    Kalender Optionen.
-* -o:                                    Termin Optionen.
-* -p:                                    Globale Optionen.
-* -P ARGUMENT:                           Termin Optionen.
-* -q CC[+...]:                           Kalender Optionen.
-* -r ARGUMENT:                           Termin Optionen.
-* -R DATEINAME:                          Globale Optionen.
-* -s ARGUMENT:                           Kalender Optionen.
-* -S DATEINAME:                          Globale Optionen.
-* -T:                                    Termin Optionen.
-* -t:                                    Termin Optionen.
-* -u:                                    Kalender Optionen.
-* -U:                                    Termin Optionen.
-* -V:                                    Allgemeine Optionen.
-* -v ARGUMENT:                           Termin Optionen.
-* -w:                                    Termin Optionen.
-* -W:                                    Termin Optionen.
-* -w:                                    Termin Optionen.
-* -w+:                                   Termin Optionen.
-* -w-:                                   Termin Optionen.
-* -W[+|-]:                               Termin Optionen.
-* -w[+|-]:                               Termin Optionen.
-* -w|W[+|-]:                             Termin Optionen.
-* -x:                                    Termin Optionen.
-* -X:                                    Kalender Optionen.
-* -y:                                    Termin Optionen.
-* -Y:                                    Termin Optionen.
-* -y+:                                   Termin Optionen.
-* -y-:                                   Termin Optionen.
-* -y[+|-]:                               Termin Optionen.
-* -Y[+|-]:                               Termin Optionen.
-* -y|Y[+|-]:                             Termin Optionen.
-* -Z:                                    Termin Optionen.
-* -z:                                    Termin Optionen.
-* @DATEI:                                Antwortdatei.
-* Kommando, .:                           3-Monatsmodus Kommandos.
-* Kommando, . JJJJ:                      3-Monatsmodus Kommandos.
-* Kommando, .+:                          3-Monatsmodus Kommandos.
-* Kommando, .+ JJJJ:                     3-Monatsmodus Kommandos.
-* Kommando, .-:                          3-Monatsmodus Kommandos.
-* Kommando, .- JJJJ:                     3-Monatsmodus Kommandos.
-* Kommando, ..:                          3-Monatsmodus Kommandos.
-* Kommando, .. JJJJ:                     3-Monatsmodus Kommandos.
-* Kommando, ::                           Einfache Kommandos.
-* Kommando, :JJJJ:                       Einfache Kommandos.
-* Kommando, JJJJ:                        Einfache Kommandos.
-* Kommando, JJJJ+JJJJ:                   Bereiche von Kommandos.
-* Kommando, JJJJ;...;JJJJ:               Listen von Kommandos.
-* Kommando, KEINES:                      Einfache Kommandos.
-* Kommando, MM JJJJ:                     Einfache Kommandos.
-* Kommando, MM JJJJ-JJJJ:                Bereiche von Kommandos.
-* Kommando, MM,...,MM:                   Listen von Kommandos.
-* Kommando, MM,...,MM JJJJ:              Listen von Kommandos.
-* Kommando, MM,MM/JJJJ,...:              Listen von Kommandos.
-* Kommando, MM-MM:                       Bereiche von Kommandos.
-* Kommando, MM-MM JJJJ:                  Bereiche von Kommandos.
-* Kommando, MM/JJJJ:                     Einfache Kommandos.
-* Kommando, MM/JJJJ,...,MM/JJJJ:         Listen von Kommandos.
-* Kommando, MM/JJJJ-JJJJ:                Bereiche von Kommandos.
-* Kommando, MM/JJJJ-MM/JJJJ:             Bereiche von Kommandos.
-* Kommando, MM::                         Einfache Kommandos.
-* Kommando, MM:;MM:;...:                 Listen von Kommandos.
-* Kommando, MM:;MM:JJJJ,...:             Listen von Kommandos.
-* Kommando, MM:JJJJ:                     Einfache Kommandos.
-* Kommando, MM:JJJJ+MM:JJJJ:             Bereiche von Kommandos.
-* Kommando, MM:JJJJ;...;MM:JJJJ:         Listen von Kommandos.
-* Kommando, MONATSNAME:                  Einfache Kommandos.
+`%n[[+|-]N]' bezeichnet die laufende bzw. abgefragte *Tagesnummer*
+relativ zum laufenden Datum `+/-' N Tagen und wird in einen, sich auf
+ein absolutes Datum beziehenden *Datumtext* im `%>02*D-%>3#U-%>04*Y'
+Format umgesetzt, z.B.:
+
+     Die Ressourcendateizeile `1962Sep21 10000 Tage alt: %n+10000' wird
+     umgesetzt in
+     ==> `10000 Tage alt: 06-Feb-1990', falls Gcal mit der einfachen
+     `-c' Option und dem `sep 1962' Kommando aufgerufen wird (*note
+     Einfaches Kommando `MM JJJJ': x-mm-jjjj.).
+
+
+File: gcal.info,  Node: Julianische Tageszahl,  Next: Geographische Distanz und Kurswinkel,  Prev: Textliches Datum,  Up: Ersetzen mit anderem Argument
+
+Julianische Tageszahl `%[FORMAT]j[ARGUMENT]' Spezialtext
+........................................................
+
+`%[FORMAT]j[[+|-]N]' bezeichnet die laufende bzw. abgefragte
+*Julianische Tageszahl* relativ zum aktuellen Systemdatum (==heute).
+Diese Tageszahl bezieht sich auf das Datum 1'ter Januar 4713 vor
+Christus, welches für astronomische Berechnungen als der Tag Null einer
+durchlaufenden Tageszählung angesehen wird und als das Julianische
+Datum (JD) bekannt ist.  Der exakte Nullpunkt von diesem Datum ist um
+12 Uhr Weltzeit (UTC/GMT); der Tageswechsel erfolgt also nicht um
+Mitternacht, sondern um Mittag Weltzeit.  Da Gcal hierbei nicht die
+Zeitzone des vom Rechner gelieferten Systemdatum auswertet, wird diese
+Tageszahl nur ganzzahlig dargestellt in der Annahme, daß der
+Tageswechsel bereits Mittags stattgefunden hat.  Wer den Tageswechsel
+als Mittags noch nicht bereits vollzogen dargestellt haben möchte, der
+soll die sich aus dem Spezialtext ergebende Julianische Tageszahl stets
+um den Faktor eins vermindern, z.B. `%j-1'.
+
+Zum Beispiel:
+
+     Die Ressourcendateizeile
+     `0 Julianischer Tag %j seit 01-Jan-4713 v.Chr.' wird umgesetzt in
+     ==> `Julianischer Tag 2437929 seit 01-Jan-4713 v.Chr.', falls Gcal
+     mit den Optionen `-c %19620921' sowie keinem Kommando aufgerufen
+     wird.
+
+Wenn dem `%[FORMAT]j' Text eine vorzeichenlose Zahl direkt folgt, so
+wird diese Zahl von der tatsächlichen Julianischen Tageszahl stets
+subtrahiert.  So kann im Text mit beliebigen Bezugsgrößen gearbeitet
+werden, z.B.:
+
+     Die Ressourcendateizeile
+     `0 Julianischer Tag %j2415021 seit 01-Jan-1900' wird umgesetzt in
+     ==> `Julianischer Tag 4 seit 01-Jan-1900', falls Gcal mit den
+     Optionen `-c %19000105' sowie keinem Kommando aufgerufen wird.
+
+
+File: gcal.info,  Node: Geographische Distanz und Kurswinkel,  Next: Sonnendaten,  Prev: Julianische Tageszahl,  Up: Ersetzen mit anderem Argument
+
+Geographische Distanz und Kurswinkel `%[FORMAT]bARGUMENT' Spezialtext
+.....................................................................
+
+`%[FORMAT]b[*][MODUS]ISO-6709:1983-KOORDINATE-1/ISO-6709:1983-KOORDINATE-2'
+bezeichnet entweder die ungefähre *Luftliniendistanz* oder den
+ungefähren *rechtweisenden Kurswinkel*(1) (*note Geographische Distanz
+und Kurswinkel-Footnote-1::) zwischen zwei beliebigen geographischen
+Orten.
+
+Die Auswahl, welcher Wert durch diesen Spezialtext berechnet werden
+soll, erfolgt durch die Angabe des MODUS Bestandteils des vorstehenden
+Arguments.  Es können derzeit genau drei verschiedene Modi benutzt
+werden, die durch die Zeichen `0'...`2' repräsentiert sind:
+
+*Modus*     *Beschreibung*
+
+`0'         Die Luftliniendistanz zwischen ISO-6709:1983-KOORDINATE-1 und
+            ISO-6709:1983-KOORDINATE-2 berechnen.  Der Wert der
+            Luftliniendistanz wird standardmäßig in Kilometer
+            dargestellt.  Ein `*' Zeichen direkt vor diesem Moduszeichen
+            veranlaßt Gcal, den Distanzwert in einer anderen Bezugsgröße
+            darzustellen, und zwar in "statute Meilen"; wobei eine
+            statute Meile 1,609344 Kilometer entspricht.  Falls Gcal
+            nicht imstande ist, die ungefähre Distanz zwischen den beiden
+            geographischen Orten zu berechnen, da das ARGUMENT
+            fehlerhaft angegeben wurde, so wird anstelle des
+            Distanzwertes ein `??' Text erzeugt.
+
+`1'         Den rechtweisenden Kurswinkel zwischen
+            ISO-6709:1983-KOORDINATE-1 und ISO-6709:1983-KOORDINATE-2
+            berechnen.  Der Wert des Kurswinkels wird standardmäßig in
+            Grad und Altminuten dargestellt, und zwar im `GGGgMM''
+            Format.  Der Kurswinkel wird bezogen auf die geographische
+            Nordrichtung (nicht etwa die magnetische Nordrichtung, die
+            ein Kompass anzeigt) im Uhrzeigersinn dargestellt, wobei die
+            Winkelwerte für die Nordrichtung sowohl mit 0 Grad als auch
+            mit 360 Grad bezeichnet werden.  Ein `*' Zeichen direkt vor
+            diesem Moduszeichen veranlaßt Gcal, den Kurswinkelwert in
+            einem anderen Stil darzustellen; und zwar in Dezimalgrad,
+            d.h. im `GGG.G...' Format.  Falls Gcal nicht imstande ist,
+            den ungefähren Kurswinkel zwischen den beiden geographischen
+            Orten zu berechnen, da das ARGUMENT fehlerhaft angegeben
+            wurde, so wird anstelle des Kurswinkels ein `???g??'' Text
+            erzeugt.
+
+`2'         Wie Modus `1', nur daß der rechtweisende Kurswinkel zwischen
+            ISO-6709:1983-KOORDINATE-2 und ISO-6709:1983-KOORDINATE-1
+            berechnet wird.
+
+Wird kein MODUS angegeben, so benutzt Gcal automatisch den Modus, der
+durch das Moduszeichen `0' ausgelöst wird.  Wird ein Moduszeichen
+angegeben, daß keinem der Zeichen `0'...`2' entspricht, so benutzt Gcal
+ebenfalls automatisch den Modus, der durch das Moduszeichen `0'
+ausgelöst wird.
+
+Nach den optionalen Stil- und Moduszeichen erfolgt die Angabe der
+Breiten- und Längengrade der geographischen Koordinaten, für welche die
+Berechnung erfolgen soll.  Diese müssen der ISO-6709:1983
+Standarddarstellung von Breiten- und Längengrad eines geographischen
+Ortes entsprechen.  Die beiden Koordinaten müssen durch ein `/'
+Begrenzungszeichen voneinander getrennt werden.
+
+*Note Argumente der sonnenbezogenen Spezialtexte: x-Sonne-Argumente,
+für die ausführliche Beschreibung der Komponenten der ISO-6709:1983
+Standarddarstellung von Breiten- und Längengrad eines geographischen
+Orts.
+
+Zum Beispiel:
+
+     Der Text `Distanz Paris-Tokyo: %b+4852+00220/+3542+13946 km' wird
+     umgesetzt in
+     ==> `Distanz Paris-Tokyo: 9746km'.
+
+     Der Text `Distanz Paris-Tokyo: %b*0+4852+00220/+3542+13946 ms'
+     wird umgesetzt in
+     ==> `Distanz Paris-Tokyo: 6056ms'.
+
+     Der Text `Kurswinkel Paris-Tokyo: %b1+4852+00220/+3542+13946' wird
+     umgesetzt in
+     ==> `Kurswinkel Paris-Tokyo: 033g22''.
+
+     Der Text `Kurswinkel Tokyo-Paris: %b*2+4852+00220/+3542+13946'
+     wird umgesetzt in
+     ==> `Kurswinkel Tokyo-Paris: 333.548'.
+
+Personen islamischen Glaubens wenden sich beim Gebet stets in diejenige
+Himmelsrichtung, in der sich der Ort Mekka, Saudi-Arabien, befindet.
+Dieser Personenkreis kann nun sehr leicht mittels Gcal feststellen, in
+welcher Richtung Mekka --bezogen auf den jeweiligen Standort-- liegt,
+und zwar durch:
+
+     %b1ISO-6709:1983-KOORDINATE-1/+212516+0394929
+
+wobei ISO-6709:1983-KOORDINATE-1 einfach durch die Ortskoordinate des
+jeweiligen Standortes ersetzt wird.
+
+*Note Termin Option `--precise': x-precise, wie eine präzisere
+Darstellung der Werte erzielt werden kann, die durch diesen Spezialtext
+bewirkt werden.
+
+Dieser Spezialtext *muß* stets von einem _whitespace_ Zeichen gefolgt
+werden, welches seinerseits in der Ausgabe entfernt wird!
+
+
+File: gcal.info,  Node: Geographische Distanz und Kurswinkel-Footnotes,  Up: Geographische Distanz und Kurswinkel
+
+(1) Der Kurswinkel gibt die Richtung an, mit der ein Großkreisbogen
+("Orthodrome"), der zwischen zwei Punkten auf einer Kugeloberfläche
+geschlagen wird, einen Meridian schneidet (Gcal benutzt einen Geoid
+(Rotationsellipsoid), der in Anlehnung an das 1961 geschaffene
+`Geodätische Welt System', abgekürzt W.G.S, berechnet wird).  Ein
+solcher Großkreisbogen stellt die kürzeste geodätische Verbindungslinie
+zwischen zwei Punkten auf einer Kugel dar.  Allerdings ändern sich die
+Kurswinkel auf einem solchen Großkreis stetig, da die geschlagene
+Kreiskurve jeden Meridian unter einem anderen Winkel schneidet --
+hiervon ausgenommen ist der Fall, daß sich beide Koordinaten entweder
+genau auf den gleichen "Meridian" (Längengrad), oder genau auf den
+gleichen Breitengrad beziehen.
+
+
+File: gcal.info,  Node: Sonnendaten,  Next: Monddaten,  Prev: Geographische Distanz und Kurswinkel,  Up: Ersetzen mit anderem Argument
+
+Sonnendaten `%[FORMAT]?ARGUMENT' Spezialtexte
+.............................................
+
+`%[FORMAT]o[*][MODUS]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+bezeichnet in der Grundeinstellung die ungefähre Uhrzeit des
+*Sonnenaufgangs*,
+`%[FORMAT]s[*][MODUS]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+bezeichnet in der Grundeinstellung die ungefähre Uhrzeit des
+*Sonnenuntergangs*,
+`%[FORMAT]u[*][MODUS]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+bezeichnet in der Grundeinstellung die ungefähre *Sichtbarkeitsdauer*
+der Sonne (solare Tageslänge), und
+`%[FORMAT]z[*][MODUS]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+bezeichnet in der Grundeinstellung die ungefähre
+*Nichtsichtbarkeitsdauer* der Sonne (solare Nachtlänge).
+
+Alle diese Spezialtexte können auf jede beliebige Ortskoordinate
+angewendet werden, d.h. es können verschiedenartige, astronomische
+Werte für jeden beliebigen Standort auf der Erdkugel ermittelt werden,
+und zwar für jede beliebige, minutengenaue Uhrzeit in dem von Gcal
+berücksichtigtem Zeitraum der Jahre A.D. 1 bis A.D. 9999.
+
+Die Auswahl, welcher andere Wert durch diese Spezialtexte berechnet
+werden soll, erfolgt durch die Angabe des MODUS Bestandteils des
+vorstehenden Arguments.  Es können derzeit genau 54 verschiedene Modi
+benutzt werden, die durch die Zeichen `0'...`9', `a'...`z' und
+`A'...`R' repräsentiert sind, und die in Abhängigkeit des verwendeten
+Spezialtextes verschiedenartige Ergebnisse erzeugen.  Es folgt zunächst
+eine Tabelle, in der alle verwendbaren Modi beschrieben und auch
+weitestgehend erklärt werden.  Aus dieser Tabelle kann zudem noch
+ersehen werden, welcher oder welche der sonnenbezogenen Spezialtexte
+mit welchem Modus korrespondieren, d.h. die Ermittlung desjenigen
+astronomischen Wertes auslösen, wie er in der Tabelle beschrieben ist:
+
+*Modus* *Spezialtext* *Beschreibung*
+
+`0'     `o', `s'      Die ungefähre Uhrzeit des astronomischen
+                      Mitternachtzeitpunktes der Sonne berechnen.  Der
+                      astronomische Mitternachtzeitpunkt der Sonne ist zu
+                      derjenigen Uhrzeit, zu der die Sonne einen "Azimut"
+                      (horizontaler Winkelabstand zwischen dem
+                      Vertikalkreis bzw. Scheitelkreis, der durch die
+                      Sonne geht, und dem Nordpunkt) von entweder genau 0
+                      Grad oder genau 180 Grad einnimmt ("Mittagslinie"),
+                      was von der Jahreszeit und der Ortskoordinate
+                      abhängig ist.  Zu dieser Uhrzeit befindet sich die
+                      Sonne nahe ihres "unteren Kulminationspunktes",
+                      d.h. nahe des niedrigsten Punktes unter- oder
+                      oberhalb der Horizontalebene, der vom Mittelpunkt
+                      der Sonne an diesem Tag durchlaufen wird.
+
+`1'     `o', `s'      Die ungefähre Uhrzeit des astronomischen
+                      Mittagzeitpunktes der Sonne berechnen.  Der
+                      astronomische Mittagzeitpunkt der Sonne ist zu
+                      derjenigen Uhrzeit, zu der die Sonne einen Azimut
+                      von entweder genau 180 Grad oder genau 0 Grad
+                      einnimmt (Mittagslinie), was von der Jahreszeit und
+                      der Ortskoordinate abhängig ist.  Zu dieser Uhrzeit
+                      befindet sich die Sonne nahe ihres "oberen
+                      Kulminationspunktes", d.h. nahe des höchsten
+                      Punktes ober- oder unterhalb der Horizontalebene,
+                      der vom Mittelpunkt der Sonne an diesem Tag
+                      durchlaufen wird.  Personen islamischen Glaubens
+                      beten normalerweise zum zweiten Mal am Tag während
+                      der Zeitspanne, die zwischen dem astronomischen
+                      Mittagzeitpunkt der Sonne (oder kurz danach) und
+                      der islamischen "Asr" Gebetszeit liegt.  Dieser
+                      Personenkreis bezeichnet diese Gebetszeit auch
+                      gemeinhin mit "Zuhr".  Die Asr Gebetszeit hängt von
+                      der Schattenlänge ab, die ein senkrechter Stab
+                      ("Gnomon") wirft.  Vertreter der _Shafi_ Lehre
+                      definieren den Beginn der Asr Gebetszeit als
+                      diejenige Uhrzeit, zu der ein senkrechter Stab
+                      einen Schatten wirft, der _genauso lang_ ist wie
+                      der Stab selbst.  Vertreter der _Hanafi_ Lehre
+                      definieren den Beginn der Asr Gebetszeit als
+                      diejenige Uhrzeit, zu der ein senkrechter Stab
+                      einen Schatten wirft, der *doppelt so lang* ist wie
+                      der Stab selbst.  In beiden Fällen wird jedoch die
+                      minimale Schattenlänge, die solch ein Stab zum
+                      astronomischen Mittagzeitpunkt der Sonne wirft, von
+                      der Schattenlänge subtrahiert, bevor diese mit der
+                      Länge des Stabes verglichen wird.  *Note Islamische
+                      Asr-1 Gebetszeit: x-Sonne-Asr-1, und *Note
+                      Islamische Asr-2 Gebetszeit: x-Sonne-Asr-2, für
+                      weitere Details.
+
+`2'     `o'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe von 0 Grad
+                      auf einem "mathematisch-geozentrischen" Horizont am
+                      Morgen durchschreitet; also aufgeht.  Ein
+                      mathematischer Horizont ist ein rein geometrisch
+                      gebildeter Horizont, der die Refraktion
+                      unberücksichtigt läßt, die sich in der Realität
+                      durch den Einfluß der Erdatmosphäre ergibt.  Als
+                      geozentrischer Horizont wird diejenige
+                      Horizontalebene bezeichnet, die durch den
+                      Erdmittelpunkt verläuft.  Im weiteren Kontext wird
+                      aber einfach nur noch der kürzere Begriff
+                      _mathematischer Horizont_ benutzt, der eigentlich
+                      den mathematisch-geozentrischen Horizont meint.
+
+`2'     `s'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe von 0 Grad
+                      auf einem mathematischen Horizont am Abend
+                      durchschreitet; also untergeht.
+
+`2'     `u'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe von 0 Grad
+                      auf einem mathematischen Horizont überschreitet;
+                      also sichtbar ist.
+
+`2'     `z'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe von 0 Grad
+                      auf einem mathematischen Horizont unterschreitet;
+                      also nicht sichtbar ist.
+
+`3'     `o'           Die ungefähre Uhrzeit berechnen, zu der der obere
+                      Rand der Sonnenscheibe eine Referenzhöhe von 0 Grad
+                      auf einem mathematischen Horizont am Morgen
+                      durchschreitet; also aufgeht.  Die hier genannte
+                      Referenzhöhe errechnet sich aus dem zu dieser
+                      Uhrzeit gültigen Wert des Sonnenradius'.  Wenn die
+                      auf den oberen Rand der Sonnenscheibe bezogene
+                      Referenzhöhe auf den Sonnenmittelpunkt umgerechnet
+                      wird, so liegt diese bei etwa 16 Altminuten
+                      unterhalb des geozentrischen Horizonts.
+
+`3'     `s'           Die ungefähre Uhrzeit berechnen, zu der der obere
+                      Rand der Sonnenscheibe eine Referenzhöhe von 0 Grad
+                      auf einem mathematischen Horizont am Abend
+                      durchschreitet; also untergeht.  Die hier genannte
+                      Referenzhöhe errechnet sich aus dem zu dieser
+                      Uhrzeit gültigen Wert des Sonnenradius'.
+
+`3'     `u'           Den ungefähre Zeitdauer berechnen, während der der
+                      obere Rand der Sonnenscheibe eine Referenzhöhe von
+                      0 Grad auf einem mathematischen Horizont
+                      überschreitet; also sichtbar ist.
+
+`3'     `z'           Die ungefähre Zeitdauer berechnen, während der der
+                      obere Rand der Sonnenscheibe eine Referenzhöhe von
+                      0 Grad auf einem mathematischen Horizont
+                      unterschreitet; also nicht sichtbar ist.
+
+`4'     `o'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe, die bei 34
+                      Altminuten unterhalb des geozentrischen Horizonts
+                      liegt, am Morgen durchschreitet; also aufgeht.  Die
+                      Refraktion, die sich in der Realität durch den
+                      Einfluß der Erdatmosphäre ergibt, wird hierbei
+                      bereits mit dem Standardwert von 34 Altminuten
+                      berücksichtigt, der aber indirekt durch die
+                      Benutzung der `--atmosphere' Option verändert
+                      werden kann.  *Note Termin Option
+                      `--atmosphere=LUFTDRUCK[,TEMPERATUR]': x-atmosphere,
+                      wie die Basisdaten der Atmosphäre geändert werden
+                      können, so daß die dann definierten atmosphärischen
+                      Bedingungen zur Refraktionsberechnung verwendet
+                      werden.
+
+`4'     `s'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe, die bei 34
+                      Altminuten unterhalb des geozentrischen Horizonts
+                      liegt, am Abend durchschreitet; also untergeht.
+                      Die Refraktion, die sich in der Realität durch den
+                      Einfluß der Erdatmosphäre ergibt, wird hierbei
+                      bereits mit dem Standardwert von 34 Altminuten
+                      berücksichtigt, der aber indirekt durch die
+                      Benutzung der `--atmosphere' Option verändert
+                      werden kann.
+
+`4'     `u'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe
+                      überschreitet, die bei 34 Altminuten unterhalb des
+                      geozentrischen Horizonts liegt; also sichtbar ist.
+
+`4'     `z'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe
+                      unterschreitet, die bei 34 Altminuten unterhalb des
+                      geozentrischen Horizonts liegt; also nicht sichtbar
+                      ist.
+
+`5'     `o'           Die ungefähre Uhrzeit berechnen, zu der der obere
+                      Rand der Sonnenscheibe eine Referenzhöhe, die bei
+                      34 Altminuten unterhalb des geozentrischen
+                      Horizonts liegt, am Morgen durchschreitet; also
+                      aufgeht.  Diese Art der Aufgangszeitberechnung
+                      entspricht der Standardberechnungsmethode, wie sie
+                      im allgemeinen international benutzt wird.  Die
+                      Refraktion, die sich in der Realität durch den
+                      Einfluß der Erdatmosphäre ergibt, wird hierbei
+                      bereits mit dem Standardwert von 34 Altminuten
+                      berücksichtigt, der aber indirekt durch die
+                      Benutzung der `--atmosphere' Option verändert
+                      werden kann.  *Note Termin Option
+                      `--atmosphere=LUFTDRUCK[,TEMPERATUR]': x-atmosphere,
+                      wie die Basisdaten der Atmosphäre geändert werden
+                      können, so daß diese definierten atmosphärischen
+                      Bedingungen zur Refraktionsberechnung verwendet
+                      werden.  Die hier genannte Referenzhöhe errechnet
+                      sich aus den zu dieser Uhrzeit jeweilig gültigen
+                      Werten von Sonnenradius und (Standard) Refraktion.
+                      Wenn die auf den oberen Rand der Sonnenscheibe
+                      bezogene Referenzhöhe auf den Sonnenmittelpunkt
+                      umgerechnet wird, so liegt diese bei etwa 50
+                      Altminuten unterhalb des geozentrischen Horizonts.
+
+`5'     `s'           Die ungefähre Uhrzeit berechnen, zu der der obere
+                      Rand der Sonnenscheibe eine Referenzhöhe, die bei
+                      34 Altminuten unterhalb des geozentrischen
+                      Horizonts liegt, am Abend durchschreitet; also
+                      untergeht.  Diese Art der Untergangszeitberechnung
+                      entspricht der Standardberechnungsmethode, wie sie
+                      im allgemeinen international benutzt wird.  Die
+                      Refraktion, die sich in der Realität durch den
+                      Einfluß der Erdatmosphäre ergibt, wird hierbei
+                      bereits mit dem Standardwert von 34 Altminuten
+                      berücksichtigt, der aber indirekt durch die
+                      Benutzung der `--atmosphere' Option verändert
+                      werden kann.  Die hier genannte Referenzhöhe
+                      errechnet sich aus den zu dieser Uhrzeit jeweilig
+                      gültigen Werten von Sonnenradius und (Standard)
+                      Refraktion.  Personen islamischen Glaubens beten
+                      normalerweise zum vorletzten Mal am Tag zu, oder
+                      kurz nach, dieser Uhrzeit.  Dieser Personenkreis
+                      bezeichnet diese Gebetszeit auch gemeinhin mit
+                      "Maghrib".
+
+`5'     `u'           Die ungefähre Zeitdauer berechnen, während der der
+                      obere Rand der Sonnenscheibe eine Referenzhöhe
+                      überschreitet, die bei 34 Altminuten unterhalb des
+                      geozentrischen Horizonts liegt; also sichtbar ist.
+                      Diese Art der Zeitdauerberechnung der Sichtbarkeit
+                      entspricht der Standardberechnungsmethode, wie sie
+                      im allgemeinen international benutzt wird.
+
+`5'     `z'           Die ungefähre Zeitdauer berechnen, während der der
+                      obere Rand der Sonnenscheibe eine Referenzhöhe
+                      unterschreitet, die bei 34 Altminuten unterhalb des
+                      geozentrischen Horizonts liegt; also nicht sichtbar
+                      ist.  Diese Art der Zeitdauerberechnung der
+                      Nichtsichtbarkeit entspricht der
+                      Standardberechnungsmethode, wie sie im allgemeinen
+                      international benutzt wird.
+
+`6'     `o'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe, die bei 6
+                      Grad unterhalb eines mathematischen Horizonts
+                      liegt, am Morgen durchschreitet; also der Beginn der
+                      "bürgerlichen Dämmerung".  Das Restlicht der Sonne,
+                      daß zu Beginn der bürgerlichen Dämmerungsphase
+                      verbleibt, reicht im allgemeinen noch nicht dazu
+                      aus, um außer Haus ohne künstliche Beleuchtung
+                      lesen zu können.
+
+`6'     `s'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe, die bie 6
+                      Grad unterhalb eines mathematischen Horizonts
+                      liegt, am Abend durchschreitet; also das Ende der
+                      bürgerlichen Dämmerung.
+
+`6'     `u'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe
+                      überschreitet, die bei 6 Grad unterhalb eines
+                      mathematischen Horizonts liegt; also die Zeitspanne,
+                      während der sich der Sonnenmittelpunkt stets
+                      oberhalb -6 Grad befindet.
+
+`6'     `z'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe
+                      unterschreitet, die bei 6 Grad unterhalb eines
+                      mathematischen Horizonts liegt; also die Zeitspanne,
+                      während der sich der Sonnenmittelpunkt stets
+                      unterhalb -6 Grad befindet.
+
+`7'     `o'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe, die bei 12
+                      Grad unterhalb eines mathematischen Horizonts
+                      liegt, am Morgen durchschreitet; also der Beginn der
+                      "nautischen Dämmerung".  Das Restlicht der Sonne,
+                      daß zu Beginn der nautischen Dämmerungsphase
+                      verbleibt, reicht im allgemeinen noch nicht dazu
+                      aus, um Navigation betreiben zu können, die sich an
+                      einem Meereshorizont orientiert.
+
+`7'     `s'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe, die bei 12
+                      Grad unterhalb eines mathematischen Horizonts
+                      liegt, am Abend durchschreitet; also das Ende der
+                      nautischen Dämmerung.
+
+`7'     `u'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe
+                      überschreitet, die bei 12 Grad unterhalb eines
+                      mathematischen Horizonts liegt; also die Zeitspanne,
+                      während der sich der Sonnenmittelpunkt stets
+                      oberhalb -12 Grad befindet.
+
+`7'     `z'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe
+                      unterschreitet, die bei 12 Grad unterhalb eines
+                      mathematischen Horizonts liegt; also die Zeitspanne,
+                      während der sich der Sonnenmittelpunkt stets
+                      unterhalb -12 Grad befindet.
+
+`8'     `o'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe, die bei 15
+                      Grad unterhalb eines mathematischen Horizonts
+                      liegt, am Morgen durchschreitet; also der Beginn der
+                      "amateur-astronomischen Dämmerung".  Das Restlicht
+                      der Sonne, daß zu Beginn der amateur-astronomischen
+                      Dämmerungsphase verbleibt, ist im allgemeinen noch
+                      so schwach, daß die meisten astronomischen
+                      Beobachtungen vorgenommen werden können.
+
+`8'     `s'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe, die bei 15
+                      Grad unterhalb eines mathematischen Horizonts
+                      liegt, am Abend durchschreitet; also das Ende der
+                      amateur-astronomischen Dämmerung.
+
+`8'     `u'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe
+                      überschreitet, die bei 15 Grad unterhalb eines
+                      mathematischen Horizonts liegt; also die Zeitspanne,
+                      während der sich der Sonnenmittelpunkt stets
+                      oberhalb -15 Grad befindet.
+
+`8'     `z'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe
+                      unterschreitet, die bei 15 Grad unterhalb eines
+                      mathematischen Horizonts liegt; also die Zeitspanne,
+                      während der sich der Sonnenmittelpunkt stets
+                      unterhalb -15 Grad befindet.
+
+`9'     `o'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe, die bei 18
+                      Grad unterhalb eines mathematischen Horizonts
+                      liegt, am Morgen durchschreitet; also der Beginn der
+                      "astronomischen Dämmerung".  Zu Beginn der
+                      astronomischen Dämmerungsphase ist kein
+                      nennenswertes Restlicht der Sonne vorhanden, der
+                      Himmel ist noch vollständig schwarz.  Personen
+                      islamischen Glaubens beten normalerweise zum ersten
+                      Mal am Tag während der Zeitspanne, die zwischen
+                      dieser Uhrzeit und der Uhrzeit des
+                      Standard-Sonnenaufgangs liegt.  Dieser Personenkreis
+                      bezeichnet diese Gebetszeit auch gemeinhin mit
+                      "Fajr".  *Note Standard-Aufgangszeit der Sonne:
+                      x-Sonne-Standardaufgang, für weitere Details.
+
+`9'     `s'           Die ungefähre Uhrzeit berechnen, zu der der
+                      Mittelpunkt der Sonne eine Referenzhöhe, die bei 18
+                      Grad unterhalb eines mathematischen Horizonts
+                      liegt, am Abend durchschreitet; also das Ende der
+                      astronomischen Dämmerung.  Personen islamischen
+                      Glaubens beten normalerweise zum letzten Mal am Tag
+                      zu, oder kurz nach, dieser Uhrzeit.  Dieser
+                      Personenkreis bezeichnet diese Gebetszeit auch
+                      gemeinhin mit "Isha".
+
+`9'     `u'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe
+                      überschreitet, die bei 18 Grad unterhalb eines
+                      mathematischen Horizonts liegt; also die Zeitspanne,
+                      ährend der sich der Sonnenmittelpunkt stets
+                      oberhalb -18 Grad befindet.
+
+`9'     `z'           Die ungefähre Zeitdauer berechnen, während der der
+                      Mittelpunkt der Sonne eine Referenzhöhe
+                      unterschreitet, die bei 18 Grad unterhalb eines
+                      mathematischen Horizonts liegt; also die Zeitspanne,
+                      während der sich der Sonnenmittelpunkt stets
+                      unterhalb -18 Grad befindet.
+
+`a'     `o', `s'      Die ungefähre, scheinbare, "topozentrische" "Höhe"
+                      der Sonne, also den vertikalen Winkelabstand
+                      zwischen Sonnenmittelpunkt und Horizont, in Grad
+                      und Altminuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.  Ergebnisse mit
+                      negativem Vorzeichen besagen, daß sich der momentane
+                      Sonnenmittelpunkt unterhalb des Horizonts befindet,
+                      und Ergebnisse mit positivem Vorzeichen besagen,
+                      daß sich der momentane Sonnenmittelpunkt oberhalb
+                      des Horizonts befindet.  Von der Erdoberfläche aus
+                      gemachte Beobachtungen von Gestirnen liefern
+                      topozentrisch-basierte Werte.  Die Gestirnsorte
+                      liegen bei topozentrisch ermittelten Daten zumeist
+                      an einer anderen Stelle als bei "geozentrisch",
+                      also am fiktiven Erdmittelpunkt, ermittelten Daten.
+                      Das hat im wesentlichen mit der Refraktion zu tun,
+                      die ein Gestirn an einem anderen Ort erscheinen
+                      läßt, als es sich in Wirklichkeit befindet.  Da
+                      sich die Erdkugel zu den Polkappen hin abflacht und
+                      somit nicht als ideale Kugelgestalt aufgefasst
+                      werden kann, hat der individuelle Erdradius, der
+                      sich zwischen Beobachtungsstandort und
+                      Erdmittelpunkt ergibt, auch noch Einfluß auf die
+                      Berechnung von topozentrisch-basierten Daten.
+
+`b'     `o', `s'      Das ungefähre, scheinbare, topozentrische Azimut
+                      der Sonne in Grad und Altminuten berechnen, das
+                      sich zum bürgerlichen Mitternachtzeitpunkt ergibt.
+
+`c'     `o', `s'      Die ungefähre, scheinbare, topozentrische
+                      "Deklination" der Sonne, also den vertikalen
+                      Winkelabstand zwischen Sonnenmittelpunkt und
+                      Himmelsäquator, in Grad und Altminuten berechnen,
+                      die sich zum bürgerlichen Mitternachtzeitpunkt
+                      ergibt.  Ergebnisse mit negativem Vorzeichen
+                      besagen, daß sich der momentane Sonnenmittelpunkt
+                      unterhalb des Himmelsäquators befindet, und
+                      Ergebnisse mit positivem Vorzeichen besagen, daß
+                      sich der momentane Sonnenmittelpunkt oberhalb des
+                      Himmelsäquators befindet.
+
+`d'     `o', `s'      Den ungefähren, scheinbaren, topozentrischen,
+                      "ekliptischen Längengrad" der Sonne, also den
+                      horizontalen Winkelabstand zwischen
+                      Sonnenmittelpunkt und Frühlingspunkt auf der
+                      "Ekliptik" (der Tierkreislinie oder Sonnenbahn), in
+                      Grad und Altminuten berechnen, der sich zum
+                      bürgerlichen Mitternachtzeitpunkt ergibt.
+
+`e'     `o', `s'      Die ungefähre, scheinbare, topozentrische
+                      "Rektazension" der Sonne, also den horizontalen
+                      Winkelabstand zwischen Sonnenmittelpunkt und dem
+                      durch den Frühlingspunkt auf der Ekliptik
+                      verlaufenden Stundenkreis, als Zeitwert in Stunden
+                      und Minuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.
+
+`f'     `o', `s'      Die ungefähre, topozentrische Entfernung der Sonne
+                      von der Erde in "Astronomischen Einheiten"
+                      berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.  Eine Astronomische
+                      Einheit, abgekürzt AE, entspricht der mittleren
+                      Entfernung der Sonne von der Erde, die etwa
+                      149.597.870,691 Kilometer beträgt.
+
+`g'     `o', `s'      Die ungefähre, scheinbare, topozentrische
+                      "Horizontalparallaxe" der Sonne in Grad und
+                      Altminuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.  Die
+                      Horizontalparallaxe der Sonne gibt den Durchmesser
+                      der Erde an, so wie er von der Sonnenoberfläche aus
+                      zu sehen ist.
+
+`h'     `o', `s'      Den ungefähren, scheinbaren, topozentrischen
+                      Sonnenradius in Grad und Altminuten berechnen, der
+                      sich zum bürgerlichen Mitternachtzeitpunkt ergibt.
+
+`i'     `o', `s'      Die ungefähre Refraktion der Erdatmosphäre in Grad
+                      und Altminuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.
+
+`j'     `o', `s'      Die ungefähre, scheinbare, geozentrische Höhe der
+                      Sonne in Grad und Altminuten berechnen, die sich
+                      zum bürgerlichen Mitternachtzeitpunkt ergibt.
+                      Ergebnisse mit negativem Vorzeichen besagen, daß
+                      sich der momentane Sonnenmittelpunkt unterhalb des
+                      Horizonts befindet, und Ergebnisse mit positivem
+                      Vorzeichen besagen, daß sich der momentane
+                      Sonnenmittelpunkt oberhalb des Horizonts befindet.
+
+`k'     `o', `s'      Das ungefähre, scheinbare, geozentrische Azimut der
+                      Sonne in Grad und Altminuten berechnen, das sich
+                      zum bürgerlichen Mitternachtzeitpunkt ergibt.
+
+`l'     `o', `s'      Die ungefähre, scheinbare, geozentrische Deklination
+                      der Sonne in Grad und Altminuten berechnen, die
+                      sich zum bürgerlichen Mitternachtzeitpunkt ergibt.
+                      Ergebnisse mit negativem Vorzeichen besagen, daß
+                      sich der momentane Sonnenmittelpunkt unterhalb des
+                      Himmelsäquators befindet, und Ergebnisse mit
+                      positivem Vorzeichen besagen, daß sich der
+                      momentane Sonnenmittelpunkt oberhalb des
+                      Himmelsäquators befindet.
+
+`m'     `o', `s'      Den ungefähren, scheinbaren, geozentrischen,
+                      ekliptischen Längengrad der Sonne in Grad und
+                      Altminuten berechnen, der sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.
+
+`n'     `o', `s'      Die ungefähre, scheinbare, geozentrische
+                      Rektazension der Sonne als Zeitwert in Stunden und
+                      Minuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.
+
+`o'     `o', `s'      Die ungefähre, geozentrische Entfernung der Sonne
+                      von der Erde in Astronomischen Einheiten berechnen,
+                      die sich zum bürgerlichen Mitternachtzeitpunkt
+                      ergibt.
+
+`p'     `o', `s'      Die ungefähre, scheinbare, geozentrische
+                      Horizontalparallaxe der Sonne in Grad und
+                      Altminuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.
+
+`q'     `o', `s'      Den ungefähren, scheinbaren, geozentrischen
+                      Sonnenradius in Grad und Altminuten berechnen, der
+                      sich zum bürgerlichen Mitternachtzeitpunkt ergibt.
+
+`r'     `o', `s'      Das ungefähre "delta-t" in Sekunden berechnen, das
+                      sich zum bürgerlichen Mitternachtzeitpunkt ergibt.
+                      Als delta-t wird die Differenz zwischen der
+                      Terrestrischen Dynamischen Zeit (englisch
+                      `Terrestrial Dynamical time', abgekürzt TDT; die
+                      früher auch unter dem Begriff _Ephemeridenzeit_
+                      (ET) bekannt war) und der Weltzeit (UT) bezeichnet.
+                      Also, `delta-t == TDT - UT'.
+
+`s'     `o', `s'      Die ungefähre, scheinbare, ortsbezogene "siderische
+                      Uhrzeit" (lokale siderische Uhrzeit (LAST), auch
+                      als _lokale Sternzeit_ bekannt), in Stunden und
+                      Minuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.  Ein "Sterntag" ist
+                      der Zeitraum zwischen zwei aufeinanderfolgenden
+                      oberen Kulminationen des Frühlingspunktes auf der
+                      Ekliptik im Meridian des Beobachtungsstandortes.
+                      Somit ist die lokale "Sternzeit" die momentane
+                      Zeitspanne, die zwischen der letzten oberen
+                      Kulmination des Frühlingspunktes im Merdian des
+                      Beobachtungsstandortes verflossen ist (der momentane
+                      Stundenwinkel des Frühlingspunktes), also die
+                      momentane Rektazension der Gestirne im
+                      Beobachtungsmeridian.
+
+`t'     `o', `s'      Die Basiszeit als Zeitwert in Stunden und Minuten
+                      ausgeben, für die die dynamischen, d.h. von der
+                      jeweiligen Uhrzeit abhängigen, astronomischen
+                      Sonnendaten und Zeiten berechnet werden.  Ohne
+                      Angabe der `--time-offset=ARGUMENT' Option werden
+                      die astronomischen Sonnendaten und Zeiten stets für
+                      0 Uhr Weltzeit (UTC/GMT) berechnet.  *Note Kalender
+                      Option `--time-offset=ARGUMENT': x-time-offset, für
+                      weitere Details.
+
+`u'     `o', `s'      Das ungefähre Julianische Datum in Tagen berechnen,
+                      das sich zum bürgerlichen Mitternachtzeitpunkt
+                      ergibt.  *Note Julianische Tageszahl::, für weitere
+                      Informationen zum Julianischen Datum.
+
+`v'     `o', `s'      Das ungefähre "Julianische Ephemeridendatum", also
+                      ein um _delta-t_ korrigiertes Julianisches Datum,
+                      in Tagen berechnen, das sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.
+
+`w'     `o', `s'      Den ungefähren Unterschied zwischen "wahrer
+                      Sonnenzeit" und "mittlerer Sonnenzeit" als Zeitwert
+                      in Stunden und Minuten berechnen, der sich zum
+                      bürgerlichen Mitternachtzeitpunkt ergibt.  Diese
+                      sogenannte "Zeitgleichung" ist eine Korrektur, die
+                      zur wahren Sonnenzeit --wie auf einer Sonnenuhr
+                      abgelesen-- hinzuaddiert wird, um die mittlere
+                      Sonnenzeit zu erhalten.  Ein "wahrer Sonnentag" ist
+                      die Zeitspanne zwischen zwei aufeinanderfolgenden
+                      unteren Kulminationen der Sonne.  Hieraus wird die
+                      wahre Sonnenzeit abgeleitet (so wie sie auch von
+                      einer Sonnenuhr während des Tages angezeigt wird).
+                      Ein Sterntag wird auch als `mittlerer Sonnentag'
+                      bezeichnet.  Da sich die Sonne gegenüber dem
+                      Frühlingspunkt auf der Ekliptik wegen der
+                      Erdbewegung um die Sonne scheinbar verschiebt, sind
+                      Sterntag und wahrer Sonnentag nicht gleich lang.
+                      Da sich die wahre Sonne nämlich ungleichförmig
+                      durch die Ekliptik bewegt, läßt man eine fiktive
+                      "mittlere Sonne" gleichmäßig durch den
+                      Himmelsäquator laufen und bezieht die mittlere
+                      Sonnenzeit auf diese.  Also, diese Zeitdifferenz
+                      ist eine Auswirkung des elliptischen und geneigten
+                      Erdorbits um die Sonne, das die scheinbar
+                      ungleichförmige Sonnenbewegung verursacht.
+
+`x'     `o', `s'      Die ungefähre, scheinbare, topozentrische
+                      Höhendifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.  Ergebnisse mit
+                      negativem Vorzeichen besagen, daß sich der momentane
+                      Sonnenmittelpunkt auf einer Höhe befindet, die
+                      unterhalb der momentanen Höhe des Mondmittelpunktes
+                      liegt; also die Sonne steht tiefer als der Mond.
+                      Ergebnisse mit positivem Vorzeichen besagen, daß
+                      sich der momentane Sonnenmittelpunkt auf einer Höhe
+                      befindet, die oberhalb der momentanen Höhe des
+                      Mondmittelpunktes liegt; also die Sonne steht höher
+                      als der Mond.
+
+`y'     `o', `s'      Die ungefähre, scheinbare, topozentrische
+                      Azimutaldifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.  Das Ergebnis gibt den
+                      horizontalen Winkelabstand an, um den der momentane
+                      Sonnenmittelpunkt vom momentanen Mondmittelpunkt
+                      entfernt ist; und zwar gemessen auf den
+                      Vertikalkreisen (Scheitelkreisen), die durch die
+                      Sonne und den Nordpunkt und durch den Mond und den
+                      Nordpunkt gehen.  Hierbei bedeutet ein Ergebnis mit
+                      negativem Vorzeichen, daß der Mond rechts (im
+                      Uhrzeigersinn) der Sonne steht, wenn man zur Sonne
+                      schaut -- oder alternativ ausgedrückt, daß die
+                      Sonne links (gegen den Uhrzeigersinn) des Mondes
+                      steht.  Und ein Ergebnis mit positivem Vorzeichen
+                      bedeutet, daß der Mond links (gegen den
+                      Uhrzeigersinn) der Sonne steht, wenn man zur Sonne
+                      schaut -- oder alternativ gesagt, daß die Sonne
+                      rechts (im Uhrzeigersinn) des Mondes steht.
+
+`z'     `o', `s'      Die ungefähre, scheinbare, geozentrische
+                      Höhendifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.
+
+`A'     `o', `s'      Die ungefähre, scheinbare, geozentrische
+                      Azimutaldifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.
+
+`B'     `o'           Die ungefähre, scheinbare, topozentrische
+                      Höhendifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zu der Uhrzeit des
+                      Standard-Sonnenaufgangs ergibt.  *Note
+                      Standard-Aufgangszeit der Sonne:
+                      x-Sonne-Standardaufgang, für weitere Details.
+
+`B'     `s'           Die ungefähre, scheinbare, topozentrische
+                      Höhendifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zu der Uhrzeit des
+                      Standard-Sonnenuntergangs ergibt.  *Note
+                      Standard-Untergangszeit der Sonne:
+                      x-Sonne-Standarduntergang, für weitere Details.
+
+`C'     `o'           Die ungefähre, scheinbare, topozentrische
+                      Azimutaldifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zu der Uhrzeit des
+                      Standard-Sonnenaufgangs ergibt.  *Note
+                      Standard-Aufgangszeit der Sonne:
+                      x-Sonne-Standardaufgang, für weitere Details.
+
+`C'     `s'           Die ungefähre, scheinbare, topozentrische
+                      Azimutaldifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zu der Uhrzeit des
+                      Standard-Sonnenuntergangs ergibt.  *Note
+                      Standard-Untergangszeit der Sonne:
+                      x-Sonne-Standarduntergang, für weitere Details.
+
+`D'     `o'           Die ungefähre, scheinbare, geozentrische
+                      Höhendifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zu der Uhrzeit des
+                      Standard-Sonnenaufgangs ergibt.  *Note
+                      Standard-Aufgangszeit der Sonne:
+                      x-Sonne-Standardaufgang, für weitere Details.
+
+`D'     `s'           Die ungefähre, scheinbare, geozentrische
+                      Höhendifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zu der Uhrzeit des
+                      Standard-Sonnenuntergangs ergibt.  *Note
+                      Standard-Untergangszeit der Sonne:
+                      x-Sonne-Standarduntergang, für weitere Details.
+
+`E'     `o'           Die ungefähre, scheinbare, geozentrische
+                      Azimutaldifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zu der Uhrzeit des
+                      Standard-Sonnenaufgangs ergibt.  *Note
+                      Standard-Aufgangszeit der Sonne:
+                      x-Sonne-Standardaufgang, für weitere Details.
+
+`E'     `s'           Die ungefähre, scheinbare, geozentrische
+                      Azimutaldifferenz (delta) von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, in Grad und
+                      Altminuten berechnen, die sich zu der Uhrzeit des
+                      Standard-Sonnenuntergangs ergibt.  *Note
+                      Standard-Untergangszeit der Sonne:
+                      x-Sonne-Standarduntergang, für weitere Details.
+
+`F'     `o', `s'      Die ungefähre Differenz (delta) der astronomischen
+                      Mitternachtzeitpunkte von Sonne und Mond, wobei die
+                      Sonne den Bezugspunkt darstellt, als Zeitwert in
+                      Stunden und Minuten berechnen, die sich zum
+                      Mitternachtzeitpunkt der Sonne ergibt.  Ergebnisse
+                      mit negativem Vorzeichen besagen, daß der
+                      astronomische Mitternachtzeitpunkt der Sonne früher
+                      stattfindet als der astronomische
+                      Mitternachtzeitpunkt des Mondes; also die solare
+                      Mitternacht findet vor der lunaren Mitternacht
+                      statt.  Ergebnisse mit positivem Vorzeichen
+                      besagen, daß der astronomische Mitternachtzeitpunkt
+                      der Sonne später stattfindet als der astronomische
+                      Mitternachtzeitpunkt des Mondes; also die solare
+                      Mitternacht findet nach der lunaren Mitternacht
+                      statt.  *Note Astronomischer Mitternachtzeitpunkt
+                      der Sonne: x-Sonne-Mitternacht, und *Note
+                      Astronomischer Mitternachtzeitpunkt des Mondes:
+                      x-Mond-Mitternacht, für weitere Details.
+
+`G'     `o', `s'      Die ungefähre Differenz (delta) der astronomischen
+                      Mittagzeitpunkte von Sonne und Mond, wobei die
+                      Sonne den Bezugspunkt darstellt, als Zeitwert in
+                      Stunden und Minuten berechnen, die sich zum
+                      Mittagzeitpunkt der Sonne ergibt.  Ergebnisse mit
+                      negativem Vorzeichen besagen, daß der astronomische
+                      Mittagzeitpunkt der Sonne früher stattfindet als
+                      der astronomische Mittagzeitpunkt des Mondes; also
+                      der solare Mittag findet vor dem lunaren Mittag
+                      statt.  Ergebnisse mit positivem Vorzeichen
+                      besagen, daß der astronomische Mittagzeitpunkt der
+                      Sonne später stattfindet als der astronomische
+                      Mittagzeitpunkt des Mondes; also der solare Mittag
+                      findet nach dem lunaren Mittag statt.  *Note
+                      Astronomischer Mittagzeitpunkt der Sonne:
+                      x-Sonne-Mittag, und *Note Astronomischer
+                      Mittagzeitpunkt des Mondes: x-Mond-Mittag, für
+                      weitere Details.
+
+`H'     `o'           Die ungefähre Differenz (delta) der
+                      Standard-Aufgangszeiten von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, als Zeitwert
+                      in Stunden und Minuten berechnen, die sich zur
+                      Uhrzeit des Standard-Sonnenaufgangs ergibt.
+                      Ergebnisse mit negativem Vorzeichen besagen, daß
+                      der Standard-Sonnenaufgang früher stattfindet als
+                      der Standard-Mondaufgang; also der Sonnenaufgang
+                      findet vor dem Mondaufgang statt.  Ergebnisse mit
+                      positivem Vorzeichen besagen, daß der
+                      Standard-Sonnenaufgang später stattfindet als der
+                      Standard-Mondaufgang; also der Sonnenaufgang findet
+                      nach dem Mondaufgang statt.  *Note
+                      Standard-Aufgangszeit der Sonne:
+                      x-Sonne-Standardaufgang, und *Note
+                      Standard-Aufgangszeit des Mondes:
+                      x-Mond-Standardaufgang, für weitere Details.
+
+`H'     `s'           Die ungefähre Differenz (delta) der
+                      Standard-Untergangszeiten von Sonne und Mond, wobei
+                      die Sonne den Bezugspunkt darstellt, als Zeitwert
+                      in Stunden und Minuten berechnen, die sich zur
+                      Uhrzeit des Standard-Sonnenuntergangs ergibt.
+                      Ergebnisse mit negativem Vorzeichen besagen, daß der
+                      Standard-Sonnenuntergang früher stattfindet als der
+                      Standard-Monduntergang; also der Sonnenuntergang
+                      findet vor dem Monduntergang statt.  Ergebnisse mit
+                      positivem Vorzeichen besagen, daß der
+                      Standard-Sonnenuntergang später stattfindet als der
+                      Standard-Monduntergang; also der Sonnenuntergang
+                      findet nach dem Monduntergang statt.  *Note
+                      Standard-Untergangszeit der Sonne:
+                      x-Sonne-Standarduntergang, und *Note
+                      Standard-Untergangszeit des Mondes:
+                      x-Mond-Standarduntergang, für weitere Details.
+
+`I'     `o', `s'      Die ungefähre, scheinbare, topozentrische Höhe der
+                      Sonne in Grad und Altminuten berechnen, die sich
+                      zum astronomischen Mitternachtzeitpunkt der Sonne
+                      ergibt (topozentrische "Mitternachtshöhe").  *Note
+                      Astronomischer Mitternachtzeitpunkt der Sonne:
+                      x-Sonne-Mitternacht, für mehr Informationen.
+
+`J'     `o', `s'      Die ungefähre, scheinbare, topozentrische Höhe der
+                      Sonne in Grad und Altminuten berechnen, die sich
+                      zum astronomischen Mittagzeitpunkt der Sonne ergibt
+                      (topozentrische "Mittagshöhe").  *Note
+                      Astronomischer Mittagzeitpunkt der Sonne:
+                      x-Sonne-Mittag, für mehr Informationen.
+
+`K'     `o'           Die ungefähre, scheinbare, topozentrische Höhe der
+                      Sonne in Grad und Altminuten berechnen, die sich
+                      zur Uhrzeit des Standard-Sonnenaufgangs ergibt
+                      (topozentrische "Aufgangshöhe").  *Note
+                      Standard-Aufgangszeit der Sonne:
+                      x-Sonne-Standardaufgang, für mehr Informationen.
+
+`K'     `s'           Die ungefähre, scheinbare, topozentrische Höhe der
+                      Sonne in Grad und Altminuten berechnen, die sich
+                      zur Uhrzeit des Standard-Sonnenuntergangs ergibt
+                      (topozentrische "Untergangshöhe").  *Note
+                      Standard-Untergangszeit der Sonne:
+                      x-Sonne-Standarduntergang, für mehr Informationen.
+
+`L'     `o'           Das ungefähre, scheinbare, topozentrische Azimut
+                      der Sonne in Grad und Altminuten berechnen, das
+                      sich zur Uhrzeit des Standard-Sonnenaufgangs ergibt
+                      (topozentrischer "Aufgangsazimut").  Der
+                      horizontale Winkelabstand zwischen dem
+                      topozentrischen Aufgangsazimut und der Ostrichtung
+                      wird auch topozentrische "Morgenweite" der Sonne
+                      genannt.  *Note Standard-Aufgangszeit der Sonne:
+                      x-Sonne-Standardaufgang, für mehr Informationen.
+
+`L'     `s'           Das ungefähre, scheinbare, topozentrische Azimut
+                      der Sonne in Grad und Altminuten berechnen, das
+                      sich zur Uhrzeit des Standard-Sonnenuntergangs
+                      ergibt (topozentrischer "Untergangsazimut").  Der
+                      horizontale Winkelabstand zwischen dem
+                      topozentrischen Untergangsazimut und der
+                      Westrichtung wird auch topozentrische "Abendweite"
+                      der Sonne genannt.  *Note Standard-Untergangszeit
+                      der Sonne: x-Sonne-Standarduntergang, für mehr
+                      Informationen.
+
+`M'     `o', `s'      Die ungefähre, scheinbare, geozentrische Höhe der
+                      Sonne in Grad und Altminuten berechnen, die sich
+                      zum astronomischen Mitternachtzeitpunkt der Sonne
+                      ergibt (geozentrische "Mitternachtshöhe").  *Note
+                      Astronomischer Mitternachtzeitpunkt der Sonne:
+                      x-Sonne-Mitternacht, für mehr Informationen.
+
+`N'     `o', `s'      Die ungefähre, scheinbare, geozentrische Höhe der
+                      Sonne in Grad und Altminuten berechnen, die sich
+                      zum astronomischen Mittagzeitpunkt der Sonne ergibt
+                      (geozentrische "Mittagshöhe").  *Note
+                      Astronomischer Mittagzeitpunkt der Sonne:
+                      x-Sonne-Mittag, für mehr Informationen.
+
+`O'     `o'           Die ungefähre, scheinbare, geozentrische Höhe der
+                      Sonne in Grad und Altminuten berechnen, die sich
+                      zur Uhrzeit des Standard-Sonnenaufgangs ergibt
+                      (geozentrische "Aufgangshöhe").  *Note
+                      Standard-Aufgangszeit der Sonne:
+                      x-Sonne-Standardaufgang, für mehr Informationen.
+
+`O'     `s'           Die ungefähre, scheinbare, geozentrische Höhe der
+                      Sonne in Grad und Altminuten berechnen, die sich
+                      zur Uhrzeit des Standard-Sonnenuntergangs ergibt
+                      (geozentrische "Untergangshöhe").  *Note
+                      Standard-Untergangszeit der Sonne:
+                      x-Sonne-Standarduntergang, für mehr Informationen.
+
+`P'     `o'           Das ungefähre, scheinbare, geozentrische Azimut der
+                      Sonne in Grad und Altminuten berechnen, das sich
+                      zur Uhrzeit des Standard-Sonnenaufgangs ergibt
+                      (geozentrischer "Aufgangsazimut").  Der horizontale
+                      Winkelabstand zwischen dem geozentrischen
+                      Aufgangsazimut und der Ostrichtung wird auch
+                      geozentrische "Morgenweite" der Sonne genannt.
+                      *Note Standard-Aufgangszeit der Sonne:
+                      x-Sonne-Standardaufgang, für mehr Informationen.
+
+`P'     `s'           Das ungefähre, scheinbare, geozentrische Azimut der
+                      Sonne in Grad und Altminuten berechnen, das sich
+                      zur Uhrzeit des Standard-Sonnenuntergangs ergibt
+                      (geozentrischer "Untergangsazimut").  Der
+                      horizontale Winkelabstand zwischen dem
+                      geozentrischen Untergangsazimut und der
+                      Westrichtung wird auch geozentrische "Abendweite"
+                      der Sonne genannt.  *Note Standard-Untergangszeit
+                      der Sonne: x-Sonne-Standarduntergang, für mehr
+                      Informationen.
+
+`Q'     `o'           Die ungefähre Uhrzeit berechnen, zu der ein
+                      senkrechter Stab vormittags einen Schatten wirft,
+                      der *genauso* lang ist wie der Stab selbst.  Jedoch
+                      wird die minimale Schattenlänge, die der senkrechte
+                      Stab zum astronomischen Mittagzeitpunkt wirft, von
+                      der der Schattenlänge subtrahiert, bevor dieser mit
+                      der Länge des Stabes verglichen wird.  *Note Termin
+                      Option `--adjust-value=ARGUMENT': x-adjust-value,
+                      wie der Schattenlängefaktor verändert werden kann.
+
+`Q'     `s'           Die ungefähre Uhrzeit berechnen, zu der ein
+                      senkrechter Stab nachmittags einen Schatten wirft,
+                      der *genauso* lang ist wie der Stab selbst.  Jedoch
+                      wird die minimale Schattenlänge, die der senkrechte
+                      Stab zum astronomischen Mittagzeitpunkt wirft, von
+                      der der Schattenlänge subtrahiert, bevor diese mit
+                      der Länge des Stabes verglichen wird.  Personen
+                      islamischen Glaubens, und zwar die Vetreter der
+                      _Shafi_ Lehre, beten normalerweise zum dritten Mal
+                      am Tag zu, oder kurz nach, dieser Uhrzeit.  Dieser
+                      Personenkreis bezeichnet diese Gebetszeit auch
+                      gemeinhin mit "Asr".  *Note Astronomischer
+                      Mittagzeitpunkt der Sonne: x-Sonne-Mittag, für mehr
+                      Informationen.  Und siehe *Note Termin Option
+                      `--adjust-value=ARGUMENT': x-adjust-value, wie der
+                      Schattenlängenfaktor verändert werden kann.
+
+`Q'     `u'           Die ungefähre Zeitdauer berechnen, während der der
+                      Sonnenmittelpunkt diejenige Referenzhöhe
+                      überschreitet, bei der ein senkrechter Stab einen
+                      Schatten wirft, der genauso lang oder kürzer ist
+                      als der Stab selbst.
+
+`Q'     `z'           Die ungefähre Zeitdauer berechnen, während der der
+                      Sonnenmittelpunkt diejenige Referenzhöhe
+                      unterschreitet, bei der ein senkrechter Stab
+                      entweder keinen Schatten mehr wirft, oder einen
+                      Schatten wirft, der länger ist als der Stab selbst.
+
+`R'     `o'           Die ungefähre Uhrzeit berechnen, zu der ein
+                      senkrechter Stab vormittags einen Schatten wirft,
+                      der *zweimal* so lang ist als der Stab selbst.
+                      Jedoch wird die minimale Schattenlänge, die der
+                      senkrechte Stab zum astronomischen Mittagzeitpunkt
+                      wirft, von der der Schattenlänge subtrahiert, bevor
+                      diese mit der Länge des Stabes verglichen wird.
+                      *Note Termin Option `--adjust-value=ARGUMENT':
+                      x-adjust-value, wie der Schattenlängenfaktor
+                      verändert werden kann.
+
+`R'     `s'           Die ungefähre Uhrzeit berechnen, zu der ein
+                      senkrechter Stab nachmittags einen Schatten wirft,
+                      der *zweimal* so lang ist als der Stab selbst.
+                      Jedoch wird die minimale Schattenlänge, die der
+                      senkrechte Stab zum astronomischen Mittagzeitpunkt
+                      wirft, von der der Schattenlänge subtrahiert, bevor
+                      diese mit der Länge des Stabes verglichen wird.
+                      Personen islamischen Glaubens, und zwar die
+                      Vetreter der _Hanafi_ Lehre, beten normalerweise
+                      zum dritten Mal am Tag zu, oder kurz nach, dieser
+                      Uhrzeit.  Dieser Personenkreis bezeichnet diese
+                      Gebetszeit auch gemeinhin mit "Asr".  *Note
+                      Astronomischer Mittagzeitpunkt der Sonne:
+                      x-Sonne-Mittag, für mehr Informationen.  Und siehe
+                      *Note Termin Option `--adjust-value=ARGUMENT':
+                      x-adjust-value, wie der Schattenlängenfaktor
+                      verändert werden kann.
+
+`R'     `u'           Die ungefähre Zeitdauer berechnen, während der der
+                      Sonnenmittelpunkt diejenige Referenzhöhe
+                      überschreitet, bei der ein senkrechter Stab einen
+                      Schatten wirft, der zweimal so lang oder kürzer ist
+                      als der Stab selbst.
+
+`R'     `z'           Die ungefähre Zeitdauer berechnen, während der der
+                      Sonnenmittelpunkt diejenige Referenzhöhe
+                      unterschreitet, bei der ein senkrechter Stab
+                      entweder keinen Schatten mehr wirft, oder einen
+                      Schatten wirft, der mehr als zweimal so lang ist
+                      als der Stab selbst.
+
+Wird kein MODUS angegeben, so benutzt Gcal automatisch den Modus, der
+durch das Moduszeichen `5' ausgelöst wird.  Wird ein Moduszeichen
+angegeben, daß keinem der Zeichen `0'...`9', `a'...`z' und `A'...`R'
+entspricht, so benutzt Gcal ebenfalls automatisch den Modus, der durch
+das Moduszeichen `5' ausgelöst wird.
+
+Die sonnenbezogenen Spezialtexte werden in Abhängigkeit des gewählten
+Modus in den folgenden Arten und Stilen von Gcal dargestellt:
+
+  1. Reelzahliger Dezimalwert ohne Vorzeichen
+     Vorzeichenlose, reelzahlige Dezimalwerte werden standardmäßig im
+     `N.N...' Format dargestellt.  Bei einigen Moduszeichen veranlaßt
+     ein `*' Zeichen, daß direkt vor dem Moduszeichen angegeben ist,
+     den Wert in einer anderen Bezugsgröße darzustellen.  Bei den
+     Moduszeichen, die
+
+       a. die Berechnung von Erde/Sonne oder Erde/Mond Entfernungen
+          bewirken, wird die ermittelte Entfernung in Kilometer
+          dargestellt.
+
+       b. die Berechnung von Phasenwinkeln des Mondes bewirken, wird
+          der ermittelte Phasenwinkel als Phasenwert in Prozent
+          dargestellt.
+
+     Falls bestimmte Ereignisse eintreten, so gibt Gcal, anstelle der
+     zuvor beschriebenen Darstellungen, besondere, ereignisbezogene
+     Texte aus.  *Note Ereignistexte der sonnenbezogenen Spezialtexte:
+     x-Sonne-Ereignistexte, wo die für Uhrzeitwerte erzeugten
+     ereignisbezogenen Texte aufgeführt sind, die schematisch und
+     sinngemäß auch auf die hier vorgestellte Darstellungsart
+     angewendet werden.
+
+  2. Reelzahliger Dezimalwert mit Vorzeichen
+     Vorzeichenbehaftete, reelzahlige Dezimalwerte werden standardmäßig
+     im `+|-N.N...' Format dargestellt.  Ein `*' Zeichen direkt vor
+     einem Moduszeichen veranlaßt Gcal, solche Werte nicht in einem
+     anderen Stil darzustellen.
+
+     Falls bestimmte Ereignisse eintreten, so gibt Gcal, anstelle der
+     zuvor beschriebenen Darstellungen, besondere, ereignisbezogene
+     Texte aus.  *Note Ereignistexte der sonnenbezogenen Spezialtexte:
+     x-Sonne-Ereignistexte, wo die für Uhrzeitwerte erzeugten
+     ereignisbezogenen Texte aufgeführt sind, die schematisch und
+     sinngemäß auch auf die hier vorgestellte Darstellungsart
+     angewendet werden.
+
+  3. Uhrzeitwert
+     Uhrzeiten werden standardmäßig in Stunden und Minuten dargestellt,
+     und zwar im `HH:MM' _24-Stunden_ Format.  Ein `*' Zeichen direkt
+     vor einem Moduszeichen veranlaßt Gcal, die Uhrzeit im _12-Stunden_
+     Format, also mit Zeitanhang versehen, darzustellen.  *Note
+     Aktuelle Ortszeit `%t[ARGUMENT]' Spezialtext: x-Aktuelle-Ortszeit,
+     wo näher auf das Darstellungsformat der Uhrzeit eingegangen wird.
+
+     Falls bestimmte Ereignisse eintreten, so gibt Gcal, anstelle der
+     zuvor beschriebenen Darstellung der Uhrzeit, besondere,
+     ereignisbezogene Texte aus:
+
+        * Falls Gcal nicht imstande ist, eine ungefähre Uhrzeit zu
+          berechnen, da das ARGUMENT fehlerhaft angegeben wurde, so
+          wird anstelle des Uhrzeittextes ein `??:??' Text erzeugt.
+
+        * Falls Gcal eine ungefähre Uhrzeit berechnet, die sich auf
+          einen Vortag oder Folgetag bezieht, oder Gcal kann keine
+          Uhrzeit berechnen, da daß zu berechnende Ereignis nicht an
+          diesem Tag stattfindet, so wird anstelle des Uhrzeittextes
+          ein `**:**' Text erzeugt.
+
+        * Falls Gcal nicht imstande ist, die ungefähre Uhrzeit zu
+          berechnen, da sich der Bezugspunkt, also entweder der
+          Mittelpunkt oder der obere Rand der Sonnen- oder Mondscheibe,
+          an diesem Tag stets oberhalb der jeweiligen Referenzhöhe
+          befindet, so wird anstelle des Uhrzeittextes ein `++:++' Text
+          erzeugt.
+
+        * Falls Gcal nicht imstande ist, die ungefähre Uhrzeit zu
+          berechnen, da sich der Bezugspunkt, also entweder der
+          Mittelpunkt oder der obere Rand der Sonnen- oder Mondscheibe,
+          an diesem Tag stets unterhalb der jeweiligen Referenzhöhe
+          befindet, so wird anstelle des Uhrzeittextes ein `--:--' Text
+          erzeugt.
+
+  4. Zeitwert ohne Vorzeichen
+     Vorzeichenlose, zumeist eine Zeitdauer bezeichnende Zeitwerte
+     werden standardmäßig in Stunden und Minuten dargestellt, und zwar
+     im `HHhMM'' Format.  Ein `*' Zeichen direkt vor einem Moduszeichen
+     veranlaßt Gcal, den Zeitwert in einem anderen Stil darzustellen;
+     und zwar in Dezimalstunden, d.h. im `HH.H...' Format.
+
+     Falls bestimmte Ereignisse eintreten, so gibt Gcal, anstelle der
+     zuvor beschriebenen Darstellungen, besondere, ereignisbezogene
+     Texte aus.  *Note Ereignistexte der sonnenbezogenen Spezialtexte:
+     x-Sonne-Ereignistexte, wo die für Uhrzeitwerte erzeugten
+     ereignisbezogenen Texte aufgeführt sind, die schematisch und
+     sinngemäß auch auf die hier vorgestellte Darstellungsart
+     beziehungsweise den Darstellungsstil angewendet werden.
+
+  5. Zeitwert mit Vorzeichen
+     Vorzeichenbehaftete, zumeist eine Zeitdauer bezeichnende Zeitwerte
+     werden standardmäßig in Stunden und Minuten dargestellt, und zwar
+     im `+|-HHhMM'' Format.  Ein `*' Zeichen direkt vor einem
+     Moduszeichen veranlaßt Gcal, den Zeitwert in einem anderen Stil
+     darzustellen; und zwar in Dezimalstunden, d.h. im `+|-HH.H...'
+     Format.
+
+     Falls bestimmte Ereignisse eintreten, so gibt Gcal, anstelle der
+     zuvor beschriebenen Darstellungen, besondere, ereignisbezogene
+     Texte aus.  *Note Ereignistexte der sonnenbezogenen Spezialtexte:
+     x-Sonne-Ereignistexte, wo die für Uhrzeitwerte erzeugten
+     ereignisbezogenen Texte aufgeführt sind, die schematisch und
+     sinngemäß auch auf die hier vorgestellte Darstellungsart
+     beziehungsweise den Darstellungsstil angewendet werden.
+
+  6. Winkelwert ohne Vorzeichen
+     Vorzeichenlose Winkelwerte werden standardmäßig in Grad und
+     Altminuten dargestellt, und zwar im `GGGgMM'' Format.  Ein `*'
+     Zeichen direkt vor einem Moduszeichen veranlaßt Gcal, den
+     Winkelwert in einem anderen Stil darzustellen; und zwar in
+     Dezimalgrad, d.h. im `GGG.G...' Format.
+
+     Falls bestimmte Ereignisse eintreten, so gibt Gcal, anstelle der
+     zuvor beschriebenen Darstellungen, besondere, ereignisbezogene
+     Texte aus.  *Note Ereignistexte der sonnenbezogenen Spezialtexte:
+     x-Sonne-Ereignistexte, wo die für Uhrzeitwerte erzeugten
+     ereignisbezogenen Texte aufgeführt sind, die schematisch und
+     sinngemäß auch auf die hier vorgestellte Darstellungsart
+     beziehungsweise den Darstellungsstil angewendet werden.
+
+  7. Winkelwert mit Vorzeichen
+     Vorzeichenbehaftete Winkelwerte werden standardmäßig in Grad und
+     Altminuten dargestellt, und zwar im `+|-GGGgMM'' Format.  Ein `*'
+     Zeichen direkt vor einem Moduszeichen veranlaßt Gcal, den
+     Winkelwert in einem anderen Stil darzustellen; und zwar in
+     Dezimalgrad, d.h. im `+|-GGG.G...' Format.
+
+     Falls bestimmte Ereignisse eintreten, so gibt Gcal, anstelle der
+     zuvor beschriebenen Darstellungen, besondere, ereignisbezogene
+     Texte aus.  *Note Ereignistexte der sonnenbezogenen Spezialtexte:
+     x-Sonne-Ereignistexte, wo die für Uhrzeitwerte erzeugten
+     ereignisbezogenen Texte aufgeführt sind, die schematisch und
+     sinngemäß auch auf die hier vorgestellte Darstellungsart
+     beziehungsweise den Darstellungsstil angewendet werden.
+
+Nach den optionalen Stil- und Moduszeichen erfolgt die Angabe der
+Breiten- und Längengrade und der relativen Höhe der geographischen
+Koordinate, für welche die Berechnung erfolgen soll.  Die Breiten- und
+Längengrade der geographischen Koordinate müssen der ISO-6709:1983
+Standarddarstellung von Breiten- und Längengrad eines geographischen
+Ortes entsprechen, so daß die Koordinate wie folgt anzugeben ist:
+
+   * Breitengrad (`+' für nördlich und auf dem Äquator, `-' für südlich
+     des Äquators.)
+
+    `+|-GG[.GG]'
+          Grad (2 Ziffern), und optional Dezimalgrad
+
+    `+|-GGMM[.MM]'
+          Grad (2 Ziffern), Altminuten (2 Ziffern), und optional
+          Dezimalminuten
+
+    `+|-GGMMSS[.SS]'
+          Grad (2 Ziffern), Altminuten (2 Ziffern), Altsekunden (2
+          Ziffern), und optional Dezimalsekunden
+
+   * Längengrad (`+' für östlich und auf dem Hauptmeridian (Greenwich),
+     `-' für westlich Greenwich und bis zum 180'ten Meridian.)
+
+    `+|-GGG[.GG]'
+          Grad (3 Ziffern), und optional Dezimalgrad
+
+    `+|-GGGMM[.MM]'
+          Grad (3 Ziffern), Altminuten (2 Ziffern), und optional
+          Dezimalminuten
+
+    `+|-GGGMMSS[.SS]'
+          Grad (3 Ziffern), Altminuten (2 Ziffern), Altsekunden (2
+          Ziffern), und optional Dezimalsekunden
+
+   * Optional die relative Höhe in Meter über dem Meeresspiegel (`+'
+     für Höhen oberhalb und auf dem Meeresspiegel, `-' für Höhen
+     unterhalb des Meeresspiegels.)
+
+    `[+|-N[N[N[N]]]]'
+          Ganzzahlige Höhenangabe in Meter im Bereich `-9999'...`+9999'
+          (1...4 Ziffern)
+
+Alle Koordinatenkomponenten müssen mit führenden Nullen versehen werden
+falls diese weniger Ziffern aufweisen als die hier dargestellten
+Schablonen.  Angegebene Dezimalsekunden werden von Gcal grundsätzlich
+nicht berücksichtigt.  Höhenangaben mit negativem Vorzeichen werden von
+Gcal bei der Ermittlung der Sonnendaten und Zeiten, sowie der Monddaten
+und Zeiten, nicht berücksichtigt.  Gcal benutzt in einem solchen Fall
+stets die Höhe `+0'.  Breiten- und Längengradkoordinaten und die Höhe
+des Beobachtungstandorts werden ohne Trennzeichen miteinander verbunden
+angegeben, wie zum Beispiel `+40-075+61', `+401213.1-0750015.1' oder
+`+40.20361-075.00417+0061'.  Für weitere Einzelheiten hierzu sei auf
+die einschlägige Fachliteratur verwiesen.
+
+Der Koordinatenangabe darf, abgegrenzt durch ein `,' Zeichen, ein
+Zeitwert `[+|-]MMMM|HH:[MM]' folgen, der angibt, um wieviele Minuten
+MMMM bzw. Stunden HH und Minuten MM der geographische Ort von der
+Weltzeit (UTC/GMT) versetzt ist.  Dieser Zeitversatzwert bestimmt also
+die Zeitzone, die für diesen Ort aktuell gültig ist.  Falls Sommer- und
+Winterzeiten für den Ort berücksichtigt werden, so sollte während des
+Sommerzeit-Zeitraums auch noch derjenige Umstellungs-Zeitwert mit in
+den Zeitzonenwert eingerechnet werden, um den die Uhr während des
+Sommerzeit-Zeitraums vorgestellt ist -- dieser Umstellungs-Zeitwert
+wird entweder vom Zeitzonenwert subtrahiert für Orte westlich des
+Hauptmeridians (Greenwich), oder zum Zeitzonenwert addiert für Orte
+östlich des Hauptmeridians, da Gcal solche Operationen derzeit nicht
+automatisch durchführen kann!  *Note Aktuelle Ortszeit `%t[ARGUMENT]'
+Spezialtext: x-Aktuelle-Ortszeit, für eine ausführliche Erklärung
+vorstehender Zeitwert-Schablone.  Wird zu einer angegebenen Koordinate
+kein Zeitversatzwert spezifiziert, so nimmt Gcal einen Zeitversatzwert
+von `0' als gegeben an, der der aktuellen Weltzeit (UTC/GMT) entspricht.
+
+Die nachstehende Tabelle gibt Aufschluß darüber, welche Darstellungsart
+von einem Modus bewirkt wird.  In der Spalte, in der die Darstellungsart
+eingetragen ist, werden die zuvor festgelegten Numerierungen, wie sie
+bei der Vorstellung der Darstellungsarten benutzt wurden, als
+Schlüsselwert verwendet.  Die Tabelle enthält zudem noch eine Spalte,
+aus der hervorgeht, ob von einem Modus dynamische, d.h. von der
+jeweiligen Uhrzeit abhängige, Werte erzeugt werden (mittels der
+`--time-offset=ARGUMENT' Option kann die jeweilige Uhrzeit verändert
+werden, die für die Berechnung solcher Werte benutzt wird).  In einer
+weiteren Tabellenspalte ist eingetragen, ob die angegebene
+Ortskoordinate einen Einfluß auf die Ermittlung des Wertes ausübt, und
+die letzte Spalte der Tabelle enthält den Vermerk, ob ein angegebener
+Zeitzonenwert die Wertermittlung beeinflußt:
+
+*Modus* *Darstellungsart*  *Dynamisch*    *Ortskoordinate*   *Zeitzone*
+
+`0'     3                  Nein           Ja                 Ja
+`1'     3                  Nein           Ja                 Ja
+`2'     3 oder 4           Nein           Ja                 Ja
+`3'     3 oder 4           Nein           Ja                 Ja
+`4'     3 oder 4           Nein           Ja                 Ja
+`5'     3 oder 4           Nein           Ja                 Ja
+`6'     3 oder 4           Nein           Ja                 Ja
+`7'     3 oder 4           Nein           Ja                 Ja
+`8'     3 oder 4           Nein           Ja                 Ja
+`9'     3 oder 4           Nein           Ja                 Ja
+`a'     7                  Ja             Ja                 Ja
+`b'     6                  Ja             Ja                 Ja
+`c'     7                  Ja             Ja                 Ja
+`d'     6                  Ja             Ja                 Ja
+`e'     4                  Ja             Ja                 Ja
+`f'     1 oder 1a          Ja             Ja                 Ja
+`g'     6                  Ja             Ja                 Ja
+`h'     6                  Ja             Ja                 Ja
+`i'     6                  Ja             Nein               Nein
+`j'     7                  Ja             Ja                 Ja
+`k'     6                  Ja             Ja                 Ja
+`l'     7                  Ja             Ja                 Ja
+`m'     6                  Ja             Ja                 Ja
+`n'     4                  Ja             Ja                 Ja
+`o'     1 oder 1a          Ja             Ja                 Ja
+`p'     6                  Ja             Ja                 Ja
+`q'     6                  Ja             Ja                 Ja
+`r'     2                  Ja             Nein               Nein
+`s'     3                  Ja             Ja                 Ja
+`t'     3                  Ja             Nein               Nein
+`u'     1                  Ja             Nein               Nein
+`v'     1                  Ja             Nein               Nein
+`w'     5                  Ja             Nein               Ja
+`x'     7                  Ja             Ja                 Ja
+`y'     7                  Ja             Ja                 Ja
+`z'     7                  Ja             Ja                 Ja
+`A'     7                  Ja             Ja                 Ja
+`B'     7                  Nein           Ja                 Ja
+`C'     7                  Nein           Ja                 Ja
+`D'     7                  Nein           Ja                 Ja
+`E'     7                  Nein           Ja                 Ja
+`F'     5                  Nein           Ja                 Ja
+`G'     5                  Nein           Ja                 Ja
+`H'     5                  Nein           Ja                 Ja
+`I'     7                  Nein           Ja                 Ja
+`J'     7                  Nein           Ja                 Ja
+`K'     7                  Nein           Ja                 Ja
+`L'     6                  Nein           Ja                 Ja
+`M'     7                  Nein           Ja                 Ja
+`N'     7                  Nein           Ja                 Ja
+`O'     7                  Nein           Ja                 Ja
+`P'     6                  Nein           Ja                 Ja
+`Q'     3 oder 4           Nein           Ja                 Ja
+`R'     3 oder 4           Nein           Ja                 Ja
+
+Und nun folgen einige Beispiele zu diesen Spezialtexten:
+
+     Der Text `Sonnenaufgang um %o+5158+00738,120  in MS, BRD' wird
+     umgesetzt in
+     ==> `Sonnenaufgang um 05:16 in MS, BRD', falls das aktuelle
+     Systemdatum der 1'te Juni 1998 ist.
+
+     Der Text `Sonnenuntergang um %s*5+5158+00738,120  in MS, BRD' wird
+     umgesetzt in
+     ==> `Sonnenuntergang um 09:39pm in MS, BRD', falls das aktuelle
+     Systemdatum der 1'te Juni 1998 ist.
+
+     Der Text `Sonne sichtbar %u5+5158+00738,120  in MS, BRD' wird
+     umgesetzt in
+     ==> `Sonne sichtbar 16h24' in MS, BRD', falls das aktuelle
+     Systemdatum der 1'te Juni 1998 ist.
+
+     Der Text `Sonne nicht sichtbar %z*+5158+00738,120  in MS, BRD'
+     wird umgesetzt in
+     ==> `Sonne nicht sichtbar 7.607 in MS, BRD', falls das aktuelle
+     Systemdatum der 1'te Juni 1998 ist.
+
+     Der Text `Sonnenazimut 0 Uhr=%s*a+5158+00738,120  in MS, BRD' wird
+     umgesetzt in
+     ==> `Sonnenazimut 0 Uhr=339g16' in MS, BRD', falls das aktuelle
+     Systemdatum der 1'te Juni 1998 ist.
+
+     Der Text `Zeitgleichung %ot+00+000=%o*w+00+000,120  BRD' wird
+     umgesetzt in
+     ==> `Zeitgleichung +16h00'=+00h02'13.201" BRD', falls das aktuelle
+     Systemdatum der 1'te Juni 1998 ist, und Gcal mit den
+     `--time-offset=16:' und `--precise' Optionen aufgerufen wird.
+
+     Der Text `Julianisches Datum um %ot+00+000 =%ou+00+000' wird
+     umgesetzt in
+     ==> `Julianisches Datum um +10h15'=2450965.927', falls das
+     aktuelle Systemdatum der 1'te Juni 1998 ist, und Gcal mit der
+     `--time-offset=10:15' Option aufgerufen wird.
+
+Es folgt nun eine Aufstellung, die die verwendeten Bezugssysteme kurz
+darstellt, sonstige, bisher noch nicht erwähnte Gesichtspunkte
+beschreibt, und über die Mängel und Einschränkungen informiert, die bei
+den sonnenbezogenen Spezialtexten vorliegen:
+
+   * Alle astronomischen Berechnungen beruhen auf Verfahren mit
+     --astronomisch gesehen-- gering-genauen Elementen, die sich
+     selbstverständlich in der Genauigkeit der durch sie bewirkten
+     Ergebnisse zeigen.  Jedoch sind diese Ergebnisse in den meisten
+     Fällen als mehr als ausreichend genau anzusehen, was deren
+     praktischen Nutzen betrifft.
+
+   * Alle Azimutal- und Höhenwerte beziehen sich stets auf den
+     Mittelpunkt des jeweiligen astronomischen Objekts, es sei denn, es
+     ist anders angegeben.
+
+   * Der Fußpunkt von Azimutalwerten, Rektazensionswerten und anderen
+     ekliptischen Koordinatenwerten ist stets auf die geographische
+     Nordrichtung bezogen (nicht etwa die magnetische Nordrichtung, die
+     ein Kompass anzeigt), und diese Werte werden im Uhrzeigersinn
+     gemessen, wobei die Winkelwerte für die Nordrichtung sowohl mit 0
+     Grad als auch mit 360 Grad bezeichnet werden.
+
+   * Die topozentrisch-basierten Azimutal- und Höhenwerte sind allesamt
+     refraktionskorrigiert, wobei Refraktionskorrekturen jedoch nur dann
+     vorgenommen werden, wenn der Mittelpunkt des jeweiligen
+     astronomischen Objekts eine Höhe von 2 Grad unterhalb des
+     Horizonts überschreitet.
+
+   * Die Auf- und Untergangszeiten der Sonne können im allgemeinen
+     nicht genau vorbestimmt werden, da durch unvorhersagbare
+     atmosphärische Bedingungen, also die zu diesen Zeitpunkten lokal
+     vorherrschenden Wetterbedingungen einen Einfluß auf den Betrag der
+     sich am Horizont ergebenden Refraktion ausüben, so daß die
+     vorausberechneten Auf- und Untergangszeiten durchaus um eine
+     Minute oder mehr falsch sein können.
+
+   * Die Genauigkeit der Auf- und Untergangsberechnungen verringert
+     sich noch in hohen Breiten, also innerhalb des solaren
+     Polarkreises.  Dort vermögen kleinste Änderungen in der
+     atmosphärischen Refraktion die Auf- oder Untergangszeiten der
+     Sonne um mehrere Minuten zu verändern, da die Sonne dort den
+     Horizont in einem sehr flachen Winkel schneidet.  Aus dem gleichen
+     Grund heraus kann auch noch durch den Einfluß, der durch die Höhe
+     des Beobachtungsortes und die lokale Topographie verursacht wird,
+     dieser Effekt verstärkt werden, so daß sich eine wesentliche
+     Veränderung der Zeiten dieser betrachteten Phänomene ergibt,
+     beziehungsweise es dann überhaupt fraglich ist, ob sich diese
+     Phänomene dann letztlich noch in der Realität tatsächlich so
+     abspielen.
+
+   * Die kurzen Erklärungen zu den verschiedenen Dämmerungsphasen gehen
+     alle modellhaft von idealen atmosphärischen Bedingungen aus.  Es
+     ist selbstverständlich, daß diese Erklärungen gegenstandslos
+     werden, wenn sich in der Realität andere Bedingungen ergeben, etwa
+     wie die einer dichten Bewölkung oder einer stark verschmutzten
+     Atmosphäre!
+
+*Bitte beachten Sie auch die folgenden Querverweise:*
+
+   * *Note Termin Option `--precise': x-precise, wie eine präzisere
+     Darstellung der Werte erzielt werden kann, die durch diese
+     Spezialtexte bewirkt werden.
+
+   * Und siehe *Note Kalender Option `--time-offset=ARGUMENT':
+     x-time-offset, wie die Uhrzeit geändert werden kann, für die die
+     dynamischen, von der jeweiligen Uhrzeit abhängigen,
+     sonnenbezogenen Spezialtexte berechnet werden.
+
+   * Ebenso siehe *Note Termin Option `--cycle-end=ARGUMENT':
+     x-cycle-end, wie die dynamischen, von der jeweiligen Uhrzeit
+     abhängigen, sonnenbezogenen Spezialtexte für eine Folge von
+     Uhrzeiten des laufenden Tag ermittelt werden können.
+
+   * Und siehe auch *Note Termin Option `--adjust-value=ARGUMENT':
+     x-adjust-value, wie sowohl die Referenzhöhe für die Berechnung der
+     Auf- und Untergangszeiten, als auch der Schattenlängefaktor
+     verändert werden kann.
+
+   * Weitherhin siehe *Note Termin Option
+     `--atmosphere=LUFTDRUCK[,TEMPERATUR]': x-atmosphere, wie die
+     Basisdaten der Atmosphäre geändert werden können, die die
+     Berechnung der sonnenbezogenen Spezialtexte beeinflussen.
+
+   * Und zuletzt, beachte *Note Termin Option `--limit': x-limit, wie
+     die Auf- und Untergangszeiten der Sonne auf den aktuellen Tag
+     beschränkt werden können.
+
+Alle sonnenbezogenen Spezialtexte *müssen* stets von einem _whitespace_
+Zeichen gefolgt werden, welches seinerseits in der Ausgabe entfernt
+wird!
 

@@ -1,7 +1,7 @@
 /* config.h.  Generated manually for emx+gcc under OS/2.  */
 
 #define PACKAGE "gcal"
-#define VERSION "2.40"
+#define VERSION "3.00"
 #define OS2
 
 
@@ -21,6 +21,9 @@
 
 /* Enable German message texts, holidays and calendar layout.  */
 #undef USE_DE
+
+/* Enable a small selection of country specific holidays only.  */
+#undef HD_TOP20CC
 
 /* Enable highlighting sequences.  */
 #define USE_HLS 1
@@ -385,8 +388,14 @@
 /* Define if you have the strcspn function.  */
 #define HAVE_STRCSPN 1
 
+/* Define if you have the strdup function.  */
+#define HAVE_STRDUP 1
+
 /* Define if you have the strtol function.  */
 #define HAVE_STRTOL 1
+
+/* Define if you have a working system function.  */
+#define HAVE_SYSTEM 1
 
 /* Define if you have the valloc function.  */
 #undef HAVE_VALLOC

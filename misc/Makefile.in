@@ -1,12 +1,12 @@
-#  $Id: Makefile.in 0.29 1997/04/23 00:02:09 tom Exp $
+#  $Id: Makefile.in 0.38 2000/04/03 00:03:08 tom Exp $
 ###############################################################################
 #
 #  Generic Makefile to create the Gcal miscellaneous files.
 #
-#  Copyright (C) 1994-1997      Thomas Esken            <esken@uni-muenster.de>
-#                               Im Hagenfeld 84
-#                               D-48147 M"unster
-#                               GERMANY
+#  Copyright (c) 2000  Thomas Esken                     <esken@uni-muenster.de>
+#                      Im Hagenfeld 84
+#                      D-48147 M"unster
+#                      GERMANY
 #
 ###############################################################################
 #
@@ -25,12 +25,24 @@ subdir = misc
 
 @SET_MAKE@
 
+LN_S = @LN_S@
+
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+
+transform = @program_transform_name@
 
 prefix = @prefix@
+exec_prefix = @exec_prefix@
+datadir = @datadir@
 # Where to install the `locale.alias' file.
 localedir = $(prefix)/@DATADIRNAME@/locale
+# Where to install the miscellaneous example files.
+packagedatadir = `echo $(datadir)/$(PACKAGE) | sed -e 's,//,/,g'`
+packagedatamiscdir = $(packagedatadir)/$(subdir)
+# Where to install the links to the executable miscellaneous example files.
+bindir = @bindir@
 
 #### End of system configuration section. ####
 
@@ -41,17 +53,174 @@ localedir = $(prefix)/@DATADIRNAME@/locale
 SHELL = /bin/sh
 
 #
+# File owner permissions used for installmisc target.
+#
+BINPERMS = `echo $(INSTALL_PROGRAM) | sed -e 's,^.*/,,' -e 's/[^0-9]//g'`
+#
+# File owner permissions used for installmisc target
+# if the configure script doesn't set $(BINPERMS).
+#
+BINPERMS2 = 0755
+
+#
 # Standard names.
 #
 
-DISTFILES = gcalltx gcalltx.bat gcalltx.sed \
-  wdays wdays.bat wdays.sed \
-  locale.alias magic.add \
-  Makefile.in README
+miscdailyDIR = daily#
+miscdailySCRIPTFILES = \
+  $(miscdailyDIR)/daily
+miscdailyDATAFILES = \
+  $(srcdir)/$(miscdailyDIR)/daily.awk \
+  $(srcdir)/$(miscdailyDIR)/daily.pl \
+  $(srcdir)/$(miscdailyDIR)/daily.rc
+miscdailyMISCFILES = \
+  $(srcdir)/$(miscdailyDIR)/daily.in \
+  $(srcdir)/$(miscdailyDIR)/daily.bat
 
-ALLDIRS-yes = $(ALLDIRS-no) $(localedir)
+miscddiffDIR = ddiff#
+miscddiffSCRIPTFILES = \
+  $(miscddiffDIR)/ddiff \
+  $(miscddiffDIR)/ddiffdrv
+miscddiffDATAFILES = \
+  $(srcdir)/$(miscddiffDIR)/ddiff1.awk \
+  $(srcdir)/$(miscddiffDIR)/ddiff1.pl \
+  $(srcdir)/$(miscddiffDIR)/ddiff2.awk \
+  $(srcdir)/$(miscddiffDIR)/ddiff2.pl \
+  $(srcdir)/$(miscddiffDIR)/ddiffdrv.awk \
+  $(srcdir)/$(miscddiffDIR)/ddiffdrv.pl \
+  $(srcdir)/$(miscddiffDIR)/zone.tab
+miscddiffMISCFILES = \
+  $(srcdir)/$(miscddiffDIR)/ddiff.in \
+  $(srcdir)/$(miscddiffDIR)/ddiff.@ \
+  $(srcdir)/$(miscddiffDIR)/ddiff.bat \
+  $(srcdir)/$(miscddiffDIR)/ddiffdrv.in \
+  $(srcdir)/$(miscddiffDIR)/ddiffdrv.bat
 
-ALLDIRS-no = $(bindir)
+miscdstDIR = dst#
+miscdstSCRIPTFILES = \
+  $(miscdstDIR)/dst
+miscdstDATAFILES = \
+  $(srcdir)/$(miscdstDIR)/dst.awk \
+  $(srcdir)/$(miscdstDIR)/dst.pl
+miscdstMISCFILES = \
+  $(srcdir)/$(miscdstDIR)/dst.in
+
+miscgcalltxDIR = gcalltx#
+miscgcalltxSCRIPTFILES = \
+  $(miscgcalltxDIR)/gcalltx \
+  $(miscgcalltxDIR)/gcalltx.pl
+miscgcalltxDATAFILES = \
+  $(srcdir)/$(miscgcalltxDIR)/gcalltx.sed
+miscgcalltxMISCFILES = \
+  $(srcdir)/$(miscgcalltxDIR)/gcalltx.in \
+  $(srcdir)/$(miscgcalltxDIR)/gcalltx.bat \
+  $(srcdir)/$(miscgcalltxDIR)/gcalltxp.in
+
+miscmoonDIR = moon#
+miscmoonSCRIPTFILES = \
+  $(miscmoonDIR)/moon
+miscmoonDATAFILES =
+miscmoonMISCFILES = \
+  $(srcdir)/$(miscmoonDIR)/moon.in \
+  $(srcdir)/$(miscmoonDIR)/moon.bat \
+  $(srcdir)/$(miscmoonDIR)/moon1.awk \
+  $(srcdir)/$(miscmoonDIR)/moon2.awk
+
+miscmrmsDIR = mrms#
+miscmrmsSCRIPTFILES = \
+  $(miscmrmsDIR)/mrms
+miscmrmsDATAFILES = \
+  $(srcdir)/$(miscmrmsDIR)/mrms.awk \
+  $(srcdir)/$(miscmrmsDIR)/mrms.pl \
+  $(srcdir)/$(miscmrmsDIR)/mrms.rc
+miscmrmsMISCFILES = \
+  $(srcdir)/$(miscmrmsDIR)/mrms.in \
+  $(srcdir)/$(miscmrmsDIR)/mrms.bat
+
+miscsrssDIR = srss#
+miscsrssSCRIPTFILES = \
+  $(miscsrssDIR)/srss
+miscsrssDATAFILES = \
+  $(srcdir)/$(miscsrssDIR)/srss.awk \
+  $(srcdir)/$(miscsrssDIR)/srss.pl \
+  $(srcdir)/$(miscsrssDIR)/srss.rc
+miscsrssMISCFILES = \
+  $(srcdir)/$(miscsrssDIR)/srss.in \
+  $(srcdir)/$(miscsrssDIR)/srss.bat
+
+miscwlocDIR = wloc#
+miscwlocSCRIPTFILES = \
+  $(miscwlocDIR)/wlocdrv
+miscwlocDATAFILES = \
+  $(srcdir)/$(miscwlocDIR)/wlocdrv1.awk \
+  $(srcdir)/$(miscwlocDIR)/wlocdrv1.pl \
+  $(srcdir)/$(miscwlocDIR)/wlocdrv2.awk \
+  $(srcdir)/$(miscwlocDIR)/wlocdrv2.pl \
+  $(srcdir)/$(miscwlocDIR)/zone.tab
+miscwlocMISCFILES = \
+  $(srcdir)/$(miscwlocDIR)/wlocdrv.in \
+  $(srcdir)/$(miscwlocDIR)/wlocdrv.bat
+
+miscSCRIPTFILES = \
+  $(miscdailySCRIPTFILES) \
+  $(miscddiffSCRIPTFILES) \
+  $(miscdstSCRIPTFILES) \
+  $(miscgcalltxSCRIPTFILES) \
+  $(miscmoonSCRIPTFILES) \
+  $(miscmrmsSCRIPTFILES) \
+  $(miscsrssSCRIPTFILES) \
+  $(miscwlocSCRIPTFILES)
+
+miscDATAFILES = \
+  $(miscdailyDATAFILES) \
+  $(miscddiffDATAFILES) \
+  $(miscdstDATAFILES) \
+  $(miscgcalltxDATAFILES) \
+  $(miscmoonDATAFILES) \
+  $(miscmrmsDATAFILES) \
+  $(miscsrssDATAFILES) \
+  $(miscwlocDATAFILES)
+
+miscINFOFILES = \
+  $(srcdir)/README \
+  $(srcdir)/gcalmagic.add
+
+miscMISCFILES = \
+  $(miscdailyMISCFILES) \
+  $(miscddiffMISCFILES) \
+  $(miscdstMISCFILES) \
+  $(miscgcalltxMISCFILES) \
+  $(miscmoonMISCFILES) \
+  $(miscmrmsMISCFILES) \
+  $(miscsrssMISCFILES) \
+  $(miscwlocMISCFILES) \
+  $(srcdir)/locale.alias \
+  $(srcdir)/magic.add \
+  $(srcdir)/Makefile.in
+
+DISTFILES = \
+  $(miscDATAFILES) \
+  $(miscINFOFILES) \
+  $(miscMISCFILES)
+
+ALLDIRS-yes = \
+  $(localedir) \
+  $(ALLDIRS-misc)
+
+ALLDIRS-no = \
+  $(ALLDIRS-misc)
+
+ALLDIRS-misc = \
+  $(packagedatadir) \
+  $(packagedatamiscdir) \
+  $(packagedatamiscdir)/$(miscdailyDIR) \
+  $(packagedatamiscdir)/$(miscddiffDIR) \
+  $(packagedatamiscdir)/$(miscdstDIR) \
+  $(packagedatamiscdir)/$(miscgcalltxDIR) \
+  $(packagedatamiscdir)/$(miscmoonDIR) \
+  $(packagedatamiscdir)/$(miscmrmsDIR) \
+  $(packagedatamiscdir)/$(miscsrssDIR) \
+  $(packagedatamiscdir)/$(miscwlocDIR)
 
 #### End of package specific make variable definition section. ####
 
@@ -59,9 +228,11 @@ ALLDIRS-no = $(bindir)
 
 #### Start of default targets section. ####
 
+default: $(miscSCRIPTFILES)
+
 all: default
 
-default installalias-no uninstall clean id ID tags TAGS:
+installalias-no clean id ID tags TAGS:
 	@echo "Nothing to be done for \`$@'"
 
 #### End of default targets section. ####
@@ -70,17 +241,21 @@ default installalias-no uninstall clean id ID tags TAGS:
 
 #### Start of install section. ####
 
-install: installdirs installalias
+install: installdirs installalias installmisc
 	@echo "All installs in $(subdir) done"
 
 installdirs: $(top_srcdir)/mkinstalldirs
 	$(NORMAL_INSTALL)
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(ALLDIRS-@USE_NLS@)
 
-installalias: installalias-@USE_NLS@
-installalias-yes: $(srcdir)/locale.alias installdirs
+installaliasdirs: $(top_srcdir)/mkinstalldirs
 	$(NORMAL_INSTALL)
-	if test ! -f "$(localedir)/locale.alias"; \
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(localedir)
+
+installalias: installalias-@USE_NLS@
+installalias-yes: $(srcdir)/locale.alias installaliasdirs
+	$(NORMAL_INSTALL)
+	@if test ! -f "$(localedir)/locale.alias"; \
 	then \
 	  echo "Installing \`$(srcdir)/locale.alias' as \`$(localedir)/locale.alias'"; \
 	  $(INSTALL_DATA) $(srcdir)/locale.alias $(localedir)/locale.alias; \
@@ -88,8 +263,92 @@ installalias-yes: $(srcdir)/locale.alias installdirs
 	else \
 	  : ; \
 	fi
+
 installbin install-strip: installalias
 	$(NORMAL_INSTALL)
+
+#
+# Install the shell scripts in $prefix/share/$PACKAGE/misc/$basedir/ by their
+# ORIGINAL_NAME, but link them as ``TRANSFORMED $PACKAGE''-ORIGINAL_NAME
+# to the $bindir, e.g. link the `dst' script as `gcal-dst' by using the
+# transformation given in $transform.
+#
+installmisc: $(miscSCRIPTFILES) $(miscDATAFILES) $(miscINFOFILES) installdirs
+	$(NORMAL_INSTALL)
+	@for file in $(miscSCRIPTFILES); \
+	do \
+	  basedir=`echo "$$file" | sed -e "s,/[^/][^/]*\$$,,"`; \
+	  basefile=`echo "$$file" | sed -e 's,.*/,,'`; \
+	  binprefix=`echo "$(PACKAGE)" | sed "$(transform)"`; \
+	  echo "Installing \`$$file' as \`$(packagedatamiscdir)/$$basedir/$$basefile'"; \
+	  sed -e "s,^packagedatamiscdir=.*,packagedatamiscdir=$(packagedatamiscdir)/$$basedir," \
+	      -e 's,^ThisGcal=.*,ThisGcal=`\$$Echo "\$$PACKAGE" | \$$Sed "\$$transform"`,' \
+	      -e 's,^PerlGcal=.*,PerlGcal="\$$PACKAGE",' $$file \
+	    > $(packagedatamiscdir)/$$basedir/$$basefile; \
+	  if test -n "$(BINPERMS)"; \
+	  then \
+	    chmod $(BINPERMS) $(packagedatamiscdir)/$$basedir/$$basefile; \
+	  else \
+	    chmod $(BINPERMS2) $(packagedatamiscdir)/$$basedir/$$basefile; \
+	  fi; \
+	  if test -n "$(LN_S)"; \
+	  then \
+	    echo "Linking \`$(packagedatamiscdir)/$$basedir/$$basefile' to \`$(bindir)/$$binprefix-$$basefile'"; \
+	    if test -h "$(bindir)/$$binprefix-$$basefile"; \
+	    then \
+	      rm -f $(bindir)/$$binprefix-$$basefile; \
+	    fi; \
+	    (cd $(bindir) && $(LN_S) $(packagedatamiscdir)/$$basedir/$$basefile $$binprefix-$$basefile); \
+	  else \
+	    echo "Installing \`$(packagedatamiscdir)/$$basedir/$$basefile' as \`$(bindir)/$$binprefix-$$basefile'"; \
+	    $(INSTALL_PROGRAM) $(packagedatamiscdir)/$$basedir/$$basefile $(bindir)/$$binprefix-$$basefile; \
+	  fi; \
+	done; \
+	for file in $(miscDATAFILES) $(miscINFOFILES); \
+	do \
+	  install_target=`echo "$$file" | sed -e "s,^$(srcdir)/,,"`; \
+	  echo "Installing \`$$file' as \`$(packagedatamiscdir)/$$install_target'"; \
+	  $(INSTALL_DATA) $$file $(packagedatamiscdir)/$$install_target; \
+	done; \
+	if test -n "$(BINPERMS)"; \
+	then \
+	  chmod $(BINPERMS) $(packagedatadir); \
+	  for dir in $(ALLDIRS-no); \
+	  do \
+	    chmod $(BINPERMS) $$dir; \
+	  done; \
+	else \
+	  chmod $(BINPERMS2) $(packagedatadir); \
+	  for dir in $(ALLDIRS-no); \
+	  do \
+	    chmod $(BINPERMS2) $$dir; \
+	  done; \
+	fi
+	@echo "Miscellaneous example files installed"
+
+uninstall:
+	$(NORMAL_UNINSTALL)
+	-for file in $(miscSCRIPTFILES); \
+	do \
+	  basedir=`echo "$$file" | sed -e "s,/[^/][^/]*\$$,,"`; \
+	  basefile=`echo "$$file" | sed -e 's,.*/,,'`; \
+	  binprefix=`echo "$(PACKAGE)" | sed "$(transform)"`; \
+	  rm -f $(bindir)/$$binprefix-$$basefile; \
+	  rm -f $(packagedatamiscdir)/$$basedir/$$basefile; \
+	done
+	-for file in $(miscDATAFILES) $(miscINFOFILES); \
+	do \
+	  uninstall_target=`echo "$$file" | sed -e "s,^$(srcdir)/,,"`; \
+	  rm -f $(packagedatamiscdir)/$$uninstall_target; \
+	done
+	-rm -f $(packagedatamiscdir)/$(miscgcalltxDIR)/*.cpr
+	-for dir in $(ALLDIRS-misc); \
+	do \
+	  rmdir $$dir 2>/dev/null; \
+	done
+	-rmdir $(packagedatamiscdir) 2>/dev/null
+	-rmdir $(packagedatadir) 2>/dev/null
+	@echo "Miscellaneous example files of distribution uninstalled"
 
 #### End of install section. ####
 
@@ -98,12 +357,12 @@ installbin install-strip: installalias
 #### Start of clean section. ####
 
 distclean:
-	rm -f Makefile
+	-rm -f Makefile $(miscSCRIPTFILES) $(miscgcalltxDIR)/*.cpr
 
 mostlyclean: distclean
 
 realclean: distclean
-	rm -f id ID tags TAGS
+	-rm -f id ID tags TAGS
 
 maintainer-clean: realclean
 	@echo "This command is intended for maintainers to use;"
@@ -113,7 +372,128 @@ maintainer-clean: realclean
 
 
 
-dist dist-gcal distzip distzoo distlha distshar: Makefile $(DISTFILES)
+dist dist-$(PACKAGE) distzip distzoo distlha distshar MANIFEST: Makefile $(DISTFILES)
+
+$(miscdailyDIR)/daily: $(srcdir)/$(miscdailyDIR)/daily.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+	-if test -s "$@"; \
+	then \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+daily: $(miscdailyDIR)/daily
+
+$(miscddiffDIR)/ddiff: $(srcdir)/$(miscddiffDIR)/ddiff.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+	-if test -s "$@"; \
+	then \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+ddiff: $(miscddiffDIR)/ddiff
+
+$(miscddiffDIR)/ddiffdrv: $(srcdir)/$(miscddiffDIR)/ddiffdrv.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+	-if test -s "$@"; \
+	then \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+ddiffdrv: $(miscddiffDIR)/ddiffdrv
+
+$(miscdstDIR)/dst: $(srcdir)/$(miscdstDIR)/dst.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+	-if test -s "$@"; \
+	then \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+dst: $(miscdstDIR)/dst
+
+$(miscgcalltxDIR)/gcalltx: $(srcdir)/$(miscgcalltxDIR)/gcalltx.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+	-if test -s "$@"; \
+	then \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+gcalltx: $(miscgcalltxDIR)/gcalltx
+
+$(miscgcalltxDIR)/gcalltx.pl: $(srcdir)/$(miscgcalltxDIR)/gcalltxp.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$(miscgcalltxDIR)/gcalltxp CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+	-if test -s "$(miscgcalltxDIR)/gcalltxp"; \
+	then \
+	  mv $(miscgcalltxDIR)/gcalltxp $@; \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+gcalltx.pl: $(miscgcalltxDIR)/gcalltx.pl
+
+$(miscmoonDIR)/moon: $(srcdir)/$(miscmoonDIR)/moon.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+	-if test -s "$@"; \
+	then \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+moon: $(miscmoonDIR)/moon
+
+$(miscmrmsDIR)/mrms: $(srcdir)/$(miscmrmsDIR)/mrms.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+	-if test -s "$@"; \
+	then \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+mrms: $(miscmrmsDIR)/mrms
+
+$(miscsrssDIR)/srss: $(srcdir)/$(miscsrssDIR)/srss.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+	-if test -s "$@"; \
+	then \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+srss: $(miscsrssDIR)/srss
+
+$(miscwlocDIR)/wlocdrv: $(srcdir)/$(miscwlocDIR)/wlocdrv.in ../config.status
+	cd .. \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= \
+	       $(SHELL) ./config.status
+	-if test -s "$@"; \
+	then \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+wlocdrv: $(miscwlocDIR)/wlocdrv
 
 Makefile: $(srcdir)/Makefile.in ../config.status
 	cd .. \

@@ -1,5 +1,6 @@
-dnl Template file for GNU Autoconf.
-dnl Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+dnl Template file for GNU Autoconf
+dnl
+dnl Copyright (c) 1995-1997, 2000 Thomas Esken
 dnl
 dnl This software doesn't claim completeness, correctness or usability.
 dnl On principle I will not be liable for ANY damages or losses (implicit
@@ -28,9 +29,9 @@ dnl
 dnl Starting operations.
 dnl
 AC_INIT(src/defines.h)dnl
-AC_CONFIG_HEADER(config.h:config.hin)dnl
-AC_PREREQ(2.9)dnl
-AC_REVISION($Id: configure.in 2.20 1997/06/25 02:02:00 tom Exp $)dnl
+AC_PREREQ(2.13)dnl
+AM_CONFIG_HEADER(config.h:config.hin)dnl
+AC_REVISION($Id: configure.in 2.29 2000/04/05 02:02:09 tom Exp $)dnl
 
 dnl
 dnl Declare package name and version number.
@@ -43,14 +44,9 @@ AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
 
 dnl
-dnl Actually supported native languages.
-dnl
-ALL_LINGUAS="de fr nl pl sv"
-
-dnl
-dnl Emit some text.  (I know that some people dislikes this, but those should
-dnl really use the `--quiet' option of the `configure' script instead of writing
-dnl me that I have to remove them.)
+dnl Emit some text.  (I know that some people dislike a talkative `configure'
+dnl script, but those persons should really use the `--quiet' option instead
+dnl of writing me that I have to remove this behaviour, because I like it!)
 dnl
 AC_MSG_RESULT()
 AC_MSG_RESULT(this is the automatical configuration step of $PACKAGE-$VERSION)
@@ -59,8 +55,19 @@ AC_MSG_RESULT(please wait...)
 AC_MSG_RESULT()
 
 dnl
+dnl Support transforming of program names.
+dnl
+AC_ARG_PROGRAM
+
+dnl
+dnl Check if the build environment is sane.
+dnl
+AM_SANITY_CHECK
+
+dnl
 dnl Checks for Gcal specific package options.
 dnl
+AC_MSG_RESULT()
 AC_CHECKING(for $PACKAGE specific package options)
 dnl
 AC_MSG_CHECKING(for language used in documentation files)
@@ -77,9 +84,22 @@ AC_ARG_ENABLE(easc,
   gcal_cv_use_easc=$enableval,
   gcal_cv_use_easc=no)
 AC_MSG_RESULT($gcal_cv_use_easc)
-if test "$gcal_cv_use_easc" = "yes"; then
+if test "$gcal_cv_use_easc" = yes; then
   AC_DEFINE(USE_EASC)
 fi
+dnl
+AC_MSG_CHECKING(whether all available country specific holidays are required)
+AC_ARG_ENABLE(cc-holidays,
+  [  --disable-cc-holidays   do not use all available country specific holidays],
+  gcal_cv_use_cc_holidays=$enableval,
+  gcal_cv_use_cc_holidays=yes)
+AC_MSG_RESULT($gcal_cv_use_cc_holidays)
+if test "$gcal_cv_use_cc_holidays" = yes; then
+  GCAL_HD_OBJS="\$(GCAL_HD_OBJS)"
+else
+  AC_DEFINE(HD_TOP20CC)
+fi
+AC_SUBST(GCAL_HD_OBJS)
 dnl
 AC_MSG_CHECKING(whether highlighting sequences are required)
 AC_ARG_ENABLE(hls,
@@ -87,7 +107,7 @@ AC_ARG_ENABLE(hls,
   gcal_cv_use_hls=$enableval,
   gcal_cv_use_hls=yes)
 AC_MSG_RESULT($gcal_cv_use_hls)
-if test "$gcal_cv_use_hls" = "yes"; then
+if test "$gcal_cv_use_hls" = yes; then
   AC_DEFINE(USE_HLS)
 fi
 dnl
@@ -97,7 +117,7 @@ AC_ARG_ENABLE(pager,
   gcal_cv_use_pager=$enableval,
   gcal_cv_use_pager=yes)
 AC_MSG_RESULT($gcal_cv_use_pager)
-if test "$gcal_cv_use_pager" = "yes"; then
+if test "$gcal_cv_use_pager" = yes; then
   AC_DEFINE(USE_PAGER)
 fi
 dnl
@@ -107,7 +127,7 @@ AC_ARG_ENABLE(rc,
   gcal_cv_use_rc=$enableval,
   gcal_cv_use_rc=yes)
 AC_MSG_RESULT($gcal_cv_use_rc)
-if test "$gcal_cv_use_rc" = "yes"; then
+if test "$gcal_cv_use_rc" = yes; then
   GCAL_RC_OBJS="\$(GCAL_RC_OBJS)"
   AC_DEFINE(USE_RC)
 fi
@@ -126,7 +146,7 @@ AC_ARG_WITH(included-regexps,
   gcal_cv_use_included_regexps=$withval,
   gcal_cv_use_included_regexps=no)
 AC_MSG_RESULT($gcal_cv_use_included_regexps)
-if test "$gcal_cv_use_included_regexps" = "yes"; then
+if test "$gcal_cv_use_included_regexps" = yes; then
   if test -f "${srcdir}/src/regexp.c"; then
     AC_DEFINE(HAVE_V8_REGCOMP)
     REGEX_O='regexp$(O)'
@@ -149,42 +169,87 @@ dnl Checks for make.
 dnl
 AC_PROG_MAKE_SET
 dnl
+dnl Checks for strip.
+dnl
+AC_CHECK_PROGS(STRIP, gstrip gnustrip strip)
+if test -z "$ac_cv_prog_STRIP"; then
+  AC_MSG_RESULT()
+  AC_MSG_WARN(no installation of stripped executable files!)
+  AC_MSG_WARN(Makefile target *install-strip* will never be executed.)
+  AC_MSG_RESULT()
+fi
+dnl
 dnl Checks for makeinfo.
 dnl
 AC_CHECK_PROGS(MAKEINFO, gmakeinfo gnumakeinfo makeinfo)
 if test -z "$ac_cv_prog_MAKEINFO"; then
   AC_MSG_RESULT()
-  AC_MSG_WARN(no automatic recreation of text documentation/info files!)
-  AC_MSG_WARN(Makefile targets *txt* and *info* will never be executed.)
+  AC_MSG_WARN(no automatic recreation of HTML and Info documentation files!)
+  AC_MSG_WARN(Makefile targets *html* and *info* will never be executed.)
   AC_MSG_RESULT()
 else
   AC_MSG_CHECKING(for $ac_cv_prog_MAKEINFO version)
   changequote(<<, >>)dnl
-  AC_CACHE_VAL(gcal_cv_prog_MAKEINFO_VERSION,
-    gcal_cv_prog_MAKEINFO_VERSION=`$ac_cv_prog_MAKEINFO --version 2>&1 | sed -e '/Makeinfo/!d' -e 's/[^0-9]//g'`)
-  changequote([, ])dnl
-  gcal_makeinfo_error=no
-  if test -n "$gcal_cv_prog_MAKEINFO_VERSION"; then
-    AC_MSG_RESULT($gcal_cv_prog_MAKEINFO_VERSION)
-    if test "$gcal_cv_prog_MAKEINFO_VERSION" -lt "38166"; then
-      gcal_makeinfo_error=yes
-    fi
+  dnl
+  dnl Gcal needs `makeinfo' from GNU Texinfo 3.12t minimum,
+  dnl so check the version number `makeinfo' emits.
+  dnl
+  makeinfo_version=`$ac_cv_prog_MAKEINFO --version 2>&1 | \
+                      sed -e '/[Mm]akeinfo/!d' \
+                          -e 's,\ ,@,' \
+                          -e 's,.*@,,' \
+                          -e 's,^[a-zA-Z\ \(\)]*,,g' \
+                          -e 's,).*,,'`
+  makeinfo_version_prefix=`echo "$makeinfo_version" | \
+                             sed -e 's,\..*,,'`
+  makeinfo_version_suffix=`echo "$makeinfo_version" | \
+                             sed -e 's,[a-zA-Z\-].*,,' \
+                                 -e 's,\.,@,' \
+                                 -e 's,.*@,,' \
+                                 -e 's,\..*,,'`
+  makeinfo_version_subsuffix=`echo "$makeinfo_version" | \
+                                sed -e 's,[0-9\.\-]*,,'`
+  if test -z "$makeinfo_version_prefix";
+  then
+    makeinfo_version_prefix=nil
+    makeinfo_version="$makeinfo_version_prefix"
   else
-    gcal_makeinfo_error=yes
-    AC_MSG_RESULT(unknown)
+    if test -z "$makeinfo_version_suffix";
+    then
+      makeinfo_version_suffix=nil
+      makeinfo_version="$makeinfo_version_prefix.$makeinfo_version_suffix"
+    else
+      if test -z "$makeinfo_version_subsuffix";
+      then
+        makeinfo_version_subsuffix="nil"
+      fi
+    fi
   fi
-  if test "$gcal_makeinfo_error" = "yes"; then
-    gcal_cv_prog_MAKEINFO_VERSION=
+  makeinfo_error=no
+  case "$makeinfo_version_prefix" in
+    nil | [0-2]) makeinfo_error=yes ;;
+    3) case "$makeinfo_version_suffix" in
+         nil | [0-9] | 10 | 11) makeinfo_error=yes ;;
+         12) case "$makeinfo_version_subsuffix" in
+               nil | [a-s] ) makeinfo_error=yes ;;
+             esac
+       esac
+  esac
+  gcal_cv_prog_MAKEINFO_VERSION="$makeinfo_version"
+  changequote([, ])dnl
+  AC_MSG_RESULT($gcal_cv_prog_MAKEINFO_VERSION)
+  if test "$makeinfo_error" = yes; then
+    gcal_cv_prog_MAKEINFO_VERSION=""
     AC_MSG_RESULT()
-    AC_MSG_WARN(no automatic recreation of text documentation/info files!)
+    AC_MSG_WARN(no automatic recreation of HTML and Info documentation files!)
     AC_MSG_WARN(the makeinfo program is out of date.)
-    AC_MSG_WARN(install *GNU Texinfo-3.8* or later in order to)
-    AC_MSG_WARN(recreate the distribution *.info and *.txt files.)
-    AC_MSG_WARN(Makefile targets *txt* and *info* will never be executed.)
+    AC_MSG_WARN(install *GNU Texinfo-3.12t* or later in order to)
+    AC_MSG_WARN(recreate the distribution *.html and *.info files.)
+    AC_MSG_WARN(Makefile targets *html* and *info* will never be executed.)
     AC_MSG_RESULT()
   fi
-  MAKEINFOVERSION=$gcal_cv_prog_MAKEINFO_VERSION
-  AC_SUBST(MAKEINFOVERSION)dnl
+  MAKEINFO_VERSION=$gcal_cv_prog_MAKEINFO_VERSION
+  AC_SUBST(MAKEINFO_VERSION)dnl
 fi
 dnl
 dnl Checks for texi2dvi.
@@ -192,9 +257,72 @@ dnl
 AC_CHECK_PROGS(TEXI2DVI, gtexi2dvi gnutexi2dvi texi2dvi)
 if test -z "$ac_cv_prog_TEXI2DVI"; then
   AC_MSG_RESULT()
-  AC_MSG_WARN(no automatic creation of dvi files!)
+  AC_MSG_WARN(no automatic creation of DVI file!)
   AC_MSG_WARN(Makefile target *dvi* will never be executed.)
   AC_MSG_RESULT()
+else
+  AC_MSG_CHECKING(for $ac_cv_prog_TEXI2DVI version)
+  changequote(<<, >>)dnl
+  dnl
+  dnl Gcal needs `texi2dvi' from GNU Texinfo 3.12p minimum,
+  dnl so check the version number `texi2dvi' emits.
+  dnl
+  texi2dvi_version=`$ac_cv_prog_TEXI2DVI --version 2>&1 | \
+                      sed -e '/[Tt]exi2dvi/!d' \
+                          -e 's,\ ,@,' \
+                          -e 's,.*@,,' \
+                          -e 's,^[a-zA-Z\ \(\)]*,,g' \
+                          -e 's,).*,,'`
+  texi2dvi_version_prefix=`echo "$texi2dvi_version" | \
+                             sed -e 's,\..*,,'`
+  texi2dvi_version_suffix=`echo "$texi2dvi_version" | \
+                             sed -e 's,[a-zA-Z\-].*,,' \
+                                 -e 's,\.,@,' \
+                                 -e 's,.*@,,' \
+                                 -e 's,\..*,,'`
+  texi2dvi_version_subsuffix=`echo "$texi2dvi_version" | \
+                                sed -e 's,[0-9\.\-]*,,'`
+  if test -z "$texi2dvi_version_prefix";
+  then
+    texi2dvi_version_prefix=nil
+    texi2dvi_version="$texi2dvi_version_prefix"
+  else
+    if test -z "$texi2dvi_version_suffix";
+    then
+      texi2dvi_version_suffix=nil
+      texi2dvi_version="$texi2dvi_version_prefix.$texi2dvi_version_suffix"
+    else
+      if test -z "$texi2dvi_version_subsuffix";
+      then
+        texi2dvi_version_subsuffix="nil"
+      fi
+    fi
+  fi
+  texi2dvi_error=no
+  case "$texi2dvi_version_prefix" in
+    nil | [0-2]) texi2dvi_error=yes ;;
+    3) case "$texi2dvi_version_suffix" in
+         nil | [0-9] | 10 | 11) texi2dvi_error=yes ;;
+         12) case "$texi2dvi_version_subsuffix" in
+               nil | [a-o] ) texi2dvi_error=yes ;;
+             esac
+       esac
+  esac
+  gcal_cv_prog_TEXI2DVI_VERSION="$texi2dvi_version"
+  changequote([, ])dnl
+  AC_MSG_RESULT($gcal_cv_prog_TEXI2DVI_VERSION)
+  if test "$texi2dvi_error" = yes; then
+    gcal_cv_prog_TEXI2DVI_VERSION=""
+    AC_MSG_RESULT()
+    AC_MSG_WARN(no automatic creation of DVI file!)
+    AC_MSG_WARN(the texi2dvi program is out of date.)
+    AC_MSG_WARN(install *GNU Texinfo-3.12p* or later in order to)
+    AC_MSG_WARN(create the DVI file.)
+    AC_MSG_WARN(Makefile target *dvi* will never be executed.)
+    AC_MSG_RESULT()
+  fi
+  TEXI2DVI_VERSION=$gcal_cv_prog_TEXI2DVI_VERSION
+  AC_SUBST(TEXI2DVI_VERSION)dnl
 fi
 dnl
 dnl Checks for shar.
@@ -258,27 +386,72 @@ else
   fi
 fi
 dnl
-dnl Checks for text converters/interpeters (perl, awk).
+dnl Checks for text converters/interpreters (perl, awk).
 dnl
 AC_CHECK_PROG(PERL, perl, perl)
-if test -z "$ac_cv_prog_PERL"; then
-  AC_PROG_AWK
+AC_PROG_AWK
+if test -z "$ac_cv_prog_AWK"; then
+  dnl
+  dnl Previous AC_PROG_AWK has already checked for `gawk'.
+  dnl
+  AC_CHECK_PROG(AWK, gnuawk, gnuawk)
   if test -z "$ac_cv_prog_AWK"; then
-    dnl
-    dnl Previous AC_PROG_AWK has already checked for `gawk'.
-    dnl
-    AC_CHECK_PROG(AWK, gnuawk, gnuawk)
-    if test -z "$ac_cv_prog_AWK"; then
-      AC_MSG_RESULT()
-      AC_MSG_WARN(no automatic installation of dates files!)
-      AC_MSG_WARN(Makefile target *installdates* will never be executed.)
-      AC_MSG_RESULT()
-    fi
+    AC_MSG_RESULT()
+    AC_MSG_WARN(no automatic installation of dates files!)
+    AC_MSG_WARN(Makefile target *installdates* will never be executed)
+    AC_MSG_WARN(and some other targets will create useless script files.)
+    AC_MSG_RESULT()
   fi
 fi
-if test "$gcal_cv_use_pager" = "yes"; then
+dnl
+dnl Checks for zdump.
+dnl
+AC_PATH_PROG(ZDUMP, zdump, , $PATH:\
+/sbin:\
+/usr/sbin:\
+/usr/local/sbin:\
+/usr/etc:\
+/usr/etc/zoneinfo:\
+/usr/lib:\
+/usr/lib/zoneinfo:\
+/usr/share:\
+/usr/share/zoneinfo:\
+/usr/share/lib:\
+/usr/share/lib/zoneinfo:\
+/usr/share/etc:\
+/usr/share/etc/zoneinfo:\
+/usr/local/etc:\
+/usr/local/etc/zoneinfo:\
+/usr/local/lib:\
+/usr/local/lib/zoneinfo:\
+/usr/local/share:\
+/usr/local/share/zoneinfo:\
+/usr/local/share/lib:\
+/usr/local/share/lib/zoneinfo:\
+/usr/local/share/etc:\
+/usr/local/share/etc/zoneinfo:\
+/opt/gnu/sbin:\
+/opt/gnu/usr/sbin:\
+/opt/gnu/usr/local/sbin:\
+/opt/gnu/etc:\
+/opt/gnu/etc/zoneinfo:\
+/opt/gnu/lib:\
+/opt/gnu/lib/zoneinfo:\
+/opt/gnu/share:\
+/opt/gnu/share/zoneinfo:\
+/opt/gnu/share/lib:\
+/opt/gnu/share/lib/zoneinfo:\
+/opt/gnu/share/etc:\
+/opt/gnu/share/etc/zoneinfo)
+if test -z "$ac_cv_path_ZDUMP"; then
+  AC_MSG_RESULT()
+  AC_MSG_WARN(Ask your sysadmin for the ZONEINFO time zone dumping program!)
+  AC_MSG_WARN(Makefile target *dst* will produce a useless script file.)
+  AC_MSG_RESULT()
+fi
+if test "$gcal_cv_use_pager" = yes; then
   dnl
-  dnl Checks for (external) pager programs (less, more, pg).
+  dnl Checks for ``external'' pager programs (less, more, pg).
   dnl
   AC_CHECK_PROG(PAGER1, less, less)
   AC_DEFINE_UNQUOTED(PAGER1_PROG, "$PAGER1")
@@ -286,6 +459,25 @@ if test "$gcal_cv_use_pager" = "yes"; then
   AC_DEFINE_UNQUOTED(PAGER2_PROG, "$PAGER2")
   AC_CHECK_PROG(PAGER3, pg, pg)
   AC_DEFINE_UNQUOTED(PAGER3_PROG, "$PAGER3")
+fi
+dnl
+dnl Checks for cp.
+dnl
+AC_CHECK_PROGS(CP, cp copy)
+if test -n "$ac_cv_prog_CP"; then
+  if test "$ac_cv_prog_CP" = cp; then
+    CP="cp -p"
+  else
+    if test "$ac_cv_prog_CP" != "cp -p"; then
+      if test "$ac_cv_prog_CP" != "copy -m"; then
+        dnl
+        dnl Assume `copy -m' on SCO 3.2v4 which does not have `cp -p'.
+        dnl
+        CP="copy -m"
+      fi
+    fi
+  fi
+  AC_SUBST(CP)
 fi
 
 dnl
@@ -311,7 +503,7 @@ AC_PROG_CC
 if test -z "$ac_cv_prog_CC"; then
   AC_MSG_RESULT(hmm... whats this??)
   AC_MSG_RESULT()
-  AC_MSG_ERROR(no C compiler found - aborting...)
+  AC_MSG_ERROR(no C compiler found -- aborting...)
 fi
 dnl
 AC_PROG_GCC_TRADITIONAL
@@ -319,7 +511,7 @@ dnl
 dnl Set some warning flags in CFLAGS if this environment variable was either
 dnl undefined or not set before previous COMPILER test, and `gcc' is found.
 dnl
-if test "$gcal_possibly_adjust_cflags" = "yes" && test -n "$GCC"; then
+if test "$gcal_possibly_adjust_cflags" = yes && test -n "$GCC"; then
   CFLAGS="$CFLAGS -Wall"
 fi
 
@@ -341,7 +533,7 @@ AC_CHECKING(for libraries)
 dnl
 dnl Checks for terminal libraries.
 dnl
-if test "$gcal_cv_use_term" = "yes"; then
+if test "$gcal_cv_use_term" = yes; then
   gcal_ttylibs_ok=no
   gcal_libtermlib_ok=no
   TTYLIBS=
@@ -367,7 +559,7 @@ if test "$gcal_cv_use_term" = "yes"; then
   AC_TRY_LINK(,
     [tgetent(0); tgetflag(0); tgetnum(0); tgetstr(0);],
     [gcal_ttylibs_ok=yes])
-  if test "$gcal_ttylibs_ok" = "yes"; then
+  if test "$gcal_ttylibs_ok" = yes; then
     AC_DEFINE(HAVE_TTYLIBS)
     AC_MSG_RESULT(using $TTYLIBS)
   else
@@ -382,7 +574,7 @@ if test "$gcal_cv_use_term" = "yes"; then
       AC_TRY_LINK(,
         [tgetent(0); tgetflag(0); tgetnum(0); tgetstr(0);],
         [gcal_ttylibs_ok=yes])
-      if test "$gcal_ttylibs_ok" = "yes"; then
+      if test "$gcal_ttylibs_ok" = yes; then
         AC_DEFINE(HAVE_TTYLIBS)
         AC_MSG_RESULT(using $TTYLIBS)
       else
@@ -394,32 +586,32 @@ if test "$gcal_cv_use_term" = "yes"; then
           [have_libtermlib=no])
         TTYLIBS="-ltermlib"
         LIBS="$LIBS $TTYLIBS"
-        if test "$have_libtermlib" = "yes"; then
+        if test "$have_libtermlib" = yes; then
           AC_MSG_CHECKING(for working terminal libraries again)
           AC_TRY_LINK(,
             [tgetent(0); tgetflag(0); tgetnum(0); tgetstr(0);],
             [gcal_libtermlib_ok=yes])
-          if test "$gcal_libtermlib_ok" = "yes"; then
+          if test "$gcal_libtermlib_ok" = yes; then
             AC_DEFINE(HAVE_TTYLIBS)
             AC_MSG_RESULT(using $TTYLIBS)
           fi
         fi
       fi
     else
-      if test "$have_libtermlib" = "yes"; then
+      if test "$have_libtermlib" = yes; then
         TTYLIBS="-ltermlib"
         LIBS="$SAVE_LIBS $TTYLIBS"
         AC_TRY_LINK(,
           [tgetent(0); tgetflag(0); tgetnum(0); tgetstr(0);],
           [gcal_libtermlib_ok=yes])
-        if test "$gcal_libtermlib_ok" = "yes"; then
+        if test "$gcal_libtermlib_ok" = yes; then
           AC_DEFINE(HAVE_TTYLIBS)
           AC_MSG_RESULT(using $TTYLIBS)
         fi
       fi
     fi
   fi
-  if test "$gcal_ttylibs_ok" = "no" && test "$gcal_libtermlib_ok" = "no"; then
+  if test "$gcal_ttylibs_ok" = no && test "$gcal_libtermlib_ok" = no; then
     LIBS="$SAVE_LIBS"
     AC_MSG_RESULT(hmm... whats this??)
     AC_MSG_RESULT()
@@ -432,7 +624,7 @@ if test "$gcal_cv_use_term" = "yes"; then
     AC_MSG_RESULT()
   fi
 fi
-if test "$gcal_cv_use_included_regexps" = "no"; then
+if test "$gcal_cv_use_included_regexps" = no; then
   dnl
   dnl Check for regular expression libraries.  GNU regexp functions preferred!
   dnl
@@ -444,18 +636,22 @@ if test "$gcal_cv_use_included_regexps" = "no"; then
   AC_CHECK_LIB(gen, regcmp)
   AC_CHECK_LIB(intl, regcmp)
   AC_CHECK_LIB(PW, regcmp)
+  dnl
+  dnl Store whether regcmp is stored in -lintl.
+  dnl
+  if test -n "`echo $LIBS | grep '\-lintl'`"; then
+    need_sys_lintl_for_regcmp=yes
+  fi
 fi
 dnl
 dnl Check for mathematical library.
 dnl
-if test "$gcal_cv_use_rc" = "yes"; then
-  AC_CHECK_LIB(m,
-    cos,
-    [LIBM="-lm"
-     AC_DEFINE(HAVE_LIBM)
-     have_libm=yes],
-    [have_libm=no])
-fi
+AC_CHECK_LIB(m,
+  cos,
+  [LIBM="-lm"
+   AC_DEFINE(HAVE_LIBM)
+   have_libm=yes],
+  [have_libm=no])
 AC_SUBST(LIBM)
 
 dnl
@@ -467,33 +663,34 @@ dnl
 AC_STDC_HEADERS
 AC_CHECK_HEADERS(stdio.h stdlib.h string.h unistd.h ctype.h errno.h limits.h)
 AC_CHECK_HEADERS(assert.h signal.h termio.h termios.h sgtty.h)
-if test "$gcal_cv_use_term" = "yes"; then
-  if test "$gcal_ttylibs_ok" = "yes" || test "$gcal_libtermlib_ok" = "yes"; then
+if test "$gcal_cv_use_term" = yes; then
+  if test "$gcal_ttylibs_ok" = yes || test "$gcal_libtermlib_ok" = yes; then
     AC_CHECK_HEADERS(termcap.h)
   fi
 fi
-if test "$have_libm" = "yes"; then
+if test "$have_libm" = yes; then
   AC_CHECK_HEADERS(math.h)
 fi
-if test "$gcal_cv_use_included_regexps" = "no"; then
+if test "$gcal_cv_use_included_regexps" = no; then
   AC_CHECK_HEADERS(regex.h)
 fi
-if test "$gcal_cv_use_pager" = "yes"; then
+if test "$gcal_cv_use_pager" = yes; then
   AC_CHECK_HEADERS(fcntl.h)
   AC_HEADER_SYS_WAIT
 fi
 AC_CHECK_HEADERS(sys/ioctl.h sys/stream.h sys/ptem.h sys/stat.h sys/types.h sys/time.h)
 
 dnl
-dnl Checks for typedefs.
+dnl Checks for typedefs and structures.
 dnl
 AC_MSG_RESULT()
-AC_CHECKING(for typedefs)
+AC_CHECKING(for typedefs and structures)
 dnl
-if test "$gcal_cv_use_pager" = "yes"; then
+if test "$gcal_cv_use_pager" = yes; then
   AC_TYPE_PID_T
 fi
 AC_TYPE_SIGNAL
+AC_HEADER_TIME
 AC_MSG_CHECKING(for time_t)
 AC_CACHE_VAL(gcal_cv_type_time_t,
   AC_TRY_COMPILE([
@@ -510,18 +707,10 @@ AC_CACHE_VAL(gcal_cv_type_time_t,
     [time_t t = 0;],
     [gcal_cv_type_time_t=yes],
     [gcal_cv_type_time_t=no]))
-if test "$gcal_cv_type_time_t" = "yes"; then
+if test "$gcal_cv_type_time_t" = yes; then
   AC_DEFINE(HAVE_TIME_T)
 fi
 AC_MSG_RESULT($gcal_cv_type_time_t)
-
-dnl
-dnl Checks for structures.
-dnl
-AC_MSG_RESULT()
-AC_CHECKING(for structures)
-dnl
-AC_HEADER_TIME
 
 dnl
 dnl Checks for compiler characteristics.
@@ -537,7 +726,7 @@ AC_CACHE_VAL(gcal_cv_c_void,
     [void *foo = 0;],
     [gcal_cv_c_void=yes],
     [gcal_cv_c_void=no]))
-if test "$gcal_cv_c_void" = "yes"; then
+if test "$gcal_cv_c_void" = yes; then
   AC_DEFINE(HAVE_VOID)
 fi
 AC_MSG_RESULT($gcal_cv_c_void)
@@ -548,7 +737,7 @@ dnl
 AC_MSG_RESULT()
 AC_CHECKING(for library functions)
 dnl
-if test "$gcal_cv_use_pager" = "yes"; then
+if test "$gcal_cv_use_pager" = yes; then
   AC_CHECK_FUNCS([dup dup2])
 fi
 AC_CHECK_FUNCS([signal strtol strstr strchr strrchr strcspn strcasecmp strncasecmp])
@@ -556,7 +745,31 @@ dnl
 dnl Some systems have termios.h but not the corresponding functions.
 dnl
 AC_CHECK_FUNC(tcgetattr, AC_DEFINE(HAVE_TERMIOS_FUNCS))
-if test "$gcal_cv_use_included_regexps" = "no"; then
+dnl
+dnl Check for working system() function.
+dnl
+AC_MSG_CHECKING(for working system function)
+AC_CACHE_VAL(gcal_cv_func_system_ok,
+  AC_TRY_RUN([
+#    if STDC_HEADERS
+#      include <stdlib.h>
+#    endif
+    int main()
+    {
+      int i;
+      i = system(NULL);
+      if (!i)
+        exit(1);
+      exit(0);
+    }],
+    gcal_cv_func_system_ok=yes,
+    gcal_cv_func_system_ok=no,
+    gcal_cv_func_system_ok=no))
+AC_MSG_RESULT($gcal_cv_func_system_ok)
+if test "$gcal_cv_func_system_ok" = yes; then
+  AC_DEFINE(HAVE_SYSTEM)
+fi
+if test "$gcal_cv_use_included_regexps" = no; then
   dnl
   dnl Checks for regular expression functions.
   dnl
@@ -564,13 +777,13 @@ if test "$gcal_cv_use_included_regexps" = "no"; then
   AC_MSG_RESULT()
   AC_CHECKING(for regular expression functions)
   dnl
-  dnl Are GNU regexp functions (preferred) available?
+  dnl Are the preferred GNU regexp functions available?
   dnl
   AC_CHECK_FUNC(re_compile_pattern,
     AC_MSG_RESULT(using GNU re_compile_pattern)
     AC_DEFINE(HAVE_GNU_RE_COMPILE_PATTERN)
     have_regexp=yes)
-  if test "$have_regexp" = "no"; then
+  if test "$have_regexp" = no; then
     have_posix_regexp=unknown
     dnl
     dnl Some versions of Solaris have a regcomp() function, but it doesn't work!
@@ -596,12 +809,12 @@ if test "$gcal_cv_use_included_regexps" = "no"; then
       have_posix_regexp=yes,
       have_posix_regexp=no,
       have_posix_regexp=unknown)
-    if test "$have_posix_regexp" = "yes"; then
+    if test "$have_posix_regexp" = yes; then
       AC_MSG_RESULT(using POSIX regcomp)
       AC_DEFINE(HAVE_POSIX_REGCOMP)
       have_regexp=yes
     else
-      if test "$have_posix_regexp" = "unknown"; then
+      if test "$have_posix_regexp" = unknown; then
         AC_TRY_LINK([
 #          if HAVE_SYS_TYPES_H
 #            include <sys/types.h>
@@ -616,26 +829,26 @@ if test "$gcal_cv_use_included_regexps" = "no"; then
           have_regexp=yes)
       fi
     fi
-    if test "$have_regexp" = "no"; then
+    if test "$have_regexp" = no; then
       AC_CHECK_FUNC(re_comp,
         AC_MSG_RESULT(using BSD re_comp)
         AC_DEFINE(HAVE_RE_COMP)
         have_regexp=yes)
     fi
-    if test "$have_regexp" = "no"; then
-      AC_CHECK_FUNC(regcmp, 
+    if test "$have_regexp" = no; then
+      AC_CHECK_FUNC(regcmp,
         AC_MSG_RESULT(using SysV regcmp)
         AC_DEFINE(HAVE_REGCMP)
         have_regexp=yes)
     fi
-    if test "$have_regexp" = "no" && test -f "${srcdir}/src/regexp.c"; then
+    if test "$have_regexp" = no && test -f "${srcdir}/src/regexp.c"; then
       AC_MSG_RESULT(using V8 regcomp)
       AC_DEFINE(HAVE_V8_REGCOMP)
       REGEX_O='regexp$(O)'
       AC_SUBST(REGEX_O)
       have_regexp=yes
     fi
-    if test "$have_regexp" = "no"; then
+    if test "$have_regexp" = no; then
       AC_MSG_RESULT(cannot find any regular expression library)
       AC_DEFINE(NO_REGEX)
     fi
@@ -656,7 +869,7 @@ AC_CACHE_VAL(gcal_cv_func_upper_lower,
     [static int x; x = tolower(x); x = toupper(x); x = islower(x); x = isupper(x);],
     [gcal_cv_func_upper_lower=yes],
     [gcal_cv_func_upper_lower=no]))
-if test "$gcal_cv_func_upper_lower" = "yes"; then
+if test "$gcal_cv_func_upper_lower" = yes; then
   AC_DEFINE(HAVE_UPPER_LOWER)
 fi
 AC_MSG_RESULT($gcal_cv_func_upper_lower)
@@ -670,7 +883,7 @@ AC_CACHE_VAL(gcal_cv_func_isdigit,
     [static int x; x = isdigit(x);],
     [gcal_cv_func_isdigit=yes],
     [gcal_cv_func_isdigit=no]))
-if test "$gcal_cv_func_isdigit" = "yes"; then
+if test "$gcal_cv_func_isdigit" = yes; then
   AC_DEFINE(HAVE_ISDIGIT)
 fi
 AC_MSG_RESULT($gcal_cv_func_isdigit)
@@ -684,7 +897,7 @@ AC_CACHE_VAL(gcal_cv_func_isalpha,
     [static int x; x = isalpha(x);],
     [gcal_cv_func_isalpha=yes],
     [gcal_cv_func_isalpha=no]))
-if test "$gcal_cv_func_isalpha" = "yes"; then
+if test "$gcal_cv_func_isalpha" = yes; then
   AC_DEFINE(HAVE_ISALPHA)
 fi
 AC_MSG_RESULT($gcal_cv_func_isalpha)
@@ -698,7 +911,7 @@ AC_CACHE_VAL(gcal_cv_func_isalnum,
     [static int x; x = isalnum(x);],
     [gcal_cv_func_isalnum=yes],
     [gcal_cv_func_isalnum=no]))
-if test "$gcal_cv_func_isalnum" = "yes"; then
+if test "$gcal_cv_func_isalnum" = yes; then
   AC_DEFINE(HAVE_ISALNUM)
 fi
 AC_MSG_RESULT($gcal_cv_func_isalnum)
@@ -712,7 +925,7 @@ AC_CACHE_VAL(gcal_cv_func_isspace,
     [static int x; x = isspace(x);],
     [gcal_cv_func_isspace=yes],
     [gcal_cv_func_isspace=no]))
-if test "$gcal_cv_func_isspace" = "yes"; then
+if test "$gcal_cv_func_isspace" = yes; then
   AC_DEFINE(HAVE_ISSPACE)
 fi
 AC_MSG_RESULT($gcal_cv_func_isspace)
@@ -720,8 +933,8 @@ AC_MSG_RESULT($gcal_cv_func_isspace)
 dnl
 dnl Checks for external variable `ospeed' in the ncurses/termcap/termlib library.
 dnl
-if test "$gcal_cv_use_term" = "yes"; then
-  if test "$gcal_ttylibs_ok" = "yes" || test "$gcal_libtermlib_ok" = "yes"; then
+if test "$gcal_cv_use_term" = yes; then
+  if test "$gcal_ttylibs_ok" = yes || test "$gcal_libtermlib_ok" = yes; then
     AC_MSG_RESULT()
     AC_CHECKING(for external variables)
     dnl
@@ -740,16 +953,16 @@ if test "$gcal_cv_use_term" = "yes"; then
         [ospeed = 0;],
         [gcal_cv_var_ospeed_test_1=yes],
         [gcal_cv_var_ospeed_test_1=no]))
-    if test "$gcal_cv_var_ospeed_test_1" = "no"; then
+    if test "$gcal_cv_var_ospeed_test_1" = no; then
       AC_CACHE_VAL(gcal_cv_var_ospeed_test_2,
         AC_TRY_LINK(,
           [extern short ospeed; ospeed = 0;],
           [gcal_cv_var_ospeed_test_2=yes],
           [gcal_cv_var_ospeed_test_2=no]))
     fi
-    if test "$gcal_cv_var_ospeed_test_1" = "yes" || test "$gcal_cv_var_ospeed_test_2" = "yes"; then
+    if test "$gcal_cv_var_ospeed_test_1" = yes || test "$gcal_cv_var_ospeed_test_2" = yes; then
       AC_DEFINE(HAVE_OSPEED)
-      if test "$gcal_cv_var_ospeed_test_2" = "yes"; then
+      if test "$gcal_cv_var_ospeed_test_2" = yes; then
         AC_DEFINE(MUST_DCL_OSPEED)
       fi
       AC_MSG_RESULT(yes)
@@ -765,8 +978,10 @@ dnl
 AC_MSG_RESULT()
 AC_CHECKING(for system services)
 dnl
+AC_EXEEXT
+AC_OBJEXT
 AC_SYS_INTERPRETER
-if test "$ac_cv_sys_interpreter" = "yes"; then
+if test "$ac_cv_sys_interpreter" = yes; then
   AC_DEFINE(HAVE_SYS_INTERPRETER)
 fi
 
@@ -775,31 +990,100 @@ dnl Checks for internationalization support
 dnl
 AC_MSG_RESULT()
 AC_CHECKING(for internationalization support)
-ud_GNU_GETTEXT
+dnl
+dnl Actually supported native languages.
+dnl
+ALL_LINGUAS="de fr nl pl ru sv"
+dnl
+AM_GNU_GETTEXT
 
 dnl
-dnl Checks for obtaining some libintl.h header files
+dnl Check whether regcmp function is stored in -lintl, if so, re-add '-lintl'
+dnl to $LIBS because previous AM_GNU_GETTEXT macro possibly has removed it.
 dnl
-if test "$nls_cv_use_nls" = "yes"; then
-  AC_MSG_RESULT()
-  AC_CHECKING(for obtaining some libintl.h header files)
-  AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
+if test "$need_sys_lintl_for_regcmp" = yes; then
+  if test -z "`echo $LIBS | grep '\-lintl'`"; then
+    LIBS="$LIBS -lintl"
+  fi
 fi
 
 dnl
 dnl Ending operations.
 dnl
-AC_MSG_RESULT()
 AC_SUBST(CFLAGS)dnl
-AC_OUTPUT([Makefile install-inf data/Makefile doc/Makefile \
-           intl/Makefile misc/Makefile po/Makefile.in src/Makefile],
-          [if test -s install-inf
-           then
+dnl
+changequote(<<, >>)dnl
+dnl
+dnl Transform the `$srcdir/doc/mks?sed.in' SED scripts while copying
+dnl because some dumb SEDs cannot handle comments.
+dnl
+if test -s "$srcdir/doc/mks1sed.in"; then
+  sed -e '/^#.*[^\\]$/d' -e '/^#$/d' $srcdir/doc/mks1sed.in > $srcdir/doc/mksamp-1.sed
+fi
+if test -s "$srcdir/doc/mks2sed.in"; then
+  sed -e '/^#.*[^\\]$/d' -e '/^#$/d' $srcdir/doc/mks2sed.in > $srcdir/doc/mksamp-2.sed
+fi
+dnl
+changequote([, ])dnl
+dnl
+AC_MSG_RESULT()
+AC_OUTPUT([Makefile \
+           install-inf \
+           data/Makefile \
+           doc/Makefile \
+           doc/mksamp \
+           intl/Makefile \
+           misc/Makefile \
+           misc/daily/daily \
+           misc/ddiff/ddiff \
+           misc/ddiff/ddiffdrv \
+           misc/dst/dst \
+           misc/gcalltx/gcalltx \
+           misc/gcalltx/gcalltxp \
+           misc/moon/moon \
+           misc/mrms/mrms \
+           misc/srss/srss \
+           misc/wloc/wlocdrv \
+           po/Makefile.in \
+           src/Makefile],
+          [if test -s install-inf; then
              mv install-inf install-info
              chmod u+x install-info
            fi
-           sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile
-           echo timestamp > stamp-h])dnl
+           if test -s doc/mksamp; then
+             chmod u+x doc/mksamp
+           fi
+           if test -s misc/daily/daily; then
+             chmod u+x misc/daily/daily
+           fi
+           if test -s misc/ddiff/ddiff; then
+             chmod u+x misc/ddiff/ddiff
+           fi
+           if test -s misc/ddiff/ddiffdrv; then
+             chmod u+x misc/ddiff/ddiffdrv
+           fi
+           if test -s misc/dst/dst; then
+             chmod u+x misc/dst/dst
+           fi
+           if test -s misc/gcalltx/gcalltx; then
+             chmod u+x misc/gcalltx/gcalltx
+           fi
+           if test -s misc/gcalltx/gcalltxp; then
+             mv misc/gcalltx/gcalltxp misc/gcalltx/gcalltx.pl
+             chmod u+x misc/gcalltx/gcalltx.pl
+           fi
+           if test -s misc/moon/moon; then
+             chmod u+x misc/moon/moon
+           fi
+           if test -s misc/mrms/mrms; then
+             chmod u+x misc/mrms/mrms
+           fi
+           if test -s misc/srss/srss; then
+             chmod u+x misc/srss/srss
+           fi
+           if test -s misc/wloc/wlocdrv; then
+             chmod u+x misc/wloc/wlocdrv
+           fi])dnl
 
 dnl
 dnl Emit some final text.
@@ -809,4 +1093,6 @@ AC_MSG_RESULT(Bored? Fallen asleep??   All checks done!)
 AC_MSG_RESULT()
 AC_MSG_RESULT(Perhaps you might want to inspect the created)
 AC_MSG_RESULT(Makefiles now for tuning some settings...)
+AC_MSG_RESULT()
+AC_MSG_RESULT(Otherwise type   make help   for a list of supported targets)
 AC_MSG_RESULT()

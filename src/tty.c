@@ -2,7 +2,7 @@
 *  tty.c:  Screen support functions and major output function.
 *
 *
-*  Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1994-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: tty.c 2.40 1997/04/19 02:04:00 tom Exp $";
+static char rcsid[]="$Id: tty.c 3.00 2000/03/04 03:00:00 tom Exp $";
 #endif
 
 
@@ -85,92 +85,33 @@ static char rcsid[]="$Id: tty.c 2.40 1997/04/19 02:04:00 tom Exp $";
 #          include <termios.h>
 #        endif
 #        include <termcap.h>
-#      else /* !HAVE_TERMCAP_H || !HAVE_TTYLIBS */
-#        if HAVE_TTYLIBS
-IMPORT int   tgetent __P_((char *buffer, char *termtype));
-IMPORT int   tgetnum __P_((char *name));
-#          if USE_HLS
-IMPORT char *tgetstr __P_((char *name, char **area));
-IMPORT char *tputs __P_((char *string, int nlines, int (*outfunc)()));
-#          endif
-#          if USE_PAGER
-IMPORT int   tgetflag __P_((char *name));
-#          endif /* USE_PAGER */
-#        endif /* HAVE_TTYLIBS */
-#      endif /* !HAVE_TERMCAP_H || !HAVE_TTYLIBS */
-#      if MUST_DCL_OSPEED && USE_HLS
-IMPORT short ospeed;   /* Terminal output baud rate */
-/*
-   On Solaris2, sys/types.h #includes sys/reg.h, which #defines PC.
-   Unfortunately, PC is a global variable used by the Termcap library.
-*/
-#        ifdef PC
-#          undef PC
-#        endif
-IMPORT char  PC;       /* Padding character */
-#      endif /* MUST_DCL_OSPEED && USE_HLS */
+#      endif /* HAVE_TERMCAP_H && HAVE_TTYLIBS */
 #    endif /* UNIX || (OS2 && __GNUC__) */
 #  endif /* !DJG */
 #endif /* USE_PAGER || USE_HLS */
-#include "gcal.h"
+#include "common.h"
+#include "globals.h"
+#include "utils.h"
+#include "tty.h"
 
 
 
 /*
-*  Function prototypes.
+*  LOCAL functions prototypes.
 */
-#if __cplusplus
-extern "C"
-{
-#endif
-/*
-************************************************** Defined in `utils.c'.
-*/
-IMPORT VOID_PTR
-my_malloc __P_((const int   amount,
-                const int   exit_status,
-                const char *module_name,
-                const long  module_line,
-                const char *var_name,
-                const int   var_contents));
-IMPORT void
-resize_all_strings __P_((const int   amount,
-                         const Bool  with_line_buffer,
-                         const char *module_name,
-                         const long  module_line));
-IMPORT void
-my_exit __P_((const int exit_status));
-IMPORT int
-my_atoi __P_((const char *string));
-#if !HAVE_STRSTR
-IMPORT char *
-my_strstr __P_((const char *text,
-                const char *pattern));
-#endif /* !HAVE_STRSTR */
+__BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `tty.c'.
 */
-EXPORT void
-print_text __P_((FILE *fp,
-                 char *text_line));
-EXPORT void
-get_tty_hls __P_((const char *sequence_str));
-#if USE_PAGER
-EXPORT void
-get_tty_scr_size __P_((int *rows,
-                       int *cols));
-#endif
 #if defined(GCAL_TCAP) && USE_HLS
 LOCAL char *
 skip_leading_padding_info __P_((char *sequence_str));
 #endif
 #if USE_HLS || USE_PAGER
 #  ifdef GCAL_TCAP
-LOCAL Bool
-open_termcap __P_((void));
+LOCAL Bool open_termcap __P_((void));
 #    if USE_HLS
-LOCAL void
-get_ospeed __P_((void));
+LOCAL void get_ospeed __P_((void));
 LOCAL int
 outchar __P_((int ch));
 LOCAL Bool
@@ -199,76 +140,55 @@ LOCAL int
 sbyte2int __P_((const char *string,
                 const int   base));
 #endif
-#if __cplusplus
-}
-#endif
+__END_DECLARATIONS
 
 
 
 /*
-*  Declare public(extern) variables.
-*/
-#ifdef GCAL_EMAIL
-IMPORT FILE       *tfp;              /* Temporary file which is send by the mailer */
-#endif
-IMPORT Hls_struct  ehls1s;           /* Effective hls 1 start (current day) */
-IMPORT Hls_struct  ehls1e;           /* Effective hls 1 end (current day) */
-IMPORT Hls_struct  ehls2s;           /* Effective hls 2 start (holiday) */
-IMPORT Hls_struct  ehls2e;           /* Effective hls 2 end (holiday) */
-IMPORT Uint        maxlen_max;       /* Actual size of all string vectors */
-IMPORT int         warning_level;    /* --debug[=0...WARN_LVL_MAX] */
-IMPORT int         is_tty;           /* Is output displayed on a terminal? */
-IMPORT int         is_tty1;          /* Is output directed to channel 1? */
-IMPORT int         is_tty2;          /* Is output directed to channel 2? */
-IMPORT int         tty_rows;         /* Number of tty rows */
-IMPORT int         tty_cols;         /* Number of tty columns */
-IMPORT char       *s1;               /* General purpose text buffer */
-#ifdef GCAL_EPAGER
-IMPORT char       *ext_pager;        /* Name of external pager program */
-#endif
-IMPORT Bool        emu_hls;          /* Must we emulate the highlighting sequences? */
-IMPORT Bool        highlight_flag;   /* -H<yes> or -H<no> */
-#if USE_PAGER
-IMPORT Bool        pager_flag;       /* -p */
-#endif
-
-
-
-/*
-   Define local(static) variables.
+*  LOCAL variables definitions.
 */
 #if USE_PAGER || USE_HLS
 #  ifdef GCAL_TCAP
+/* Module global Termcap buffer. */
+LOCAL char  tc_buf[TC_BUFLEN];
+
+/* Termcap access error occurred. */
+LOCAL Bool  tc_no_error=TRUE;
+
 #    if USE_HLS
-LOCAL FILE  *fp_outchar;         /* Module global file which is used by the `tputs()' function */
-LOCAL Bool   is_padding=FALSE;   /* Stores whether padding is used or not */
-#    endif
-#    define  TC_BUFLEN  4096
-LOCAL char   tc_buf[TC_BUFLEN];  /* Module global Termcap buffer */
-LOCAL Bool   tc_no_error=TRUE;   /* Termcap access error occurred */
-#    if MUST_DCL_OSPEED && USE_HLS
-extern short ospeed;             /* Terminal output baud rate */
-extern char  PC;                 /* Padding character */
+/* Module global file which is used by the `tputs()' function. */
+LOCAL FILE  *fp_outchar=(FILE *)NULL;
+
+/* Stores whether padding is used or not. */
+LOCAL Bool  is_padding=FALSE;
 #    endif
 #  endif /* GCAL_TCAP */
+
 #  if USE_PAGER
-LOCAL Bool   tty_am=TRUE;        /* Terminal has automatic margins */
-LOCAL Bool   tty_xn=FALSE;       /* Terminal ignores newline after wrap */
+/* Terminal has automatic margins. */
+LOCAL Bool   tty_am=TRUE;
+
+/* Terminal ignores newline after wrap. */
+LOCAL Bool   tty_xn=FALSE;
 #  endif /* USE_PAGER */
 #endif /* USE_PAGER || USE_HLS */
 
 
 
+/*
+*  Function implementations.
+*/
    PUBLIC void
 print_text (fp, text_line)
    FILE *fp;
    char *text_line;
 /*
    This is the central tty output function, which works according to
-     actual display mode.  It prints a line of text given in `text_line' with
-     newline to file `fp' with paging option (very poor and simple paging,
-     only used if preprocessor symbol USE_PAGER is defined) and ALWAYS "deletes"
-     the delivered `text_line' automatically after printing (*text_line = '\0').
+     actual display mode.  It prints a line of text given in `text_line'
+     with newline to file `fp' with paging option (very poor and simple
+     paging, only used if preprocessor symbol USE_PAGER is defined) and
+     ALWAYS "deletes" the delivered `text_line' automatically after printing
+     (*text_line = '\0').
 */
 {
 #if USE_PAGER || (defined(GCAL_TCAP) && USE_HLS)
@@ -354,7 +274,7 @@ print_text (fp, text_line)
          */
          if (   (   strchr(text_line+i, '\n') == (char *)NULL
 #  if USE_PAGER
-                 || !pager_flag 
+                 || !pager_flag
 #    ifdef GCAL_EPAGER
                  || (   pager_flag
                      && (ext_pager != (char *)NULL))
@@ -523,9 +443,11 @@ print_text (fp, text_line)
                  fputs(ehls1s.seq, fp);
 #    endif /* !GCAL_TCAP || !USE_HLS */
 #    if USE_DE
-               fprintf(fp, "Weiter mit <Return> , <%s> zum Beenden...", PAGER_QUIT);
+               fprintf(fp, "%s: Weiter mit <Return>, <%s> zum Beenden...",
+                       prgr_name, PAGER_QUIT);
 #    else /* !USE_DE */
-               fprintf(fp, _("<Return> for more , <%s> to quit..."), PAGER_QUIT);
+               fprintf(fp, _("%s: <Return> for more, <%s> to quit..."),
+                       prgr_name, PAGER_QUIT);
 #    endif /* !USE_DE */
                if (print_hls)
 #    if defined(GCAL_TCAP) && USE_HLS
@@ -540,7 +462,7 @@ print_text (fp, text_line)
                if (tolower(k) == (int)*PAGER_QUIT)
                 {
                   /*
-                     In case a leading "quit" character and other text is in the stdin buffer:
+                     In case a leading "quit" character and other text is in the STDIN buffer:
                        Clean the whole buffer.
                   */
                   while (   ((k=fgetc(stdin)) != '\n')
@@ -550,7 +472,7 @@ print_text (fp, text_line)
                 }
                else
                  /*
-                    In case a "quit" character is not leading (anywhere) in the stdin buffer:
+                    In case a "quit" character is not leading (anywhere) in the STDIN buffer:
                       Clean the buffer until the "quit" character isn't found.
                  */
                  if (k != '\n')
@@ -559,7 +481,7 @@ print_text (fp, text_line)
                           && (k != EOF))
                      ;   /* Void */
                /*
-                  In case the "quit" character is found in the stdin buffer now:
+                  In case the "quit" character is found in the STDIN buffer now:
                     Clean up the rest of buffer (until its end).
                */
                if (tolower(k) == (int)*PAGER_QUIT)
@@ -570,10 +492,11 @@ print_text (fp, text_line)
                   k = EOF;
                 }
                /*
-                  Exit the program with success if the "quit" character was found in the stdin buffer.
+                  Exit the program with success if the PAGER_QUIT character
+                    was found in the STDIN buffer.
                */
                if (k == EOF)
-                 my_exit (0);
+                 my_exit (EXIT_SUCCESS);
                /*
                   Begin scrolling of the next page.
                */
@@ -608,7 +531,8 @@ print_text (fp, text_line)
 #endif /* USE_PAGER || (GCAL_TCAP && USE_HLS) */
     {
       /*
-         If the mailing option is selected, print the output to the temporary file.
+         If the mailing option is selected,
+           print the output to the temporary file.
       */
       if (   (fp != (FILE *)stderr)
 #ifdef GCAL_EMAIL
@@ -633,9 +557,13 @@ get_tty_hls (sequence_str)
 */
 {
 #if USE_HLS
+#  if !defined(AMIGA) || defined(__GNUC__)
    auto char  *ptr_env=getenv(ENV_VAR_GCALANSI);
+#  else /* AMIGA && !__GNUC__ */
+   auto char  *ptr_env=(char *)NULL;
+#  endif /* AMIGA && !__GNUC__ */
 #  ifdef GCAL_TCAP
-   auto Bool   check_again=FALSE;  
+   auto Bool   check_again=FALSE;
 #  endif
 #endif
    auto Bool   hls1_set=FALSE;
@@ -643,7 +571,8 @@ get_tty_hls (sequence_str)
 
 
    /*
-      Check whether highlighting must be disabled (-H<no> given in command line).
+      Check whether highlighting must be disabled
+        (`-H<no>' given in the command line).
    */
    if (!highlight_flag)
     {
@@ -656,8 +585,8 @@ get_tty_hls (sequence_str)
    else
     {
       /*
-         If output is not directed to a tty, emulate highlighting sequences
-           by marking characters.
+         If output is not directed to a tty,
+           emulate the highlighting sequences by using marking characters.
       */
       if (   !is_tty
           && !emu_hls
@@ -665,7 +594,7 @@ get_tty_hls (sequence_str)
         emu_hls = TRUE;
       /*
          Check whether user defined highlighting sequences are given
-           in command line (-H<def>).
+           in the command line (`-H<LIST_OF_HL_SEQUENCES>').
       */
       if (sequence_str != (char *)NULL)
        {
@@ -696,7 +625,7 @@ get_tty_hls (sequence_str)
          if (!emu_hls)
           {
             /*
-               Try to open the [/etc/]termcap file.
+               Try to open the `[/etc/]termcap' file.
             */
             tc_no_error = open_termcap ();
             if (tc_no_error)
@@ -748,8 +677,9 @@ get_tty_hls (sequence_str)
              {
                /*
                   Use emulation of highlighting sequences
-                    in case output is not directed to a tty and the highlighting
-                    sequences are not explicit disabled in command line by -H<no>.
+                    in case output is not directed to a tty and the
+                    highlighting sequences are not explicit disabled
+                    in the command line by `-H<no>'.
                */
                if (!hls1_set)
                 {
@@ -853,7 +783,7 @@ get_tty_scr_size (rows, cols)
    int *cols;
 /*
    Detects the number of rows and columns of a tty
-     and stores the values found in `rows' and `cols'.
+     and stores the values found in `&rows' and `&cols'.
 */
 {
 #  if !defined(AMIGA) || defined(__GNUC__)
@@ -863,9 +793,9 @@ get_tty_scr_size (rows, cols)
 
 
    /*
-      First look into the environment variable pair $LINES and $COLUMNS
-      resp., $LI and $CO in case these are defined and have valid settings:
-        Use these settings.
+      First look into the environment variable pair $GCAL_LINES and
+      $GCAL_COLUMNS resp., $LINES and $COLUMNS in case these are defined
+      and have valid settings: Use these settings.
    */
    ptr_env = getenv(ENV_VAR_LI);
    if (ptr_env != (char *)NULL)
@@ -926,8 +856,8 @@ get_tty_scr_size (rows, cols)
 #    else /* DJG || MSDOS || OS2 || UNIX */
 #      ifdef DJG
          /*
-            Get the actual number of lines and columns of the video
-              by calling the DJGPP-GCC ScreenRows() and ScreenCols() functions.
+            Get the actual number of lines and columns of the video by
+              using the DJGPP-GCC `ScreenRows()' and `ScreenCols()' functions.
          */
          *rows = ScreenRows();
          *cols = ScreenCols();
@@ -951,7 +881,7 @@ get_tty_scr_size (rows, cols)
 #          if defined(OS2) && defined(__GNUC__)
          /*
             Get the actual number of lines and columns of the
-              video by calling the EMX-GCC _scrsize() function.
+              video by using the EMX-GCC `_scrsize()' function.
          */
          _scrsize(info);
          *cols = s1[0];
@@ -960,7 +890,7 @@ get_tty_scr_size (rows, cols)
 #            if defined(UNIX)
          /*
             Get the actual number of lines and columns of the
-              video by calling the ioctl() function.
+              video by using the `ioctl()' function.
          */
 #              ifdef TIOCGWINSZ
          if (   !ioctl(1, TIOCGWINSZ, &wsz)
@@ -996,7 +926,8 @@ get_tty_scr_size (rows, cols)
           {
 #      if HAVE_TTYLIBS
             /*
-               If the previous actions have failed, try to open the  [/etc/]termcap file.
+               If the previous actions have failed,
+                 try to open the `[/etc/]termcap' file.
             */
             tc_no_error = open_termcap ();
             if (tc_no_error)
@@ -1013,14 +944,14 @@ get_tty_scr_size (rows, cols)
             else
              {
                /*
-                  Access to [/etc/]termcap file has failed: Defaults only!
+                  Access to `[/etc/]termcap' file has failed: Defaults only!
                */
                *rows = SCREEN_ROWS;
                *cols = SCREEN_COLS;
              }
 #      else /* !HAVE_TTYLIBS */
             /*
-               No [/etc/]termcap file available: Defaults only!
+               No `[/etc/]termcap' file available: Defaults only!
             */
             *rows = SCREEN_ROWS;
             *cols = SCREEN_COLS;
@@ -1032,7 +963,7 @@ get_tty_scr_size (rows, cols)
 #  else /* AMIGA && !__GNUC__ */
 #    ifdef AMIGA
    /*
-      Amiga gets the window size by asking the console.device.
+      Amiga gets the window size by asking the `console.device'.
    */
    {
      auto long  len;
@@ -1129,24 +1060,22 @@ open_termcap ()
 #    else /* !OS2 || !__GNUC__ */
       if (term == (char *)NULL)
        {
+         if (warning_level >= 0)
 #      if USE_DE
-         if (warning_level >= 0)
-           fprintf(stderr, "\nUmgebungsvariable `%s' nicht vorhanden", ENV_VAR_TERM);
+           sprintf(s1, "Umgebungsvariable `%s' nicht vorhanden", ENV_VAR_TERM);
 #      else /* !USE_DE */
-         if (warning_level >= 0)
-           fprintf(stderr, _("\nEnvironment variable `%s' not found"), ENV_VAR_TERM);
+           sprintf(s1, _("environment variable `%s' not found"), ENV_VAR_TERM);
 #      endif /* !USE_DE */
          is_error = TRUE;
        }
       else
         if (!*term)
          {
+           if (warning_level >= 0)
 #      if USE_DE
-           if (warning_level >= 0)
-             fprintf(stderr, "\nUmgebungsvariable `%s' nicht gesetzt", ENV_VAR_TERM);
+             sprintf(s1, "Umgebungsvariable `%s' nicht gesetzt", ENV_VAR_TERM);
 #      else /* !USE_DE */
-           if (warning_level >= 0)
-             fprintf(stderr, _("\nEnvironment variable `%s' not set"), ENV_VAR_TERM);
+             sprintf(s1, _("environment variable `%s' not set"), ENV_VAR_TERM);
 #      endif /* !USE_DE */
            is_error = TRUE;
          }
@@ -1155,26 +1084,28 @@ open_termcap ()
          {
 #    if defined(OS2) && defined(__GNUC__)
            /*
-              Make sure the Termcap database is available, i.e. store its access path
-                in the environment explicitly so we are able to refer it.
+              Ensure the Termcap database is available,
+                i.e. store its access path in the environment explicitly
+                so we are able to refer it.
            */
            if (   ptr_env == NULL
                || !*ptr_env)
             {
-              ptr_env = (char *)my_malloc (256,
-                                           124, __FILE__, ((long)__LINE__)-1,
+              ptr_env = (char *)my_malloc (256, ERR_NO_MEMORY_AVAILABLE,
+                                           __FILE__, ((long)__LINE__)-1L,
                                            "ptr_env", 0);
               _searchenv(FNAME_TCAP, "INIT", ptr_env);
               if (!*ptr_env)
                 _searchenv(FNAME_TCAP, ENV_VAR_PATH, ptr_env);
               if (!*ptr_env)
-                _searchenv(FNAME_TCAP, ENV_VAR_DPATH, ptr_env);
+                _searchenv(FNAME_TCAP, ENV_VAR_GCALPATH, ptr_env);
               if (*ptr_env)
                {
                  ptr_tc = (char *)my_malloc (strlen(ptr_env)+9,
-                                             124, __FILE__, ((long)__LINE__)-1,
+                                             ERR_NO_MEMORY_AVAILABLE,
+                                             __FILE__, ((long)__LINE__)-2L,
                                              "ptr_tc", 0);
-                 sprintf(ptr_tc, ENV_VAR_TCAP"=%s", ptr_env);
+                 sprintf(ptr_tc, "%s=%s", ENV_VAR_TCAP, ptr_env);
                  putenv(ptr_tc);
                }
               free(ptr_env);
@@ -1183,22 +1114,22 @@ open_termcap ()
            switch (tgetent(tc_buf, term))
             {
               case -1:
+                if (warning_level >= 0)
 #    if USE_DE
-                if (warning_level >= 0)
-                  fputs("\n`termcap' Datei wurde nicht vorgefunden", stderr);
+                  strcpy(s1, "`termcap' Datei nicht vorgefunden");
 #    else /* !USE_DE */
-                if (warning_level >= 0)
-                  fputs(_("\n`termcap' file not found"), stderr);
+                  strcpy(s1, _("`termcap' file not found"));
 #    endif /* !USE_DE */
                 is_error = TRUE;
                 break;
               case 0:
+                if (warning_level >= 0)
 #    if USE_DE
-                if (warning_level >= 0)
-                  fprintf(stderr, "\nUnbekannter Terminaltyp in `%s' eingetragen", ENV_VAR_TERM);
+                  sprintf(s1, "unbekannter Terminaltyp in `%s' eingetragen",
+                          ENV_VAR_TERM);
 #    else /* !USE_DE */
-                if (warning_level >= 0)
-                  fprintf(stderr, _("\nUnknown terminal type defined in `%s'"), ENV_VAR_TERM);
+                  sprintf(s1, _("unknown terminal type defined in `%s'"),
+                          ENV_VAR_TERM);
 #    endif /* !USE_DE */
                 is_error = TRUE;
                 break;
@@ -1208,7 +1139,11 @@ open_termcap ()
          }
       if (   is_error
           && (warning_level >= 0))
-        fputs(".\n\n", stderr);
+#    if USE_DE
+        fprintf(stderr, "\n%s: Warnung, %s.\n\n", prgr_name, s1);
+#    else /* !USE_DE */
+        fprintf(stderr, _("\n%s: warning, %s.\n\n"), prgr_name, s1);
+#    endif /* !USE_DE */
       return((Bool)!is_error);
     }
 
@@ -1413,8 +1348,8 @@ get_termcap_hls (hls1_set, hls2_set)
    if (!func_accessed)
     {
       func_accessed = TRUE;
-      area = (char *)my_malloc (TC_BUFLEN,
-                                124, __FILE__, ((long)__LINE__)-1,
+      area = (char *)my_malloc (TC_BUFLEN, ERR_NO_MEMORY_AVAILABLE,
+                                __FILE__, ((long)__LINE__)-1L,
                                 "area", 0);
       ptr_area = area;
 #      if HAVE_OSPEED
@@ -1519,7 +1454,7 @@ peek_byte (segment, offset)
    Uint segment;
    Uint offset;
 /*
-   Gets a byte of ibm/pc-memory from address (segment:offset).
+   Gets a byte of IBM/PC-memory from address (segment:offset).
 */
 {
    auto Ulint       long_tmp;
@@ -1546,7 +1481,7 @@ get_hl_seq (sequence_str, hls1_set, hls2_set)
          Bool *hls2_set;
 /*
    Highlighting sequences/marking characters are given in command line
-   (-H<seq1_start:seq1_end:seq2_start:seq2_end> option set),
+   (`-H<seq1_start:seq1_end:seq2_start:seq2_end>' option set),
    i.e.:  the colon separated string `sequence_str', which should contain
           highlighting sequence/marking character pairs (2 pairs maximum,
           first for actual day, second for holiday; seq?_start enables,
@@ -1683,8 +1618,9 @@ get_hl_seq (sequence_str, hls1_set, hls2_set)
                  j = sbyte2int (ptr_err, (is_hex) ? 16 : 8);
 #endif /* !HAVE_STRTOL */
                  /*
-                    If conversion error occurs (invalid chars in hex/oct character
-                      sequence), don't store ALL sequences, which are previously decoded!
+                    If conversion error occurs (invalid chars in hex/oct
+                      character sequence), don't store ALL sequences,
+                      which are previously decoded!
                  */
                  if (   j == -1
 #if HAVE_STRTOL
@@ -1712,8 +1648,8 @@ get_hl_seq (sequence_str, hls1_set, hls2_set)
                  struct_variable using static buffer `buf_hls[]'.
             */
             n = (int)strlen(s1);
-            buf_hls[seq_no] = (char *)my_malloc (n+1,
-                                                 124, __FILE__, ((long)__LINE__)-1,
+            buf_hls[seq_no] = (char *)my_malloc (n+1, ERR_NO_MEMORY_AVAILABLE,
+                                                 __FILE__, ((long)__LINE__)-1L,
                                                  "buf_hls[seq_no]", seq_no);
             strcpy(buf_hls[seq_no], s1);
             switch (seq_no)
@@ -1745,8 +1681,8 @@ get_hl_seq (sequence_str, hls1_set, hls2_set)
       seq_no++;
     }
    /*
-      Either real highlighting sequences (ESC-char..., length > 1) only or
-        marking characters (length == 1) only can be managed:
+      Either real highlighting sequences (ESC-char..., length>1) only
+        or marking characters (length==1) only can be managed:
         Avoid mixture of both!
    */
 #if USE_HLS

@@ -1,8 +1,8 @@
-.\" $Id: gcal2txt.1 v0.02 1997/01/02 00:00:02 tom Exp $
+.\" $Id: gcal2txt.1 v0.05 2000/05/28 00:00:05 tom Exp $
 .\"
-.\" gcal2txt.1:  English [n]roff source of GCAL2TXT manual page
+.\" gcal2txt.1:  English [n]roff source of Un*x manual page
 .\"
-.\" Copyright (C) 1996, 1997 Thomas Esken
+.\" Copyright (c) 1996-1997, 2000 Thomas Esken
 .\"
 .\"
 .\" Permission is granted to make and distribute verbatim copies of
@@ -21,7 +21,7 @@
 .\"
 .\"
 .\" ------------------------oOO      \\\_''/      OOo---------------------------
-.\" Thomas Esken               O     (/o-o\)     O  eMail: esken@uni-muenster.de
+.\" Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
 .\" Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 .\" D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 .\"
@@ -44,45 +44,36 @@
 .pl 11i
 .po 0
 .\"
-.TH GCAL2TXT 1 "January 02, 1997"
+.TH GCAL2TXT 1 "May 28, 2000"
 .SH NAME
-gcal2txt \- creates a verbatim text file from a Gcal resource file.
+Gcal2txt \- creates a verbatim text file from a Gcal resource file.
 .SH SYNOPSIS
-.B gcal2txt
-[
-.I \-\-help
-|
-.I \-\-version
-] | [
-.B Resource\-file
-|
-.B \-
-]
+.B gcal2txt \fI[\fB\-\-help\fI|\fB\-\-version\fI] | [Resource\-file | \-]
 .SH DESCRIPTION
 .B Gcal2txt
 is a program which creates a verbatim text file
 from a Gcal resource file.  If no
-.B resource\-file
-argument is given or/but
-.B \-
-, the program reads and processes all input received from the standard
-input channel.  All results are always shown on the standard output
-channel. An exit status of 0 means all processing is successfully done,
-any other value means an error has occured.
+.I resource\-file
+argument is given or/but a single
+.I `\-'
+character, the program reads and processes all input received from the
+standard input channel.  All results are always shown on the standard
+output channel. An exit status of 0 means all processing is successfully
+done, any other value means an error has occured.
 .SH OPTIONS
 .TP
-.I \-\-help
+.B \-\-help
 Print a usage message listing all available options, then exit
 successfully.
 .TP
-.I \-\-version
+.B \-\-version
 Print the version number, then exit successfully.
 .bp
 .SH COPYRIGHT
 .in 0
 .sp
 .B Gcal2txt
-Copyright (C) 1996, 1997 Thomas Esken
+Copyright (c) 1996-1997, 2000 Thomas Esken
 .LP
 This software doesn't claim completeness, correctness or usability.
 On principle I will not be liable for any damages or losses (implicit
@@ -107,11 +98,11 @@ Enjoy it   =8^)
 .in 2
 .nf
 ------------------------oOO      \e\e\e_''/      OOo---------------------------
-Thomas Esken               O     (/o-o\e)     O  eMail: esken@uni-muenster.de
+Thomas Esken               O     (/o-o\e)     O  eMail: esken@gmx.net
 Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 D-48147 Muenster; Germany    \e____) ~ (____/    MotD : 2old2live, 2young2die
 .fi
 .SH SEE ALSO
 gcal(1),
 tcal(1),
-txt2gcal(1)
+txt2gcal(1).

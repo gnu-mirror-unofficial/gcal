@@ -6,7 +6,7 @@
 *             (advanced  -ct  respectively  --period-of-fixed-dates=t  option).
 *             Works *only* for Gregorian years!
 *
-*  Copyright (C) 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1995-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -29,7 +29,7 @@
 
 
 
-static char rcsid[]="$Id: tcal.c 2.92 1997/03/31 02:09:02 tom Exp $";
+static char rcsid[]="$Id: tcal.c 3.00 2000/03/04 03:00:00 tom Exp $";
 
 
 
@@ -37,6 +37,9 @@ static char rcsid[]="$Id: tcal.c 2.92 1997/03/31 02:09:02 tom Exp $";
 *  Include header files.
 */
 #include "tailor.h"
+#if HAVE_ASSERT_H
+#  include <assert.h>
+#endif
 #if HAVE_CTYPE_H
 #  include <ctype.h>
 #endif
@@ -49,7 +52,8 @@ static char rcsid[]="$Id: tcal.c 2.92 1997/03/31 02:09:02 tom Exp $";
 #if HAVE_ERRNO_H
 #  include <errno.h>
 #endif
-#if (!HAVE_SIGNAL_H || !HAVE_SIGNAL) && HAVE_SYS_TYPES_H   /* Otherwise "gcal.h" includes <sys/types.h> */
+#if (!HAVE_SIGNAL_H || !HAVE_SIGNAL) && HAVE_SYS_TYPES_H
+/* Otherwise "gcal.h" includes <sys/types.h>. */
 #  include <sys/types.h>
 #endif
 #if HAVE_SYS_STAT_H
@@ -65,28 +69,27 @@ static char rcsid[]="$Id: tcal.c 2.92 1997/03/31 02:09:02 tom Exp $";
 #    include <time.h>
 #  endif /* !HAVE_SYS_TIME_H */
 #endif /* !TIME_WITH_SYS_TIME */
+#ifdef MSDOS
+#  include <process.h>
+#endif
 #ifndef USE_RC
 #  define  USE_RC  1
+#else
+#  if !USE_RC
+#    undef  USE_RC
+#    define  USE_RC  1
+#  endif
 #endif
-#include "gcal.h"
+#include "common.h"
+#include "rc-defs.h"
+#include "tcal.h"
 
 
 
 /*
-*   Program specific preprocessor symbols.
+*  LOCAL functions prototypes.
 */
-#define  ENV_VAR_GCALPROG  "GCALPROG"
-#define  SHIFT_VALUE_DFT   "1"
-
-
-
-/*
-*  Function prototypes.
-*/
-#if __cplusplus
-extern "C"
-{
-#endif
+__BEGIN_DECLARATIONS
 LOCAL void
 usage_msg __P_((      FILE *fp,
                 const char *prgr_name,
@@ -129,52 +132,84 @@ my_strncasecmp __P_((const char *s1,
 LOCAL int
 days_of_february __P_((const int year));
 LOCAL Bool
-valid_date __P_((const int day,
-                 const int month,
-                 const int year));
+doy2date __P_((      int  doy,
+               const int  is_leap_year,
+                     int *day,
+                     int *month));
+LOCAL Ulint
+date2num __P_((const int day,
+               const int month,
+               const int year));
+LOCAL void
+num2date __P_((Ulint  mjd,
+               int   *day,
+               int   *month,
+               int   *year));
 LOCAL void
 get_actual_date __P_((int *day,
                       int *month,
                       int *year));
-LOCAL void
-prev_date __P_((int *day,
-                int *month,
-                int *year));
-LOCAL void
-next_date __P_((int *day,
-                int *month,
-                int *year));
-EXPORT int
-main __P_((int   argc,
-           char *argv[]));
-#if __cplusplus
-}
-#endif
+__END_DECLARATIONS
 
 
 
 /*
-*  Define program global variables.
+*  LOCAL variables definitions.
 */
 /*
    Number of days in months.
 */
-LOCAL const int  dvec[]=
- {
-   31, 28, 31, 30, 31, 30,
-   31, 31, 30, 31, 30, 31
- };
+LOCAL const int  dvec[]={31, 28, 31, 30, 31, 30,31, 31, 30, 31, 30, 31};
+
+/*
+   Number of past days of month.
+*/
+LOCAL const int  mvec[]={0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+
+/*
+   The Gregorian Reformation dates table is an unterminated vector
+     of `Greg_struct'.
+*/
+LOCAL Greg_struct  greg_reform_date[]=
+{
+/*
+  { int year, int month, int f_day, int l_day },
+*/
+  { 1582, 10,  5, 14 },
+  { 1752,  9,  3, 13 }
+};
+
+/* Points to the used Gregorian Reformation date. */
+LOCAL Greg_struct *greg=greg_reform_date;
+
 #ifdef DJG
-LOCAL Usint  testval;                 /* Set to SHRT_MAX for checking the maximum table range */
+/* Set to SHRT_MAX for checking the maximum table range. */
+LOCAL Usint  testval=(Usint)0;
 #else
-LOCAL Uint   testval;                 /* Set to INT_MAX for checking the maximum table range */
+/* Set to INT_MAX for checking the maximum table range. */
+LOCAL Uint  testval=(Uint)0;
 #endif
-LOCAL Uint   maxlen_max=MAXLEN_MAX;   /* Actual length of all strings */
-LOCAL char  *prgr_name;               /* The name of this executable */
-LOCAL char  *s1;                      /* General purpose text buffer */
+
+/* Actual length of all strings. */
+LOCAL Uint  maxlen_max=MAXLEN_MAX;
+
+/* The name of this executable. */
+LOCAL char  *prgr_name=(char *)NULL;
+
+/* Text of `--help' option name. */
+LOCAL char  *help_option_name="help";
+
+/* Text of `--version' option name. */
+LOCAL char  *version_option_name="version";
+
+/* Text of `--shift' option name. */
+LOCAL char  *shift_option_name="shift";
 
 
 
+/*
+*  Function implementations.
+*/
    LOCAL void
 usage_msg (fp, prgr_name, exit_status)
          FILE *fp;
@@ -186,23 +221,25 @@ usage_msg (fp, prgr_name, exit_status)
 */
 {
 #if USE_DE
-   fprintf(fp, "Aufruf:  %s  [--help | --version] | [--shift=[+|-]ZAHL] [ARGUMENT...]\n", prgr_name);
-   if (!exit_status)
+   fprintf(fp, "Aufruf:  %s  [--%s | --%s] | [--%s=[+|-]ZAHL] [ARGUMENT...]\n",
+           prgr_name, help_option_name, version_option_name, shift_option_name);
+   if (exit_status == EXIT_SUCCESS)
     {
       S_NEWLINE(fp);
-      fprintf(fp, "Fehlerberichte via eMail an <esken@uni-muenster.de>");
+      fprintf(fp, "Fehlerberichte via eMail an <%s>", BUG_REPORT_ADR1);
       S_NEWLINE(fp);
-      fprintf(fp, "oder (falls das fehlschl%sgt) an <bug-gnu-utils@prep.ai.mit.edu>.", AE);
+      fprintf(fp, "oder (falls das fehlschl%sgt) an <%s>.", AE, BUG_REPORT_ADR2);
       S_NEWLINE(fp);
     }
 #else /* !USE_DE */
-   fprintf(fp, _("Usage:  %s  [--help | --version] | [--shift=[+|-]NUMBER] [ARGUMENT...]\n"), prgr_name);
-   if (!exit_status)
+   fprintf(fp, _("Usage:  %s  [--%s | --%s] | [--%s=[+|-]NUMBER] [ARGUMENT...]\n"),
+           prgr_name, help_option_name, version_option_name, shift_option_name);
+   if (exit_status == EXIT_SUCCESS)
     {
       S_NEWLINE(fp);
-      fprintf(fp, _("Email bug reports to <esken@uni-muenster.de>"));
+      fprintf(fp, _("Email bug reports to <%s>"), BUG_REPORT_ADR1);
       S_NEWLINE(fp);
-      fprintf(fp, _("or (if this fails) to <bug-gnu-utils@prep.ai.mit.edu>."));
+      fprintf(fp, _("or (if this fails) to <%s>."), BUG_REPORT_ADR2);
       S_NEWLINE(fp);
     }
 #endif /* !USE_DE */
@@ -224,9 +261,9 @@ version_msg (fp, prgr_name, exit_status)
    auto char  *ptr_rcsid=rcsid+12;
 
 
-   rcsid[16] = '\0';
+   *(ptr_rcsid + 4) = '\0';
    fprintf(fp, "%s (GNU cal %s) %s\n", prgr_name, VERSION_NO, ptr_rcsid);
-   fprintf(fp, "Copyright (C) 1995-1997 Thomas Esken\n");
+   fprintf(fp, "Copyright (c) 1995-1997, 2000 Thomas Esken\n");
 #if USE_DE
    fprintf(fp, "Dies ist freie Software; in den Quellen befindet sich die Lizenz-");
    S_NEWLINE(fp);
@@ -255,9 +292,10 @@ my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents
    const char *var_name;
    const int   var_contents;
 /*
-   Allocate AMOUNT bytes of memory dynamically, with error checking.  Calls `my_error()'
-     and terminates program if any errors occur.  AMOUNT is limited to `int' range
-     instead of `size_t' range; this is wanted!
+   Allocate AMOUNT bytes of memory dynamically, with error checking.
+     Calls `my_error()' and terminates the program if any errors occur.
+     AMOUNT is limited to `int' range instead of `size_t' range;
+     this is wanted!
 */
 {
    auto VOID_PTR  ptr_memblock;
@@ -267,11 +305,11 @@ my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents
      /*
         Error, table size overflow!
      */
-     my_error (107, module_name, module_line, var_name, (int)testval);
+     my_error (ERR_INTERNAL_TABLE_CRASH, module_name, module_line, var_name, (int)testval);
    ptr_memblock = (VOID_PTR)malloc((int)amount);
    if (ptr_memblock == (VOID_PTR)NULL)
      /*
-        Error, `malloc()' have failed.
+        Error, `malloc()' function failed.
      */
      my_error (exit_status, module_name, module_line, var_name, var_contents);
 
@@ -290,23 +328,24 @@ my_realloc (ptr_memblock, amount, exit_status, module_name, module_line, var_nam
    const char     *var_name;
    const int       var_contents;
 /*
-   Change the size of an allocated block of memory PTR_MEMBLOCK to AMOUNT bytes,
-     with error checking.  Calls `my_error()' and terminates program if any errors
-     occur.  AMOUNT is limited to `int' range instead of `size_t' range; this is
-     wanted!  If PTR_MEMBLOCK is NULL, `my_malloc()' is called instead.
+   Change the size of an allocated block of memory PTR_MEMBLOCK to AMOUNT
+     bytes, with error checking.  Calls `my_error()' and terminates the program
+     if any errors occur.  AMOUNT is limited to `int' range instead of `size_t'
+     range; this is wanted!  If PTR_MEMBLOCK is NULL, `my_malloc()' is called
+     instead.
 */
 {
    if ((Uint)amount > testval)
      /*
         Error, table size overflow!
      */
-     my_error (107, module_name, module_line, var_name, (int)testval);
+     my_error (ERR_INTERNAL_TABLE_CRASH, module_name, module_line, var_name, (int)testval);
    if (ptr_memblock == (VOID_PTR)NULL)
      return(my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents));
    ptr_memblock = (VOID_PTR)realloc(ptr_memblock, (int)amount);
    if (ptr_memblock == (VOID_PTR)NULL)
      /*
-        Error, `realloc()' have failed.
+        Error, `realloc()' function failed.
      */
      my_error (exit_status, module_name, module_line, var_name, var_contents);
 
@@ -327,6 +366,11 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
      and terminates the program with status `exit_status'.
 */
 {
+   if (prgr_name == (char *)NULL)
+    {
+      prgr_name = rcsid + 5;
+      *(prgr_name + 4) = '\0';
+    }
 #if USE_DE
    fprintf(stderr, "\n%s: Abbruch, ", prgr_name);
 #else /* !USE_DE */
@@ -335,30 +379,30 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
    switch(exit_status)
     {
 #if USE_DE
-      case 124:
+      case ERR_NO_MEMORY_AVAILABLE:
         fprintf(stderr, "`%s' Zeile %ld: virtueller Speicher ersch%spft (%s=%d)",
                 module_name, module_line, OE, var_name, var_contents);
         break;
-      case 107:
+      case ERR_INTERNAL_TABLE_CRASH:
         fprintf(stderr, "`%s' Zeile %ld: (`%s') ung%sltiger Wert f%sr Tabellengr%s%se `sizeof %s>%d'",
                 module_name, module_line, INTERNAL_TXT, UE, UE, OE, SZ, var_name, var_contents);
         break;
-      case 2:
+      case EXIT_FATAL:
         fprintf(stderr, "Versatzwert `%s' ist ung%sltig", var_name, UE);
         break;
       default:
         fprintf(stderr, "`%s' Zeile %ld: (`%s') unbehandelter Fehler (%d)",
                 module_name, module_line, INTERNAL_TXT, exit_status);
 #else /* !USE_DE */
-      case 124:
+      case ERR_NO_MEMORY_AVAILABLE:
         fprintf(stderr, _("`%s' line %ld: virtual memory exhausted (%s=%d)"),
                 module_name, module_line, var_name, var_contents);
         break;
-      case 107:
+      case ERR_INTERNAL_TABLE_CRASH:
         fprintf(stderr, _("`%s' line %ld: (`%s') invalid value for table size `sizeof %s>%d'"),
                 module_name, module_line, _("Internal"), var_name, var_contents);
         break;
-      case 2:
+      case EXIT_FATAL:
         fprintf(stderr, _("shift value `%s' is invalid"), var_name);
         break;
       default:
@@ -377,8 +421,9 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 handle_signal (the_signal)
    int the_signal;
 /*
-   Signal handler function which displays the numeric ID of the received signal
-     on stderr channel and terminates the program with an exit status 3.
+   Signal handler function which displays the numeric ID of the
+     received signal on STDERR channel and terminates the program
+     with ERR_TERMINATION_BY_SIGNAL exit status.
 */
 {
    fflush(stdout);
@@ -386,15 +431,15 @@ handle_signal (the_signal)
    fprintf(stderr, "\n%s: Programmabbruch durch Signal %d\n", prgr_name, the_signal);
 #else /* !USE_DE */
    fprintf(stderr, _("\n%s: program aborted by signal %d\n"), prgr_name, the_signal);
-#endif /* */  
-   exit(3);
+#endif /* !USE_DE */
+   exit(ERR_TERMINATION_BY_SIGNAL);
 }
 #endif /* HAVE_SIGNAL && (SIGINT || SIGTERM || SIGHUP) */
 
 
 
 #if !HAVE_STRNCASECMP
-   PUBLIC int
+   LOCAL int
 my_strncasecmp (s1, s2, len)
    const char *s1;
    const char *s2;
@@ -433,86 +478,174 @@ my_strncasecmp (s1, s2, len)
 days_of_february (year)
    const int year;
 /*
-   Computes the number of days in February and returns them.
+   Computes the number of days in February --- respecting
+     the Gregorian Reformation period --- and returns them.
 */
 {
-   return((year&3) ? 28 : (!(year%100)&&(year%400)) ? 28 : 29);
+   register int  day;
+
+
+   if (   (year > greg->year)
+       || (   (year == greg->year)
+           && (   greg->month == 1
+               || (   (greg->month == 2)
+                   && (greg->last_day >= 28)))))
+     day = (year & 3) ? 28 : ((!(year % 100) && (year % 400)) ? 28 : 29);
+   else
+     day = (year & 3) ? 28 : 29;
+   /*
+      Exception, the year 4 AD was historically NO leap year!
+   */
+   if (year == 4)
+     day--;
+
+   return(day);
 }
 
 
 
    LOCAL Bool
-valid_date (day, month, year)
-   const int day;
-   const int month;
-   const int year;
+doy2date (doy, is_leap_year, day, month)
+         int  doy;
+   const int  is_leap_year;
+         int *day;
+         int *month;
 /*
-   Checks whether a delivered date is valid.
+   Converts a given number of days of a year to a standard date
+     (returned in &day and &month) and returns:
+       TRUE in case the `day_of_year' number is valid;
+       FALSE otherwise.
 */
 {
-   if (   day < 0
-       || month < MONTH_MIN
-       || month > MONTH_MAX
-       || (   (month != 2)
-           && (day > dvec[month-1]))
-       || (   (month == 2)
-           && (day > days_of_february (year))))
+   register int   i;
+   auto     Bool  decrement_date;
+
+
+   if (   doy > DAY_LAST+is_leap_year
+       || doy < DAY_MIN)
      return(FALSE);
+   decrement_date = (Bool)(   is_leap_year
+                           && (doy > mvec[2]));
+   if (decrement_date)
+     doy--;
+   for (i=MONTH_MIN ; i < MONTH_MAX ; i++)
+    {
+      doy -= dvec[i-1];
+      if (doy <= 0)
+       {
+         doy += dvec[i-1];
+         break;
+       }
+    }
+   *month = i;
+   *day = doy;
+   if (   decrement_date
+       && (*month == 2)
+       && (*day == 28))
+     (*day)++;
 
    return(TRUE);
 }
 
 
 
-   LOCAL void
-prev_date (day, month, year)
-   int *day;
-   int *month;
-   int *year;
+   LOCAL Ulint
+date2num (day, month, year)
+   const int day;
+   const int month;
+   const int year;
 /*
-   Sets a delivered date back by one day (to yesterday's date).
+   Computes the absolute number of days of the given date since
+     00010101(==YYYYMMDD) respecting the missing period of the
+     Gregorian Reformation.
 */
 {
-   (*day)--;
-   if (   !*day
-       || !valid_date (*day, *month, *year))
+   auto Ulint  mjd=(Ulint)((year-1)*(Ulint)(DAY_LAST)+((year-1)>>2));
+
+
+   if (   year > greg->year
+       || (   (year == greg->year)
+           && (   month > greg->month
+               || (   (month == greg->month)
+                   && (day > greg->last_day)))))
+     mjd -= (Ulint)(greg->last_day - greg->first_day + 1);
+   if (year > greg->year)
     {
-      (*month)--;
-      if (*month < MONTH_MIN)
-       {
-         *month = MONTH_MAX;
-         (*year)--;
-       }
-      if (*month == 2)
-        *day = days_of_february (*year);
-      else
-        *day = dvec[*month-1];
+      mjd += (((year - 1) / 400) - (greg->year / 400));
+      mjd -= (((year - 1) / 100) - (greg->year / 100));
+      if (   !(greg->year % 100)
+          && (greg->year % 400))
+        mjd--;
     }
+   mjd += (Ulint)mvec[month-1];
+   mjd += day;
+   if (   (days_of_february (year) == 29)
+       && (month > 2))
+     mjd++;
+
+   return(mjd);
 }
 
 
 
    LOCAL void
-next_date (day, month, year)
-   int *day;
-   int *month;
-   int *year;
+num2date (mjd, day, month, year)
+   Ulint  mjd;
+   int   *day;
+   int   *month;
+   int   *year;
 /*
-   Sets the delivered date forwards by one day (to tomorrow's date).
+   Converts a delivered absolute number of days `mjd' to a standard
+     date (since 00010101(==YYYYMMDD), returned in &day, &month and &year)
+     respecting the missing period of the Gregorian Reformation.
 */
 {
-   (*day)++;
-   if (!valid_date (*day, *month, *year))
+   auto     double  x;
+   auto     Ulint   jdays=date2num (greg->first_day-1, greg->month, greg->year);
+   register int     i;
+
+
+   if (mjd > jdays)
+     mjd += (Ulint)(greg->last_day - greg->first_day + 1);
+   x = (double)mjd / (DAY_LAST + 0.25);
+   i = (int)x;
+   if ((double)i != x)
+     *year = i + 1;
+   else
     {
-      *day = DAY_MIN;
-      if (*month == MONTH_MAX)
-       {
-         *month = MONTH_MIN;
-         (*year)++;
-       }
-      else
-        (*month)++;
+      *year = i;
+      i--;
     }
+   if (mjd > jdays)
+    {
+      /*
+         Correction for Gregorian years.
+      */
+      mjd -= (Ulint)((*year / 400) - (greg->year / 400));
+      mjd += (Ulint)((*year / 100) - (greg->year / 100));
+      x = (double)mjd / (DAY_LAST + 0.25);
+      i = (int)x;
+      if ((double)i != x)
+        *year = i + 1;
+      else
+       {
+         *year = i;
+         i--;
+       }
+      if (   (*year % 400)
+          && !(*year % 100))
+        mjd--;
+    }
+   i = (int)(mjd - (Ulint)(i * (DAY_LAST + 0.25)));
+   /*
+      Correction for Gregorian centuries.
+   */
+   if (   (*year > greg->year)
+       && (*year % 400)
+       && !(*year % 100)
+       && (i < ((*year/100)-(greg->year/100))-((*year/400)-(greg->year/400))))
+     i++;
+   (void)doy2date (i, (days_of_february (*year)==29), day, month);
 }
 
 
@@ -553,39 +686,32 @@ main (argc, argv)
      otherwise it will be searched using the $PATH environment variable.
 */
 {
-   auto     Slint  shift=(Slint)CHR2DIG(*SHIFT_VALUE_DFT);
-   register int    len_year_max;
-   register int    i;
-   register int    act_len;
-   register int    arg_len;
-   register int    status;
-   auto     int    day;
-   auto     int    month;
-   auto     int    year;
-   auto     char  *gcal_name;
-   auto     char  *gcal_line;
-   auto     char  *ptr_char;
-   auto     char  *buf_ptr_char;
-   auto     Bool   shift_set=FALSE;
-
-
-#ifdef GCAL_NLS
-   /*
-      Now initialize the NLS functions.
-   */
-#    if HAVE_SETLOCALE
-   setlocale(LC_ALL, "");
-#    endif
-#    ifndef LOCALEDIR
-#      define LOCALEDIR  NULL
-#    endif
-   bindtextdomain(PACKAGE, LOCALEDIR);
-   textdomain(PACKAGE);
+   auto     Ulint   the_date;
+   auto     Slint   shift_value=(Slint)CHR2DIG(*SHIFT_VALUE_DEFAULT);
+   register Uint    my_argc_max=MY_ARGC_MAX;
+   register int     my_argc=0;
+   register int     len_year_max;
+   register int     i;
+   register int     arg_len;
+   register int     status;
+   auto     int     day;
+   auto     int     month;
+   auto     int     year;
+   auto     char  **my_argv=(char **)NULL;
+   auto     char   *s1;
+   auto     char   *gcal_prgr;
+   auto     char   *ptr_char;
+   auto     char   *buf_ptr_char;
+   auto     Bool    shift_value_set=FALSE;
+#if !USE_DE && defined(GCAL_NLS)
+   auto     Bool    is_en=FALSE;
 #endif
+
+
    /*
-      Let's set `testval' to SHRT_MAX/INT_MAX if SHRT_MAX/INT_MAX itself isn't
-        defined.  This solution only works on machines with internal arithmethics
-        based on "two complements".
+      Let's set `testval' to SHRT_MAX/INT_MAX if SHRT_MAX/INT_MAX itself
+        isn't defined.  This solution only works on machines with internal
+        arithmethics based on "two complements".
    */
 #ifdef DJG
 #  ifdef SHRT_MAX
@@ -602,28 +728,168 @@ main (argc, argv)
    testval >>= 1;
 #  endif /* !INT_MAX */
 #endif /* !DJG */
+#if HAVE_ASSERT_H
    /*
-      Initial memory allocation for global string.
+      To ensure safe program operations,
+        MAXLEN_MAX must be 1024 minimum and `testval' maximum!
    */
-   s1 = (char *)my_malloc (MAXLEN_MAX, 124, __FILE__, (long)__LINE__, "s1", 0);
+   assert(MAXLEN_MAX>=1024);
+   assert((Uint)MAXLEN_MAX<=testval);
+#endif
+   /*
+      Initial memory allocation for the `s1' string.
+   */
+   s1 = (char *)my_malloc (MAXLEN_MAX, ERR_NO_MEMORY_AVAILABLE,
+                           __FILE__, ((long)__LINE__)-1L,
+                           "s1", 0);
    /*
       Compute the string length of the maximum year able to compute.
    */
    sprintf(s1, "%d", YEAR_MAX);
    len_year_max = (int)strlen(s1);
    /*
+      Perform some more assertations for safe program operation.
+   */
+#if HAVE_ASSERT_H
+   /*
+      Check if value for maximum number of table entries
+        fits to the positive range of a signed int (SHRT_MAX/INT_MAX)!
+   */
+   assert(len_year_max<11);
+   assert(len_year_max>0);
+   assert(YEAR_MAX>=YEAR_MIN);
+   assert(MONTH_MAX==12);
+   assert(CENTURY==1900);
+   assert(strlen(PRGR_NAME)>0);
+   assert(strlen(VERSION_NO)>0);
+   assert(MY_ARGC_MAX>1);
+   assert((Uint)MY_ARGC_MAX<=testval);
+#endif /* HAVE_ASSERT_H */
+#if !USE_DE
+#  ifdef GCAL_NLS
+   /*
+      Now initialize the NLS functions.
+   */
+#    if HAVE_SETLOCALE
+   setlocale(LC_ALL, "");
+#    endif
+#    ifndef LOCALEDIR
+#      define LOCALEDIR  NULL
+#    endif
+   bindtextdomain(PACKAGE, LOCALEDIR);
+   textdomain(PACKAGE);
+   /*
+      Now check whether we have to use the Gregorian Reformation date of 1752
+        (table index 1 !!) by default!
+   */
+#    if !defined(AMIGA) || defined(__GNUC__)
+   /*
+      Detect whether the $LANGUAGE environment variable (GNU specific) is set.
+   */
+   ptr_char = getenv(ENV_VAR_LANGUAGE);
+   if (ptr_char != (char *)NULL)
+     if (!*ptr_char)
+       ptr_char = (char *)NULL;
+   if (ptr_char == (char *)NULL)
+    {
+      /*
+         Detect whether the $LC_ALL environment variable is set.
+      */
+      ptr_char = getenv(ENV_VAR_LC_ALL);
+      if (ptr_char != (char *)NULL)
+        if (!*ptr_char)
+          ptr_char = (char *)NULL;
+    }
+#      if HAVE_LC_MESSAGES
+   if (ptr_char == (char *)NULL)
+    {
+      /*
+         Detect whether the $LC_MESSAGES environment variable is set.
+      */
+      ptr_char = getenv(ENV_VAR_LC_MESSAGES);
+      if (ptr_char != (char *)NULL)
+        if (!*ptr_char)
+          ptr_char = (char *)NULL;
+    }
+#      endif
+   if (ptr_char == (char *)NULL)
+    {
+      /*
+         Detect whether the $LANG environment variable is set.
+      */
+      ptr_char = getenv(ENV_VAR_LANG);
+      if (ptr_char != (char *)NULL)
+        if (!*ptr_char)
+          ptr_char = (char *)NULL;
+    }
+   /*
+      Now check the kind of territory specifics we have to use!
+   */
+   if (ptr_char != (char *)NULL)
+    {
+      if (*ptr_char)
+       {
+         strncpy(s1, ptr_char, 6);
+         s1[5] = '\0';
+         if (!strncasecmp(s1, "en", 2))
+           /*
+              We have to use the Gregorian Reformation date of 1752 (table index 1 !!).
+           */
+           is_en = TRUE;
+         else
+           /*
+              Hmm... We have to check whether the special settings "C" or
+                "POSIX" are given, if so, we have to use the Gregorian
+                Reformation date of 1752 (table index 1 !!).
+           */
+           if (   !strncasecmp(s1, "posix", 5)
+               || !strcasecmp(s1, "c"))
+             is_en = TRUE;
+       }
+      else
+        /*
+           Environment variable defined but not set, hmm...
+             Let's use the Gregorian Reformation date of 1752 (table index 1 !!).
+        */
+        is_en = TRUE;
+    }
+   else
+     /*
+        No environment variable defined.
+     */
+#    endif /* !AMIGA || __GNUC__ */
+     /*
+        Let's use the Gregorian Reformation date of 1752 (table index 1 !!).
+     */
+     is_en = TRUE;
+   if (is_en)
+     /*
+        Set the date of Gregorian Reformation to 1752 (table index 1 !!)
+     */
+     greg++;
+#  else /* !GCAL_NLS */
+   /*
+      Set the date of Gregorian Reformation to 1752 (table index 1 !!)
+   */
+   greg++;
+#  endif /* !GCAL_NLS */
+#endif /* !USE_DE */
+   /*
       Detect the own program name.
    */
-   i = (int)strlen(argv[0]);
+   i = (int)strlen(*argv);
    if ((Uint)i >= maxlen_max)
-     s1 = my_realloc ((VOID_PTR)s1, i+1, 124, __FILE__, (long)__LINE__, "s1", i+1);
+     s1 = my_realloc ((VOID_PTR)s1,
+                      i+1, ERR_NO_MEMORY_AVAILABLE,
+                      __FILE__, ((long)__LINE__)-2L,
+                      "s1", i+1);
    if (!i)
     {
       strcpy(s1, rcsid+5);
       s1[5] = '\0';
     }
    else
-     strcpy(s1, argv[0]);
+     strcpy(s1, *argv);
 #ifdef SUFFIX_SEP
    /*
       Eliminate version suffix under VMS.
@@ -661,7 +927,9 @@ main (argc, argv)
       i -= 4;
       *(ptr_char + i) = '\0';
     }
-   prgr_name = (char *)my_malloc (i+1, 124, __FILE__, (long)__LINE__, "prgr_name", 0);
+   prgr_name = (char *)my_malloc (i+1, ERR_NO_MEMORY_AVAILABLE,
+                                  __FILE__, ((long)__LINE__)-1L,
+                                  "prgr_name", 0);
    strcpy(prgr_name, ptr_char);
 #if HAVE_SIGNAL
    /*
@@ -681,26 +949,54 @@ main (argc, argv)
      (void)signal(SIGHUP, (Sig_type)handle_signal);
 #  endif
 #endif /* HAVE_SIGNAL */
-   buf_ptr_char = SHIFT_VALUE_DFT;
+   buf_ptr_char = SHIFT_VALUE_DEFAULT;
    if (argc > 1)
     {
       /*
-         Check if `--help', `--version' or `--shift=[+|-]NUMBER' long-style option is given.
+         Check if `--help', `--version' or `--shift=[+|-]NUMBER'
+           long-style option is given.
       */
-      if (   (strlen(argv[1]) > 2)
+      arg_len = (int)strlen(argv[1]) - 2;
+      if (   (arg_len > 0)
           && (*argv[1] == *SWITCH)
           && (*(argv[1]+1) == *SWITCH))
        {
          auto Bool  is_number=TRUE;
 
 
-         if (!strncasecmp(argv[1]+2, "help", strlen(argv[1]+2)))
-           usage_msg (stdout, prgr_name, 0);
-         if (!strncasecmp(argv[1]+2, "version", strlen(argv[1]+2)))
-           version_msg (stdout, prgr_name, 0);
-         if (!strncasecmp(argv[1]+2, "shi", 3))
+         if (!strncasecmp(argv[1]+2, help_option_name, arg_len))
+           usage_msg (stdout, prgr_name, EXIT_SUCCESS);
+         if (!strncasecmp(argv[1]+2, version_option_name, arg_len))
+           version_msg (stdout, prgr_name, EXIT_SUCCESS);
+         if (!strncasecmp(argv[1]+2, shift_option_name, 3))
           {
             ptr_char = strchr(argv[1]+2, *LARG_SEP);
+            if (ptr_char != (char *)NULL)
+              i = (int)(ptr_char - (argv[1] + 2));
+            else
+              i = arg_len;
+            switch (i)
+             {
+               case 3:
+               case 4:
+               case 5:
+                 if (!strncasecmp(argv[1]+2, shift_option_name, i))
+                   break;
+                 /* Fallthrough. */
+               default:
+                 /*
+                    Error, unrecognized option.
+                 */
+#if USE_DE
+                 fprintf(stderr, "%s: unbekannte Option `%s'",
+                         prgr_name, argv[1]);
+#else /* !USE_DE */
+                 fprintf(stderr, _("%s: unrecognized option `%s'"),
+                         prgr_name, argv[1]);
+#endif /* !USE_DE */
+                 S_NEWLINE(stderr);
+                 usage_msg (stderr, prgr_name, ERR_INVALID_OPTION);
+             }
             if (   ptr_char == (char *)NULL
                 || (   (ptr_char != (char *)NULL)
                     && !*(ptr_char+1)))
@@ -709,44 +1005,23 @@ main (argc, argv)
                   Error, option requires an argument.
                */
 #if USE_DE
-               fprintf(stderr, "%s: Option `%s' ben%stigt ein Argument",
-                       prgr_name, argv[1], OE);
+               fprintf(stderr, "%s: Option `--%s' ben%stigt ein Argument",
+                       prgr_name, shift_option_name, OE);
 #else /* !USE_DE */
-               fprintf(stderr, _("%s: option `%s' requires an argument"),
-                       prgr_name, argv[1]);
+               fprintf(stderr, _("%s: option `--%s' requires an argument"),
+                       prgr_name, shift_option_name);
 #endif /* !USE_DE */
                S_NEWLINE(stderr);
-               usage_msg (stderr, prgr_name, 1);
+               usage_msg (stderr, prgr_name, ERR_INVALID_OPTION);
              }
             else
              {
-               i = (int)(ptr_char - (argv[1] + 2));
-               switch (i)
-                {
-                  case 3:
-                  case 4:
-                  case 5:
-                    if (!strncasecmp(argv[1]+2, "shift", i))
-                      break;
-                  default:
-                    /*
-                       Error, unrecognized option.
-                    */
-#if USE_DE
-                    fprintf(stderr, "%s: unbekannte Option `%s'",
-                            prgr_name, argv[1]);
-#else /* !USE_DE */
-                    fprintf(stderr, _("%s: unrecognized option `%s'"),
-                            prgr_name, argv[1]);
-#endif /* !USE_DE */
-                    S_NEWLINE(stderr);
-                    usage_msg (stderr, prgr_name, 1);
-                }
                /*
-                  Let's get the argument of the `--shift=[+|-]NUMBER' long-style option.
+                  Let's get the argument of the `--shift=[+|-]NUMBER'
+                    long-style option.
                */
                ptr_char++;
-               shift = atol(ptr_char);
+               shift_value = atol(ptr_char);
                /*
                   Check if the argument is a NUMBER.
                */
@@ -776,99 +1051,142 @@ main (argc, argv)
                           prgr_name, argv[1]);
 #endif /* !USE_DE */
                   S_NEWLINE(stderr);
-                  usage_msg (stderr, prgr_name, 1);
-                } 
-               shift_set = TRUE;
+                  usage_msg (stderr, prgr_name, ERR_INVALID_OPTION);
+                }
+               shift_value_set = TRUE;
              }
-          } 
+          }
        }
     }
    /*
       Detect the name of the Gcal executable.
    */
-   gcal_name = getenv(ENV_VAR_GCALPROG);
-   if (gcal_name != (char *)NULL)
+#if !defined(AMIGA) || defined(__GNUC__)
+   gcal_prgr = getenv(ENV_VAR_GCALPROG);
+   if (gcal_prgr != (char *)NULL)
     {
-      if (!*gcal_name)
-        gcal_name = PRGR_NAME;
+      if (!*gcal_prgr)
+        gcal_prgr = PRGR_NAME;
     }
    else
-     gcal_name = PRGR_NAME;
+#endif /* !AMIGA || __GNUC__ */
+     gcal_prgr = PRGR_NAME;
    /*
-      Compute the actual date.
+      Get the actual date.
    */
    get_actual_date (&day, &month, &year);
    /*
+      Compute the Julian Day number of the actual date.
+   */
+   the_date = date2num (day, month, year);
+   /*
+      Check if the shifted date is in the right range.
+   */
+   if (   (Slint)the_date+shift_value <= 0L
+       || (Slint)the_date+shift_value > (Slint)date2num (dvec[MONTH_MAX-1], MONTH_MAX, YEAR_MAX))
+     my_error (EXIT_FATAL, "", 0L, buf_ptr_char, 0);
+   /*
       Now calculate the shifted date (default mode is tomorrow [+1]).
    */
-   if (shift > 0L)
-     for ( ; shift ; shift--)
-      {
-        next_date (&day, &month, &year);
-        if (year > YEAR_MAX)
-          my_error (2, "", 0L, buf_ptr_char, 0);
-      }
-   else
-     if (shift < 0L)
-       for ( ; shift ; shift++)
-        {
-          prev_date (&day, &month, &year);
-          if (year < YEAR_MIN)
-            my_error (2, "", 0L, buf_ptr_char, 0);
-        }
+   num2date ((Ulint)the_date+shift_value, &day, &month, &year);
    /*
-      Create the base command line including the actual date modifier %...
-        which is used in the system() call to run Gcal.
+      Initial memory allocation for the `my_argv[]' table.
    */
-   gcal_line = (char *)my_malloc (MAXLEN_MAX, 124, __FILE__, (long)__LINE__, "gcal_line", 0);
-   sprintf(gcal_line, "%s %c%0*d%02d%02d",
-           gcal_name, RC_ADATE_CHAR, len_year_max, year, month, day);
-   act_len = (int)strlen(gcal_line);
+   my_argv = (char **)my_malloc (MY_ARGC_MAX*sizeof(char *),
+                                 ERR_NO_MEMORY_AVAILABLE,
+                                 __FILE__, ((long)__LINE__)-2L,
+                                 "my_argv[MY_ARGC_MAX]", MY_ARGC_MAX);
+   /*
+      Now copy the name of the Gcal executable into `my_argv[]'
+        table at position 0.
+   */
+   my_argv[my_argc] = (char *)my_malloc (strlen(gcal_prgr)+1,
+                                         ERR_NO_MEMORY_AVAILABLE,
+                                         __FILE__, ((long)__LINE__)-2L,
+                                         "my_argv[my_argc]", my_argc);
+   strcpy(my_argv[my_argc++], gcal_prgr);
+   /*
+      Now construct and copy the actual date modifier %DATE into `my_argv[]'
+        table at position 1.
+   */
+   sprintf(s1, "%c%0*d%02d%02d", RC_ADATE_CHAR, len_year_max, year, month, day);
+   my_argv[my_argc] = (char *)my_malloc (strlen(s1)+1, ERR_NO_MEMORY_AVAILABLE,
+                                         __FILE__, ((long)__LINE__)-1L,
+                                         "my_argv[my_argc]", my_argc);
+   strcpy(my_argv[my_argc++], s1);
    /*
       Skip the locally respected `--shift=[+|-]NUMBER' long-style option
         if given in the command line.
    */
-   if (shift_set)
+   if (shift_value_set)
     {
       argc--;
       argv++;
     }
    /*
-      Now append all command line arguments to "gcal_line".
+      Now copy all other command line arguments which are delivered to
+        the Gcal executable into `my_argv[]' table at position `my_argc'.
    */
    while (argc > 1)
     {
-      strcat(gcal_line, " ");
       argv++;
-      arg_len = (int)strlen(*argv);
-      if ((Uint)act_len+arg_len >= maxlen_max)
+      if ((Uint)my_argc >= my_argc_max)
        {
-         maxlen_max <<= 1;
-         if (maxlen_max > testval)
-           maxlen_max = testval;
-         gcal_line = (char *)my_realloc ((VOID_PTR)gcal_line, maxlen_max,
-                                         124, __FILE__, (long)__LINE__,
-                                         "gcal_line", maxlen_max);
+         /*
+            Resize the `my_argv[]' table.
+         */
+         my_argc_max <<= 1;
+         if (my_argc_max*sizeof(char *) > testval)
+           my_argc_max--;
+         my_argv = (char **)my_realloc ((VOID_PTR)my_argv,
+                                        my_argc_max*sizeof(char *),
+                                        ERR_NO_MEMORY_AVAILABLE,
+                                        __FILE__, ((long)__LINE__)-3L,
+                                        "my_argv[my_argc_max]", my_argc_max);
        }
-      strcat(gcal_line, *argv);
-      act_len += (arg_len + 1);
+      my_argv[my_argc] = (char *)my_malloc (strlen(*argv)+1,
+                                            ERR_NO_MEMORY_AVAILABLE,
+                                            __FILE__, ((long)__LINE__)-2L,
+                                            "my_argv[my_argc]", my_argc);
+      strcpy(my_argv[my_argc++], *argv);
       argc--;
     }
-   status = system(gcal_line);
+   /*
+      And terminate the `my_argv[]' table by a final NULL element.
+   */
+   if ((Uint)my_argc >= my_argc_max)
+    {
+      /*
+         Resize the `my_argv[]' table.
+      */
+      my_argc_max <<= 1;
+      if (my_argc_max*sizeof(char *) > testval)
+        my_argc_max--;
+      my_argv = (char **)my_realloc ((VOID_PTR)my_argv,
+                                     my_argc_max*sizeof(char *),
+                                     ERR_NO_MEMORY_AVAILABLE,
+                                     __FILE__, ((long)__LINE__)-3L,
+                                     "my_argv[my_argc_max]", my_argc_max);
+    }
+   my_argv[my_argc] = (char *)NULL;
+   /*
+      Run the Gcal executable alltogether with the collected arguments.
+   */
+   status = execvp(gcal_prgr, my_argv);
    if (status == -1)
     {
 #if USE_DE
       fprintf(stderr, "%s: Fehler bei Programmausf%shrung von `%s'\n",
-              prgr_name, UE, gcal_name);
+              prgr_name, UE, gcal_prgr);
 #else /* !USE_DE */
       fprintf(stderr, _("%s: error during program execution of `%s'\n"),
-              prgr_name, gcal_name);
+              prgr_name, gcal_prgr);
 #endif /* !USE_DE */
 #if HAVE_ERRNO_H
-      perror(gcal_name);
+      perror(gcal_prgr);
 #endif
-      exit(status);
+      exit(ERR_EXTERNAL_CMD_FAILURE);
     }
 
-   return(status);
+   exit(status);
 }

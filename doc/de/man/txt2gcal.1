@@ -1,8 +1,8 @@
-.\" $Id: txt2gcal.1 v0.04 1997/01/02 00:00:04 tom Exp $
+.\" $Id: txt2gcal.1 v0.07 2000/05/28 00:00:07 tom Exp $
 .\"
-.\" txt2gcal.1:  German [n]roff source of TXT2GCAL manual page
+.\" txt2gcal.1:  German [n]roff source of Un*x manual page
 .\"
-.\" Copyright (C) 1996, 1997 Thomas Esken
+.\" Copyright (c) 1996-1997, 2000 Thomas Esken
 .\"
 .\"
 .\" Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
@@ -24,7 +24,7 @@
 .\"
 .\"
 .\" ------------------------oOO      \\\_''/      OOo---------------------------
-.\" Thomas Esken               O     (/o-o\)     O  eMail: esken@uni-muenster.de
+.\" Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
 .\" Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 .\" D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 .\"
@@ -47,54 +47,43 @@
 .pl 11i
 .po 0
 .\"
-.TH TXT2GCAL 1 "02 Januar 1997"
+.TH TXT2GCAL 1 "28 Mai 2000"
 .SH NAME
-txt2gcal \- erzeugt aus einer Textdatei eine wortgetreue Gcal Ressourcendatei.
+Txt2gcal \- erzeugt aus einer Textdatei eine wortgetreue Gcal Ressourcendatei.
 .SH AUFRUF
-.B txt2gcal
-[
-.I \-\-help
-|
-.I \-\-version
-] | [
-.B Textdatei
-|
-.I \-
-] [
-.B Datumteil
-] 
+.B txt2gcal \fI[\fB\-\-help\fI | \fB\-\-version\fI] | [Textdatei | \-] [Datumteil]
 .SH BESCHREIBUNG
 .B Txt2gcal
 ist ein Programm, welches aus einer Textdatei eine wortgetreue
 Gcal Ressourcendatei erzeugt.  Wird keine
-.B Textdatei
-oder aber
-.B \-
-als Argument angegeben, so liest und verarbeitet das Programm alle
+.I Textdatei
+oder aber ein einzelnes
+.I `\-'
+Zeichen als Argument angegeben, so liest und verarbeitet das Programm alle
 Eingaben, die vom Standardeingabekanal kommen. Wird kein
-.B Datumteil
+.I Datumteil
 als Argument angegeben, so wird von
 .B txt2gcal
 eine
-.I 0
+.B 0
 f"ur den Datumteil erzeugt. Alle Ergebnisse werden stets auf dem
 Standardausgabekanal ausgegeben.  Ein Programmendestatus 0 bedeutet,
 da"s die Verarbeitung erfolgreich war, ein anderer Endestatus verweist
 auf einen Fehler w"ahrend der Verarbeitung.
 .SH OPTIONEN
 .TP
-.I \-\-help
+.B \-\-help
 Ausgabe eines Hilfetextes, der alle verf"ugbaren Optionen aufzeigt,
 sodann erfolgreiches Programmende.
 .TP
-.I \-\-version
+.B \-\-version
 Ausgabe der Versionsnummer, sodann erfolgreiches Programmende.
 .bp
 .SH COPYRIGHT
 .in 0
 .sp
 .B Txt2gcal
-Copyright (C) 1996, 1997 Thomas Esken
+Copyright (c) 1996-1997, 2000 Thomas Esken
 .LP
 Diese Software erhebt keinen Anspruch auf Vollst"andigkeit,
 Verwendungsf"ahigkeit oder Korrektheit. F"ur Sch"aden (implizit
@@ -119,11 +108,11 @@ Viel Spa"s mit diesem Programm   =8^)
 .in 2
 .nf
 ------------------------oOO      \e\e\e_''/      OOo---------------------------
-Thomas Esken               O     (/o-o\e)     O  eMail: esken@uni-muenster.de
+Thomas Esken               O     (/o-o\e)     O  eMail: esken@gmx.net
 Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 D-48147 Muenster; Germany    \e____) ~ (____/    MotD : 2old2live, 2young2die
 .fi
 .SH QUERVERWEIS
 gcal(1),
 tcal(1),
-gcal2txt(1)
+gcal2txt(1).

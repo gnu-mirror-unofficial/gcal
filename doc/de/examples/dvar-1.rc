@@ -1,0 +1,8 @@
+; dvar-1.rc
+;
+z=0202
+0@z Das lokal an `z' zugewiesene Datum
+z=
+0@z Das global an `z' zugewiesene Datum
+z=0404
+0@z Das lokal an `z' zugewiesene Datum

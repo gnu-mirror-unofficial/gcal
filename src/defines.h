@@ -4,7 +4,7 @@
 *  defines.h:  Program name, release number and modification symbols.
 *
 *
-*  Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1994-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -28,7 +28,7 @@
 
 
 /*
-*  $Id: defines.h 2.40 1997/04/23 02:04:00 tom Exp $
+*  $Id: defines.h 3.00 2000/03/04 03:00:00 tom Exp $
 */
 
 
@@ -36,8 +36,11 @@
 /*
 *  Define the program name and version.
 */
-#define  PRGR_NAME    "gcal"   /* Actual program name, 6 characters maximum */
-#define  VERSION_NO   "2.40"   /* Actual version number */
+/* Actual program name. */
+#  define  PRGR_NAME   "gcal"
+
+/* Actual version number. */
+#  define  VERSION_NO  "3.00"
 
 
 
@@ -83,13 +86,15 @@
 *          like this feature...
 */
 
+
 #if 0
 #  define  USE_EASC   0
 #  define  USE_DE     0
 #  define  USE_HLS    1
 #  define  USE_PAGER  1
 #  define  USE_RC     1
-#endif
+#endif /* 0 */
+
 
 /*
 *

@@ -1,0 +1,568 @@
+Dies ist gcal.info, hergestellt von Makeinfo Version 4.0 aus gcal.texi.
+
+INFO-DIR-SECTION GNU Pakete
+START-INFO-DIR-ENTRY
+* Gcal: (gcal).                        GNU Kalenderprogramm.
+* Tcal: (gcal)Aufruf von tcal.         Gcal mit morgigem Datum aufrufen.
+* Txt2gcal: (gcal)Aufruf von txt2gcal. Kalendertext zu Ressourcendatei wandeln.
+* Gcal2txt: (gcal)Aufruf von gcal2txt. Kalenderressource zu Textdatei wandeln.
+END-INFO-DIR-ENTRY
+
+Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
+auszugeben.
+
+Copyright (c) 1994-1997, 2000 Thomas Esken
+
+Diese Ausgabe ist für Gcal Version 3.00.
+
+Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
+zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
+Copyrightvermerk und diesem Genehmigungsvermerk ausgestattet sind und
+vorgenannte Vermerke erhalten bleiben.
+
+Hiermit wird die Erlaubnis erteilt, veränderte Kopien dieses Handbuchs
+wie unter den Bedingungen für wortgetreue Kopien zu erstellen und zu
+vertreiben, sofern die ausgeführten Arbeiten in Ableitung und Gesamtheit
+innerhalb der Bestimmungen eines Genehmigungsvermerks liegen und zudem
+mit diesem ausgestattet sind, welcher mit diesem hier identisch ist.
+
+Hiermit wird die Erlaubnis erteilt, wie unter den vorgenannten
+Bedingungen für veränderte Versionen Übersetzungen dieses Handbuchs in
+eine andere Sprache zu erstellen und zu vertreiben, mit der Ausnahme,
+daß dieser Genehmigungsvermerk in einer Übersetzung angegeben sein
+darf, welche von der Free Software Foundation gebilligt wird.
+
+Jedwede Vorschläge, Verbesserungen, Erweiterungen, Fehlerberichte, Geld-
+und Sachspenden, Programmieraufträge usw. sind stets willkommen.  Bitte
+senden Sie diese direkt an meine eMail Adresse <esken@gmx.net>.  Wenn
+Sie dieses Werkzeug mögen, so würde ich mich sehr über eine Postkarte
+von Ihnen freuen!
+
+------------------------oOO      \\\_''/      OOo---------------------------
+Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
+Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
+D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
+
+
+File: gcal.info,  Node: Argumentenindex,  Next: Variablenindex,  Prev: Glossar,  Up: Top
+
+Verzeichnis der Kommandozeilenargumente
+***************************************
+
+Hier ist eine alphabetische Liste der Kommandozeilenargumente, die von
+Gcal verarbeitet werden:
+
+* Menu:
+
+* %DATUM:                                Datummodifizierer.
+* -# ZEILE:                              Termin Optionen.
+* -*dN:                                  Termin Optionen.
+* -*dNWWW:                               Termin Optionen.
+* -*wN[WWW]:                             Termin Optionen.
+* --adjust-value=ARGUMENT:               Termin Optionen.
+* --alternative-format:                  Termin Optionen.
+* --astronomical-holidays:               Kalender Optionen.
+* --atmosphere=LUFTDRUCK[,TEMPERATUR]:   Termin Optionen.
+* --bahai-holidays:                      Kalender Optionen.
+* --bahai-months:                        Kalender Optionen.
+* --biorhythm-axis=ANZAHL:               Termin Optionen.
+* --blocks=1:                            Kalender Optionen.
+* --blocks=12:                           Kalender Optionen.
+* --blocks=2:                            Kalender Optionen.
+* --blocks=3:                            Kalender Optionen.
+* --blocks=4:                            Kalender Optionen.
+* --blocks=6:                            Kalender Optionen.
+* --blocks=ANZAHL:                       Kalender Optionen.
+* --calendar-dates=both:                 Kalender Optionen.
+* --calendar-dates=special:              Kalender Optionen.
+* --calendar-dates=special|both:         Kalender Optionen.
+* --cc-holidays=CC[_TT][+...]:           Kalender Optionen.
+* --celtic-holidays:                     Kalender Optionen.
+* --chinese-flexible-holidays:           Kalender Optionen.
+* --chinese-flexible-months:             Kalender Optionen.
+* --chinese-holidays:                    Kalender Optionen.
+* --chinese-months:                      Kalender Optionen.
+* --christian-holidays:                  Kalender Optionen.
+* --coptic-months:                       Kalender Optionen.
+* --copyleft:                            Allgemeine Optionen.
+* --copyright:                           Allgemeine Optionen.
+* --cycle-end=ARGUMENT:                  Termin Optionen.
+* --cycle-step=ARGUMENT:                 Termin Optionen.
+* --date-format=de|us|gb|TEXT:           Kalender Optionen.
+* --date-variable=ARGUMENT:              Termin Optionen.
+* --debug=abort:                         Globale Optionen.
+* --debug=all:                           Globale Optionen.
+* --debug=handled:                       Globale Optionen.
+* --debug=internal:                      Globale Optionen.
+* --debug=unhandled:                     Globale Optionen.
+* --debug[=internal|handled|unhandled|all|abort]: Globale Optionen.
+* --descending-fixed-dates=long:         Termin Optionen.
+* --descending-fixed-dates=short:        Termin Optionen.
+* --descending-fixed-dates[=short|long]: Termin Optionen.
+* --descending-holiday-list=long:        Kalender Optionen.
+* --descending-holiday-list=short:       Kalender Optionen.
+* --descending-holiday-list[=long|short]: Kalender Optionen.
+* --disable-highlighting:                Globale Optionen.
+* --end-of-month:                        Termin Optionen.
+* --end-of-week:                         Termin Optionen.
+* --end-of-year:                         Termin Optionen.
+* --ethiopic-months:                     Kalender Optionen.
+* --exclude-fixed-dates-list-title:      Termin Optionen.
+* --exclude-holiday-list-title:          Kalender Optionen.
+* --execute-command:                     Termin Optionen.
+* --exit-status-help-non-zero:           Allgemeine Optionen.
+* --export-date-variables <1>:           Datumvariablen.
+* --export-date-variables:               Termin Optionen.
+* --export-text-variables <1>:           Textvariablen.
+* --export-text-variables:               Termin Optionen.
+* --filter-day=ARGUMENT:                 Termin Optionen.
+* --filter-period=ARGUMENT:              Termin Optionen.
+* --filter-text=SUCHMUSTER:              Termin Optionen.
+* --fixed-dates=both:                    Kalender Optionen.
+* --fixed-dates=special:                 Kalender Optionen.
+* --fixed-dates=special|both:            Kalender Optionen.
+* --force-highlighting:                  Globale Optionen.
+* --french-revolutionary-months:         Kalender Optionen.
+* --gregorian-reform=1582|1700|1752|1753|ARGUMENT: Kalender Optionen.
+* --grouping-text[=TEXT]:                Termin Optionen.
+* --hebrew-holidays:                     Kalender Optionen.
+* --hebrew-months:                       Kalender Optionen.
+* --help <1>:                            Aufruf von gcal2txt.
+* --help <2>:                            Aufruf von txt2gcal.
+* --help <3>:                            Aufruf von tcal.
+* --help:                                Allgemeine Optionen.
+* --here=ZEILE:                          Termin Optionen.
+* --highlighting=no:                     Globale Optionen.
+* --highlighting=TEXT:                   Globale Optionen.
+* --highlighting=yes:                    Globale Optionen.
+* --holiday-dates=both:                  Kalender Optionen.
+* --holiday-dates=special:               Kalender Optionen.
+* --holiday-dates=special|both:          Kalender Optionen.
+* --holiday-list=long:                   Kalender Optionen.
+* --holiday-list=short:                  Kalender Optionen.
+* --holiday-list[=long|short]:           Kalender Optionen.
+* --ignore-case:                         Termin Optionen.
+* --include-consecutive-number:          Termin Optionen.
+* --include-holidays=long:               Termin Optionen.
+* --include-holidays=short:              Termin Optionen.
+* --include-resource-file-name:          Termin Optionen.
+* --include-today:                       Termin Optionen.
+* --include-week-number:                 Termin Optionen.
+* --indian-civil-months:                 Kalender Optionen.
+* --islamic-civil-holidays:              Kalender Optionen.
+* --islamic-civil-months:                Kalender Optionen.
+* --iso-week-number=no:                  Kalender Optionen.
+* --iso-week-number=yes:                 Kalender Optionen.
+* --iso-week-number=yes|no:              Kalender Optionen.
+* --japanese-flexible-holidays:          Kalender Optionen.
+* --japanese-flexible-months:            Kalender Optionen.
+* --japanese-holidays:                   Kalender Optionen.
+* --japanese-months:                     Kalender Optionen.
+* --leap-day=february:                   Termin Optionen.
+* --leap-day=february|march:             Termin Optionen.
+* --leap-day=march:                      Termin Optionen.
+* --license:                             Allgemeine Optionen.
+* --limit:                               Termin Optionen.
+* --list-mode:                           Termin Optionen.
+* --list-of-fixed-dates=long:            Termin Optionen.
+* --list-of-fixed-dates=short:           Termin Optionen.
+* --list-of-fixed-dates[=short|long]:    Termin Optionen.
+* --long-help=?:                         Allgemeine Optionen.
+* --long-help[=ARGUMENT]:                Allgemeine Optionen.
+* --mail[=ADRESSE]:                      Globale Optionen.
+* --month:                               Termin Optionen.
+* --moonimage-lines=ANZAHL:              Termin Optionen.
+* --multicultural-new-year-holidays:     Kalender Optionen.
+* --old-armenic-months:                  Kalender Optionen.
+* --old-egyptic-months:                  Kalender Optionen.
+* --omit-multiple-date-part:             Termin Optionen.
+* --orthodox-calendar:                   Kalender Optionen.
+* --orthodox-new-holidays:               Kalender Optionen.
+* --orthodox-old-holidays:               Kalender Optionen.
+* --pager:                               Globale Optionen.
+* --period-of-fixed-dates=ARGUMENT:      Termin Optionen.
+* --persian-jalaali-holidays:            Kalender Optionen.
+* --persian-jalaali-months:              Kalender Optionen.
+* --precise:                             Termin Optionen.
+* --resource-file=DATEINAME[+...]:       Termin Optionen.
+* --response-file=DATEINAME:             Globale Optionen.
+* --revert-match:                        Termin Optionen.
+* --shell-script=DATEINAME:              Globale Optionen.
+* --shift=[+|-]ZAHL:                     Aufruf von tcal.
+* --start-of-month:                      Termin Optionen.
+* --start-of-week:                       Termin Optionen.
+* --start-of-year:                       Termin Optionen.
+* --starting-day=ARGUMENT:               Kalender Optionen.
+* --suppress-calendar:                   Kalender Optionen.
+* --suppress-date-part:                  Termin Optionen.
+* --suppress-fixed-dates-list-separator: Termin Optionen.
+* --suppress-holiday-list-separator:     Kalender Optionen.
+* --suppress-text-part:                  Termin Optionen.
+* --text-variable=ARGUMENT:              Termin Optionen.
+* --time-offset=ARGUMENT:                Kalender Optionen.
+* --today:                               Termin Optionen.
+* --tomorrow:                            Termin Optionen.
+* --transform-year=ARGUMENT:             Kalender Optionen.
+* --translate-string=TEXT:               Kalender Optionen.
+* --type=special|standard:               Kalender Optionen.
+* --usage=?:                             Allgemeine Optionen.
+* --usage[=ARGUMENT]:                    Allgemeine Optionen.
+* --version <1>:                         Aufruf von gcal2txt.
+* --version <2>:                         Aufruf von txt2gcal.
+* --version <3>:                         Aufruf von tcal.
+* --version:                             Allgemeine Optionen.
+* --week:                                Termin Optionen.
+* --with-week-number:                    Kalender Optionen.
+* --year:                                Termin Optionen.
+* --zero-dates-only:                     Termin Optionen.
+* --zodiacal-marker-holidays:            Kalender Optionen.
+* -?:                                    Allgemeine Optionen.
+* -??:                                   Allgemeine Optionen.
+* -@DVAR[+|-]NWWW:                       Termin Optionen.
+* -@DVAR[[+|-]N]:                        Termin Optionen.
+* -@e[+|-]NWWW:                          Termin Optionen.
+* -@e[[+|-]N]:                           Termin Optionen.
+* -@t[+|-]NWWW:                          Termin Optionen.
+* -@t[[+|-]N]:                           Termin Optionen.
+* -A:                                    Termin Optionen.
+* -a:                                    Termin Optionen.
+* -b 1:                                  Kalender Optionen.
+* -b 12:                                 Kalender Optionen.
+* -b 2:                                  Kalender Optionen.
+* -b 3:                                  Kalender Optionen.
+* -b 4:                                  Kalender Optionen.
+* -b 6:                                  Kalender Optionen.
+* -b ANZAHL:                             Kalender Optionen.
+* -C:                                    Termin Optionen.
+* -c:                                    Termin Optionen.
+* -c*dN:                                 Termin Optionen.
+* -c*dNWWW:                              Termin Optionen.
+* -c*wN[WWW]:                            Termin Optionen.
+* -C-:                                   Termin Optionen.
+* -c-:                                   Termin Optionen.
+* -c@DVAR[+|-]NWWW:                      Termin Optionen.
+* -c@DVAR[[+|-]N]:                       Termin Optionen.
+* -c@e[+|-]NWWW:                         Termin Optionen.
+* -c@e[[+|-]N]:                          Termin Optionen.
+* -c@t[+|-]NWWW:                         Termin Optionen.
+* -c@t[[+|-]N]:                          Termin Optionen.
+* -c[m|M[+|-]]:                          Termin Optionen.
+* -c[t|T]:                               Termin Optionen.
+* -c[w|W[+|-]]:                          Termin Optionen.
+* -c[y|Y[+|-]]:                          Termin Optionen.
+* -cA:                                   Termin Optionen.
+* -ca:                                   Termin Optionen.
+* -cd:                                   Termin Optionen.
+* -cE:                                   Termin Optionen.
+* -ce:                                   Termin Optionen.
+* -cg[TEXT]:                             Termin Optionen.
+* -cJ:                                   Termin Optionen.
+* -ck:                                   Termin Optionen.
+* -cl:                                   Termin Optionen.
+* -cl*dN:                                Termin Optionen.
+* -cl*dNWWW:                             Termin Optionen.
+* -cl*wN[WWW]:                           Termin Optionen.
+* -cl@DVAR[+|-]NWWW:                     Termin Optionen.
+* -cl@DVAR[[+|-]N]:                      Termin Optionen.
+* -cl@e[+|-]NWWW:                        Termin Optionen.
+* -cl@e[[+|-]N]:                         Termin Optionen.
+* -cl@t[+|-]NWWW:                        Termin Optionen.
+* -cl@t[[+|-]N]:                         Termin Optionen.
+* -clMMTT:                               Termin Optionen.
+* -clMMWWWN:                             Termin Optionen.
+* -clN+|-:                               Termin Optionen.
+* -clNd:                                 Termin Optionen.
+* -clNw:                                 Termin Optionen.
+* -cm:                                   Termin Optionen.
+* -cm+:                                  Termin Optionen.
+* -cm-:                                  Termin Optionen.
+* -cMMTT:                                Termin Optionen.
+* -cMMWWWN:                              Termin Optionen.
+* -cN+|-:                                Termin Optionen.
+* -cNd:                                  Termin Optionen.
+* -cNw:                                  Termin Optionen.
+* -co:                                   Termin Optionen.
+* -cQ:                                   Termin Optionen.
+* -cT:                                   Termin Optionen.
+* -ct:                                   Termin Optionen.
+* -cU:                                   Termin Optionen.
+* -cw:                                   Termin Optionen.
+* -cw+:                                  Termin Optionen.
+* -cw-:                                  Termin Optionen.
+* -cx:                                   Termin Optionen.
+* -cy:                                   Termin Optionen.
+* -cy+:                                  Termin Optionen.
+* -cy-:                                  Termin Optionen.
+* -cZ:                                   Termin Optionen.
+* -cz:                                   Termin Optionen.
+* -c|C[-]:                               Termin Optionen.
+* -d:                                    Termin Optionen.
+* -D ARGUMENT:                           Termin Optionen.
+* -E:                                    Termin Optionen.
+* -e:                                    Termin Optionen.
+* -f|F DATEINAME[+...]:                  Termin Optionen.
+* -G:                                    Kalender Optionen.
+* -g[TEXT]:                              Termin Optionen.
+* -h:                                    Allgemeine Optionen.
+* -H no:                                 Globale Optionen.
+* -H TEXT:                               Globale Optionen.
+* -H yes:                                Globale Optionen.
+* -hh:                                   Allgemeine Optionen.
+* -i:                                    Kalender Optionen.
+* -I SUCHMUSTER:                         Termin Optionen.
+* -i[-]:                                 Kalender Optionen.
+* -J:                                    Termin Optionen.
+* -j:                                    Kalender Optionen.
+* -j[b]:                                 Kalender Optionen.
+* -jb:                                   Kalender Optionen.
+* -jc:                                   Kalender Optionen.
+* -jc[b]:                                Kalender Optionen.
+* -jcb:                                  Kalender Optionen.
+* -jn:                                   Kalender Optionen.
+* -jn[b]:                                Kalender Optionen.
+* -jnb:                                  Kalender Optionen.
+* -k:                                    Termin Optionen.
+* -K:                                    Kalender Optionen.
+* -l:                                    Termin Optionen.
+* -L:                                    Allgemeine Optionen.
+* -l*dN:                                 Termin Optionen.
+* -l*dNWWW:                              Termin Optionen.
+* -l*wN[WWW]:                            Termin Optionen.
+* -l@DVAR[+|-]NWWW:                      Termin Optionen.
+* -l@DVAR[[+|-]N]:                       Termin Optionen.
+* -l@e[+|-]NWWW:                         Termin Optionen.
+* -l@e[[+|-]N]:                          Termin Optionen.
+* -l@t[+|-]NWWW:                         Termin Optionen.
+* -l@t[[+|-]N]:                          Termin Optionen.
+* -lMMTT:                                Termin Optionen.
+* -lMMWWWN:                              Termin Optionen.
+* -lN+|-:                                Termin Optionen.
+* -lNd:                                  Termin Optionen.
+* -lNw:                                  Termin Optionen.
+* -m:                                    Termin Optionen.
+* -M:                                    Termin Optionen.
+* -m:                                    Termin Optionen.
+* -m+:                                   Termin Optionen.
+* -m-:                                   Termin Optionen.
+* -M[+|-]:                               Termin Optionen.
+* -m[+|-]:                               Termin Optionen.
+* -m|M[+|-]:                             Termin Optionen.
+* -N:                                    Kalender Optionen.
+* -n:                                    Kalender Optionen.
+* -N-:                                   Kalender Optionen.
+* -n-:                                   Kalender Optionen.
+* -n|N[-]:                               Kalender Optionen.
+* -o:                                    Termin Optionen.
+* -O:                                    Kalender Optionen.
+* -p:                                    Globale Optionen.
+* -P ARGUMENT:                           Termin Optionen.
+* -Q:                                    Termin Optionen.
+* -q CC[_TT][+...]:                      Kalender Optionen.
+* -r ARGUMENT:                           Termin Optionen.
+* -R DATEINAME:                          Globale Optionen.
+* -s ARGUMENT:                           Kalender Optionen.
+* -S DATEINAME:                          Globale Optionen.
+* -T:                                    Termin Optionen.
+* -t:                                    Termin Optionen.
+* -U:                                    Termin Optionen.
+* -u:                                    Kalender Optionen.
+* -V:                                    Allgemeine Optionen.
+* -v ARGUMENT:                           Termin Optionen.
+* -w:                                    Termin Optionen.
+* -W:                                    Termin Optionen.
+* -w:                                    Termin Optionen.
+* -w+:                                   Termin Optionen.
+* -w-:                                   Termin Optionen.
+* -W[+|-]:                               Termin Optionen.
+* -w[+|-]:                               Termin Optionen.
+* -w|W[+|-]:                             Termin Optionen.
+* -x:                                    Termin Optionen.
+* -X:                                    Kalender Optionen.
+* -y:                                    Termin Optionen.
+* -Y:                                    Termin Optionen.
+* -y:                                    Termin Optionen.
+* -y+:                                   Termin Optionen.
+* -y-:                                   Termin Optionen.
+* -Y[+|-]:                               Termin Optionen.
+* -y[+|-]:                               Termin Optionen.
+* -y|Y[+|-]:                             Termin Optionen.
+* -Z:                                    Termin Optionen.
+* -z:                                    Termin Optionen.
+* @DATEI:                                Antwortdatei.
+* Kommando, .:                           3-Monatsmodus Kommandos.
+* Kommando, . JJJJ:                      3-Monatsmodus Kommandos.
+* Kommando, .+:                          3-Monatsmodus Kommandos.
+* Kommando, .+ JJJJ:                     3-Monatsmodus Kommandos.
+* Kommando, .-:                          3-Monatsmodus Kommandos.
+* Kommando, .- JJJJ:                     3-Monatsmodus Kommandos.
+* Kommando, ..:                          3-Monatsmodus Kommandos.
+* Kommando, .. JJJJ:                     3-Monatsmodus Kommandos.
+* Kommando, ::                           Einfache Kommandos.
+* Kommando, :JJJJ:                       Einfache Kommandos.
+* Kommando, JJJJ:                        Einfache Kommandos.
+* Kommando, JJJJ+JJJJ:                   Bereiche von Kommandos.
+* Kommando, JJJJ;...;JJJJ:               Listen von Kommandos.
+* Kommando, KEINES:                      Einfache Kommandos.
+* Kommando, MM JJJJ:                     Einfache Kommandos.
+* Kommando, MM JJJJ-JJJJ:                Bereiche von Kommandos.
+* Kommando, MM,...,MM:                   Listen von Kommandos.
+* Kommando, MM,...,MM JJJJ:              Listen von Kommandos.
+* Kommando, MM,MM/JJJJ,...:              Listen von Kommandos.
+* Kommando, MM-MM:                       Bereiche von Kommandos.
+* Kommando, MM-MM JJJJ:                  Bereiche von Kommandos.
+* Kommando, MM-MM JJJJ+JJJJ:             Bereiche von Kommandos.
+* Kommando, MM/JJJJ:                     Einfache Kommandos.
+* Kommando, MM/JJJJ,...,MM/JJJJ:         Listen von Kommandos.
+* Kommando, MM/JJJJ-JJJJ:                Bereiche von Kommandos.
+* Kommando, MM/JJJJ-MM/JJJJ:             Bereiche von Kommandos.
+* Kommando, MM::                         Einfache Kommandos.
+* Kommando, MM:;MM:;...:                 Listen von Kommandos.
+* Kommando, MM:;MM:JJJJ,...:             Listen von Kommandos.
+* Kommando, MM:JJJJ:                     Einfache Kommandos.
+* Kommando, MM:JJJJ+MM:JJJJ:             Bereiche von Kommandos.
+* Kommando, MM:JJJJ;...;MM:JJJJ:         Listen von Kommandos.
+* Kommando, MONATSNAME:                  Einfache Kommandos.
+
+
+File: gcal.info,  Node: Variablenindex,  Next: Tabellenindex,  Prev: Argumentenindex,  Up: Top
+
+Verzeichnis der Umgebungsvariablen
+**********************************
+
+Hier ist eine alphabetische Liste der Umgebungsvariablen, die von Gcal
+berücksichtigt werden:
+
+* Menu:
+
+* COLUMNS <1>:                           Umgebungsvariablen.
+* COLUMNS:                               Globale Optionen.
+* GCAL <1>:                              Umgebungsvariablen.
+* GCAL <2>:                              Die GCAL Umgebungsvariable.
+* GCAL:                                  Globale Optionen.
+* GCAL_COLUMNS <1>:                      Umgebungsvariablen.
+* GCAL_COLUMNS:                          Globale Optionen.
+* GCAL_DATE_FORMAT <1>:                  Umgebungsvariablen.
+* GCAL_DATE_FORMAT:                      Kalender Optionen.
+* GCAL_LINES <1>:                        Umgebungsvariablen.
+* GCAL_LINES:                            Globale Optionen.
+* GCAL_OPT <1>:                          Umgebungsvariablen.
+* GCAL_OPT:                              Die GCAL Umgebungsvariable.
+* GCAL_SYS_DATADIR <1>:                  Umgebungsvariablen.
+* GCAL_SYS_DATADIR:                      Ressourcendatei.
+* GCAL_USR_DATADIR <1>:                  Umgebungsvariablen.
+* GCAL_USR_DATADIR:                      Ressourcendatei.
+* GCALANSI <1>:                          Umgebungsvariablen.
+* GCALANSI:                              Globale Optionen.
+* GCALPATH <1>:                          Umgebungsvariablen.
+* GCALPATH:                              Ressourcendatei.
+* GCALPROG <1>:                          Umgebungsvariablen.
+* GCALPROG:                              Aufruf von tcal.
+* HOME <1>:                              Umgebungsvariablen.
+* HOME <2>:                              Ressourcendatei.
+* HOME:                                  Termin Optionen.
+* LANG <1>:                              Umgebungsvariablen.
+* LANG:                                  Internationalisierung.
+* LANGUAGE <1>:                          Umgebungsvariablen.
+* LANGUAGE:                              Internationalisierung.
+* LC_ALL <1>:                            Umgebungsvariablen.
+* LC_ALL:                                Internationalisierung.
+* LC_MESSAGES <1>:                       Umgebungsvariablen.
+* LC_MESSAGES:                           Internationalisierung.
+* LINES <1>:                             Umgebungsvariablen.
+* LINES:                                 Globale Optionen.
+* LOGNAME <1>:                           Umgebungsvariablen.
+* LOGNAME:                               Globale Optionen.
+* MAILPROG <1>:                          Umgebungsvariablen.
+* MAILPROG:                              Globale Optionen.
+* MAILTO <1>:                            Umgebungsvariablen.
+* MAILTO:                                Globale Optionen.
+* PAGER <1>:                             Umgebungsvariablen.
+* PAGER:                                 Globale Optionen.
+* PATH <1>:                              Umgebungsvariablen.
+* PATH:                                  Globale Optionen.
+* TERM <1>:                              Umgebungsvariablen.
+* TERM:                                  Globale Optionen.
+* TXT2GCALPROG <1>:                      Umgebungsvariablen.
+* TXT2GCALPROG:                          Textvariablen.
+* TZ:                                    Umgebungsvariablen.
+* USER <1>:                              Umgebungsvariablen.
+* USER:                                  Globale Optionen.
+
+
+File: gcal.info,  Node: Tabellenindex,  Next: Begriffsindex,  Prev: Variablenindex,  Up: Top
+
+Tabellenverzeichnis
+*******************
+
+Hier ist eine alphabetische Liste der wichtigsten Tabellen,
+Zusammenfassungen und sonstigen Übersichten, die in diesem Handbuch zu
+finden sind:
+
+* Menu:
+
+* Besondere ereignisbezogene Texte, Monddaten und Zeiten: Sonnendaten.
+* Besondere ereignisbezogene Texte, Sonnendaten und Zeiten: Sonnendaten.
+* Darstellungsarten der mondbezogenen Spezialtexte: Monddaten.
+* Darstellungsarten der sonnenbezogenen Spezialtexte: Sonnendaten.
+* Datumformate des Datummodifizierers:   Datummodifizierer.
+* Datumformate, veraltete fest vorgegebene: Tabelle der veralteten Datumformate.
+* Datumformatelemente, veraltete individuelle: Tabelle der veralteten Datumformatelemente.
+* Datumformattext, Formatelemente und Zeichenersatzangaben im: Kalender Optionen.
+* Datummodifizierer, Datumformate des:   Datummodifizierer.
+* Datumteil Kodierschema 1:              Kodierschema Tabelle 1.
+* Datumteil Kodierschema-2:              Kodierschema Tabelle 2.
+* Datumvariablen, Operationen auf:       Datumvariablen.
+* Einträge in Ressourcendatei:           Struktur einer Ressourcendatei.
+* Ereignisbezogene Texte bei Monddaten und Zeiten, besondere: Sonnendaten.
+* Ereignisbezogene Texte bei Sonnendaten und Zeiten, besondere: Sonnendaten.
+* Ewige Feiertagsliste, verwendete Markierungszeichen in: Ewige Feiertage.
+* Exit-Kodes:                            Fehlerkodes.
+* Fehlerkodes:                           Fehlerkodes.
+* Feiertage, landesspezifische:          Kalender Optionen.
+* Formatanweisung:                       Formatanweisung.
+* Formatelemente und Zeichenersatzangaben im Datumformattext: Kalender Optionen.
+* Geographische Distanz und Kurswinkel, Modi: Geographische Distanz und Kurswinkel.
+* Glossar:                               Glossar.
+* GNU Langoptionen:                      Optionen.
+* ISO-6709:1983 Koordinate:              Sonnendaten.
+* Kodierschema 1, Datumteil:             Kodierschema Tabelle 1.
+* Kodierschema-2, Datumteil:             Kodierschema Tabelle 2.
+* Kommandotrennzeichen:                  Kommandos.
+* Koordinate, ISO-6709:1983:             Sonnendaten.
+* Kurzoptionen, traditionelle:           Optionen.
+* Landesspezifische Feiertage:           Kalender Optionen.
+* Landessprache, Wahl der:               Internationalisierung.
+* Landessprachen, unterstützte:          Internationalisierung.
+* Langoptionen, GNU:                     Optionen.
+* Laufzeitfehlerkodes:                   Fehlerkodes.
+* Markierungszeichen in ewiger Feiertagsliste, verwendete: Ewige Feiertage.
+* Metasymbole, verwendete:               Metasymbole.
+* Modi, geographische Distanz und Kurswinkel: Geographische Distanz und Kurswinkel.
+* Modi, mondbezogenen Spezialtexte:      Monddaten.
+* Modi, sonnenbezogenen Spezialtexte:    Sonnendaten.
+* Mondbezogene Spezialtexte, Darstellungsarten der: Monddaten.
+* Mondbezogene Spezialtexte, Modi:       Monddaten.
+* Monddaten und Zeiten, besondere ereignisbezogene Texte: Sonnendaten.
+* Operationen auf Datumvariablen:        Datumvariablen.
+* Operationen auf Textvariablen:         Textvariablen.
+* Regulär-Ausdruck Programmbibliotheken, unterstützte: Regulaere Ausdruecke.
+* Reguläre Ausdrücke:                    Regexp (kurz).
+* Ressourcendatei, Einträge in:          Struktur einer Ressourcendatei.
+* Sonnenbezogene Spezialtexte, Darstellungsarten der: Sonnendaten.
+* Sonnenbezogene Spezialtexte, Modi:     Sonnendaten.
+* Sonnendaten und Zeiten, besondere ereignisbezogene Texte: Sonnendaten.
+* Spezialtexte:                          Spezialtexte (kurz).
+* Spezialtexte, veraltete:               Tabelle der veralteten Spezialtexte.
+* Termineintrag, Zeilenstruktur von:     Struktur einer Ressourcendatei.
+* Textvariablen, Operationen auf:        Textvariablen.
+* Traditionelle Kurzoptionen:            Optionen.
+* Umgebungsvariablen:                    Umgebungsvariablen.
+* Unterstützte Landessprachen:           Internationalisierung.
+* Unterstützte regulär-Ausdruck Programmbibliotheken: Regulaere Ausdruecke.
+* Veraltete fest vorgegebene Datumformate: Tabelle der veralteten Datumformate.
+* Veraltete individuelle Datumformatelemente: Tabelle der veralteten Datumformatelemente.
+* Veraltete Spezialtexte:                Tabelle der veralteten Spezialtexte.
+* Verwendete Metasymbole:                Metasymbole.
+* Wahl der Landessprache:                Internationalisierung.
+* Zeilenstruktur von Termineintrag:      Struktur einer Ressourcendatei.
+

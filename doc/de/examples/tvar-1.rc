@@ -1,0 +1,19 @@
+; tvar-1.rc
+;
+$a=foo
+0 \$a:1=$a
+$c=$a
+0 \$c=$c
+$b=$c bar $a
+0 \$b=$b
+$a=bar $b baz $a booz
+0 \$a:2=$a
+$a=
+$b=0 $b $c frozz $a frozz
+$b ->Das ist \$b
+0 \$x='$x' und \$d ist nicht definiert: $d...
+$a= 0 ~ 1~2~\$3~%n~$c~\
+jetzt ist's genug!
+0 \$a=---$a---
+$a=0 \   \ \\ Und das...
+$a geht auch!

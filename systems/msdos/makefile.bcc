@@ -1,13 +1,13 @@
-#  $Id: makefile.bcc 0.14 1997/01/26 00:01:04 tom Exp $
+#  $Id: makefile.bcc 0.18 2000/03/05 00:01:08 tom Exp $
 ###############################################################################
 #
 #  Borland-C (v2.0++ ... v4.0++)
 #  Makefile to create the extended `gcal' program.
 #
-#  Copyright (C) 1994-1997      Thomas Esken            <esken@uni-muenster.de>
-#                               Im Hagenfeld 84
-#                               D-48147 M"unster
-#                               GERMANY
+#  Copyright (c) 1994-1997, 2000  Thomas Esken          <esken@uni-muenster.de>
+#                                 Im Hagenfeld 84
+#                                 D-48147 M"unster
+#                                 GERMANY
 #
 ###############################################################################
 #
@@ -122,7 +122,7 @@ INCLUDE = d:\bcc\include
 LIB = d:\bcc\lib
 #
 CC = bcc $(MODEL)
-CFLAGS = -G -M -N -O -Og -Oe -Om -Ov -Ob -Op -Oi -Z -a -d -k- -v- -y- -w+
+CFLAGS = -1- -N -O -a -d -f -k- -v- -y- -w+ -g0
 #
 LD = $(CC)
 LDFLAGS =
@@ -132,8 +132,8 @@ O = .obj
 C = .c
 H = .h
 #
-OBJA = gcal$(O) file-io$(O) hd-data$(O) hd-use$(O) help$(O) print$(O) rc-check$(O)
-OBJB = rc-insert$(O) rc-use$(O) rc-utils$(O) regexp$(O) tty$(O) utils$(O)
+OBJA = gcal$(O) file-io$(O) hd-astro$(O) hd-data$(O) hd-data1$(O) hd-use$(O) help$(O) print$(O)
+OBJB = rc-astro$(O) rc-check$(O) rc-insert$(O) rc-use$(O) rc-utils$(O) regexp$(O) tty$(O) utils$(O)
 OBJ2 = tcal$(O)
 OBJ3 = txt2gcal$(O)
 OBJ4 = gcal2txt$(O)

@@ -1,0 +1,22 @@
+; demo-3.rc
+;
+$a=%VWerktag
+$c=%i#0000$b99
+a=$bmo1
+0@a#+4 $a
+a=$bdi1
+0@a#+3 $a
+a=$bmi1
+0@a#+2 $a
+a=$bdo1
+0@a#+1 $a
+a=$bfr1
+0@a $a
+a=$bmo2
+0@a#+4 $a
+a=$bmo3
+0@a#+4 $a
+a=$bmo4
+0@a#+4 $a$c
+a=$bmo9
+0@a#+4 $a$c

@@ -1,8 +1,8 @@
-.\" $Id: tcal.1 v0.05 1997/01/02 00:00:05 tom Exp $
+.\" $Id: tcal.1 v0.08 2000/05/28 00:00:08 tom Exp $
 .\"
-.\" tcal.1:  German [n]roff source of TCAL manual page
+.\" tcal.1:  German [n]roff source of Un*x manual page
 .\"
-.\" Copyright (C) 1996, 1997 Thomas Esken
+.\" Copyright (c) 1996-1997, 2000 Thomas Esken
 .\"
 .\"
 .\" Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
@@ -24,7 +24,7 @@
 .\"
 .\"
 .\" ------------------------oOO      \\\_''/      OOo---------------------------
-.\" Thomas Esken               O     (/o-o\)     O  eMail: esken@uni-muenster.de
+.\" Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
 .\" Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 .\" D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 .\"
@@ -47,54 +47,48 @@
 .pl 11i
 .po 0
 .\"
-.TH TCAL 1 "02 Januar 1997"
+.TH TCAL 1 "28 Mai 2000"
 .SH NAME
-tcal \- startet das Gcal Programm mit dem Datum des morgigen Tages.
+Tcal \- startet das Gcal Programm mit dem Datum des morgigen Tages.
 .SH AUFRUF
-.B tcal
-[
-.I \-\-help
-|
-.I \-\-version
-] | [
-.I \-\-shift=[+|\-]Zahl
-] [
-.B Argument\&...
-] 
+.B tcal \fI[\fB\-\-help\fI | \fB\-\-version\fI] | [\fB\-\-shift=\fI[\fB+\fI|\fB\-\fI]Zahl] [Argument\&...]
 .SH BESCHREIBUNG
 .B Tcal
 ist ein Programm, welches
 .B gcal
 mit dem Datum des morgigen Tages aufruft (entspricht der
-.I \-\-shift=1
+.B \-\-shift=\fI1
+.ft R
 Option). Alle gegebenen
-.B Argumente
-werden unver"andert an das Gcal Programm "ubergeben.  Soll das Gcal Programm
-mit einem anderen Datum als dem Datum des morgigen Tages aufgerufen werden,
-so kann dieses gew"unschte Datum mittels der
-.I \-\-shift=[+|\-]Zahl
-Option vorgew"ahlt werden, wobei
-.I [+|\-]Zahl
-die Distanz an Tagen ist, die das gew"unschte Datum vom aktuellen Datum
+.I Argumente
+werden unver"andert an das Gcal Programm "ubergeben.  Soll das Gcal
+Programm mit einem anderen Datum als dem Datum des morgigen Tages
+aufgerufen werden, so kann dieses gew"unschte Datum mittels der
+.B \-\-shift=\fI[\fB+\fI|\fB\-\fI]Zahl
+.ft R
+Option vorgew"ahlt werden, wobei [\fB+\fI|\fB\-\fI]Zahl
+.ft R
+die Distanz in Tagen ist, die das gew"unschte Datum vom aktuellen Datum
 entfernt ist (funktioniert nur f"ur Gregorianische Jahre).  Die
-.I \-\-shift
+.B \-\-shift
 Option mu"s vor allen anderen
-.B Argumenten,
+.I Argumenten,
 die an das Gcal Programm "ubergeben werden, angegeben werden.  Ein
 Programmendestatus 0 bedeutet, da"s die Verarbeitung erfolgreich war,
 ein anderer Endestatus verweist auf einen Fehler w"ahrend der Verarbeitung.
 .SH OPTIONEN
 .TP
-.I \-\-help
+.B \-\-help
 Ausgabe eines Hilfetextes, der alle verf"ugbaren Optionen aufzeigt,
 sodann erfolgreiches Programmende.
 .TP
-.I \-\-version
+.B \-\-version
 Ausgabe der Versionsnummer, sodann erfolgreiches Programmende.
 .TP
-.I \-\-shift=[+|\-]Zahl
-Legt den um
-.I [+|\-]Zahl
+.B \-\-shift=\fI[\fB+\fI|\fB\-\fI]Zahl
+.ft R
+Legt den um [\fB+\fI|\fB\-\fI]Zahl
+.ft R
 vorgegebenen Versatz an Tagen bezogen auf das aktuelle Datum fest.
 .SH UMGEBUNGSVARIABLEN
 .TP
@@ -103,18 +97,18 @@ Die Umgebungsvariable
 .I GCALPROG
 enth"alt den Dateinamen des ausf"uhrbaren Gcal
 Programms, welcher von
-.B tcal
-benutzt wird, um Gcal aufzurufen. Hat Vorrang vor
+.B Tcal
+benutzt wird, um Gcal aufzurufen, und hat Vorrang vor
 dem beim Kompilationsvorgang in
 .B tcal
-eingebrannten Dateinamen
-.B gcal.
+eingebrannten Dateinamen `\fBgcal\fI'.
+.ft R
 .bp
 .SH COPYRIGHT
 .in 0
 .sp
 .B Tcal
-Copyright (C) 1995, 1996, 1997 Thomas Esken
+Copyright (c) 1995-1997, 2000 Thomas Esken
 .LP
 Diese Software erhebt keinen Anspruch auf Vollst"andigkeit,
 Verwendungsf"ahigkeit oder Korrektheit. F"ur Sch"aden (implizit
@@ -139,11 +133,11 @@ Viel Spa"s mit diesem Programm   =8^)
 .in 2
 .nf
 ------------------------oOO      \e\e\e_''/      OOo---------------------------
-Thomas Esken               O     (/o-o\e)     O  eMail: esken@uni-muenster.de
+Thomas Esken               O     (/o-o\e)     O  eMail: esken@gmx.net
 Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 D-48147 Muenster; Germany    \e____) ~ (____/    MotD : 2old2live, 2young2die
 .fi
 .SH QUERVERWEIS
 gcal(1),
 txt2gcal(1),
-gcal2txt(1)
+gcal2txt(1).

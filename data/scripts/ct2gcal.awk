@@ -1,13 +1,13 @@
-#  $Id: ct2gcal.awk 0.18 1996/09/10 00:01:08 tom Exp $
+#  $Id: ct2gcal.awk 0.19 2000/01/12 00:01:09 tom Exp $
 #
 #  ct2gcal.awk:  Very simple, slow and silly AWK script for converting
 #                  "[X]Calentool-2.3" appointments into the `gcal' format.
 #
 #
-#  Copyright (C) 1994-1996  Thomas Esken      <esken@uni-muenster.de>
-#                           Im Hagenfeld 84
-#                           D-48147 M"unster
-#                           GERMANY
+#  Copyright (c) 1994-1996, 2000  Thomas Esken      <esken@uni-muenster.de>
+#                                 Im Hagenfeld 84
+#                                 D-48147 M"unster
+#                                 GERMANY
 #
 #  This software doesn't claim completeness, correctness or usability.
 #  On principle I will not be liable for ANY damages or losses (implicit

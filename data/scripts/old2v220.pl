@@ -1,12 +1,11 @@
-#  $Id: old2v220.pl 0.03 1996/11/10 00:00:03 tom Exp $
+#  $Id: old2v220.pl 0.05 2000/01/12 00:00:05 tom Exp $
 #
 #  old2v220.pl:  Very simple, slow and silly Perl script for converting
 #                  resource files of former Gcal versions into the style
 #                  which is used by Gcal-2.20 or newer.
 #                  This means, all former `%s[DATE]' and `%e[DATE]'
 #                  special texts are converted into their according
-#                  `%i[STARTING_DATE][#[ENDING_DATE]]' equivalents,
-#                  and some new `%?' special texts are quoted.
+#                  `%i[STARTING_DATE][#[ENDING_DATE]]' equivalents.
 #
 #  *** WARNING ***
 #  This script is unable to manage `%s[DATE]' and `%e[DATE]' special texts
@@ -15,10 +14,10 @@
 #  *** WARNING ***
 #
 #
-#  Copyright (C) 1996  Thomas Esken      <esken@uni-muenster.de>
-#                      Im Hagenfeld 84
-#                      D-48147 M"unster
-#                      GERMANY
+#  Copyright (c) 1996, 2000  Thomas Esken      <esken@uni-muenster.de>
+#                            Im Hagenfeld 84
+#                            D-48147 M"unster
+#                            GERMANY
 #
 #  This software doesn't claim completeness, correctness or usability.
 #  On principle I will not be liable for ANY damages or losses (implicit
@@ -73,10 +72,6 @@ while (<>) {
     #
     # Main block.
     #
-
-    #
-    # Construct the line.
-    #
     if ($mode == 1) {
 	$is_s = 0;
 	if ($_ =~ /[^\\]+%+[sS]/) {
@@ -86,11 +81,10 @@ while (<>) {
 	if ($_ =~ /[^\\]+%+[eE]/) {
 	    $is_e = 1;
 	}
-	$is_other = 0;
-	if ($_ =~ /[^\\]+%\)/) {
-	    $is_other = 1;
-	}
-	if ($is_s == 1 || $is_e == 1 || $is_other == 1) {
+	if ($is_s == 1 || $is_e == 1) {
+	    #
+	    # Build the line.
+	    #
 	    $is_both = 0;
 	    if (($is_s == 1) && ($is_e == 1)) {
 		$is_both = 1;
@@ -112,9 +106,6 @@ while (<>) {
 		}
 		else {
 		    if ($ch eq '%') {
-			if (substr($_, $i + 1, 1) eq ')') {
-			    $line = $line . "\\";
-			}
 			if ($is_both == 1) {
 			    if (substr($_, $i + 1, 1) =~ /[sS]/) {
 				$i++;

@@ -1,0 +1,639 @@
+Dies ist gcal.info, hergestellt von Makeinfo Version 4.0 aus gcal.texi.
+
+INFO-DIR-SECTION GNU Pakete
+START-INFO-DIR-ENTRY
+* Gcal: (gcal).                        GNU Kalenderprogramm.
+* Tcal: (gcal)Aufruf von tcal.         Gcal mit morgigem Datum aufrufen.
+* Txt2gcal: (gcal)Aufruf von txt2gcal. Kalendertext zu Ressourcendatei wandeln.
+* Gcal2txt: (gcal)Aufruf von gcal2txt. Kalenderressource zu Textdatei wandeln.
+END-INFO-DIR-ENTRY
+
+Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
+auszugeben.
+
+Copyright (c) 1994-1997, 2000 Thomas Esken
+
+Diese Ausgabe ist für Gcal Version 3.00.
+
+Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
+zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
+Copyrightvermerk und diesem Genehmigungsvermerk ausgestattet sind und
+vorgenannte Vermerke erhalten bleiben.
+
+Hiermit wird die Erlaubnis erteilt, veränderte Kopien dieses Handbuchs
+wie unter den Bedingungen für wortgetreue Kopien zu erstellen und zu
+vertreiben, sofern die ausgeführten Arbeiten in Ableitung und Gesamtheit
+innerhalb der Bestimmungen eines Genehmigungsvermerks liegen und zudem
+mit diesem ausgestattet sind, welcher mit diesem hier identisch ist.
+
+Hiermit wird die Erlaubnis erteilt, wie unter den vorgenannten
+Bedingungen für veränderte Versionen Übersetzungen dieses Handbuchs in
+eine andere Sprache zu erstellen und zu vertreiben, mit der Ausnahme,
+daß dieser Genehmigungsvermerk in einer Übersetzung angegeben sein
+darf, welche von der Free Software Foundation gebilligt wird.
+
+Jedwede Vorschläge, Verbesserungen, Erweiterungen, Fehlerberichte, Geld-
+und Sachspenden, Programmieraufträge usw. sind stets willkommen.  Bitte
+senden Sie diese direkt an meine eMail Adresse <esken@gmx.net>.  Wenn
+Sie dieses Werkzeug mögen, so würde ich mich sehr über eine Postkarte
+von Ihnen freuen!
+
+------------------------oOO      \\\_''/      OOo---------------------------
+Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
+Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
+D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
+
+
+File: gcal.info,  Node: Veraltete Spezialtexte,  Next: Formatanweisung,  Prev: Spezialtexte (kurz),  Up: Top
+
+Veraltete Spezialtexte und Formatelemente
+*****************************************
+
+* Menu:
+
+* Tabelle der veralteten Spezialtexte::
+* Tabelle der veralteten Datumformatelemente::
+* Tabelle der veralteten Datumformate::
+
+Da ja Gcal 3.00 in der Lage ist, die meisten Spezialtexte, die im
+Textteil einer Ressourcendateizeile auftreten dürfen (*note
+Beschreibung aller `%?'... Spezialtexte: Spezialtexte (lang).), sowie
+die meisten Formatelemente, wie sie im Datumformattext der
+`--date-format' Option benutzt werden dürfen (*note Kalender Option
+`--date-format=de|us|gb|TEXT': x-date-format.), durch eine
+Formatanweisung besonders darzustellen, sind nun einige Spezialtexte
+bzw. Formatelemente, die hauptsächlich in den Gcal Versionen 2.20 und
+2.40 eingeführt wurden, veraltet.  Es folgen nun die vollständigen
+Tabellen aller dieser veralteten Spezialtexte bzw. Formatelemente,
+sowie deren neue Darstellung, wie sie nun von Gcal 3.00 benutzt wird.
+
+
+File: gcal.info,  Node: Tabelle der veralteten Spezialtexte,  Next: Tabelle der veralteten Datumformatelemente,  Prev: Veraltete Spezialtexte,  Up: Veraltete Spezialtexte
+
+Tabelle der veralteten Spezialtexte
+===================================
+
+In dieser Tabelle werden alle veralteten Spezialtexte gegenübergestellt,
+wie sie im Textteil einer Ressourcendateizeile auftreten dürfen (*note
+Beschreibung aller `%?'... Spezialtexte: Spezialtexte (lang).), sowie
+deren neue Darstellung, wie sie nun von Gcal 3.00 benutzt wird.
+
+*Symbolischer Name*                         *Alter Stil*      *Neuer Stil*
+
+%Vollständiger Wochentagsname               `%o'          ==  `%K'
+%3-Buchstaben Wochentagsname                `%O'          ==  `%>3#K'
+%2-Buchstaben Wochentagsname                `%K'          ==  `%>2#K'
+%Wochentagsnummer (Mon=1...Son=7)           `%S'          ==  `%W'
+%Wochentagsnummer (Mon=1...Son=7) OZA       `%I'          ==  `%>1&*W'
+%Wochentagsnummer (Mon=0...Son=6) OZA       `%J'          ==  `%>1&*E'
+%Wochentagsnummer (Son=1...Sam=7)           `%('          ==  `%I'
+%Wochentagsnummer (Son=1...Sam=7) OZA       `%<'          ==  `%>1&*I'
+%Wochentagsnummer (Son=0...Sam=6)           `%)'          ==  `%J'
+%Wochentagsnummer (Son=0...Sam=6) OZA       `%>'          ==  `%>1&*J'
+%Wochentagsnummer (Mon=1...Son=7) FLX       `%['          ==  `%S'
+%Wochentagsnummer (Mon=1...Son=7) FLX OZA   `%{'          ==  `%>1&*S'
+%Wochentagsnummer (Mon=0...Son=6) FLX       `%]'          ==  `%T'
+%Wochentagsnummer (Mon=0...Son=6) FLX OZA   `%}'          ==  `%>1&*T'
+%Tag-des-Jahres Nummer                      `%+'          ==  `%N'
+%Tag-des-Jahres Nummer +FN                  `%*'          ==  `%>03*N'
+%Tag-des-Jahres Nummer OZA                  `%&'          ==  `%>1&*N'
+%Tag-des-Jahres Nummer +FN OZA              `%#'          ==  `%>03&*N'
+%Tagesnummer +FN                            `%N'          ==  `%>02*D'
+%Tagesnummer OZA                            `%s'          ==  `%>1&*D'
+%Tagesnummer +FN OZA                        `%u'          ==  `%>02&*D'
+%Vollständiger Monatsname                   `%M'          ==  `%U'
+%3-Buchstaben Monatsname                    `%T'          ==  `%>3#U'
+%Monatsnummer                               `%U'          ==  `%M'
+%Monatsnummer +FN                           `%W'          ==  `%>02*M'
+%Monatsnummer OZA                           `%z'          ==  `%>1&*M'
+%Monatsnummer +FN OZA                       `%Z'          ==  `%>02&*M'
+%Vollständige Jahresnummer +FN              `%='          ==  `%>04*Y'
+%Alterswert (Geburtstag)                    `%b'          ==  `%B'
+%Alterswert (Geburtstag) OZA                `%B'          ==  `%>1&*B'
+%Mondphasentext                             `%-'          ==  `%O'
+%Mondphasentext +FN                         `%_'          ==  `%>03*O'
+%Mondphasen-Textgrafik                      `%:'          ==  `%Z'
+
+Legende:
+
++FN  ==   Mit führender Null bzw. führenden Nullen
+FLX  ==   Flexibler Starttag der Woche (*note Kalender Option
+          `--starting-day=ARGUMENT': x-starting-day.)
+OZA  ==   Mit Ordnungszahlanhang
+
+
+File: gcal.info,  Node: Tabelle der veralteten Datumformatelemente,  Next: Tabelle der veralteten Datumformate,  Prev: Tabelle der veralteten Spezialtexte,  Up: Veraltete Spezialtexte
+
+Tabelle der veralteten Datumformatelemente
+==========================================
+
+In dieser Tabelle werden alle veralteten Datumformatelemente
+gegenübergestellt, wie sie im individuellen Datumformattext der
+`--date-format' Option benutzt werden dürfen (*note Kalender Option
+`--date-format=de|us|gb|TEXT': x-date-format.), sowie deren neue
+Darstellung, wie sie nun von Gcal 3.00 benutzt wird.
+
+*Symbolischer Name*                  *Alter Stil*      *Neuer Stil*
+
+%Tagesnummer                         `%d'          ==  `%>02*D'
+%Tagesnummer +FL                     `%D'          ==  `%>2*D'
+%Tagesnummer +FN OZA                 `%u'          ==  `%02&*D'
+%Tagesnummer +FL OZA                 `%U'          ==  `%>2&*D'
+%Vollständiger Monatsname            `%B'          ==  `%U'
+%3-Buchstaben Monatsname             `%b'          ==  `%<3#U'
+%Monatsnummer +FN                    `%m'          ==  `%>02*M'
+%Monatsnummer +FL                    `%M'          ==  `%>2*M'
+%Vollständige Jahresnummer +FN       `%y'          ==  `%>04*Y'
+%Vollständige Jahresnummer +FL       `%Y'          ==  `%>4*Y'
+%Letzte-2-Ziffern Jahresnummer +FN   `%z'          ==  `%>02#Y'
+%Letzte-2-Ziffern Jahresnummer +FL   `%Z'          ==  `%>2#Y'
+%Vollständiger Wochentagsname        `%A'          ==  `%K'
+%3-Buchstaben Wochentagsname         `%W'          ==  `%<3#K'
+%2-Buchstaben Wochentagsname         `%w'          ==  `%<2#K'
+
+Legende:
+
++FN  ==   Mit führender Null bzw. führenden Nullen
++FL  ==   Mit führendem Leerzeichen bzw. führenden Leerzeichen
+OZA  ==   Mit Ordnungszahlanhang
+
+
+File: gcal.info,  Node: Tabelle der veralteten Datumformate,  Prev: Tabelle der veralteten Datumformatelemente,  Up: Veraltete Spezialtexte
+
+Tabelle der veralteten Datumformate
+===================================
+
+In dieser Tabelle werden alle veralteten Datumformattexte
+gegenübergestellt, wie sie in den festen Vorgaben der
+landesspezifischen Datumformate der `--date-format' Option für deutsche
+Benutzer, US amerikanische Benutzer und Benutzer in Großbritannien
+benutzt werden dürfen (*note Kalender Option
+`--date-format=de|us|gb|TEXT': x-date-format.), sowie deren neue
+Darstellung, wie sie nun von Gcal 3.00 benutzt wird.
+
+*CC*    *Alter Stil*               *Neuer Stil*
+
+DE      `%w,  %1%D%2 %b %y'    ==  `%<2#K,  %1%>2*D%2 %<3#U %>04*Y'
+US      `%W, %b  %1%U%2 %y'    ==  `%<3#K, %<3#U  %1%>2&*D%2 %>04*Y'
+GB      `%W,  %1%U%2 %b %y'    ==  `%<3#K,  %1%>2&*D%2 %<3#U %>04*Y'
+
+
+File: gcal.info,  Node: Formatanweisung,  Next: Kodierschema,  Prev: Veraltete Spezialtexte,  Up: Top
+
+Formatanweisung
+***************
+
+Gcal 3.00 ist in der Lage, Textvariablen, Spezialtexte und Datumformate
+in sehr komfortabler und einheitlicher Weise mittels einer
+Formatanweisung besonders darzustellen.
+
+Es folgt nun die Beschreibung der Komponenten der Formatanweisung, die
+im weiteren Kontext mit FORMAT bezeichnet wird.  Die Schablone einer
+Formatanweisung lautet generell:
+
+     AUSRICHTUNG [VORZEICHEN] [NULL] BREITE [STIL] [ANHANG] FORMAT
+
+Wird ein FORMAT nach der hier dargestellten Schablone benutzt, so
+müssen dessen Komponenten in der hier vorgegebenen Reihenfolge angegeben
+werden, wobei natürlich die Angabe der mit `[ ]' umklammerten
+Komponenten optional ist, also erfolgen kann oder nicht.  Die einzelnen
+Komponenten der Formatanweisung setzen sich wie folgt zusammen:
+
+*Zeichen*   *Beschreibung der Komponenten*
+
+            AUSRICHTUNG-Gruppe (genau ein Mitglied muß definiert werden):
+`<'         Feldinhalt linksbündig stellen im Feld der Breite BREITE
+`:'         Feldinhalt mittig stellen im Feld der Breite BREITE
+`>'         Feldinhalt rechtsbündig stellen im Feld der Breite BREITE
+
+            VORZEICHEN (darf definiert werden):
+`+'         Numerischen Wert mit führendem Vorzeichen ausstatten
+
+            NULL (darf definiert werden):
+`0'         Numerischen Wert mit führender Null bzw. führenden Nullen
+            auffüllen
+
+            BREITE (muß definiert werden):
+N           Feld hat die Breite N (derzeit im Bereich 1...256)
+
+            STIL-Gruppe (genau ein Mitglied darf definiert werden):
+`u'         Feldinhalt in Großbuchstaben umwandeln
+`l'         Feldinhalt in Kleinbuchstaben umwandeln
+`w'         Feldinhalt in Wortgroßschreibung umwandeln
+
+            ANHANG (darf definiert werden):
+`&'         Numerischen Wert mit Ordnungszahlanhang ausstatten
+
+            FORMAT-Gruppe (genau ein Mitglied muß definiert werden):
+`*'         Feldinhalt wird nicht nach Position BREITE abgeschnitten
+`#'         Feldinhalt wird nach Position BREITE abgeschnitten
+
+Falls eine angegebene BREITE-Komponente größer 256, aber kleiner gleich
+999 ist, so wird eine Feldbreite von 256 angenommen.  Wenn aber eine
+BREITE-Komponente Null ist, so wird die Interpretationsphase von Gcal
+unterbrochen, so daß das vollständige FORMAT nicht mehr weiter
+ausgewertet wird, und dadurch wird es ausgegeben bzw. zugewiesen wie es
+ist.  Das gleiche passiert, wenn eine Komponente fehlerhaft geschrieben
+oder in der falschen Reihenfolge angegeben wird, oder eine der
+benötigten Komponenten gar nicht angegeben wird.
+
+Ferner wird bei der Angabe einer STIL-Komponente nicht zwischen Groß-
+und Kleinschreibung unterschieden.  *Note Kalender Option
+`--translate-string=TEXT': x-translate-string, für weitere Anmerkungen
+wie die STIL-Komponente richtig benutzt wird.
+
+
+File: gcal.info,  Node: Kodierschema,  Next: Umgebungsvariablen,  Prev: Formatanweisung,  Up: Top
+
+Kodierschema
+************
+
+* Menu:
+
+* Kodierschema Tabelle 1::
+* Kodierschema Tabelle 2::
+
+Es folgt nun die tabellarische Aufstellung des Kodierschemas, welches
+für den _Datumteil_ (JJJJ...) einer Zeile der Ressourcendatei verwendet
+werden kann, und der Modifizierer, welche die Kurzoption `-c|C[]'
+annehmen darf, bzw. die Argumente, welche die Langoption
+`--period-of-fixed-dates=ARGUMENT' annehmen darf.  Aus diesen Tabellen
+kann ersehen werden, welche _Terminargumente_ mit welchem _Datumteil_
+einer Zeile der Ressourcendatei korrespondieren, d.h. bei Anwahl eines
+_Terminarguments_ berücksichtigt werden; da Gcal eben nicht alle
+vorhandenen Einträge in einer Ressourcendatei berücksichtigt, sondern
+nur solche, die in einem bestimmten Verhältnis zum _Terminargument_
+stehen, und somit die Ausgabe überflüssiger Informationen verhindert
+wird.  *Note Termin Option `--period-of-fixed-dates=ARGUMENT':
+x-period-of-fixed-dates, für weitere Details.
+
+_Datumteil_ JJJJ...:
+
+JJJJ
+     steht für jede Jahreszahl (`0001...9999').
+
+MM
+     steht für jede Monatszahl (`01...12' oder `99') bzw.  jeden
+     Monatsnamen im 3-Buchstaben Kurzformat (`Jan', `Feb'...).
+
+TT
+     steht für jede Tageszahl (`01...28', `29', `30', `31' oder `99').
+
+WWW
+     steht für jeden Wochentagsnamen im 2...3-Buchstaben Kurzformat
+     (`Mon...Son').
+
+?
+     steht für jeden Einzelbuchstaben des Alphabets (Groß- bzw.
+     Kleinbuchstaben werden nicht unterschieden).
+
+N
+     steht für jede positive Ganzzahl (eine oder mehrere Ziffern).
+
+
+File: gcal.info,  Node: Kodierschema Tabelle 1,  Next: Kodierschema Tabelle 2,  Prev: Kodierschema,  Up: Kodierschema
+
+Kodierschema Tabelle 1
+======================
+
+In dieser Tabelle werden alle möglichen Kodierungen von einem Datum im
+_Datumteil_ einer Ressourcendatei mit allen dazu möglichen Kodierungen
+der Modifizierer der Kurzoption `-c|C[]' gegenübergestellt.
+
+*Bitte beachten:*
+Die `-c', `-ct', `-cNd', `-c*d|wN[WWW]', `-c@?[[+|-]N[WWW]]', `-cMMTT'
+und `-cMMWWWN' Optionen berücksichtigen *alle* Kodiervariationen des
+_Datumteils_!
+
+*Datumteil*               *Kurzoption `-c|C[]'*
+
+`00000000'                `-cN+|-'
+`000000TT'                `-cNw|+|-', `-cw[+|-]', `-cm[+|-]'
+`0000MM00'                `-cN+|-'
+`0000MMTT'                `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]',
+                          `-clNd|w|+|-', `-cl*d|wN[WWW]',
+                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'
+`JJJJ0000'                `-cN+|-'
+`JJJJ00TT'                `-cNw|+|-', `-cw[+|-]', `-cm[+|-]'
+`JJJJMM00'                `-cN+|-'
+`JJJJMMTT'                `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]',
+                          `-clNd|w|+|-', `-cl*d|wN[WWW]',
+                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'
+`000000WWWN'              `-cNw|+|-', `-cw[+|-]', `-cm[+|-]'
+`0000MMWWWN'              `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]',
+                          `-clNd|w|+|-', `-cl*d|wN[WWW]',
+                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'
+`JJJJ00WWWN'              `-cNw|+|-', `-cw[+|-]', `-cm[+|-]'
+`JJJJMMWWWN'              `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]',
+                          `-clNd|w|+|-', `-cl*d|wN[WWW]',
+                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'
+`0000*dN[WWW]'            `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]',
+                          `-clNd|w|+|-', `-cl*d|wN[WWW]',
+                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'
+`JJJJ*dN[WWW]'            `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]',
+                          `-clNd|w|+|-', `-cl*d|wN[WWW]',
+                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'
+`0000*wN[WWW]'            `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]',
+                          `-clNd|w|+|-', `-cl*d|wN[WWW]',
+                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'
+`JJJJ*wN[WWW]'            `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]',
+                          `-clNd|w|+|-', `-cl*d|wN[WWW]',
+                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'
+`0000@?[+|-]N[WWW]'       `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]',
+                          `-clNd|w|+|-', `-cl*d|wN[WWW]',
+                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'
+`JJJJ@?[+|-]N[WWW]'       `-cNw|+|-', `-cw[+|-]', `-cm[+|-]', `-cy[+|-]',
+                          `-clNd|w|+|-', `-cl*d|wN[WWW]',
+                          `-cl@?[[+|-]N[WWW]]', `-clMMTT', `-clMMWWWN'
+
+
+File: gcal.info,  Node: Kodierschema Tabelle 2,  Prev: Kodierschema Tabelle 1,  Up: Kodierschema
+
+Kodierschema Tabelle 2
+======================
+
+In dieser Tabelle werden alle möglichen Kodierungen der Modifizierer der
+Kurzoption `-c|C[]' mit allen dazu möglichen Kodierungen von einem
+Datum im _Datumteil_ einer Ressourcendatei gegenübergestellt.
+
+*Kurzoption `-c|C[]'*     *Datumteil*
+
+`-c'                      
+`-ct'                     
+`-cNd|+|-'                
+`-cMMTT'                  
+`-cMMWWWN'                
+`-c*d|wN[WWW]'            
+`-c@?[[+|-]N[WWW]]'       `00000000', `0000MM00', `JJJJ0000', `JJJJMM00',
+                          `000000TT', `0000MMTT', `JJJJ00TT', `JJJJMMTT',
+                          `000000WWWN', `0000MMWWWN', `JJJJ00WWWN',
+                          `JJJJMMWWWN', `0000*dN', `0000*dNWWW',
+                          `JJJJ*dN', `JJJJ*dNWWW', `0000*wN',
+                          `0000*wNWWW', `JJJJ*wN', `JJJJ*wNWWW',
+                          `0000@?[+|-]N', `0000@?[+|-]NWWW',
+                          `JJJJ@?[+|-]N', `JJJJ@?[+|-]NWWW'
+`-cNw'                    
+`-cw[+|-]'                `000000TT', `0000MMTT', `JJJJ00TT', `JJJJMMTT',
+                          `000000WWWN', `0000MMWWWN', `JJJJ00WWWN',
+                          `JJJJMMWWWN', `0000*dN', `0000*dNWWW',
+                          `JJJJ*dN', `JJJJ*dNWWW', `0000*wN',
+                          `0000*wNWWW', `JJJJ*wN', `JJJJ*wNWWW',
+                          `0000@?[+|-]N', `0000@?[+|-]NWWW',
+                          `JJJJ@?[+|-]N', `JJJJ@?[+|-]NWWW'
+`-cm[+|-]'                `000000TT', `0000MMTT', `JJJJ00TT', `JJJJMMTT',
+                          `000000WWWN', `0000MMWWWN', `JJJJ00WWWN',
+                          `JJJJMMWWWN', `0000*dN', `0000*dNWWW',
+                          `JJJJ*dN', `JJJJ*dNWWW', `0000*wN',
+                          `0000*wNWWW', `JJJJ*wN', `JJJJ*wNWWW',
+                          `0000@?[+|-]N', `0000@?[+|-]NWWW',
+                          `JJJJ@?[+|-]N', `JJJJ@?[+|-]NWWW'
+`-cy[+|-]'                
+`-clNd|w|+|-'             
+`-clMMTT'                 
+`-clMMWWWN'               
+`-cl*d|wN[WWW]'           
+`-cl@?[[+|-]N[WWW]]'      `0000MMTT', `JJJJMMTT', `0000MMWWWN',
+                          `JJJJMMWWWN', `0000*dN', `0000*dNWWW',
+                          `JJJJ*dN', `JJJJ*dNWWW', `0000*wN',
+                          `0000*wNWWW', `JJJJ*wN', `JJJJ*wNWWW',
+                          `0000@?[+|-]N', `0000@?[+|-]NWWW',
+                          `JJJJ@?[+|-]N', `JJJJ@?[+|-]NWWW'
+
+
+File: gcal.info,  Node: Umgebungsvariablen,  Next: Fehlerkodes,  Prev: Kodierschema,  Up: Top
+
+Umgebungsvariablen
+******************
+
+Hier ist eine Liste aller Umgebungsvariablen, die von Gcal benutzt
+werden:
+
+`GCAL'
+`GCAL_OPT'
+     Argumente, die an das Gcal Programm automatisch übergeben werden.
+
+`GCAL_COLUMNS'
+`COLUMNS'
+     Setzt die Anzahl der Spalten des Bildschirms.  Hat Vorrang vor der
+     Anzahl der Spalten, welche die `TERM' Umgebungsvariable oder das
+     System selbst definiert.
+
+`GCAL_DATE_FORMAT'
+     Enthält den Datumformattext, der die Anordnung von einem
+     auszugebenden Datum bestimmt.  Hat Vorrang vor dem
+     Grundeinstellungs-Datumformattext.
+
+`GCAL_LINES'
+`LINES'
+     Setzt die Anzahl der Zeilen des Bildschirms.  Hat Vorrang vor der
+     Anzahl der Zeilen, welche die `TERM' Umgebungsvariable oder das
+     System selbst definiert.
+
+`GCAL_SYS_DATADIR'
+     Name eines Dateiverzeichnisses absolut zum _Wurzel_/$PREFIX
+     Dateiverzeichnis, in welchem der Systemadministrator allgemeine
+     bzw.  _öffentliche_ Ressourcendateien (Termindateien) speichert.
+
+`GCAL_USR_DATADIR'
+     Name eines Dateiverzeichnisses relativ zum `HOME' Dateiverzeichnis,
+     in welchem der Benutzer seine persönlichen bzw. _privaten_
+     Ressourcendateien (Termindateien) speichert.  Hat Vorrang vor
+     `GCAL_SYS_DATADIR'.
+
+`GCALANSI'
+     Wenn definiert oder gesetzt, so werden ANSI
+     Escape-Hervorhebungssequenzen als Grundeinstellung benutzt bzw.
+     ergänzt, falls keine anderen Hervorhebungssequenzen mittels
+     Kommandozeilenoption definiert werden oder in der Termcap
+     Bibliotheksdatei aufgefunden werden.
+
+`GCALPATH'
+     Durch (`:') Doppelpunkt separierte Liste von Dateiverzeichnissen,
+     welche durchsucht werden, um die `.gcalrc' Datei zu finden.  Hat
+     Vorrang vor `HOME', `GCAL_USR_DATADIR' und `GCAL_SYS_DATADIR'.
+
+`GCALPROG'
+     Enthält den Dateinamen des ausführbaren Gcal Programms, welcher vom
+     Tcal Programm benutzt wird, um das Gcal Programm aufzurufen.  Hat
+     Vorrang vor dem beim Kompilationsvorgang in das Tcal Programm
+     eingebrannten Dateinamen `gcal'.  Die `GCALPROG' Umgebungsvariable
+     muß immer dann gesetzt werden, wenn das Gcal Programm unter einem
+     anderen Namen als dem Standardnamen `gcal' installiert ist, da
+     Tcal sonst das Gcal Programm nicht automatisch ausführen kann!
+
+`HOME'
+     Name des Heimatverzeichnisses des Benutzers.  Dieses wird benutzt,
+     um die `.gcalrc' Datei zu finden.  Hat Vorrang vor
+     `GCAL_USR_DATADIR' und `GCAL_SYS_DATADIR'.
+
+`LANGUAGE'
+     Die Landessprache und sonstige kulturspezifische Konventionen, die
+     Gcal zur Laufzeit verwenden soll.  Hat Vorrang vor `LC_ALL',
+     `LC_MESSAGES' und `LANG'.
+
+`LC_ALL'
+     Die Landessprache und sonstige kulturspezifische Konventionen, die
+     Gcal zur Laufzeit verwenden soll.  Hat Vorrang vor `LC_MESSAGES'
+     und `LANG'.
+
+`LC_MESSAGES'
+     Die Landessprache und sonstige kulturspezifische Konventionen, die
+     Gcal zur Laufzeit verwenden soll.  Hat Vorrang vor `LANG'.
+
+`LANG'
+     Die Landessprache und sonstige kulturspezifische Konventionen, die
+     Gcal zur Laufzeit verwenden soll.
+
+`LOGNAME'
+     Die Postadresse, an welche die von Gcal erzeugte Ausgabe versandt
+     wird.  *Note Globale Option `--mail[=ADRESSE]': x-mail, für
+     weitere Details.
+
+`MAILPROG'
+     Der Name des Mailprogramms, das verwendet wird, wenn Postversand
+     der von Gcal erzeugten Ausgabe gewünscht wird.  Hat Vorrang vor
+     dem beim Kompilationsvorgang in das Gcal Programm eingebrannten
+     Dateinamen `mail'.  *Note Globale Option `--mail[=ADRESSE]':
+     x-mail, für weitere Details.
+
+`MAILTO'
+     Die Postadresse, an welche die von Gcal erzeugte Ausgabe versandt
+     wird.  Hat Vorrang vor `USER' und `LOGNAME'.  *Note Globale Option
+     `--mail[=ADRESSE]': x-mail, für weitere Details.
+
+`PAGER'
+     Der Name des externen Paginiererprogramms, das verwendet wird, wenn
+     Paginierung gewünscht wird.  *Note Globale Option `--pager':
+     x-pager, für weitere Details.
+
+`PATH'
+     Durch (`:') Doppelpunkt separierte Liste von Dateiverzeichnissen,
+     welche durchsucht werden, um das externe Paginiererprogramm zu
+     finden.  *Note Globale Option `--pager': x-pager, für weitere
+     Details.
+
+`TERM'
+     Der Terminaltyp, auf dem das Gcal Programm zum Ablauf kommt.
+
+`TXT2GCALPROG'
+     Enthält den Dateinamen des ausführbaren Txt2gcal Programms,
+     welcher vom Gcal Programm benutzt wird, um das Txt2gcal Programm
+     aufzurufen.  Hat Vorrang vor dem beim Kompilationsvorgang in das
+     Gcal Programm eingebrannten Dateinamen `txt2gcal'.  Die
+     `TXT2GCALPROG' Umgebungsvariable muß immer dann gesetzt werden,
+     wenn das Txt2gcal Programm unter einem anderen Namen als dem
+     Standardnamen `txt2gcal' installiert ist, da Gcal sonst das
+     Txt2gcal Programm nicht automatisch ausführen kann!  *Note
+     Textvariablen::, für weitere Details.
+
+`TZ'
+     Die Zeitzoneninformation, mit dem der Datumtext in versandten
+     eMails, erzeugten Anwortdateien und erzeugten shell script Dateien
+     versehen wird.
+
+`USER'
+     Die Postadresse, an welche die von Gcal erzeugte Ausgabe versandt
+     wird.  Hat Vorrang vor `LOGNAME'.  *Note Globale Option
+     `--mail[=ADRESSE]': x-mail, für weitere Details.
+
+
+File: gcal.info,  Node: Fehlerkodes,  Next: Glossar,  Prev: Umgebungsvariablen,  Up: Top
+
+Fehlerkodes
+***********
+
+Gcal erzeugt folgende _exit-Kodes_:
+
+`127'
+     Hilfeseite, Softwarelizenz bzw. Versionsnummer angefordert
+     (einstellbar).
+
+`126'
+     Unzulässige Option bei Programmaufruf.
+
+`125'
+     Jahr außerhalb zulässigen Bereichs bei Ermittlung des
+     Ostersonntags.
+
+`124'
+     Virtueller Speicher erschöpft.
+
+`123'
+     Unzulässiger Datumeintrag in Ressourcen- bzw. Einfügedatei.
+
+`122'
+     Ungültiger Monatseintrag in Ressourcen- bzw. Einfügedatei.
+
+`121'
+     Ungültiger Tageseintrag in Ressourcen- bzw. Einfügedatei.
+
+`120'
+     Mißgebildete _#include_ Anweisung in Ressourcen- bzw.
+     Einfügedatei.
+
+`119'
+     Unzulässige rekursive/zyklische _#include_ Anweisung in Ressourcen-
+     bzw. Einfügedatei.
+
+`118'
+     Ressourcen- bzw. Einfügedatei nicht gefunden.
+
+`117'
+     Ungültiges N'ter Wochentagsfeld (nur `1...5' oder `9' erlaubt).
+
+`116'
+     Fehlendes _whitespace_ Trennzeichen zwischen _Datumteil_ und
+     _Textteil_.
+
+`115'
+     Antwortdatei bzw. shell script kann nicht geschrieben werden.
+
+`114'
+     Illegale Datumvariablen-Operation.
+
+`113'
+     Datumvariable undefiniert.
+
+`112'
+     Zuweisung von ungültigem Datumwert an Datumvariable.
+
+`111'
+     Versenden der Ausgabe an eMail Adresse hat versagt.
+
+`110'
+     Interner Fehler, C Funktion pipe(), fork(), exec*() oder unlink()
+     hat versagt.
+
+`109'
+     Fehler beim Lesen der Ressourcen-, Einfüge- bzw. Antwortdatei
+     aufgetreten.
+
+`108'
+     Illegales Zeichen in Antwortdatei vorgefunden.
+
+`107'
+     Interner Fehler, ungültiger Wert für die Größe einer internen
+     Tabelle aufgetreten.
+
+`106'
+     Ungültiger Datumformattext angegeben.
+
+`105'
+     Illegale Textvariablen-Definition.
+
+`104'
+     Ungültiges regulär-Ausdruck Suchmuster angegeben.
+
+`3'
+     Programmabbruch durch Signal.
+
+`2'
+     _Exit-Kode_ ungleich Null bei Kommandoausführung aufgetreten.
+
+`1'
+     Keine Ausgabe von Terminen obwohl Option `-c|C[]',
+     `-f|F DATEINAME[+...]' oder `-# ZEILE' aktiviert.
+
+`0'
+     Fehlerfreier Programmlauf.
+

@@ -1,12 +1,12 @@
-#  $Id: Makefile.in 0.39 1997/06/25 00:03:09 tom Exp $
+#  $Id: Makefile.in 0.50 2000/05/30 00:05:00 tom Exp $
 ###############################################################################
 #
 #  Generic Makefile to manage all Gcal targets.
 #
-#  Copyright (C) 1994-1997      Thomas Esken            <esken@uni-muenster.de>
-#                               Im Hagenfeld 84
-#                               D-48147 M"unster
-#                               GERMANY
+#  Copyright (c) 1994-1997, 2000  Thomas Esken          <esken@uni-muenster.de>
+#                                 Im Hagenfeld 84
+#                                 D-48147 M"unster
+#                                 GERMANY
 #
 ###############################################################################
 #
@@ -21,21 +21,28 @@ srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
 
+top_builddir = .
+
 @SET_MAKE@
+
+doclang = @doclang@
+
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
 
 SHAR = @SHAR@
 ZIP = @ZIP@
 ZOO = @ZOO@
 LHA = @LHA@
 TAR = @TAR@
-GZIP = @GZIP@
+
+Gzip = @GZIP@
 COMPRESS = @COMPRESS@
 
-X=
-# For OS/2 or MSDOS, use: X=.exe
+AWK = @AWK@
+PERL = @PERL@
 
-O=.o
-# For OS/2 or MSDOS, use: O=.obj
+CP = @CP@
 
 #### End of system configuration section. ####
 
@@ -44,6 +51,9 @@ O=.o
 #### Start of package specific make variable definition section. ####
 
 SHELL = /bin/sh
+
+# Extension (not including `.') for the installed manual page file names.
+manext = 1
 
 #
 # Compressor/archiver flags.
@@ -62,14 +72,14 @@ COMPRESSFLAGS = -c
 DISTBINPERMS = 0777
 DISTSRCPERMS = 0666
 #
-# File owner permissions used for installdates targets and
-# for resetting the permissions after running a distribution target.
+# File owner permissions used for the installdata and installdates target
+# and for resetting the permissions after running a distribution target.
 #
-BINPERMS = `echo $(INSTALL_PROGRAM) | sed -e 's/[^0-9]//g'`
-SRCPERMS = `echo $(INSTALL_DATA) | sed -e 's/[^0-9]//g'`
+BINPERMS = `echo $(INSTALL_PROGRAM) | sed -e 's,^.*/,,' -e 's/[^0-9]//g'`
+SRCPERMS = `echo $(INSTALL_DATA) | sed -e 's,^.*/,,' -e 's/[^0-9]//g'`
 #
-# File owner permissions used for installdates targets and
-# for resetting the permissions after running a distribution target
+# File owner permissions used for installdata and installdates target
+# and for resetting the permissions after running a distribution target
 # if the configure script doesn't set $(BINPERMS) or $(SRCPERMS).
 #
 BINPERMS2 = 0755
@@ -79,101 +89,534 @@ SRCPERMS2 = 0644
 # Standard names.
 #
 
-srcDIR = src#
-SRCS = $(srcDIR)/gcal.c $(srcDIR)/file-io.c $(srcDIR)/hd-data.c \
-  $(srcDIR)/hd-use.c $(srcDIR)/help.c $(srcDIR)/print.c \
-  $(srcDIR)/rc-check.c $(srcDIR)/rc-insert.c $(srcDIR)/rc-use.c \
-  $(srcDIR)/rc-utils.c $(srcDIR)/regexp.c $(srcDIR)/tty.c \
-  $(srcDIR)/utils.c \
-  $(srcDIR)/tcal.c $(srcDIR)/txt2gcal.c $(srcDIR)/gcal2txt.c
-
-HDRS = $(srcDIR)/gcal.h $(srcDIR)/defines.h $(srcDIR)/tailor.h \
-  $(srcDIR)/regexp.h
-
-genFILES = ABOUT-NLS ATTENTION BUGS COPYING DISCLAIM HISTORY \
-  INSTALL LIMITATIONS NEWS README SYMBOLS THANKS TODO MANIFEST \
-  Makefile.in configure.in stamp-h.in acconfig.h config.hin \
-  aclocal.m4 $(srcDIR)/Makefile.in $(SRCS) $(HDRS)
-
-shellscriptFILES = configure install-inf.in install-sh mkinstalldirs
-
 dataDIR = data#
-dataREADMEFILE = $(dataDIR)/README
-dataGCALRCFILE = $(dataDIR)/gcalrc
-dataEXAMPLEFILES = $(dataDIR)/ansipic.rc $(dataDIR)/textpic.rc \
-  $(dataDIR)/meteoric.rc
-dataMISCFILES = $(dataDIR)/Makefile.in \
-  $(dataREADMEFILE) $(dataGCALRCFILE) $(dataEXAMPLEFILES)
 
-datascriptDIR = $(dataDIR)/scripts#
-datascriptFILES = $(datascriptDIR)/cal2gcal.awk $(datascriptDIR)/cal2gcal.pl \
-  $(datascriptDIR)/ct2gcal.awk $(datascriptDIR)/ct2gcal.pl \
-  $(datascriptDIR)/old2v220.awk $(datascriptDIR)/old2v220.pl
+dataREADMEFILE = \
+  $(dataDIR)/README
+dataGCALRCFILE = \
+  $(dataDIR)/gcalrc
+dataEXAMPLEFILES = \
+  $(dataDIR)/ansipic.rc \
+  $(dataDIR)/birthday.rc \
+  $(dataDIR)/bkk.rc \
+  $(dataDIR)/de-mdata.rc \
+  $(dataDIR)/de-sdata.rc \
+  $(dataDIR)/mdata.rc \
+  $(dataDIR)/meteoric.rc \
+  $(dataDIR)/ms.rc \
+  $(dataDIR)/sdata.rc \
+  $(dataDIR)/sun-moon.rc \
+  $(dataDIR)/textpic.rc \
+  $(dataDIR)/wloc.rc \
+  $(dataDIR)/wtt1.rc \
+  $(dataDIR)/wtt2.rc \
+  $(dataDIR)/wtt3.rc
+dataMISCFILES = \
+  $(dataDIR)/Makefile.in \
+  $(dataREADMEFILE) \
+  $(dataGCALRCFILE) \
+  $(dataEXAMPLEFILES)
 
-calendarsDIR = $(dataDIR)/calendars#
-calendarsFILES = $(calendarsDIR)/calendar.birth $(calendarsDIR)/calendar.chris \
-  $(calendarsDIR)/calendar.compu $(calendarsDIR)/calendar.histo \
-  $(calendarsDIR)/calendar.holid $(calendarsDIR)/calendar.judai \
-  $(calendarsDIR)/calendar.music $(calendarsDIR)/calendar.ushol
+datacalendarsDIR = $(dataDIR)/calendars#
+datacalendarsFILES = \
+  $(datacalendarsDIR)/calendar.birth \
+  $(datacalendarsDIR)/calendar.chris \
+  $(datacalendarsDIR)/calendar.compu \
+  $(datacalendarsDIR)/calendar.histo \
+  $(datacalendarsDIR)/calendar.holid \
+  $(datacalendarsDIR)/calendar.judai \
+  $(datacalendarsDIR)/calendar.music \
+  $(datacalendarsDIR)/calendar.ushol
 
-datesDIR = $(dataDIR)/dates#
-datesFILES = $(datesDIR)/ancient $(datesDIR)/can_holiday $(datesDIR)/celtic \
-  $(datesDIR)/computing $(datesDIR)/events $(datesDIR)/events1 \
-  $(datesDIR)/events2 $(datesDIR)/events3 $(datesDIR)/events4 \
-  $(datesDIR)/events5 $(datesDIR)/events6 $(datesDIR)/gdead \
-  $(datesDIR)/hawaii $(datesDIR)/literature $(datesDIR)/lives \
-  $(datesDIR)/lives1 $(datesDIR)/lives2 $(datesDIR)/lives3 \
-  $(datesDIR)/lives4 $(datesDIR)/lives5 $(datesDIR)/lives6 $(datesDIR)/lotr \
-  $(datesDIR)/movies $(datesDIR)/music $(datesDIR)/radio $(datesDIR)/sfo \
-  $(datesDIR)/space $(datesDIR)/sports $(datesDIR)/television \
-  $(datesDIR)/usa_holiday $(datesDIR)/usa_other $(datesDIR)/usa_states \
-  $(datesDIR)/witchcraft $(datesDIR)/world
-datesMISCFILES = $(datesDIR)/CREDITS $(datesDIR)/README
+datadatesDIR = $(dataDIR)/dates#
+datadatesFILES = \
+  $(datadatesDIR)/ancient \
+  $(datadatesDIR)/can_holiday \
+  $(datadatesDIR)/celtic \
+  $(datadatesDIR)/computing \
+  $(datadatesDIR)/events \
+  $(datadatesDIR)/events1 \
+  $(datadatesDIR)/events2 \
+  $(datadatesDIR)/events3 \
+  $(datadatesDIR)/events4 \
+  $(datadatesDIR)/events5 \
+  $(datadatesDIR)/events6 \
+  $(datadatesDIR)/gdead \
+  $(datadatesDIR)/hawaii \
+  $(datadatesDIR)/literature \
+  $(datadatesDIR)/lives \
+  $(datadatesDIR)/lives1 \
+  $(datadatesDIR)/lives2 \
+  $(datadatesDIR)/lives3 \
+  $(datadatesDIR)/lives4 \
+  $(datadatesDIR)/lives5 \
+  $(datadatesDIR)/lives6 \
+  $(datadatesDIR)/lotr \
+  $(datadatesDIR)/movies \
+  $(datadatesDIR)/music \
+  $(datadatesDIR)/radio \
+  $(datadatesDIR)/sfo \
+  $(datadatesDIR)/space \
+  $(datadatesDIR)/sports \
+  $(datadatesDIR)/television \
+  $(datadatesDIR)/usa_holiday \
+  $(datadatesDIR)/usa_other \
+  $(datadatesDIR)/usa_states \
+  $(datadatesDIR)/witchcraft \
+  $(datadatesDIR)/world
+datadatesMISCFILES = \
+  $(datadatesDIR)/CREDITS \
+  $(datadatesDIR)/README
+
+datascriptsDIR = $(dataDIR)/scripts#
+datascriptsFILES = \
+  $(datascriptsDIR)/cal2gcal.awk \
+  $(datascriptsDIR)/cal2gcal.pl \
+  $(datascriptsDIR)/ct2gcal.awk \
+  $(datascriptsDIR)/ct2gcal.pl \
+  $(datascriptsDIR)/old2v220.awk \
+  $(datascriptsDIR)/old2v220.pl \
+  $(datascriptsDIR)/v2x2v300.awk \
+  $(datascriptsDIR)/v2x2v300.pl
+
+dataFILES = \
+  $(dataMISCFILES) \
+  $(datacalendarsFILES) \
+  $(datadatesMISCFILES) \
+  $(datadatesFILES) \
+  $(datascriptsFILES)
 
 docDIR = doc#
 
-manDIR = man#
-texiDIR = texi#
+docMISCFILES = \
+  $(docDIR)/2accent.awk \
+  $(docDIR)/2accent.pl \
+  $(docDIR)/GREG-REFORM \
+  $(docDIR)/ISO_3166 \
+  $(docDIR)/ISO_639 \
+  $(docDIR)/ISO_6709 \
+  $(docDIR)/calendar.faq \
+  $(docDIR)/mks1sed.in \
+  $(docDIR)/mks2sed.in \
+  $(docDIR)/mksamp.in \
+  $(docDIR)/Makefile.in \
+  $(docDIR)/texinfo.tex
 
-docMISCFILES = $(docDIR)/2accent.awk $(docDIR)/2accent.pl \
-  $(docDIR)/GREG-REFORM $(docDIR)/calendar.faq \
-  $(docDIR)/ISO_3166 $(docDIR)/ISO_639 \
-  $(docDIR)/Makefile.in $(docDIR)/texinfo.tex
+docexamplesDIR = examples#
+docmanDIR = man#
+doctexiDIR = texi#
 
 # German language (de)
 de = de#
 
-$(de)-infoFILES = $(docDIR)/$(de)/gcal.info \
-  $(docDIR)/$(de)/gcal.info-1 $(docDIR)/$(de)/gcal.info-2 \
-  $(docDIR)/$(de)/gcal.info-3 $(docDIR)/$(de)/gcal.info-4 \
-  $(docDIR)/$(de)/gcal.info-5 $(docDIR)/$(de)/gcal.info-6 \
-  $(docDIR)/$(de)/gcal.info-7 $(docDIR)/$(de)/gcal.info-8 \
-  $(docDIR)/$(de)/gcal.info-9
+doc-$(de)-MISCTEXFILES = \
+  $(docDIR)/$(de)/txi-$(de).tex
 
-$(de)-manFILES = $(docDIR)/$(de)/$(manDIR)/gcal.1 \
-  $(docDIR)/$(de)/$(manDIR)/tcal.1 $(docDIR)/$(de)/$(manDIR)/txt2gcal.1 \
-  $(docDIR)/$(de)/$(manDIR)/gcal2txt.1 
+doc-$(de)-HTMLFILES = \
+  $(docDIR)/$(de)/$(PACKAGE).html
 
-$(de)-texiFILES = $(docDIR)/$(de)/$(texiDIR)/gcal.texi
+doc-$(de)-INFOFILES = \
+  $(docDIR)/$(de)/$(PACKAGE).info \
+  $(docDIR)/$(de)/$(PACKAGE).info-1 \
+  $(docDIR)/$(de)/$(PACKAGE).info-2 \
+  $(docDIR)/$(de)/$(PACKAGE).info-3 \
+  $(docDIR)/$(de)/$(PACKAGE).info-4 \
+  $(docDIR)/$(de)/$(PACKAGE).info-5 \
+  $(docDIR)/$(de)/$(PACKAGE).info-6 \
+  $(docDIR)/$(de)/$(PACKAGE).info-7 \
+  $(docDIR)/$(de)/$(PACKAGE).info-8 \
+  $(docDIR)/$(de)/$(PACKAGE).info-9 \
+  $(docDIR)/$(de)/$(PACKAGE).info-10 \
+  $(docDIR)/$(de)/$(PACKAGE).info-11 \
+  $(docDIR)/$(de)/$(PACKAGE).info-12 \
+  $(docDIR)/$(de)/$(PACKAGE).info-13 \
+  $(docDIR)/$(de)/$(PACKAGE).info-14
 
-$(de)-txtFILES = $(docDIR)/$(de)/gcal.txt
+doc-$(de)-examplesINFILES = \
+  $(docDIR)/$(de)/$(docexamplesDIR)/bio.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/common.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/cycle-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/cycle-2.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-2.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-2a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-3.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-3a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/dvar-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/dvar-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/include.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/lbrk-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/lbrk-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/limit.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/moon.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/redir-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/redir-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/remark.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/speci-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/speci-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/sun-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/sun-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/swtim-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/swtim-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1b.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1c.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-2.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-2a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-3.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-3a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarc-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarc-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarf-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarf-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvaro-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvaro-1a.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/wspc-1.in \
+  $(docDIR)/$(de)/$(docexamplesDIR)/wspc-1a.in
+
+doc-$(de)-examplesRCFILES = \
+  $(docDIR)/$(de)/$(docexamplesDIR)/bio.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/common.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-2.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-3.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/dvar-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/include.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/lbrk-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/redir-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/remark.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/speci-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/sun-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/swtim-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-2.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-3.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarc-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarc-1a.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarf-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvaro-1.rc \
+  $(docDIR)/$(de)/$(docexamplesDIR)/wspc-1.rc
+
+doc-$(de)-examplesSHFILES = \
+  $(docDIR)/$(de)/$(docexamplesDIR)/bio.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/common.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/cycle-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/cycle-2.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-2.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-2a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-3.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-3a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/dvar-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/dvar-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/include.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/lbrk-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/lbrk-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/limit.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/moon.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/redir-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/redir-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/remark.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/speci-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/speci-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/sun-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/sun-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/swtim-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/swtim-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1b.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1c.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-2.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-2a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-3.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-3a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarc-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarc-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarf-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarf-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvaro-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvaro-1a.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/wspc-1.sh \
+  $(docDIR)/$(de)/$(docexamplesDIR)/wspc-1a.sh
+
+doc-$(de)-examplesTEXIFILES = \
+  $(docDIR)/$(de)/$(docexamplesDIR)/bio.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/common.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/cycle-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/cycle-2.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-2.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-2a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-3.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/demo-3a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/dvar-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/dvar-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/include.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/lbrk-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/lbrk-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/limit.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/moon.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/redir-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/redir-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/remark.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/speci-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/speci-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/sun-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/sun-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/swtim-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/swtim-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1b.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1c.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-2.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-2a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-3.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvar-3a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarc-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarc-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarf-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvarf-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvaro-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tvaro-1a.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/wspc-1.texi \
+  $(docDIR)/$(de)/$(docexamplesDIR)/wspc-1a.texi
+
+doc-$(de)-examplesMISCFILES = \
+  $(docDIR)/$(de)/$(docexamplesDIR)/tdemo-1.txt
+
+doc-$(de)-examplesFILES = \
+  $(doc-de-examplesINFILES) \
+  $(doc-de-examplesRCFILES) \
+  $(doc-de-examplesTEXIFILES) \
+  $(doc-de-examplesMISCFILES)
+
+doc-$(de)-manFILES = \
+  $(docDIR)/$(de)/$(docmanDIR)/$(PACKAGE).$(manext) \
+  $(docDIR)/$(de)/$(docmanDIR)/tcal.$(manext) \
+  $(docDIR)/$(de)/$(docmanDIR)/txt2gcal.$(manext) \
+  $(docDIR)/$(de)/$(docmanDIR)/gcal2txt.$(manext)
+
+doc-$(de)-texiFILES = \
+  $(docDIR)/$(de)/$(doctexiDIR)/$(PACKAGE).texi
 
 # English language (en)
 en = en#
 
-$(en)-infoFILES = $(docDIR)/$(en)/gcal.info \
-  $(docDIR)/$(en)/gcal.info-1 $(docDIR)/$(en)/gcal.info-2 \
-  $(docDIR)/$(en)/gcal.info-3 $(docDIR)/$(en)/gcal.info-4 \
-  $(docDIR)/$(en)/gcal.info-5 $(docDIR)/$(en)/gcal.info-6 \
-  $(docDIR)/$(en)/gcal.info-7 $(docDIR)/$(en)/gcal.info-8
+doc-$(en)-MISCTEXFILES = \
+  $(docDIR)/$(en)/txi-$(en).tex
 
-$(en)-manFILES = $(docDIR)/$(en)/$(manDIR)/gcal.1 \
-  $(docDIR)/$(en)/$(manDIR)/tcal.1 $(docDIR)/$(en)/$(manDIR)/txt2gcal.1 \
-  $(docDIR)/$(en)/$(manDIR)/gcal2txt.1
+doc-$(en)-HTMLFILES = \
+  $(docDIR)/$(en)/$(PACKAGE).html
 
-$(en)-texiFILES = $(docDIR)/$(en)/$(texiDIR)/gcal.texi
+doc-$(en)-INFOFILES = \
+  $(docDIR)/$(en)/$(PACKAGE).info \
+  $(docDIR)/$(en)/$(PACKAGE).info-1 \
+  $(docDIR)/$(en)/$(PACKAGE).info-2 \
+  $(docDIR)/$(en)/$(PACKAGE).info-3 \
+  $(docDIR)/$(en)/$(PACKAGE).info-4 \
+  $(docDIR)/$(en)/$(PACKAGE).info-5 \
+  $(docDIR)/$(en)/$(PACKAGE).info-6 \
+  $(docDIR)/$(en)/$(PACKAGE).info-7 \
+  $(docDIR)/$(en)/$(PACKAGE).info-8 \
+  $(docDIR)/$(en)/$(PACKAGE).info-9 \
+  $(docDIR)/$(en)/$(PACKAGE).info-10 \
+  $(docDIR)/$(en)/$(PACKAGE).info-11 \
+  $(docDIR)/$(en)/$(PACKAGE).info-12 \
+  $(docDIR)/$(en)/$(PACKAGE).info-13 \
+  $(docDIR)/$(en)/$(PACKAGE).info-14
 
-$(en)-txtFILES = $(docDIR)/$(en)/gcal.txt
+doc-$(en)-examplesINFILES = \
+  $(docDIR)/$(en)/$(docexamplesDIR)/bio.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/common.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/cycle-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/cycle-2.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-2.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-2a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-3.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-3a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/dvar-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/dvar-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/include.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/lbrk-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/lbrk-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/limit.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/moon.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/redir-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/redir-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/remark.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/speci-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/speci-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/sun-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/sun-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/swtim-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/swtim-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1b.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1c.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-2.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-2a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-3.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-3a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarc-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarc-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarf-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarf-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvaro-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvaro-1a.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/wspc-1.in \
+  $(docDIR)/$(en)/$(docexamplesDIR)/wspc-1a.in
+
+doc-$(en)-examplesRCFILES = \
+  $(docDIR)/$(en)/$(docexamplesDIR)/bio.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/common.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-2.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-3.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/dvar-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/include.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/lbrk-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/redir-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/remark.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/speci-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/sun-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/swtim-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-2.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-3.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarc-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarc-1a.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarf-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvaro-1.rc \
+  $(docDIR)/$(en)/$(docexamplesDIR)/wspc-1.rc
+
+doc-$(en)-examplesSHFILES = \
+  $(docDIR)/$(en)/$(docexamplesDIR)/bio.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/common.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/cycle-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/cycle-2.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-2.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-2a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-3.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-3a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/dvar-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/dvar-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/include.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/lbrk-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/lbrk-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/limit.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/moon.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/redir-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/redir-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/remark.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/speci-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/speci-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/sun-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/sun-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/swtim-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/swtim-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1b.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1c.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-2.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-2a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-3.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-3a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarc-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarc-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarf-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarf-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvaro-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvaro-1a.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/wspc-1.sh \
+  $(docDIR)/$(en)/$(docexamplesDIR)/wspc-1a.sh
+
+doc-$(en)-examplesTEXIFILES = \
+  $(docDIR)/$(en)/$(docexamplesDIR)/bio.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/common.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/cycle-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/cycle-2.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-2.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-2a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-3.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/demo-3a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/dvar-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/dvar-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/include.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/lbrk-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/lbrk-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/limit.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/moon.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/redir-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/redir-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/remark.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/speci-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/speci-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/sun-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/sun-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/swtim-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/swtim-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1b.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1c.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-2.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-2a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-3.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvar-3a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarc-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarc-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarf-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvarf-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvaro-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tvaro-1a.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/wspc-1.texi \
+  $(docDIR)/$(en)/$(docexamplesDIR)/wspc-1a.texi
+
+doc-$(en)-examplesMISCFILES = \
+  $(docDIR)/$(en)/$(docexamplesDIR)/tdemo-1.txt
+
+doc-$(en)-examplesFILES = \
+  $(doc-en-examplesINFILES) \
+  $(doc-en-examplesRCFILES) \
+  $(doc-en-examplesTEXIFILES) \
+  $(doc-en-examplesMISCFILES)
+
+doc-$(en)-manFILES = \
+  $(docDIR)/$(en)/$(docmanDIR)/$(PACKAGE).$(manext) \
+  $(docDIR)/$(en)/$(docmanDIR)/tcal.$(manext) \
+  $(docDIR)/$(en)/$(docmanDIR)/txt2gcal.$(manext) \
+  $(docDIR)/$(en)/$(docmanDIR)/gcal2txt.$(manext)
+
+doc-$(en)-texiFILES = \
+  $(docDIR)/$(en)/$(doctexiDIR)/$(PACKAGE).texi
 
 # French language (fr)
 fr = fr#
@@ -184,107 +627,435 @@ nl = nl#
 # Polish language (pl)
 pl = pl#
 
+# Russian language (ru)
+ru = ru#
+
 # Swedish language (sv)
 sv = sv#
 
-infoFILES = $($(de)-infoFILES) $($(en)-infoFILES)
+docMISCTEXFILES = \
+  $(doc-de-MISCTEXFILES) \
+  $(doc-en-MISCTEXFILES)
 
-manFILES = $($(de)-manFILES) $($(en)-manFILES)
+docHTMLFILES = \
+  $(doc-de-HTMLFILES) \
+  $(doc-en-HTMLFILES)
 
-texiFILES = $($(de)-texiFILES) $($(en)-texiFILES)
+docINFOFILES = \
+  $(doc-de-INFOFILES) \
+  $(doc-en-INFOFILES)
 
-txtFILES = $($(de)-txtFILES) $($(en)-txtFILES)
+docexamplesSHFILES = \
+  $(doc-de-examplesSHFILES) \
+  $(doc-en-examplesSHFILES)
 
+docexamplesFILES = \
+  $(doc-de-examplesFILES) \
+  $(doc-en-examplesFILES)
+
+docmanFILES = \
+  $(doc-de-manFILES) \
+  $(doc-en-manFILES)
+
+doctexiFILES = \
+  $(doc-de-texiFILES) \
+  $(doc-en-texiFILES)
+
+docFILES = \
+  $(docMISCFILES) \
+  $(docMISCTEXFILES) \
+  $(docexamplesFILES) \
+  $(docmanFILES) \
+  $(doctexiFILES)
 
 miscDIR = misc#
-miscFILES = $(miscDIR)/gcalltx $(miscDIR)/gcalltx.bat $(miscDIR)/gcalltx.sed \
-  $(miscDIR)/wdays $(miscDIR)/wdays.bat $(miscDIR)/wdays.sed \
-  $(miscDIR)/locale.alias $(miscDIR)/magic.add \
-  $(miscDIR)/Makefile.in $(miscDIR)/README
+
+miscdailyDIR = $(miscDIR)/daily#
+miscdailyFILES = \
+  $(miscdailyDIR)/daily.awk \
+  $(miscdailyDIR)/daily.bat \
+  $(miscdailyDIR)/daily.in \
+  $(miscdailyDIR)/daily.pl \
+  $(miscdailyDIR)/daily.rc
+
+miscddiffDIR = $(miscDIR)/ddiff#
+miscddiffFILES = \
+  $(miscddiffDIR)/ddiff.@ \
+  $(miscddiffDIR)/ddiff.bat \
+  $(miscddiffDIR)/ddiff.in \
+  $(miscddiffDIR)/ddiff1.awk \
+  $(miscddiffDIR)/ddiff1.pl \
+  $(miscddiffDIR)/ddiff2.awk \
+  $(miscddiffDIR)/ddiff2.pl \
+  $(miscddiffDIR)/ddiffdrv.awk \
+  $(miscddiffDIR)/ddiffdrv.bat \
+  $(miscddiffDIR)/ddiffdrv.in \
+  $(miscddiffDIR)/ddiffdrv.pl \
+  $(miscddiffDIR)/zone.tab
+
+miscdstDIR = $(miscDIR)/dst#
+miscdstFILES = \
+  $(miscdstDIR)/dst.awk \
+  $(miscdstDIR)/dst.in \
+  $(miscdstDIR)/dst.pl
+
+miscgcalltxDIR = $(miscDIR)/gcalltx#
+miscgcalltxFILES = \
+  $(miscgcalltxDIR)/gcalltx.bat \
+  $(miscgcalltxDIR)/gcalltx.in \
+  $(miscgcalltxDIR)/gcalltx.sed \
+  $(miscgcalltxDIR)/gcalltxp.in
+
+miscmoonDIR = $(miscDIR)/moon#
+miscmoonFILES = \
+  $(miscmoonDIR)/moon.bat \
+  $(miscmoonDIR)/moon.in \
+  $(miscmoonDIR)/moon1.awk \
+  $(miscmoonDIR)/moon2.awk
+
+miscmrmsDIR = $(miscDIR)/mrms#
+miscmrmsFILES = \
+  $(miscmrmsDIR)/mrms.awk \
+  $(miscmrmsDIR)/mrms.bat \
+  $(miscmrmsDIR)/mrms.in \
+  $(miscmrmsDIR)/mrms.pl \
+  $(miscmrmsDIR)/mrms.rc
+
+miscsrssDIR = $(miscDIR)/srss#
+miscsrssFILES = \
+  $(miscsrssDIR)/srss.awk \
+  $(miscsrssDIR)/srss.bat \
+  $(miscsrssDIR)/srss.in \
+  $(miscsrssDIR)/srss.pl \
+  $(miscsrssDIR)/srss.rc
+
+miscwlocDIR = $(miscDIR)/wloc#
+miscwlocFILES = \
+  $(miscwlocDIR)/wlocdrv.bat \
+  $(miscwlocDIR)/wlocdrv.in \
+  $(miscwlocDIR)/wlocdrv1.awk \
+  $(miscwlocDIR)/wlocdrv1.pl \
+  $(miscwlocDIR)/wlocdrv2.awk \
+  $(miscwlocDIR)/wlocdrv2.pl \
+  $(miscwlocDIR)/zone.tab
+
+miscFILES = \
+  $(miscdailyFILES) \
+  $(miscddiffFILES) \
+  $(miscdstFILES) \
+  $(miscgcalltxFILES) \
+  $(miscmoonFILES) \
+  $(miscmrmsFILES) \
+  $(miscsrssFILES) \
+  $(miscwlocFILES) \
+  $(miscDIR)/Makefile.in \
+  $(miscDIR)/README \
+  $(miscDIR)/gcalmagic.add \
+  $(miscDIR)/locale.alias \
+  $(miscDIR)/magic.add
 
 poDIR = po#
-poFILES = $(poDIR)/ChangeLog $(poDIR)/Makefile.in.in $(poDIR)/POTFILES.in \
-  $(poDIR)/$(de).po $(poDIR)/$(fr).po $(poDIR)/$(nl).po $(poDIR)/$(pl).po \
+
+poFILES = \
+  $(poDIR)/ChangeLog \
+  $(poDIR)/Makefile.in.in \
+  $(poDIR)/POTFILES.in \
+  $(poDIR)/$(de).po \
+  $(poDIR)/$(fr).po \
+  $(poDIR)/$(nl).po \
+  $(poDIR)/$(pl).po \
+  $(poDIR)/$(ru).po \
   $(poDIR)/$(sv).po
 
-poCREATFILES= $(poDIR)/gcal.pot $(poDIR)/cat-id-tbl.c $(poDIR)/stamp-cat-id \
-  $(poDIR)/$(de).gmo $(poDIR)/$(fr).gmo $(poDIR)/$(nl).gmo $(poDIR)/$(pl).gmo \
+poCREATEFILES = \
+  $(poDIR)/$(PACKAGE).pot \
+  $(poDIR)/cat-id-tbl.c \
+  $(poDIR)/stamp-cat-id \
+  $(poDIR)/$(de).gmo \
+  $(poDIR)/$(fr).gmo \
+  $(poDIR)/$(nl).gmo \
+  $(poDIR)/$(pl).gmo \
+  $(poDIR)/$(ru).gmo \
   $(poDIR)/$(sv).gmo
 
 intlDIR = intl#
-intlFILES = $(intlDIR)/ChangeLog $(intlDIR)/Makefile.in $(intlDIR)/VERSION \
-  $(intlDIR)/bindtextdom.c $(intlDIR)/cat-compat.c $(intlDIR)/dcgettext.c \
-  $(intlDIR)/dgettext.c $(intlDIR)/explodename.c $(intlDIR)/finddomain.c \
-  $(intlDIR)/gettext.c $(intlDIR)/gettext.h $(intlDIR)/gettextP.h \
-  $(intlDIR)/hash-string.h $(intlDIR)/intl-compat.c $(intlDIR)/l10nflist.c \
-  $(intlDIR)/libgettext.h $(intlDIR)/linux-msg.sed $(intlDIR)/loadinfo.h \
-  $(intlDIR)/loadmsgcat.c $(intlDIR)/localealias.c $(intlDIR)/po2tbl.sed.in \
-  $(intlDIR)/textdomain.c $(intlDIR)/xopen-msg.sed
 
-#
-#  Machine specific names.
-#
+intlFILES = \
+  $(intlDIR)/ChangeLog \
+  $(intlDIR)/Makefile.in \
+  $(intlDIR)/VERSION \
+  $(intlDIR)/bindtextdom.c \
+  $(intlDIR)/cat-compat.c \
+  $(intlDIR)/dcgettext.c \
+  $(intlDIR)/dgettext.c \
+  $(intlDIR)/explodename.c \
+  $(intlDIR)/finddomain.c \
+  $(intlDIR)/gettext.c \
+  $(intlDIR)/gettext.h \
+  $(intlDIR)/gettextP.h \
+  $(intlDIR)/hash-string.h \
+  $(intlDIR)/intl-compat.c \
+  $(intlDIR)/l10nflist.c \
+  $(intlDIR)/libgettext.h \
+  $(intlDIR)/linux-msg.sed \
+  $(intlDIR)/loadinfo.h \
+  $(intlDIR)/loadmsgcat.c \
+  $(intlDIR)/localealias.c \
+  $(intlDIR)/po2tbl.sed.in \
+  $(intlDIR)/textdomain.c \
+  $(intlDIR)/xopen-msg.sed
+
+srcDIR = src#
+
+SRCS = \
+  $(srcDIR)/file-io.c \
+  $(srcDIR)/gcal.c \
+  $(srcDIR)/hd-astro.c \
+  $(srcDIR)/hd-data.c \
+  $(srcDIR)/hd-data1.c \
+  $(srcDIR)/hd-data2.c \
+  $(srcDIR)/hd-data3.c \
+  $(srcDIR)/hd-data4.c \
+  $(srcDIR)/hd-data5.c \
+  $(srcDIR)/hd-use.c \
+  $(srcDIR)/help.c \
+  $(srcDIR)/print.c \
+  $(srcDIR)/rc-astro.c \
+  $(srcDIR)/rc-check.c \
+  $(srcDIR)/rc-insert.c \
+  $(srcDIR)/rc-use.c \
+  $(srcDIR)/rc-utils.c \
+  $(srcDIR)/regexp.c \
+  $(srcDIR)/tty.c \
+  $(srcDIR)/utils.c \
+  $(srcDIR)/gcal2txt.c \
+  $(srcDIR)/tcal.c \
+  $(srcDIR)/txt2gcal.c
+
+COMMON_HDRS = \
+  $(srcDIR)/common.h \
+  $(srcDIR)/defines.h \
+  $(srcDIR)/tailor.h
+
+GCAL_BASE_HDRS = \
+  $(srcDIR)/file-io.h \
+  $(srcDIR)/gcal.h \
+  $(srcDIR)/globals.h \
+  $(srcDIR)/hd-astro.h \
+  $(srcDIR)/hd-data.h \
+  $(srcDIR)/hd-data1.h \
+  $(srcDIR)/hd-defs.h \
+  $(srcDIR)/hd-use.h \
+  $(srcDIR)/help.h \
+  $(srcDIR)/print.h \
+  $(srcDIR)/regexp.h \
+  $(srcDIR)/tty.h \
+  $(srcDIR)/utils.h
+
+GCAL_HD_HDRS = \
+  $(srcDIR)/hd-data2.h \
+  $(srcDIR)/hd-data3.h \
+  $(srcDIR)/hd-data4.h \
+  $(srcDIR)/hd-data5.h
+
+GCAL_RC_HDRS = \
+  $(srcDIR)/rc-astro.h \
+  $(srcDIR)/rc-check.h \
+  $(srcDIR)/rc-defs.h \
+  $(srcDIR)/rc-insert.h \
+  $(srcDIR)/rc-use.h \
+  $(srcDIR)/rc-utils.h
+
+GCAL2TXT_HDRS = \
+  $(srcDIR)/gcal2txt.h
+
+TCAL_HDRS = \
+  $(srcDIR)/tcal.h
+
+TXT2GCAL_HDRS = \
+  $(srcDIR)/txt2gcal.h
+
+HDRS = \
+  $(COMMON_HDRS) \
+  $(GCAL_BASE_HDRS) \
+  $(GCAL_HD_HDRS) \
+  $(GCAL_RC_HDRS) \
+  $(GCAL2TXT_HDRS) \
+  $(TCAL_HDRS) \
+  $(TXT2GCAL_HDRS)
+
+srcFILES = \
+  $(srcDIR)/Makefile.in \
+  $(SRCS) \
+  $(HDRS)
 
 systemsDIR = systems#
 
-systemsMISCFILES = $(systemsDIR)/README
+systemsMISCFILES = \
+  $(systemsDIR)/README
 
-acornDIR = $(systemsDIR)/acorn#
-acornFILES = $(acornDIR)/readme.arm $(acornDIR)/makefile.gcc
+systemsacornDIR = $(systemsDIR)/acorn#
+systemsacornFILES = \
+  $(systemsacornDIR)/readme.arm \
+  $(systemsacornDIR)/makefile.gcc
 
-amigaDIR = $(systemsDIR)/amiga#
-amigaFILES = $(amigaDIR)/makefile.sas $(amigaDIR)/makefile.gcc
+systemsamigaDIR = $(systemsDIR)/amiga#
+systemsamigaFILES = \
+  $(systemsamigaDIR)/makefile.sas \
+  $(systemsamigaDIR)/makefile.gcc
 
-atariDIR = $(systemsDIR)/atari#
-atariFILES = $(atariDIR)/makefile.st
+systemsatariDIR = $(systemsDIR)/atari#
+systemsatariFILES = \
+  $(systemsatariDIR)/makefile.st
 
-ntDIR = $(systemsDIR)/nt#
-ntFILES = $(ntDIR)/makefile.nt
+systemsntDIR = $(systemsDIR)/nt#
+systemsntFILES = \
+  $(systemsntDIR)/makefile.nt
 
-msdosDIR = $(systemsDIR)/msdos#
-msdosFILES = $(msdosDIR)/gcal_tc2.prj $(msdosDIR)/makefile.bcc \
-  $(msdosDIR)/makefile.djg $(msdosDIR)/makefile.msc $(msdosDIR)/makefile.tc2 \
-  $(msdosDIR)/makefile.tcc $(msdosDIR)/makefile.wcc $(msdosDIR)/makefile.ztc
+systemsmsdosDIR = $(systemsDIR)/msdos#
+systemsmsdosFILES = \
+  $(systemsmsdosDIR)/makefile.bcc \
+  $(systemsmsdosDIR)/makefile.djg \
+  $(systemsmsdosDIR)/makefile.msc \
+  $(systemsmsdosDIR)/makefile.tc2 \
+  $(systemsmsdosDIR)/makefile.tcc \
+  $(systemsmsdosDIR)/makefile.wcc \
+  $(systemsmsdosDIR)/makefile.ztc
 
-os2DIR = $(systemsDIR)/os2#
-os2INTLDIR = $(os2DIR)/intl#
-os2FILES = $(os2DIR)/readme.os2 $(os2DIR)/makefile.os2 $(os2DIR)/config.h \
-  $(os2INTLDIR)/makefile.os2 $(os2INTLDIR)/gnuintl.def $(os2INTLDIR)/patches.os2
+systemsos2DIR = $(systemsDIR)/os2#
+systemsos2intlDIR = $(systemsos2DIR)/intl#
+systemsos2FILES = \
+  $(systemsos2DIR)/readme.os2 \
+  $(systemsos2DIR)/makefile.os2 \
+  $(systemsos2DIR)/config.h \
+  $(systemsos2intlDIR)/makefile.os2 \
+  $(systemsos2intlDIR)/gnuintl.def \
+  $(systemsos2intlDIR)/patches.os2
 
-primosDIR = $(systemsDIR)/primos#
-primosINCDIR = $(primosDIR)/include#
-primosFILES = $(primosDIR)/readme.pri $(primosDIR)/ci.opts \
-  $(primosDIR)/build.cpl $(primosDIR)/getenv.c $(primosINCDIR)/stdlib.h
+systemsprimosDIR = $(systemsDIR)/primos#
+systemsprimosincludeDIR = $(systemsprimosDIR)/include#
+systemsprimosFILES = \
+  $(systemsprimosDIR)/readme.pri \
+  $(systemsprimosDIR)/ci.opts \
+  $(systemsprimosDIR)/build.cpl \
+  $(systemsprimosDIR)/getenv.c \
+  $(systemsprimosincludeDIR)/stdlib.h
 
-vmsDIR = $(systemsDIR)/vms#
-vmsFILES = $(vmsDIR)/readme.vms $(vmsDIR)/makegcal.com $(vmsDIR)/makefile.gcc \
-  $(vmsDIR)/makefile.mms $(vmsDIR)/makefile.vms
+systemsvmsDIR = $(systemsDIR)/vms#
+systemsvmsFILES = \
+  $(systemsvmsDIR)/readme.vms \
+  $(systemsvmsDIR)/makegcal.com \
+  $(systemsvmsDIR)/makefile.gcc \
+  $(systemsvmsDIR)/makefile.mms \
+  $(systemsvmsDIR)/makefile.vms
+
+systemsFILES = \
+  $(systemsMISCFILES) \
+  $(systemsacornFILES) \
+  $(systemsamigaFILES) \
+  $(systemsatariFILES) \
+  $(systemsntFILES) \
+  $(systemsmsdosFILES) \
+  $(systemsos2FILES) \
+  $(systemsprimosFILES) \
+  $(systemsvmsFILES)
+
+GENERALFILES = \
+  ABOUT-NLS \
+  ATTENTION \
+  BUGS \
+  COPYING \
+  DISCLAIM \
+  HISTORY \
+  INSTALL \
+  LIMITATIONS \
+  NEWS \
+  README \
+  SYMBOLS \
+  THANKS \
+  TODO \
+  Makefile.in \
+  acconfig.h \
+  aclocal.m4 \
+  configure.in \
+  config.hin \
+  install-inf.in \
+  stamp-h.in
+
+MANIFEST = \
+  MANIFEST
+
+SHELLSCRIPTFILES = \
+  configure \
+  install-sh \
+  mkinstalldirs \
+  $(docexamplesSHFILES)
 
 #
 # Combined names.
 #
 
-SUBDIRS = $(intlDIR) @POSUB@ $(srcDIR) $(miscDIR) $(docDIR) $(dataDIR)
-
-DISTDIRS = $(dataDIR) $(calendarsDIR) $(datesDIR) $(datascriptDIR) \
+SUBDIRS = \
+  $(intlDIR) \
+  @POSUB@ \
+  $(srcDIR) \
+  $(miscDIR) \
   $(docDIR) \
-  $(docDIR)/$(de) \
-  $(docDIR)/$(de)/$(manDIR) $(docDIR)/$(de)/$(texiDIR) \
-  $(docDIR)/$(en) \
-  $(docDIR)/$(en)/$(manDIR) $(docDIR)/$(en)/$(texiDIR) \
-  $(intlDIR) $(miscDIR) $(poDIR) $(srcDIR) \
-  $(systemsDIR) $(acornDIR) $(amigaDIR) $(atariDIR) $(msdosDIR) \
-  $(ntDIR) $(os2DIR) $(os2INTLDIR) $(primosDIR) $(primosINCDIR) \
-  $(vmsDIR)
+  $(dataDIR)
 
-DISTFILES = $(genFILES) $(shellscriptFILES) $(docMISCFILES) $(manFILES) \
-  $(texiFILES) $(dataMISCFILES) $(calendarsFILES) $(datesMISCFILES) \
-  $(datesFILES) $(datascriptFILES) $(intlFILES) $(miscFILES) \
-  $(poFILES) $(systemsMISCFILES) $(acornFILES) $(amigaFILES) \
-  $(atariFILES) $(msdosFILES) $(ntFILES) $(os2FILES) $(primosFILES) \
-  $(vmsFILES)
+DISTDIRS = \
+  $(dataDIR) \
+    $(datacalendarsDIR) \
+    $(datadatesDIR) \
+    $(datascriptsDIR) \
+  $(docDIR) \
+    $(docDIR)/$(de) \
+      $(docDIR)/$(de)/$(docexamplesDIR) \
+      $(docDIR)/$(de)/$(docmanDIR) \
+      $(docDIR)/$(de)/$(doctexiDIR) \
+    $(docDIR)/$(en) \
+      $(docDIR)/$(en)/$(docexamplesDIR) \
+      $(docDIR)/$(en)/$(docmanDIR) \
+      $(docDIR)/$(en)/$(doctexiDIR) \
+  $(intlDIR) \
+  $(miscDIR) \
+    $(miscdailyDIR) \
+    $(miscddiffDIR) \
+    $(miscdstDIR) \
+    $(miscgcalltxDIR) \
+    $(miscmoonDIR) \
+    $(miscmrmsDIR) \
+    $(miscsrssDIR) \
+    $(miscwlocDIR)\
+  $(poDIR) \
+  $(srcDIR) \
+  $(systemsDIR) \
+    $(systemsacornDIR) \
+    $(systemsamigaDIR) \
+    $(systemsatariDIR) \
+    $(systemsmsdosDIR) \
+    $(systemsntDIR) \
+    $(systemsos2DIR) \
+      $(systemsos2intlDIR) \
+    $(systemsprimosDIR) \
+      $(systemsprimosincludeDIR) \
+    $(systemsvmsDIR)
 
-CREATFILES = $(txtFILES) $(infoFILES) $(poCREATFILES)
+DISTFILES = \
+  $(GENERALFILES) \
+  $(SHELLSCRIPTFILES) \
+  $(dataFILES) \
+  $(docFILES) \
+  $(intlFILES) \
+  $(miscFILES) \
+  $(poFILES) \
+  $(srcFILES) \
+  $(systemsFILES)
+
+CREATEFILES = \
+  $(docHTMLFILES) \
+  $(docINFOFILES) \
+  $(poCREATEFILES)
 
 #### End of package specific make variable definition section. ####
 
@@ -292,7 +1063,7 @@ CREATFILES = $(txtFILES) $(infoFILES) $(poCREATFILES)
 
 #### Start of default targets section. ####
 
-default: all-recursive
+default: install-info all-recursive
 
 all: default
 
@@ -303,29 +1074,32 @@ overall: install-recursive dist distzip
 	@echo "All targets created"
 
 help:
-	@echo
+	@echo ""
 	@echo "Most important Makefile targets:"
-	@echo
-	@echo "Standard:       default  all  overall  check  TAGS  help"
-	@echo
+	@echo ""
+	@echo "Standard:       default  all  overall  check  ID  TAGS  $(srcdir)/$(MANIFEST)  $@"
+	@echo ""
 	@echo "Machine:        next  next-fat  os2_gcc  xenix_286  coherent"
-	@echo
+	@echo ""
 	@echo "Configuration:  Makefile  config.status  $(srcdir)/configure"
-	@echo
-	@echo "Binary:         gcal$X  tcal$X  txt2gcal$X  gcal2txt$X"
-	@echo
-	@echo "Documentation:  gcal.txt  txt  gcal.info  info  gcal.dvi  dvi"
-	@echo
+	@echo ""
+	@echo "Binary:         $(PACKAGE)  tcal  txt2gcal  gcal2txt"
+	@echo ""
+	@echo "Script:         install-info  mksamp      daily  ddiff  ddiffdrv  dst"
+	@echo "                gcalltx       gcalltx.pl  moon   mrms   srss      wlocdrv"
+	@echo ""
+	@echo "Documentation:  $(PACKAGE).html  html  $(PACKAGE).info  info  $(PACKAGE).dvi  dvi"
+	@echo ""
 	@echo "Installation:   install      installdirs  installbin   install-strip"
 	@echo "                installdata  installman   installinfo  installdates"
-	@echo
+	@echo "                installmisc"
+	@echo ""
 	@echo "NLS specific:   POTFILES  update-po  $(PACKAGE).pot  cat-id-tbl.c"
-	@echo
-	@echo "Cleaning up:    clean        texclean   distclean  archiveclean"
-	@echo "                mostlyclean  realclean  uninstall  maintainer-clean"
-	@echo
-	@echo "Distribution:   dist  dist-gcal  distzip  distzoo  distlha  distshar"
-	@echo
+	@echo ""
+	@echo "Cleaning up:    clean      de-texclean  texclean   archiveclean  distclean"
+	@echo "                realclean  mostlyclean  uninstall  maintainer-clean"
+	@echo ""
+	@echo "Distribution:   dist  dist-$(PACKAGE)  distzip  distzoo  distlha  distshar"
 	@exit 0
 
 #### End of default targets section. ####
@@ -334,28 +1108,44 @@ help:
 
 #### Start of (auto)configure specific section. ####
 
-$(srcdir)/configure: configure.in aclocal.m4
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+config.status: $(srcdir)/configure
+	$(SHELL) ./config.status --recheck
+
+$(srcdir)/configure: $(srcdir)/configure.in $(top_srcdir)/aclocal.m4
 	@echo "Warning: $(srcdir)/configure is out of date"
 	cd $(srcdir) && rm -f configure && autoconf
 
-# autoheader might not change config.hin, so touch a stamp file.
-$(srcdir)/config.hin: stamp-h.in
-
-$(srcdir)/stamp-h.in: $(top_srcdir)/configure.in aclocal.m4 acconfig.h
-	cd $(top_srcdir) && autoheader
-	echo timestamp > $(srcdir)/stamp-h.in
-
 config.h: stamp-h
+	@if test ! -f $@; \
+	then \
+	  rm -f stamp-h; \
+	  $(MAKE) stamp.h; \
+	else \
+	  : ; \
+	fi
 
-stamp-h: config.hin config.status
-	CONFIG_FILES= CONFIG_HEADERS="config.h:config.hin" $(SHELL) ./config.status
-	echo timestamp > stamp-h
+stamp-h: $(srcdir)/config.hin $(top_builddir)/config.status
+	@cd $(top_builddir) \
+	  && CONFIG_FILES= CONFIG_HEADERS="config.h:config.hin" \
+	     $(SHELL) ./config.status
+	@echo "timestamp" > stamp-h 2> /dev/null
 
-Makefile: $(srcdir)/Makefile.in config.status
-	CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
+$(srcdir)/config.hin: $(srcdir)/stamp-h.in
+	@if test ! -f $@; \
+	then \
+	  rm -f $(srcdir)/stamp-h.in; \
+	  $(MAKE) $(srcdir)/stamp-h.in; \
+	else \
+	  : ; \
+	fi
 
-config.status: configure
-	$(SHELL) ./config.status --recheck
+$(srcdir)/stamp-h.in: $(top_srcdir)/configure.in $(top_srcdir)/aclocal.m4 acconfig.h
+	cd $(top_srcdir) && autoheader
+	@echo "timestamp" > $(srcdir)/stamp-h.in 2> /dev/null
 
 #### End of (auto)configure specific section. ####
 
@@ -364,13 +1154,25 @@ config.status: configure
 #### Start of clean section. ####
 
 archiveclean:
-	rm -f *.gz *.z *.Z *.zip *.zoo *.lzh *.shar*
+	-rm -f *.gz \
+	       *.z \
+	       *.Z \
+	       *.zip \
+	       *.zoo \
+	       *.lzh \
+	       *.shar*
 
 distclean-local: archiveclean
-	rm -f Makefile config.status config.cache config.log config.h stamp-h install-info
+	-rm -f Makefile \
+	       config.status \
+	       config.cache \
+	       config.log \
+	       config.h \
+	       stamp-h \
+	       install-info
 
 realclean-local: distclean-local
-	rm -f ID id TAGS tags
+	-rm -f ID id TAGS tags
 
 maintainer-clean-local: realclean-local
 	@echo "This command is intended only for maintainers to use;"
@@ -395,24 +1197,116 @@ install: install-recursive
 
 
 
+#### Start of basic targets section. ####
+
+install-info: $(srcdir)/install-inf.in $(top_builddir)/config.status
+	@cd $(top_builddir) \
+	  && CONFIG_FILES=install-inf CONFIG_HEADERS= $(SHELL) ./config.status
+	-if test -s install-inf; \
+	then \
+	  mv install-inf $@; \
+	  chmod u+x $@; \
+	else \
+	  : ; \
+	fi
+
+#
+# `perl' preferred!
+#
+$(srcdir)/$(MANIFEST): Makefile $(MANIFEST)-recursive $(DISTFILES)
+	@if test ! -s "$@"; \
+	then \
+	  echo "" > $@; \
+	  if test -n "$(AWK)" || test -n "$(PERL)"; \
+	  then \
+	    echo "Creating \`$@', please wait..."; \
+	    distname=$(PACKAGE)-$(VERSION); \
+	    rm -rf $$distname; \
+	    mkdir $$distname; \
+	    chmod $(DISTBINPERMS) $$distname; \
+	    for dir in $(DISTDIRS); \
+	    do \
+	      mkdir $$distname/$$dir; \
+	      chmod $(DISTBINPERMS) $$distname/$$dir; \
+	    done; \
+	    for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
+	    do \
+	      ln $(srcdir)/$$file $$distname/$$file 2>/dev/null || \
+	      { \
+	        echo "Cannot link, copying \`$(srcdir)/$$file'"; \
+	        if test -n "$(CP)"; \
+	        then \
+	          $(CP) $(srcdir)/$$file $$distname/$$file; \
+	        else \
+	          cat $(srcdir)/$$file > $$distname/$$file; \
+	        fi; \
+	      }; \
+	    done; \
+	    if test -n "$(PERL)"; \
+	    then \
+	      ls -lR $$distname | \
+	      grep '^[^d]' | \
+	      $(PERL) -e '$$[=1;$$d="/";$$b=".".$$d;$$p=$$b;$$x=0;$$o=0;' \
+	              -e 'while(<>){chop;@Fld=split(" ",$$_,9999);' \
+	              -e 'if(($$.-$$FNRbase)>1){if($$#Fld==1){$$l=length($$_);' \
+	              -e 'for($$i=1;$$i<=$$l;$$i++){if(substr($$_,$$i,1)eq$$d)' \
+	              -e '{$$p=$$b.substr($$_,$$i+1,$$l-$$i-1).$$d;$$i=$$l;$$x=1;}}}' \
+	              -e 'else{if($$x==1){$$x=0;}else{$$f=$$p.$$Fld[$$#Fld];$$o=1;}}}' \
+	              -e 'if($$o==1){printf"%s\n",$$f;$$o=0;}}' > $@; \
+	    else \
+	      ls -lR $$distname | \
+	      grep '^[^d]' | \
+	      $(AWK) 'BEGIN{d="/";b="."d;p=b;x=0;o=0} \
+	              {if(FNR>1){if(NF==1){l=length($$0); \
+	              for(i=1;i<=l;i++){if(substr($$0,i,1)==d) \
+	              {p=b""substr($$0,i+1,l-i-1)""d;i=l;x=1;}}} \
+	              else{if(x==1){x=0;}else{f=p""$$NF;o=1;}}} \
+	              if(o==1){printf"%s\n",f;o=0;}}' > $@; \
+	    fi; \
+	    rm -rf $$distname; \
+	  else \
+	    echo "Unable to create \`$@', missing \`awk' and \`perl'"; \
+	  fi; \
+	else \
+	  echo "Nothing to be done for \`$@'."; \
+	fi
+
+#### End of basic targets section. ####
+
+
+
 #### Start of recursive targets section. ####
 
+$(MANIFEST)-recursive: Makefile config.h
+	@target=`echo "$@" | sed -e 's/-recursive//'`; \
+	if test ! -f "$$target"; \
+	then \
+	  for subdir in $(SUBDIRS); \
+	  do \
+	    echo "Making $$target in $$subdir"; \
+	    (cd $$subdir && $(MAKE) $$target) \
+	     || case "$(MFLAGS)" in *k*) fail=yes;; *) exit 1;; esac; \
+	  done && test -z "$$fail"; \
+	else \
+	  : ; \
+	fi
+
 clean mostlyclean uninstall installdirs installbin install-strip \
-id ID tags TAGS all-recursive install-recursive distclean-recursive \
-realclean-recursive maintainer-clean-recursive dist-recursive \
-dist-gcal-recursive distzip-recursive distzoo-recursive \
-distlha-recursive distshar-recursive: Makefile config.h
-	for subdir in $(SUBDIRS); \
+id ID tags TAGS all-recursive install-recursive \
+distclean-recursive realclean-recursive maintainer-clean-recursive \
+dist-recursive dist-$(PACKAGE)-recursive distzip-recursive \
+distzoo-recursive distlha-recursive distshar-recursive: Makefile config.h
+	@for subdir in $(SUBDIRS); \
 	do \
-	  target=`echo $@ | sed -e 's/-recursive//'`; \
+	  target=`echo "$@" | sed -e 's/-recursive//'`; \
 	  echo "Making $$target in $$subdir"; \
 	  (cd $$subdir && $(MAKE) $$target) \
 	   || case "$(MFLAGS)" in *k*) fail=yes;; *) exit 1;; esac; \
 	done && test -z "$$fail"
 
 next next-fat os2_gcc xenix_286 coherent check \
-gcal$X tcal$X txt2gcal$X gcal2txt$X: Makefile config.h
-	echo "Making all in $(intlDIR)"; \
+$(PACKAGE) tcal txt2gcal gcal2txt: Makefile config.h
+	@echo "Making all in $(intlDIR)"; \
 	(cd $(intlDIR) && $(MAKE) all) \
 	 || case "$(MFLAGS)" in *k*) fail=yes;; *) exit 1;; esac; \
 	if test -n "@POSUB@"; \
@@ -426,17 +1320,27 @@ gcal$X tcal$X txt2gcal$X gcal2txt$X: Makefile config.h
 	echo "Making $@ in $(srcDIR)"; \
 	cd $(srcDIR) && $(MAKE) $@
 
-gcal.txt txt gcal.info info gcal.dvi dvi texclean installman installinfo: Makefile
+$(PACKAGE).html html $(PACKAGE).info info $(PACKAGE).dvi dvi \
+mksamp $(doclang)-texclean texclean installman installinfo: Makefile
 	@echo "Making $@ in $(docDIR)"
 	cd $(docDIR) && $(MAKE) $@
 
-installdates installdata: Makefile
+installdata: Makefile $(PACKAGE)
+	@echo "Making $@ in $(dataDIR)"
+	cd $(dataDIR) && $(MAKE) $@
+
+installdates: Makefile
 	@echo "Making $@ in $(dataDIR)"
 	cd $(dataDIR) && $(MAKE) $@
 
 POTFILES update-po $(PACKAGE).pot cat-id-tbl.c: Makefile config.h
 	@echo "Making $@ in $(poDIR)"
 	cd $(poDIR) && $(MAKE) $@
+
+daily ddiff ddiffdrv dst gcalltx gcalltx.pl moon mrms srss wlocdrv \
+installmisc: Makefile
+	@echo "Making $@ in $(miscDIR)"
+	cd $(miscDIR) && $(MAKE) $@
 
 #### End of recursive targets section. ####
 
@@ -445,22 +1349,21 @@ POTFILES update-po $(PACKAGE).pot cat-id-tbl.c: Makefile config.h
 #### Start of distribution section. ####
 
 #
-# Prefering gzip!
+# `gzip' preferred!
 #
-dist dist-gcal: Makefile dist-recursive $(DISTFILES)
-	distname=$(PACKAGE)-$(VERSION); \
-	if (test -n "$(GZIP)" && test ! -f "$$distname.tar.gz") || \
+dist dist-$(PACKAGE): Makefile dist-recursive $(MANIFEST) $(DISTFILES)
+	@distname=$(PACKAGE)-$(VERSION); \
+	if (test -n "$(Gzip)" && test ! -f "$$distname.tar.gz") || \
 	(test -n "$(COMPRESS)" && test ! -f "$$distname.tar.Z"); \
 	then \
-	  if test -n "$(TAR)" && (test -n "$(GZIP)" || test -n "$(COMPRESS)"); \
+	  if test -n "$(TAR)" && (test -n "$(Gzip)" || test -n "$(COMPRESS)"); \
 	  then \
-	    if test -n "$(GZIP)"; \
+	    if test -n "$(Gzip)"; \
 	    then \
-	      echo "Creating $$distname.tar.gz"; \
+	      echo "Creating \`$$distname.tar.gz', please wait..."; \
 	    else \
-	      echo "Creating $$distname.tar.Z"; \
+	      echo "Creating \`$$distname.tar.Z', please wait..."; \
 	    fi; \
-	    echo "Please wait..."; \
 	    rm -rf $$distname; \
 	    mkdir $$distname; \
 	    chmod $(DISTBINPERMS) $$distname; \
@@ -469,48 +1372,53 @@ dist dist-gcal: Makefile dist-recursive $(DISTFILES)
 	      mkdir $$distname/$$dir; \
 	      chmod $(DISTBINPERMS) $$distname/$$dir; \
 	    done; \
-	    for file in $(DISTFILES) $(CREATFILES); \
+	    for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	    do \
 	      ln $(srcdir)/$$file $$distname/$$file 2>/dev/null || \
 	      { \
 	        echo "Cannot link, copying \`$(srcdir)/$$file'"; \
-	        cp -p $(srcdir)/$$file $$distname/$$file; \
+	        if test -n "$(CP)"; \
+	        then \
+	          $(CP) $(srcdir)/$$file $$distname/$$file; \
+	        else \
+	          cat $(srcdir)/$$file > $$distname/$$file; \
+	        fi; \
 	      }; \
 	      chmod $(DISTSRCPERMS) $$distname/$$file; \
 	    done; \
-	    for file in $(shellscriptFILES); \
+	    for file in $(SHELLSCRIPTFILES); \
 	    do \
 	      chmod $(DISTBINPERMS) $$distname/$$file; \
 	    done; \
-	    if test -n "$(GZIP)"; \
+	    if test -n "$(Gzip)"; \
 	    then \
-	      $(TAR) $(TARFLAGS) - $$distname | $(GZIP) $(GZIPFLAGS) > $$distname.tar.gz; \
-	      echo "$$distname.tar.gz created"; \
+	      $(TAR) $(TARFLAGS) - $$distname | $(Gzip) $(GZIPFLAGS) > $$distname.tar.gz; \
+	      echo "\`$$distname.tar.gz' created"; \
 	    else \
 	      $(TAR) $(TARFLAGS) - $$distname | $(COMPRESS) $(COMPRESSFLAGS) > $$distname.tar.Z; \
-	      echo "$$distname.tar.Z created"; \
+	      echo "\`$$distname.tar.Z' created"; \
 	    fi; \
 	    rm -rf $$distname; \
 	    if test -n "$(SRCPERMS)"; \
 	    then \
-	      for file in $(DISTFILES) $(CREATFILES); \
+	      for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	      do \
 	        chmod $(SRCPERMS) $(srcdir)/$$file; \
 	      done; \
 	    else \
-	      for file in $(DISTFILES) $(CREATFILES); \
+	      for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	      do \
 	        chmod $(SRCPERMS2) $(srcdir)/$$file; \
 	      done; \
 	    fi; \
 	    if test -n "$(BINPERMS)"; \
 	    then \
-	      for file in $(shellscriptFILES); \
+	      for file in $(SHELLSCRIPTFILES); \
 	      do \
 	        chmod $(BINPERMS) $(srcdir)/$$file; \
 	      done; \
 	    else \
-	      for file in $(shellscriptFILES); \
+	      for file in $(SHELLSCRIPTFILES); \
 	      do \
 	        chmod $(BINPERMS2) $(srcdir)/$$file; \
 	      done; \
@@ -518,35 +1426,34 @@ dist dist-gcal: Makefile dist-recursive $(DISTFILES)
 	  else \
 	    if test -z "$(TAR)"; \
 	    then \
-	      echo "Unable to create $$distname.tar, missing \`tar'"; \
+	      echo "Unable to create \`$$distname.tar', missing \`tar'"; \
 	    else \
-	      if test -z "$(GZIP)"; \
+	      if test -z "$(Gzip)"; \
 	      then \
-	        echo "Unable to create $$distname.tar.gz, missing \`gzip'"; \
+	        echo "Unable to create \`$$distname.tar.gz', missing \`gzip'"; \
 	      else \
-	        echo "Unable to create $$distname.tar.Z, missing \`compress'"; \
+	        echo "Unable to create \`$$distname.tar.Z', missing \`compress'"; \
 	      fi; \
 	    fi; \
 	  fi; \
 	else \
 	  if test -f "$$distname.tar.gz"; \
 	  then \
-	    echo "Creation of $$distname.tar.gz unnecessary,"; \
+	    echo "Creation of \`$$distname.tar.gz' unnecessary,"; \
 	    echo "already existent. You have to erase this file first"; \
 	  else \
-	    echo "Creation of $$distname.tar.Z unnecessary,"; \
+	    echo "Creation of \`$$distname.tar.Z' unnecessary,"; \
 	    echo "already existent. You have to erase this file first"; \
 	  fi; \
 	fi
 
-distzip: Makefile distzip-recursive $(DISTFILES)
-	distname=$(PACKAGE)-`echo $(VERSION) | sed -e 's/[.]//g'`; \
+distzip: Makefile distzip-recursive $(MANIFEST) $(DISTFILES)
+	@distname=$(PACKAGE)-`echo $(VERSION) | sed -e 's/[.]//g'`; \
 	if test ! -f "$$distname.zip"; \
 	then \
 	  if test -n "$(ZIP)"; \
 	  then \
-	    echo "Creating $$distname.zip"; \
-	    echo "Please wait..."; \
+	    echo "Creating \`$$distname.zip', please wait..."; \
 	    rm -rf $$distname; \
 	    mkdir $$distname; \
 	    chmod $(DISTBINPERMS) $$distname; \
@@ -555,62 +1462,66 @@ distzip: Makefile distzip-recursive $(DISTFILES)
 	      mkdir $$distname/$$dir; \
 	      chmod $(DISTBINPERMS) $$distname/$$dir; \
 	    done; \
-	    for file in $(DISTFILES) $(CREATFILES); \
+	    for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	    do \
 	      ln $(srcdir)/$$file $$distname/$$file 2>/dev/null || \
 	      { \
 	        echo "Cannot link, copying \`$(srcdir)/$$file'"; \
-	        cp -p $(srcdir)/$$file $$distname/$$file; \
+	        if test -n "$(CP)"; \
+	        then \
+	          $(CP) $(srcdir)/$$file $$distname/$$file; \
+	        else \
+	          cat $(srcdir)/$$file > $$distname/$$file; \
+	        fi; \
 	      }; \
 	      chmod $(DISTSRCPERMS) $$distname/$$file; \
 	    done; \
-	    for file in $(shellscriptFILES); \
+	    for file in $(SHELLSCRIPTFILES); \
 	    do \
 	      chmod $(DISTBINPERMS) $$distname/$$file; \
 	    done; \
 	    $(ZIP) $(ZIPFLAGS) $$distname $$distname; \
-	    echo "$$distname.zip created"; \
+	    echo "\`$$distname.zip' created"; \
 	    rm -rf $$distname; \
 	    if test -n "$(SRCPERMS)"; \
 	    then \
-	      for file in $(DISTFILES) $(CREATFILES); \
+	      for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	      do \
 	        chmod $(SRCPERMS) $(srcdir)/$$file; \
 	      done; \
 	    else \
-	      for file in $(DISTFILES) $(CREATFILES); \
+	      for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	      do \
 	        chmod $(SRCPERMS2) $(srcdir)/$$file; \
 	      done; \
 	    fi; \
 	    if test -n "$(BINPERMS)"; \
 	    then \
-	      for file in $(shellscriptFILES); \
+	      for file in $(SHELLSCRIPTFILES); \
 	      do \
 	        chmod $(BINPERMS) $(srcdir)/$$file; \
 	      done; \
 	    else \
-	      for file in $(shellscriptFILES); \
+	      for file in $(SHELLSCRIPTFILES); \
 	      do \
 	        chmod $(BINPERMS2) $(srcdir)/$$file; \
 	      done; \
 	    fi; \
 	  else \
-	    echo "Unable to create $$distname.zip, missing \`zip'"; \
+	    echo "Unable to create \`$$distname.zip', missing \`zip'"; \
 	  fi; \
 	else \
-	  echo "Creation of $$distname.zip unnecessary,"; \
+	  echo "Creation of \`$$distname.zip' unnecessary,"; \
 	  echo "already existent. You have to erase this file first"; \
 	fi
 
-distzoo: Makefile distzoo-recursive $(DISTFILES)
-	distname=$(PACKAGE)-`echo $(VERSION) | sed -e 's/[.]//g'`; \
+distzoo: Makefile distzoo-recursive $(MANIFEST) $(DISTFILES)
+	@distname=$(PACKAGE)-`echo $(VERSION) | sed -e 's/[.]//g'`; \
 	if test ! -f "$$distname.zoo"; \
 	then \
 	  if test -n "$(ZOO)"; \
 	  then \
-	    echo "Creating $$distname.zoo"; \
-	    echo "Please wait..."; \
+	    echo "Creating \`$$distname.zoo', please wait..."; \
 	    rm -rf $$distname; \
 	    mkdir $$distname; \
 	    chmod $(DISTBINPERMS) $$distname; \
@@ -619,62 +1530,66 @@ distzoo: Makefile distzoo-recursive $(DISTFILES)
 	      mkdir $$distname/$$dir; \
 	      chmod $(DISTBINPERMS) $$distname/$$dir; \
 	    done; \
-	    for file in $(DISTFILES) $(CREATFILES); \
+	    for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	    do \
 	      ln $(srcdir)/$$file $$distname/$$file 2>/dev/null || \
 	      { \
 	        echo "Cannot link, copying \`$(srcdir)/$$file'"; \
-	        cp -p $(srcdir)/$$file $$distname/$$file; \
+	        if test -n "$(CP)"; \
+	        then \
+	          $(CP) $(srcdir)/$$file $$distname/$$file; \
+	        else \
+	          cat $(srcdir)/$$file > $$distname/$$file; \
+	        fi; \
 	      }; \
 	      chmod $(DISTSRCPERMS) $$distname/$$file; \
 	    done; \
-	    for file in $(shellscriptFILES); \
+	    for file in $(SHELLSCRIPTFILES); \
 	    do \
 	      chmod $(DISTBINPERMS) $$distname/$$file; \
 	    done; \
-	    cat MANIFEST | sed -e "s/.\//$$distname\//" | $(ZOO) $(ZOOFLAGS) $$distname; \
-	    echo "$$distname.zoo created"; \
+	    cat $(srcdir)/$(MANIFEST) | sed -e "s,./,$$distname/," | $(ZOO) $(ZOOFLAGS) $$distname; \
+	    echo "\`$$distname.zoo' created"; \
 	    rm -rf $$distname; \
 	    if test -n "$(SRCPERMS)"; \
 	    then \
-	      for file in $(DISTFILES) $(CREATFILES); \
+	      for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	      do \
 	        chmod $(SRCPERMS) $(srcdir)/$$file; \
 	      done; \
 	    else \
-	      for file in $(DISTFILES) $(CREATFILES); \
+	      for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	      do \
 	        chmod $(SRCPERMS2) $(srcdir)/$$file; \
 	      done; \
 	    fi; \
 	    if test -n "$(BINPERMS)"; \
 	    then \
-	      for file in $(shellscriptFILES); \
+	      for file in $(SHELLSCRIPTFILES); \
 	      do \
 	        chmod $(BINPERMS) $(srcdir)/$$file; \
 	      done; \
 	    else \
-	      for file in $(shellscriptFILES); \
+	      for file in $(SHELLSCRIPTFILES); \
 	      do \
 	        chmod $(BINPERMS2) $(srcdir)/$$file; \
 	      done; \
 	    fi; \
 	  else \
-	    echo "Unable to create $$distname.zoo, missing \`zoo'"; \
+	    echo "Unable to create \`$$distname.zoo', missing \`zoo'"; \
 	  fi; \
 	else \
-	  echo "Creation of $$distname.zoo unnecessary,"; \
+	  echo "Creation of \`$$distname.zoo' unnecessary,"; \
 	  echo "already existent. You have to erase this file first"; \
 	fi
 
-distlha: Makefile distlha-recursive $(DISTFILES) 
-	distname=$(PACKAGE)-`echo $(VERSION) | sed -e 's/[.]//g'`; \
+distlha: Makefile distlha-recursive $(MANIFEST) $(DISTFILES)
+	@distname=$(PACKAGE)-`echo $(VERSION) | sed -e 's/[.]//g'`; \
 	if test ! -f "$$distname.lzh"; \
 	then \
 	  if test -n "$(LHA)"; \
 	  then \
-	    echo "Creating $$distname.lzh"; \
-	    echo "Please wait..."; \
+	    echo "Creating \`$$distname.lzh', please wait..."; \
 	    rm -rf $$distname; \
 	    mkdir $$distname; \
 	    chmod $(DISTBINPERMS) $$distname; \
@@ -683,62 +1598,66 @@ distlha: Makefile distlha-recursive $(DISTFILES)
 	      mkdir $$distname/$$dir; \
 	      chmod $(DISTBINPERMS) $$distname/$$dir; \
 	    done; \
-	    for file in $(DISTFILES) $(CREATFILES); \
+	    for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	    do \
 	      ln $(srcdir)/$$file $$distname/$$file 2>/dev/null || \
 	      { \
 	        echo "Cannot link, copying \`$(srcdir)/$$file'"; \
-	        cp -p $(srcdir)/$$file $$distname/$$file; \
+	        if test -n "$(CP)"; \
+	        then \
+	          $(CP) $(srcdir)/$$file $$distname/$$file; \
+	        else \
+	          cat $(srcdir)/$$file > $$distname/$$file; \
+	        fi; \
 	      }; \
 	      chmod $(DISTSRCPERMS) $$distname/$$file; \
 	    done; \
-	    for file in $(shellscriptFILES); \
+	    for file in $(SHELLSCRIPTFILES); \
 	    do \
 	      chmod $(DISTBINPERMS) $$distname/$$file; \
 	    done; \
 	    $(LHA) $(LHAFLAGS) $$distname.lzh $$distname; \
-	    echo "$$distname.lzh created"; \
+	    echo "\`$$distname.lzh' created"; \
 	    rm -rf $$distname; \
 	    if test -n "$(SRCPERMS)"; \
 	    then \
-	      for file in $(DISTFILES) $(CREATFILES); \
+	      for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	      do \
 	        chmod $(SRCPERMS) $(srcdir)/$$file; \
 	      done; \
 	    else \
-	      for file in $(DISTFILES) $(CREATFILES); \
+	      for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	      do \
 	        chmod $(SRCPERMS2) $(srcdir)/$$file; \
 	      done; \
 	    fi; \
 	    if test -n "$(BINPERMS)"; \
 	    then \
-	      for file in $(shellscriptFILES); \
+	      for file in $(SHELLSCRIPTFILES); \
 	      do \
 	        chmod $(BINPERMS) $(srcdir)/$$file; \
 	      done; \
 	    else \
-	      for file in $(shellscriptFILES); \
+	      for file in $(SHELLSCRIPTFILES); \
 	      do \
 	        chmod $(BINPERMS2) $(srcdir)/$$file; \
 	      done; \
 	    fi; \
 	  else \
-	    echo "Unable to create $$distname.lzh, missing \`lha' or \`lharc'"; \
+	    echo "Unable to create \`$$distname.lzh', missing \`lha' or \`lharc'"; \
 	  fi; \
 	else \
-	  echo "Creation of $$distname.lzh unnecessary,"; \
+	  echo "Creation of \`$$distname.lzh' unnecessary,"; \
 	  echo "already existent. You have to erase this file first"; \
 	fi
 
-distshar: Makefile distshar-recursive $(DISTFILES)
-	distname=$(PACKAGE)-$(VERSION); \
+distshar: Makefile distshar-recursive $(MANIFEST) $(DISTFILES)
+	@distname=$(PACKAGE)-$(VERSION); \
 	if test ! -f "$$distname.shar*"; \
 	then \
 	  if test -n "$(SHAR)"; \
 	  then \
-	    echo "Creating $$distname.shar"; \
-	    echo "Please wait..."; \
+	    echo "Creating \`$$distname.shar', please wait..."; \
 	    rm -rf $$distname; \
 	    mkdir $$distname; \
 	    chmod $(DISTBINPERMS) $$distname; \
@@ -747,51 +1666,56 @@ distshar: Makefile distshar-recursive $(DISTFILES)
 	      mkdir $$distname/$$dir; \
 	      chmod $(DISTBINPERMS) $$distname/$$dir; \
 	    done; \
-	    for file in $(DISTFILES) $(CREATFILES); \
+	    for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	    do \
 	      ln $(srcdir)/$$file $$distname/$$file 2>/dev/null || \
 	      { \
 	        echo "Cannot link, copying \`$(srcdir)/$$file'"; \
-	        cp -p $(srcdir)/$$file $$distname/$$file; \
+	        if test -n "$(CP)"; \
+	        then \
+	          $(CP) $(srcdir)/$$file $$distname/$$file; \
+	        else \
+	          cat $(srcdir)/$$file > $$distname/$$file; \
+	        fi; \
 	      }; \
 	      chmod $(DISTSRCPERMS) $$distname/$$file; \
 	    done; \
-	    for file in $(shellscriptFILES); \
+	    for file in $(SHELLSCRIPTFILES); \
 	    do \
 	      chmod $(DISTBINPERMS) $$distname/$$file; \
 	    done; \
 	    $(SHAR) $(SHARFLAGS) -o$$distname.shar $$distname; \
-	    echo "$$distname.shar created"; \
+	    echo "\`$$distname.shar' created"; \
 	    rm -rf $$distname; \
 	    if test -n "$(SRCPERMS)"; \
 	    then \
-	      for file in $(DISTFILES) $(CREATFILES); \
+	      for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	      do \
 	        chmod $(SRCPERMS) $(srcdir)/$$file; \
 	      done; \
 	    else \
-	      for file in $(DISTFILES) $(CREATFILES); \
+	      for file in $(DISTFILES) $(MANIFEST) $(CREATEFILES); \
 	      do \
 	        chmod $(SRCPERMS2) $(srcdir)/$$file; \
 	      done; \
 	    fi; \
 	    if test -n "$(BINPERMS)"; \
 	    then \
-	      for file in $(shellscriptFILES); \
+	      for file in $(SHELLSCRIPTFILES); \
 	      do \
 	        chmod $(BINPERMS) $(srcdir)/$$file; \
 	      done; \
 	    else \
-	      for file in $(shellscriptFILES); \
+	      for file in $(SHELLSCRIPTFILES); \
 	      do \
 	        chmod $(BINPERMS2) $(srcdir)/$$file; \
 	      done; \
 	    fi; \
 	  else \
-	    echo "Unable to create $$distname.shar, missing \`shar'"; \
+	    echo "Unable to create \`$$distname.shar', missing \`shar'"; \
 	  fi; \
 	else \
-	  echo "Creation of $$distname.shar unnecessary,"; \
+	  echo "Creation of \`$$distname.shar' unnecessary,"; \
 	  echo "already existent. You have to erase this file first"; \
 	fi
 

@@ -1,54 +1,256 @@
-This is Info file ./de/gcal.info, produced by Makeinfo version 1.67
-from the input file ./de/gcal.texi.
+Dies ist gcal.info, hergestellt von Makeinfo Version 4.0 aus gcal.texi.
 
 INFO-DIR-SECTION GNU Pakete
 START-INFO-DIR-ENTRY
-* Gcal: (gcal).                         Das GNU Kalenderprogramm.
-* tcal: (gcal)Aufruf von tcal.          Gcal mit morgigem Datum aufrufen.
-* txt2gcal: (gcal)Aufruf von txt2gcal.  Textdatei zu Ressourcendatei wandeln.
-* gcal2txt: (gcal)Aufruf von gcal2txt.  Ressourcendatei zu Textdatei wandeln.
+* Gcal: (gcal).                        GNU Kalenderprogramm.
+* Tcal: (gcal)Aufruf von tcal.         Gcal mit morgigem Datum aufrufen.
+* Txt2gcal: (gcal)Aufruf von txt2gcal. Kalendertext zu Ressourcendatei wandeln.
+* Gcal2txt: (gcal)Aufruf von gcal2txt. Kalenderressource zu Textdatei wandeln.
 END-INFO-DIR-ENTRY
 
-Diese Datei beschreibt Gcal, ein Programm um Kalender auszugeben.  Gcal
-gibt Monatskalender und Jahreskalender, ewige Feiertagslisten sowie
-Terminlisten auf viele verschiedene Arten und Weisen aus.  Es
-ber"ucksichtigt diejenigen Daten korrekt, welche "ubergangen wurden,
-als der derzeitig g"ultige Gregorianische Kalender den vormals g"ultigen
-Julianischen Kalender abl"oste.
+Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
+auszugeben.
 
-Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+Copyright (c) 1994-1997, 2000 Thomas Esken
 
-Das ist die zweite Ausgabe der Gcal Dokumentation.
+Diese Ausgabe ist für Gcal Version 3.00.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
 Copyrightvermerk und diesem Genehmigungsvermerk ausgestattet sind und
 vorgenannte Vermerke erhalten bleiben.
 
-Hiermit wird die Erlaubnis erteilt, ver"anderte Kopien dieses Handbuchs
-wie unter den Bedingungen f"ur wortgetreue Kopien zu erstellen und zu
-vertreiben, sofern die ausgef"uhrten Arbeiten in Ableitung und
-Gesamtheit innerhalb der Bestimmungen eines Genehmigungsvermerks liegen
-und zudem mit diesem ausgestattet sind, welcher mit diesem hier
-identisch ist.
+Hiermit wird die Erlaubnis erteilt, veränderte Kopien dieses Handbuchs
+wie unter den Bedingungen für wortgetreue Kopien zu erstellen und zu
+vertreiben, sofern die ausgeführten Arbeiten in Ableitung und Gesamtheit
+innerhalb der Bestimmungen eines Genehmigungsvermerks liegen und zudem
+mit diesem ausgestattet sind, welcher mit diesem hier identisch ist.
 
 Hiermit wird die Erlaubnis erteilt, wie unter den vorgenannten
-Bedingungen f"ur ver"anderte Versionen "Ubersetzungen dieses Handbuchs
-in eine andere Sprache zu erstellen und zu vertreiben, mit der
-Ausnahme, dass dieser Genehmigungsvermerk in einer "Ubersetzung
-angegeben sein darf, welche von der Free Software Foundation gebilligt
-wird.
+Bedingungen für veränderte Versionen Übersetzungen dieses Handbuchs in
+eine andere Sprache zu erstellen und zu vertreiben, mit der Ausnahme,
+daß dieser Genehmigungsvermerk in einer Übersetzung angegeben sein
+darf, welche von der Free Software Foundation gebilligt wird.
 
-Jedwede Vorschl"age, Verbesserungen, Erweiterungen, Fehlerberichte,
-Geld- und Sachspenden, Programmierauftr"age usw. sind stets willkommen.
-Bitte senden Sie diese direkt an meine eMail Adresse.  Wenn Sie dieses
-Werkzeug m"ogen, so w"urde ich mich sehr "uber eine Postkarte von Ihnen
-freuen!
+Jedwede Vorschläge, Verbesserungen, Erweiterungen, Fehlerberichte, Geld-
+und Sachspenden, Programmieraufträge usw. sind stets willkommen.  Bitte
+senden Sie diese direkt an meine eMail Adresse <esken@gmx.net>.  Wenn
+Sie dieses Werkzeug mögen, so würde ich mich sehr über eine Postkarte
+von Ihnen freuen!
 
 ------------------------oOO      \\\_''/      OOo---------------------------
-Thomas Esken               O     (/o-o\)     O  eMail: esken@uni-muenster.de
+Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
 Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
+
+
+File: gcal.info,  Node: Datumteil einer Zeile,  Next: Weitere Datumteil-Attribute,  Prev: Struktur einer Ressourcendatei,  Up: Ressourcendatei
+
+Datumteil einer Zeile
+---------------------
+
+Die Struktur von einem "Datumteil" --welcher Gcal die Information gibt,
+wann ein Termin stattfindet-- einer Zeile der Gcal Ressourcendatei ist
+
+*entweder*: `JJJJ[MM[TT|WWWN]]'
+
+    `JJJJ'
+          (4 Ziffern), ist das Jahr einschließlich des Jahrhunderts
+          (Bereich `0000...9999').  Es sind führende Nullen anzugeben
+          falls das Jahr kleiner `1000' ist und weitere Komponenten des
+          Datumteils dem Jahr folgen.
+
+    `MM'
+          (2 Ziffern oder 3 Zeichen), ist der Monat (Bereich `00...12'
+          oder `99', bzw. `Jan', `Feb'...).  `99' kodiert stets den
+          letzten Monat eines Jahres (== Dezember). Es sind führende
+          Nullen anzugeben falls der Monat kleiner `10' ist und weitere
+          Komponenten des Datumteils dem Monat folgen.
+
+    `TT'
+          (2 Ziffern), ist der Tag (Bereich `00...31' oder `99').  `99'
+          kodiert stets den letzten Tag eines Monats.  Es sind führende
+          Nullen anzugeben falls der Tag kleiner `10' ist und weitere
+          Komponenten des Datumteils dem Tag folgen.
+
+    `WWW'
+          (2...3 Zeichen), ist ein Wochentagsname im Kurzformat (Bereich
+          `Mon...Son').
+
+    `N'
+          (1 Ziffer), ist der N'te Wochentag WWW im Monat (Bereich
+          `1...5' oder `9').
+
+             * N == `1...5'
+               N'ter WWW Wochentag im Monat.
+
+             * N == `9'
+               Letzter WWW Wochentag im Monat.
+
+*oder*: `JJJJ*d|wN[WWW]'
+
+    `JJJJ'
+          (4 Ziffern), ist das Jahr einschließlich des Jahrhunderts
+          (Bereich `0000...9999').  Es sind führende Nullen anzugeben
+          falls das Jahr kleiner `1000' ist und weitere Komponenten des
+          Datumteils dem Jahr folgen.
+
+    `*d'
+          (2 Zeichen), ist ein Bezug auf ein gewöhnliches Tagesdatum.
+
+    `*w'
+          (2 Zeichen), ist entweder ein Bezug auf ein ISO-Wochendatum
+          oder ein Standard-Wochendatum.
+
+    `N'
+          (1...3 Ziffern), ist der Wert in Tagen oder Wochen, an
+          welchem der Termin auftritt.  `99' in Verbindung mit einem
+          Wochentagsnamen im Kurzformat kodiert stets den letzten
+          Wochentag WWW eines Jahres.  `999' in Verbindung mit `*d'
+          kodiert stets den letzten Tag eines Jahres, also den 31'ten
+          Dezember.  Falls das berechnete Datum nicht im Jahr auftritt,
+          also außerhalb der Jahresgrenzen liegt, so wird der Termin
+          unterdrückt.
+
+    `WWW'
+          (2...3 Zeichen), ist ein Wochentagsname im Kurzformat (Bereich
+          `Mon...Son').
+
+*oder*: `JJJJ@e|t|DVAR[[+|-]N]'
+
+    `JJJJ'
+          (4 Ziffern), ist das Jahr einschließlich des Jahrhunderts
+          (Bereich `0000...9999').  Es sind führende Nullen anzugeben
+          falls das Jahr kleiner `1000' ist und weitere Komponenten des
+          Datumteils dem Jahr folgen.
+
+    `@e'
+          (2 Zeichen), ist ein Bezug auf das Datum des Ostersonntags.
+
+    `@t'
+          (2 Zeichen), ist ein Bezug auf das heutige Datum.
+
+    `@DVAR'
+          (2 Zeichen), ist ein Bezug auf eine Datumvariable.
+
+    `[+|-]N'
+          (1...4 alphanumerische Zeichen), ist der optionale Versatz in
+          Tagen, an welchem der Termin relativ zum Datum des
+          Ostersonntags, relativ zum heutigen Datum, oder relativ zum
+          Datum einer Datumvariablen auftritt.  `-999' kodiert stets
+          den ersten Tag eines Jahres, also den 1'ten Januar.  `+999'
+          oder `999' kodiert stets den letzten Tag eines Jahres, also
+          den 31'ten Dezember.  Falls das berechnete Datum nicht im
+          Jahr auftritt, also außerhalb der Jahresgrenzen liegt, so
+          wird der Termin unterdrückt.
+
+*oder*: `JJJJ@e|t|DVAR[+|-]NWWW'
+
+    `JJJJ'
+          (4 Ziffern), ist das Jahr einschließlich des Jahrhunderts
+          (Bereich `0000...9999').  Es sind führende Nullen anzugeben
+          falls das Jahr kleiner `1000' ist und weitere Komponenten des
+          Datumteils dem Jahr folgen.
+
+    `@e'
+          (2 Zeichen), ist ein Bezug auf das Datum des Ostersonntags.
+
+    `@t'
+          (2 Zeichen), ist ein Bezug auf das heutige Datum.
+
+    `@DVAR'
+          (2 Zeichen), ist ein Bezug auf eine Datumvariable.
+
+    `[+|-]NWWW'
+          (3...7 alphanumerische Zeichen), ist der optionale Versatz in
+          Wochentagen, an welchem der Termin relativ zum Datum des
+          Ostersonntags, relativ zum heutigen Datum, oder relativ zum
+          Datum einer Datumvariablen auftritt.  `-99' kodiert stets den
+          ersten Wochentag WWW eines Jahres.  `+99' oder `99' kodiert
+          stets den letzten Wochentag WWW eines Jahres.  Falls das
+          berechnete Datum nicht im Jahr auftritt, also außerhalb der
+          Jahresgrenzen liegt, so wird der Termin unterdrückt.
+
+*Bitte beachten:*
+
+   * Falls JJJJ nicht als festes Jahr, sondern als `0000', `000', `00'
+     oder `0' angegeben ist:
+     Es wird angenommen, daß der Monat und Tag jährliche Ereignisse
+     sind, und der _Textteil_ wird für jedes Jahr ausgegeben.
+
+   * Falls MM nicht als fester Monat, sondern als `00', `0' oder gar
+     nicht angegeben ist:
+     Es wird angenommen, daß der Tag ein monatliches Ereignis im
+     angegebenen Jahr ist, und der _Textteil_ wird für jeden Monat
+     ausgegeben.
+
+   * Falls TT nicht als fester Tag, sondern als `00', `0' oder gar
+     nicht angegeben ist:
+     Es wird angenommen, daß der Tag ein tägliches Ereignis im
+     angegebenen Monat und Jahr ist, und der _Textteil_ wird für jeden
+     Tag ausgegeben.
+
+   * Falls ein Wochentagsname WWW im 2...3-Buchstaben Kurzformat
+     angegeben ist:
+     Es wird angenommen, daß der gegebene Wochentagsname ein
+     wöchentliches Ereignis im angegebenen Monat und Jahr ist, und der
+     _Textteil_ wird für jede Woche ausgegeben.
+
+*Hinweis:*
+Vorstehende Aufstellung mag leicht zu der Annahme verleiten, daß ein
+Termin, der für alle Tage im Jahr gültig sein soll, mit einem Datumteil
+definiert werden kann, der nur aus einer `0' besteht.  Das ist nur
+insoweit richtig, als das der so definierte Termin nur in einigen
+wenigen Terminzeiträumen berücksichtigt wird (*note Kodierschema::).
+Wenn ein Termin definiert wird, der in allen Terminzeiträumen für alle
+Tage im Jahr berücksichtigt werden soll, so ist dieser Termin mit einem
+`0*d1#999' Datumteil zu erstellen.  Gleiches gilt beispielsweise für
+Termine, die ein wöchentliches Ereignis darstellen, und die im gesamten
+Jahr gültig sein sollen.  Anstelle einen solchen Termin mit einem
+`000000WWW' Datumteil zu erstellen (der ebenfalls nur in einigen
+wenigen Terminzeiträumen berücksichtigt wird), sollte ein solcher
+Termin mit einem `0*d1WWW#99WWW.7' Datumteil definiert werden.  *Note
+Bereiche von Tagen::, und *Note Auftretensfaktor von Tagen::, für
+weitere Informationen.
+
+
+File: gcal.info,  Node: Weitere Datumteil-Attribute,  Next: Textteil einer Zeile,  Prev: Datumteil einer Zeile,  Up: Ressourcendatei
+
+Weitere Datumteil-Attribute
+---------------------------
+
+* Menu:
+
+* Listen von Tagen::               Wie eine Liste von Tagen benutzt wird.
+* Bereiche von Tagen::             Wie ein Bereich von Tagen benutzt wird.
+* Wiederholungsfaktor von Tagen::  Wie ein solcher Faktor benutzt wird.
+* Auftretensfaktor von Tagen::     Wie ein solcher Faktor benutzt wird.
+
+Der Datumteil, welcher einen Termintext in einer Gcal
+Ressourcendateizeile anführt, darf mit weiteren Attributen ausgestattet
+werden.  Weitere Attribute sind entweder die Angabe einer Liste von
+Tagen oder eines Bereichs von Tagen, in welchem der Termin stattfinden
+soll.  Weitere Attribute sind auch Faktoren, welche eine
+Wiederholungsdauer oder einen Auftretenszeitpunkt eines Termins
+bestimmen.
+
+Grundsätzlich dürfen alle diejenigen Datumteile in einer Gcal
+Ressourcendateizeile, die wie folgt strukturiert sind, mit weiteren
+Attributen versehen werden:
+
+   * `JJJJMM'...
+
+   * `JJJJ*d|w'...
+
+   * `JJJJ@e|t|DVAR'...
+
+*Vorsicht:*
+Falls der Datumteil mit weiteren Attributen ausgestattet ist und das
+Jahr, in dem der Termin stattfindet, unbestimmt ist, d.h. das Jahr JJJJ
+ist auf Null gesetzt, so werden solche Datumteile *nur* innerhalb
+einfacher Jahresgrenzen korrekt berechnet, also nicht in denjenigen
+Terminen, welche ausgegeben werden, nachdem das laufende Jahr
+gewechselt hat, z.B. in *Fiskaljahren*.
 
 
 File: gcal.info,  Node: Listen von Tagen,  Next: Bereiche von Tagen,  Prev: Weitere Datumteil-Attribute,  Up: Weitere Datumteil-Attribute
@@ -56,28 +258,30 @@ File: gcal.info,  Node: Listen von Tagen,  Next: Bereiche von Tagen,  Prev: Weit
 Listen von Tagen
 ................
 
-Eine Liste von Tagen wird durch ein `,' Trennzeichen kenntlich gemacht;
-diese muss mindestens zwei Elemente enthalten, und darf unbegrenzt viele
-Elemente enthalten.  Ein einzelnes Element der Liste darf nicht auf den
-Wert Null gesetzt werden und somit unkonkret sein, was in diesem
-Zusammenhang auch keinen Sinn machen w"urde.
-
 Eine Liste von Tagen wird dazu benutzt, um wiederkehrende Termine zu
 definieren und dabei nur eine Zeile in der Ressourcendatei zu belegen,
 anstelle diese wiederkehrenden Termine einzeln in mehreren Zeilen in
-der Ressourcendatei festzulegen.  Angenommen ein Termin tritt stets am
-1'ten und am 15'ten Tag in jedem beliebigen Monat des Jahres 1996 auf,
-z.B.  `Steuer-Voranmeldungen', so kann einerseits f"ur den 1'ten im
-Monat ein Termineintrag in der Ressourcendatei vorgenommen werden und
-auch f"ur den 15'ten im Monat, was in diesem Fall zwei Eintr"age in der
-Ressourcendatei zu einem solchen Termin erg"abe.
+der Ressourcendatei festzulegen.
+
+Eine Liste von Tagen wird durch ein `,' Trennzeichen kenntlich gemacht;
+diese muß mindestens zwei Elemente enthalten, und darf unbegrenzt viele
+Elemente enthalten.  Ein einzelnes Element der Liste darf nicht auf den
+Wert Null gesetzt werden und somit unkonkret sein, was in diesem
+Zusammenhang auch keinen Sinn machen würde.
+
+Angenommen, ein Termin tritt stets am 1'ten und am 15'ten Tag in jedem
+beliebigen Monat des Jahres 1996 auf, z.B. `Steuervoranmeldungen', so
+kann einerseits für den 1'ten im Monat ein Termineintrag in der
+Ressourcendatei vorgenommen werden und auch für den 15'ten im Monat,
+was in diesem Fall zwei Einträge in der Ressourcendatei zu einem
+solchen Termin ergäbe.
 
 Andererseits kann mittels einer Liste von Tagen dieser Aufwand aber nun
 verringert werden hin zu nur einem Eintrag in der Ressourcendatei,
-welcher gleichermassen f"ur den 1'ten und f"ur den 15'ten Tag eines
-beliebigen Monat gilt, n"amlich
+welcher gleichermaßen für den 1'ten und für den 15'ten Tag eines
+beliebigen Monat gilt, nämlich
 
-     19960001,15 Steuer-Voranmeldungen
+     19960001,15 Steuervoranmeldungen
 
 Erlaubt ist die Benutzung der Listen von Tagen im Datumteil wie folgt:
 
@@ -105,25 +309,25 @@ Einige Beispiele hierzu:
      Jahres.
 
 `1996*w1fr,1,17mo,99fr'
-     Im Jahr 1996: am Freitag der 1'ten ISO-Kalenderwoche, am Montag
-     der ersten ISO-Kalenderwoche, am Montag der 17'ten
-     ISO-Kalenderwoche sowie am Freitag der letzten ISO-Kalenderwoche.
+     Im Jahr 1996: am Freitag der 1'ten Kalenderwoche, am Montag der
+     ersten Kalenderwoche, am Montag der 17'ten Kalenderwoche sowie am
+     Freitag der letzten Kalenderwoche.
 
 `0@a,+1,-3,5,+4fr,2fr,-10sa'
      In jedem Jahr: am Datum der Datumvariablen A, einen Tag nach dem
-     Datum von A, drei Tage vor dem Datum von A, f"unf Tage nach dem
+     Datum von A, drei Tage vor dem Datum von A, fünf Tage nach dem
      Datum von A, vier Freitage nach dem Datum von A, zwei Freitage
      nach dem Datum von A sowie zehn Samstage vor dem Datum von A.
 
 `1996@e+1,-3,5,+4fr,2fr,-10sa'
      Im Jahr 1996: einen Tag nach Ostersonntag, drei Tage vor
-     Ostersonntag, f"unf Tage nach Ostersonntag, vier Freitage nach
+     Ostersonntag, fünf Tage nach Ostersonntag, vier Freitage nach
      Ostersonntag, zwei Freitage nach Ostersonntag sowie zehn Samstage
      vor Ostersonntag.
 
 `1996@t+1,-3,5,+4fr,2fr,-10sa'
      Im Jahr 1996: einen Tag nach dem heutigen Datum, drei Tage vor dem
-     heutigen Datum, f"unf Tage nach dem heutigen Datum, vier Freitage
+     heutigen Datum, fünf Tage nach dem heutigen Datum, vier Freitage
      nach dem heutigen Datum, zwei Freitage nach dem heutigen Datum
      sowie zehn Samstage vor dem heutigen Datum.
 
@@ -133,27 +337,29 @@ File: gcal.info,  Node: Bereiche von Tagen,  Next: Wiederholungsfaktor von Tagen
 Bereiche von Tagen
 ..................
 
-Ein Bereich von Tagen wird durch ein `#' Trennzeichen kenntlich gemacht
-und besteht aus genau zwei Elementen, n"amlich aus Starttag und
-Endetag.  Der Starttag wie auch der Endetag des Bereichs darf nicht auf
-den Wert Null gesetzt werden und somit unkonkret sein, was in diesem
-Zusammenhang auch keinen Sinn machen w"urde.
-
 Ein Bereich von Tagen wird ebenso wie eine Liste von Tagen dazu benutzt,
 um wiederkehrende Termine zu definieren und dabei nur eine Zeile in der
 Ressourcendatei zu belegen, anstelle diese wiederkehrenden Termine
 einzeln in mehreren Zeilen in der Ressourcendatei festzulegen.
-Angenommen ein Termin tritt stets w"ahrend des 1'ten und des 15'ten
-Tages (einschliesslich) in jedem beliebigen Monat des Jahres 1996 auf,
-z.B. `Innendienst', so kann einerseits f"ur den 1'ten im Monat ein
-Termineintrag in der Ressourcendatei vorgenommen werden, f"ur den 2'ten
+
+Ein Bereich von Tagen wird durch ein `#' Trennzeichen kenntlich gemacht
+und besteht aus genau zwei Elementen, nämlich aus Starttag und Endetag.
+Der Starttag wie auch der Endetag des Bereichs darf nicht auf den Wert
+Null gesetzt werden und somit unkonkret sein, was in diesem
+Zusammenhang auch keinen Sinn machen würde.
+
+Angenommen, ein Termin tritt stets während des 1'ten und des 15'ten
+Tages (einschließlich) in jedem beliebigen Monat des Jahres 1996 auf,
+z.B.  `Innendienst', so kann einerseits für den 1'ten im Monat ein
+Termineintrag in der Ressourcendatei vorgenommen werden, für den 2'ten
 im Monat ebenso, bis hin zum 15'ten im Monat, was in diesem Fall 15
-Eintr"age in der Ressourcendatei zu einem solchen Termin erg"abe (1).
+Einträge in der Ressourcendatei zu einem solchen Termin ergäbe(1)
+(*note Bereiche von Tagen-Footnote-1::).
 
 Andererseits kann mittels eines Bereichs von Tagen dieser Aufwand aber
 nun verringert werden hin zu nur einem Eintrag in der Ressourcendatei,
-welcher gleichermassen f"ur den 1'ten bis hin zum 15'ten Tag eines
-beliebigen Monat gilt, n"amlich
+welcher gleichermaßen für den 1'ten bis hin zum 15'ten Tag eines
+beliebigen Monat gilt, nämlich
 
      19960001#15 Innendienst
 
@@ -167,28 +373,28 @@ Erlaubt ist die Benutzung der Bereiche von Tagen im Datumteil wie folgt:
 
    * `JJJJ@e|t|DVAR[[+|-]N[WWW]]#[+|-]N[WWW]'
 
-Aus der vorstehenden Aufstellung kann ersehen werden, dass als Start-
+Aus der vorstehenden Aufstellung kann ersehen werden, daß als Start-
 und Endetag nur Datumformate gleichen Typs links und rechts des `#'
-Trennzeichens verwendet werden k"onnen.  Es ist somit nicht explizit
-m"oglich, dass ein Bereich von Tagen mit verschiedenartigen Typen von
-Datumformaten definiert werden kann, also Termineintr"age wie z.B.:
+Trennzeichens verwendet werden können.  Es ist somit nicht explizit
+möglich, daß ein Bereich von Tagen mit verschiedenartigen Typen von
+Datumformaten definiert werden kann, also Termineinträge wie z.B.:
 
      1996@e+3fr#1012 Im Jahr 1996: An jedem Tag, der in den\
                      Zeitraum vom Datum 3'ter Freitag nach Ostersonntag\
-                     bis zum 12'ten Oktober f"allt.
+                     bis zum 12'ten Oktober fällt.
 
-k"onnen so nicht vereinbart werden.  Hier bietet sich aber Abhilfe an,
+können so nicht vereinbart werden.  Hier bietet sich aber Abhilfe an,
 indem ein inklusive Datum Zeitraum `%i[DATUM][#[DATUM]]' Spezialtext
-zur Festlegung des Endetags des Bereichs benutzt wird (2), und die
-Termine der Einfachheit halber bis zum letzten Tag des Jahres
-produziert werden, z.B.:
+zur Festlegung des Endetags des Bereichs benutzt wird(2) (*note
+Bereiche von Tagen-Footnote-2::), und die Termine der Einfachheit
+halber bis zum letzten Tag des Jahres produziert werden, z.B.:
 
      1996@e+3fr#+999 Im Jahr 1996: An jedem Tag, der in den\
                      Zeitraum vom Datum 3'ter Freitag nach Ostersonntag\
-                     bis zum 12'ten Oktober f"allt.%i0#19961012
+                     bis zum 12'ten Oktober fällt.%i0#19961012
 
 *Note Inklusive Datum Zeitraum `%i[DATUM][#[DATUM]]' Spezialtext:
-Inklusive Datum Zeitraum, f"ur weitere Details.
+Inklusive Datum Zeitraum, für weitere Details.
 
 Einige Beispiele hierzu:
 
@@ -202,54 +408,54 @@ Einige Beispiele hierzu:
 
 `000001fr3#12'
      In jedem Jahr im Monat Januar: an jedem Tag, der in den Zeitraum
-     vom 3'ten Freitag des Monats bis zum 12'ten des Monats f"allt.
+     vom 3'ten Freitag des Monats bis zum 12'ten des Monats fällt.
 
 `00000112#fr3'
      In jedem Jahr im Monat Januar: an jedem Tag, der in den Zeitraum
-     vom 12'ten des Monats bis zum 3'ten Freitag des Monats f"allt.
+     vom 12'ten des Monats bis zum 3'ten Freitag des Monats fällt.
 
 `00000112#augfre3'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom 12'ten Januar
-     bis zum 3'ten Freitag des Monats August f"allt.
+     bis zum 3'ten Freitag des Monats August fällt.
 
 `0000sep13#99fr9'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom 13'ten
-     September bis zum letzten Freitag des Monats Dezember f"allt.
+     September bis zum letzten Freitag des Monats Dezember fällt.
 
 `0*d1#1fr'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom 1'ten Tag des
-     Jahres bis zum 1'ten Freitag des Jahres f"allt.
+     Jahres bis zum 1'ten Freitag des Jahres fällt.
 
 `0*d99fr#333'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom letzten
-     Freitag des Jahres bis zum 333'ten Tag des Jahres f"allt.
+     Freitag des Jahres bis zum 333'ten Tag des Jahres fällt.
 
 `1996*w1fr#17mo'
      Im Jahr 1996: an jedem Tag, der in den Zeitraum vom Freitag der
-     1'ten ISO-Kalenderwoche bis zum Montag der 17'ten
-     ISO-Kalenderwoche f"allt.
+     1'ten Kalenderwoche bis zum Montag der 17'ten Kalenderwoche fällt.
 
 `0@a#+4fr'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom Datum der
      Datumvariablen A bis zum 4'ten Freitag nach dem Datum der
-     Datumvariablen A f"allt.
+     Datumvariablen A fällt.
 
 `1996@e-3#+9fr'
      Im Jahr 1996: an jedem Tag, der in den Zeitraum vom Datum drei
      Tage vor Ostersonntag bis zum 9'ten Freitag nach dem Datum des
-     Ostersonntag f"allt.
+     Ostersonntag fällt.
 
 `1996@t-3#+99fr'
      Im Jahr 1996: an jedem Tag, der in den Zeitraum vom Datum drei
      Tage vor dem heutigen Datum bis zum letzten Freitag des Jahres
-     f"allt.
+     fällt.
 
-  ---------- Footnotes ----------
+
+File: gcal.info,  Node: Bereiche von Tagen-Footnotes,  Up: Bereiche von Tagen
 
-  (1)  Einmal abgesehen von der M"oglichkeit, dass in einem solchen
-Fall auch eine Liste von Tagen verwendet werden kann.
+(1) Einmal abgesehen von der Möglichkeit, daß in einem solchen Fall
+auch eine Liste von Tagen verwendet werden kann.
 
-  (2)  Implizite L"osung.
+(2) Implizite Lösung.
 
 
 File: gcal.info,  Node: Wiederholungsfaktor von Tagen,  Next: Auftretensfaktor von Tagen,  Prev: Bereiche von Tagen,  Up: Weitere Datumteil-Attribute
@@ -257,39 +463,41 @@ File: gcal.info,  Node: Wiederholungsfaktor von Tagen,  Next: Auftretensfaktor v
 Wiederholungsfaktor von Tagen
 .............................
 
+Ein Wiederholungsfaktor von Tagen wird dazu benutzt, um wiederkehrende
+Termine zu definieren und dabei nur eine Zeile in der Ressourcendatei
+zu belegen, anstelle diese wiederkehrenden Termine einzeln in mehreren
+Zeilen in der Ressourcendatei festzulegen.
+
 Ein Wiederholungsfaktor von Tagen (`:N') wird durch ein `:' Zeichen
-kenntlich gemacht und muss dem Tagesfeld, welches einen konkreten Wert
-in einem Datumteil einer Gcal Ressourcendatei haben muss und nicht auf
+kenntlich gemacht und muß dem Tagesfeld, welches einen konkreten Wert
+in einem Datumteil einer Gcal Ressourcendatei haben muß und nicht auf
 den Wert Null gesetzt sein darf, folgen bzw. einem Auftretensfaktor von
 Tagen entweder vorangehen oder folgen.  Mit Ausnahme von Bereichen von
 Tagen oder Terminen, die nur an einem bestimmten Wochentag auftreten
 wie z.B.  `199600mon Immer Montags 1996', darf ein solcher
-Wiederholungsfaktor in allen sonst m"oglichen Angaben von Datumteilen
+Wiederholungsfaktor in allen sonst möglichen Angaben von Datumteilen
 einer Gcal Ressourcendatei auftreten.
 
-Dieser Faktor darf den Wert 1...999 annehmen.  Werte, die gr"osser sind
-als die tats"achliche Differenz zwischen dem Datum des ersten
-Auftretens des Termins und dem letzten Tag des Jahres, werden stets auf
-diese tats"achliche Differenz reduziert.  So bedeutet dann jeder Wert
-gr"osser 365 (1) stets einen Wiederholungsfaktor bis hin zum letzten
-Tag des Jahres.
+Dieser Faktor darf den Wert `1...999' annehmen.  Werte, die größer sind
+als die tatsächliche Differenz zwischen dem Datum des ersten Auftretens
+des Termins und dem letzten Tag des Jahres, werden stets auf diese
+tatsächliche Differenz reduziert.  So bedeutet dann jeder Wert größer
+`365'(1) (*note Wiederholungsfaktor von Tagen-Footnote-1::) stets einen
+Wiederholungsfaktor bis hin zum letzten Tag des Jahres.
 
-Ein Wiederholungsfaktor von Tagen wird dazu benutzt, um wiederkehrende
-Termine zu definieren und dabei nur eine Zeile in der Ressourcendatei
-zu belegen, anstelle diese wiederkehrenden Termine einzeln in mehreren
-Zeilen in der Ressourcendatei festzulegen.  Angenommen ein Termin tritt
-stets am 15'ten Tag in jedem beliebigen Monat des Jahres 1996 auf und
-erstreckt sich "uber einen Zeitraum von insgesamt vier Tagen
-(einschliesslich des 15'ten selbst), z.B. `Mitarbeiterschulung', so
-kann einerseits f"ur den 15'ten im Monat ein Termineintrag in der
-Ressourcendatei vorgenommen werden und auch f"ur die dem 15'ten im
-Monat folgenden drei Tage, was in diesem Fall vier Eintr"age in der
-Ressourcendatei zu einem solchen Termin erg"abe (2).
+Angenommen, ein Termin tritt stets am 15'ten Tag in jedem beliebigen
+Monat des Jahres 1996 auf und erstreckt sich über einen Zeitraum von
+insgesamt vier Tagen (einschließlich des 15'ten selbst), z.B.
+`Mitarbeiterschulung', so kann einerseits für den 15'ten im Monat ein
+Termineintrag in der Ressourcendatei vorgenommen werden und auch für
+die dem 15'ten im Monat folgenden drei Tage, was in diesem Fall vier
+Einträge in der Ressourcendatei zu einem solchen Termin ergäbe(2)
+(*note Wiederholungsfaktor von Tagen-Footnote-2::).
 
 Andererseits kann mittels eines Wiederholungsfaktors von Tagen dieser
 Aufwand aber nun verringert werden hin zu nur einem Eintrag in der
-Ressourcendatei, welcher gleichermassen f"ur den 15'ten und die dem
-15'ten folgenden drei Tage eines beliebigen Monat gilt, n"amlich
+Ressourcendatei, welcher gleichermaßen für den 15'ten und die dem
+15'ten folgenden drei Tage eines beliebigen Monat gilt, nämlich
 
      19960015:4 Mitarbeiterschulung
 
@@ -313,56 +521,57 @@ Einige Beispiele hierzu:
 `000001fr3:11'
      In jedem Jahr im Monat Januar: an jedem Tag, der in den Zeitraum
      vom 3'ten Freitag des Monats und den darauffolgenden zehn Tagen
-     f"allt.
+     fällt.
 
 `00000112:3'
      In jedem Jahr im Monat Januar: an jedem Tag, der in den Zeitraum
-     vom 12'ten des Monats und den darauffolgenden zwei Tagen f"allt.
+     vom 12'ten des Monats und den darauffolgenden zwei Tagen fällt.
 
 `00000112:3,fr3:5'
      In jedem Jahr im Monat Januar: an jedem Tag, der in den Zeitraum
-     vom 12'ten des Monats und den darauffolgenden zwei Tagen f"allt,
+     vom 12'ten des Monats und den darauffolgenden zwei Tagen fällt,
      sowie auch in den Zeitraum vom 3'ten Freitag des Monats und den
-     darauffolgenden vier Tagen f"allt.
+     darauffolgenden vier Tagen fällt.
 
 `0*d1:1'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom 1'ten Tag des
-     Jahres und keinem darauffolgenden Tag f"allt.
+     Jahres und keinem darauffolgenden Tag fällt.
 
 `0*d1:2'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom 1'ten Tag des
-     Jahres und dem darauffolgenden Tag f"allt.
+     Jahres und dem darauffolgenden Tag fällt.
 
 `0*d99fr:333'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom letzten
-     Freitag des Jahres und den darauffolgenden 332 Tagen f"allt.
-     Allerdings werden in F"allen wie diesen, wo ein solcher Termin die
-     Jahresgrenze "uberschreiten w"urde, nur Termine bis zum letzten
-     Tag des Jahres produziert.
+     Freitag des Jahres und den darauffolgenden 332 Tagen fällt.
+     Allerdings werden in Fällen wie diesen, wo ein solcher Termin die
+     Jahresgrenze überschreiten würde, nur Termine bis zum letzten Tag
+     des Jahres produziert.
 
 `1996*w1fr:17'
      Im Jahr 1996: an jedem Tag, der in den Zeitraum vom Freitag der
-     1'ten ISO Kalenderwoche und den darauffolgenden 16 Tagen f"allt.
+     1'ten Kalenderwoche und den darauffolgenden 16 Tagen fällt.
 
 `0@a:4'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom Datum der
-     Datumvariablen A und den darauffolgenden drei Tagen f"allt.
+     Datumvariablen A und den darauffolgenden drei Tagen fällt.
 
 `1996@e-3:9'
      Im Jahr 1996: an jedem Tag, der in den Zeitraum vom Datum drei
-     Tage vor Ostersonntag und den darauffolgenden acht Tagen f"allt.
+     Tage vor Ostersonntag und den darauffolgenden acht Tagen fällt.
 
 `1996@t-3:9'
      Im Jahr 1996: an jedem Tag, der in den Zeitraum vom Datum drei
      Tage vor dem heutigen Datum und den darauffolgenden acht Tagen
-     f"allt.
+     fällt.
 
-  ---------- Footnotes ----------
+
+File: gcal.info,  Node: Wiederholungsfaktor von Tagen-Footnotes,  Up: Wiederholungsfaktor von Tagen
 
-  (1)  Oder 366 in Schaltjahren.
+(1) Oder `366' in Schaltjahren.
 
-  (2)  Einmal abgesehen von der M"oglichkeit, dass in einem solchen
-Fall auch eine Liste oder ein Bereich von Tagen verwendet werden kann.
+(2) Einmal abgesehen von der Möglichkeit, daß in einem solchen Fall
+auch eine Liste oder ein Bereich von Tagen verwendet werden kann.
 
 
 File: gcal.info,  Node: Auftretensfaktor von Tagen,  Prev: Wiederholungsfaktor von Tagen,  Up: Weitere Datumteil-Attribute
@@ -370,42 +579,44 @@ File: gcal.info,  Node: Auftretensfaktor von Tagen,  Prev: Wiederholungsfaktor v
 Auftretensfaktor von Tagen
 ..........................
 
+Ein Auftretensfaktor von Tagen wird dazu benutzt, um einem bestimmten
+Versatz in wiederkehrenden Terminen zu definieren.
+
 Ein Auftretensfaktor von Tagen (`.N') wird durch ein `.' Zeichen
-kenntlich gemacht und muss dem Tagesfeld, welches einen konkreten Wert
-in einem Datumteil einer Gcal Ressourcendatei haben muss und nicht auf
+kenntlich gemacht und muß dem Tagesfeld, welches einen konkreten Wert
+in einem Datumteil einer Gcal Ressourcendatei haben muß und nicht auf
 den Wert Null gesetzt sein darf, folgen bzw. einem Wiederholungsfaktor
 von Tagen entweder vorangehen oder folgen.  Mit Ausnahme von Terminen,
 die nur an einem bestimmten Wochentag auftreten und als solche nicht
 als ein Bereich von Tagen angegeben sind, wie z.B. `199600mon Immer
-Montags 1996', darf ein solcher Wiederholungsfaktor in allen sonst
-m"oglichen Angaben von Datumteilen einer Gcal Ressourcendatei
-auftreten.  Bei Listen von Tagen darf dieser Faktor in jedem einzelnen
-Element angegeben werden, bei Bereichen von Tagen darf dieser Faktor
-*nur* dem Endetag folgen.  Allerdings macht die Verwendung dieses
+Montags 1996', darf ein solcher Auftretensfaktor in allen sonst
+möglichen Angaben von Datumteilen einer Gcal Ressourcendatei auftreten.
+Bei Listen von Tagen darf dieser Faktor in jedem einzelnen Element
+angegeben werden, bei Bereichen von Tagen darf dieser Faktor *nur* dem
+Endetag folgen.  Allerdings macht die Verwendung dieses
 Auftretensfaktors nur dann Sinn, wenn er entweder in einem Bereich von
 Tagen, oder aber zusammen mit einem Wiederholungsfaktor angegeben wird.
 
-Dieser Faktor darf den Wert 1...999 annehmen.  Wenn der Faktor Werte
-annimmt, die gr"osser sind als die tats"achliche Differenz zwischen dem
-Datum des Auftretens des Termins und dem letzten Tag des Jahres bzw. dem
-Ende des Zeitraum, f"ur welchen die Termine entweder produziert oder
-ber"ucksichtigt werden sollen, so wird ein solcher Termin ignoriert.
+Dieser Faktor darf den Wert `1...999' annehmen.  Wenn der Faktor Werte
+annimmt, die größer sind als die tatsächliche Differenz zwischen dem
+Datum des Auftretens des Termins und dem letzten Tag des Jahres bzw.
+dem Ende des Zeitraum, für welchen die Termine entweder produziert oder
+berücksichtigt werden sollen, so wird ein solcher Termin ignoriert.
 
-Ein Auftretensfaktor von Tagen wird dazu benutzt, um einem bestimmten
-Versatz in wiederkehrenden Terminen zu definieren.  Angenommen ein
-Termin tritt stets am 15'ten Tag in jedem beliebigen Monat des Jahres
-1996 auf und erstreckt sich "uber einen Zeitraum von insgesamt sieben
-Tagen (einschliesslich des 15'ten selbst), soll aber nur jeden dritten
-Tag (d.h. jeweils zwei Tage sind zu "uberspringen) innerhalb dieser
-Periode ber"ucksichtigt werden, z.B.  `Seminar', so kann einerseits
-f"ur den 15'ten im Monat ein Termineintrag in der Ressourcendatei
-vorgenommen werden, f"ur den 18'ten und auch f"ur den 21'ten im Monat,
-was in diesem Fall drei Eintr"age in der Ressourcendatei zu einem
-solchen Termin erg"abe (1).
+Angenommen, ein Termin tritt stets am 15'ten Tag in jedem beliebigen
+Monat des Jahres 1996 auf und erstreckt sich über einen Zeitraum von
+insgesamt sieben Tagen (einschließlich des 15'ten selbst), soll aber
+nur jeden dritten Tag (d.h. jeweils zwei Tage sind zu überspringen)
+innerhalb dieser Periode berücksichtigt werden, z.B.  `Seminar', so
+kann einerseits für den 15'ten im Monat ein Termineintrag in der
+Ressourcendatei vorgenommen werden, für den 18'ten und auch für den
+21'ten im Monat, was in diesem Fall drei Einträge in der
+Ressourcendatei zu einem solchen Termin ergäbe(1) (*note
+Auftretensfaktor von Tagen-Footnote-1::).
 
 Andererseits kann mittels eines Auftretensfaktors von Tagen dieser
 Aufwand aber nun verringert werden hin zu nur einem Eintrag in der
-Ressourcendatei, welcher gleichermassen f"ur den 15'ten, den 18'ten und
+Ressourcendatei, welcher gleichermaßen für den 15'ten, den 18'ten und
 den 21'ten eines beliebigen Monat gilt, beispielsweise unter Verwendung
 eines Wiederholungsfaktors
 
@@ -454,123 +665,123 @@ Einige Beispiele hierzu:
 
 `000001fr3:11.3'
      In jedem Jahr im Monat Januar: an jedem Tag, der in den Zeitraum
-     vom 3'ten Freitag und den darauffolgenden zehn Tagen f"allt, aber
-     nur jeden dritten Tag in diesem Zeitraum ("uberspringe jeweils
-     zwei Tage).
+     vom 3'ten Freitag und den darauffolgenden zehn Tagen fällt, aber
+     nur jeden dritten Tag in diesem Zeitraum (überspringe jeweils zwei
+     Tage).
 
 `00000112:3.2'
      In jedem Jahr im Monat Januar: an jedem Tag, der in den Zeitraum
-     vom 12'ten des Monats und den darauffolgenden zwei Tagen f"allt,
-     aber nur jeden zweiten Tag in diesem Zeitraum ("uberspringe
-     jeweils einen Tag).
+     vom 12'ten des Monats und den darauffolgenden zwei Tagen fällt,
+     aber nur jeden zweiten Tag in diesem Zeitraum (überspringe jeweils
+     einen Tag).
 
 `00000112:3.2,fr3:5.3'
      In jedem Jahr im Monat Januar: an jedem Tag, der in den Zeitraum
-     vom 12'ten des Monats und den darauffolgenden zwei Tagen f"allt,
-     aber nur jeden zweiten Tag ("uberspringe jeweils einen Tag) sowie
+     vom 12'ten des Monats und den darauffolgenden zwei Tagen fällt,
+     aber nur jeden zweiten Tag (überspringe jeweils einen Tag) sowie
      auch am 3'ten Freitag im Januar jeden Jahres und den
      darauffolgenden vier Tagen, aber nur jeden dritten Tag
-     ("uberspringe jeweils zwei Tage).
+     (überspringe jeweils zwei Tage).
 
 `0*d1:10.1'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom 1'ten Tag des
-     Jahres und den darauffolgenden neun Tagen f"allt, und das f"ur
-     jeden dieser Tage ("uberspringe jeweils null Tage) in diesem
-     Zeitraum.
+     Jahres und den darauffolgenden neun Tagen fällt, und das für jeden
+     dieser Tage (überspringe jeweils null Tage) in diesem Zeitraum.
 
 `0*d1:2.5'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom 1'ten Tag des
-     Jahres und dem darauffolgenden Tag f"allt, aber nur jeden f"unften
-     Tag ("uberspringe jeweils vier Tage) in diesem Zeitraum.  In einem
+     Jahres und dem darauffolgenden Tag fällt, aber nur jeden fünften
+     Tag (überspringe jeweils vier Tage) in diesem Zeitraum.  In einem
      solchen Fall werden die dem Starttag (1'ter Tag des Jahres)
      folgenden Tage (in diesem Beispiel nur einer) nicht respektiert,
-     da der n"achste Tag, der sich unter Ber"ucksichtigung des
+     da der nächste Tag, der sich unter Berücksichtigung des
      Auftretensfaktors ergibt, denjenigen Tag, welcher sich mit dem
      Wiederholungsfaktor als Endetag der Periode errechnet,
-     "uberschreitet.
+     überschreitet.
 
 `0*d99fr:333.61'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom letzten
-     Freitag des Jahres und den darauffolgenden 332 Tagen f"allt, aber
-     nur jeden 61'ten Tag ("uberspringe jeweils 60 Tage) in diesem
-     Zeitraum.  Allerdings werden in F"allen wie diesen, wo ein solcher
-     Termin die Jahresgrenze "uberschreiten w"urde, nur Termine bis zum
+     Freitag des Jahres und den darauffolgenden 332 Tagen fällt, aber
+     nur jeden 61'ten Tag (überspringe jeweils 60 Tage) in diesem
+     Zeitraum.  Allerdings werden in Fällen wie diesen, wo ein solcher
+     Termin die Jahresgrenze überschreiten würde, nur Termine bis zum
      letzten Tag des Jahres produziert.  Da nun aber mit einem Versatz
      von 60 Tage gearbeitet werden soll, wird keiner der dem Starttag
      (letzter Freitag des Jahres) folgenden Tage (in diesem Beispiel
-     332) respektiert, da der n"achste Tag, der sich unter
-     Ber"ucksichtigung des Auftretensfaktors ergibt, denjenigen Tag,
+     332) respektiert, da der nächste Tag, der sich unter
+     Berücksichtigung des Auftretensfaktors ergibt, denjenigen Tag,
      welcher sich mit dem Wiederholungsfaktor als Endetag der Periode
-     errechnet (hier w"are es der letzte Tag des Jahres),
-     "uberschreitet.
+     errechnet (hier wäre es der letzte Tag des Jahres), überschreitet.
 
 `1996*w1fr:17.8'
      Im Jahr 1996: an jedem Tag, der in den Zeitraum vom Freitag der
-     1'ten ISO-Kalenderwoche und den darauffolgenden 16 Tagen f"allt,
-     aber nur jeden achten Tag in diesem Zeitraum ("uberspringe jeweils
+     1'ten Kalenderwoche und den darauffolgenden 16 Tagen fällt, aber
+     nur jeden achten Tag in diesem Zeitraum (überspringe jeweils
      sieben Tage).
 
 `0@a:4.3'
      In jedem Jahr: an jedem Tag, der in den Zeitraum vom Datum der
-     Datumvariablen A und den darauffolgenden drei Tagen f"allt, aber
-     nur jeden dritten Tag in diesem Zeitraum ("uberspringe jeweils
-     zwei Tage).
+     Datumvariablen A und den darauffolgenden drei Tagen fällt, aber
+     nur jeden dritten Tag in diesem Zeitraum (überspringe jeweils zwei
+     Tage).
 
 `1996@e-3:9.4'
      Im Jahr 1996: an jedem Tag, der in den Zeitraum vom Datum drei
-     Tage vor Ostersonntag und den darauffolgenden acht Tagen f"allt,
-     aber nur jeden vierten Tag in diesem Zeitraum ("uberspringe
-     jeweils drei Tage).
+     Tage vor Ostersonntag und den darauffolgenden acht Tagen fällt,
+     aber nur jeden vierten Tag in diesem Zeitraum (überspringe jeweils
+     drei Tage).
 
 `1996@e3#-20so.15'
      Im Jahr 1996: an jedem Tag, der in den Zeitraum vom Datum drei
      Tage nach Ostersonntag bis zum 20'ten Sonntag vor Ostersonntag
-     f"allt, aber nur jeden 15'ten Tag in diesem Zeitraum ("uberspringe
+     fällt, aber nur jeden 15'ten Tag in diesem Zeitraum (überspringe
      jeweils 14 Tage).
 
 `1996@t3#-20so.15'
      Im Jahr 1996: an jedem Tag, der in den Zeitraum vom Datum drei
      Tage nach dem heutigen Datum bis zum 20'ten Sonntag vor dem
-     heutigen Datum f"allt, aber nur jeden 15'ten Tag in diesem Zeitraum
-     ("uberspringe jeweils 14 Tage).
-
-  ---------- Footnotes ----------
-
-  (1)  Einmal abgesehen von der M"oglichkeit, dass in einem solchen
-Fall auch eine Liste von Tagen verwendet werden kann.
+     heutigen Datum fällt, aber nur jeden 15'ten Tag in diesem Zeitraum
+     (überspringe jeweils 14 Tage).
 
 
-File: gcal.info,  Node: Textteil einer Zeile,  Next: Zeile kommentieren,  Prev: Weitere Datumteil-Attribute,  Up: Ressourcendatei
+File: gcal.info,  Node: Auftretensfaktor von Tagen-Footnotes,  Up: Auftretensfaktor von Tagen
+
+(1) Einmal abgesehen von der Möglichkeit, daß in einem solchen Fall
+auch eine Liste von Tagen verwendet werden kann.
+
+
+File: gcal.info,  Node: Textteil einer Zeile,  Next: Spezialtexte,  Prev: Weitere Datumteil-Attribute,  Up: Ressourcendatei
 
 Textteil einer Zeile
 --------------------
 
 Der "Textteil" einer Zeile der Ressourcendatei darf jeden beliebigen
-Text enthalten, den Sie m"ogen.  Allerdings haben einige Zeichen eine
-Sonderbedeutung (`%', `$', `~', `^' und `\'), und m"ussen
-gegebenenfalls gesch"utzt werden, falls mit diesen Zeichen besondere
-Zeichenkombinationen gebildet werden (1), die nur rein textlich
-verwendet werden sollen.  Falls der Textteil nicht von Gcal selbst
-erzeugte Zeichen zur Druckaufbereitung oder Hervorhebung enth"alt, oder
-Zeichen, denen in der Tabelle des verwendeten Zeichensatzes ein Wert
-gr"osser 127 (dezimal) zugeordnet ist (2), so werden auch diese Zeichen
-von Gcal ausgegeben, allerdings *uninterpretiert*!  Deswegen k"onnen bei
-der Ausgabe solcher Zeichen unter Umst"anden Probleme mit der
-verwendeten Bildschirmtreiber-Software und/oder dem externen
-Paginiererprogramm auftreten, ebenso wie beim Versand solcher Zeichen
-mittels elektronischer Post.
+Text enthalten, den Sie mögen.  Allerdings haben einige Zeichen eine
+Sonderbedeutung (`%', `$', `~', `^' und `\'), und müssen gegebenenfalls
+geschützt werden, falls mit diesen Zeichen besondere
+Zeichenkombinationen gebildet werden(1) (*note Textteil einer
+Zeile-Footnote-1::), die nur rein textlich verwendet werden sollen.
+Falls der Textteil nicht von Gcal selbst erzeugte Zeichen zur
+Druckaufbereitung oder Hervorhebung enthält, oder Zeichen, denen in der
+Tabelle des verwendeten Zeichensatzes ein Wert größer 127 (dezimal)
+zugeordnet ist(2) (*note Textteil einer Zeile-Footnote-2::), so werden
+auch diese Zeichen von Gcal ausgegeben, allerdings *uninterpretiert*!
+Deswegen können bei der Ausgabe solcher Zeichen unter Umständen
+Probleme mit der verwendeten Bildschirmtreiber-Software und/oder dem
+externen Paginiererprogramm auftreten, ebenso wie beim Versand solcher
+Zeichen mittels elektronischer Post.
 
-Sogenannte `NUL' Zeichen (3) d"urfen auch im Textteil enthalten sein,
-diese bewirken aber, dass der gesamte Text, der dem ersten Auftreten
-von einem `NUL' Zeichen folgt, unterdr"uckt wird.  Da es meiner Meinung
-nach keinen erkennbaren Sinn macht, auch diese Zeichen als solche
-uninterpretiert auszugeben, dienen diese also nur zum Kommentieren;
-sonst w"urden `NUL' Zeichen auch die bereits vorgenannten Probleme
-verursachen.
+So genannte `NUL' Zeichen(3) (*note Textteil einer Zeile-Footnote-3::)
+dürfen auch im Textteil enthalten sein, diese bewirken aber, daß der
+gesamte Text, der dem ersten Auftreten von einem `NUL' Zeichen folgt,
+unterdrückt wird.  Da es meiner Meinung nach keinen erkennbaren Sinn
+macht, auch diese Zeichen als solche uninterpretiert auszugeben, dienen
+diese also nur zum Kommentieren; sonst würden `NUL' Zeichen auch die
+bereits vorgenannten Probleme verursachen.
 
 Eine Zeile der Ressourcendatei wird auf der Folgezeile fortgesetzt, wenn
 eine `\-\n' (Backslash-Newline) Zeichensequenz vorgefunden wird, d.h.
-das Newline Zeichen der Zeile durch ein Backslash Zeichen unterdr"uckt
+das Newline Zeichen der Zeile durch ein Backslash Zeichen unterdrückt
 wird, z.B.:
 
 Die Zeile:
@@ -583,183 +794,244 @@ und die Zeilen:
 
 bewirken die gleiche Ausgabe und sind insofern identisch.
 
-Ferner k"onnen *lange* Textteile an beliebiger Stelle umgebrochen
-werden.  Die Bezeichnung *lang* bedeutet in diesem Zusammenhang, dass
-der von Gcal bei der Ausgabe dargestellte Text den rechten
-Bildschirmrand "uberschreiten bzw. an diesem umgebrochen w"urde.
+Ferner können "lange Textteile" an beliebiger Stelle umgebrochen werden.
+Die Bezeichnung _lang_ bedeutet in diesem Zusammenhang, daß der von
+Gcal bei der Ausgabe dargestellte Text den rechten Bildschirmrand
+überschreiten bzw. an diesem umgebrochen würde.
 
 Jedesmal wenn ein `~' (Tilde) Zeichen im Textteil vorgefunden wird, so
 wird dieses Zeichen durch ein echtes `\n' (Newline) Zeichen ersetzt, und
-der so umgebrochene Text bei der Ausgabe linksb"unding formatiert
-dargestellt -- das heisst mit einer bestimmten Anzahl von Leerzeichen
-aufgef"ullt.
+der so umgebrochene Text bei der Ausgabe linksbündig formatiert
+dargestellt, das heißt, mit einer bestimmten Anzahl von Leerzeichen
+aufgefüllt.
 
 Falls das `~' (Tilde) Zeichen als Zeichen selbst verwendet werden soll,
-so muss es durch ein f"uhrendes `\' (Backslash) Zeichen hinsichtlich
+so muß es durch ein führendes `\' (Backslash) Zeichen hinsichtlich
 seiner speziellen Bedeutung entwertet werden, z.B. `\~'.  Wenn die
-Zeichen `\~' selbst als Zeichenfolge verwendet werden sollen, so muss
-das `\' (Backslash) Zeichen mit sich selbst gesch"utzt werden, z.B.
-`\\~'.
+Zeichen `\~' selbst als Zeichenfolge verwendet werden sollen, so muß
+das `\' (Backslash) Zeichen durch ein weiteres `\' (Backslash) Zeichen
+geschützt werden, z.B. `\\~'.
 
 Jedesmal wenn ein `^' (Caret) Zeichen im Textteil vorgefunden wird, so
 wird auch dieses Zeichen durch ein echtes `\n' (Newline) Zeichen
 ersetzt, und der so umgebrochene Text bei der Ausgabe in Spalte 1
-dargestellt -- das heisst nicht mit Leerzeichen aufgef"ullt.  Die
+dargestellt, das heißt, nicht mit Leerzeichen aufgefüllt.  Die
 Schutzregeln des `^' Zeichens entsprechen denen des `~' Zeichens.
 
-Die Ressourcendatei `beispiel.rc'
+Die Ressourcendatei `lbrk-1.rc'
 
-     ;
-     ; Hallo, ich bin `beispiel.rc' und jetzt lebendig
-     ;
-     0 Ich weiss ich bin ein kurzer Text
-     0 Ich hoffe ich bin lang genug~hier, ein Zeilenumbruch\
-     ~und noch einer~und nun zum letzten Mal...
-     0 Ich hoffe ich bin auch lang genug^hier, ein Zeilenumbruch\
-     ~und noch einer^und nun zum letzten Mal...
-     0 Bin ich ein kurzer Text? Weiss nicht...
+     $ cat lbrk-1.rc
+     -| ; Hallo, ich bin `lbrk-1.rc' und jetzt lebendig
+     -| ;
+     -| 0 Ich weiss ich bin ein kurzer Text
+     -| 0 Ich hoffe ich bin lang genug~hier, ein Zeilenumbruch~\
+     -| und noch einer~und nun zum letzten Mal...
+     -| 0 Ich hoffe ich bin auch lang genug^hier, ein Zeilenumbruch\
+     -| ~und noch einer^und nun zum letzten Mal...
+     -| 0 Bin ich ein kurzer Text? Weiss nicht...
 
 wird wie folgt ausgegeben:
 
-     $ gcal --resource-file=./beispiel.rc --disable-highlighting
+     $ gcal %00000101 --resource-file=./lbrk-1.rc --disable-highlighting
      -|
      -| Terminliste:
      -|
-     -| Mi,  14 Sep 1994: Bin ich ein kurzer Text? Weiss nicht...
-     -| Mi,  14 Sep 1994: Ich hoffe ich bin auch lang genug
+     -| Sa,   1 Jan 2000: Bin ich ein kurzer Text? Weiss nicht...
+     -| Sa,   1 Jan 2000: Ich hoffe ich bin auch lang genug
      -| hier, ein Zeilenumbruch
      -|                   und noch einer
      -| und nun zum letzten Mal...
-     -| Mi,  14 Sep 1994: Ich hoffe ich bin lang genug
+     -| Sa,   1 Jan 2000: Ich hoffe ich bin lang genug
      -|                   hier, ein Zeilenumbruch
      -|                   und noch einer
      -|                   und nun zum letzten Mal...
-     -| Mi,  14 Sep 1994: Ich weiss ich bin ein kurzer Text
+     -| Sa,   1 Jan 2000: Ich weiss ich bin ein kurzer Text
 
-Da *whitespace* Zeichen zur Trennung von Datum- und Textteil verwendet
-werden, ist es somit nicht ohne weiteres m"oglich, den Textteil mit
-f"uhrenden *whitespace* Zeichen zu versehen, weil diese intern
-"ubersprungen werden und somit nicht zur Ausgabe gelangen.  Falls nun
-aber doch *whitespace* Zeichen den Textteil anf"uhren sollen, so muss
-das *erste* dieser *whitespace* Zeichen durch ein f"uhrendes `\'
-(Backslash) Zeichen hinsichtlich seiner speziellen Bedeutung entwertet
-werden, z.B. `\ ', wenn es sich um ein Leerzeichen handelt.  Gcal
-erkennt an Hand einer solchen Zeichenfolge, dass der Text, der dem `\'
-Zeichen nachfolgt, nicht mehr l"anger der Trennung dient, sondern
-Bestandteil vom Textteil ist.  Gcal "uberspringt sodann dieses
-besondere, nur der Markierung dienende Backslash Zeichen (stellt es
-also nicht in die Ausgabe), und verarbeitet den Rest der Zeile wie
-"ublich.
+Da _whitespace_ Zeichen zur Trennung von Datum- und Textteil verwendet
+werden, ist es somit nicht ohne weiteres möglich, den Textteil mit
+führenden _whitespace_ Zeichen zu versehen, weil diese intern
+übersprungen werden und somit nicht zur Ausgabe gelangen.  Falls nun
+aber doch _whitespace_ Zeichen den Textteil anführen sollen, so muß das
+*erste* dieser _whitespace_ Zeichen durch ein führendes `\' (Backslash)
+Zeichen hinsichtlich seiner speziellen Bedeutung entwertet werden, z.B.
+`\ ', wenn es sich um ein Leerzeichen handelt.  Gcal erkennt an Hand
+einer solchen Zeichenfolge, daß der Text, der dem `\' Zeichen
+nachfolgt, nicht mehr länger der Trennung dient, sondern Bestandteil
+vom Textteil ist.  Gcal überspringt sodann dieses besondere, nur der
+Markierung dienende Backslash Zeichen (stellt es also nicht in die
+Ausgabe), und verarbeitet den Rest der Zeile wie üblich.
 
-Folgendes Beispiel sollte gen"ugen, um den vorstehenden Sachverhalt zu
-verdeutlichen.  Die Ressourcendatei `whitespc.rc'
+Folgendes Beispiel sollte genügen, um den vorstehenden Sachverhalt zu
+verdeutlichen.  Die Ressourcendatei `wspc-1.rc'
 
-     0 BANG BANG
-     0 bogus
-     0         bogomips
-     0    \hallo welt
-     0    \ main(){for(;;)fork();}
-     0 \     sh $0 & $0 &
-     0    \  a  \  b  \\  c  \\\  d
-     0    Was passiert nun?\
-     ~0  \  Dieses!
-     0    Was passiert nun?\\
-     ~0  \  Jenes!
+     $ cat wspc-1.rc
+     -| 0 BANG BANG
+     -| 0 bogus
+     -| 0         bogomips
+     -| 0    \hallo welt
+     -| 0    \ main(){for(;;)fork();}
+     -| 0 \     sh $0 & $0 &
+     -| 0    \  a  \  b  \\  c  \\\  d
+     -| 0    Was passiert nun?\
+     -| ~0  \  Dieses!
+     -| 0    Was passiert nun?\\
+     -| ~0  \  Jenes!
 
 wird wie folgt ausgegeben:
 
-     $ gcal --resource-file=./whitespc.rc --disable-highlighting
+     $ gcal --resource-file=./wspc-1.rc --disable-highlighting
      -|
      -| Terminliste:
      -|
-     -| Mi,  14 Sep 1994:      sh $0 & $0 &
-     -| Mi,  14 Sep 1994:   a  \  b  \\  c  \\\  d
-     -| Mi,  14 Sep 1994:  main(){for(;;)fork();}
-     -| Mi,  14 Sep 1994: BANG BANG
-     -| Mi,  14 Sep 1994: Was passiert nun?~0  \  Jenes!
-     -| Mi,  14 Sep 1994: Was passiert nun?
+     -| Sa,   3 Jun 2000:      sh $0 & $0 &
+     -| Sa,   3 Jun 2000:   a  \  b  \\  c  \\\  d
+     -| Sa,   3 Jun 2000:  main(){for(;;)fork();}
+     -| Sa,   3 Jun 2000: BANG BANG
+     -| Sa,   3 Jun 2000: Was passiert nun?~0  \  Jenes!
+     -| Sa,   3 Jun 2000: Was passiert nun?
      -|                   0  \  Dieses!
-     -| Mi,  14 Sep 1994: \hallo welt
-     -| Mi,  14 Sep 1994: bogomips
-     -| Mi,  14 Sep 1994: bogus
+     -| Sa,   3 Jun 2000: \hallo welt
+     -| Sa,   3 Jun 2000: bogomips
+     -| Sa,   3 Jun 2000: bogus
 
-  ---------- Footnotes ----------
+
+File: gcal.info,  Node: Textteil einer Zeile-Footnotes,  Up: Textteil einer Zeile
 
-  (1)  Wie zum Beispiel `%i', `$a'...
+(1) Wie zum Beispiel `%i', `$a'...
 
-  (2)  Diese Zeichen sind eventuell nicht druckbar.
+(2) Diese Zeichen sind eventuell nicht druckbar.
 
-  (3)  Das ist das Zeichen, welchem in der Tabelle des verwendeten
+(3) Das ist das Zeichen, welchem in der Tabelle des verwendeten
 Zeichensatzes der Wert Null zugeordnet ist.
 
 
-File: gcal.info,  Node: Zeile kommentieren,  Next: Include Anweisungen,  Prev: Textteil einer Zeile,  Up: Ressourcendatei
+File: gcal.info,  Node: Spezialtexte,  Next: Zeile kommentieren,  Prev: Textteil einer Zeile,  Up: Ressourcendatei
+
+`%?'... Spezialtexte
+--------------------
+
+Der Textteil einer Zeile der Ressourcendatei darf mit verschiedenen
+Spezialtexten ausgestattet werden, welche in jeder beliebigen(1) (*note
+Spezialtexte-Footnote-1::) Anzahl und Reihenfolge auftreten dürfen.
+Diese Texte beginnen alle mit dem `%' (Prozent) Zeichen, welches
+seinerseits durch ein führendes `\' (Backslash) Zeichen hinsichtlich
+seiner speziellen Bedeutung entwertet werden kann, falls das `%'
+(Prozent) Zeichen selbst im Textteil verwendet werden soll, z.B. `\%'.
+Dem `%' Zeichen folgt sodann meist eine optionale Formatanweisung,
+(siehe *Note Formatanweisung::, für die ausführliche Beschreibung der
+Formatanweisung und ihrer Komponenten), und danach ein Kennzeichen,
+welches die Art des Spezialtextes definiert.  Falls das Kennzeichen ein
+Buchstabe ist, so wird zwischen Groß- bzw. Kleinschreibung
+*unterschieden*.
+
+Der Sinn dieser Spezialtexte besteht hauptsächlich darin, entweder die
+Ausgabe von Terminen in bestimmten Fällen zu unterdrücken, oder aber
+diese mit besonderen Texten auszustatten bzw. externe Kommandos
+auszuführen.  *Note Beschreibung aller `%?'... Spezialtexte:
+Spezialtexte (lang), für eine vollständige Darstellung aller
+verwendbaren Spezialtexte, und *Note Zusammenfassung aller `%?'...
+Spezialtexte: Spezialtexte (kurz), für deren entsprechende
+Kurzdarstellung.
+
+So wird zum Beispiel die Ressourcendatei `speci-1.rc'
+
+     $ cat speci-1.rc
+     -| ; Ich bin wahrhaftig sehr speziell :)
+     -| ;
+     -| 0 1. Heute ist %>1u*K , %>02&*D  %U  %Y !
+     -| 0 2. Es ist der %>03&*N  Tag des Jahres.
+     -| 0 3. Die aktuelle Wochennummer ist: %k .
+     -| 0 4. Gegenwaertig ist es %t*  Uhr, Herr %-USER .
+     -| 0 5. Beeilen Sie sich mit ihrer Arbeit,~\
+     -|    denn Sonnenaufgang ist um %o+5158+00738+61,2: .
+
+wie folgt ausgegeben (wenn das heutige Datum der 4'te Oktober 1996 ist):
+
+     $ gcal --resource-file=speci-1.rc -H no -ox
+     -|
+     -| Mo,   4 Okt 1999: 1. Heute ist MONTAG, 04'ter Oktober 1999!
+     -|                   2. Es ist der 277'ter Tag des Jahres.
+     -|                   3. Die aktuelle Wochennummer ist: 40.
+     -|                   4. Gegenwaertig ist es 04:01am Uhr, Herr esken.
+     -|                   5. Beeilen Sie sich mit ihrer Arbeit,
+     -|                      denn Sonnenaufgang ist um 07:33.
+
+
+File: gcal.info,  Node: Spezialtexte-Footnotes,  Up: Spezialtexte
+
+(1) Vernünftigen!
+
+
+File: gcal.info,  Node: Zeile kommentieren,  Next: Einfuegeanweisungen,  Prev: Spezialtexte,  Up: Ressourcendatei
 
 Zeile kommentieren
 ------------------
 
-Eine Zeile (1) der Ressourcendatei, die mit einem `;' (Semikolon)
-Zeichen beginnt, ist ein Kommentar und wird von Gcal vollst"andig
-ignoriert!  F"uhrende *whitespace* Zeichen d"urfen dem Kommentarzeichen
-vorangehen.  *Note Textteil einer Zeile::, wo erkl"art wird, wie ein
-`NUL' Zeichen zur Kommentierung in einem Textteil benutzt werden kann.
+Eine Zeile(1) (*note Zeile kommentieren-Footnote-1::) der
+Ressourcendatei, die mit einem `;' (Semikolon) Zeichen beginnt, ist ein
+Kommentar und wird von Gcal vollständig ignoriert!  Führende
+_whitespace_ Zeichen dürfen dem Kommentarzeichen vorangehen.  *Note
+Textteil einer Zeile::, wo erklärt wird, wie ein `NUL' Zeichen zur
+Kommentierung in einem Textteil benutzt werden kann.
 
-Die nun folgende Darstellung der `kommentar.rc' Ressourcendatei, die
-ihrerseits *nur* aus Kommentaren besteht, sollte gen"ugen, um den
+Die nun folgende Darstellung der `remark.rc' Ressourcendatei, die
+ihrerseits *nur* aus Kommentaren besteht, sollte genügen um den
 vorstehenden Sachverhalt zu verdeutlichen:
 
-     $ cat kommentar.rc
-     ;00001031 ^\
-                             ........^\
-                              ;::;;::,^\
-                              ;::;;::;,^\
-                             ;;:::;;:;;,^\
-               .vnmnv\%vnnv\%,.;;;:::;;:;;,  .,vnmnv\%vnmn,^\
-            vnmmmn\%vnmmnv\%vnmmnv\%;;;;;;\%nmmmnv\%vnmnv\%vmmnv^\
-          vnmmnv\%vmmmmnv\%vnmmmmmnv\%;:\%nmmmmmmnv\%vnmn\%vnmmmnv^\
-         vnmmnv\%vnmmmnv\%vnmmmmmmmmnv\%nmmmmmmmmnv\%vnmmn\%vnmmmnv^\
-        vnmmnv\%vnmmmnv\%vnmmmmmmmmnv\%vmmmmmmmmmmnv\%vnmmv\%vnmmmnv^\
-       vnmmnv\%vnmmmnv\%vnmm;mmmmmmnv\%vmmmmmmmm;mmnv\%vnmnv\%vnmmmnv,^\
-      vnmmnv\%vnmmmnv\%vnmm;' mmmmmnv\%vmmmmmmm;' mmnv\%vnmnv\%vnmmmnv,^\
-      vnmmnv\%vnmmmnv\%vn;;    mmmmnv\%vmmmmmm;;    nv\%vnmmnv\%vnmmmnv^\
-     vnmmnv\%vnmmmmnv\%v;;      mmmnv\%vmmmmm;;      v\%vnmmmnv\%vnmmmnv^\
-     vnmmnv\%vnmmmmnv\%vnmmmmmmmmm;;      mmmmmmmmmnv\%vnmmmmnv\%vnmmmnv^\
-     vnmmnv\%vnmmmmnv\%vnmmmmmmmmmm;;    mmmmmmmmmmnv\%vnmmmmnv\%vnmmmnv^\
-     vnmmnv\%vnmmmmnv\%vnmmmmmmmmmmnv;,mmmmmmmmmmmmnv\%vn;mmmnv\%vnmmmnv^\
-     vnmmnv\%vnmmm. nv\%vnmmmmmmmmmnv\%;mmmmmmmmmmmnv\%vn; mmmnv\%vnmmmnv^\
-     `vnmmnv\%vnmm,  v\%vnmmmmmmmmmmnv\%nmmmmmmmmmmnv\%v;  mmnv\%vnnmmnv'^\
-      vnmmnv\%vnmm;,   \%vnmmmmmmmmmnv\%nmmmmmmmmmnv\%;'   mmv\%vnmmmmnv^\
-       vnmmnv\%vnmm;;,   nmmm;'             mmmm;;'    mnv\%vnmmmmnv'^\
-       `vnmmnv\%vnmmm;;,.         mmnvv;,            mmnv\%vnmmmmnv'^\
-        `vnmmnv\%vnmmmmnv\%vnmmmmmmmmnvvnmmmmmmnv\%vnmmmmv\%vnmmmmnv'^\
-          `vnmvn\%vmmmmmnv\%vnmmmmmmmnvvnmmmmmnv\%vnmmmmn\%vnmmmnv'^\
-              `vn\%nmmmmmn\%:\%vnmnmmmmn\%vnmmmnv\%:\%vnmnv\%nmnv'
-     
-     ; Ein Zeilenkommentar
-           ; Ebenfalls ein Zeilenkommentar
-     ;     Ein                              \
-           formatierter und mehrzeiliger    \
-           Kommentar
-
-  ---------- Footnotes ----------
-
-  (1)  Physisch wie auch logisch.
+     $ cat remark.rc
+     -| ;00001031 ^\
+     -|                         .......^\
+     -|                         ;::;::,^\
+     -|                         ;::;::;,^\
+     -|                        ;;::;;:;;,^\
+     -|           .vmnv\%vnv\%,.;;;:::;;:;;,  .,vnmv\%vnn,^\
+     -|        vmmmn\%vmmnv\%vnmmnv\%;;;;;;\%nmmmnv\%vnmv\%vmmv^\
+     -|      vmmnv\%vmmmnv\%vnmmmmmnv\%;:\%nmmmmmmnv\%vnm\%vnmmmv^\
+     -|     vmmnv\%vmmmnv\%vnmmmmmmmmnv\%nmmmmmmmmnv\%vnmm\%vnmmmv^\
+     -|    vmmnv\%vmmmnv\%vnmmmmmmmmnv\%vmmmmmmmmmmnv\%vnmv\%vnmmmv^\
+     -|   vmmnv\%vmmmnv\%vnmm;mmmmmmnv\%vmmmmmmmm;mmnv\%vnmv\%vnmmmv,^\
+     -|  vmmnv\%vmmmnv\%vnmm;' mmmmmnv\%vmmmmmmm;' mmnv\%vnmv\%vnmmmv,^\
+     -|  vmmnv\%vmmmnv\%vn;;    mmmmnv\%vmmmmmm;;    nv\%vnmmv\%vnmmmv^\
+     -| vmmnv\%vmmmmnv\%v;;      mmmnv\%vmmmmm;;      v\%vnmmmv\%vnmmmv^\
+     -| vmmnv\%vmmmmnv\%vnmmmmmmmmm;;      mmmmmmmmmnv\%vnmmmmv\%vnmmmv^\
+     -| vmmnv\%vmmmmnv\%vnmmmmmmmmmm;;    mmmmmmmmmmnv\%vnmmmmv\%vnmmmv^\
+     -| vmmnv\%vmmmmnv\%vnmmmmmmmmmmnv;,mmmmmmmmmmmmnv\%vn;mmmv\%vnmmmv^\
+     -| vmmnv\%vmmm. nv\%vnmmmmmmmmmnv\%;mmmmmmmmmmmnv\%vn; mmmv\%vnmmmv^\
+     -| `vmmnv\%vmm,  v\%vnmmmmmmmmmmnv\%nmmmmmmmmmmnv\%v;  mmv\%vnnmmv'^\
+     -|  vmmnv\%vmm;,   \%vnmmmmmmmmmnv\%nmmmmmmmmmnv\%;'   mv\%vnmmmmv^\
+     -|   vmmnv\%vmm;;,   nmmm;'             mmmm;;'    mv\%vnmmmmv'^\
+     -|   `vmmnv\%vmmm;;,.         mmnvv;,            mmv\%vnmmmmv'^\
+     -|    `vmmnv\%vmmmmnv\%vnmmmmmmmmnvvnmmmmmmnv\%vnmmmv\%vnmmmmv'^\
+     -|      `vmvn\%vmmmmnv\%vnmmmmmmmnvvnmmmmmnv\%vnmmmm\%vnmmmv'^\
+     -|          `v\%mmmmmn%:\%vnmnmmmmn\%vnmmmnv%:\%vnmv\%nmv'
+     -|
+     -| ; Ein Zeilenkommentar
+     -|       ; Ebenfalls ein Zeilenkommentar
+     -| ;     Ein                              \
+     -|       formatierter und mehrzeiliger    \
+     -|       Kommentar
 
 
-File: gcal.info,  Node: Include Anweisungen,  Next: Spezialtexte,  Prev: Zeile kommentieren,  Up: Ressourcendatei
+File: gcal.info,  Node: Zeile kommentieren-Footnotes,  Up: Zeile kommentieren
 
-Include Anweisungen
--------------------
+(1) Physisch als auch logisch.
 
-Es d"urfen `#include' Anweisungen in einer Ressourcendatei eingef"ugt
-werden, welche dass Aufsuchen und Vorladen weiterer Ressourcendateien
-bewirken (1).  Eine `#include' Anweisung veranlasst Gcal das Lesen der
-laufenden Ressourcendatei zu unterbrechen und eine andere
-Ressourcendatei zu lesen, bevor mit dem Weiterlesen der laufenden
-Ressourcendatei fortgefahren wird.  Die Anweisung ist eine Zeile in der
-Ressourcendatei, die wie die folgende Schablone aussieht:
+
+File: gcal.info,  Node: Einfuegeanweisungen,  Next: Datumvariablen,  Prev: Zeile kommentieren,  Up: Ressourcendatei
 
-     #include *whitespace* ARGUMENT [*whitespace*] *newline*
+Einfügeanweisungen
+------------------
+
+Es dürfen `#include' Anweisungen in einer Ressourcendatei eingefügt
+werden, welche daß Aufsuchen und Vorladen weiterer Ressourcendateien
+bewirken(1) (*note Einfuegeanweisungen-Footnote-1::).  Eine `#include'
+Anweisung veranlaßt Gcal das Lesen der laufenden Ressourcendatei zu
+unterbrechen und eine andere Ressourcendatei zu lesen, bevor mit dem
+Weiterlesen der laufenden Ressourcendatei fortgefahren wird.  Die
+Anweisung ist eine Zeile in der Ressourcendatei, die wie die folgende
+Schablone aussieht:
+
+     #include _whitespace_ ARGUMENT [_whitespace_] _newline_
 
 Das ARGUMENT kann entweder
 
@@ -769,11 +1041,11 @@ oder
 
      <DATEINAME>
 
-sein (2).
+sein(2) (*note Einfuegeanweisungen-Footnote-2::).
 
-Mindestens ein *whitespace* Zeichen ist notwendig zwischen `#include'
-und dem ARGUMENT.  Dem ARGUMENT d"urfen beliebig viele *whitespace*
-Zeichen folgen und die Zeile muss mit einem `\n' (Newline) Zeichen
+Mindestens ein _whitespace_ Zeichen ist notwendig zwischen `#include'
+und dem ARGUMENT.  Dem ARGUMENT dürfen beliebig viele _whitespace_
+Zeichen folgen und die Zeile muß mit einem `\n' (Newline) Zeichen
 enden, ausgenommen es ist die letzte Zeile in einer Ressourcendatei.
 
 Nun zu einem etwas konkreteren Beispiel:
@@ -783,427 +1055,51 @@ Nun zu einem etwas konkreteren Beispiel:
   2. #include <bar>
 
 Die erste `#include' Anweisung regt Gcal an, die Datei `bar' im
-Dateiverzeichnis `foo' vom aktuellen Dateiverzeichnis aus einzuf"ugen.
+Dateiverzeichnis `foo' vom aktuellen Dateiverzeichnis aus einzufügen.
 Falls das nicht gelingt, so versucht Gcal mittels der Schritte 1...4
-des bereits zuvor erkl"arten Datei-Suchmechanismus' diese Datei
-einzuf"ugen (*note Datei-Suchmechanismus: Ressourcendatei.).
+des bereits zuvor erklärten Datei-Suchmechanismus' diese Datei
+einzufügen (*note Datei-Suchmechanismus: x-Datei-Suchmechanismus.).
 
 Die zweite `#include' Anweisung regt Gcal an, die Datei `bar' aus dem
 Benutzer- bzw. System-Datenverzeichnis mittels der Schritte 3...4 des
-bereits zuvor erkl"arten Datei-Suchmechanismus' einzuf"ugen.
-Allerdings ist es nicht gestattet, Dateien, deren Zugriffspfad vom
+bereits zuvor erklärten Datei-Suchmechanismus' einzufügen.  Allerdings
+ist es nicht gestattet, Dateien, deren Zugriffspfad vom
 Wurzeldateiverzeichnis aus fest vorgegeben ist, mittels einer solchen
-`#include' Anweisung einzuf"ugen, wie z.B. `#include </file>' oder
+`#include' Anweisung einzufügen, wie z.B. `#include </file>' oder
 `#include </foo/bar/file>'.  Ebenfalls nicht gestattet bei dieser Art
 von `#include' Anweisungen ist die Angabe eines einfachen oder
 erweiterten Dateinamens, der mit einer Laufwerksangabe versehen ist,
 auch wenn ein Betriebssystem wie MS-DOS oder OS/2 eine solche
-Laufwerksangabe grunds"atzlich erlauben w"urde, da der mit f"uhrendem
+Laufwerksangabe grundsätzlich erlauben würde, da der mit führendem
 Benutzer- bzw. System-Datenverzeichnisnamen ausgestattete,
 resultierende, erweiterte Dateiname nicht mehr den geltenden
-Dateinamenskonventionen entsprechen w"urde.
+Dateinamenskonventionen entsprechen würde.
 
-Eingef"ugte Dateien d"urfen ihrerseits wiederum weitere Dateien
-einf"ugen.  Allerdings ist die Schachtelungstiefe eingef"ugter Dateien
-einerseits durch die Gr"osse des zur Verf"ugung stehenden
-Hauptspeichers begrenzt, und andererseits durch den Wert, der vom
-Betriebssystem bzw. Kompilierer als Obergrenze von gleichzeitig
-ge"offneten Dateien vorgegeben ist.  Rekursive Einf"ugungen (3) oder
-zyklische Einf"ugungen (4) sind nicht erlaubt, da solche
-R"uckw"artsbez"uge eine programminterne Endlosschleife erzeugen w"urden!
-Gcal erkennt solche Situationen und beendet sich sofort mit einem
-fatalen Fehler.  *Note 119: Fehlerkodes, f"ur weitere Informationen.
+Eingefügte Dateien dürfen ihrerseits wiederum weitere Dateien einfügen.
+Allerdings ist die Schachtelungstiefe eingefügter Dateien einerseits
+durch die Größe des zur Verfügung stehenden Hauptspeichers begrenzt, und
+andererseits durch den Wert, der vom Betriebssystem bzw. Kompilierer als
+Obergrenze von gleichzeitig geöffneten Dateien vorgegeben ist.
+Rekursive Einfügungen(3) (*note Einfuegeanweisungen-Footnote-3::) oder
+zyklische Einfügungen(4) (*note Einfuegeanweisungen-Footnote-4::) sind
+nicht erlaubt, da solche Rückwärtsbezüge eine programminterne
+Endlosschleife erzeugen würden!  Gcal erkennt solche Situationen und
+beendet sich sofort mit einem fatalen Fehler.  *Note Fehlerkode 119:
+x-119-Fehlerkode, für weitere Informationen.
 
-Falls eine einzuf"ugende Ressourcendatei nicht gefunden wird und keine
+Falls eine einzufügende Ressourcendatei nicht gefunden wird und keine
 `--debug=abort' Option angegeben ist, so wird mit der Verarbeitung der
 Ressourcendatei, welche `#include' enthielt, fortgefahren.
 
-  ---------- Footnotes ----------
-
-  (1)  Ein Mechanismus "ahnlich demjenigen, den der C Preprocessor
-benutzt.
-
-  (2)  Also ein Dateiname, der entweder mit `""' oder `<>' umfasst ist.
-
-  (3)  Die eingef"ugte Datei versucht sich selbst erneut einzuf"ugen.
-
-  (4)  Die eingef"ugte Datei wird von einer anderen Datei, die an einer
-tieferen Stelle in einer solchen Kette auftritt, erneut eingef"ugt.
-
 
-File: gcal.info,  Node: Spezialtexte,  Next: Datumvariablen,  Prev: Include Anweisungen,  Up: Ressourcendatei
+File: gcal.info,  Node: Einfuegeanweisungen-Footnotes,  Up: Einfuegeanweisungen
 
-`%?'... Spezialtexte
---------------------
+(1) Ein Mechanismus ähnlich demjenigen, den der C Preprocessor benutzt.
 
-Der Textteil einer Zeile der Ressourcendatei darf 81 verschiedene
-Spezialtexte enthalten, welche in jeder beliebigen (1) Anzahl und
-Reihenfolge auftreten d"urfen.  Diese Texte beginnen alle mit dem `%'
-(Prozent) Zeichen, welches seinerseits durch ein f"uhrendes `\'
-(Backslash) Zeichen hinsichtlich seiner speziellen Bedeutung entwertet
-werden kann, falls das `%' (Prozent) Zeichen selbst im Textteil
-verwendet werden soll, z.B. `\%'.  Dem `%' Zeichen folgt sodann ein
-Kennzeichen, welches die Art des Spezialtextes definiert.  Falls das
-Kennzeichen ein Buchstabe ist, so wird zwischen Gross- bzw.
-Kleinschreibung *unterschieden*.
+(2) Also ein Dateiname, der entweder mit `""' oder `<>' umfaßt ist.
 
-Der Sinn dieser Spezialtexte besteht haupts"achlich darin, entweder die
-Ausgabe von Terminen in bestimmten F"allen zu unterdr"ucken, oder aber
-diese mit besonderen Texten auszustatten bzw. externe Kommandos
-auszuf"uhren.  *Note `%?'... Spezialtexte: Spezialtexte (lang), f"ur
-eine vollst"andige Darstellung aller verwendbaren Spezialtexte, und
-*Note Zusammenfassung aller `%?'... Spezialtexte: Spezialtexte (kurz),
-f"ur deren entsprechende Kurzdarstellung.
+(3) Die eingefügte Datei versucht sich selbst erneut einzufügen.
 
-So wird zum Beispiel die Ressourcendatei `spezial.rc'
-
-     ; Ich bin wahrhaftig sehr speziell :)
-     ;
-     0 1. Heute ist %o , %u  %M  %Y !
-     0 2. Es ist der %#  Tag des Jahres.
-     0 3. Die aktuelle Wochennummer ist: %k .
-     0 4. Gegenwaertig ist es %t12 Uhr.
-
-wie folgt ausgegeben (wenn das heutige Datum der 4'te Oktober 1996 ist):
-
-     $ gcal --resource-file=spezial.rc -H no -ox
-     -|
-     -| Fr,   4 Okt 1996: 1. Heute ist Freitag, 04'ter Oktober 1996!
-     -|                   2. Es ist der 278'ter Tag des Jahres.
-     -|                   3. Die aktuelle Wochennummer ist: 40.
-     -|                   4. Gegenwaertig ist es 01.25am Uhr.
-
-  ---------- Footnotes ----------
-
-  (1)  Vern"unftigen!
-
-
-File: gcal.info,  Node: Datumvariablen,  Next: Textvariablen,  Prev: Spezialtexte,  Up: Ressourcendatei
-
-Datumvariablen
---------------
-
-Gcal respektiert *globale* und/oder *lokale* Datumvariablen, welche
-entweder im Datumteil einer Zeile der Gcal Ressourcendatei oder als
-Bestandteil eines Spezialtexts im Textteil einer Zeile der
-Ressourcendatei verwendet werden d"urfen.
-
-*Note `--date-variable=ARGUMENT': Termin Optionen, f"ur weitere Details
-zu globalen Datumvariablen.
-
-Das bedeutet, dass bis zu *24* benutzerdefinierte Datumvariablen
-gesetzt und w"ahrend der Programmausf"uhrung referenziert werden
-k"onnen.  Der Name einer Datumvariablen DVAR besteht aus einem einzelnen
-Buchstaben (1), und wird in einer Definition von dem Zuweisungsoperator
-`=' gefolgt, sowie den Zahlenwerten f"ur Monat MM (oder einem
-Monatsnamen im 3-Buchstaben Kurzformat, z.B. `Jan', `Feb', ...) und Tag
-TT, welche diese Variable aufzunehmen hat (2), z.B.:
-
-     a=1127
-     c=a
-
-speichert den 27'ten November in der lokalen Datumvariablen A und in
-der lokalen Datumvariablen C.  Sie sollten stets in Erinnerung behalten,
-dass Datumvariablen erst dann in einer Zeile referenziert werden
-k"onnen, wenn diese bereits definiert worden sind, da eine
-Ressourcendatei von Gcal Zeile f"ur Zeile abgearbeitet wird.
-
-Nur an lokale Datumvariablen k"onnen dynamische Daten zugewiesen werden,
-die im `MMWWWN', `DVAR[+|-]N[WWW]' oder `*d|wN[WWW]' Format angegeben
-sind, z.B.:
-
-     a=03so2
-     b=JunMon9
-     c=b-3
-     d=c+4Sa
-     x=*d10
-     y=*d10fre
-     z=*w3So
-
-Vorstehendes bedeutet, dass die Datumvariable A das Datum des 2'ten
-Sonntags im M"arz speichert und B das Datum des letzten Montags im
-Monat Juni speichert.  Datumvariable C speichert das Datum, welches
-drei Tage vor dem Datum des letzten Montags im Juni liegt und in der
-Datumvariablen D wird dieses Datum auf dasjenige Datum gesetzt, welches
-sich vier Samstage nach dem Datum von C ergibt.  Datumvariable X
-speichert das Datum des 10'ten absoluten Tages des Jahres (== 10'ter
-Januar).  Y speichert das Datum des 10'ten Freitags des Jahres, und Z
-wird das Datum des Sonntags, der in die 3'te ISO-Kalenderwoche f"allt,
-zugewiesen.
-
-*Achtung:*
-Diese Art der Zuweisung an Datumvariablen wird *nur* innerhalb
-einfacher Jahresgrenzen korrekt berechnet, also nicht in denjenigen
-Terminen, welche ausgegeben werden, nachdem das laufende Jahr gewechselt
-hat, z.B. in *Fiskaljahren*.
-
-Datumvariablen, die in einer Ressourcendatei definiert werden, sind
-stets lokal, und werden nur in dieser spezifischen Datei *und*
-derjenigen Datei respektiert, welche in diese eingef"ugt wird.  Das
-bedeutet hinsichtlich der eingef"ugten Datei, dass alle lokalen
-Variablen der aufrufenden Datei sichtbar sind.  Die eingef"ugte Datei
-selbst darf eigene lokale Variablen definieren, welche dann die bereits
-an anderer Stelle definierten lokalen Variablen "uberdecken, und welche
-bei Weiterverarbeitung der aufrufenden Datei nicht exportiert werden.
-Alle anderen Definitionen von Datumvariablen (3) sind stets global.
-Falls eine Zeile einer Ressourcendatei eine Referenz auf eine
-Datumvariable enth"alt, die nicht lokal in dieser Datei definiert ist,
-so wird Gcal versuchen, die Werte der entsprechenden globalen Variablen
-zu benutzen.  Sollte dieses nicht gelingen, da keine globale Definition
-dieser Datumvariablen vorliegt, so wird Gcal diese Zeile nicht
-verarbeiten.  Wenn zudem die einfache `--debug' bzw.
-`--debug=internal' Option angegeben wurde, so wird ein Informationstext
-auf dem *Standardfehler-Ger"atekanal* f"ur jede undefinierte
-Datumvariable ausgegeben (*note `--debug=internal': Globale Optionen.).
-Falls die `--debug=abort' Option angegeben wurde und eine Referenz
-einer undefinierten Datumvariable auftrat, so wird das Gcal-Programm
-mit Fehlerkode abgebrochen.  *Note 113: Fehlerkodes, und *Note
-`--debug=abort': Globale Optionen, f"ur weitere Informationen.
-
-Eine lokale Datumvariable kann aber auch gel"oscht werden, was bedeutet,
-dass diese Datumvariable keinen lokalen G"ultigkeitsbereich mehr
-aufweist und somit undefiniert ist.  So ist es dann m"oglich, dass in
-einer Folgezeile, in der diese Datumvariable referenziert wird, ein
-m"oglicherweise global gesetzter Wert dieser Datumvariable verwendet
-werden kann.  Das nachfolgende Beispiel der Ressourcendatei `dvar.rc'
-verdeutlicht diesen Sachverhalt:
-
-     ; dvar.rc
-     ;
-     z=0202
-     0@z Das lokal an `z' zugewiesene Datum
-     z=
-     0@z Das global an `z' zugewiesene Datum
-     z=0404
-     0@z Das lokal an `z' zugewiesene Datum
-
-So erzeugt Gcal die folgende Ausgabe:
-
-     $ gcal %1777 -H no -x -v z=1212 -f ./dvar.rc -y
-     -|
-     -| So,   2 Feb 1777: Das lokal an `z' zugewiesene Datum
-     -| Fr,   4 Apr 1777: Das lokal an `z' zugewiesene Datum
-     -| Fr,  12 Dez 1777: Das global an `z' zugewiesene Datum
-     $ gcal %1777 -H no -x -f ./dvar.rc -y
-     -|
-     -| So,   2 Feb 1777: Das lokal an `z' zugewiesene Datum
-     -| Fr,   4 Apr 1777: Das lokal an `z' zugewiesene Datum
-
-Nur fortgeschrittene Benutzer sollten die `--export-date-variables'
-Option benutzen, welche bewirkt, dass die aktuelle Inkarnation einer
-lokalen Datumvariablen -- welche zuvor in einer Ressourcendatei
-definiert wurde und nicht in einer eingef"ugten Datei -- an weitere
-Ressourcendateien exportiert wird, anstelle der Benutzung deren
-globalen Wertes, falls diese Datumvariable nicht lokal in dieser
-weiteren Ressourcendatei definiert ist.  *Note Include Anweisungen::,
-f"ur weitere Details.
-
-Aber seien Sie vorsichtig, die Benutzung dieser Option k"onnte
-unerwartete Ergebnisse erzeugen, da die Reihenfolge der Abarbeitung der
-Ressourcendateien eine wichtige Gr"osse hinsichtlich der Wirkung der
-`--export-date-variables' Option ist, so dass es nicht empfohlen werden
-kann, diese Option zu benutzen.  Sie, der Benutzer, m"ussen sehr genau
-wissen, was Sie mit dieser Option bezwecken wollen; *Sie seien nun
-ausdr"ucklich gewarnt!*
-
-Einige grundlegende Operationen k"onnen auf Datumvariablen ausgef"uhrt
-werden.  Diese sind:
-
-*Operation*    *Beschreibung*                                             
-`DVAR++'       Einfache Inkrementierung um einen Tag.                     
-`DVAR--'       Einfache Dekrementierung um einen Tag.                     
-`DVAR+=N'      Addition eines konstanten numerischen Tagesfaktors N.      
-`DVAR-=N'      Subtraktion eines konstanten numerischen Tagesfaktors N.   
-`DVAR+=NWWW'   Addition von N Wochentagen WWW.                            
-`DVAR-=NWWW'   Subtraktion von N Wochentagen WWW.                         
-
-Der G"ultigkeitsbereich der Operationen, welche auf einer lokalen
-Datumvariablen durchgef"uhrt werden, erstreckt sich auf die
-Ressourcendatei oder die eingef"ugte Datei, in welcher die lokale
-Datumvariable definiert wurde.
-
-Falls Operationen auf eine globale Datumvariable in einer
-Ressourcendatei oder in derjenigen Datei, die in diese eingef"ugt wird,
-durchgef"uhrt werden, so sind diese Operationen nur in dieser
-entsprechenden Datei g"ultig (4), nicht aber in weiteren
-Ressourcendateien, welche verarbeitet werden.  Das bedeutet, dass die
-Initialwerte der globalen Datumvariablen stets restauriert werden, falls
-die zu verarbeitende Ressourcendatei wechselt.
-
-Bitte beachten Sie abschliessend, dass jede Zuweisung oder Operation
-auf eine Datumvariable in einer separaten Zeile der Ressourcendatei
-erfolgen muss.
-
-  ---------- Footnotes ----------
-
-  (1)  Gross- bzw. Kleinbuchstaben werden nicht unterschieden.  Nicht
-zuweisbar bzw. inoperabel ist die Datumvariable E, welche intern f"ur
-das Datum des Ostersonntags reserviert ist.  Ebenfalls nicht zuweisbar
-bzw. inoperabel ist die Datumvariable T, welche intern f"ur das heutige
-Datum reserviert ist.
-
-  (2)  Oder dem Namen einer anderen Datumvariablen.
-
-  (3)  In der Kommandozeile, Umgebungsvariable `GCAL' oder Antwortdatei.
-
-  (4)  Diese werden nur lokal ausgef"uhrt.
-
-
-File: gcal.info,  Node: Textvariablen,  Prev: Datumvariablen,  Up: Ressourcendatei
-
-Textvariablen
--------------
-
-Gcal respektiert *globale* und/oder *lokale* Textvariablen, welche
-"uberall in einer Zeile der Gcal Ressourcendatei verwendet werden
-d"urfen.
-
-*Note `--text-variable=ARGUMENT': Termin Optionen, f"ur weitere Details
-zu globalen Textvariablen.
-
-Das bedeutet, dass bis zu *26* benutzerdefinierte Textvariablen gesetzt
-und w"ahrend der Programmausf"uhrung referenziert werden k"onnen.  Der
-Name einer Textvariablen "tvar" besteht aus einem `$' Pr"afix und einem
-einzelnen Buchstaben (1), und wird in einer Definition von dem
-Zuweisungsoperator `=' gefolgt, sowie dem Text, welchen diese Variable
-aufzunehmen hat.  Nur lokale Textvariablen werden auf einen
-undefinierten Wert gesetzt, falls kein Text rechts des
-Zuweisungsoperators angegeben ist.  Sie sollten stets in Erinnerung
-behalten, dass Textvariablen erst dann in einer Zeile referenziert
-werden k"onnen, wenn diese bereits definiert worden sind, da eine
-Ressourcendatei von Gcal Zeile f"ur Zeile abgearbeitet wird.
-Textvariablenreferenzen werden von Gcal stets solange rekursiv
-expandiert, bis alle Sub-Referenzen auf andere Textvariablen aufgel"ost
-sind.
-
-Falls das `$' Zeichen im Text als Zeichen selbst verwendet werden soll,
-so muss dieses durch ein f"uhrendes `\' (Backslash) Zeichen
-hinsichtlich seiner speziellen Bedeutung entwertet werden, z.B. `\$'.
-Wenn die Zeichen `\$' im Text selbst als Zeichenfolge verwendet werden
-sollen, so muss das `\' (Backslash) Zeichen mit sich selbst gesch"utzt
-werden, z.B. `\\$'.
-
-Nun folgen ein paar Beispiele, wie Textvariablen von Gcal verarbeitet
-werden.  Angenommen es existiert eine Ressourcendatei mit dem Namen
-`demo.rc' und dem folgenden Inhalt:
-
-     $a=foo
-     0 \$a:1=$a
-     $c=$a
-     0 \$c=$c
-     $b=$c bar $a
-     0 \$b=$b
-     $a=bar $b baz $a booz
-     0 \$a:2=$a
-     $a=
-     $b=0 $b $c frozz $a frozz
-     $b ->Das ist \$b
-     0 \$x='$x' und \$d ist nicht definiert: $d...
-     $a= 0 ~ 1~2~\$3~%n~$c~jetzt ist's genug!
-     0 \$a=---$a---
-     $a=0 \   \ \\ Und das...
-     $a geht auch!
-
-So erzeugt Gcal die folgende Ausgabe:
-
-     $ gcal %19960101 -H no -x -r '$A=FROBOZZ:$x=' -f ./demo.rc
-     -|
-     -| Mo,   1 Jan 1996: $a:1=foo
-     -| Mo,   1 Jan 1996: $a:2=bar foo bar foo baz foo booz
-     -| Mo,   1 Jan 1996: $a=--- 0
-     -|                    1
-     -|                   2
-     -|                   $3
-     -|                   01-Jan-1996
-     -|                   foo
-     -|                   jetzt ist's genug!---
-     -| Mo,   1 Jan 1996: $b=foo bar foo
-     -| Mo,   1 Jan 1996: $c=foo
-     -| Mo,   1 Jan 1996:    \ \\ Und das... geht auch!
-     -| Mo,   1 Jan 1996: foo bar foo foo frozz FROBOZZ frozz ->Das ist $b
-     -| Mo,   1 Jan 1996: $x='' und $d ist nicht definiert: $d...
-
-Oder es existiert eine Ressourcendatei mit dem Namen `demo2.rc' und
-folgendem Inhalt:
-
-     $a=$b foo
-     $b=0@e
-     $a bar
-     $b \$b
-     0 \$a:$a
-     0 \$b:$b
-
-So erzeugt Gcal die folgenden Ausgaben:
-
-     $ gcal %19960101 -H no -x -f ./demo2.rc
-     -|
-     -| Mo,   1 Jan 1996: $a:0@e foo
-     -| Mo,   1 Jan 1996: $b:0@e
-     $ gcal %19960101 -H no -x -f ./demo2.rc -y
-     -|
-     -| So,   7 Apr 1996: $b
-     -| So,   7 Apr 1996: foo bar
-
-Wie zuvor gesehen k"onnen vollst"andige (oder auch teilweise) Datumteile
-(*note Datumteil einer Zeile::.), sowie Spezialtexte (*note `%?'...
-Spezialtexte: Spezialtexte.) in Textvariablen angegeben werden, oder
-auch Referenzen auf andere Textvariablen, welche nach Expansion der
-Textvariablen von Gcal verarbeitet werden.
-
-Textvariablen, die in einer Ressourcendatei definiert werden, sind
-stets lokal, und werden nur in dieser spezifischen Datei *und*
-derjenigen Datei respektiert, welche in diese eingef"ugt wird.  Das
-bedeutet hinsichtlich der eingef"ugten Datei, dass alle lokalen
-Variablen der aufrufenden Datei sichtbar sind.  Die eingef"ugte Datei
-selbst darf eigene lokale Variablen definieren, welche dann die bereits
-an anderer Stelle definierten lokalen Variablen "uberdecken, und welche
-bei Weiterverarbeitung der aufrufenden Datei nicht exportiert werden.
-Alle anderen Definitionen von Textvariablen (2) sind stets global.
-Falls eine Zeile einer Ressourcendatei eine Referenz auf eine
-Textvariable enth"alt, die nicht lokal in dieser Datei definiert ist,
-so wird Gcal versuchen, die Werte der entsprechenden globalen Variablen
-zu benutzen.  Sollte dieses nicht gelingen, da keine globale Definition
-dieser Textvariablen vorliegt, so wird Gcal den Namen dieser
-Textvariablen unver"andert in der Zeile belassen.
-
-Nur fortgeschrittene Benutzer sollten die `--export-text-variables'
-Option benutzen, welche bewirkt, dass die aktuelle Inkarnation einer
-lokalen Textvariablen -- welche zuvor in einer Ressourcendatei
-definiert wurde und nicht in einer eingef"ugten Datei -- an weitere
-Ressourcendateien exportiert wird, anstelle der Benutzung deren
-globalen Wertes, falls diese Textvariable nicht lokal in dieser
-weiteren Ressourcendatei definiert ist.  *Note Include Anweisungen::,
-f"ur weitere Details.
-
-Aber seien Sie vorsichtig, die Benutzung dieser Option k"onnte
-unerwartete Ergebnisse erzeugen, da die Reihenfolge der Abarbeitung der
-Ressourcendateien eine wichtige Gr"osse hinsichtlich der Wirkung der
-`--export-text-variables' Option ist, so dass es nicht empfohlen werden
-kann, diese Option zu benutzen.  Sie, der Benutzer, m"ussen sehr genau
-wissen was Sie mit dieser Option bezwecken wollen; *Sie seien nun
-ausdr"ucklich gewarnt!*
-
-Der G"ultigkeitsbereich der Definitionen, welche auf eine lokale
-Textvariable durchgef"uhrt werden, erstreckt sich auf die
-Ressourcendatei oder die eingef"ugte Datei, in welcher die lokale
-Textvariable definiert wurde.
-
-Falls Redefinitionen einer globalen Textvariable in einer
-Ressourcendatei oder in derjenigen Datei, die in diese eingef"ugt wird,
-durchgef"uhrt werden, so sind diese Redefinitionen nur in dieser
-entsprechenden Datei g"ultig (3), nicht aber in weiteren
-Ressourcendateien, welche verarbeitet werden.  Das bedeutet, dass die
-Initialwerte der globalen Textvariablen stets restauriert werden, falls
-die zu verarbeitende Ressourcendatei wechselt.
-
-Bitte beachten Sie abschliessend, dass jede Zuweisung an eine
-Textvariable in einer separaten Zeile der Ressourcendatei erfolgen muss.
-
-  ---------- Footnotes ----------
-
-  (1)  Gross- bzw. Kleinbuchstaben werden nicht unterschieden.
-
-  (2)  In der Kommandozeile, Umgebungsvariable `GCAL' oder Antwortdatei.
-
-  (3)  Diese werden nur lokal ausgef"uhrt.
+(4) Die eingefügte Datei wird von einer anderen Datei, die an einer
+tieferen Stelle in einer solchen Kette auftritt, erneut eingefügt.
 

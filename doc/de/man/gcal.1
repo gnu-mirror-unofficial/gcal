@@ -1,8 +1,8 @@
-.\" $Id: gcal.1 v0.44 1997/01/02 00:04:04 tom Exp $
+.\" $Id: gcal.1 v0.47 2000/05/28 00:04:07 tom Exp $
 .\"
-.\" gcal.1:  German [n]roff source of GCAL manual page
+.\" gcal.1:  German [n]roff source of Un*x manual page
 .\"
-.\" Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+.\" Copyright (c) 1994-1997, 2000 Thomas Esken
 .\"
 .\"
 .\" Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
@@ -24,7 +24,7 @@
 .\"
 .\"
 .\" ------------------------oOO      \\\_''/      OOo---------------------------
-.\" Thomas Esken               O     (/o-o\)     O  eMail: esken@uni-muenster.de
+.\" Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
 .\" Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 .\" D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 .\"
@@ -47,36 +47,35 @@
 .pl 11i
 .po 0
 .\"
-.TH GCAL 1 "02 Januar 1997"
+.TH GCAL 1 "28 Mai 2000"
 .SH NAME
-gcal \- gibt Monats\-/ Jahreskalender, ewige Feiertagslisten f"ur Julianische\-
-und Gregorianische Jahre und Terminlisten auf viele Arten und Weisen
-aus.
+Gcal \- ein Programm um Kalender zu berechnen und auszugeben.
 .SH AUFRUF
-.B gcal
-[[
-.I Option\&...
-] [
-.I %Datum
-] [
-.I @Datei\&...
-]] [
-.I Kommando
-]
+.B gcal \fI[[Option\&...] [\fB%\fIDatum] [\fB@\fIDatei\&...]] [Kommando]
 .SH BESCHREIBUNG
 .B Gcal
 ist ein Programm, welches in seiner Funktionsweise den Standard
-Kalenderprogrammen
-.I BSD\-`cal'
-und
-.I `calendar'
-entspricht.
+Kalenderprogrammen BSD-`\fBcal\fI'
+.ft R
+und `\fBcalendar\fI'
+.ft R
+"ahnlich ist.
 .sp
 .B Gcal
-gibt Gregorianische Kalender bzw. Julianische Kalender (vor Oktober 1582) aus.
+gibt hybrid und proleptische Julianische bzw. Gregorianische
+Kalenderbl"atter f"ur einen Monat, drei Monate oder ein ganzes Jahr
+aus.  Es zeigt auch ewige Feiertagslisten f"ur viele L"ander rund
+um den Erdball an, und zeichnet sich durch die sehr leistungsf"ahige
+Erzeugung von Terminlisten aus, die f"ur Erinnerungszwecke benutzt
+werden k"onnen.  Gcal kann f"ur jeden beliebigen Standort verschiedenartige
+astronomische Daten und Zeiten der Sonne und des Mondes berechnen, die
+pr"azise genug f"ur die meisten zivilen Zwecke sind.  Gcal unterst"utzt
+zudem noch einige andere Kalendersysteme, zum Beispiel den chinesischen
+und japanischen Kalender, den hebr"aischen Kalender und den b"urgerlichen
+islamischen Kalender.
 .sp
 Wenn
-.B gcal
+.B Gcal
 ohne entsprechende
 .I Optionen
 aufgerufen wird bzw. kein
@@ -98,25 +97,18 @@ Argument auf das Jahr.  Werden beim Aufruf unkorrekte
 .I Kommandos
 angegeben, so wird die Programmausf"uhrung unter Benutzung interner
 Grundeinstellungen von
-.B gcal
+.B Gcal
 vorgenommen.
-.sp
-Es wird angenommen, da"s die Gregorianische Reformation am 5'ten Oktober des
-Jahres 1582 stattgefunden hat.  Um Anschlu"s an den fr"uheren Julianischen
-Kalender zu gewinnen, wurde seinerzeit der Kalender vom 4.10.1582 (Julianisch)
-sofort auf den 15.10.1582 (Gregorianisch) umgestellt, indem einfach 10 Tage in
-der Z"ahlung "ubergangen wurden.  Der Kalender f"ur diesen Monat sieht daher
-ein wenig ungew"ohnlich aus.
 .SH MEHR INFORMATIONEN ZUM PROGRAMM
 Mehr Informationen zum Programm erhalten Sie, wenn Sie
-.B gcal
+.B Gcal
 wie folgt aufrufen:
 .EX
 gcal -h
 gcal -?
 gcal --help
 
-bzw.
+beziehungsweise
 
 gcal -hh
 gcal -??
@@ -131,7 +123,7 @@ enthalten sein, die Sie mit Ihrem GNU Infobrowser ansehen k"onnen.
 .in 0
 .sp
 .B Gcal
-Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+Copyright (c) 1994-1997, 2000 Thomas Esken
 .LP
 Diese Software erhebt keinen Anspruch auf Vollst"andigkeit,
 Verwendungsf"ahigkeit oder Korrektheit. F"ur Sch"aden (implizit
@@ -156,7 +148,7 @@ Viel Spa"s mit diesem Programm   =8^)
 .in 2
 .nf
 ------------------------oOO      \e\e\e_''/      OOo---------------------------
-Thomas Esken               O     (/o-o\e)     O  eMail: esken@uni-muenster.de
+Thomas Esken               O     (/o-o\e)     O  eMail: esken@gmx.net
 Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 D-48147 Muenster; Germany    \e____) ~ (____/    MotD : 2old2live, 2young2die
 .fi
@@ -165,4 +157,4 @@ tcal(1),
 txt2gcal(1),
 gcal2txt(1),
 cal(1),
-calendar(1)
+calendar(1).

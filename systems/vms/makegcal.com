@@ -8,13 +8,27 @@ $ cc gcal.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER=1) /define(USE_R
 $ define/user sys sys$library
 $ cc file-io.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
 $ define/user sys sys$library
+$ cc hd-astro.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
+$ define/user sys sys$library
 $ cc hd-data.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
+$ define/user sys sys$library
+$ cc hd-data1.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
+$ define/user sys sys$library
+$ cc hd-data2.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
+$ define/user sys sys$library
+$ cc hd-data3.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
+$ define/user sys sys$library
+$ cc hd-data4.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
+$ define/user sys sys$library
+$ cc hd-data5.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
 $ define/user sys sys$library
 $ cc hd-use.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
 $ define/user sys sys$library
 $ cc help.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER=1) /define(USE_RC=1)
 $ define/user sys sys$library
 $ cc print.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
+$ define/user sys sys$library
+$ cc rc-astro.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
 $ define/user sys sys$library
 $ cc rc-check.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
 $ define/user sys sys$library
@@ -29,7 +43,7 @@ $ define/user sys sys$library
 $ cc tty.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER=1) /define(USE_RC=1)
 $ define/user sys sys$library
 $ cc utils.c /define=(VAXC) /define(USE_HLS=1) /define(USE_PAGER) /define(USE_RC=1)
-$ linkobjs:=gcal.obj file-io.obj help.obj holiday.obj print.obj rc-check.obj rc-insert.obj rc-use.obj rc-utils.obj regexp.obj tty.obj utils.obj
+$ linkobjs:=gcal.obj file-io.obj hd-data.obj hd-data1.obj hd-data2.obj hd-data3.obj hd-data4.obj hd-data5.obj hd-use.obj help.obj print.obj rc-check.obj rc-insert.obj rc-use.obj rc-utils.obj regexp.obj tty.obj utils.obj
 $ Loop:
 $ p = f$locate(" ",linkobjs)
 $ if p .lt. f$length(linkobjs)

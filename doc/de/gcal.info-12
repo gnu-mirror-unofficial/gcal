@@ -1,0 +1,856 @@
+Dies ist gcal.info, hergestellt von Makeinfo Version 4.0 aus gcal.texi.
+
+INFO-DIR-SECTION GNU Pakete
+START-INFO-DIR-ENTRY
+* Gcal: (gcal).                        GNU Kalenderprogramm.
+* Tcal: (gcal)Aufruf von tcal.         Gcal mit morgigem Datum aufrufen.
+* Txt2gcal: (gcal)Aufruf von txt2gcal. Kalendertext zu Ressourcendatei wandeln.
+* Gcal2txt: (gcal)Aufruf von gcal2txt. Kalenderressource zu Textdatei wandeln.
+END-INFO-DIR-ENTRY
+
+Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
+auszugeben.
+
+Copyright (c) 1994-1997, 2000 Thomas Esken
+
+Diese Ausgabe ist für Gcal Version 3.00.
+
+Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
+zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
+Copyrightvermerk und diesem Genehmigungsvermerk ausgestattet sind und
+vorgenannte Vermerke erhalten bleiben.
+
+Hiermit wird die Erlaubnis erteilt, veränderte Kopien dieses Handbuchs
+wie unter den Bedingungen für wortgetreue Kopien zu erstellen und zu
+vertreiben, sofern die ausgeführten Arbeiten in Ableitung und Gesamtheit
+innerhalb der Bestimmungen eines Genehmigungsvermerks liegen und zudem
+mit diesem ausgestattet sind, welcher mit diesem hier identisch ist.
+
+Hiermit wird die Erlaubnis erteilt, wie unter den vorgenannten
+Bedingungen für veränderte Versionen Übersetzungen dieses Handbuchs in
+eine andere Sprache zu erstellen und zu vertreiben, mit der Ausnahme,
+daß dieser Genehmigungsvermerk in einer Übersetzung angegeben sein
+darf, welche von der Free Software Foundation gebilligt wird.
+
+Jedwede Vorschläge, Verbesserungen, Erweiterungen, Fehlerberichte, Geld-
+und Sachspenden, Programmieraufträge usw. sind stets willkommen.  Bitte
+senden Sie diese direkt an meine eMail Adresse <esken@gmx.net>.  Wenn
+Sie dieses Werkzeug mögen, so würde ich mich sehr über eine Postkarte
+von Ihnen freuen!
+
+------------------------oOO      \\\_''/      OOo---------------------------
+Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
+Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
+D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
+
+
+File: gcal.info,  Node: Glossar,  Next: Argumentenindex,  Prev: Fehlerkodes,  Up: Top
+
+Glossar
+*******
+
+Hier ist eine alphabetische Liste der meisten Begriffe mit kurzen
+Erklärungen, die in diesem Handbuch eingeführt und benutzt werden:
+
+"Abendweite"
+"Untergangsweite"
+     Der horizontale Winkelabstand zwischen dem Untergangsazimut eines
+     Gestirns und der Westrichtung.
+
+"Allgemeine Optionsklasse"
+     Die Standardoptionen, welche jede GNU Software wenigstens teilweise
+     aufweisen sollte.
+
+"Amateur-astronomische Dämmerung"
+     Die Uhrzeit, zu der der Mittelpunkt der Sonne eine Referenzhöhe,
+     die bei 15 Grad unterhalb eines mathematischen Horizonts liegt,
+     durchschreitet.
+
+"Anker"
+     Die `^' und `$' Metazeichen in einem regulären Ausdruck.
+
+"ANSI"
+     Das `American National Standards Institute'.  Diese Organisation
+     produziert viele Standards, unter anderem auch die Standards für
+     die C und C++ Programmiersprachen.
+
+"Antwortdatei"
+     Eine Datei, aus der Optionen und Kommandos von Gcal bei
+     Programmstart vorgeladen werden.  Eine Antwortdatei darf Optionen
+     und Kommandos enthalten, aber *keine* Verweise auf weitere
+     Antwortdateien.
+
+"Asr Gebetszeit"
+     Die dritte islamische Gebetszeit.  Beginnt am Nachmittag, wenn ein
+     senkrechter Stab einen Schatten wirft, der einer bestimmten Länge
+     entspricht, und endet vor Sonnenuntergang.
+
+"Astronomische Dämmerung"
+     Die Uhrzeit, zu der der Mittelpunkt der Sonne eine Referenzhöhe,
+     die bei 18 Grad unterhalb eines mathematischen Horizonts liegt,
+     durchschreitet.
+
+"Astronomische Einheit"
+     Eine Astronomische Einheit, abgekürzt AE, entspricht der mittleren
+     Entfernung der Sonne von der Erde, die etwa 149.597.870,691
+     Kilometer beträgt.
+
+"Aufgangsazimut"
+     Das Azimut eines Gestirns, das sich zur Uhrzeit des
+     Gestirnaufgangs ergibt.
+
+"Aufgangshöhe"
+     Die Höhe eines Gestirns, die sich zur Uhrzeit des Gestirnaufgangs
+     ergibt.
+
+"Aufgangsphasenwinkel"
+     Der Phasenwinkel eines Gestirns, der sich zur Uhrzeit des
+     Gestirnaufgangs ergibt.
+
+"Auswahloperator"
+     Das `|' Metazeichen wird in einem regulären Ausdruck benutzt, um
+     Alternativen zu vereinbaren.
+
+"Azimut"
+     Der horizontale Winkelabstand zwischen dem Vertikalkreis, der
+     durch einen Himmelskörper geht, und dem Nordpunkt.
+
+"Bürgerliche Dämmerung"
+     Die Uhrzeit, zu der der Mittelpunkt der Sonne eine Referenzhöhe,
+     die bei 6 Grad unterhalb eines mathematischen Horizonts liegt,
+     durchschreitet.
+
+"Bürgerlicher Mitternachtzeitpunkt"
+     Im Sinne von Gcal ist das 0 Uhr, der Tageswechsel hat gerade
+     stattgefunden.  Diese Uhrzeit wird auch alternativ mit 24 Uhr,
+     oder 12am, bezeichnet.
+
+"Bürgerlicher islamischer Kalender"
+     Der arithmetisch ermittelte islamische Mondkalender.
+
+"Biorhythmus"
+     Auf- und absteigende Kurven, die drei miteinander zusammenhängende
+     biologische Zyklen aufzeigen; und zwar den physischen, den
+     emotionalen und der intellektuellen Zyklus.
+
+"BSD"
+     Die Kurzform für `Berkeley Software Distribution', einer Unix
+     Betriebssystemvariante.
+
+"C"
+     Die Systemprogrammiersprache, in der die meiste GNU Software
+     geschrieben ist.
+
+"Dämmerung"
+     Die Zeitspanne vor Sonnenaufgang und noch einmal nach
+     Sonnenuntergang, während der bereits natürliches Licht auf die
+     obere Erdatmosphäre auftritt, das durch direkte Sonneneinstrahlung
+     verursacht wird, und das nach unten, hin zur Erdoberfläche,
+     reflektiert wird.
+
+"Datummodifizierer"
+     Gcal benutzt dasjenige Datum als Datum des heutigen Tages, das
+     durch den Datummodifizierer vereinbart wurde, anstatt das Datum zu
+     verwenden, das von der Computeruhr als Systemdatum geliefert wird.
+
+"Datumteil"
+     Derjenige Teil einer Gcal Ressourcendateizeile, der die
+     Information enthält, wann ein Termin stattfindet.
+
+"Deklination"
+     Der vertikale Winkelabstand zwischen Gestirnmittelpunkt und
+     Himmelsäquator.
+
+"Delta-t"
+     Die Differenz zwischen der Terrestrischen Dynamischen Zeit
+     (englisch `Terrestrial Dynamical time', abgekürzt TDT; die früher
+     auch unter dem Begriff _Ephemeridenzeit_ (ET) bekannt war) und der
+     Weltzeit (UT).  Also, `delta-t == TDT - UT'.
+
+"Dezimalsystem"
+     Ein Zahlensystem mit der Basis 10, in dem die Ziffern `0'...`9'
+     sind.
+
+"Einfache Sprachkode-Information"
+     Ein aus zwei Buchstaben bestehender Sprachkode wie z.B. `de' für
+     Deutsch, der in der ISO-639:1988 definiert ist.
+
+"Einfacher Dateiname"
+     Ein Name, der eine Datei bezeichnet, der aber keinen Verweis auf
+     einen Zugriffspfad enthält, welcher entweder vom
+     Wurzeldateiverzeichnis oder vom aktuellen Dateiverzeichnis aus
+     fest vorgegeben ist, wie z.B. `file' oder `bar/file'.
+
+"Einzelnes Kommando"
+"3-Monatsmodus Kommando"
+     Erzeugen nur ein Kalenderblatt je Programmlauf.
+
+"Ekliptik"
+     Die Tierkreislinie oder Sonnenbahn.
+
+"Ekliptischer Breitengrad"
+     Der vertikale Winkelabstand zwischen Gestirnmittelpunkt und
+     Ekliptik.
+
+"Ekliptischer Längengrad"
+     Der horizontale Winkelabstand zwischen Gestirnmittelpunkt und
+     Frühlingspunkt auf der Ekliptik.
+
+"Elongation"
+     Der von der Erde aus gesehene horizontale Winkelabstand zwischen
+     Gestirnmittelpunkt und Sonnenmittelpunkt.
+
+"Endedatum eines Termins"
+     Ein Bestandteil eines Gcal Spezialtextes, der das letzte oder
+     späteste Datum definiert, an dem ein Termin auftreten darf.
+
+"Erweiterte Sprachkode-Information"
+     Eine einfache Sprachkode-Information, die zusätzlich noch eine
+     durch ein `_' abgegrenzte Territoriumsinformation hat, wie z.B.
+     `en_us' für amerikanisches Englisch.
+
+"Erweiterter Dateiname"
+     Ein Name, der ein oder mehrere `/' Zeichen enthält, und der eine
+     Datei bezeichnet, deren Zugriffspfad entweder vom
+     Wurzeldateiverzeichnis aus fest vorgegeben ist, wie z.B.
+     `/foo/bar/file', oder vom aktuellen Dateiverzeichnis aus fest
+     vorgegeben ist, wie z.B. `./bar/file' oder `../bar/file'.
+
+"Escape-Sequenz"
+     Eine spezielle Sequenz von Zeichen, die dazu benutzt wird, um
+     nicht-druckbare Zeichen zu beschreiben, so wie `\E' oder `\033'
+     oder `\x1B' für das ASCII `ESC' (Escape) Zeichen selbst.
+
+"Exklusive Tag Zeitraum"
+"Exklusive Datum Zeitraum"
+     Ein Gcal Spezialtext, der dazu dient, nur diejenigen Termine zu
+     berücksichtigen und auszugeben, die nicht in einem bestimmten
+     Zeitraum liegen.
+
+"Fajr Gebetszeit"
+     Die erste islamische Gebetszeit.  Beginnt mit dem Beginn der
+     astronomischen Morgendämmerung, und endet kurz vor Sonnenaufgang.
+
+"Formatanweisung"
+     Ein Anweisungstext, mit dem Textvariablen, Spezialtexte und
+     Datumformate zusätzlich ausgestattet werden können.  Ein solcher
+     Text bewirkt, daß die Inhalte von Textvariablen sowie die
+     ausgewerteten Spezialtexte und Datumformate auf besondere Weise
+     dargestellt werden.
+
+"Frühe Jahre"
+     In Bezug auf von Gcal ermittelte Feiertage ist das in etwa der
+     Zeitraum A.D. 30 bis zur Mitte des 20'ten Jahrhunderts.
+
+"Frühlingspunkt auf der Ekliptik"
+"Tagundnachtgleiche im Frühling"
+     Der Schnittpunkt der aufsteigenden Sonnenbahn auf dem
+     Himmelsäquator; ist auch unter dem Zeitpunktbegriff
+     _Tagundnachtgleiche im Frühling_ bekannt.
+
+"FSF"
+"Free Software Foundation"
+     Eine nicht auf Gewinnerzielung ausgerichtete Organisation, die
+     sich der Produktion und dem Vetrieb von frei vertreibbarer
+     Software verschrieben hat.  Sie wurde von Richard M. Stallman
+     gegründet, dem Autor des original Emacs Editors.
+
+"Ganzzahl"
+     Eine ganze Zahl, d.h. eine Zahl, die keinen Nachkommastellenteil
+     hat.
+
+"Geometrischer Horizont"
+"Mathematischer Horizont"
+"Mathematisch-geozentrischer Horizont"
+     Ein rein geometrisch gebildeter Horizont, der die Refraktion
+     unberücksichtigt läßt, die sich in der Realität durch den Einfluß
+     der Erdatmosphäre ergibt.
+
+"Geozentrische Daten"
+     Vom fiktiven Erdmittelpunkt aus gemachte Beobachtungen von
+     Gestirnen liefern geozentrisch-basierte Werte.
+
+"Geozentrischer Horizont"
+     Diejenige fiktive Horizontalebene, die durch den Erdmittelpunkt
+     verläuft.
+
+"Gesetzlicher Feiertag"
+     Ein Tag, an dem die Bevölkerung nicht zu arbeiten braucht -- also
+     in den meisten Firmen, und die Geschäfte haben geschlossen; wie am
+     `Neujahrstag', dem 1'ten Januar.
+
+"Gestirnhöhe"
+     Der vertikale Winkelabstand zwischen Gestirn und Horizont.
+
+"Gleichwertigkeitsklasse"
+     Eine Liste von gleichwertigen Zeichen in einem regulären Ausdruck,
+     die mit `[=' und `=]' Metazeichen umschlossen wird.
+
+"Globale Datumvariable"
+     Eine Gcal Datumvariable, die in der Kommandozeile definiert ist.
+     Ist in allen referenzierten Ressourcendateien sichtbar ist.
+
+"Globale Optionsklasse"
+     Die Optionen, welche die vom Programm erzeugte Ausgabe
+     beeinflussen.
+
+"Globale Textvariable"
+     Eine Gcal Textvariable, die in der Kommandozeile definiert ist.
+     Ist in allen referenzierten Ressourcendateien sichtbar ist.
+
+"Gnomon"
+     Ein senkrechter Stab, der zur Feststellung der Schattenlänge
+     verwendet wird.
+
+"GNU"
+     `GNU's not Unix'.  Ein fortwährendes Projekt der Free Software
+     Foundation, um eine vollständige, frei verfügbare und POSIX
+     konforme Rechenumgebung zu schaffen.
+
+"GPL"
+"General Public License"
+     Die Bedingungen, unter denen Gcal und dessen Quellentext
+     vertrieben werden darf.
+
+"Größenklasse"
+     Wird dazu benutzt, um die Helligkeit eines Gestirns zu definieren,
+     und ist ein nicht-metrischer Wert (lateinisch `magnitudo',
+     abgekürzt m).  Die Differenz zwischen zwei aufeinanderfolgenden
+     Größenklassen beträgt 1 zu 2,512.  Ein Stern der Helligkeit 1m ist
+     also 2,512 mal heller als ein Stern 2m.  Eine negative Größe
+     bezeichnet einen sehr hellen Stern, zum Beispiel hat die Sonne
+     nahezu -27m, während der kaum sichtbare Planet Pluto eine
+     Helligkeit von etwas über +14m hat.  Der Vollmond hat eine
+     visuelle Helligkeit von circa -12m,55.
+
+"Gregorianischer Kalender"
+     Der A.D. 1582 durch Papst Gregor XIII eingeführte Kalender, der
+     eine durchschnittliche Jahreslänge von 365,2425 Tagen hat.  Dieser
+     Kalender wird heutzutage weltweit am meisten berücksichtigt.
+
+"Herbstpunkt auf der Ekliptik"
+"Tagundnachtgleiche im Herbst"
+     Der Schnittpunkt der absteigenden Sonnenbahn auf dem
+     Himmelsäquator; ist auch unter dem Zeitpunktbegriff
+     _Tagundnachtgleiche im Herbst_ bekannt.
+
+"Hervorhebungssequenz"
+     Eine Folge von Steuerzeichen, die eine Farbumschaltung oder eine
+     Intensitätsumschaltung von auszugebendem Text bewirken.  Typische
+     Steuerzeichenfolgen sind die so genannten ANSI Escape-Sequenzen,
+     welche als erstes Zeichen der Sequenz ein Escape Zeichen
+     aufweisen, und danach weitere Zeichen, die die Art der ANSI
+     Escape-Sequenz definieren.
+
+"Hexadezimalsystem"
+     Ein Zahlensystem mit der Basis 16, in dem die Ziffern `0'...`9'
+     und `A'...`F' sind, wobei `A' eine 10 darstellt, `B' eine 11
+     darstellt, und so weiter, bis zum `F' für die 15.
+
+"Himmelsachse"
+     Die gerade Verbindungslinie, die durch den nördlichen und den
+     südlichen Himmelspol verläuft.
+
+"Himmelsäquator"
+     Ein Großkreis am Himmel, der senkrecht auf der Himmelsachse steht
+     und gleichzeitig den an das Himmelsgewölbe projizierten Erdäquator
+     darstellt.
+
+"Himmelspol"
+     Der auf das Himmelsgewölbe projizierte Punkt der nördlichen bzw.
+     südlichen Verlängerung der Rotationsachse der Erde.
+
+"Horizontalparallaxe"
+     Die Horizontalparallaxe der eines Gestirns gibt den Durchmesser der
+     Erde an, so wie er von der Oberfläche des Gestirns aus zu sehen
+     ist.
+
+"Hybrid-Kalendermodus"
+     Die automatische Umstellung von einem Kalendersystem auf ein
+     anderes, wenn sich Bezüge auf einen Zeitpunkt ergeben, für den das
+     andere Kalendersystem gilt.  Also, Gcal stellt sich automatisch
+     vom Julianischen Kalendersystem auf das Gregorianische
+     Kalendersystem um, wenn sich Ausgaben auf einen Zeitpunkt nach der
+     Gregorianischen Reformation beziehen.
+
+"Inklusive Tag Zeitraum"
+"Inklusive Datum Zeitraum"
+     Ein Gcal Spezialtext, der dazu dient, nur diejenigen Termine zu
+     berücksichtigen und auszugeben, die in einem bestimmten Zeitraum
+     liegen.
+
+"Intervall-Ausdruck"
+     Eine oder zwei Zahlen innerhalb geschweifter Klammern in einem
+     regulären Ausdruck.
+
+"Isha Gebetszeit"
+     Die fünfte islamische Gebetszeit.  Beginnt mit dem Ende der
+     astronomischen Abenddämmerung und endet kurz vor dem
+     astronomischen Mitternachtzeitpunkt der Sonne.
+
+"ISO"
+     ISO ist die Abkürzung für `International Organization for
+     Standardization'.
+
+"ISO-Wochennummer"
+     Die Woche beginnt mit dem Montag, und die erste Woche des Jahres
+     ist diejenige Woche, in welche der erste Donnerstag fällt, also
+     gleich derjenigen Woche ist, in welcher der 4'te Januar auftritt.
+
+"Julianische Ephemeridendatum"
+     Ein um _delta-t_ korrigiertes Julianisches Datum.
+
+"Julianischer Kalender"
+     Der im Jahre 46 vor Christus durch Julius Cäsar eingeführte und
+     später durch Kaiser Augustus verbesserte Kalender, der eine
+     durchschnittliche Jahreslänge von 365,25 Tagen hat.  Dieser
+     Kalender wurde A.D. 1582 vom Gregorianischen Kalender abgelöst.
+
+"Julianisches Datum"
+"Julianische Tageszahl"
+     Eine Tageszahl, die sich auf das Datum 1'ter Januar 4713 vor
+     Christus bezieht, welches für astronomische Berechnungen als der
+     Tag Null einer durchlaufenden Tageszählung angesehen wird. Der
+     exakte Nullpunkt von diesem Datum ist um 12 Uhr Weltzeit
+     (UTC/GMT); der Tageswechsel erfolgt also nicht um Mitternacht,
+     sondern um Mittag Weltzeit.
+
+"Kalender Optionsklasse"
+     Die Optionen, die das Kalender Layout steuern.
+
+"Kommandozeilenargument"
+     Ein besonderer Text, der zumeist über die Kommandozeile an Gcal
+     bei Aufruf übergeben wird, und welcher der Programmsteuerung dient.
+
+"Kommando"
+     Ein bestimmter Typ von Kommandozeilenargument, der die Zeiträume
+     kontrolliert, die von Gcal berücksichtigt werden.
+
+"Konjunktion"
+     Ein Gestirn steht von der Erde aus gesehen entweder hinter der
+     Sonne, oder zwischen Sonne und Erde, und ist somit von der Erde
+     aus nicht sichtbar.  Auf den Mond bezogen ist das die Neumondphase.
+
+"Kritischer Tag"
+     Solche Tage im Biorhythmus, an denen eine oder mehrere der
+     biologischen Zyklen den Nullpunkt überqueren.  Zu einem solchen
+     Zeitpunkt, so wird gesagt, soll sich der Organismus in einem
+     Stadium des Umbruchs befinden, und es scheint angebracht zu sein,
+     Vorsicht walten zu lassen.
+
+"Kurzoption"
+     Der traditionelle --standardgemäße-- Stil, eine Option zu
+     schreiben, z.B. `-x'.
+
+"Langoption"
+     Ein besonderer --nicht standardgemäßer-- Stil, eine Option zu
+     schreiben, z.B. `--foo'.
+
+"Listen von Kommandos"
+"Bereiche von Kommandos"
+     Erzeugen mehr als ein Kalenderblatt je Programmlauf
+
+"Lokale Datumvariable"
+     Eine Gcal Datumvariable, die in einer Ressourcendatei definiert
+     ist.  Ist nur in dieser spezifischen Datei und derjenigen Datei
+     sichtbar, die in diese eingefügt wird.
+
+"Lokale Sternzeit"
+"Lokale siderische Uhrzeit"
+     Die momentane Zeitspanne, die zwischen der letzten oberen
+     Kulmination des Frühlingspunktes im Merdian des
+     Beobachtungsstandortes verflossen ist (der momentane Stundenwinkel
+     des Frühlingspunktes), also die momentane Rektazension der
+     Gestirne im Beobachtungsmeridian.
+
+"Lokale Textvariable"
+     Eine Gcal Textvariable, die in einer Ressourcendatei definiert ist.
+     Ist nur in dieser spezifischen Datei und derjenigen Datei sichtbar,
+     die in diese eingefügt wird.
+
+"Lunarer Polarkreis"
+     Der geographische Breitenkreis, der etwa zwischen 61,5 und 71,9
+     Dezimalgrad, und dem geographischen Pol liegt.
+
+"Lunation"
+"Synodischer Monat"
+     Die durchschnittliche Zeitspanne zwischen zwei
+     aufeinanderfolgenden Neumondphasen.
+
+"Maghrib Gebetszeit"
+     Die vierte islamische Gebetszeit.  Beginnt bei Sonnenuntergang,
+     und endet zu Anfang der _Isha_ Gebetszeit.
+
+"Markierungszeichen"
+     Einzelne, druckbare Zeichen, die dem auszugebenden Text zu
+     Markierungszwecken vorangehen bzw. folgen.
+
+"Meridian"
+     Entweder ein geographischer Längengrad, oder ein astronomischer
+     Vertikalkreis.
+
+"Metazeichen"
+"Regulär-Ausdruck Operator"
+     Besondere Zeichen in einem regulären Ausdruck.
+
+"Mittagshöhe"
+     Die Höhe eines Gestirns, die sich zur Uhrzeit des astronomischen
+     Mittagzeitpunktes des Gestirns ergibt.
+
+"Mittagslinie"
+     Die Verbindungsgerade, die zwischen dem Nordpunkt und dem Südpunkt
+     verläuft.
+
+"Mittagsphasenwinkel"
+     Der Phasenwinkel eines Gestirns, der sich zum astronomischen
+     Mittagzeitpunkt des Gestirns ergibt.
+
+"Mitternachtshöhe"
+     Die Höhe eines Gestirns, die sich zur Uhrzeit des astronomischen
+     Mitternachtzeitpunktes des Gestirns ergibt.
+
+"Mitternachtsphasenwinkel"
+     Der Phasenwinkel eines Gestirns, der sich zum astronomischen
+     Mitternachtzeitpunkt des Gestirns ergibt.
+
+"Mittlere Sonnenzeit"
+"Mittlerer Sonnentag"
+"Mittlere Sonne"
+     Ein Sterntag wird auch als _mittlerer Sonnentag_ bezeichnet.  Da
+     sich die Sonne gegenüber dem Frühlingspunkt auf der Ekliptik wegen
+     der Erdbewegung um die Sonne scheinbar verschiebt, sind Sterntag
+     und wahrer Sonnentag nicht gleich lang.  Da sich die wahre Sonne
+     nämlich ungleichförmig durch die Ekliptik bewegt, läßt man eine
+     fiktive _mittlere Sonne_ gleichmäßig durch den Himmelsäquator
+     laufen und bezieht die mittlere Sonnenzeit auf diese.
+
+"Mittlerer Erdäquatoradius"
+     Der mittlere Radius der Erde am Äquator beträgt etwa 6.378,137
+     Kilometer.
+
+"Modifizierer"
+     Ein oder mehrere Zeichen, welche einer Kurzoption direkt folgen
+     und einen besonderen Modus für diese Option definieren.
+
+"Morgenweite"
+"Aufgangsweite"
+     Der horizontale Winkelabstand zwischen dem Aufgangsazimut eines
+     Gestirns und der Ostrichtung.
+
+"Nautische Dämmerung"
+     Die Uhrzeit, zu der der Mittelpunkt der Sonne eine Referenzhöhe,
+     die bei 12 Grad unterhalb eines mathematischen Horizonts liegt,
+     durchschreitet.
+
+"Negativer Tag"
+     Solche Tage im Biorhythmus, an denen eine oder mehrere der
+     biologischen Zyklen einen negativen Maximalwert haben.  Zu einem
+     solchen Zeitpunkt, so wird gesagt, soll sich der Organismus in
+     einem verminderten Stadium befinden.
+
+"Negierte Zeichenliste"
+"Komplementäre Zeichenliste"
+     Paßt, ausgenommen die durch eckige Klammern umschlossenen
+     Einzelzeichen, auf jedes Einzelzeichen in einem Text, der durch
+     einen regulären Ausdruck verarbeitet wird.
+
+"Oberer Kulminationspunkt"
+     Der höchste Punkt ober- oder unterhalb der Horizontalebene, der
+     vom Mittelpunkt eines Himmelskörpers an einem Tag durchlaufen wird.
+
+"Oktalsystem"
+     Ein Zahlensystem mit der Basis 8, in dem die Ziffern `0'...`7'
+     sind.
+
+"Opposition"
+     Die Erde steht in einer Linie zwischen Gestirn und Sonne, und das
+     Gestirn ist somit vollständig von der Erde aus sichtbar.  Auf den
+     Mond bezogen ist das die Vollmondphase.
+
+"Option"
+     Ein bestimmter Typ von Kommandozeilenargument, der verschiedene
+     Verhaltensweisen bei Gcal auslöst.
+
+"Orthodrome"
+     Ein Großkreisbogen, der zwischen zwei Punkten auf einer
+     Kugeloberfläche geschlagen wird.  Stellt die kürzeste geodätische
+     Verbindungslinie zwischen zwei Punkten auf einer Kugel dar.
+
+"Phasenwinkel"
+     Der Phasenwinkel gibt die Phase eines Himmelkörpers an, d.h. den
+     beleuchteten Anteil des Himmelskörpers, so wie er von der Erde aus
+     zu sehen ist.
+
+"Pipelining"
+     Die Programmausgabe dient als Eingabedatenstrom für ein weiteres
+     Programm.
+
+"Positiver Tag"
+     Solche Tage im Biorhythmus, an denen eine oder mehrere der
+     biologischen Zyklen einen positiven Maximalwert haben.  Zu einem
+     solchen Zeitpunkt, so wird gesagt, soll sich der Organismus in
+     einem gesteigerten Stadium befinden.
+
+"POSIX"
+     Der Name für eine Reihe von Standards, die von der IEEE entwickelt
+     wurden, welche eine portable Betriebssystemschnittstelle (Portable
+     Operating System interface) angeben.  Das `IX' bezeichnet die Unix
+     Herkunft dieser Standards.
+
+"Proleptischer-Kalendermodus"
+     Darunter ist zu verstehen, daß Gcal während eines bestimmten
+     Zeitraums durchweg nur dieses eine bestimmte Kalendersystem
+     verwendet, obwohl in der geschichtlichen Realität durchaus der
+     Wechsel hin zu einem anderen Kalendersystem in diesem Zeitraums
+     stattgefunden hat.
+
+"Rechtweisender Kurswinkel"
+     Der Kurswinkel gibt die Richtung an, mit der ein Großkreisbogen
+     (Orthodrome), der zwischen zwei Punkten auf einer Kugeloberfläche
+     geschlagen wird, einen Meridian schneidet (Gcal benutzt einen Geoid
+     (Rotationsellipsoid), der in Anlehnung an das 1961 geschaffene
+     `Geodätische Welt System', abgekürzt W.G.S, berechnet wird).  Ein
+     solcher Großkreisbogen stellt die kürzeste geodätische
+     Verbindungslinie zwischen zwei Punkten auf einer Kugel dar.
+     Allerdings ändern sich die Kurswinkel auf einem solchen Großkreis
+     stetig, da die geschlagene Kreiskurve jeden Meridian unter einem
+     anderen Winkel schneidet -- hiervon ausgenommen ist der Fall, daß
+     sich beide Koordinaten entweder genau auf den gleichen Längengrad,
+     oder genau auf den gleichen Breitengrad beziehen.
+
+"Redirektionierung"
+     Die Programmausgabe wird auf einen anderen Gerätekanal umgelenkt,
+     anstatt daß sie auf den _Standard-Ausgabekanal_ gesendet wird.
+
+"Reelle Zahl"
+"Fließpunktzahl"
+     Eine Zahl, die einen Nachkommastellenteil haben kann.
+
+"Refraktion"
+     Refraktion oder Strahlenbrechung ist ein durch die Erdatmosphäre
+     verursachtes optisches Phänomen, daß zu einer scheinbaren Hebung
+     des Gestirnsortes über dem Horizont führt.  Der Betrag der
+     Refraktion nimmt bei steigendem Luftdruck und sinkender Temperatur
+     zu und umgekehrt.
+
+"Regexp"
+"Regulärer Ausdruck"
+     Ein Weg zur Beschreibung einer Klasse von Zeichenketten.
+
+"Rektazension"
+     Der horizontale Winkelabstand zwischen Gestirnmittelpunkt und dem
+     durch den Frühlingspunkt auf der Ekliptik verlaufenden
+     Stundenkreis.
+
+"Relativer Zeitversatzwert"
+     Ein Zeitversatzwert, der sich auf eine Basiszeit bezieht.
+
+"Religiöser islamischer Kalender"
+     Der astronomisch ermittelte islamische Mondkalender.
+
+"Ressourcendatei"
+     Eine Datei, die im wesentlichen die Termineinträge enthält.
+
+"RFC"
+     RFC ist die Abkürzung für `Request for Comments'.
+
+"Schaltjahr"
+     Im Gregorianischen Kalender ist jedes Jahr ein Schaltjahr, dessen
+     Nummer ohne Rest durch 4 geteilt werden kann, und
+     Jahrhundertwenden sind keine Schaltjahre, wenn sie nicht
+     ganzzahlig durch 400 geteilt werden können.  Aber die östlichen
+     orthodoxen Kirchen berechnen Schaltjahre innerhalb des
+     Gregorianischen Kalenders mittels einer anderen Regel; und zwar ist
+     ein Schaltjahr jedes Jahr, dessen Nummer ohne Rest durch 4 geteilt
+     werden kann, und Jahrhundertwenden sind Schaltjahre, wenn sie durch
+     9 geteilt einen Divisionsrest von 2 oder 6 aufweisen.
+
+"Schalttag"
+     Der 29'te Februar im Gregorianischen Kalender.
+
+"Scheitelkreis"
+     Ein Vertikalkreis.
+
+"Shell"
+     Der Kommandointerpretierer des Betriebssystems.  Dieses
+     Betriebssystemprogramm interpretiert Kommandozeilen und führt
+     diese aus.
+
+"Solarer Polarkreis"
+     Der geographische Breitenkreis, der etwa zwischen 66,7 und 65,9
+     (refraktionskorrigiert) Dezimalgrad, und dem geographischen Pol
+     liegt.  Für die Berechnung der verschiedenen Dämmerungsphasen
+     verringert sich dieser Breitenkreis auf etwa:
+
+        * 60,7 Dezimalgrad bei der bürgerlichen Dämmerung.
+
+        * 54,7 Dezimalgrad bei der nautischen Dämmerung.
+
+        * 51,7 Dezimalgrad bei der amateur-astronomischen Dämmerung.
+
+        * 48,7 Dezimalgrad bei der astronomischen Dämmerung.
+
+"Sommerpunkt auf der Ekliptik"
+"Sommersonnenwende"
+"Sonnenwende im Sommer"
+     Die Sonnenbahn durchquert den höchsten Punkt oberhalb des
+     Himmelsäquators, der während eines Erdumlaufs um die Sonne
+     durchlaufen wird.
+
+"Spezialtext"
+     Ein durch ein `%' Zeichen eingeleiteter Text in einer Gcal
+     Ressourcendatei, der entweder die Ausgabe von Terminen in
+     bestimmten Fällen unterdrückt, oder aber diese mit besonderen
+     Texten auszustattet bzw. externe Kommandos ausführt.
+
+"Standard-Wochennummer"
+     Die Woche beginnt mit dem jeweiligen Starttag der Woche, und
+     diejenigen Tage in einem neuen Jahr, die dem ersten Starttag der
+     Woche vorangehen, liegen in der letzten Woche des Vorjahres, bzw.
+     in der Woche Null des neuen Jahres.
+
+"Startdatum eines Termins"
+     Ein Bestandteil eines Gcal Spezialtextes, der das erste oder
+     früheste Datum definiert, an dem ein Termin auftreten darf.
+
+"Statute Meile"
+     Ein Längenmaß; eine statute Meile entspricht 1,609344 Kilometer.
+
+"Sterntag"
+     Der Zeitraum zwischen zwei aufeinanderfolgenden oberen
+     Kulminationen des Frühlingspunktes auf der Ekliptik im Meridian
+     des Beobachtungsstandortes.
+
+"String"
+     Eine Zeichenkette.
+
+"Suchmuster"
+     Ein Suchmuster ist ein einstellbarer, bedingter Ausdruck, gegen
+     den eine Eingabe getestet wird.  Wenn die Bedingung erfüllt ist,
+     so `paßt' das Suchmuster auf die Eingabe, wie man so sagt.  Ein
+     typisches Suchmuster könnte eine Eingabe gegen einen regulären
+     Ausdruck vergleichen.
+
+"Termin Optionsklasse"
+     Die Optionen, die das Layout der Termine und deren Intensität
+     kontrollieren.
+
+"Textteil"
+     Derjenige Teil einer Gcal Ressourcendateizeile, der den Termintext
+     enthält.
+
+"Topozentrische Daten"
+     Von der Erdoberfläche aus gemachte Beobachtungen von Gestirnen
+     liefern topozentrisch-basierte Werte.
+
+"Unix"
+     Ein Betriebssystem für Computer, daß Anfang 1970 von den AT&T Bell
+     Labaratories entwickelt wurde.  Es wurde anfänglich weltweit an den
+     Universitäten poplär, und etablierte sich später in kommerziellen
+     Umgebungen als Entwicklungssystem für Software und als System für
+     Netzwerkdienste.  Es gibt viele kommerzielle Versionen von Unix,
+     ebenso wie zahlreiche Systeme, die in ähnlicher Weise arbeiten und
+     deren Quellentext frei erhältlich ist (so wie Linux, NetBSD, und
+     FreeBSD).
+
+"Umgebung"
+"Environment"
+     Eine Sammlung von strings der Form `Name'`='WERT, die jedem
+     Programm zur Verfügung steht.  Benutzer stellen im allgemeinen
+     Werte in die Umgebung, um die zahlreichen Programme mit
+     Informationen zu versorgen.  Typische Beispiele sind die
+     Umgebungsvariablen `HOME' und `PATH'.
+
+"Umschaltzeichen"
+     Eine Option wird durch ein führendes Umschaltzeichen definiert;
+     entweder das `-' oder das `/' Zeichen bei traditionellen
+     Kurzoptionen, oder zwei `--' bei den mnemotechnischen Langoptionen;
+     einem Kommando darf kein Umschaltzeichen vorangehen.
+
+"Unterer Kulminationspunkt"
+     Der niedrigste Punkt unter- oder oberhalb der Horizontalebene, der
+     vom Mittelpunkt eines Himmelskörpers an einem Tag durchlaufen wird.
+
+"Untergangsazimut"
+     Das Azimut eines Gestirns, das sich zur Uhrzeit des
+     Gestirnuntergangs ergibt.
+
+"Untergangshöhe"
+     Die Höhe eines Gestirns, die sich zur Uhrzeit des
+     Gestirnuntergangs ergibt.
+
+"Untergangsphasenwinkel"
+     Der Phasenwinkel eines Gestirns, der sich zur Uhrzeit des
+     Gestirnuntergangs ergibt.
+
+"Vergleichendes Element"
+     Eine Spezialfolge in einer Zeichenliste eines regulären Ausdrucks.
+     Diese läß sich auf Nicht-ASCII Zeichensätze anwenden, welche
+     einzelne Symbole haben können, die mit mehr als einem Zeichen
+     dargestellt werden, ebensogut wie zahlreiche Zeichen, die
+     gleichwertig für Vergleichs- oder Sortierungszwecke benutzt werden
+     können.
+
+"Vergleichendes Symbol"
+     Ein Multizeichen vergleichendes Element in einem regulären
+     Ausdruck, das mit `[.' und `.]' Metazeichen umschlossen wird.
+
+"Wahre Sonnenzeit"
+"Wahrer Sonnentag"
+     Ein wahrer Sonnentag ist die Zeitspanne zwischen zwei
+     aufeinanderfolgenden unteren Kulminationen der Sonne.  Hieraus
+     wird die wahre Sonnenzeit abgeleitet (so wie sie auch von einer
+     Sonnenuhr während des Tages angezeigt wird).
+
+"Whitespace"
+     Das sind zum Beispiel _Tab_, _Space_, _Form-Feed_ und ähnliche
+     Zeichen.
+
+"Winterpunkt auf der Ekliptik"
+"Wintersonnenwende"
+"Sonnenwende im Winter"
+     Die Sonnenbahn durchquert den niedrigsten Punkt unterhalb des
+     Himmelsäquators, der während eines Erdumlaufs um die Sonne
+     durchlaufen wird.
+
+"Wort"
+     Eine Folge von einem oder mehreren Buchstaben, Zahlen oder
+     Unterstrichzeichen (`_') in einem regulären Ausdruck.
+
+"Zeichenklasse"
+     Eine Zeichenklasse in einem regulären Ausdruck ist eine spezielle
+     Bezeichnung, um Zeichenlisten, die mit speziellen Eigenschaften
+     ausgestattet sind, zu beschreiben, wohingegen sich aber die
+     aktuellen Zeichen selbst von Land zu Land und/oder Zeichensatz zu
+     Zeichensatz verändern.
+
+"Zeichenliste"
+     Paßt auf jedes durch eckige Klammern umschlossene Einzelzeichen in
+     einem Text, der durch einen regulären Ausdruck verarbeitet wird.
+
+"Zeichensatz"
+     Die Menge der numerischen Kodes, die von einem Computersystem
+     benutzt wird, um die Zeichen (Buchstaben, Zahlen, Interpunktion,
+     etc.) darzustellen, die in einem bestimmten Land oder Ort benutzt
+     werden.  Der heute allgemein am meisten benutzte Zeichensatz ist
+     ASCII (American Standard Code for Information Interchange).  In
+     vielen europäischen Ländern wird eine Erweiterung des ASCII
+     Zeichensatzes benutzt, die als ISO-8859-1 (ISO Latin-1) bekannt
+     ist.
+
+"Zeitgleichung"
+     Eine Korrektur, die zur wahren Sonnenzeit --wie auf einer Sonnenuhr
+     abgelesen-- hinzuaddiert wird, um die mittlere Sonnenzeit zu
+     erhalten.
+
+"Zuhr Gebetszeit"
+     Die zweite islamische Gebetszeit.  Beginnt nach dem astronomischen
+     Mittagzeitpunkt der Sonne, und endet zu Anfang der _Asr_
+     Gebetszeit.
+
+"Zyklusmodus"
+     Die dynamischen, von der jeweiligen Uhrzeit abhängigen, sonnen- und
+     mondbezogene Spezialtexte werden für eine Folge von Uhrzeiten des
+     laufenden Tages berechnet, d.h. für ein beliebiges, vom Benutzer
+     individuell definierbares Zeitintervall ermittelt.
+

@@ -1,12 +1,12 @@
-#  $Id: Makefile.in 0.30 1997/04/23 00:03:00 tom Exp $
+#  $Id: Makefile.in 0.38 2000/03/25 00:03:08 tom Exp $
 ###############################################################################
 #
 #  Generic Makefile to create the Gcal appointment/reminder files.
 #
-#  Copyright (C) 1994-1997      Thomas Esken            <esken@uni-muenster.de>
-#                               Im Hagenfeld 84
-#                               D-48147 M"unster
-#                               GERMANY
+#  Copyright (c) 1994-1997, 2000  Thomas Esken          <esken@uni-muenster.de>
+#                                 Im Hagenfeld 84
+#                                 D-48147 M"unster
+#                                 GERMANY
 #
 ###############################################################################
 #
@@ -25,19 +25,24 @@ subdir = data
 
 @SET_MAKE@
 
-PERL = @PERL@
 AWK = @AWK@
+PERL = @PERL@
+
+CP = @CP@
 
 INSTALL = @INSTALL@
-INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
 
 prefix = @prefix@
 datadir = @datadir@
-# Where to install the converted reminder/appointment files and other examples.
-packagedatadir = `echo $(datadir)/$(PACKAGE) | sed -e 's/\/\//\//g'`
+# Where to install the converted reminder/appointment and other example files.
+packagedatadir = `echo $(datadir)/$(PACKAGE) | sed -e 's,//,/,g'`
 # Where to install the `.gcalrc' file.
 homedir = $(HOME)
+
+thisgcal = ../src/$(PACKAGE)
+datetime = `$(thisgcal) -f/dev/null -QUx --here='0 %:04*Y %:02*M %:02*D %:02*\_ %:02*?'`
 
 #### End of system configuration section. ####
 
@@ -48,19 +53,12 @@ homedir = $(HOME)
 SHELL = /bin/sh
 
 #
-# Suffix for ORIGINAL (==copied) files
+# File owner permissions used for installdata and installdates target.
 #
-originalSUFFIX = ~
-
+BINPERMS = `echo $(INSTALL_PROGRAM) | sed -e 's,^.*/,,' -e 's/[^0-9]//g'`
+SRCPERMS = `echo $(INSTALL_DATA) | sed -e 's,^.*/,,' -e 's/[^0-9]//g'`
 #
-# File owner permissions used for installdates targets and
-# for resetting the permissions after running a distribution target.
-#
-BINPERMS = `echo $(INSTALL_PROGRAM) | sed -e 's/[^0-9]//g'`
-SRCPERMS = `echo $(INSTALL_DATA) | sed -e 's/[^0-9]//g'`
-#
-# File owner permissions used for installdates targets and
-# for resetting the permissions after running a distribution target
+# File owner permissions used for installdata and installdates target
 # if the configure script doesn't set $(BINPERMS) or $(SRCPERMS).
 #
 BINPERMS2 = 0755
@@ -70,38 +68,100 @@ SRCPERMS2 = 0644
 # Standard names.
 #
 
-dataREADMEFILE = README
-dataGCALRCFILE = gcalrc
-dataEXAMPLEFILES = ansipic.rc textpic.rc meteoric.rc
-dataMISCFILES = Makefile.in \
-  $(dataREADMEFILE) $(dataGCALRCFILE) $(dataEXAMPLEFILES)
+dataREADMEFILE = \
+  $(srcdir)/README
+dataGCALRCFILE = \
+  $(srcdir)/gcalrc
+dataEXAMPLEFILES = \
+  $(srcdir)/ansipic.rc \
+  $(srcdir)/birthday.rc \
+  $(srcdir)/bkk.rc \
+  $(srcdir)/de-mdata.rc \
+  $(srcdir)/de-sdata.rc \
+  $(srcdir)/mdata.rc \
+  $(srcdir)/meteoric.rc \
+  $(srcdir)/ms.rc \
+  $(srcdir)/sdata.rc \
+  $(srcdir)/sun-moon.rc \
+  $(srcdir)/textpic.rc \
+  $(srcdir)/wloc.rc \
+  $(srcdir)/wtt1.rc \
+  $(srcdir)/wtt2.rc \
+  $(srcdir)/wtt3.rc
+dataMISCFILES = \
+  $(srcdir)/Makefile.in \
+  $(dataREADMEFILE) \
+  $(dataGCALRCFILE) \
+  $(dataEXAMPLEFILES)
 
-calendarsDIR = calendars#
-calendarsFILES = $(calendarsDIR)/calendar.birth $(calendarsDIR)/calendar.chris \
-  $(calendarsDIR)/calendar.compu $(calendarsDIR)/calendar.histo \
-  $(calendarsDIR)/calendar.holid $(calendarsDIR)/calendar.judai \
-  $(calendarsDIR)/calendar.music $(calendarsDIR)/calendar.ushol
+datacalendarsDIR = calendars#
+datacalendarsFILES = \
+  $(srcdir)/$(datacalendarsDIR)/calendar.birth \
+  $(srcdir)/$(datacalendarsDIR)/calendar.chris \
+  $(srcdir)/$(datacalendarsDIR)/calendar.compu \
+  $(srcdir)/$(datacalendarsDIR)/calendar.histo \
+  $(srcdir)/$(datacalendarsDIR)/calendar.holid \
+  $(srcdir)/$(datacalendarsDIR)/calendar.judai \
+  $(srcdir)/$(datacalendarsDIR)/calendar.music \
+  $(srcdir)/$(datacalendarsDIR)/calendar.ushol
 
-datesDIR = dates#
-datesFILES = $(datesDIR)/ancient $(datesDIR)/can_holiday $(datesDIR)/celtic \
-  $(datesDIR)/computing $(datesDIR)/events $(datesDIR)/events1 \
-  $(datesDIR)/events2 $(datesDIR)/events3 $(datesDIR)/events4 \
-  $(datesDIR)/events5 $(datesDIR)/events6 $(datesDIR)/gdead \
-  $(datesDIR)/hawaii $(datesDIR)/literature $(datesDIR)/lives \
-  $(datesDIR)/lives1 $(datesDIR)/lives2 $(datesDIR)/lives3 \
-  $(datesDIR)/lives4 $(datesDIR)/lives5 $(datesDIR)/lives6 $(datesDIR)/lotr \
-  $(datesDIR)/movies $(datesDIR)/music $(datesDIR)/radio $(datesDIR)/sfo \
-  $(datesDIR)/space $(datesDIR)/sports $(datesDIR)/television \
-  $(datesDIR)/usa_holiday $(datesDIR)/usa_other $(datesDIR)/usa_states \
-  $(datesDIR)/witchcraft $(datesDIR)/world
-datesMISCFILES = $(datesDIR)/CREDITS $(datesDIR)/README
+datadatesDIR = dates#
+datadatesFILES = \
+  $(srcdir)/$(datadatesDIR)/ancient \
+  $(srcdir)/$(datadatesDIR)/can_holiday \
+  $(srcdir)/$(datadatesDIR)/celtic \
+  $(srcdir)/$(datadatesDIR)/computing \
+  $(srcdir)/$(datadatesDIR)/events \
+  $(srcdir)/$(datadatesDIR)/events1 \
+  $(srcdir)/$(datadatesDIR)/events2 \
+  $(srcdir)/$(datadatesDIR)/events3 \
+  $(srcdir)/$(datadatesDIR)/events4 \
+  $(srcdir)/$(datadatesDIR)/events5 \
+  $(srcdir)/$(datadatesDIR)/events6 \
+  $(srcdir)/$(datadatesDIR)/gdead \
+  $(srcdir)/$(datadatesDIR)/hawaii \
+  $(srcdir)/$(datadatesDIR)/literature \
+  $(srcdir)/$(datadatesDIR)/lives \
+  $(srcdir)/$(datadatesDIR)/lives1 \
+  $(srcdir)/$(datadatesDIR)/lives2 \
+  $(srcdir)/$(datadatesDIR)/lives3 \
+  $(srcdir)/$(datadatesDIR)/lives4 \
+  $(srcdir)/$(datadatesDIR)/lives5 \
+  $(srcdir)/$(datadatesDIR)/lives6 \
+  $(srcdir)/$(datadatesDIR)/lotr \
+  $(srcdir)/$(datadatesDIR)/movies \
+  $(srcdir)/$(datadatesDIR)/music \
+  $(srcdir)/$(datadatesDIR)/radio \
+  $(srcdir)/$(datadatesDIR)/sfo \
+  $(srcdir)/$(datadatesDIR)/space \
+  $(srcdir)/$(datadatesDIR)/sports \
+  $(srcdir)/$(datadatesDIR)/television \
+  $(srcdir)/$(datadatesDIR)/usa_holiday \
+  $(srcdir)/$(datadatesDIR)/usa_other \
+  $(srcdir)/$(datadatesDIR)/usa_states \
+  $(srcdir)/$(datadatesDIR)/witchcraft \
+  $(srcdir)/$(datadatesDIR)/world
+datadatesMISCFILES = \
+  $(srcdir)/$(datadatesDIR)/CREDITS \
+  $(srcdir)/$(datadatesDIR)/README
 
-datascriptDIR = scripts#
-datascriptFILES = $(datascriptDIR)/cal2gcal.awk $(datascriptDIR)/cal2gcal.pl \
-  $(datascriptDIR)/ct2gcal.awk $(datascriptDIR)/ct2gcal.pl \
-  $(datascriptDIR)/old2v220.awk $(datascriptDIR)/old2v220.pl
+datascriptsDIR = scripts#
+datascriptsFILES = \
+  $(srcdir)/$(datascriptsDIR)/cal2gcal.awk \
+  $(srcdir)/$(datascriptsDIR)/cal2gcal.pl \
+  $(srcdir)/$(datascriptsDIR)/ct2gcal.awk \
+  $(srcdir)/$(datascriptsDIR)/ct2gcal.pl \
+  $(srcdir)/$(datascriptsDIR)/old2v220.awk \
+  $(srcdir)/$(datascriptsDIR)/old2v220.pl \
+  $(srcdir)/$(datascriptsDIR)/v2x2v300.awk \
+  $(srcdir)/$(datascriptsDIR)/v2x2v300.pl
 
-DISTFILES = $(dataMISCFILES) $(calendarFILES) $(datesFILES) $(datesMISCFILES) $(datascriptFILES)
+DISTFILES = \
+  $(dataMISCFILES) \
+  $(datacalendarFILES) \
+  $(datadatesFILES) \
+  $(datadatesMISCFILES) \
+  $(datascriptsFILES)
 
 #### End of package specific make variable definition section. ####
 
@@ -120,87 +180,108 @@ default check installbin install-strip id ID tags TAGS:
 
 #### Start of install section. ####
 
-install: installdirs installdata installdates
+install: installdirs installdates installdata
 	@echo "All installs in $(subdir) done"
 
 installdirs: $(top_srcdir)/mkinstalldirs
 	$(NORMAL_INSTALL)
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(homedir)
+	$(SHELL) $(top_srcdir)/mkinstalldirs $(packagedatadir)
 	if test -n "$(AWK)" || test -n "$(PERL)"; \
 	then \
-	  $(SHELL) $(top_srcdir)/mkinstalldirs $(packagedatadir); \
-	  $(SHELL) $(top_srcdir)/mkinstalldirs $(packagedatadir)/$(datascriptDIR); \
-	else \
-	  echo "Dates files will not be installed because \`awk' and \`perl'"; \
-	  echo "are missing.  Therefore, creation of dates file directory unnecessary"; \
+	  $(SHELL) $(top_srcdir)/mkinstalldirs $(packagedatadir)/$(datascriptsDIR); \
 	fi
 
 #
-# If an old-style `~/.gcalrc' is found, we convert it (preferring `perl')
-# preserving a copy of it by the name of `~/.gcalrc~'.
-# Otherwise, `gcalrc' is installed as `~./gcalrc'.
+# If an old-style `~/.gcalrc' is found, it is converted (`perl' preferred)
+# preserving a copy of it by the name of `~/.gcalrc.DATETIME'.
+# Otherwise, `gcalrc' is installed as `~/.gcalrc'.
 #
-installdata: $(srcdir)/$(dataGCALRCFILE) installdirs
+installdata: $(dataGCALRCFILE) $(dataEXAMPLEFILES) $(dataREADMEFILE) installdirs
 	$(NORMAL_INSTALL)
-	if test -f "$(homedir)/.$(dataGCALRCFILE)"; \
+	@install_target=`echo "$(dataGCALRCFILE)" | sed -e 's,.*/,,'` ;\
+	if test -f "$(homedir)/.$$install_target"; \
 	then \
-	  cp -p $(homedir)/.$(dataGCALRCFILE) $(homedir)/.$(dataGCALRCFILE)$(originalSUFFIX); \
+	  if test -n "$(CP)"; \
+	  then \
+	    $(CP) $(homedir)/.$$install_target $(homedir)/.$$install_target.$(datetime); \
+	  else \
+	    cat $(homedir)/.$$install_target > $(homedir)/.$$install_target.$(datetime); \
+	  fi; \
+	  echo "Saved original \`$(homedir)/.$$install_target' as \`$(homedir)/.$$install_target.$(datetime)'"; \
 	  if test -n "$(PERL)"; \
 	  then \
-	    echo "$(PERL) updates possibly old-style \`$(homedir)/.$(dataGCALRCFILE)'"; \
-	    $(PERL) $(srcdir)/$(datascriptDIR)/old2v220.pl $(homedir)/.$(dataGCALRCFILE) > updated; \
-	    $(INSTALL_DATA) updated $(homedir)/.$(dataGCALRCFILE); \
+	    echo "$(PERL) updates possibly old-style \`$(homedir)/.$$install_target'"; \
+	    $(PERL) $(srcdir)/$(datascriptsDIR)/old2v220.pl $(homedir)/.$$install_target > updated; \
+	    $(INSTALL_DATA) updated $(homedir)/.$$install_target; \
 	  else \
 	    if test -n "$(AWK)"; \
 	    then \
-	      echo "$(AWK) updates possibly old-style \`$(homedir)/.$(dataGCALRCFILE)'"; \
-	      $(AWK) -f $(srcdir)/$(datascriptDIR)/old2v220.awk $(homedir)/.$(dataGCALRCFILE) > updated; \
-	      $(INSTALL_DATA) updated $(homedir)/.$(dataGCALRCFILE); \
+	      echo "$(AWK) updates possibly old-style \`$(homedir)/.$$install_target'"; \
+	      $(AWK) -f $(srcdir)/$(datascriptsDIR)/old2v220.awk $(homedir)/.$$install_target > updated; \
+	      $(INSTALL_DATA) updated $(homedir)/.$$install_target; \
 	    else \
-	      echo "Unable to update possibly old-style file \`$(homedir)/.$(dataGCALRCFILE)', missing \`awk' and \`perl'"; \
-	      echo "Installing \`$(srcdir)/$(dataGCALRCFILE)' as \`$(homedir)/.$(dataGCALRCFILE)' instead"; \
-	      $(INSTALL_DATA) $(srcdir)/$(dataGCALRCFILE) $(homedir)/.$(dataGCALRCFILE); \
+	      echo "Unable to update possibly old-style file \`$(homedir)/.$$install_target', missing \`awk' and \`perl'"; \
+	      echo "Installing \`$(srcdir)/$$install_target' as \`$(homedir)/.$$install_target' instead"; \
+	      $(INSTALL_DATA) $(srcdir)/$$install_target $(homedir)/.$$install_target; \
 	    fi; \
 	  fi; \
 	  rm -f updated; \
 	else \
-	  echo "Installing \`$(srcdir)/$(dataGCALRCFILE)' as \`$(homedir)/.$(dataGCALRCFILE)'"; \
-	  $(INSTALL_DATA) $(srcdir)/$(dataGCALRCFILE) $(homedir)/.$(dataGCALRCFILE); \
+	  echo "Installing \`$(dataGCALRCFILE)' as \`$(homedir)/.$$install_target'"; \
+	  $(INSTALL_DATA) $(dataGCALRCFILE) $(homedir)/.$$install_target; \
+	fi; \
+	echo "Data file \`$(homedir)/.$$install_target' installed/updated"
+	@for file in $(dataREADMEFILE) $(dataEXAMPLEFILES); \
+	do \
+	  install_target=$(packagedatadir)/`echo "$$file" | sed -e 's,.*/,,'`; \
+	  echo "Installing \`$$file' as \`$$install_target'"; \
+	  $(INSTALL_DATA) $$file $$install_target; \
+	done; \
+	if test -n "$(BINPERMS)"; \
+	then \
+	  chmod $(BINPERMS) $(packagedatadir); \
+	else \
+	  chmod $(BINPERMS2) $(packagedatadir); \
 	fi
-	@echo "Data file \`$(homedir)/.$(dataGCALRCFILE)' installed/updated"
+	@echo "Example data files installed"
 
 #
-# Only if a reminder/appointment file is NOT found in `$packagedatadir', it's
-# installed, otherwise updated (preferring `perl') because it could be old-style.
+# Only if a reminder/appointment file is NOT found in `$packagedatadir', it is
+# installed, otherwise updated (`perl' preferred) because it could be old-style.
+# Some documentation texts and all existing conversion scripts are also installed.
 #
-# Some example files, documentation texts and all existing conversion scripts are also installed.
-#
-installdates: $(calendarsFILES) $(datesFILES) $(datesMISCFILES) $(dataEXAMPLEFILES) $(srcdir)/$(dataREADMEFILE) installdirs
+installdates: $(datacalendarsFILES) $(datadatesFILES) $(datadatesMISCFILES) installdirs
 	$(NORMAL_INSTALL)
-	if test -n "$(AWK)" || test -n "$(PERL)"; \
+	@if test -n "$(AWK)" || test -n "$(PERL)"; \
 	then \
-	  for file in $(calendarsFILES); \
+	  for file in $(datacalendarsFILES); \
 	  do \
-	    install_target=$(packagedatadir)/`echo $$file | sed -e 's/$(calendarsDIR)\///'`; \
+	    install_target=$(packagedatadir)/`echo "$$file" | sed -e 's,.*/,,'`; \
 	    if test -f "$$install_target"; \
 	    then \
-	      cp -p $$install_target updated; \
+	      if test -n "$(CP)"; \
+	      then \
+	        $(CP) $$install_target updated; \
+	      else \
+	        cat $$install_target > updated; \
+	      fi; \
 	      if test -n "$(PERL)"; \
 	      then \
 	        echo "$(PERL) updates possibly old-style file \`$$install_target'"; \
-	        $(PERL) $(srcdir)/$(datascriptDIR)/old2v220.pl updated > $$install_target; \
+	        $(PERL) $(srcdir)/$(datascriptsDIR)/old2v220.pl updated > $$install_target; \
 	      else \
 	        echo "$(AWK) updates possibly old-style file \`$$install_target'"; \
-	        $(AWK) -f $(srcdir)/$(datascriptDIR)/old2v220.awk updated > $$install_target; \
+	        $(AWK) -f $(srcdir)/$(datascriptsDIR)/old2v220.awk updated > $$install_target; \
 	      fi; \
 	    else \
 	      if test -n "$(PERL)"; \
 	      then \
-	        echo "$(PERL) installs \`$(srcdir)/$$file' as \`$$install_target'"; \
-	        $(PERL) $(srcdir)/$(datascriptDIR)/cal2gcal.pl $(srcdir)/$$file > $$install_target; \
+	        echo "$(PERL) installs \`$$file' as \`$$install_target'"; \
+	        $(PERL) $(srcdir)/$(datascriptsDIR)/cal2gcal.pl $$file > $$install_target; \
 	      else \
-	        echo "$(AWK) installs \`$(srcdir)/$$file' as \`$$install_target'"; \
-	        $(AWK) -f $(srcdir)/$(datascriptDIR)/cal2gcal.awk $(srcdir)/$$file > $$install_target; \
+	        echo "$(AWK) installs \`$$file' as \`$$install_target'"; \
+	        $(AWK) -f $(srcdir)/$(datascriptsDIR)/cal2gcal.awk $$file > $$install_target; \
 	      fi; \
 	    fi; \
 	    if test -n "$(SRCPERMS)"; \
@@ -210,28 +291,33 @@ installdates: $(calendarsFILES) $(datesFILES) $(datesMISCFILES) $(dataEXAMPLEFIL
 	      chmod $(SRCPERMS2) $$install_target; \
 	    fi; \
 	  done; \
-	  for file in $(datesFILES); \
+	  for file in $(datadatesFILES); \
 	  do \
-	    install_target=$(packagedatadir)/`echo $$file | sed -e 's/$(datesDIR)\///'`; \
+	    install_target=$(packagedatadir)/`echo "$$file" | sed -e 's,.*/,,'`; \
 	    if test -f "$$install_target"; \
 	    then \
-	      cp -p $$install_target updated; \
+	      if test -n "$(CP)"; \
+	      then \
+	        $(CP) $$install_target updated; \
+	      else \
+	        cat $$install_target > updated; \
+	      fi; \
 	      if test -n "$(PERL)"; \
 	      then \
 	        echo "$(PERL) updates possibly old-style file \`$$install_target'"; \
-	        $(PERL) $(srcdir)/$(datascriptDIR)/old2v220.pl updated > $$install_target; \
+	        $(PERL) $(srcdir)/$(datascriptsDIR)/old2v220.pl updated > $$install_target; \
 	      else \
 	        echo "$(AWK) updates possibly old-style file \`$$install_target'"; \
-	        $(AWK) -f $(srcdir)/$(datascriptDIR)/old2v220.awk updated > $$install_target; \
+	        $(AWK) -f $(srcdir)/$(datascriptsDIR)/old2v220.awk updated > $$install_target; \
 	      fi; \
 	    else \
 	      if test -n "$(PERL)"; \
 	      then \
-	        echo "$(PERL) installs \`$(srcdir)/$$file' as \`$$install_target'"; \
-	        $(PERL) $(srcdir)/$(datascriptDIR)/ct2gcal.pl $(srcdir)/$$file > $$install_target; \
+	        echo "$(PERL) installs \`$$file' as \`$$install_target'"; \
+	        $(PERL) $(srcdir)/$(datascriptsDIR)/ct2gcal.pl $$file > $$install_target; \
 	      else \
-	        echo "$(AWK) installs \`$(srcdir)/$$file' as \`$$install_target'"; \
-	        $(AWK) -f $(srcdir)/$(datascriptDIR)/ct2gcal.awk $(srcdir)/$$file > $$install_target; \
+	        echo "$(AWK) installs \`$$file' as \`$$install_target'"; \
+	        $(AWK) -f $(srcdir)/$(datascriptsDIR)/ct2gcal.awk $$file > $$install_target; \
 	      fi; \
 	    fi; \
 	    if test -n "$(SRCPERMS)"; \
@@ -242,70 +328,63 @@ installdates: $(calendarsFILES) $(datesFILES) $(datesMISCFILES) $(dataEXAMPLEFIL
 	    fi; \
 	  done; \
 	  rm -f updated; \
-	  for file in $(datesMISCFILES); \
+	  for file in $(datadatesMISCFILES); \
 	  do \
-	    install_target=$(packagedatadir)/`echo $$file | sed -e 's/$(datesDIR)\///'`; \
-	    echo "Installing \`$(srcdir)/$$file' as \`$$install_target$(originalSUFFIX)'"; \
-	    rm -f $$install_target; \
-	    $(INSTALL_DATA) $(srcdir)/$$file $$install_target$(originalSUFFIX); \
+	    install_target=$(packagedatadir)/`echo "$$file" | sed -e 's,.*/,,'`; \
+	    echo "Installing \`$$file' as \`$$install_target.$(datadatesDIR)'"; \
+	    $(INSTALL_DATA) $$file $$install_target.$(datadatesDIR); \
 	  done; \
-	  for file in $(dataREADMEFILE) $(dataEXAMPLEFILES); \
+	  for file in $(datascriptsFILES); \
 	  do \
-	    install_target=$(packagedatadir)/$$file; \
-	    echo "Installing \`$(srcdir)/$$file' as \`$$install_target'"; \
-	    $(INSTALL_DATA) $(srcdir)/$$file $$install_target; \
-	  done; \
-	  for file in $(datascriptFILES); \
-	  do \
-	    install_target=$(packagedatadir)/$$file; \
-	    echo "Installing \`$(srcdir)/$$file' as \`$$install_target'"; \
-	    $(INSTALL_DATA) $(srcdir)/$$file $$install_target; \
+	    install_target=$(packagedatadir)/`echo "$$file" | sed -e "s,^$(srcdir)/,,"`; \
+	    echo "Installing \`$$file' as \`$$install_target'"; \
+	    $(INSTALL_DATA) $$file $$install_target; \
 	  done; \
 	  if test -n "$(BINPERMS)"; \
 	  then \
 	    chmod $(BINPERMS) $(packagedatadir); \
-	    chmod $(BINPERMS) $(packagedatadir)/$(datascriptDIR); \
+	    chmod $(BINPERMS) $(packagedatadir)/$(datascriptsDIR); \
 	  else \
 	    chmod $(BINPERMS2) $(packagedatadir); \
-	    chmod $(BINPERMS2) $(packagedatadir)/$(datascriptDIR); \
+	    chmod $(BINPERMS2) $(packagedatadir)/$(datascriptsDIR); \
 	  fi; \
-	  echo "Dates files installed/updated and conversion scripts installed"; \
+	  echo "Reminder/appointment files and conversion scripts installed/updated"; \
 	else \
-	  echo "Unable to install/update dates files, missing \`awk' and \`perl'"; \
+	  echo "Unable to install/update reminder/appointment files, missing \`awk' and \`perl'"; \
 	fi
 
 uninstall:
-	$(PRE_UNINSTALL)
-	rm -f $(homedir)/.$(dataGCALRCFILE)
+	$(NORMAL_UNINSTALL)
+	-uninstall_target=`echo "$(dataGCALRCFILE)" | sed -e 's,.*/,,'`; \
+	rm -f $(homedir)/.$$uninstall_target; \
 	if test -n "$(AWK)" || test -n "$(PERL)"; \
 	then \
-	  for file in $(calendarsFILES); \
+	  for file in $(datacalendarsFILES) $(datadatesFILES); \
 	  do \
-	    uninstall_target=$(packagedatadir)/`echo $$file | sed -e 's/$(calendarsDIR)\///'`; \
+	    uninstall_target=$(packagedatadir)/`echo "$$file" | sed -e 's,.*/,,'`; \
 	    rm -f $$uninstall_target; \
 	  done; \
-	  for file in $(datesFILES); \
+	  for file in $(datadatesMISCFILES); \
 	  do \
-	    uninstall_target=$(packagedatadir)/`echo $$file | sed -e 's/$(datesDIR)\///'`; \
-	    rm -f $$uninstall_target; \
-	  done; \
-	  for file in $(datesMISCFILES); \
-	  do \
-	    uninstall_target=$(packagedatadir)/`echo $$file | sed -e 's/$(datesDIR)\///'`; \
-	    rm -f $$uninstall_target$(originalSUFFIX); \
+	    uninstall_target=$(packagedatadir)/`echo "$$file" | sed -e 's,.*/,,'`; \
+	    rm -f $$uninstall_target.$(datadatesDIR); \
 	  done; \
 	  for file in $(dataREADMEFILE) $(dataEXAMPLEFILES); \
 	  do \
-	    rm -f $(packagedatadir)/$$file; \
+	    uninstall_target=$(packagedatadir)/`echo "$$file" | sed -e 's,.*/,,'`; \
+	    rm -f $$uninstall_target; \
 	  done; \
-	  for file in $(datascriptFILES); \
+	  for file in $(datascriptsFILES); \
 	  do \
-	    rm -f $(packagedatadir)/$$file; \
+	    uninstall_target=$(packagedatadir)/`echo "$$file" | sed -e "s,^$(srcdir)/,,"`; \
+	    rm -f $$uninstall_target; \
 	  done; \
+	  rmdir $(packagedatadir)/$(datascriptsDIR); \
+	  rmdir $(packagedatadir) 2>/dev/null; \
 	else \
 	  : ; \
 	fi
-	@echo "Appointment/reminder files of distribution uninstalled"
+	@echo "Reminder/appointment/data files of distribution uninstalled"
 
 #### End of install section. ####
 
@@ -314,15 +393,15 @@ uninstall:
 #### Start of clean section. ####
 
 clean:
-	rm -f updated
+	-rm -f updated
 
 distclean: clean
-	rm -f Makefile
+	-rm -f Makefile
 
 mostlyclean: distclean
 
 realclean: distclean
-	rm -f id ID tags TAGS
+	-rm -f id ID tags TAGS
 
 maintainer-clean: realclean
 	@echo "This command is intended for maintainers to use;"
@@ -332,7 +411,7 @@ maintainer-clean: realclean
 
 
 
-dist dist-gcal distzip distzoo distlha distshar: Makefile $(DISTFILES)
+dist dist-$(PACKAGE) distzip distzoo distlha distshar MANIFEST: Makefile $(DISTFILES)
 
 Makefile: $(srcdir)/Makefile.in ../config.status
 	cd .. \

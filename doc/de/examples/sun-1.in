@@ -1,0 +1,70 @@
+; sun-1.in
+;
+
+; The command(s) used within this example are prefixed with `%%%'.
+; The real call(s) of these command(s) are prefixed with `***'.
+;
+%%%cat sun-1.rc
+***cat ./sun-1.rc
+
+; The resource file line(s) used within this example are prefixed with `:::'.
+;
+:::; sun-1.rc, Vergleich von Sonnenauf- und untergang, Tageslaenge
+:::; und Nachtlaenge zweier Orte, naemlich:  Muenster.DE / Bangkok.TH
+:::; Alle Bezuege basieren auf Muenster.DE!
+:::;
+:::; Allgemeine Definitionen
+:::$p=0*d1#999
+:::$v=%2%4 nach dortiger Ortszeit
+:::$z=aktuelle Ortszeit in
+:::; Definitionen fuer Winterzeit
+:::$a=%e#1980 %e0@a#0@b-1
+:::$x=Sonne:~%o$c,$w auf, %s$c,$w unter, %u$c,$w tag, %z$c,$w nacht~$l
+:::; Winterzeit in Deutschland == MEWZ/GMT-1 (+60 Minuten)
+:::$w=+60
+:::; Beginn der Winterzeit in Deutschland
+:::b=10son9
+:::; Definitionen fuer Sommerzeit
+:::$b=%e#1980 %i0@a#0@b-1
+:::$y=Sonne:~%o$c,$s auf, %s$c,$s unter, %u$c,$s tag, %z$c,$s nacht~$l
+:::; Sommerzeit in Deutschland == MESZ/GMT-2 (+120 Minuten)
+:::$s=+120
+:::; Beginn der Sommerzeit in Deutschland
+:::a=03son9
+:::; Geographische Koordinate und Name des Orts Muenster, Deutschland
+:::$c=+5158+00738+61
+:::$l=%1Muenster
+:::; Muensters Sonnenaufgang etc. nach dortiger Ortszeit
+:::$p $a $x$v
+:::$p $b $y$v
+:::; Muensters aktuelle Ortszeit
+:::0 $a %1%@$w %2 $z $l
+:::0 $b %1%@$s %2 $z $l
+:::; Geographische Koordinate und Name des Orts Bangkok, Thailand
+:::$c=+1345+10031+10
+:::$l=%3Bangkok%4-Zeit umgerechnet in $ls%2 Ortszeit
+:::; Bangkok Sonnenaufgang etc. umgerechnet in Muensters Ortszeit
+:::$p $a $x
+:::$p $b $y
+:::; Bangkok Ortszeit == WAST/GMT-7 (+420 Minuten)
+:::$t=+420
+:::$w=$t
+:::; Bangkoks aktuelle Ortszeit
+:::$l=%3Bangkok
+:::0 $a %3%@$t %4 $z $l
+:::0 $b %3%@$t %4 $z $l
+:::; Bangkoks Sonnenaufgang etc. nach dortiger Ortszeit
+:::$l=$l$v
+:::$p $x
+
+; Additionally leading Texinfo commands are prefixed with `+++'.
+;
++++example
++++group
++++cartouche
+
+; Additionally trailing Texinfo commands are prefixed with `---'.
+;
+---end cartouche
+---end group
+---end example

@@ -1,4 +1,4 @@
-SYMBOLS file for `gcal'.
+SYMBOLS file for Gcal.
 
 Most important predefined preprocessor symbols and their meaning:
 
@@ -72,12 +72,16 @@ Most important predefined preprocessor symbols and their meaning:
               LINUX
                     ix86 Linux
 
-   * (Auto)configure detects symbols
+   * (Auto)configure detected symbols
 
          V A R I O U S
                See the `config.hin' file for more details!
 
    * Gcal's internal symbols setting its main behaviour
+
+         HD_TOP20CC
+               Enable a small collection of country specific holidays
+               only.
 
          USE_DE
                Enable German texts, holidays and calendar style for
@@ -87,10 +91,11 @@ Most important predefined preprocessor symbols and their meaning:
                Enable displaying using the extended ASCII character set.
 
          USE_HLS
-               Enable highlighting sequences/marking characters.
+               Enable highlighting sequences respectively marking
+               characters.
 
          USE_PAGER
-               Enable simple, internal pager feature.
+               Enable external or simple internal pager feature.
 
          USE_RC
                Enable fixed date feature.
@@ -101,4 +106,24 @@ Most important predefined preprocessor symbols and their meaning:
                Cuts respectively replaces some long variable or
                function names to 6 significant places so *any* linker
                should be able to bind an executable file.
+
+         GCAL_TCAP
+               System has working Termcap functions, so terminal
+               dependent highlighting sequences are used.
+
+         GCAL_SHELL
+               System has a Un*x-like shell, so shell script files can
+               be created.
+
+         GCAL_EPAGER
+               System supports forking of processes and pipelining, so
+               an external pager program can be used.
+
+         GCAL_EMAIL
+               System basically supports the sending of electronic
+               mails, so the mailer can be used.
+
+         GCAL_NLS
+               System supports i18n and has mechanisms to localize
+               message texts, so localized message texts can be used.
 

@@ -1,0 +1,7 @@
+; redir-1.rc, shell Kommando $c ausfuehren und nach $f umlenken
+;
+$p=0*d1#999
+$c=$p %!$c
+$g=|txt2gcal - $p
+;
+$c $g>$f

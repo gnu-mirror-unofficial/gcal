@@ -1,4 +1,4 @@
-#  $Id: makefile.mms 0.14 1996/10/17 00:01:04 tom Exp $
+#  $Id: makefile.mms 0.17 2000/03/05 00:01:07 tom Exp $
 ###############################################################################
 #
 #  Vax/VMS VAX-C with MMS
@@ -15,10 +15,10 @@
 #$ gcal2txt == "$disk:[directory]gcal2txt.exe"
 #
 #
-#  Copyright (C) 1994-1996      Thomas Esken            <esken@uni-muenster.de>
-#                               Im Hagenfeld 84
-#                               D-48147 M"unster
-#                               GERMANY
+#  Copyright (c) 1994-1996, 2000  Thomas Esken          <esken@uni-muenster.de>
+#                                 Im Hagenfeld 84
+#                                 D-48147 M"unster
+#                                 GERMANY
 #
 ###############################################################################
 #
@@ -139,9 +139,10 @@ O = .obj
 C = .c
 H = .h
 
-OBJ1 = gcal$(O) file-io$(O) hd-data$(O) hd-use$(O) help$(O) print$(O) \
-  rc-check$(O) rc-insert$(O) rc-use$(O) rc-utils$(O) regexp$(O) tty$(O) \
-  utils$(O)
+OBJ1 = gcal$(O) file-io$(O) hd-astro$(O) hd-data$(O) hd-data1$(O) \
+  hd-data2$(O) hd-data3$(O) hd-data4$(O) hd-data5$(O) hd-use$(O) help$(O) \
+  print$(O) rc-astro$(O) rc-check$(O) rc-insert$(O) rc-use$(O) rc-utils$(O) \
+  regexp$(O) tty$(O) utils$(O)
 OBJ2 = tcal$(O)
 OBJ3 = txt2gcal$(O)
 OBJ4 = gcal2txt$(O)

@@ -4,7 +4,7 @@
 *  config.h:  System and program specific preprocessor statements.
 *
 *
-*  Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1995-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -28,7 +28,7 @@
 
 
 /*
-*  $Id: config.h 2.40 1997/01/26 02:04:00 tom Exp $
+*  $Id: config.h 3.00 2000/03/30 03:00:00 tom Exp $
 */
 
 
@@ -41,16 +41,16 @@
 /* Define to the version of the distribution.  */
 #undef VERSION
 
-/* Define as 1 if you have the stpcpy function.  */
+/* Define if you have the stpcpy function.  */
 #undef HAVE_STPCPY
 
-/* Define to 1 if NLS is requested.  */
+/* Define if NLS is requested.  */
 #undef ENABLE_NLS
 
-/* Define as 1 if you have catgets and don't want to use GNU gettext.  */
+/* Define if you have catgets and don't want to use GNU gettext.  */
 #undef HAVE_CATGETS
 
-/* Define as 1 if you have gettext and don't want to use GNU gettext.  */
+/* Define if you have gettext and don't want to use GNU gettext.  */
 #undef HAVE_GETTEXT
 
 /* Define if your locale.h file contains LC_MESSAGES.  */
@@ -58,7 +58,7 @@
 
 /*
  * Regular expression library.
- * Define exactly one of the following to be 1:
+ * Define exactly one of the following:
  * HAVE_GNU_RE_COMPILE_PATTERN: GNU re_compile_pattern() and regex.h
  * HAVE_POSIX_REGCOMP: POSIX regcomp() and regex.h
  * HAVE_RE_COMP: BSD re_comp()
@@ -85,14 +85,14 @@
 /* Function/macro isspace() is found.  */
 #undef HAVE_ISSPACE
 
-/* Link -lncurses or -ltermcap or -ltermlib to executable.  */
-#undef HAVE_TTYLIBS
-
 /* Define if you have the m library (-lm), only necessary if USE_RC=1.  */
 #undef HAVE_LIBM
 
 /* The ospeed variable is defined in -lncurses or -ltermcap or -ltermlib.  */
 #undef HAVE_OSPEED
+
+/* Define if you have a working system function.  */
+#undef HAVE_SYSTEM
 
 /* Shell can interpret `#!' in first line of a shell script.  */
 #undef HAVE_SYS_INTERPRETER
@@ -102,6 +102,9 @@
 
 /* Type time_t is predefined.  */
 #undef HAVE_TIME_T
+
+/* Link -lncurses or -ltermcap or -ltermlib to executable.  */
+#undef HAVE_TTYLIBS
 
 /* Functions/macros toupper(), tolower(), isupper() and islower() are found.  */
 #undef HAVE_UPPER_LOWER
@@ -123,6 +126,9 @@
 
 /* Enable displaying using the extended ASCII character set.  */
 #undef USE_EASC
+
+/* Enable a small selection of country specific holidays only.  */
+#undef HD_TOP20CC
 
 /* Enable highlighting sequences.  */
 #undef USE_HLS

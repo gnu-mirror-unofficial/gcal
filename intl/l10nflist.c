@@ -1,6 +1,6 @@
-/* finddomain.c -- handle list of needed message catalogs
-   Copyright (C) 1995, 1996 Free Software Foundation, Inc.
-   Written by Ulrich Drepper <drepper@gnu.ai.mit.edu>, 1995.
+/* Handle list of needed message catalogs
+   Copyright (C) 1995, 1996, 1997 Free Software Foundation, Inc.
+   Contributed by Ulrich Drepper <drepper@gnu.ai.mit.edu>, 1995.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
 # include <config.h>
 #endif
 
+
 #if defined HAVE_STRING_H || defined _LIBC
 # ifndef _GNU_SOURCE
 #  define _GNU_SOURCE	1
@@ -27,11 +28,13 @@
 # include <string.h>
 #else
 # include <strings.h>
+# ifndef memcpy
+#  define memcpy(Dst, Src, Num) bcopy (Src, Dst, Num)
+# endif
+#endif
+#if !HAVE_STRCHR && !defined _LIBC
 # ifndef strchr
 #  define strchr index
-# endif
-# ifndef memcpy
-#  define memcpy(Dst, Src, Num) bcopy ((Src), (Dst), (Num))
 # endif
 #endif
 
@@ -39,6 +42,7 @@
 # include <argz.h>
 #endif
 #include <ctype.h>
+#include <sys/types.h>
 
 #if defined STDC_HEADERS || defined _LIBC
 # include <stdlib.h>
@@ -61,7 +65,9 @@
 /* Rename the non ANSI C functions.  This is required by the standard
    because some ANSI C functions will require linking with this object
    file and the name space must not be polluted.  */
-# define stpcpy(dest, src) __stpcpy(dest, src)
+# ifndef stpcpy
+#  define stpcpy(dest, src) __stpcpy(dest, src)
+# endif
 #else
 # ifndef HAVE_STPCPY
 static char *stpcpy PARAMS ((char *dest, const char *src));
@@ -198,14 +204,16 @@ _nl_make_l10nflist (l10nfile_list, dirlist, dirlist_len, mask, language,
 				  + ((mask & XPG_NORM_CODESET) != 0
 				     ? strlen (normalized_codeset) + 1 : 0)
 				  + (((mask & XPG_MODIFIER) != 0
-				      || (mask & CEN_AUDIENCE) != 0) ?
-				     strlen (modifier) + 1 : 0)
+				      || (mask & CEN_AUDIENCE) != 0)
+				     ? strlen (modifier) + 1 : 0)
 				  + ((mask & CEN_SPECIAL) != 0
 				     ? strlen (special) + 1 : 0)
-				  + ((mask & CEN_SPONSOR) != 0
-				     ? strlen (sponsor) + 1 : 0)
-				  + ((mask & CEN_REVISION) != 0
-				     ? strlen (revision) + 1 : 0)
+				  + (((mask & CEN_SPONSOR) != 0
+				      || (mask & CEN_REVISION) != 0)
+				     ? (1 + ((mask & CEN_SPONSOR) != 0
+					     ? strlen (sponsor) + 1 : 0)
+					+ ((mask & CEN_REVISION) != 0
+					   ? strlen (revision) + 1 : 0)) : 0)
 				  + 1 + strlen (filename) + 1);
 
   if (abs_filename == NULL)
@@ -248,15 +256,16 @@ _nl_make_l10nflist (l10nfile_list, dirlist, dirlist_len, mask, language,
       *cp++ = '+';
       cp = stpcpy (cp, special);
     }
-  if ((mask & CEN_SPONSOR) != 0)
+  if ((mask & (CEN_SPONSOR | CEN_REVISION)) != 0)
     {
       *cp++ = ',';
-      cp = stpcpy (cp, sponsor);
-    }
-  if ((mask & CEN_REVISION) != 0)
-    {
-      *cp++ = '_';
-      cp = stpcpy (cp, revision);
+      if ((mask & CEN_SPONSOR) != 0)
+	cp = stpcpy (cp, sponsor);
+      if ((mask & CEN_REVISION) != 0)
+	{
+	  *cp++ = '_';
+	  cp = stpcpy (cp, revision);
+	}
     }
 
   *cp++ = '/';
@@ -313,8 +322,8 @@ _nl_make_l10nflist (l10nfile_list, dirlist, dirlist_len, mask, language,
     }
 
   entries = 0;
-  /* If the DIRLIST is a real list the RETVAL entry correcponds not to
-     a real file.  So we have to use the DIRLIST separation machanism
+  /* If the DIRLIST is a real list the RETVAL entry corresponds not to
+     a real file.  So we have to use the DIRLIST separation mechanism
      of the inner loop.  */
   cnt = __argz_count (dirlist, dirlist_len) == 1 ? mask - 1 : mask;
   for (; cnt >= 0; --cnt)
@@ -343,7 +352,7 @@ _nl_make_l10nflist (l10nfile_list, dirlist, dirlist_len, mask, language,
    names.  */
 const char *
 _nl_normalize_codeset (codeset, name_len)
-     const char *codeset;
+     const unsigned char *codeset;
      size_t name_len;
 {
   int len = 0;

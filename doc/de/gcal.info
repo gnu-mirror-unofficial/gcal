@@ -1,151 +1,363 @@
-This is Info file ./de/gcal.info, produced by Makeinfo version 1.67
-from the input file ./de/gcal.texi.
+Dies ist gcal.info, hergestellt von Makeinfo Version 4.0 aus gcal.texi.
 
 INFO-DIR-SECTION GNU Pakete
 START-INFO-DIR-ENTRY
-* Gcal: (gcal).                         Das GNU Kalenderprogramm.
-* tcal: (gcal)Aufruf von tcal.          Gcal mit morgigem Datum aufrufen.
-* txt2gcal: (gcal)Aufruf von txt2gcal.  Textdatei zu Ressourcendatei wandeln.
-* gcal2txt: (gcal)Aufruf von gcal2txt.  Ressourcendatei zu Textdatei wandeln.
+* Gcal: (gcal).                        GNU Kalenderprogramm.
+* Tcal: (gcal)Aufruf von tcal.         Gcal mit morgigem Datum aufrufen.
+* Txt2gcal: (gcal)Aufruf von txt2gcal. Kalendertext zu Ressourcendatei wandeln.
+* Gcal2txt: (gcal)Aufruf von gcal2txt. Kalenderressource zu Textdatei wandeln.
 END-INFO-DIR-ENTRY
 
-Diese Datei beschreibt Gcal, ein Programm um Kalender auszugeben.  Gcal
-gibt Monatskalender und Jahreskalender, ewige Feiertagslisten sowie
-Terminlisten auf viele verschiedene Arten und Weisen aus.  Es
-ber"ucksichtigt diejenigen Daten korrekt, welche "ubergangen wurden,
-als der derzeitig g"ultige Gregorianische Kalender den vormals g"ultigen
-Julianischen Kalender abl"oste.
+Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
+auszugeben.
 
-Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+Copyright (c) 1994-1997, 2000 Thomas Esken
 
-Das ist die zweite Ausgabe der Gcal Dokumentation.
+Diese Ausgabe ist für Gcal Version 3.00.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
 Copyrightvermerk und diesem Genehmigungsvermerk ausgestattet sind und
 vorgenannte Vermerke erhalten bleiben.
 
-Hiermit wird die Erlaubnis erteilt, ver"anderte Kopien dieses Handbuchs
-wie unter den Bedingungen f"ur wortgetreue Kopien zu erstellen und zu
-vertreiben, sofern die ausgef"uhrten Arbeiten in Ableitung und
-Gesamtheit innerhalb der Bestimmungen eines Genehmigungsvermerks liegen
-und zudem mit diesem ausgestattet sind, welcher mit diesem hier
-identisch ist.
+Hiermit wird die Erlaubnis erteilt, veränderte Kopien dieses Handbuchs
+wie unter den Bedingungen für wortgetreue Kopien zu erstellen und zu
+vertreiben, sofern die ausgeführten Arbeiten in Ableitung und Gesamtheit
+innerhalb der Bestimmungen eines Genehmigungsvermerks liegen und zudem
+mit diesem ausgestattet sind, welcher mit diesem hier identisch ist.
 
 Hiermit wird die Erlaubnis erteilt, wie unter den vorgenannten
-Bedingungen f"ur ver"anderte Versionen "Ubersetzungen dieses Handbuchs
-in eine andere Sprache zu erstellen und zu vertreiben, mit der
-Ausnahme, dass dieser Genehmigungsvermerk in einer "Ubersetzung
-angegeben sein darf, welche von der Free Software Foundation gebilligt
-wird.
+Bedingungen für veränderte Versionen Übersetzungen dieses Handbuchs in
+eine andere Sprache zu erstellen und zu vertreiben, mit der Ausnahme,
+daß dieser Genehmigungsvermerk in einer Übersetzung angegeben sein
+darf, welche von der Free Software Foundation gebilligt wird.
 
-Jedwede Vorschl"age, Verbesserungen, Erweiterungen, Fehlerberichte,
-Geld- und Sachspenden, Programmierauftr"age usw. sind stets willkommen.
-Bitte senden Sie diese direkt an meine eMail Adresse.  Wenn Sie dieses
-Werkzeug m"ogen, so w"urde ich mich sehr "uber eine Postkarte von Ihnen
-freuen!
+Jedwede Vorschläge, Verbesserungen, Erweiterungen, Fehlerberichte, Geld-
+und Sachspenden, Programmieraufträge usw. sind stets willkommen.  Bitte
+senden Sie diese direkt an meine eMail Adresse <esken@gmx.net>.  Wenn
+Sie dieses Werkzeug mögen, so würde ich mich sehr über eine Postkarte
+von Ihnen freuen!
 
 ------------------------oOO      \\\_''/      OOo---------------------------
-Thomas Esken               O     (/o-o\)     O  eMail: esken@uni-muenster.de
+Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
 Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 
 
 Indirect:
-gcal.info-1: 2491
-gcal.info-2: 48793
-gcal.info-3: 97548
-gcal.info-4: 145777
-gcal.info-5: 194682
-gcal.info-6: 242557
-gcal.info-7: 289977
-gcal.info-8: 338629
-gcal.info-9: 341624
+gcal.info-1: 2142
+gcal.info-2: 94725
+gcal.info-3: 160237
+gcal.info-4: 204254
+gcal.info-5: 248422
+gcal.info-6: 297414
+gcal.info-7: 346408
+gcal.info-8: 469417
+gcal.info-9: 533367
+gcal.info-10: 546843
+gcal.info-11: 624732
+gcal.info-12: 648991
+gcal.info-13: 679442
+gcal.info-14: 709581
 
 Tag Table:
 (Indirect)
-Node: Top2491
-Node: Einleitung8279
-Node: Aufruf von Gcal12253
-Node: Kommandozeilenargumente14056
-Node: Optionen16070
-Node: Allgemeine Optionen19978
-Node: Globale Optionen21404
-Node: Kalender Optionen32363
-Node: Termin Optionen48793
-Node: Antwortdatei97548
-Node: Datummodifizierer99912
-Node: Kommandos109977
-Node: Einfache Kommandos112432
-Node: 3-Monatsmodus Kommandos114668
-Node: Listen von Kommandos115676
-Node: Bereiche von Kommandos116928
-Node: Die GCAL Umgebungsvariable117963
-Node: Ewige Feiertage118989
-Node: Termine124032
-Node: Ressourcendatei130009
-Node: Struktur einer Ressourcendatei135363
-Node: Datumteil einer Zeile138540
-Node: Weitere Datumteil-Attribute144279
-Node: Listen von Tagen145777
-Node: Bereiche von Tagen149048
-Node: Wiederholungsfaktor von Tagen153899
-Node: Auftretensfaktor von Tagen158458
-Node: Textteil einer Zeile165826
-Node: Zeile kommentieren172081
-Node: Include Anweisungen174676
-Node: Spezialtexte178297
-Node: Datumvariablen180263
-Node: Textvariablen188128
-Node: Ressourcendateibeispiele194682
-Node: Heutiger Kalender203380
-Node: Gcal Hilfsprogramme209162
-Node: Aufruf von tcal209867
-Node: Aufruf von txt2gcal211742
-Node: Aufruf von gcal2txt214333
-Node: Internationalisierung216537
-Node: Metasymbole223976
-Node: Regulaere Ausdruecke225579
-Node: Benutzung von Regexp227471
-Node: Regexp Operatoren228261
-Node: Regexps (kurz)242557
-Node: Spezialtexte (lang)245103
-Node: Ausschliessen246746
-Node: Ausschliessen mit Datumargument247308
-Node: Inklusive Datum Zeitraum248459
-Node: Exklusive Datum Zeitraum251895
-Node: Ausschliessen ohne Argument255317
-Node: Inklusive Tag Zeitraum256366
-Node: Exklusive Tag Zeitraum258022
-Node: Ersetzen259631
-Node: Ersetzen mit Datumargument260533
-Node: Wochentagsname262198
-Node: Wochentag263344
-Node: Tageszahl268731
-Node: Tag270273
-Node: Woche271665
-Node: Monatsname272196
-Node: Monat273013
-Node: Jahr274440
-Node: Mondphase275195
-Node: Biorhythmus278172
-Node: Differenzwert283104
-Node: Ersetzen mit anderem Argument284596
-Node: Aktuelle Uhrzeit285317
-Node: Textliches Datum286034
-Node: Julianische Tageszahl286747
-Node: Ersetzen ohne Argument288701
-Node: Andere Differenzwerte289063
-Node: Hervorhebung289977
-Node: Shell Kommando298089
-Node: Spezialtexte (kurz)299470
-Node: Kodierschema305205
-Node: Kodierschema Tabelle 1306715
-Node: Kodierschema Tabelle 2310188
-Node: Umgebungsvariablen313617
-Node: Fehlerkodes317297
-Node: Argumentenindex319432
-Node: Variablenindex338629
-Node: Begriffsindex341624
+Node: Top2142
+Node: Vorwort9150
+Node: Vorwort-Footnotes22184
+Ref: Vorwort-Footnote-122243
+Ref: Vorwort-Footnote-222616
+Node: Einleitung22680
+Node: Einleitung-Footnotes26978
+Ref: Einleitung-Footnote-127043
+Ref: Einleitung-Footnote-227084
+Ref: Einleitung-Footnote-327116
+Node: Aufruf von Gcal27148
+Node: Aufruf von Gcal-Footnotes28816
+Ref: Aufruf von Gcal-Footnote-128891
+Node: Kommandozeilenargumente29014
+Node: Kommandozeilenargumente-Footnotes30968
+Ref: Kommandozeilenargumente-Footnote-131059
+Ref: Kommandozeilenargumente-Footnote-231111
+Node: Optionen31149
+Node: Optionen-Footnotes34977
+Ref: Optionen-Footnote-135038
+Node: Allgemeine Optionen35080
+Node: Globale Optionen36494
+Ref: x-response-file36685
+Ref: x-debug-internal37704
+Ref: x-debug-abort38204
+Ref: x-pager38449
+Ref: x-highlighting41760
+Ref: x-mail46338
+Node: Globale Optionen-Footnotes48731
+Ref: Globale Optionen-Footnote-148808
+Ref: Globale Optionen-Footnote-248882
+Ref: Globale Optionen-Footnote-348940
+Ref: Globale Optionen-Footnote-448989
+Ref: Globale Optionen-Footnote-549045
+Ref: Globale Optionen-Footnote-649110
+Ref: Globale Optionen-Footnote-749169
+Node: Kalender Optionen49226
+Ref: x-holiday-list49453
+Ref: x-astronomical-holidays50880
+Ref: x-bahai-holidays51344
+Ref: x-chinese-flexible-holidays51773
+Ref: x-chinese-holidays52196
+Ref: x-islamic-civil-holidays52769
+Ref: x-japanese-flexible-holidays53028
+Ref: x-japanese-holidays53411
+Ref: x-persian-jalaali-holidays54721
+Ref: x-cc-holidays55407
+Ref: x-type73559
+Ref: x-orthodox-calendar74735
+Ref: x-iso-week-number76434
+Ref: x-blocks78045
+Ref: x-starting-day80981
+Ref: x-time-offset81709
+Ref: x-date-format89088
+Ref: x-translate-string93013
+Node: Kalender Optionen-Footnotes94725
+Ref: Kalender Optionen-Footnote-194804
+Ref: Kalender Optionen-Footnote-294854
+Ref: Kalender Optionen-Footnote-394935
+Ref: Kalender Optionen-Footnote-494977
+Ref: Kalender Optionen-Footnote-595052
+Ref: Kalender Optionen-Footnote-695280
+Node: Termin Optionen95407
+Ref: x-date-variable95565
+Ref: x-text-variable96692
+Ref: x-adjust-value101469
+Ref: x-atmosphere102763
+Ref: x-limit103871
+Ref: x-cycle-end106815
+Ref: x-cycle-step110125
+Ref: x-precise112546
+Ref: x-execute-command113193
+Ref: x-filter-text115490
+Ref: x-ignore-case116850
+Ref: x-list-of-fixed-dates117479
+Ref: x-resource-file119435
+Ref: x-biorhythm-axis127030
+Ref: x-moonimage-lines128440
+Ref: x-list-mode135208
+Ref: x-period-of-fixed-dates135546
+Node: Termin Optionen-Footnotes160237
+Ref: Termin Optionen-Footnote-1160312
+Ref: Termin Optionen-Footnote-2160612
+Ref: Termin Optionen-Footnote-3160785
+Ref: Termin Optionen-Footnote-4160845
+Ref: Termin Optionen-Footnote-5161124
+Ref: Termin Optionen-Footnote-6161253
+Ref: Termin Optionen-Footnote-7161447
+Ref: Termin Optionen-Footnote-8161503
+Ref: Termin Optionen-Footnote-9161683
+Ref: Termin Optionen-Footnote-10161727
+Ref: Termin Optionen-Footnote-11161802
+Ref: Termin Optionen-Footnote-12161847
+Ref: Termin Optionen-Footnote-13161889
+Ref: Termin Optionen-Footnote-14161988
+Ref: Termin Optionen-Footnote-15162013
+Ref: Termin Optionen-Footnote-16162073
+Ref: Termin Optionen-Footnote-17162133
+Ref: Termin Optionen-Footnote-18162214
+Node: Antwortdatei162295
+Node: Datummodifizierer164662
+Node: Kommandos174765
+Node: Einfache Kommandos177236
+Ref: x-mm-jjjj178231
+Node: Einfache Kommandos-Footnotes179465
+Ref: Einfache Kommandos-Footnote-1179546
+Node: 3-Monatsmodus Kommandos179581
+Node: Listen von Kommandos180585
+Node: Bereiche von Kommandos181837
+Node: Die GCAL Umgebungsvariable183052
+Node: Ewige Feiertage184077
+Node: Termine189112
+Node: Ressourcendatei195004
+Ref: x-Datei-Suchmechanismus196008
+Node: Ressourcendatei-Footnotes200028
+Ref: Ressourcendatei-Footnote-1200103
+Ref: Ressourcendatei-Footnote-2200248
+Ref: Ressourcendatei-Footnote-3200377
+Ref: Ressourcendatei-Footnote-4200418
+Ref: Ressourcendatei-Footnote-5200488
+Ref: Ressourcendatei-Footnote-6200628
+Node: Struktur einer Ressourcendatei200680
+Node: Struktur einer Ressourcendatei-Footnotes203880
+Ref: Struktur einer Ressourcendatei-Footnote-1203985
+Ref: Struktur einer Ressourcendatei-Footnote-2204062
+Node: Datumteil einer Zeile204254
+Node: Weitere Datumteil-Attribute211178
+Node: Listen von Tagen212684
+Node: Bereiche von Tagen215924
+Node: Bereiche von Tagen-Footnotes220627
+Ref: Bereiche von Tagen-Footnote-1220708
+Ref: Bereiche von Tagen-Footnote-2220826
+Node: Wiederholungsfaktor von Tagen220849
+Node: Wiederholungsfaktor von Tagen-Footnotes225268
+Ref: Wiederholungsfaktor von Tagen-Footnote-1225371
+Ref: Wiederholungsfaktor von Tagen-Footnote-2225404
+Node: Auftretensfaktor von Tagen225539
+Node: Auftretensfaktor von Tagen-Footnotes232727
+Ref: Auftretensfaktor von Tagen-Footnote-1232824
+Node: Textteil einer Zeile232942
+Node: Textteil einer Zeile-Footnotes239152
+Ref: Textteil einer Zeile-Footnote-1239237
+Ref: Textteil einer Zeile-Footnote-2239273
+Ref: Textteil einer Zeile-Footnote-3239323
+Node: Spezialtexte239432
+Node: Spezialtexte-Footnotes241871
+Ref: Spezialtexte-Footnote-1241940
+Node: Zeile kommentieren241959
+Node: Zeile kommentieren-Footnotes244506
+Ref: Zeile kommentieren-Footnote-1244587
+Node: Einfuegeanweisungen244619
+Node: Einfuegeanweisungen-Footnotes247995
+Ref: Einfuegeanweisungen-Footnote-1248078
+Ref: Einfuegeanweisungen-Footnote-2248151
+Ref: Einfuegeanweisungen-Footnote-3248220
+Ref: Einfuegeanweisungen-Footnote-4248286
+Node: Datumvariablen248422
+Node: Datumvariablen-Footnotes255900
+Ref: Datumvariablen-Footnote-1255973
+Ref: Datumvariablen-Footnote-2256273
+Ref: Datumvariablen-Footnote-3256345
+Ref: Datumvariablen-Footnote-4256416
+Node: Textvariablen256456
+Node: Textvariablen-Footnotes272045
+Ref: Textvariablen-Footnote-1272116
+Ref: Textvariablen-Footnote-2272176
+Ref: Textvariablen-Footnote-3272247
+Node: Ressourcendateibeispiele272287
+Node: Heutiger Kalender286217
+Node: Gcal Hilfsprogramme291831
+Node: Aufruf von tcal292529
+Node: Aufruf von tcal-Footnotes294591
+Ref: Aufruf von tcal-Footnote-1294666
+Node: Aufruf von txt2gcal294710
+Node: Aufruf von gcal2txt297414
+Node: Internationalisierung299701
+Node: Internationalisierung-Footnotes306457
+Ref: Internationalisierung-Footnote-1306544
+Ref: Internationalisierung-Footnote-2306616
+Ref: Internationalisierung-Footnote-3306682
+Ref: Internationalisierung-Footnote-4306744
+Ref: Internationalisierung-Footnote-5306854
+Ref: Internationalisierung-Footnote-6306921
+Node: Metasymbole307055
+Node: Regulaere Ausdruecke308650
+Node: Benutzung von Regexp310476
+Node: Benutzung von Regexp-Footnotes311149
+Ref: Benutzung von Regexp-Footnote-1311234
+Node: Regexp Operatoren311353
+Node: Regexp Operatoren-Footnotes325470
+Ref: Regexp Operatoren-Footnote-1325549
+Ref: Regexp Operatoren-Footnote-2325646
+Ref: Regexp Operatoren-Footnote-3325690
+Ref: Regexp Operatoren-Footnote-4325768
+Ref: Regexp Operatoren-Footnote-5325868
+Ref: Regexp Operatoren-Footnote-6325924
+Ref: Regexp Operatoren-Footnote-7325978
+Ref: Regexp Operatoren-Footnote-8326033
+Node: Regexp (kurz)326094
+Node: Regexp (kurz)-Footnotes328525
+Ref: Regexp (kurz)-Footnote-1328596
+Node: Spezialtexte (lang)328667
+Node: Ausschliessen332654
+Node: Ausschliessen mit Datumargument333209
+Node: Inklusive Datum Zeitraum334353
+Node: Exklusive Datum Zeitraum337810
+Node: Ausschliessen ohne Argument341253
+Node: Inklusive Tag Zeitraum342295
+Node: Exklusive Tag Zeitraum343927
+Node: Ersetzen345510
+Node: Ersetzen mit Datumargument346408
+Node: Ersetzen mit Datumargument-Footnotes348055
+Ref: Ersetzen mit Datumargument-Footnote-1348152
+Node: Wochentagsname348239
+Node: Wochentagsnummer349340
+Node: Tag-des-Jahres Nummer354925
+Node: Tagesnummer356541
+Node: Wochennummer357955
+Node: Monatsname358850
+Node: Monatsnummer359628
+Node: Jahresnummer361061
+Node: Mondphase361819
+Node: Biorhythmus365106
+Node: Differenzwert370022
+Ref: x-Alterswert370569
+Node: Ersetzen mit anderem Argument371543
+Node: Aktuelle Uhrzeit372688
+Ref: x-Aktuelle-Ortszeit374307
+Node: Aktuelle Uhrzeit-Footnotes382138
+Ref: Aktuelle Uhrzeit-Footnote-1382215
+Node: Textliches Datum382270
+Node: Julianische Tageszahl383001
+Node: Geographische Distanz und Kurswinkel384926
+Node: Geographische Distanz und Kurswinkel-Footnotes389932
+Ref: Geographische Distanz und Kurswinkel-Footnote-1390049
+Node: Sonnendaten390826
+Ref: x-Sonne-Mitternacht392814
+Ref: x-Sonne-Mittag393793
+Ref: x-Sonne-Standardaufgang401860
+Ref: x-Sonne-Standarduntergang403532
+Ref: x-Sonne-Asr-1443613
+Ref: x-Sonne-Asr-2446095
+Ref: x-Sonne-Darstellung448278
+Ref: x-Sonne-Ereignistexte450642
+Ref: x-Sonne-Argumente455329
+Node: Monddaten469417
+Ref: x-Mond-Mitternacht471389
+Ref: x-Mond-Mittag472944
+Ref: x-Mond-Standardaufgang482040
+Ref: x-Mond-Standarduntergang483963
+Node: Inhalt von Umgebungsvariable533367
+Node: Ersetzen ohne Argument533963
+Node: Andere Differenzwerte534324
+Node: Hervorhebung537214
+Node: Shell Kommando545361
+Node: Spezialtexte (kurz)546843
+Node: Veraltete Spezialtexte624732
+Node: Tabelle der veralteten Spezialtexte625792
+Node: Tabelle der veralteten Datumformatelemente628901
+Node: Tabelle der veralteten Datumformate630660
+Node: Formatanweisung631547
+Node: Kodierschema634429
+Node: Kodierschema Tabelle 1636043
+Node: Kodierschema Tabelle 2639051
+Node: Umgebungsvariablen641581
+Ref: x-GCAL641811
+Ref: x-GCAL_COLUMNS641908
+Ref: x-COLUMNS641908
+Ref: x-GCAL_DATE_FORMAT642100
+Ref: x-GCAL_LINES642280
+Ref: x-LINES642280
+Ref: x-GCAL_SYS_DATADIR642470
+Ref: x-GCAL_USR_DATADIR642694
+Ref: x-GCALANSI642935
+Ref: x-GCALPATH643235
+Ref: x-GCALPROG643456
+Ref: x-HOME643954
+Ref: x-LOGNAME644761
+Ref: x-MAILPROG644931
+Ref: x-MAILTO645249
+Ref: x-PAGER645455
+Ref: x-PATH645637
+Ref: x-TERM645865
+Ref: x-TXT2GCALPROG645947
+Ref: x-USER646693
+Node: Fehlerkodes646880
+Ref: x-126-Fehlerkode647131
+Ref: x-119-Fehlerkode647609
+Ref: x-118-Fehlerkode647713
+Ref: x-113-Fehlerkode648058
+Ref: x-2-Fehlerkode648770
+Ref: x-1-Fehlerkode648842
+Node: Glossar648991
+Node: Argumentenindex679442
+Node: Variablenindex701564
+Node: Tabellenindex705049
+Node: Begriffsindex709581
 
 End Tag Table

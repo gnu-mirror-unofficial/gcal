@@ -1,7 +1,7 @@
 # Makefile for program source directory in GNU NLS utilities package.
-# Copyright (C) 1995, 1996 Free Software Foundation, Inc.
+# Copyright (C) 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
 #
-# Modified 18-MAR-1997 by Thomas Esken <esken@uni-muenster.de> for Gcal.
+# Modified 08-Nov-1999 by Thomas Esken <esken@uni-muenster.de> for Gcal.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -39,6 +39,9 @@ subdir = po
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 
+X = @EXEEXT@
+O = @OBJEXT@
+
 CC = @CC@
 GENCAT = @GENCAT@
 GMSGFMT = @GMSGFMT@
@@ -70,9 +73,9 @@ CATOBJEXT = @CATOBJEXT@
 INSTOBJEXT = @INSTOBJEXT@
 
 .SUFFIXES:
-.SUFFIXES: .c .o .po .pox .gmo .mo .msg .cat
+.SUFFIXES: .c $O .po .pox .gmo .mo .msg .cat
 
-.c.o:
+.c$O:
 	$(COMPILE) $<
 
 .po.pox:
@@ -95,20 +98,16 @@ all: all-@USE_NLS@
 
 all-yes: cat-id-tbl.c $(CATALOGS)
 
-$(PACKAGE).pot: $(POTFILES)
+$(srcdir)/$(PACKAGE).pot: $(POTFILES)
 	$(XGETTEXT) --default-domain=$(PACKAGE) --directory=$(top_srcdir) \
 	  --add-comments --keyword=_ --keyword=N_ \
-	  --files-from=$(srcdir)/POTFILES.in
-	if [ ! -s $(PACKAGE).po ] \
-	  || cmp -s $(PACKAGE).po $(srcdir)/$(PACKAGE).pot; then \
-	  rm -f $(PACKAGE).po; \
-	else \
-	  rm -f $(srcdir)/$(PACKAGE).pot \
-	    && mv $(PACKAGE).po $(srcdir)/$(PACKAGE).pot; \
-	fi
+	  --files-from=$(srcdir)/POTFILES.in \
+	&& test ! -f $(PACKAGE).po \
+	   || ( rm -f $(srcdir)/$(PACKAGE).pot \
+		&& mv $(PACKAGE).po $(srcdir)/$(PACKAGE).pot )
 
-cat-id-tbl.c: stamp-cat-id
-stamp-cat-id: $(PACKAGE).pot
+$(srcdir)/cat-id-tbl.c: stamp-cat-id; @:
+$(srcdir)/stamp-cat-id: $(PACKAGE).pot
 	rm -f cat-id-tbl.tmp
 	sed -f ../intl/po2tbl.sed $(srcdir)/$(PACKAGE).pot \
 		| sed -e "s/@PACKAGE NAME@/$(PACKAGE)/" > cat-id-tbl.tmp
@@ -121,17 +120,17 @@ stamp-cat-id: $(PACKAGE).pot
 	fi
 	cd $(srcdir) && rm -f stamp-cat-id && echo timestamp > stamp-cat-id
 
-
 install installbin install-strip: all
 	$(NORMAL_INSTALL)
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(datadir)
 	@catalogs='$(CATALOGS)'; \
 	for cat in $$catalogs; do \
+	  cat=`basename $$cat`; \
 	  case "$$cat" in \
 	    *.gmo) destdir=$(gnulocaledir);; \
 	    *)     destdir=$(localedir);; \
 	  esac; \
-	  lang=`echo $$cat | sed 's/$(CATOBJEXT)$$//'`; \
+	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
 	  dir=$$destdir/$$lang/LC_MESSAGES; \
 	  $(SHELL) $(top_srcdir)/mkinstalldirs $$dir; \
 	  if test -r $$cat; then \
@@ -158,21 +157,22 @@ uninstall:
 	$(NORMAL_UNINSTALL)
 	catalogs='$(CATALOGS)'; \
 	for cat in $$catalogs; do \
-	  lang=`echo $$cat | sed 's/$(CATOBJEXT)$$//'`; \
+	  cat=`basename $$cat`; \
+	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
 	  rm -f $(localedir)/$$lang/LC_MESSAGES/$(PACKAGE)$(INSTOBJEXT); \
 	  rm -f $(localedir)/$$lang/LC_MESSAGES/$(PACKAGE)$(INSTOBJEXT).m; \
 	  rm -f $(gnulocaledir)/$$lang/LC_MESSAGES/$(PACKAGE)$(INSTOBJEXT); \
 	  rm -f $(gnulocaledir)/$$lang/LC_MESSAGES/$(PACKAGE)$(INSTOBJEXT).m; \
 	done
 
-cat-id-tbl.o: ../intl/libgettext.h
+cat-id-tbl$O: ../intl/libgettext.h
 
 all-no installdirs id ID TAGS tags:
 	@echo "Nothing to be done for \`$@'"
 
 mostlyclean:
 	rm -f core core.* *.pox $(PACKAGE).po *.old.po cat-id-tbl.tmp
-	rm -rf *.o
+	rm -rf *$O
 
 clean: mostlyclean
 
@@ -184,13 +184,15 @@ realclean: distclean
 maintainer-clean: realclean
 	@echo "This command is intended for maintainers to use;"
 	@echo "it deletes files that may require special tools to rebuild."
+	rm -f $(GMOFILES)
 
 update-po: Makefile
 	$(MAKE) $(PACKAGE).pot
 	cd $(srcdir); \
 	catalogs='$(CATALOGS)'; \
 	for cat in $$catalogs; do \
-	  lang=`echo $$cat | sed 's/$(CATOBJEXT)$$//'`; \
+	  cat=`basename $$cat`; \
+	  lang=`echo $$cat | sed 's/\$(CATOBJEXT)$$//'`; \
 	  mv $$lang.po $$lang.old.po; \
 	  echo "$$lang:"; \
 	  if $(MSGMERGE) $$lang.old.po $(PACKAGE).pot -o $$lang.po; then \
@@ -208,11 +210,16 @@ POTFILES: POTFILES.in
 	  else \
 	    posrcprefix="../"; \
 	  fi; \
-	  sed -e '/^#/d' -e '/^[ 	]*$$/d' \
-	      -e "s@.*@	$$posrcprefix& \\\\@" \
-	      -e '$$s/\(.*\) \\/\1/' < $(srcdir)/POTFILES.in > POTFILES )
+	  rm -f $@-t $@ \
+	    && (sed -e '/^#/d' -e '/^[ 	]*$$/d' \
+		    -e "s@.*@	$$posrcprefix& \\\\@" < $(srcdir)/$@.in \
+		| sed -e '$$s/\\$$//') > $@-t \
+	    && chmod a-w $@-t \
+	    && mv $@-t $@ )
 
-dist dist-gcal distzip distzoo distlha distshar: Makefile update-po $(DISTFILES)
+dist dist-$(PACKAGE) distzip distzoo distlha distshar: Makefile update-po $(DISTFILES)
+
+MANIFEST: all
 
 Makefile: $(srcdir)/Makefile.in.in ../config.status POTFILES
 	cd .. \

@@ -2,7 +2,7 @@
 *  print.c:  Create, construct and print the calendar sheet(s).
 *
 *
-*  Copyright (C) 1994, 1995, 1996, 1997 Thomas Esken
+*  Copyright (c) 1994-1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: print.c 2.40 1997/03/17 02:04:00 tom Exp $";
+static char rcsid[]="$Id: print.c 3.00 2000/03/04 03:00:00 tom Exp $";
 #endif
 
 
@@ -35,86 +35,29 @@ static char rcsid[]="$Id: print.c 2.40 1997/03/17 02:04:00 tom Exp $";
 *  Include header files.
 */
 #include "tailor.h"
-#include "gcal.h"
-
-
-
-/*
-*  Function prototypes.
-*/
-#if __cplusplus
-extern "C"
-{
-#endif
-/*
-************************************************** Defined in `holiday.c'.
-*/
-IMPORT void
-print_all_holidays __P_((      Bool init_data,
-                         const Bool detect));
+#include "common.h"
 #if USE_RC
-/*
-************************************************** Defined in `rc-use.c'.
-*/
-IMPORT void
-rc_use __P_((void));
+#  include "rc-defs.h"
 #endif /* USE_RC */
-/*
-************************************************** Defined in `tty.c'.
-*/
-IMPORT void
-print_text __P_((FILE *fp,
-                 char *text_line));
-/*
-************************************************** Defined in `utils.c'.
-*/
+#include "globals.h"
+#include "hd-defs.h"
+#include "hd-use.h"
 #if USE_RC
-IMPORT Bool
-get_actual_date __P_((void));
-#endif
-IMPORT const char *
-short3_day_name __P_((const int day));
-IMPORT const char *
-short_day_name __P_((const int day));
-IMPORT const char *
-day_name __P_((const int day));
-IMPORT const char *
-month_name __P_((const int month));
-IMPORT Bool
-doy2date __P_((      int  doy,
-               const int  is_leap_year,
-                     int *day,
-                     int *month));
-IMPORT int
-weekday_of_date __P_((const int day,
-                      const int month,
-                      const int year));
-IMPORT int
-day_of_year __P_((const int day,
-                  const int month,
-                  const int year));
-IMPORT int
-days_of_february __P_((const int year));
-#if USE_RC
-IMPORT Bool
-valid_date __P_((const int day,
-                 const int month,
-                 const int year));
-#endif
-IMPORT int
-week_number __P_((const int day,
-                  const int month,
-                  const int year));
-#ifdef USE_RC
-IMPORT int
-weekno2doy __P_((      int week,
-                 const int year));
-#endif
+#  include "rc-use.h"
+#endif /* USE_RC */
+#include "tty.h"
+#include "utils.h"
+#include "print.h"
+
+
+
+/*
+*  LOCAL functions prototypes.
+*/
+__BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `print.c'.
 */
-EXPORT void
-print_calendar __P_((void));
 LOCAL void
 fill_year_vector __P_((int year));
 LOCAL Bool
@@ -126,81 +69,24 @@ print_highlighted_date __P_((const Bool  last_item,
                              const int   hls_slen,
                              const char *hls_end,
                              const int   hls_elen));
-#if __cplusplus
-}
-#endif
+__END_DECLARATIONS
 
 
 
 /*
-*  Declare public(extern) variables.
+*  LOCAL variables definitions.
 */
-IMPORT const int    dvec[];                  /* Amount of days in months */
-IMPORT Greg_struct *greg;                    /* Points to the used Gregorian Reformation date */
-IMPORT Ml_struct   *month_list;              /* Used if a list/range of months/years is given */
-IMPORT Hls_struct   ehls1s;                  /* Effective hls 1 start (current day) */
-IMPORT Hls_struct   ehls1e;                  /* Effective hls 1 end (current day) */
-IMPORT Hls_struct   ehls2s;                  /* Effective hls 2 start (holiday) */
-IMPORT Hls_struct   ehls2e;                  /* Effective hls 2 end (holiday) */
-IMPORT int          len_year_max;            /* String length of the maximum year able to compute */
-IMPORT int          len_dayname_max;         /* Maximum string length of a textual day_name() */
-IMPORT int          start_day;               /* -s<0,1...7|day name> */
-IMPORT int          day;                     /* Current day */
-IMPORT int          month;                   /* Current month */
-IMPORT int          year;                    /* Current year */
-IMPORT int          act_day;                 /* Actual day */
-IMPORT int          act_month;               /* Actual month */
-IMPORT int          act_year;                /* Actual year */
-IMPORT int          fiscal_month;            /* Starting month of a fiscal year */
-IMPORT int          out_rows;                /* Number of month rows of a year calendar */
-IMPORT int          out_cols;                /* Number of month columns of ... */
-IMPORT int          fmt_len;                 /* Format length of a standard/special/both day */
-IMPORT int          is_leap_year;            /* Is current year a leap year? */
-IMPORT char         hd_ldays[];              /* Vector of holiday dates (legal days) */
-IMPORT char        *s1;                      /* General purpose text buffer */
-IMPORT char        *s2;                      /* General purpose text buffer */
-IMPORT char        *s3;                      /* General purpose text buffer */
-IMPORT char        *s4;                      /* General purpose text buffer */
-#if USE_RC
-IMPORT int          rc_period;               /* Amount of period of fixed dates */
-IMPORT Bool         rc_use_flag;             /* -c */
-IMPORT Bool         rc_period_flag;          /* [-c]<<<<n>>[<d|w|+|-]>|[0]`mmdd'|[0]`mmww[w]'<n>> */
-IMPORT Bool         rc_period_list;          /* [-c]l */
-IMPORT Bool         rc_week_year_flag;       /* [-c<<n>>]w */
-IMPORT Bool         rc_forwards_flag;        /* [-c<<n>|w|m|y>]+ */
-IMPORT Bool         rc_backwards_flag;       /* [-c<<n>|w|m|y>]- */
-IMPORT Bool         is_date_given;           /* Is a command (explicit date) given in the command line? */
-IMPORT Bool         is_1month_mode;          /* [-c]<n>w and complete week is in month */
-IMPORT Bool         is_2month_mode;          /* [-c]<n>w and only part of week is in month */
-#endif
-IMPORT Bool         use_short3_day_name;     /* 3 char day name format specifier given in date format? */
-IMPORT Bool         use_day_zeroleaded;      /* Day leaded with zeroes format specifier given in date format? */
-IMPORT Bool         use_year_zeroleaded;     /* Year leaded with zeroes format specifier given in date format? */
-IMPORT Bool         special_calsheet_flag;   /* -i */
-IMPORT Bool         suppr_cal_flag;          /* -u */
-IMPORT Bool         highlight_flag;          /* -H<yes> or -H<no> */
-IMPORT Bool         cal_with_weekno;         /* -K */
-IMPORT Bool         cal_special_flag;        /* -j */
-IMPORT Bool         cal_both_dates_flag;     /* -jb */
-IMPORT Bool         holiday_flag;            /* -n|N */
-IMPORT Bool         is_fiscal_year;          /* `:' char found in argument (`mm':`yyyy') */
-IMPORT Bool         is_3month_mode;          /* Argument is "." or ".+" or ".-" */
-IMPORT Bool         is_3month_mode2;         /* Argument is ".." -> current quarter of actual year */
-IMPORT Bool         is_ext_year;             /* Is an extended list/range of years given? */
-IMPORT Bool         is_ext_list;             /* Is an extended list of months/years given? */
-IMPORT Bool         is_ext_range;            /* Is an extended range of months/years given? */
-IMPORT Bool         is_special_range;        /* Is a special range of a selected month of years given? */
+/* Standard or special year dates. */
+LOCAL int  year_vector[VEC_ELEMS];
+
+/* Special year dates only. */
+LOCAL int  special_vector[VEC_ELEMS];
 
 
 
 /*
-   Define local(static) variables.
+*  Function implementations.
 */
-LOCAL int  year_vector[VEC_ELEMS];      /* Standard or special year dates */
-LOCAL int  special_vector[VEC_ELEMS];   /* Special year dates only */
-
-
-
    PUBLIC void
 print_calendar ()
 /*
@@ -212,6 +98,8 @@ print_calendar ()
    register int    tmp_ad=act_day;
    register int    i;
    register int    j;
+   register int    n;
+   register int    lym;
    register int    d;
    register int    m;
    register int    mm;
@@ -225,7 +113,8 @@ print_calendar ()
    auto     int    this_month;
    auto     Bool   is_marked=FALSE;
    auto     Bool   marker_flag=FALSE;
-   auto     Bool   backwards=FALSE;
+   auto     Bool   y_backwards=FALSE;
+   auto     Bool   m_backwards=FALSE;
 
 
    if (cal_special_flag)
@@ -235,26 +124,37 @@ print_calendar ()
         Set the actual list/range/fiscal year mode and
         initialize the controlling variables of the main loop.
    */
-   if (is_special_range)
+   if (   is_special_range
+       || is_multi_range)
     {
-      backwards = (Bool)((*month_list).year > month_list[1].year);
-      if (backwards)
-        amount = (*month_list).year - month_list[1].year + 1L;
+      y_backwards = (Bool)((*month_list).ml_year > month_list[1].ml_year);
+      if (y_backwards)
+        amount = (*month_list).ml_year - month_list[1].ml_year + 1L;
       else
-        amount = month_list[1].year - (*month_list).year + 1L;
-      month = (*month_list).month;
-      year = (*month_list).year;
+        amount = month_list[1].ml_year - (*month_list).ml_year + 1L;
+      if (is_multi_range)
+       {
+         m_backwards=(Bool)((*month_list).ml_month > month_list[1].ml_month);
+         if (m_backwards)
+           i = (*month_list).ml_month - month_list[1].ml_month + 1;
+         else
+           i = month_list[1].ml_month - (*month_list).ml_month + 1;
+         amount *= (Slint)i;
+
+       }
+      month = (*month_list).ml_month;
+      year = (*month_list).ml_year;
     }
    else
      if (!is_ext_range)
-       for (i=0 ; month_list[i].month ; i++)
+       for (i=0 ; month_list[i].ml_month ; i++)
         {
-          if (!month_list[i].year)
+          if (!month_list[i].ml_year)
            {
              if (year != act_year)
-               month_list[i].year = year;
+               month_list[i].ml_year = year;
              else
-               month_list[i].year = act_year;
+               month_list[i].ml_year = act_year;
            }
           amount++;
         }
@@ -262,69 +162,69 @@ print_calendar ()
       {
         if (!is_ext_year)
          {
-           if (!(*month_list).year)
-             (*month_list).year = act_year;
-           if (!month_list[1].year)
-             month_list[1].year = act_year;
-           backwards = (Bool)(   (*month_list).year > month_list[1].year
-                              || (   ((*month_list).year == month_list[1].year)
-                                  && ((*month_list).month > month_list[1].month)));
-           if (backwards)
-             amount = ((((*month_list).year - 1L) - month_list[1].year) * MONTH_MAX)
-                        + (*month_list).month + ((MONTH_MAX - month_list[1].month) + 1L);
+           if (!(*month_list).ml_year)
+             (*month_list).ml_year = act_year;
+           if (!month_list[1].ml_year)
+             month_list[1].ml_year = act_year;
+           y_backwards = (Bool)(   (*month_list).ml_year > month_list[1].ml_year
+                                || (   ((*month_list).ml_year == month_list[1].ml_year)
+                                    && ((*month_list).ml_month > month_list[1].ml_month)));
+           if (y_backwards)
+             amount =   ((((*month_list).ml_year - 1L) - month_list[1].ml_year) * MONTH_MAX)
+                      + (*month_list).ml_month + ((MONTH_MAX - month_list[1].ml_month) + 1L);
            else
-             amount = (((month_list[1].year - 1L) - (*month_list).year) * MONTH_MAX)
-                        + month_list[1].month + ((MONTH_MAX - (*month_list).month) + 1L);
-           month = (*month_list).month;
-           year = (*month_list).year;
+             amount =   (((month_list[1].ml_year - 1L) - (*month_list).ml_year) * MONTH_MAX)
+                      + month_list[1].ml_month + ((MONTH_MAX - (*month_list).ml_month) + 1L);
+           month = (*month_list).ml_month;
+           year = (*month_list).ml_year;
          }
         else
          {
            if (is_fiscal_year)
             {
-              backwards = (Bool)((*month_list).year > month_list[1].year);
-              if (backwards)
-                amount = ((*month_list).year - month_list[1].year) + 1L;
+              y_backwards = (Bool)((*month_list).ml_year > month_list[1].ml_year);
+              if (y_backwards)
+                amount = ((*month_list).ml_year - month_list[1].ml_year) + 1L;
               else
-                amount = (month_list[1].year - (*month_list).year) + 1L;
-              year = (*month_list).year;
+                amount = (month_list[1].ml_year - (*month_list).ml_year) + 1L;
+              year = (*month_list).ml_year;
             }
            else
             {
-              backwards = (Bool)((*month_list).month > month_list[1].month);
-              if (backwards)
-                amount = ((*month_list).month - month_list[1].month) + 1L;
+              y_backwards = (Bool)((*month_list).ml_month > month_list[1].ml_month);
+              if (y_backwards)
+                amount = ((*month_list).ml_month - month_list[1].ml_month) + 1L;
               else
-                amount = (month_list[1].month - (*month_list).month) + 1L;
-              year = (*month_list).month;
+                amount = (month_list[1].ml_month - (*month_list).ml_month) + 1L;
+              year = (*month_list).ml_month;
             }
          }
       }
    if (is_fiscal_year)
-     fiscal_month = (*month_list).month;
+     fiscal_month = (*month_list).ml_month;
    if (!fiscal_month)
      fiscal_month = act_month;
    if (!amount)
      amount++;
 #if USE_RC
    /*
-      A [-c]<n>w option and no explicit date given:
+      A `-cNw' option and no explicit date given:
         Set the correct month/year to display.
    */
    if (   rc_week_year_flag
        && !rc_period_list
        && !is_date_given)
     {
-      i = weekno2doy (rc_period, act_year);
+      i = weekno2doy (rc_period, act_year, iso_week_number, start_day);
       if (i != -WEEK_MAX)
        {
          if (   i < DAY_MIN
              || i+DAY_MAX-1 > DAY_LAST+is_leap_year)
           {
             is_2month_mode=is_fiscal_year = TRUE;
-            (*month_list).month=fiscal_month = MONTH_MAX;
+            (*month_list).ml_month=fiscal_month = MONTH_MAX;
             if (i < DAY_MIN)
-              (*month_list).year = --year;
+              (*month_list).ml_year = --year;
           }
          else
           {
@@ -338,7 +238,7 @@ print_calendar ()
              }
             else
               is_1month_mode = TRUE;
-            (*month_list).month = month;
+            (*month_list).ml_month = month;
           }
          if (is_2month_mode)
           {
@@ -362,22 +262,23 @@ print_calendar ()
    for (count=0L ; count < amount ; count++)
     {
       /*
-         If the loop must be processed multiple,
-           we have to re-initialize the affected variables according to actual mode.
+         If the loop must be processed multiple, we have to
+           re-initialize the affected variables according to actual mode.
       */
       mm=yy = 0;
       if (   !is_ext_list
           && !is_ext_range
-          && !is_special_range)
+          && !is_special_range
+          && !is_multi_range)
        {
          /*
             If a month calendar of only the current year is wanted
               resp., a year calendar of only the current year is wanted:
               Initialize the touched variables.
          */
-         month = month_list[(int)count].month;
-         if (month_list[(int)count].year)
-           year = month_list[(int)count].year;
+         month = month_list[(int)count].ml_month;
+         if (month_list[(int)count].ml_year)
+           year = month_list[(int)count].ml_year;
          if (count)
            yy = year;
 #if USE_RC
@@ -434,12 +335,12 @@ print_calendar ()
          {
            if (!is_ext_year)
             {
-              month = month_list[(int)count].month;
+              month = month_list[(int)count].ml_month;
               if (   count
-                  && (year == month_list[(int)count].year))
+                  && (year == month_list[(int)count].ml_year))
                 yy = year;
               else
-                year = month_list[(int)count].year;
+                year = month_list[(int)count].ml_year;
             }
            else
             {
@@ -447,38 +348,40 @@ print_calendar ()
               if (is_fiscal_year)
                {
                  if (   count
-                     && (fiscal_month == month_list[(int)count].month)
-                     && (year == month_list[(int)count].year))
+                     && (fiscal_month == month_list[(int)count].ml_month)
+                     && (year == month_list[(int)count].ml_year))
                   {
                     mm = fiscal_month;
                     yy = year;
                   }
                  else
                   {
-                    fiscal_month = month_list[(int)count].month;
-                    year = month_list[(int)count].year;
+                    fiscal_month = month_list[(int)count].ml_month;
+                    year = month_list[(int)count].ml_year;
                   }
                }
               else
                {
                  if (   count
-                     && (year == month_list[(int)count].month))
+                     && (year == month_list[(int)count].ml_month))
                    yy = year;
                  else
-                   year = month_list[(int)count].month;
+                   year = month_list[(int)count].ml_month;
                }
             }
          }
         else
           if (   (   is_ext_range
-                  || is_special_range)
+                  || is_special_range
+                  || is_multi_range)
               && count)
            {
              if (   !is_special_range
+                 && !is_multi_range
                  && !is_ext_year)
               {
                 yy = year;
-                if (backwards)
+                if (y_backwards)
                  {
                    month--;
                    if (month < MONTH_MIN)
@@ -493,16 +396,50 @@ print_calendar ()
               }
              else
               {
-                if (!is_special_range)
+                if (   !is_special_range
+                    && !is_multi_range)
                   month = 0;
-                if (backwards)
-                  year--;
+                if (is_multi_range)
+                 {
+                   if (m_backwards)
+                    {
+                      month--;
+                      if (month < month_list[1].ml_month)
+                       {
+                         month = (*month_list).ml_month;
+                         if (y_backwards)
+                           year--;
+                         else
+                           year++;
+                       }
+                      else
+                        yy = year;
+                    }
+                   else
+                    {
+                      month++;
+                      if (month > month_list[1].ml_month)
+                       {
+                         month = (*month_list).ml_month;
+                         if (y_backwards)
+                           year--;
+                         else
+                           year++;
+                       }
+                      else
+                        yy = year;
+                    }
+                 }
                 else
-                  year++;
+                  if (y_backwards)
+                    year--;
+                  else
+                    year++;
               }
            }
           else
             if (   !is_special_range
+                && !is_multi_range
                 && is_ext_year)
               month = 0;
       if (   yy != year
@@ -518,7 +455,8 @@ print_calendar ()
          */
          fill_year_vector (year);
          /*
-            Get the dates of the eternal holidays; used for highlighting the calendar.
+            Get the dates of the eternal holidays;
+              used for highlighting the calendar.
          */
          if (   (   (year == EASTER_MIN-1)
                  && (fiscal_month > MONTH_MIN))
@@ -552,7 +490,8 @@ print_calendar ()
           && (   month
               || is_ext_list
               || is_ext_range
-              || is_special_range))
+              || is_special_range
+              || is_multi_range))
        {
          /*
             If no explicit request for suppressing the calendar sheet is given
@@ -561,9 +500,22 @@ print_calendar ()
          */
          if (!suppr_cal_flag)
           {
+            lym = len_year_max;
+            if (transform_year)
+             {
+               n = year - transform_year;
+               if (   (n >= 0)
+                   && (transform_year > 0))
+                 n++;
+               if (abs(n) > YEAR_MAX)
+                 lym++;
+             }
+            else
+              n = year;
             /*
-               Print the month calendar sheet and if needed the fixed dates, which are
-                 related to the month and the eternal holidays related to the month.
+               Print the month calendar sheet and if needed the fixed dates,
+                 which are related to the month and the eternal holidays
+                 related to the month.
             */
             print_text (stdout, s1);
             if (special_calsheet_flag)
@@ -574,23 +526,21 @@ print_calendar ()
                */
                inner_end = DAY_MAX;
                /*
-                  Print the month header in a centered manner.
+                  Print the month header in centered manner.
                */
-               i = ((fmt_len * DAY_MAX) >> 1)
-                   + ((strlen(month_name (month)) + len_year_max + 1) >> 1) - len_year_max;
                if (use_year_zeroleaded)
                 {
-                  i = ((fmt_len * DAY_MAX) >> 1)
-                      + ((strlen(month_name (month)) + len_year_max + 1) >> 1) - len_year_max;
-                  sprintf(s1, "%*s %0*d", i, month_name (month), len_year_max, year);
+                  i = ((format_len * DAY_MAX) >> 1)
+                      + ((strlen(month_name (month)) + lym + 1) >> 1) - lym;
+                  sprintf(s1, "%*s %0*d", i, month_name (month), lym, n);
                 }
                else
                 {
-                  sprintf(s1, "%d", year);
+                  sprintf(s1, "%d", n);
                   d = (int)strlen(s1);
-                  i = ((fmt_len * DAY_MAX) >> 1)
+                  i = ((format_len * DAY_MAX) >> 1)
                       + ((strlen(month_name (month)) + d + 1) >> 1) - d;
-                  sprintf(s1, "%*s %d", i, month_name (month), year);
+                  sprintf(s1, "%*s %d", i, month_name (month), n);
                 }
                print_text (stdout, s1);
                /*
@@ -599,22 +549,26 @@ print_calendar ()
                for (i=DAY_MIN ; i <= DAY_MAX ; i++)
                 {
                   if (   use_short3_day_name
-                      && (fmt_len > FMT_LEN_MIN))
-                    sprintf(s2, "%*s", fmt_len, short3_day_name (SDAY(i, start_day)));
+                      && (format_len > FORMAT_LEN_MIN))
+                    sprintf(s2, "%*s", format_len, short3_day_name (SDAY(i, start_day)));
                   else
-                    sprintf(s2, "%*s", fmt_len, short_day_name (SDAY(i, start_day)));
+                    sprintf(s2, "%*s", format_len, short_day_name (SDAY(i, start_day)));
                   strcat(s1, s2);
                 }
-               if (cal_with_weekno)
+               if (cal_with_week_number)
                 {
                   /*
-                     The short week text which must be a proper abbreviation of "week"
-                       consists of 2 letters and is separated by 1 space character of
-                       the month calendar.
+                     The short week text which should be a proper abbreviation
+                       of "calendar week", consists of 2 letters and is
+                       separated by one space character of the month calendar.
                   */
 #if USE_DE
                   sprintf(s2, " %2s", "KW");
 #else /* !USE_DE */
+                  /*
+                     *** Translators, please translate this as a fixed 2-character text.
+                     *** This text should be a proper abbreviation of "Calendar Week".
+                  */
                   sprintf(s2, " %2s", _("CW"));
 #endif /* !USE_DE */
                   strcat(s1, s2);
@@ -631,11 +585,11 @@ print_calendar ()
                   Print the month header.
                */
                if (use_year_zeroleaded)
-                 sprintf(s1, "%s %0*d", month_name (month), len_year_max, year);
+                 sprintf(s1, "%s %0*d", month_name (month), lym, n);
                else
-                 sprintf(s1, "%s %d", month_name (month), year);
+                 sprintf(s1, "%s %d", month_name (month), n);
                print_text (stdout, s1);
-               if (cal_with_weekno)
+               if (cal_with_week_number)
 #if USE_DE
                  sprintf(s3, "%-*s", len_dayname_max+blanks_between, "Woche");
 #else /* !USE_DE */
@@ -675,11 +629,13 @@ print_calendar ()
                    {
                      if (   is_marked
                          && (ehls1s.len == 1))
-                       marker_flag = print_highlighted_date (d==inner_end, is_marked,
+                       marker_flag = print_highlighted_date (d==inner_end,
+                                                             is_marked,
                                                              "", 0,
                                                              ehls1e.seq, ehls1e.len);
                      else
-                       is_marked=marker_flag = print_highlighted_date (d==inner_end, is_marked,
+                       is_marked=marker_flag = print_highlighted_date (d==inner_end,
+                                                                       is_marked,
                                                                        ehls1s.seq, ehls1s.len,
                                                                        ehls1e.seq, ehls1e.len);
                    }
@@ -706,11 +662,13 @@ print_calendar ()
                         */
                         if (   is_marked
                             && (ehls2s.len == 1))
-                          marker_flag = print_highlighted_date (d==inner_end, is_marked,
+                          marker_flag = print_highlighted_date (d==inner_end,
+                                                                is_marked,
                                                                 "", 0,
                                                                 ehls2e.seq, ehls2e.len);
                         else
-                          is_marked=marker_flag = print_highlighted_date (d==inner_end, is_marked,
+                          is_marked=marker_flag = print_highlighted_date (d==inner_end,
+                                                                          is_marked,
                                                                           ehls2s.seq, ehls2s.len,
                                                                           ehls2e.seq, ehls2e.len);
                       }
@@ -723,7 +681,7 @@ print_calendar ()
                         is_marked = FALSE;
                       }
                    }
-                  if (   cal_with_weekno
+                  if (   cal_with_week_number
                       && (   (   special_calsheet_flag
                               && (d == inner_end))
                           || (   !special_calsheet_flag
@@ -746,10 +704,10 @@ print_calendar ()
                               if (cal_special_flag)
                                {
                                  (void)doy2date (year_vector[day+j], is_leap_year, &day, &month);
-                                 j = week_number (day, month, year);
+                                 j = week_number (day, month, year, iso_week_number, start_day);
                                }
                               else
-                                j = week_number (year_vector[day+j], month, year);
+                                j = week_number (year_vector[day+j], month, year, iso_week_number, start_day);
                             }
                            else
                              j = SPECIAL_VALUE;
@@ -770,10 +728,10 @@ print_calendar ()
                            if (cal_special_flag)
                             {
                               (void)doy2date (year_vector[day+j], is_leap_year, &day, &month);
-                               j = week_number (day, month, year);
+                               j = week_number (day, month, year, iso_week_number, start_day);
                             }
                            else
-                             j = week_number (year_vector[day+j], month, year);
+                             j = week_number (year_vector[day+j], month, year, iso_week_number, start_day);
                          }
                         else
                           j = SPECIAL_VALUE;
@@ -782,7 +740,7 @@ print_calendar ()
                       {
                         /*
                            We convert the computed week number to a week number text
-                             (that looks nicer in output).
+                             (this looks nicer in output).
                         */
                         if (j < 0)
                           /*
@@ -826,7 +784,7 @@ print_calendar ()
                       }
                      else
                       {
-                        sprintf(s4, "%*s", fmt_len-2, "");
+                        sprintf(s4, "%*s", format_len-2, "");
                         strcat(s3, s4);
                         strcat(s3, s2);
                       }
@@ -838,7 +796,7 @@ print_calendar ()
                print_text (stdout, s1);
                is_marked=marker_flag = FALSE;
              }
-            if (   cal_with_weekno
+            if (   cal_with_week_number
                 && !special_calsheet_flag)
              {
                print_text (stdout, s1);
@@ -852,7 +810,9 @@ print_calendar ()
          if (   rc_use_flag
              && (   is_ext_list
                  || is_ext_range
-                 || amount > 1))
+                 || is_special_range
+                 || is_multi_range
+                 || amount > 1L))
            rc_use ();
 #endif
          /*
@@ -861,7 +821,9 @@ print_calendar ()
          if (   holiday_flag
              && (   is_ext_list
                  || is_ext_range
-                 || amount > 1)
+                 || is_special_range
+                 || is_multi_range
+                 || amount > 1L)
              && (   (   (year == EASTER_MIN-1)
                      && (fiscal_month > MONTH_MIN))
                  || (   (year >= EASTER_MIN)
@@ -876,6 +838,29 @@ print_calendar ()
          */
          if (!suppr_cal_flag)
           {
+            register int  n2;
+
+
+            lym = len_year_max;
+            if (transform_year)
+             {
+               n = year - transform_year;
+               if (   (n >= 0)
+                   && (transform_year > 0))
+                 n++;
+               n2 = (year - transform_year) + 1;
+               if (   (n2 >= 0)
+                   && (transform_year > 0))
+                 n2++;
+               if (   abs(n) > YEAR_MAX
+                   || abs(n2) > YEAR_MAX)
+                 lym++;
+             }
+            else
+             {
+               n = year;
+               n2 = year + 1;
+             }
             /*
                Print the year calendar sheet and if needed:
                  The fixed dates related to the year and
@@ -893,7 +878,7 @@ print_calendar ()
                /*
                   Compute the position of the year number.
                */
-               i = ((out_cols - 1) * blanks_between + out_cols * fmt_len * DAY_MAX) >> 1;
+               i = ((out_cols - 1) * blanks_between + out_cols * format_len * DAY_MAX) >> 1;
              }
             else
              {
@@ -905,7 +890,7 @@ print_calendar ()
                /*
                   Compute the position of the year number.
                */
-               i = (out_cols * fmt_len * MONTH_COLS + 2 + blanks_between) >> 1;
+               i = (out_cols * format_len * MONTH_COLS + 2 + blanks_between) >> 1;
              }
             /*
                Print the year header.
@@ -925,26 +910,25 @@ print_calendar ()
                     && (fiscal_month >= MONTH_MAX-1)))
              {
                if (use_year_zeroleaded)
-                 sprintf(s1, "%*s%0*d/%0*d", i-len_year_max, "",
-                         len_year_max, year, len_year_max, year+1);
+                 sprintf(s1, "%*s%0*d/%0*d", i-lym, "", lym, n, lym, n2);
                else
                 {
-                  sprintf(s1, "%d", year);
+                  sprintf(s1, "%d", n);
                   d = (int)strlen(s1);
-                  sprintf(s1, "%d", year+1);
+                  sprintf(s1, "%d", n2);
                   d += (int)strlen(s1);
-                  sprintf(s1, "%*s%d/%d", i-(d>>1), "", year, year+1);
+                  sprintf(s1, "%*s%d/%d", i-(d>>1), "", n, n2);
                 }
              }
             else
              {
                if (use_year_zeroleaded)
-                 sprintf(s1, "%*s%0*d", i-(len_year_max>>1), "", len_year_max, year);
+                 sprintf(s1, "%*s%0*d", i-(lym>>1), "", lym, n);
                else
                 {
-                  sprintf(s1, "%d", year);
+                  sprintf(s1, "%d", n);
                   d = (int)strlen(s1);
-                  sprintf(s1, "%*s%d", i-(d>>1), "", year);
+                  sprintf(s1, "%*s%d", i-(d>>1), "", n);
                 }
              }
             print_text (stdout, s1);
@@ -955,17 +939,17 @@ print_calendar ()
                if (special_calsheet_flag)
                 {
                   /*
-                     Print the month header in a centered manner.
+                     Print the month header in centered manner.
                   */
                   for (i=1 ; i <= out_cols ; i++)
                    {
-                     d = ((fmt_len * DAY_MAX) >> 1)
+                     d = ((format_len * DAY_MAX) >> 1)
                          + (strlen(month_name (SMONTH(m*out_cols+i, fiscal_month))) >> 1);
                      sprintf(s2, "%*s", d, month_name (SMONTH(m*out_cols+i, fiscal_month)));
                      strcat(s1, s2);
                      if (i != out_cols)
                       {
-                        sprintf(s2, "%*s", (fmt_len*DAY_MAX)-(d-blanks_between), "");
+                        sprintf(s2, "%*s", (format_len*DAY_MAX)-(d-blanks_between), "");
                         strcat(s1, s2);
                       }
                    }
@@ -978,29 +962,33 @@ print_calendar ()
                      for (d=DAY_MIN ; d <= DAY_MAX ; d++)
                       {
                         if (   use_short3_day_name
-                            && (fmt_len > FMT_LEN_MIN))
-                          sprintf(s2, "%*s", fmt_len, short3_day_name (SDAY(d, start_day)));
+                            && (format_len > FORMAT_LEN_MIN))
+                          sprintf(s2, "%*s", format_len, short3_day_name (SDAY(d, start_day)));
                         else
-                          sprintf(s2, "%*s", fmt_len, short_day_name (SDAY(d, start_day)));
+                          sprintf(s2, "%*s", format_len, short_day_name (SDAY(d, start_day)));
                         strcat(s1, s2);
                       }
-                     if (cal_with_weekno)
+                     if (cal_with_week_number)
                       {
                         /*
-                           The short week text which must be a proper abbreviation of "week"
-                             consists of 2 letters and is separated by 1 space character of
-                             the month calendar.
+                           The short week text which should be a proper abbreviation
+                             of "calendar week", consists of 2 letters and is
+                             separated by one space character of the month calendar.
                         */
 #if USE_DE
                         sprintf(s2, " %2s", "KW");
 #else /* !USE_DE */
+                        /*
+                           *** Translators, please translate this as a fixed 2-character text.
+                           *** This text should be a proper abbreviation of "Calendar Week".
+                        */
                         sprintf(s2, " %2s", _("CW"));
 #endif /* !USE_DE */
                         strcat(s1, s2);
                       }
                      if (i != out_cols)
                       {
-                        sprintf(s2, "%*s", (cal_with_weekno) ? blanks_between-3 : blanks_between, "");
+                        sprintf(s2, "%*s", (cal_with_week_number) ? blanks_between-3 : blanks_between, "");
                         strcat(s1, s2);
                       }
                    }
@@ -1021,24 +1009,28 @@ print_calendar ()
                      strcat(s1, s2);
                      if (i != out_cols)
                       {
-                        sprintf(s2, "%*s", (fmt_len*MONTH_COLS)-(d+2+blanks_between+1), "");
+                        sprintf(s2, "%*s", (format_len*MONTH_COLS)-(d+2+blanks_between+1), "");
                         strcat(s1, s2);
                       }
                    }
-                  if (cal_with_weekno)
+                  if (cal_with_week_number)
                    {
                      if (use_short3_day_name)
                        j = 3;
                      else
                        j = 2;
                      /*
-                        The short week text which must be a proper abbreviation of "week"
-                          consists of 2 letters and is separated by 1 space character of
-                          the month calendar.
+                        The short week text which should be a proper abbreviation
+                          of "calendar week", consists of 2 letters and is
+                          separated by one space character of the month calendar.
                      */
 #if USE_DE
                      sprintf(s3, "%-*s", j+blanks_between, "KW");
 #else /* !USE_DE */
+                     /*
+                        *** Translators, please translate this as a fixed 2-character text.
+                        *** This text should be a proper abbreviation of "Calendar Week".
+                     */
                      sprintf(s3, "%-*s", j+blanks_between, _("CW"));
 #endif /* !USE_DE */
                    }
@@ -1087,11 +1079,13 @@ print_calendar ()
                       {
                         if (   is_marked
                             && (ehls1s.len == 1))
-                          marker_flag = print_highlighted_date (TRUE, is_marked,
+                          marker_flag = print_highlighted_date (TRUE,
+                                                                is_marked,
                                                                 "", 0,
                                                                 ehls1e.seq, ehls1e.len);
                         else
-                          is_marked=marker_flag = print_highlighted_date ((ehls1s.len==1) ? TRUE : FALSE, is_marked,
+                          is_marked=marker_flag = print_highlighted_date ((ehls1s.len == 1) ? TRUE : FALSE,
+                                                                          is_marked,
                                                                           ehls1s.seq, ehls1s.len,
                                                                           ehls1e.seq, ehls1e.len);
                       }
@@ -1123,11 +1117,13 @@ print_calendar ()
                            */
                            if (   is_marked
                                && (ehls2s.len == 1))
-                             marker_flag = print_highlighted_date (TRUE, is_marked,
+                             marker_flag = print_highlighted_date (TRUE,
+                                                                   is_marked,
                                                                    "", 0,
                                                                    ehls2e.seq, ehls2e.len);
                            else
-                             is_marked=marker_flag = print_highlighted_date ((ehls2s.len==1) ? TRUE : FALSE, is_marked,
+                             is_marked=marker_flag = print_highlighted_date ((ehls2s.len == 1) ? TRUE : FALSE,
+                                                                             is_marked,
                                                                              ehls2s.seq, ehls2s.len,
                                                                              ehls2e.seq, ehls2e.len);
                          }
@@ -1140,7 +1136,7 @@ print_calendar ()
                            is_marked = FALSE;
                          }
                       }
-                     if (   cal_with_weekno
+                     if (   cal_with_week_number
                          && (   (   special_calsheet_flag
                                  && !(d % DAY_MAX))
                              || (   !special_calsheet_flag
@@ -1162,13 +1158,15 @@ print_calendar ()
                                {
                                  if (cal_special_flag)
                                   {
-                                    (void)doy2date (year_vector[day+j], (hday>hmonth)
+                                    (void)doy2date (year_vector[day+j], (hday > hmonth)
                                                       ? days_of_february (year+1) == 29 : is_leap_year,
                                                       &day, &hmonth);
-                                    j = week_number (day, hmonth, (hday>hmonth) ? year+1 : year);
+                                    j = week_number (day, hmonth, (hday > hmonth) ? year+1 : year,
+                                                     iso_week_number, start_day);
                                   }
                                  else
-                                   j = week_number (year_vector[day+j], hmonth, (hday>hmonth) ? year+1 : year);
+                                   j = week_number (year_vector[day+j], hmonth, (hday > hmonth) ? year+1 : year,
+                                                    iso_week_number, start_day);
                                }
                               else
                                 j = SPECIAL_VALUE;
@@ -1188,13 +1186,15 @@ print_calendar ()
                             {
                               if (cal_special_flag)
                                {
-                                 (void)doy2date (year_vector[day+j], (hday>hmonth)
+                                 (void)doy2date (year_vector[day+j], (hday > hmonth)
                                                    ? days_of_february (year+1) == 29 : is_leap_year,
                                                    &day, &hmonth);
-                                  j = week_number (day, hmonth, (hday>hmonth) ? year+1 : year);
+                                  j = week_number (day, hmonth, (hday > hmonth) ? year+1 : year,
+                                                   iso_week_number, start_day);
                                }
                               else
-                                j = week_number (year_vector[day+j], hmonth, (hday>hmonth) ? year+1 : year);
+                                j = week_number (year_vector[day+j], hmonth, (hday > hmonth) ? year+1 : year,
+                                                 iso_week_number, start_day);
                             }
                            else
                              j = SPECIAL_VALUE;
@@ -1203,7 +1203,7 @@ print_calendar ()
                          {
                            /*
                               We convert the computed week number to a week number text
-                                (that looks nicer in output).
+                                (this looks nicer in output).
                            */
                            if (j < 0)
                              /*
@@ -1237,7 +1237,7 @@ print_calendar ()
                          }
                         else
                          {
-                           sprintf(s4, "%*s", fmt_len-2, "");
+                           sprintf(s4, "%*s", format_len-2, "");
                            strcat(s3, s4);
                            strcat(s3, s2);
                          }
@@ -1250,8 +1250,8 @@ print_calendar ()
                          && !(d % DAY_MAX)
                          && (d != DAY_MAX*out_cols))
                       {
-                        sprintf(s2, "%*s", (cal_with_weekno) ? blanks_between-3 : blanks_between, "");
-                        if (   cal_with_weekno
+                        sprintf(s2, "%*s", (cal_with_week_number) ? blanks_between-3 : blanks_between, "");
+                        if (   cal_with_week_number
                             && is_marked)
                           strcat(s2, " ");
                         strcat(s1, s2);
@@ -1263,7 +1263,7 @@ print_calendar ()
                   print_text (stdout, s1);
                   marker_flag=is_marked = FALSE;
                 }
-               if (   cal_with_weekno
+               if (   cal_with_week_number
                    && !special_calsheet_flag)
                 {
                   print_text (stdout, s1);
@@ -1302,7 +1302,7 @@ print_calendar ()
     }
 #if USE_RC
    /*
-      A [-c]<n>w option and no explicit date given:
+      A `-cNw' option and no explicit date given:
         Reset some affected global variables.
    */
    if (   is_1month_mode
@@ -1314,7 +1314,7 @@ print_calendar ()
     }
    else
      /*
-        Reinitialize actual date.
+        Re-initialize the actual date.
      */
      if (   rc_period_flag
          && (   rc_forwards_flag
@@ -1431,12 +1431,13 @@ print_unhighlighted_date (marker_flag)
    Bool marker_flag;
 /*
    Prints a date in NON-highlighted manner.
-     If the MARKER_FLAG is set to TRUE when entering this function, this indicates,
-     that a highlighting  sequence/marking character pair was already displayed
-     previously (or better adjacent) in the same row of the line, so it can be set
-     to FALSE now and returned by this function, otherwise it will be returned
-     untouched (means it was FALSE).  The respection of this MARKER_FLAG is absolutely
-     necessary to format the line properly.
+     If the MARKER_FLAG is set to TRUE when entering this function, this
+     indicates, that a highlighting sequence/marking character pair was
+     already displayed previously (or better adjacent) in the same row of
+     the line, so it can be set to FALSE now and returned by this function,
+     otherwise it will be returned untouched (means it was FALSE).  The
+     respection of this MARKER_FLAG is absolutely necessary to format the
+     line properly.
 */
 {
    if (cal_both_dates_flag)
@@ -1461,11 +1462,11 @@ print_unhighlighted_date (marker_flag)
        {
          if (marker_flag)
           {
-            sprintf(s2, "%*s", fmt_len-1, "");
+            sprintf(s2, "%*s", format_len-1, "");
             marker_flag = FALSE;
           }
          else
-           sprintf(s2, "%*s", fmt_len, "");
+           sprintf(s2, "%*s", format_len, "");
        }
     }
    else
@@ -1475,26 +1476,26 @@ print_unhighlighted_date (marker_flag)
          if (marker_flag)
           {
             if (use_day_zeroleaded)
-              sprintf(s2, "%0*d", fmt_len-1, year_vector[day]);
+              sprintf(s2, "%0*d", format_len-1, year_vector[day]);
             else
-              sprintf(s2, "%*d", fmt_len-1, year_vector[day]);
+              sprintf(s2, "%*d", format_len-1, year_vector[day]);
             marker_flag = FALSE;
           }
          else
            if (use_day_zeroleaded)
-             sprintf(s2, " %0*d", fmt_len-1, year_vector[day]);
+             sprintf(s2, " %0*d", format_len-1, year_vector[day]);
            else
-             sprintf(s2, "%*d", fmt_len, year_vector[day]);
+             sprintf(s2, "%*d", format_len, year_vector[day]);
        }
       else
        {
          if (marker_flag)
           {
-            sprintf(s2, "%*s", fmt_len-1, "");
+            sprintf(s2, "%*s", format_len-1, "");
             marker_flag = FALSE;
           }
          else
-           sprintf(s2, "%*s", fmt_len, "");
+           sprintf(s2, "%*s", format_len, "");
        }
     }
    strcat(s1, s2);
@@ -1517,20 +1518,21 @@ print_highlighted_date (last_item, marker_flag, hls_start, hls_slen, hls_end, hl
      which consists of the "starting" highlighting sequence HLS_START and the
      "ending/final" highlighting sequence HLS_END, for distinguishing whether
      a real highlighting sequence is given.  The lengths of such a highlighting
-     sequence/marking character pair are delivered, too.  If these lengths are
-     greater ONE, it's assumed that a "real" (Termcap/ANSI) highlighting sequence
-     pair is given, otherwise a marking character pair.  If the MARKER_FLAG is
-     set to TRUE when entering this function, this indicates, that a highlighting
-     sequence/marking character pair was already displayed previously (or better
-     adjacent) in the same row of the line, so only an ending marking character
-     may be produced in this case (this doesn't matter to "real" highlighting
-     sequences, because their width is zero on the display [if interpreted properly
-     by the screen device driver], but a marking character has the width of one),
-     otherwise, all components of the marking character pair must be produced.
-     The respection of this MARKER_FLAG is absolutely necessary to format the
-     line properly.  If `last_item' is set to TRUE, this function does not
-     produce a trailing blank character after an ending highlighting sequence
-     respectively marking character.  Returns always TRUE to indicate, that a
+     sequence/marking character pair are delivered, too.  If these lengths
+     are greater ONE, it's assumed that a "real" (Termcap/ANSI) highlighting
+     sequence pair is given, otherwise a marking character pair.  If the
+     MARKER_FLAG is set to TRUE when entering this function, this indicates,
+     that a highlighting sequence/marking character pair was already displayed
+     previously (or better adjacent) in the same row of the line, so only an
+     ending marking character may be produced in this case (this doesn't matter
+     to "real" highlighting sequences, because their width is zero on the
+     display [if interpreted properly by the screen device driver], but a
+     marking character has the width of one), otherwise, all components of the
+     marking character pair must be produced.  The respection of this
+     MARKER_FLAG is absolutely necessary to format the line properly.
+     If `last_item' is set to TRUE, this function does not produce a trailing
+     blank character after an ending highlighting sequence respectively
+     marking character.  Returns always TRUE to indicate, that a
      marking character/highlighting sequence pair is set by it!
 */
 {
@@ -1538,27 +1540,27 @@ print_highlighted_date (last_item, marker_flag, hls_start, hls_slen, hls_end, hl
     {
       if (use_day_zeroleaded)
         sprintf(s2, "%s%s%02d(%03d)%s%s",
-                (((hls_slen>1)&&!marker_flag) ? NO_HLS : ""), hls_start,
+                (((hls_slen > 1) && !marker_flag) ? NO_HLS : ""), hls_start,
                 year_vector[day], special_vector[day],
-                hls_end, (((hls_elen>1)&&!last_item) ? NO_HLS : ""));
+                hls_end, (((hls_elen > 1) && !last_item) ? NO_HLS : ""));
       else
         sprintf(s2, "%s%s%2d(%3d)%s%s",
-                (((hls_slen>1)&&!marker_flag) ? NO_HLS : ""), hls_start,
+                (((hls_slen > 1) && !marker_flag) ? NO_HLS : ""), hls_start,
                 year_vector[day], special_vector[day],
-                hls_end, (((hls_elen>1)&&!last_item) ? NO_HLS : ""));
+                hls_end, (((hls_elen > 1) && !last_item) ? NO_HLS : ""));
     }
    else
     {
       if (use_day_zeroleaded)
         sprintf(s2, "%s%s%0*d%s%s",
-                (((hls_slen>1)&&!marker_flag) ? NO_HLS : ""), hls_start,
-                fmt_len-1, year_vector[day],
-                hls_end, (((hls_elen>1)&&!last_item) ? NO_HLS : ""));
+                (((hls_slen > 1) && !marker_flag) ? NO_HLS : ""), hls_start,
+                format_len-1, year_vector[day],
+                hls_end, (((hls_elen > 1) && !last_item) ? NO_HLS : ""));
       else
         sprintf(s2, "%s%s%*d%s%s",
-                (((hls_slen>1)&&!marker_flag) ? NO_HLS : ""), hls_start,
-                fmt_len-1, year_vector[day],
-                hls_end, (((hls_elen>1)&&!last_item) ? NO_HLS : ""));
+                (((hls_slen>1) && !marker_flag) ? NO_HLS : ""), hls_start,
+                format_len-1, year_vector[day],
+                hls_end, (((hls_elen > 1) && !last_item) ? NO_HLS : ""));
     }
    strcat(s1, s2);
 

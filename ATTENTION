@@ -1,25 +1,162 @@
-ATTENTION file for `gcal'.
+ATTENTION file for Gcal.
 
-The `%s[DATE]' ("starting date" of event) and `%e[DATE]' ("ending date"
-of event) special texts respected by former versions of the Gcal
-program in the text part of a resource file line do not exist in this
-style anymore in Gcal-2.20 or newer.  Using above mentioned old-style
-special texts will not produce the wanted results if you use this
-version of the Gcal program.
+Table of incompatibilities:
 
-Use `%i[STARTING_DATE][#[ENDING_DATE]]' instead!
+   * Gcal-3.00
 
-You can find an `old2v220' AWK respectively Perl script in the
-`data/scripts' directory which converts old-style resource files into
-the style used by Gcal-2.20 or newer.  This script will be used
-automatically while running the `install' target of the `data/Makefile'
-in case the enclosed appointment respecitively reminder files (likewise
-the `~/.gcalrc' file) of the distribution are already installed.  In
-case the `~/.gcalrc' file is processed in this above mentioned way, a
-copy of its old contents by the name `~/.gcalrc~' will be created, too.
+        - By reason of implementing the optional format instruction
+          which can be used by many special texts in the text part of a
+          Gcal resource file line now, some of these special texts do
+          not exist in this style anymore in Gcal-3.00 or newer.
 
-**** WARNING ****
-The `old2v220' script is unable to manage `%s[DATE]' and `%e[DATE]'
-special texts correctly if all or parts of the DATE component is/are
-assembled by using Gcal's text variable mechanism!
+          Here comes a complete list of all special texts which are
+          changed:
+
+          Symbolic name                            Old-style     New-style
+          %complete weekday name                   `%o'      ==  `%K'
+          %3-letter weekday name                   `%O'      ==  `%>3#K'
+          %2-letter weekday name                   `%K'      ==  `%>2#K'
+          %weekday number (Mon=1...Sun=7)          `%S'      ==  `%W'
+          %weekday number (Mon=1...Sun=7) ONS      `%I'      ==  `%>1&*W'
+          %weekday number (Mon=0...Sun=6) ONS      `%J'      ==  `%>1&*E'
+          %weekday number (Sun=1...Sat=7)          `%('      ==  `%I'
+          %weekday number (Sun=1...Sat=7) ONS      `%<'      ==  `%>1&*I'
+          %weekday number (Sun=0...Sat=6)          `%)'      ==  `%J'
+          %weekday number (Sun=0...Sat=6) ONS      `%>'      ==  `%>1&*J'
+          %weekday number (Mon=1...Sun=7) FLX      `%['      ==  `%S'
+          %weekday number (Mon=1...Sun=7) FLX ONS  `%{'      ==  `%>1&*S'
+          %weekday number (Mon=0...Sun=6) FLX      `%]'      ==  `%T'
+          %weekday number (Mon=0...Sun=6) FLX ONS  `%}'      ==  `%>1&*T'
+          %day-of-year number                      `%+'      ==  `%N'
+          %day-of-year number +LZ                  `%*'      ==  `%>03*N'
+          %day-of-year number ONS                  `%&'      ==  `%>1&*N'
+          %day-of-year number +LZ ONS              `%#'      ==  `%>03&*N'
+          %day number +LZ                          `%N'      ==  `%>02*D'
+          %day number ONS                          `%s'      ==  `%>1&*D'
+          %day number +LZ ONS                      `%u'      ==  `%>02&*D'
+          %complete month name                     `%M'      ==  `%U'
+          %3-letter month name                     `%T'      ==  `%>3#U'
+          %month number                            `%U'      ==  `%M'
+          %month number +LZ                        `%W'      ==  `%>02*M'
+          %month number ONS                        `%z'      ==  `%>1&*M'
+          %month number +LZ ONS                    `%Z'      ==  `%>02&*M'
+          %complete year number +LZ                `%='      ==  `%>04*Y'
+          %age value (birthday) number             `%b'      ==  `%B'
+          %age value (birthday) number ONS         `%B'      ==  `%>1&*B'
+          %moonphase                               `%-'      ==  `%O'
+          %moonphase +LZ                           `%_'      ==  `%>03*O'
+          %moonphase text graphics image           `%:'      ==  `%Z'
+
+          Legend:
+          +LZ ==  With leading zero(es)
+          FLX ==  Flexible starting day of week (`-s N' option)
+          ONS ==  With Ordinal Number suffix
+
+          Using these old-style special texts will not produce the
+          wanted results if you use this version of the Gcal program.
+          You can find a `v2x2v300' AWK respectively Perl script in the
+          `data/scripts' directory which converts old-style resource
+          files into the style used by Gcal-3.00 or newer.
+
+          If you have Gcal version 2.20 or version 2.40 resource files
+          and you want to use them with Gcal version 3.00, you first
+          have to convert them manually into the Gcal-3.00 style by
+          processing them using the `v2x2v300' AWK respectively Perl
+          scripts, for example:
+
+               $ awk -f v2x2v300.awk FILE-OLD.rc > FILE-v300.rc
+               or
+               $ perl v2x2v300.pl FILE-OLD.rc > FILE-v300.rc
+
+        - By reason of implementing the optional format instruction
+          which can be used by many date format texts now, some format
+          elements which can be individually specified by the
+          `--date-format' option are obsolete now and are changed to:
+
+          Symbolic name                   Old-style     New-style
+          %day number                     `%d'      ==  `%>02*D'
+          %day number +LS                 `%D'      ==  `%>2*D'
+          %day number +LZ ONS             `%u'      ==  `%02&*D'
+          %day number +LS ONS             `%U'      ==  `%>2&*D'
+          %complete month name            `%B'      ==  `%U'
+          %3-letter month name            `%b'      ==  `%<3#U'
+          %month number +LZ               `%m'      ==  `%>02*M'
+          %month number +LS               `%M'      ==  `%>2*M'
+          %complete year number +LZ       `%y'      ==  `%>04*Y'
+          %complete year number +LS       `%Y'      ==  `%>4*Y'
+          %last-2-digit year number +LZ   `%z'      ==  `%>02#Y'
+          %last-2-digit year number +LS   `%Z'      ==  `%>2#Y'
+          %complete weekday name          `%A'      ==  `%K'
+          %3-letter weekday name          `%W'      ==  `%<3#K'
+          %2-letter weekday name          `%w'      ==  `%<2#K'
+
+          Legend:
+          +LZ     With leading zero(es)
+          +LS ==  With leading space(s)
+          ONS ==  With Ordinal Number suffix
+
+          Using these old-style date format texts will not produce the
+          wanted results if you use this version of the Gcal program.
+
+        - By reason of implementing the optional format instruction
+          which can be used by many format elements in the date format
+          text now, the burned-in default country specific date formats
+          for `DE == Germany', `US == U.S.A.' and `GB == Great Britain',
+          which can be specified by the `--date-format' option are
+          obsolete now and are changed to:
+
+          CC  Old-style               New-style
+          DE  `%w,  %1%D%2 %b %y' ==  `%<2#K,  %1%>2*D%2 %<3#U %>04*Y'
+          US  `%W, %b  %1%U%2 %y' ==  `%<3#K, %<3#U  %1%>2&*D%2 %>04*Y'
+          GB  `%W,  %1%U%2 %b %y' ==  `%<3#K,  %1%>2&*D%2 %<3#U %>04*Y'
+
+          Using these old-style date format texts will not produce the
+          wanted results if you use this version of the Gcal program.
+
+        - The `%t[12|24]' special text respected by former versions of
+          the Gcal program in the text part of a resource file line
+          does not exist in this style anymore in Gcal-3.00 or newer.
+          Using above mentioned old-style special text will not produce
+          the wanted results if you use this version of the Gcal
+          program.
+
+          Use `%t[*][[+|-]MMMM|HH:[MM]]' instead!
+
+   * Gcal-2.20
+
+     The `%s[DATE]' ("starting date" of event) and `%e[DATE]' ("ending
+     date" of event) special texts respected by former versions of the
+     Gcal program in the text part of a Gcal resource file line do not
+     exist in this style anymore in Gcal-2.20 or newer.  Using above
+     mentioned old-style special texts will not produce the wanted
+     results if you use this version of the Gcal program.
+
+     Use `%i[STARTING_DATE][#[ENDING_DATE]]' instead!
+
+     You can find a `old2v220' AWK respectively Perl script in the
+     `data/scripts' directory which converts old-style resource files
+     into the style used by Gcal-2.20 or newer.  This script will be
+     used automatically when running the `install' target of the
+     `data/Makefile' in case the enclosed appointment respecitively
+     reminder files (likewise the `~/.gcalrc' file) of the distribution
+     are already installed.  In case the `~/.gcalrc' file is processed
+     like this, a copy of its old contents by the name
+     `~/.gcalrc.YYYYMMDDHHMM' will be created, too.  Notice that your
+     Gcal resource files are not changed if the `old2v220' scripts do
+     not detect any old-style _starting date_ and _ending date_ of
+     event special texts!
+
+     **** WARNING ****
+     The `old2v220' scripts are unable to manage `%s[DATE]' and
+     `%e[DATE]' special texts correctly if all or parts of the DATE
+     component is/are assembled by using Gcal's text variable mechanism!
+
+     If you have other _old_, pre Gcal version 2.20 resource files, you
+     first have to convert them manually into the Gcal-2.20 style by
+     processing them using the `old2v220' AWK respectively Perl
+     scripts, for example:
+
+          $ awk -f old2v220.awk FILE-OLD.rc > FILE-v220.rc
+          or
+          $ perl old2v220.pl FILE-OLD.rc > FILE-v220.rc
 

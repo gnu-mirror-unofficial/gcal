@@ -1,3 +1,32 @@
+Sat Mar 04 11:54:22 2000  Thomas Esken  <esken@uni-muenster.de>
+
+      * de.po: update to Gcal version 3.00 (20000304).
+
+Mon Nov 08 01:28:35 1999  Thomas Esken  <esken@uni-muenster.de>
+
+      * de.po: update to Gcal version 2.50 (19991107).
+      * POTFILES.in: update to Gcal version 2.50 (19991107).
+
+Mon Aug 30 13:07:22 1999  Thomas Esken  <esken@uni-muenster.de>
+
+      * fr.po: update to Gcal version 2.40 (19990813).
+
+Mon Feb 23 12:05:51 1999  Thomas Esken  <esken@uni-muenster.de>
+
+      * ru.po added.
+
+Sun Feb 21 19:00:22 1999  Thomas Esken  <esken@uni-muenster.de>
+
+      * Makefile.in.in updated according to gettext-0.10.35.
+
+Thu Jan 08 09:09:49 1998  Thomas Esken  <esken@uni-muenster.de>
+
+      * de.po: update to Gcal version 2.41 (19980109).
+
+Fri Jan 02 08:09:12 1998  Thomas Esken  <esken@uni-muenster.de>
+
+      * Makefile.in.in updated according to gettext-0.10.32.
+
 Fri Jun 27 14:20:22 1997  Thomas Esken  <esken@uni-muenster.de>
 
       * pl.po added.
@@ -45,7 +74,7 @@ Tue Jul 16 10:11:52 1996  Thomas Esken  <esken@uni-muenster.de>
 Wed Jun 05 00:30:14 1996  Thomas Esken  <esken@uni-muenster.de>
 
       * Updated some rules in Makefile.in.in according to
-        GNU gettext-0-10.14.
+        GNU gettext-0.10.14.
 
 Fri Apr 26 11:07:23 1996  Thomas Esken  <esken@uni-muenster.de>
 

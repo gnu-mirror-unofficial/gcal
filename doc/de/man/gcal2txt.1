@@ -1,8 +1,8 @@
-.\" $Id: gcal2txt.1 v0.02 1997/01/02 00:00:02 tom Exp $
+.\" $Id: gcal2txt.1 v0.05 2000/05/28 00:00:05 tom Exp $
 .\"
-.\" gcal2txt.1:  German [n]roff source of GCAL2TXT manual page
+.\" gcal2txt.1:  German [n]roff source of Un*x manual page
 .\"
-.\" Copyright (C) 1996, 1997 Thomas Esken
+.\" Copyright (c) 1996-1997, 2000 Thomas Esken
 .\"
 .\"
 .\" Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
@@ -24,7 +24,7 @@
 .\"
 .\"
 .\" ------------------------oOO      \\\_''/      OOo---------------------------
-.\" Thomas Esken               O     (/o-o\)     O  eMail: esken@uni-muenster.de
+.\" Thomas Esken               O     (/o-o\)     O  eMail: esken@gmx.net
 .\" Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 .\" D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 .\"
@@ -47,46 +47,37 @@
 .pl 11i
 .po 0
 .\"
-.TH GCAL2TXT 1 "02 Januar 1997"
+.TH GCAL2TXT 1 "28 Mai 2000"
 .SH NAME
-gcal2txt \- erzeugt aus einer Gcal Ressourcendatei eine wortgetreue Textdatei.
+Gcal2txt \- erzeugt aus einer Gcal Ressourcendatei eine wortgetreue Textdatei.
 .SH AUFRUF
-.B gcal2txt
-[
-.I \-\-help
-|
-.I \-\-version
-] | [
-.B Ressourcendatei
-|
-.I \-
-]
+.B gcal2txt \fI[\fB\-\-help\fI | \fB\-\-version\fI] | [Ressourcendatei | \-]
 .SH BESCHREIBUNG
 .B Gcal2txt
 ist ein Programm, welches aus einer Gcal Ressourcendatei
 eine wortgetreue Textdatei erzeugt.  Wird keine
-.B Ressourcendatei
-oder aber
-.B \-
-als Argument angegeben, so liest und verarbeitet das Programm alle
+.I Ressourcendatei
+oder aber ein einzelnes
+.I `\-'
+Zeichen als Argument angegeben, so liest und verarbeitet das Programm alle
 Eingaben, die vom Standardeingabekanal kommen.  Alle Ergebnisse werden
 stets auf dem Standardausgabekanal ausgegeben.  Ein Programmendestatus
 0 bedeutet, da"s die Verarbeitung erfolgreich war, ein anderer Endestatus
 verweist auf einen Fehler w"ahrend der Verarbeitung.
 .SH OPTIONEN
 .TP
-.I \-\-help
+.B \-\-help
 Ausgabe eines Hilfetextes, der alle verf"ugbaren Optionen aufzeigt,
 sodann erfolgreiches Programmende.
 .TP
-.I \-\-version
+.B \-\-version
 Ausgabe der Versionsnummer, sodann erfolgreiches Programmende.
 .bp
 .SH COPYRIGHT
 .in 0
 .sp
 .B Gcal2txt
-Copyright (C) 1996, 1997 Thomas Esken
+Copyright (c) 1996-1997, 2000 Thomas Esken
 .LP
 Diese Software erhebt keinen Anspruch auf Vollst"andigkeit,
 Verwendungsf"ahigkeit oder Korrektheit. F"ur Sch"aden (implizit
@@ -111,11 +102,11 @@ Viel Spa"s mit diesem Programm   =8^)
 .in 2
 .nf
 ------------------------oOO      \e\e\e_''/      OOo---------------------------
-Thomas Esken               O     (/o-o\e)     O  eMail: esken@uni-muenster.de
+Thomas Esken               O     (/o-o\e)     O  eMail: esken@gmx.net
 Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585
 D-48147 Muenster; Germany    \e____) ~ (____/    MotD : 2old2live, 2young2die
 .fi
 .SH QUERVERWEIS
 gcal(1),
 tcal(1),
-txt2gcal(1)
+txt2gcal(1).

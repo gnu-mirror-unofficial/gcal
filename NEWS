@@ -2,10 +2,34 @@ NEWS file for `gcal'.
 
 User-visible changes.
 
-Current Version: 3.00
+Current Version: 3.01
 See the HISTORY file for the details of all changes.
 
 
+Major changes in release 3.01
+
+* Some minor changes in the `doc/LL/texi/gcal.texi' documentation (fixed some
+    typos and extended the manuals with description text for the new options).
+* Now, text variable references like `$[FORMAT]TVAR TEXT' at the beginning
+    of a Gcal resource file are expanded correctly if the contents of the
+    TVAR that is used with the FORMAT instruction results in a *valid* Gcal
+    date-part, that may be used in a resource file line.
+* Now, the `--execute-command' option also works correctly for global text
+    variable assignments like `-r$a?echo $HOME' or `-r$b:expr 2 + 2 2>&1' if
+    it is written *before* such a text variable option in the command line
+    (Sorry, it still does not work if it is given *behind* such a text
+    variable option in the command line).
+* Changed behavior of Gcal in terms how it choses the default style of
+    year calendar sheets if the `--type' option is used.
+* Now, the `--grouping-text[=TEXT]' option also recognizes a '^'-CARET
+    character for line break-up, global $TVAR references and `%?'...
+    special texts that are used for text replacement.
+* New `--heading-text=TEXT' option that can be used to create a self-defined
+    title text for the fixed date list.  The TEXT argument may contain
+    '~'-TILDE and '^'-CARET characters for line break-up, global $TVAR
+    references and `%?'... special texts that are used for text replacement.
+* Changed layout of Coypright texts to improve the legal clearness.
+
 Major changes in release 3.00
 * Some major changes in the `doc/LL/texi/gcal.texi' documentation.
 * Changed my old and momentary (20000527) recent <esken@uni-muenster.de>
@@ -142,7 +166,7 @@ Major changes in release 2.50 (inofficial alpha testing release)
     data (aka the Chinese/Japanese major/minor solar terms resp., aka the
     Chinese ZhongQi's/JieQi's) into the eternal holiday list added.
 * Removed the `--without-standard-holidays' option.
-* Removed a bug that occured during century leap years when displaying
+* Removed a bug that occurred during century leap years when displaying
     holidays of Orthodox Churches.
 * When using an external pager via $PAGER environment variable,
     possible command line arguments stored there are passed now.
@@ -480,7 +504,7 @@ Major changes in release 2.30 (inofficial beta testing release)
 * The `--orthodox-calendar' option (== `-O') can be used now for
     calculating the leap years as done by the Eastern orthodox churches.
 * Corrected the fixed date feature for that year
-    in which the Gregorian Reformation have occured.
+    in which the Gregorian Reformation have occurred.
 * The burned-in Gregorian Reformation period 18-28 Feb 1753
     (`--gregorian-reform=1753') is new.
 * The burned-in Gregorian Reformation period 19-28 Feb 1700

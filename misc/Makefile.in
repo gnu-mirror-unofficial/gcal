@@ -1,9 +1,9 @@
-#  $Id: Makefile.in 0.38 2000/04/03 00:03:08 tom Exp $
+#  $Id: Makefile.in 0.39 2000/06/14 00:03:09 tom Exp $
 ###############################################################################
 #
 #  Generic Makefile to create the Gcal miscellaneous files.
 #
-#  Copyright (c) 2000  Thomas Esken                     <esken@uni-muenster.de>
+#  Copyright (c) 2000  Thomas Esken      <esken@gmx.net>
 #                      Im Hagenfeld 84
 #                      D-48147 M"unster
 #                      GERMANY

@@ -2,7 +2,7 @@
 *  gcal2txt.c:  Creates a verbatim text file from a Gcal resource file.
 *
 *
-*  Copyright (c) 1996-1997, 2000 Thomas Esken
+*  Copyright (c) 1996, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -25,7 +25,7 @@
 
 
 
-static char rcsid[]="$Id: gcal2txt.c 2.05 2000/03/16 02:00:05 tom Exp $";
+static char rcsid[]="$Id: gcal2txt.c 2.06 2000/06/14 02:00:06 tom Exp $";
 
 
 
@@ -194,7 +194,7 @@ version_msg (fp, prgr_name, exit_status)
 
    *(ptr_rcsid + 4) = '\0';
    fprintf(fp, "%s (GNU cal %s) %s\n", prgr_name, VERSION_NO, ptr_rcsid);
-   fprintf(fp, "Copyright (c) 1996-1997, 2000 Thomas Esken\n");
+   fprintf(fp, "Copyright (c) 1996, 1997, 2000 Thomas Esken\n");
 #if USE_DE
    fprintf(fp, "Dies ist freie Software; in den Quellen befindet sich die Lizenz-");
    S_NEWLINE(fp);

@@ -4,7 +4,7 @@
 *  txt2gcal.h:  Creates a verbatim Gcal resource file from a text file header file.
 *
 *
-*  Copyright (c) 1996-1997, 2000 Thomas Esken
+*  Copyright (c) 1996, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -28,7 +28,7 @@
 
 
 /*
-*  $Id: txt2gcal.h 3.03 2000/01/01 03:00:03 tom Exp $
+*  $Id: txt2gcal.h 3.06 2000/06/14 03:00:06 tom Exp $
 */
 
 

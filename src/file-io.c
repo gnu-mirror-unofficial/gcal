@@ -2,7 +2,7 @@
 *  file-io.c:  Managing and accessing resource, include and response files.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: file-io.c 3.00 2000/03/26 03:00:00 tom Exp $";
+static char rcsid[]="$Id: file-io.c 3.01 2000/06/30 03:00:01 tom Exp $";
 #endif
 
 
@@ -843,12 +843,15 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                If the line does not consist of a text variable
                   assignment or operation, expand the text variable.
             */
-            if (   isalpha(*(*line_buffer + 1))
-                && (*(*line_buffer + 2) != *RC_VAR_ASSIGN)
-                && (*(*line_buffer + 2) != *RC_TVAR_ICMD_ASSIGN)
-                && (*(*line_buffer + 2) != *RC_TVAR_UCMD_ASSIGN)
-                && (*(*line_buffer + 2) != *RC_VAR_ADD)
-                && (*(*line_buffer + 2) != *RC_VAR_SUB))
+            if (   (   isalpha(*(*line_buffer + 1))
+                    && (*(*line_buffer + 2) != *RC_VAR_ASSIGN)
+                    && (*(*line_buffer + 2) != *RC_TVAR_ICMD_ASSIGN)
+                    && (*(*line_buffer + 2) != *RC_TVAR_UCMD_ASSIGN)
+                    && (*(*line_buffer + 2) != *RC_VAR_ADD)
+                    && (*(*line_buffer + 2) != *RC_VAR_SUB))
+                || *(*line_buffer + 1) == FLEFT_CHAR
+                || *(*line_buffer + 1) == FCENTER_CHAR
+                || *(*line_buffer + 1) == FRIGHT_CHAR)
               *is_tvar = FALSE;
           }
          else

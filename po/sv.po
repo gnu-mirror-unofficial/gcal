@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gcal 2.40\n"
-"POT-Creation-Date: 2000-05-25 17:15+0200\n"
+"POT-Creation-Date: 2000-06-30 23:38+0200\n"
 "PO-Revision-Date: 1997-05-17 23:56+0100\n"
 "Last-Translator: Johan Linde <jl@theophys.kth.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -13,29 +13,29 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/file-io.c:1565
+#: src/file-io.c:1568
 #, c-format
 msgid "Try to write %s `%s'... %s%s%s"
 msgstr "Försöket att skriva %s \"%s\"... %s%s%s"
 
-#: src/file-io.c:1567 src/file-io.c:1704 src/file-io.c:1718
+#: src/file-io.c:1570 src/file-io.c:1707 src/file-io.c:1721
 msgid "failed"
 msgstr "misslyckades"
 
-#: src/file-io.c:1567 src/file-io.c:1704 src/file-io.c:1718
+#: src/file-io.c:1570 src/file-io.c:1707 src/file-io.c:1721
 msgid "success"
 msgstr "lyckades"
 
-#: src/file-io.c:1701
+#: src/file-io.c:1704
 #, c-format
 msgid "Try to open%sresource file `%s'... %s%s%s"
 msgstr "Försöket att öppna%sresursfilen \"%s\"... %s%s%s"
 
-#: src/file-io.c:1702
+#: src/file-io.c:1705
 msgid " `HERE' "
 msgstr " \"HÄR\" "
 
-#: src/file-io.c:1715
+#: src/file-io.c:1718
 #, c-format
 msgid "Try to open (level: %02d) include file `%s'... %s%s%s"
 msgstr "Försöket att öppna (nivå: %02d) inkluderingsfil \"%s\"... %s%s%s"
@@ -45,23 +45,23 @@ msgstr "Försöket att öppna (nivå: %02d) inkluderingsfil \"%s\"... %s%s%s"
 #. *** Translators, please translate this as a fixed 3-character text.
 #. *** This text should be a proper abbreviation of "ARGUMENT".
 #.
-#: src/gcal.c:372 src/gcal.c:547 src/gcal.c:2085
+#: src/gcal.c:374 src/gcal.c:549 src/gcal.c:2094
 msgid "ARG"
 msgstr "ARG"
 
-#: src/gcal.c:1104 src/hd-data.c:100
+#: src/gcal.c:1113 src/hd-data.c:100
 msgid "Germany"
 msgstr "Tyskland"
 
-#: src/gcal.c:1105
+#: src/gcal.c:1114
 msgid "U.S.A."
 msgstr "USA"
 
-#: src/gcal.c:1106 src/hd-data.c:103
+#: src/gcal.c:1115 src/hd-data.c:103
 msgid "Great Britain"
 msgstr "Storbritannien"
 
-#: src/gcal.c:1900
+#: src/gcal.c:1909
 msgid "default"
 msgstr "standard"
 
@@ -69,7 +69,7 @@ msgstr "standard"
 #. *** Translators, please translate this as a fixed 1-character text.
 #. *** This is the character which is used for separating the time HH:MM.
 #.
-#: src/gcal.c:2004
+#: src/gcal.c:2013
 msgid ":"
 msgstr "."
 
@@ -77,7 +77,7 @@ msgstr "."
 #. *** Translators, please translate this as a fixed 1-character text.
 #. *** This text should be a proper abbreviation of "Year".
 #.
-#: src/gcal.c:2019
+#: src/gcal.c:2028
 msgid "Y"
 msgstr ""
 
@@ -85,7 +85,7 @@ msgstr ""
 #. *** Translators, please translate this as a fixed 1-character text.
 #. *** This text should be a proper abbreviation of "Month".
 #.
-#: src/gcal.c:2024
+#: src/gcal.c:2033
 #, fuzzy
 msgid "M"
 msgstr "må"
@@ -94,7 +94,7 @@ msgstr "må"
 #. *** Translators, please translate this as a fixed 1-character text.
 #. *** This text should be a proper abbreviation of "Week".
 #.
-#: src/gcal.c:2029
+#: src/gcal.c:2038
 #, fuzzy
 msgid "W"
 msgstr "VE"
@@ -103,15 +103,20 @@ msgstr "VE"
 #. *** Translators, please translate this as a fixed 1-character text.
 #. *** This text should be a proper abbreviation of "Day".
 #.
-#: src/gcal.c:2034
+#: src/gcal.c:2043
 msgid "D"
 msgstr ""
 
-#: src/gcal.c:2138 src/gcal.c:2154
+#: src/gcal.c:2141
+#, fuzzy
+msgid "Fixed date list:"
+msgstr "Lista med fasta datum"
+
+#: src/gcal.c:2161 src/gcal.c:2177
 msgid "environment variable"
 msgstr "miljövariabel"
 
-#: src/gcal.c:2307
+#: src/gcal.c:2330
 #, fuzzy, c-format
 msgid ""
 "%s: command in environment variable `%s' found -- %s\n"
@@ -121,86 +126,86 @@ msgstr ""
 "%s: kommando funnet i miljövariabeln \"%s\" -- %s\n"
 "%s\n"
 
-#: src/gcal.c:2516 src/gcal.c:2548 src/gcal.c:6321 src/gcal2txt.c:331
-#: src/gcal2txt.c:335 src/rc-use.c:1849 src/rc-use.c:1924 src/rc-use.c:1988
-#: src/rc-use.c:2180 src/rc-utils.c:424 src/rc-utils.c:454 src/tcal.c:403
+#: src/gcal.c:2516 src/gcal.c:2549 src/gcal.c:6269 src/gcal2txt.c:331
+#: src/gcal2txt.c:335 src/rc-use.c:1853 src/rc-use.c:1928 src/rc-use.c:1992
+#: src/rc-use.c:2277 src/rc-utils.c:424 src/rc-utils.c:454 src/tcal.c:403
 #: src/tcal.c:410 src/txt2gcal.c:331 src/txt2gcal.c:335 src/utils.c:457
 #: src/utils.c:476 src/utils.c:491 src/utils.c:797
 msgid "Internal"
 msgstr "Intern"
 
-#: src/gcal.c:2974
+#: src/gcal.c:2926
 msgid "response file"
 msgstr "responsfil"
 
-#: src/gcal.c:2974 src/gcal.c:2985
+#: src/gcal.c:2926 src/gcal.c:2937
 msgid "Created"
 msgstr "Skapad"
 
-#: src/gcal.c:2985
+#: src/gcal.c:2937
 msgid "shell script"
 msgstr "skalprogram"
 
-#: src/gcal.c:3202
+#: src/gcal.c:3154
 #, c-format
 msgid "Mail from \\`%s' (%02d-%s-%04d %02d%s%02d%s%02d"
 msgstr "E-post från \\\"%s\" (%02d-%s-%04d %02d%s%02d%s%02d"
 
-#: src/gcal.c:3253
+#: src/gcal.c:3205
 #, c-format
 msgid "%s: warning, eMail with empty message body not sent to <%s>.\n"
 msgstr ""
 
-#: src/gcal.c:5003 src/gcal.c:5034
+#: src/gcal.c:4978 src/gcal.c:5009
 msgid "command line"
 msgstr "kommandorad"
 
-#: src/gcal.c:5985
+#: src/gcal.c:5933
 #, c-format
 msgid "%s: option `%s' is ambiguous"
 msgstr "%s: flaggan \"%s\" är tvetydig"
 
-#: src/gcal.c:5990 src/gcal2txt.c:792 src/tcal.c:994 src/txt2gcal.c:793
+#: src/gcal.c:5938 src/gcal2txt.c:792 src/tcal.c:994 src/txt2gcal.c:793
 #, c-format
 msgid "%s: unrecognized option `%s'"
 msgstr "%s: okänd flagga \"%s\""
 
-#: src/gcal.c:5993
+#: src/gcal.c:5941
 #, c-format
 msgid "%s: invalid option -- %s"
 msgstr "%s: felaktig flagga -- %s"
 
-#: src/gcal.c:5998
+#: src/gcal.c:5946
 #, fuzzy, c-format
 msgid "%s: option `--%s' doesn't allow an argument"
 msgstr "%s: flaggan \"%s\" tar inget argument"
 
-#: src/gcal.c:6001
+#: src/gcal.c:5949
 #, c-format
 msgid "%s: option `%s' doesn't allow an argument"
 msgstr "%s: flaggan \"%s\" tar inget argument"
 
-#: src/gcal.c:6006
+#: src/gcal.c:5954
 #, c-format
 msgid "%s: option `%s' requires an argument"
 msgstr "%s: flaggan \"%s\" behöver ett argument"
 
-#: src/gcal.c:6009
+#: src/gcal.c:5957
 #, c-format
 msgid "%s: option requires an argument -- %s"
 msgstr "%s: flaggan behöver ett argument -- %s"
 
-#: src/gcal.c:6013 src/tcal.c:1050
+#: src/gcal.c:5961 src/tcal.c:1050
 #, c-format
 msgid "%s: option with invalid argument -- %s"
 msgstr "%s: flagga med felaktigt argument -- %s"
 
-#: src/gcal.c:6017
+#: src/gcal.c:5965
 #, c-format
 msgid "%s: option with ambiguous argument -- %s"
 msgstr "%s: flagga med tvetydigt argument -- %s"
 
-#: src/gcal.c:6080
+#: src/gcal.c:6028
 #, fuzzy, c-format
 msgid ""
 "%s: invalid date given -- %c%s\n"
@@ -437,8 +442,9 @@ msgid "Bermuda"
 msgstr "tyska"
 
 #: src/hd-data.c:497
-msgid "Brunei Darussalam"
-msgstr ""
+#, fuzzy
+msgid "Brunei"
+msgstr "juni"
 
 #: src/hd-data.c:498
 msgid "Bolivia"
@@ -4604,63 +4610,63 @@ msgstr "%s: Använd \"%s %s\" med ett av dessa argument"
 msgid "OPTION"
 msgstr "FLAGGA"
 
-#: src/help.c:1824
+#: src/help.c:1836
 msgid "          Display help text and quit program"
 msgstr "          Visa hjälptext och avsluta"
 
-#: src/help.c:1838
+#: src/help.c:1850
 msgid "          Display extended help text and quit program"
 msgstr "          Visa utvidgad hjälptext och avsluta"
 
-#: src/help.c:1853
+#: src/help.c:1865
 msgid "          Display software license and quit program"
 msgstr "          Visa programlicens och avsluta"
 
-#: src/help.c:1862
+#: src/help.c:1874
 #, fuzzy
 msgid "          Display version information and quit program"
 msgstr "          Visa versionsnummer och avsluta"
 
-#: src/help.c:1871
+#: src/help.c:1883
 #, fuzzy, c-format
 msgid "          Set EXIT status of program to %d on `%s' etc."
 msgstr ""
 "          Sätt programmets slutstatus till 127 vid --help, --version osv."
 
-#: src/help.c:1881
+#: src/help.c:1893
 #, c-format
 msgid "          Create response file for the `%cFILE' option"
 msgstr "          Skapa responsfil för \"%cFIL-flaggan\""
 
-#: src/help.c:1883
+#: src/help.c:1895
 #, c-format
 msgid "   %-3s    = Store arguments of command line in file %s"
 msgstr "   %-3s    = Lagra argumenten från kommandoraden i filen %s"
 
-#: src/help.c:1893
+#: src/help.c:1905
 msgid ""
 "          Create shell script which contains the arguments of command line"
 msgstr ""
 "          Skapa ett skalprogram som innehåller argumenten från kommandoraden"
 
-#: src/help.c:1895
+#: src/help.c:1907
 #, c-format
 msgid "   %-3s    = File name of the shell script"
 msgstr "   %-3s    = Skalprogrammets filnamn"
 
-#: src/help.c:1906
+#: src/help.c:1918
 #, fuzzy
 msgid "          Define global date variable(s) \"DVAR->a...d|f...s|u...|z\""
 msgstr ""
 "          Definiera globala datumvariabler \"dvar->a...d|f...s|u...|z\""
 
-#: src/help.c:1908
+#: src/help.c:1920
 #, fuzzy, c-format
 msgid "   %-3s    = \"DVAR%s%s%s\" definitions separated by `%s' characters"
 msgstr ""
 "   %-3s    = Definition av \"dvar%s'%s%s'\" skilda åt med \"%s\"-tecken"
 
-#: src/help.c:1911
+#: src/help.c:1923
 #, fuzzy, c-format
 msgid ""
 "            E.g.  %sv a%s1127%sb%s054   Set `a' to Nov 27 and `b' to May 4"
@@ -4668,22 +4674,22 @@ msgstr ""
 "            t.ex.  %sv a%s1127%sb%s054   Sätt \"a\" till 27 nov och \"b\" "
 "till 4 maj"
 
-#: src/help.c:1921
+#: src/help.c:1933
 msgid "          Export local date variables from file to file"
 msgstr "          Exportera lokala datumvariabler från fil till fil"
 
-#: src/help.c:1930
+#: src/help.c:1942
 #, fuzzy, c-format
 msgid "          Define global text variable(s) \"TVAR->%ca...%cz\""
 msgstr "          Definiera globala textvariabler \"tvar->%ca...%cz\""
 
-#: src/help.c:1933
+#: src/help.c:1945
 #, fuzzy, c-format
 msgid "   %-3s    = \"TVAR%sTEXT\" definitions separated by `%s' characters"
 msgstr ""
 "   %-3s    = Definition av \"dvar%s'%s%s'\" skilda åt med \"%s\"-tecken"
 
-#: src/help.c:1936
+#: src/help.c:1948
 #, fuzzy, c-format
 msgid ""
 "            E.g.  %sr %ca%sfoo%s%cb%sbar   Set `%ca' to `foo' and `%cb' to "
@@ -4692,13 +4698,13 @@ msgstr ""
 "            t.ex.  %sr %ca%sfoo%s%cb%sbar   Sätt \"%ca\" till \"foo\" och "
 "\"%cb\" till \"bar\""
 
-#: src/help.c:1940
+#: src/help.c:1952
 #, fuzzy, c-format
 msgid ""
 "          = \"TVAR[%s|%c%s]COMMAND\" definitions separated by `%s' characters"
 msgstr "            uttryck skilda åt med \"%s\"-tecken"
 
-#: src/help.c:1943
+#: src/help.c:1955
 #, fuzzy, c-format
 msgid ""
 "            E.g.  %sr %ca%sfoo   Assign output of command `foo' to `%ca'"
@@ -4706,69 +4712,69 @@ msgstr ""
 "            t.ex.  %sr %ca%sfoo%s%cb%sbar   Sätt \"%ca\" till \"foo\" och "
 "\"%cb\" till \"bar\""
 
-#: src/help.c:1953
+#: src/help.c:1965
 msgid "          Export local text variables from file to file"
 msgstr "          Exportera lokala textvariabler från fil till fil"
 
-#: src/help.c:1962 src/help.c:1982
+#: src/help.c:1974 src/help.c:1994
 #, c-format
 msgid ""
 "          Display only those fixed dates, whose date is not excluded by %s"
 msgstr "          Visa bara de fasta datum, som inte utesluts av %s"
 
-#: src/help.c:1965
+#: src/help.c:1977
 #, c-format
 msgid "   %-3s    = One or more of the following characters.  If character"
 msgstr "   %-3s    = Ett eller fler av följande tecken.  Om tecknet"
 
-#: src/help.c:1967
+#: src/help.c:1979
 #, fuzzy
 msgid "            is a LOWER-CASE-LETTER, it means a non-exclusion!"
 msgstr "            är en GEMEN, betyder det \"icke uteslutning\"!"
 
-#: src/help.c:1971
+#: src/help.c:1983
 #, c-format
 msgid "            %c = Exclusion of all %s"
 msgstr "            %c = Uteslutning av %s"
 
-#: src/help.c:1985
+#: src/help.c:1997
 #, c-format
 msgid "   %-3s    = List of `%c[DATE][%c[DATE]]' and/or `%c[DATE][%c[DATE]]'"
 msgstr ""
 "   %-3s    = Lista med \"%c[DATUM][%c[DATUM]]\" och/eller "
 "\"%c[DATUM][%c[DATUM]]\""
 
-#: src/help.c:1988
+#: src/help.c:2000
 #, c-format
 msgid "            expressions separated by `%s' characters"
 msgstr "            uttryck skilda åt med \"%s\"-tecken"
 
-#: src/help.c:1997
+#: src/help.c:2009
 #, c-format
 msgid "          Display only those fixed dates, whose text is matched by %s"
 msgstr "          Visa bara de fasta datum, vars text överensstämmer med %s"
 
-#: src/help.c:2000
+#: src/help.c:2012
 #, c-format
 msgid "   %-3s    = Any text you like, metacharacters are not respected"
 msgstr "   %-3s    = Vilken text som helst, metatecken tas inte hänsyn till"
 
-#: src/help.c:2002
+#: src/help.c:2014
 #, c-format
 msgid "   %-3s    = Any text respectively \"regular expression\" you like"
 msgstr "   %-3s    = Vilken text eller \"reguljärt uttryck\" som helst"
 
-#: src/help.c:2012
+#: src/help.c:2024
 #, c-format
 msgid "          Ignore case distinctions if `%s' option is given"
 msgstr ""
 
-#: src/help.c:2022
+#: src/help.c:2034
 #, fuzzy, c-format
 msgid "          Revert the sense of matching of the `%s' option"
 msgstr "          Skapa responsfil för \"%cFIL-flaggan\""
 
-#: src/help.c:2033
+#: src/help.c:2045
 #, fuzzy
 msgid "          Display some debug information"
 msgstr "          Visa lite felsökningsinformation"
@@ -4777,7 +4783,7 @@ msgstr "          Visa lite felsökningsinformation"
 #. *** Translators, please don't translate the word `internal',
 #. *** because it is used textually AS IS as an option argument.
 #.
-#: src/help.c:2039
+#: src/help.c:2051
 #, fuzzy, c-format
 msgid ""
 "  [%-3s]   = internal    Information if program internal maximums are reached"
@@ -4788,7 +4794,7 @@ msgstr ""
 #. *** Translators, please don't translate the words `handled' and `internal',
 #. *** because they are used textually AS IS as an option argument.
 #.
-#: src/help.c:2046
+#: src/help.c:2058
 msgid ""
 "          = handled     Like `internal' and file names which are handled"
 msgstr "          = handled     Som \"internal\" plus filnamn som hanteras"
@@ -4797,7 +4803,7 @@ msgstr "          = handled     Som \"internal\" plus filnamn som hanteras"
 #. *** Translators, please don't translate the words `unhandled' and `internal',
 #. *** because they are used textually AS IS as an option argument.
 #.
-#: src/help.c:2052
+#: src/help.c:2064
 msgid ""
 "          = unhandled   Like `internal' and file names which are unhandled"
 msgstr ""
@@ -4807,7 +4813,7 @@ msgstr ""
 #. *** Translators, please don't translate the words `all', `handled' and `unhandled',
 #. *** because they are used textually AS IS as an option argument.
 #.
-#: src/help.c:2058
+#: src/help.c:2070
 msgid "          = all         Like `handled' and `unhandled' together"
 msgstr "          = all         Som \"handled\" och \"unhandled\" tillsammans"
 
@@ -4815,36 +4821,36 @@ msgstr "          = all         Som \"handled\" och \"unhandled\" tillsammans"
 #. *** Translators, please don't translate the words `abort' and `all',
 #. *** because they are used textually AS IS as an option argument.
 #.
-#: src/help.c:2064
+#: src/help.c:2076
 msgid ""
 "          = abort       Like `all' and abort if file name can't be handled"
 msgstr ""
 "          = abort       Som \"all\" men avbryt om filnamnet inte kan hanteras"
 
-#: src/help.c:2073
+#: src/help.c:2085
 msgid "          Use special format for calendar sheet"
 msgstr "          Använd speciellt format för kalenderblad"
 
-#: src/help.c:2075
+#: src/help.c:2087
 msgid "  [MOD]   = -   Use standard format for calendar sheet"
 msgstr "  [MOD]   = -   Använd standardformat för kalenderblad"
 
-#: src/help.c:2084
+#: src/help.c:2096
 #, fuzzy
 msgid "          Use leap year rule of Eastern Orthodox churches"
 msgstr "          Använd regeln för skottår i ortodoxa kyrkan"
 
-#: src/help.c:2093
+#: src/help.c:2105
 #, fuzzy
 msgid "          Provide calendar sheet with week numbers"
 msgstr "          Tillhandahåll kalenderblad med veckonummer"
 
-#: src/help.c:2102
+#: src/help.c:2114
 #, fuzzy, c-format
 msgid "          Determine type of week numbers (actual:  %s)"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2103 src/help.c:3636
+#: src/help.c:2115 src/help.c:3660
 msgid "Standard"
 msgstr ""
 
@@ -4852,7 +4858,7 @@ msgstr ""
 #. *** Translators, please don't translate the word `yes',
 #. *** because it is used textually AS IS as an option argument.
 #.
-#: src/help.c:2109
+#: src/help.c:2121
 #, c-format
 msgid "   %-3s    = yes   ISO-8601:1988 week numbers"
 msgstr ""
@@ -4861,51 +4867,51 @@ msgstr ""
 #. *** Translators, please don't translate the word `no',
 #. *** because it is used textually AS IS as an option argument.
 #.
-#: src/help.c:2115
+#: src/help.c:2127
 #, fuzzy
 msgid "          = no    Standard week numbers"
 msgstr "          Tillhandahåll kalenderblad med veckonummer"
 
-#: src/help.c:2124
+#: src/help.c:2136
 msgid "          Suppress output of calendar sheet explicitly"
 msgstr "          Undertryck utmatning av kalenderblad explicit"
 
-#: src/help.c:2136
+#: src/help.c:2148
 #, c-format
 msgid "          Direct output through external `%s' pager"
 msgstr "          Skicka utdata genom en extern \"%s\"-sidvisare"
 
-#: src/help.c:2139 src/help.c:2141
+#: src/help.c:2151 src/help.c:2153
 msgid "          Direct output through simple internal pager"
 msgstr "          Skicka utdata genom en enkel intern sidvisare"
 
-#: src/help.c:2154
+#: src/help.c:2166
 msgid "          Disable highlighting of text, holiday resp., actual day"
 msgstr "          Stäng av framhävning av text, helgdagar resp. aktuell dag"
 
-#: src/help.c:2165
+#: src/help.c:2177
 msgid "          Forces highlighting sequences if output is redirected/piped"
 msgstr "          Framtvinga framhävningssekvens om utdata styrs om"
 
-#: src/help.c:2174
+#: src/help.c:2186
 msgid ""
 "          Set highlighting sequence pairs 1 (=actual day) and 2 (=holiday)"
 msgstr ""
 "          Sätt framhävningssekvenspar 1 (=aktuell dag) och 2 (=helgdag)"
 
-#: src/help.c:2176
+#: src/help.c:2188
 #, c-format
 msgid "   %-3s    = Highlighting sequence pairs separated by `%s' characters"
 msgstr "   %-3s    = Framhävningssekvenspar skilda åt med \"%s\"-tecken"
 
-#: src/help.c:2179
+#: src/help.c:2191
 #, fuzzy, c-format
 msgid ""
 "            E.g.  %sH \\x2%s\\xAE   Use hex values 2 and AE for sequence 1"
 msgstr ""
 "            t.ex.  %sH \\x2%s\\xAE   Använd hexvärdena 2 och AE för sekvens 1"
 
-#: src/help.c:2182
+#: src/help.c:2194
 #, fuzzy, c-format
 msgid ""
 "            E.g.  %sH %s%s*%s*      Use characters `*' and `*' for sequence 2"
@@ -4913,572 +4919,582 @@ msgstr ""
 "            t.ex.  %sH %s%s*%s*      Använd tecknen \"*\" och \"*\" för "
 "sekvens 2"
 
-#: src/help.c:2192
+#: src/help.c:2204
 msgid "          Modify format of year calendar"
 msgstr "          Ändra format på årskalender"
 
-#: src/help.c:2194
+#: src/help.c:2206
 #, fuzzy, c-format
 msgid "   %-3s    = 1|2|3|4|6|12   Number of blocks (actual:  %d)"
 msgstr "   %-3s    = 1|2|3|4|6|12   Antalet block"
 
-#: src/help.c:2204
+#: src/help.c:2216
 msgid "          Use consecutive day of year in calendar sheet"
 msgstr "          Använd fortlöpande dagar på året på kalenderbladet"
 
-#: src/help.c:2206
+#: src/help.c:2218
 msgid "  [MOD]   = b   Use both date notations (day of month+year)"
 msgstr ""
 "  [MOD]   = b   Använd båda datumbeteckningarna (dag i månaden+dag på året)"
 
-#: src/help.c:2215
+#: src/help.c:2227
 msgid "          Use consecutive day of year in eternal holiday list"
 msgstr "          Använd fortlöpande dagar på året i evighetskalendern"
 
-#: src/help.c:2217 src/help.c:2229
+#: src/help.c:2229 src/help.c:2241
 msgid "   [MOD]  = b   Use both date notations (day of month+year)"
 msgstr ""
 "  [MOD]   = b   Använd båda datumbeteckningarna (dag i månaden+dag på året)"
 
-#: src/help.c:2227
+#: src/help.c:2239
 msgid "          Use consecutive day of year in fixed date list"
 msgstr "          Använd fortlöpande dagar på året på listan med fasta datum"
 
-#: src/help.c:2239
+#: src/help.c:2251
 #, fuzzy, c-format
 msgid "          Set starting day of week (actual:  %s)"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2271
+#: src/help.c:2283
 #, c-format
 msgid "          Send output via `%s' program to user"
 msgstr "          Skicka utdata via programmet \"%s\" till användare"
 
-#: src/help.c:2299
+#: src/help.c:2311
 msgid "UNKNOWN"
 msgstr ""
 
-#: src/help.c:2300
+#: src/help.c:2312
 #, c-format
 msgid "  [%-3s]   = Email address, otherwise eMail is send to user `%s'"
 msgstr ""
 
-#: src/help.c:2314
+#: src/help.c:2326
 #, c-format
 msgid "          Display eternal holiday list (Year in range: %d...%d)"
 msgstr ""
 "          Visa evighetskalender för helgdagar (år i intervallet: %d - %d)"
 
-#: src/help.c:2317
+#: src/help.c:2329
 msgid " n        = Legal days and memorial days"
 msgstr " n        = Allmänna helgdagar och minnesdagar"
 
-#: src/help.c:2319
+#: src/help.c:2331
 msgid "   N      = Legal days only"
 msgstr "   N      = Enbart allmänna helgdagar"
 
-#: src/help.c:2321 src/help.c:2884
+#: src/help.c:2333 src/help.c:2896
 #, c-format
 msgid "    [MOD] = %s   Descending sort order"
 msgstr "    [MOD] = %s   Fallande sorteringsordning"
 
-#: src/help.c:2330
+#: src/help.c:2342
 #, fuzzy
 msgid "          Suppress leading blank line of eternal holiday list"
 msgstr "          Evighetskalender för helgdagar utan titel"
 
-#: src/help.c:2339
+#: src/help.c:2351
 msgid "          Exclude title of eternal holiday list"
 msgstr "          Evighetskalender för helgdagar utan titel"
 
-#: src/help.c:2348
+#: src/help.c:2360
 #, fuzzy
 msgid "          Provide eternal holiday list with astronomical data"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2357
+#: src/help.c:2369
 #, fuzzy
 msgid "          Provide eternal holiday list with Bahá'i calendar holidays"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2366
+#: src/help.c:2378
 #, fuzzy
 msgid "          Provide eternal holiday list with Bahá'i calendar months"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2375
+#: src/help.c:2387
 #, fuzzy
 msgid "          Provide eternal holiday list with Celtic calendar holidays"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2384
+#: src/help.c:2396
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Chinese flexible calendar "
 "holidays"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2393
+#: src/help.c:2405
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Chinese flexible calendar months"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2402
+#: src/help.c:2414
 #, fuzzy
 msgid "          Provide eternal holiday list with Chinese calendar holidays"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2411
+#: src/help.c:2423
 #, fuzzy
 msgid "          Provide eternal holiday list with Chinese calendar months"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2420
+#: src/help.c:2432
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Christian Western calendar "
 "holidays"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2429
+#: src/help.c:2441
 #, fuzzy
 msgid "          Provide eternal holiday list with Coptic calendar months"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2438
+#: src/help.c:2450
 #, fuzzy
 msgid "          Provide eternal holiday list with Ethiopic calendar months"
 msgstr "          Tillhandahåll en evighetskalender utan standardhelgdagar"
 
-#: src/help.c:2447
+#: src/help.c:2459
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with French Revolutionary calendar "
 "months"
 msgstr "          Tillhandahåll en evighetskalender utan standardhelgdagar"
 
-#: src/help.c:2456
+#: src/help.c:2468
 #, fuzzy
 msgid "          Provide eternal holiday list with Hebrew calendar holidays"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2465
+#: src/help.c:2477
 #, fuzzy
 msgid "          Provide eternal holiday list with Hebrew calendar months"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2474
+#: src/help.c:2486
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Indian civil-calendar months"
 msgstr "          Tillhandahåll en evighetskalender utan standardhelgdagar"
 
-#: src/help.c:2483
+#: src/help.c:2495
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Islamic civil-calendar holidays"
 msgstr "          Tillhandahåll en evighetskalender utan standardhelgdagar"
 
-#: src/help.c:2492
+#: src/help.c:2504
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Islamic civil-calendar months"
 msgstr "          Tillhandahåll en evighetskalender utan standardhelgdagar"
 
-#: src/help.c:2501
+#: src/help.c:2513
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Japanese flexible calendar "
 "holidays"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2510
+#: src/help.c:2522
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Japanese flexible calendar months"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2519
+#: src/help.c:2531
 #, fuzzy
 msgid "          Provide eternal holiday list with Japanese calendar holidays"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2528
+#: src/help.c:2540
 #, fuzzy
 msgid "          Provide eternal holiday list with Japanese calendar months"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2537
+#: src/help.c:2549
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with multicultural New Year holidays"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2546
+#: src/help.c:2558
 #, fuzzy
 msgid "          Provide eternal holiday list with Old-Armenic calendar months"
 msgstr "          Tillhandahåll en evighetskalender utan standardhelgdagar"
 
-#: src/help.c:2555
+#: src/help.c:2567
 #, fuzzy
 msgid "          Provide eternal holiday list with Old-Egyptic calendar months"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2564
+#: src/help.c:2576
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Orthodox new-calendar holidays"
 msgstr "          Tillhandahåll en evighetskalender utan standardhelgdagar"
 
-#: src/help.c:2573
+#: src/help.c:2585
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Orthodox old-calendar holidays"
 msgstr "          Tillhandahåll en evighetskalender utan standardhelgdagar"
 
-#: src/help.c:2582
+#: src/help.c:2594
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Persian Jalaali-calendar holidays"
 msgstr "          Tillhandahåll en evighetskalender utan standardhelgdagar"
 
-#: src/help.c:2591
+#: src/help.c:2603
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Persian Jalaali-calendar months"
 msgstr "          Tillhandahåll en evighetskalender utan standardhelgdagar"
 
-#: src/help.c:2600
+#: src/help.c:2612
 #, fuzzy
 msgid "          Provide eternal holiday list with zodiacal marker data"
 msgstr "          Tillhandahåll en evighetskalender med kristna helgdagar"
 
-#: src/help.c:2609
+#: src/help.c:2621
 msgid "          Provide eternal holiday list with country specific holidays"
 msgstr ""
 "          Tillhandahåll en evighetskalender med landsspecifika helgdagar"
 
-#: src/help.c:2611
+#: src/help.c:2623
 #, fuzzy, c-format
 msgid "   %-3s    = Single country resp., territory code or a list of these,"
 msgstr "   %-3s    = Enstaka landskod eller en lista med landskoder"
 
-#: src/help.c:2613
+#: src/help.c:2625
 #, fuzzy, c-format
 msgid ""
 "            which are connected by `%s' characters. Countries/territories,"
 msgstr "            som är sammanbundna med \"%s\"-tecken"
 
-#: src/help.c:2615
+#: src/help.c:2627
 msgid "            marked by # have an incomplete recording of holidays"
 msgstr ""
 
-#: src/help.c:2619
+#: src/help.c:2631
 #, fuzzy, c-format
 msgid "            %-*s = Holidays in %s"
 msgstr "            %s = %s helgdagar"
 
-#: src/help.c:2636
+#: src/help.c:2648
 msgid ""
 "          Set reference value for rise/set time respectively shadow length"
 msgstr ""
 
-#: src/help.c:2638
+#: src/help.c:2650
 #, c-format
 msgid "   %-3s    = Angular value respectively factor in range:  %+.1f...%+.1f"
 msgstr ""
 
-#: src/help.c:2648
+#: src/help.c:2660
 #, fuzzy
 msgid "          Set base data of Earth's atmosphere"
 msgstr "          Använd speciellt format för kalenderblad"
 
-#: src/help.c:2650
+#: src/help.c:2662
 #, fuzzy, c-format
 msgid "   %-3s    = Air pressure and temperature separated by `%s' character"
 msgstr "   %-3s    = Framhävningssekvenspar skilda åt med \"%s\"-tecken"
 
-#: src/help.c:2653
+#: src/help.c:2665
 #, fuzzy, c-format
 msgid "            Air pressure in Millibar (actual:  %.3f)"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2655
+#: src/help.c:2667
 #, fuzzy, c-format
 msgid "            Air temperature in degrees Celsius (actual:  %+.3f)"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2665
+#: src/help.c:2677
 #, fuzzy
 msgid "          Limit rise/set times of Sun to the day"
 msgstr "          1. Representation av text"
 
-#: src/help.c:2674
+#: src/help.c:2686
 msgid "          Represent astronomical times and data with utmost precision"
 msgstr ""
 
-#: src/help.c:2683
+#: src/help.c:2695
 #, fuzzy, c-format
 msgid "          Execute `%c%c[%s]' shell commands"
 msgstr "          # B            = Utför inte skalkommandona \"%c%c[%s]\""
 
-#: src/help.c:2686
+#: src/help.c:2698
 #, fuzzy, c-format
 msgid "          and \"TVAR[%s|%c%s]COMMAND\" assigments"
 msgstr "                           = %s   Bakåt"
 
-#: src/help.c:2697
+#: src/help.c:2709
 #, fuzzy
 msgid "          Change base time of astronomical functions"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2700
+#: src/help.c:2712
 #, fuzzy
 msgid "          respectively, change cycle-starting time"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2708
+#: src/help.c:2720
 #, fuzzy, c-format
 msgid ""
 "   %-3s    = %c|%c|[%c|%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  "
 "%s%02d%s%02d == GMT%s)"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2713
+#: src/help.c:2725
 #, fuzzy, c-format
 msgid ""
 "   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  "
 "%s%02d%s%02d == GMT%s)"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2727
+#: src/help.c:2739
 #, fuzzy
 msgid "          Change cycle-ending time"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2729
+#: src/help.c:2741
 #, fuzzy, c-format
 msgid ""
 "   %-3s    = %c|%c|[%c|%c][%s|%s]MMMM|HH%s[MM]   Ending time value (actual:  "
 "%02d%s%02d)"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2741
+#: src/help.c:2753
 #, fuzzy
 msgid "          Change cycle-timestep"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2743
+#: src/help.c:2755
 #, fuzzy, c-format
 msgid "   %-3s    = MMMM|HH%s[MM]   Timestep value (actual:  %02d%s%02d)"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2754
+#: src/help.c:2766
 #, fuzzy
 msgid "          Change base year of calendar"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2756
+#: src/help.c:2768
 #, fuzzy, c-format
 msgid "   %-3s    = [%s|%s]YYYY   Year offset value (actual:  %d)"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:2766
+#: src/help.c:2778
 msgid "          Set period of Gregorian Reformation"
 msgstr "          Ställ in perioden för gregorianska reformationen"
 
-#: src/help.c:2768
+#: src/help.c:2780
 #, c-format
 msgid "          Actual respected period:  %02d-%02d %s %0*d"
 msgstr "          Aktuell tidsperiod:  %02d-%02d %s %0*d"
 
-#: src/help.c:2774
+#: src/help.c:2786
 #, c-format
 msgid "   %-*d%*s = Set period to:  %02d-%02d %s %0*d"
 msgstr "   %-*d%*s = Sätt tidsperioden till:  %02d-%02d %s %0*d"
 
-#: src/help.c:2780
+#: src/help.c:2792
 #, fuzzy, c-format
 msgid "   %-3s    = %s%c%s%s%s%s%s%s   Set period explicitly"
 msgstr "   %-3s    = %s%s%s%s%s%s%s   Sätt tidsperioden uttryckligen"
 
-#: src/help.c:2790
+#: src/help.c:2802
 #, c-format
 msgid "          Set order of date elements using the %s format text"
 msgstr ""
 "          Sätt ordningen på datumelementen genom att använda formattexten %s"
 
-#: src/help.c:2792
+#: src/help.c:2804
 #, fuzzy, c-format
 msgid "          Actual:  (%s) `%s' (%s)"
 msgstr "          Aktuellt format:  (%s) \"%s\" (%s)"
 
-#: src/help.c:2793 src/help.c:3661
+#: src/help.c:2805 src/help.c:3685
 msgid "self-defined"
 msgstr "eget"
 
-#: src/help.c:2798
+#: src/help.c:2810
 #, fuzzy, c-format
 msgid "   %-6s = Format is:  `%s' (%s)"
 msgstr "   %-6s = Sätt formatet till:  \"%s\" (%s)"
 
-#: src/help.c:2802
+#: src/help.c:2814
 #, fuzzy, c-format
 msgid "   %-3s    = Define individual format. Respected format elements are:"
 msgstr "   %-3s    = Definiera eget format. Formatelement som känns igen är:"
 
-#: src/help.c:2833
+#: src/help.c:2845
 msgid "          Define translatable country specific special character pairs"
 msgstr ""
 
-#: src/help.c:2835
+#: src/help.c:2847
 #, c-format
 msgid "   %-3s    = UPPER-CASE-LETTER\"\"LOWER-CASE-LETTER... definitions"
 msgstr ""
 
-#: src/help.c:2838
+#: src/help.c:2850
 #, c-format
 msgid ""
 "            E.g. a `%s%s%s%s%s%s%s%s' %-3s causes the correct conversion of"
 msgstr ""
 
-#: src/help.c:2841
+#: src/help.c:2853
 msgid ""
 "            the preceding special characters in an individual date format,"
 msgstr ""
 
-#: src/help.c:2843
+#: src/help.c:2855
 msgid ""
 "            which has a STYLE format instruction component, and that, how"
 msgstr ""
 
-#: src/help.c:2845
+#: src/help.c:2857
 #, fuzzy
 msgid "            they are used by the character set used in Germany"
 msgstr "            som är sammanbundna med \"%s\"-tecken"
 
-#: src/help.c:2854
+#: src/help.c:2866
 msgid "+++ FIXED DATES +++"
 msgstr "+++ FASTA DATUM +++"
 
-#: src/help.c:2871
+#: src/help.c:2883
 #, c-format
 msgid "          Use standard resource file `.%s%s' for fixed date list"
 msgstr ""
 "          Använd standardresursfilen \".%s%s\" för listan med fasta datum"
 
-#: src/help.c:2874
+#: src/help.c:2886
 #, c-format
 msgid "          Use standard resource file `%s%s' for fixed date list"
 msgstr ""
 "          Använd standardresursfilen \"%s%s\" för listan med fasta datum"
 
-#: src/help.c:2878 src/help.c:3265
+#: src/help.c:2890 src/help.c:3289
 msgid "          Implies period:  Today"
 msgstr "          Medför tidsperioden:  idag"
 
-#: src/help.c:2880
+#: src/help.c:2892
 msgid " c        = Display only those dates, for which fixed dates exists"
 msgstr " c        = Visa bara de dagar, som har fasta datum"
 
-#: src/help.c:2882
+#: src/help.c:2894
 msgid ""
 "   C      = Display those dates, for which fixed dates doesn't exist, too"
 msgstr "   C      = Visa också de dagar, som inte har fasta datum"
 
-#: src/help.c:2892
+#: src/help.c:2904
 msgid ""
 "    [MOD] = One or more of the following modifiers which are marked by #"
 msgstr "    [MOD] = En eller fler av följande modifierare markerade med #"
 
-#: src/help.c:2902
+#: src/help.c:2914
+#, fuzzy, c-format
+msgid "            %-3s         = Heading/Title text used for fixed date list"
+msgstr "          # x            = Lista med fasta datum utan titel"
+
+#: src/help.c:2917
+#, fuzzy, c-format
+msgid "                          Actual:  `%s'"
+msgstr "                           = %s   Bakåt"
+
+#: src/help.c:2926
 msgid "          # g[MOD]       = Group fixed dates by day using text MOD"
 msgstr ""
 "          # g[MOD]       = Gruppera fasta datum genom att använda texten MOD"
 
-#: src/help.c:2914
+#: src/help.c:2938
 msgid "          1. Representation of text"
 msgstr "          1. Representation av text"
 
-#: src/help.c:2923
+#: src/help.c:2947
 msgid "                         = Set width of the biorhythm text graphics"
 msgstr "                         = Sätt bredden på biorytmens textgrafik"
 
-#: src/help.c:2925
+#: src/help.c:2949
 #, c-format
 msgid "                           %-3s = %d...%d   Length of a single axis"
 msgstr "                           %-3s = %d - %d   Längden på en axel"
 
-#: src/help.c:2935
+#: src/help.c:2959
 #, fuzzy
 msgid "                         = Set height of the Moon phase text graphics"
 msgstr "                         = Sätt höjden på månfasens textgrafik"
 
-#: src/help.c:2937
+#: src/help.c:2961
 #, c-format
 msgid "                           %-3s = %d...%d   Total number of lines"
 msgstr "                           %-3s = %d...%d   Totala antalet rader"
 
-#: src/help.c:2947
+#: src/help.c:2971
 msgid "          # a            = Display origin of fixed date"
 msgstr "          # a            = Visa ursprunget till fast datum"
 
-#: src/help.c:2956
+#: src/help.c:2980
 msgid "          # A            = Display using alternative list format"
 msgstr ""
 "          # A            = Visa genom att använda ett alternativt listformat"
 
-#: src/help.c:2965
+#: src/help.c:2989
 msgid "          # e            = Include legal days and memorial days"
 msgstr "          # e            = Tag med allmänna helgdagar och minnesdagar"
 
-#: src/help.c:2967
+#: src/help.c:2991
 msgid "          # E            = Include legal days only"
 msgstr "          # E            = Tag bara med allmänna helgdagar"
 
-#: src/help.c:2976
+#: src/help.c:3000
 #, fuzzy
 msgid "          # k            = Display week number"
 msgstr "          # k            = Visa veckonummer"
 
-#: src/help.c:2985
+#: src/help.c:3009
 msgid "          # o            = Omit repeating date part of fixed dates"
 msgstr "          # o            = Utelämna del av datumet som upprepas"
 
-#: src/help.c:2994
+#: src/help.c:3018
 #, fuzzy
 msgid ""
 "          # Q            = Suppress leading blank line of fixed dates list"
 msgstr "          # U            = Utelämna datumdelen av fasta datum"
 
-#: src/help.c:3003
+#: src/help.c:3027
 msgid "          # U            = Suppress date part of fixed dates"
 msgstr "          # U            = Utelämna datumdelen av fasta datum"
 
-#: src/help.c:3012
+#: src/help.c:3036
 #, fuzzy
 msgid "          # J            = Suppress text part of fixed dates"
 msgstr "          # U            = Utelämna datumdelen av fasta datum"
 
-#: src/help.c:3021
+#: src/help.c:3045
 msgid "          # x            = Exclude title of fixed date list"
 msgstr "          # x            = Lista med fasta datum utan titel"
 
-#: src/help.c:3030
+#: src/help.c:3054
 msgid "          # z            = Display consecutive number of fixed date"
 msgstr "          # z            = Visa fortlöpande fasta datum"
 
-#: src/help.c:3039
+#: src/help.c:3063
 msgid ""
 "          # Z            = Display dates, for which fixed dates doesn't exist"
 msgstr "          # Z            = Visa dagar, som saknar fasta datum"
 
-#: src/help.c:3047
+#: src/help.c:3071
 msgid "          2. Respected period"
 msgstr "          2. Aktuell tidsperiod"
 
-#: src/help.c:3056
+#: src/help.c:3080
 msgid "                         = Manage `29-FEBRUARY' in non-leap years"
 msgstr "                         = Hantera 29 FEBRUARI under icke skottår"
 
@@ -5486,7 +5502,7 @@ msgstr "                         = Hantera 29 FEBRUARI under icke skottår"
 #. *** Translators, please don't translate the word `february',
 #. *** because it is used textually AS IS as an option argument.
 #.
-#: src/help.c:3062
+#: src/help.c:3086
 #, c-format
 msgid "                           %-3s = february   Respect at `28-FEBRUARY'"
 msgstr "                           %-3s = february   Beakta den 28 FEBRUARI"
@@ -5495,456 +5511,456 @@ msgstr "                           %-3s = february   Beakta den 28 FEBRUARI"
 #. *** Translators, please don't translate the word `march',
 #. *** because it is used textually AS IS as an option argument.
 #.
-#: src/help.c:3068
+#: src/help.c:3092
 #, c-format
 msgid "                           %-3s = march      Respect at `01-MARCH'"
 msgstr "                           %-3s = march      Beakta den 1 MARS"
 
-#: src/help.c:3077
+#: src/help.c:3101
 msgid ""
 "          # d            = Include actual date if list of periods is "
 "generated"
 msgstr ""
 "          # d            = Tag med aktuellt datum om periodlista skapas"
 
-#: src/help.c:3086
+#: src/help.c:3110
 msgid ""
 "          # l            = Generate list of periods instead of a single "
 "period"
 msgstr ""
 "          # l            = Skapa periodlista i stället för en enstaka period"
 
-#: src/help.c:3101
+#: src/help.c:3125
 msgid "          # Nd           = Single absolute day N"
 msgstr "          # Nd           = Enstaka dag N"
 
-#: src/help.c:3103
+#: src/help.c:3127
 #, c-format
 msgid "          # %cdN          = Single absolute day N"
 msgstr "          # %cdN          = Enstaka dag N"
 
-#: src/help.c:3106
+#: src/help.c:3130
 msgid "          # NMOD         = Single day N relative to today"
 msgstr "          # NMOD         = Enstaka dag N relativt idag"
 
-#: src/help.c:3108
+#: src/help.c:3132
 #, c-format
 msgid "             MOD           = %s   Forwards"
 msgstr "             MOD           = %s   Framåt"
 
-#: src/help.c:3110
+#: src/help.c:3134
 #, c-format
 msgid "                           = %s   Backwards"
 msgstr "                           = %s   Bakåt"
 
-#: src/help.c:3113
+#: src/help.c:3137
 msgid "          # Nw           = Complete week N"
 msgstr "          # Nw           = Hel vecka N"
 
-#: src/help.c:3115
+#: src/help.c:3139
 msgid ""
 "                           N = 0        1st week / last week of previous year"
 msgstr ""
 "                           N = 0        1:a veckan / sista veckan föregående "
 "år"
 
-#: src/help.c:3117
+#: src/help.c:3141
 msgid "                           N = 1...52   1st...52nd week (always)"
 msgstr "                           N = 1 - 52   1:a - 52:a veckan (alltid)"
 
-#: src/help.c:3119
+#: src/help.c:3143
 msgid "                           N = 53       53rd week (sometimes)"
 msgstr "                           N = 53       53:e veckan (ibland)"
 
-#: src/help.c:3121
+#: src/help.c:3145
 msgid "                           N = 99       Last week"
 msgstr "                           N = 99       Sista veckan"
 
-#: src/help.c:3124
+#: src/help.c:3148
 #, fuzzy, c-format
 msgid "          # %s%s         = Single day %s of month %s"
 msgstr "          # \"%s%s\"       = Enstaka dag \"%s\" i månaden \"%s\""
 
-#: src/help.c:3128
+#: src/help.c:3152
 #, fuzzy, c-format
 msgid "          # %s%sN       = Single N'th weekday %s of month %s"
 msgstr ""
 "          # \"%s%s\"N     = Enstaka N:e veckodag \"%s\" i månaden \"%s\""
 
-#: src/help.c:3131
+#: src/help.c:3155
 #, fuzzy, c-format
 msgid "                           N = 1...4   1st...4th weekday %s (always)"
 msgstr ""
 "                           N = 1 - 4   1:a - 4:e veckodagen \"%s\" (alltid)"
 
-#: src/help.c:3133
+#: src/help.c:3157
 #, fuzzy, c-format
 msgid "                           N = 5       5th weekday %s (sometimes)"
 msgstr "                           N = 5       5:e veckodagen \"%s\" (ibland)"
 
-#: src/help.c:3135
+#: src/help.c:3159
 #, fuzzy, c-format
 msgid "                           N = 9       Last weekday %s"
 msgstr "                           N = 9       Sista veckodagen \"%s\""
 
-#: src/help.c:3138
+#: src/help.c:3162
 #, fuzzy, c-format
 msgid "          # %cdN%s       = Single N'th weekday %s"
 msgstr "          # %cdN\"%s\"     = Enstaka N:e veckodag \"%s\""
 
-#: src/help.c:3141
+#: src/help.c:3165
 #, fuzzy, c-format
 msgid "                           N = 1...51   1st...51st weekday %s (always)"
 msgstr ""
 "                           N = 1 - 51   1:a - 51:a veckodagen \"%s\" (alltid)"
 
-#: src/help.c:3143
+#: src/help.c:3167
 #, fuzzy, c-format
 msgid "                           N = 52|53    52|53rd weekday %s (sometimes)"
 msgstr ""
 "                           N = 52|53    52|53:e veckodagen \"%s\" (ibland)"
 
-#: src/help.c:3145
+#: src/help.c:3169
 #, fuzzy, c-format
 msgid "                           N = 99       Last weekday %s"
 msgstr "                           N = 99       Sista veckodagen \"%s\""
 
-#: src/help.c:3148
+#: src/help.c:3172
 #, fuzzy, c-format
 msgid "          # %cwN%s       = Single weekday %s of N'th week"
 msgstr "          # %cwN\"%s\"     = Enstaka veckodag \"%s\" i N:e veckan"
 
-#: src/help.c:3151
+#: src/help.c:3175
 #, fuzzy, c-format
 msgid ""
 "                           N = 0        %s which isn't located in 1st week"
 msgstr ""
 "                           N = 0        \"%s\" som inte finns i 1:a veckan"
 
-#: src/help.c:3153
+#: src/help.c:3177
 #, fuzzy, c-format
 msgid "                           N = 1...51   %s of 1st...51st week (always)"
 msgstr ""
 "                           N = 1 - 51   \"%s\" i 1:a - 51:a veckan (alltid)"
 
-#: src/help.c:3155
+#: src/help.c:3179
 #, fuzzy, c-format
 msgid "                           N = 52|53    %s of 52|53rd week (sometimes)"
 msgstr ""
 "                           N = 52|53    \"%s\" i 52:a|53:e veckan (ibland)"
 
-#: src/help.c:3157
+#: src/help.c:3181
 #, fuzzy, c-format
 msgid "                           N = 99       %s of last week"
 msgstr "                           N = 99       \"%s\" i sista veckan"
 
-#: src/help.c:3160
+#: src/help.c:3184
 #, c-format
 msgid "          # %c%c[[%s|%s]N]   = Single day N relative to Easter Sunday"
 msgstr "          # %c%c[[%s|%s]N]   = Enstaka dag N relativt påskdagen"
 
-#: src/help.c:3164
+#: src/help.c:3188
 #, fuzzy, c-format
 msgid ""
 "          # %c%c[%s|%s]N%s  = Single N'th weekday relative to Easter Sunday"
 msgstr ""
 "          # %c%c[%s|%s]N\"%s\"= Enstaka N:e veckodag relativt påskdagen"
 
-#: src/help.c:3168
+#: src/help.c:3192
 #, c-format
 msgid "          # %c%c[[%s|%s]N]   = Single day N relative to today's date"
 msgstr "          # %c%c[[%s|%s]N]   = Enstaka dag N relativt dagens datum"
 
-#: src/help.c:3172
+#: src/help.c:3196
 #, fuzzy, c-format
 msgid ""
 "          # %c%c[%s|%s]N%s  = Single N'th weekday relative to today's date"
 msgstr ""
 "          # %c%c[%s|%s]N\"%s\"= Enstaka N:e veckodag relativt dagens datum"
 
-#: src/help.c:3176
+#: src/help.c:3200
 #, c-format
 msgid "          # %c?[[%s|%s]N]   = Single day N relative to date variable"
 msgstr "          # %c?[[%s|%s]N]   = Enstaka dag N relativt datumvariabel"
 
-#: src/help.c:3180
+#: src/help.c:3204
 #, fuzzy, c-format
 msgid ""
 "          # %c?[%s|%s]N%s  = Single N'th weekday relative to date variable"
 msgstr ""
 "          # %c?[%s|%s]N\"%s\"= Enstaka N:e veckodag relativt datumvariabel"
 
-#: src/help.c:3187
+#: src/help.c:3211
 msgid "          # t|T          = List tomorrow"
 msgstr "          # t|T          = Lista imorgon"
 
-#: src/help.c:3202
+#: src/help.c:3226
 msgid "          # w|W[MOD]     = List complete week"
 msgstr "          # w|W[MOD]     = Lista hela veckan"
 
-#: src/help.c:3204
+#: src/help.c:3228
 #, c-format
 msgid ""
 "               [MOD]       = %s   List tomorrow until ending day of week"
 msgstr ""
 "               [MOD]       = %s   Lista från imorgon till slutet på veckan"
 
-#: src/help.c:3207
+#: src/help.c:3231
 #, c-format
 msgid ""
 "                           = %s   List yesterday until starting day of week"
 msgstr ""
 "                           = %s   Lista från igår till början på veckan"
 
-#: src/help.c:3225
+#: src/help.c:3249
 msgid "          # m|M[MOD]     = List complete month"
 msgstr "          # m|M[MOD]     = Lista hela månaden"
 
-#: src/help.c:3227
+#: src/help.c:3251
 #, c-format
 msgid ""
 "               [MOD]       = %s   List tomorrow until ending day of month"
 msgstr ""
 "               [MOD]       = %s   Lista från imorgon till slutet på månaden"
 
-#: src/help.c:3230
+#: src/help.c:3254
 #, c-format
 msgid ""
 "                           = %s   List yesterday until starting day of month"
 msgstr ""
 "                           = %s   Lista från igår till början på månaden"
 
-#: src/help.c:3248
+#: src/help.c:3272
 msgid "          # y|Y[MOD]     = List complete year"
 msgstr "          # y|Y[MOD]     = Lista hela året"
 
-#: src/help.c:3250
+#: src/help.c:3274
 #, c-format
 msgid ""
 "               [MOD]       = %s   List tomorrow until ending day of year"
 msgstr ""
 "               [MOD]       = %s   Lista från imorgon till slutet på året"
 
-#: src/help.c:3253
+#: src/help.c:3277
 #, c-format
 msgid ""
 "                           = %s   List yesterday until starting day of year"
 msgstr "                           = %s   Lista från igår till början på året"
 
-#: src/help.c:3263
+#: src/help.c:3287
 msgid "          Use alternative file(s) instead of standard resource file"
 msgstr "          Använd alternativ(a) fil(er) i stället för standardresursfil"
 
-#: src/help.c:3267
+#: src/help.c:3291
 msgid " f        = Display only those dates, for which fixed dates exists"
 msgstr " f        = Visa bara de dagar, som har fasta datum"
 
-#: src/help.c:3269
+#: src/help.c:3293
 msgid ""
 "   F      = Display those dates, for which fixed dates doesn't exist, too"
 msgstr "   F      = Visa också de dagar, som inte har fasta datum"
 
-#: src/help.c:3271
+#: src/help.c:3295
 #, c-format
 msgid "     %-3s  = Single file or list of files connected by `%s' characters"
 msgstr ""
 "     %-3s  = Enstaka fil eller lista med filer sammanbundna med \"%s\"-tecken"
 
-#: src/help.c:3281
+#: src/help.c:3305
 msgid "          Define additional resource file line"
 msgstr "          Definiera ytterligare rader i resursfilen"
 
-#: src/help.c:3283
+#: src/help.c:3307
 #, c-format
 msgid "   %-3s    = Any possible resource file line"
 msgstr "   %-3s    = Vilken resursfilrad som helst"
 
-#: src/help.c:3292
+#: src/help.c:3316
 #, c-format
 msgid "%cDATE"
 msgstr "%cDATUM"
 
-#: src/help.c:3294
+#: src/help.c:3318
 msgid "Use given `DATE' instead of today's date"
 msgstr "Använd angivet \"DATUM\" i stället för dagens datum"
 
-#: src/help.c:3296
+#: src/help.c:3320
 #, fuzzy, c-format
 msgid ""
 "Date format:  %s[%s[%s|%s[N]]], %s%c%c|%c|DVAR[[%s|%s]N[%s]], %s%cdN[%s]"
 msgstr ""
 "Datumformat:  %s[%s[%s|%s[N]]], %s%c%c|%c|dvar[[%s|%s]N[%s]], %s%cdN[%s]"
 
-#: src/help.c:3300
+#: src/help.c:3324
 #, c-format
 msgid "              %s%cwN[%s], month name[%s], weekday name[N] or %s"
 msgstr ""
 "              %s%cwN[%s], namn på månad[%s], namn på veckodag[N] eller %s"
 
-#: src/help.c:3309
+#: src/help.c:3333
 #, c-format
 msgid "%cFILE"
 msgstr "%cFIL"
 
-#: src/help.c:3311
+#: src/help.c:3335
 msgid "Preload options and commands from `FILE'"
 msgstr "Läs flaggor och kommandon från \"FIL\""
 
-#: src/help.c:3315
+#: src/help.c:3339
 msgid "COMMAND"
 msgstr "KOMMANDO"
 
-#: src/help.c:3317
+#: src/help.c:3341
 #, c-format
 msgid "%s        = Month in range:  %d...%d"
 msgstr "%s        = Månad i intervallet:  %d - %d"
 
-#: src/help.c:3319
+#: src/help.c:3343
 #, c-format
 msgid "                        or:  month name | %s | %s%s | %s%s | %s%s"
 msgstr "                        eller: namn på månad | %s | %s%s | %s%s | %s%s"
 
-#: src/help.c:3323
+#: src/help.c:3347
 #, c-format
 msgid "            List:   %s[%s%s]%s...%s%s[%s%s]"
 msgstr "            Lista:     %s[%s%s]%s...%s%s[%s%s]"
 
-#: src/help.c:3326
+#: src/help.c:3350
 #, c-format
 msgid "            Range:  %s[%s%s]%s%s[%s%s] | %s%s%s%s%s | %s %s%s%s"
 msgstr "            Intervall: %s[%s%s]%s%s[%s%s] | %s%s%s%s%s | %s %s%s%s"
 
-#: src/help.c:3332
+#: src/help.c:3356
 #, c-format
 msgid "%s%*s    = Year  in range:  %d...%d"
 msgstr "%s%*s    = År i intervallet:  %d - %d"
 
-#: src/help.c:3336
+#: src/help.c:3360
 #, c-format
 msgid "            List:   [%s%s]%s%s...%s[%s%s]%s"
 msgstr "            Lista:     [%s%s]%s%s...%s[%s%s]%s"
 
-#: src/help.c:3339
+#: src/help.c:3363
 #, fuzzy, c-format
 msgid "            Range:  [%s%s]%s%s[%s%s]%s | %s%s%s %s%s%s"
 msgstr "            Intervall: %s[%s%s]%s%s[%s%s] | %s%s%s%s%s | %s %s%s%s"
 
-#: src/help.c:3392
+#: src/help.c:3416
 #, fuzzy, c-format
 msgid "  %sh,  %s          Display this help text and quit program"
 msgstr "          Visa hjälptext och avsluta"
 
-#: src/help.c:3395
+#: src/help.c:3419
 #, fuzzy, c-format
 msgid "  %shh, %s   Display extended help text and quit program"
 msgstr "          Visa utvidgad hjälptext och avsluta"
 
-#: src/help.c:3398
+#: src/help.c:3422
 #, fuzzy, c-format
 msgid "  %sL,  %s       Display software license and quit program"
 msgstr "          Visa programlicens och avsluta"
 
-#: src/help.c:3401
+#: src/help.c:3425
 #, fuzzy, c-format
 msgid "  %sV,  %s       Display version information and quit program"
 msgstr "          Visa versionsnummer och avsluta"
 
-#: src/help.c:3407
+#: src/help.c:3431
 #, fuzzy, c-format
 msgid "  %sp,  %s         Direct output through external `%s' pager"
 msgstr "          Skicka utdata genom en extern \"%s\"-sidvisare"
 
-#: src/help.c:3411 src/help.c:3414
+#: src/help.c:3435 src/help.c:3438
 #, fuzzy, c-format
 msgid "  %sp,  %s         Direct output through simple internal pager"
 msgstr "          Skicka utdata genom en enkel intern sidvisare"
 
-#: src/help.c:3465
+#: src/help.c:3489
 msgid "This software doesn't claim completeness, correctness or usability."
 msgstr "Detta program gör inte anspråk på fullständighet, korrekthet eller"
 
-#: src/help.c:3467
+#: src/help.c:3491
 msgid "On principle I will not be liable for ANY damages or losses (implicit"
 msgstr "användbarhet. Jag tar av princip inte ansvar för NÅGON skada eller"
 
-#: src/help.c:3469
+#: src/help.c:3493
 msgid "or explicit), which result from using or handling my software."
 msgstr "förlust (direkt eller indirekt), som användandet eller handhavandet"
 
-#: src/help.c:3471
+#: src/help.c:3495
 msgid "If you use this software, you agree without any exception to this"
 msgstr "av mitt program gett upphov till. Om du använder detta program,"
 
-#: src/help.c:3473
+#: src/help.c:3497
 msgid "agreement, which binds you LEGALLY !!"
 msgstr "accepterar du utan undantag detta avtal!!"
 
-#: src/help.c:3476
+#: src/help.c:3500
 msgid "This program is free software; you can redistribute it and/or modify"
 msgstr ""
 "Detta program är fri programvara; du får distribuera det och/eller modifiera"
 
-#: src/help.c:3478
+#: src/help.c:3502
 msgid "it under the terms of the `GNU General Public License' as published by"
 msgstr "det under villkoren i \"GNU General Public License\" utfärdade av"
 
-#: src/help.c:3480
+#: src/help.c:3504
 msgid "the `Free Software Foundation'; either version 2, or (at your option)"
 msgstr ""
 "\"Free Software Foundation\"; antingen version 2, eller (om du så önskar)"
 
-#: src/help.c:3482
+#: src/help.c:3506
 msgid "any later version."
 msgstr "en senare version."
 
-#: src/help.c:3485
+#: src/help.c:3509
 msgid "You should have received a copy of the `GNU General Public License'"
 msgstr "Du skall ha fått en kopia av \"GNU General Public License\""
 
-#: src/help.c:3487
+#: src/help.c:3511
 msgid "along with this program; if not, write to the:"
 msgstr "tillsammans med detta program; om inte, skriv till:"
 
-#: src/help.c:3526
+#: src/help.c:3550
 msgid "Compilation options:"
 msgstr "Kompileringsflaggor:"
 
-#: src/help.c:3628
+#: src/help.c:3652
 #, fuzzy, c-format
 msgid "Starting day of week: %s"
 msgstr "          Sätt dag som veckan börjar med"
 
-#: src/help.c:3635
+#: src/help.c:3659
 #, c-format
 msgid "Type of week numbers: %s"
 msgstr ""
 
-#: src/help.c:3643
+#: src/help.c:3667
 #, c-format
 msgid "Base year of calendar: %d"
 msgstr ""
 
-#: src/help.c:3651
+#: src/help.c:3675
 #, c-format
 msgid "Gregorian Reformation: %02d-%02d %s %0*d"
 msgstr "Gregorianska reformationen: %02d-%02d %s %0*d"
 
-#: src/help.c:3660
+#: src/help.c:3684
 #, c-format
 msgid "Date format: (%s) `%s' (%s)"
 msgstr "Datumformat: (%s) \"%s\" (%s)"
 
-#: src/help.c:3671
+#: src/help.c:3695
 #, c-format
 msgid "Respected countries/territories: %d"
 msgstr ""
 
-#: src/help.c:3683
+#: src/help.c:3707
 #, c-format
 msgid "Time offset value of astronomical functions: %s%02d%s%02d == GMT%s"
 msgstr ""
 
-#: src/help.c:3713
+#: src/help.c:3737
 #, c-format
 msgid ""
 "Usage:  %s [%s|%s{[?|h|??|hh|L|V]|{%sHKNOR%sXb%sijn%sq%ssu%s}}] [[%s] [%s]]"
@@ -5952,153 +5968,153 @@ msgstr ""
 "Användning:  %s [%s|%s{[?|h|??|hh|L|V]|{%sHKNOR%sXb%sijn%sq%ssu%s}}] [[%s] "
 "[%s]]"
 
-#: src/help.c:3746
+#: src/help.c:3770
 #, fuzzy, c-format
 msgid "Use `%s %s|[%s?]"
 msgstr "Använd \"%s %s\" eller "
 
-#: src/help.c:3759
+#: src/help.c:3783
 #, fuzzy
 msgid "for more information."
 msgstr "\"%s %s|[%s?]\" för mer information."
 
-#: src/gcal2txt.c:171 src/help.c:3870 src/tcal.c:240 src/txt2gcal.c:171
+#: src/gcal2txt.c:171 src/help.c:3894 src/tcal.c:240 src/txt2gcal.c:171
 #, fuzzy, c-format
 msgid "Email bug reports to <%s>"
 msgstr "Rapportera fel till <esken@uni-muenster.de>"
 
-#: src/gcal2txt.c:173 src/help.c:3872 src/tcal.c:242 src/txt2gcal.c:173
+#: src/gcal2txt.c:173 src/help.c:3896 src/tcal.c:242 src/txt2gcal.c:173
 #, fuzzy, c-format
 msgid "or (if this fails) to <%s>."
 msgstr ""
 "eller (om inte det går) till <bug-gnu-utils@prep.ai.mit.edu>\n"
 "Rapportera synpunkter på översättningen till <sv@li.org>"
 
-#: src/gcal2txt.c:205 src/help.c:3904 src/tcal.c:274 src/txt2gcal.c:205
+#: src/gcal2txt.c:205 src/help.c:3928 src/tcal.c:274 src/txt2gcal.c:205
 msgid "This is free software; see the source for copying conditions."
 msgstr "Detta är fri programvara; se källkoden för kopieringsvillkor"
 
-#: src/gcal2txt.c:207 src/help.c:3906 src/tcal.c:276 src/txt2gcal.c:207
+#: src/gcal2txt.c:207 src/help.c:3930 src/tcal.c:276 src/txt2gcal.c:207
 msgid "There is NO warranty, without even the implied warranty of"
 msgstr "Det finns INGEN garanti, ej heller någon underförstådd garanti om"
 
-#: src/gcal2txt.c:209 src/help.c:3908 src/tcal.c:278 src/txt2gcal.c:209
+#: src/gcal2txt.c:209 src/help.c:3932 src/tcal.c:278 src/txt2gcal.c:209
 msgid "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
 msgstr "SÄLJBARHET eller LÄMPLIGHET FÖR NÅGOT SPECIELLT ÄNDAMÅL"
 
-#: src/help.c:3930
+#: src/help.c:3954
 #, fuzzy, c-format
 msgid "%s: The Gregorian calendar program (GNU cal) %s"
 msgstr ":%*s GNUs kalenderprogram  ("
 
-#: src/help.c:3943
+#: src/help.c:3967
 #, c-format
 msgid "Usage:  %s [[OPTION...] [%cDATE] [%cFILE...]] [COMMAND]"
 msgstr "Användning:  %s [[FLAGGA...] [%cDATUM] [%cFIL...]] [KOMMANDO]"
 
-#: src/help.c:3950
+#: src/help.c:3974
 #, c-format
 msgid "Usage:  %s [[OPTION...] [%cFILE...]] [COMMAND]"
 msgstr "Användning:  %s [[FLAGGA...] [%cFIL...]] [KOMMANDO]"
 
-#: src/help.c:3978
+#: src/help.c:4002
 #, c-format
 msgid ""
 "   +++  If you specify two digits for the year I DON'T assume %2d%s  +++"
 msgstr "    +++ Om du anger året med två siffror ANTAR JAG INTE %2d%s +++"
 
-#: src/help.c:3981
+#: src/help.c:4005
 #, c-format
 msgid "   +++  `%s' is free software, enjoy   =8^)  +++"
 msgstr "   +++  \"%s\" är \"fri programvara\". Mycket nöje!   =8^)  +++"
 
-#: src/help.c:4066 src/help.c:4247
+#: src/help.c:4090 src/help.c:4271
 msgid " 4.0 or 4.02"
 msgstr " 4.0 eller 4.02"
 
-#: src/help.c:4078 src/help.c:4259
+#: src/help.c:4102 src/help.c:4283
 msgid " later than 5.0"
 msgstr " senare än 5.0"
 
-#: src/help.c:4093 src/help.c:4270
+#: src/help.c:4117 src/help.c:4294
 msgid "++ 3.0 or later"
 msgstr "++ 3.0 eller senare"
 
-#: src/help.c:4124 src/help.c:4402
+#: src/help.c:4148 src/help.c:4426
 msgid "5.1 or earlier"
 msgstr "5.1 eller tidigare"
 
-#: src/help.c:4131 src/help.c:4409 src/help.c:4615 src/help.c:4713
+#: src/help.c:4155 src/help.c:4433 src/help.c:4639 src/help.c:4737
 msgid "unknown compiler"
 msgstr "okänd kompilator"
 
-#: src/help.c:4176 src/help.c:4296 src/help.c:4456 src/help.c:4491
-#: src/help.c:4581 src/help.c:4636 src/help.c:4667 src/help.c:4746
-#: src/help.c:4983
+#: src/help.c:4200 src/help.c:4320 src/help.c:4480 src/help.c:4515
+#: src/help.c:4605 src/help.c:4660 src/help.c:4691 src/help.c:4770
+#: src/help.c:5007
 msgid " on "
 msgstr " på "
 
-#: src/help.c:4218
+#: src/help.c:4242
 msgid "(bad version)"
 msgstr "(dålig version)"
 
-#: src/help.c:4284
+#: src/help.c:4308
 msgid "unknown compiler (SDK?)"
 msgstr "okänd kompilator (SDK?)"
 
-#: src/help.c:4361
+#: src/help.c:4385
 msgid " later than 4.5"
 msgstr " senare än 4.5"
 
-#: src/help.c:4375
+#: src/help.c:4399
 msgid "++ 1.0 or later"
 msgstr "++ 1.0 eller senare"
 
-#: src/help.c:4387
+#: src/help.c:4411
 msgid " 1.0 or 1.5?"
 msgstr " 1.0 eller 1.5?"
 
-#: src/help.c:4538
+#: src/help.c:4562
 msgid "unknown "
 msgstr "okänd "
 
-#: src/help.c:4554
+#: src/help.c:4578
 #, c-format
 msgid "version %d.%d"
 msgstr "version %d.%d"
 
-#: src/help.c:4561 src/help.c:4606 src/help.c:4785
+#: src/help.c:4585 src/help.c:4630 src/help.c:4809
 #, c-format
 msgid "version %d"
 msgstr "version %d"
 
-#: src/help.c:4567
+#: src/help.c:4591
 msgid "unknown version"
 msgstr "okänd version"
 
-#: src/help.c:4729
+#: src/help.c:4753
 #, c-format
 msgid " (%.4s for Alpha)"
 msgstr " (%.4s för Alpha)"
 
-#: src/help.c:4736
+#: src/help.c:4760
 #, c-format
 msgid " (%.4s for VAX)"
 msgstr " (%.4s för VAX)"
 
-#: src/help.c:4901
+#: src/help.c:4925
 msgid " (NetBSD before 0.9)"
 msgstr " (NetBSD före 0.9)"
 
-#: src/help.c:4901
+#: src/help.c:4925
 msgid " (NetBSD 1.2 or later)"
 msgstr " (NetBSD 1.2 eller senare)"
 
-#: src/help.c:4912
+#: src/help.c:4936
 msgid " (FreeBSD 2.0 or later)"
 msgstr " (FreeBSD 2.0 eller senare)"
 
-#: src/help.c:4919
+#: src/help.c:4943
 msgid " (BSD/386 1.1 or later)"
 msgstr " (BSD/386 1.1 eller senare)"
 
@@ -6118,7 +6134,7 @@ msgstr "Vecka"
 #. *** Translators, please translate this as a fixed 2-character text.
 #. *** This text should be a proper abbreviation of "post meridiem".
 #.
-#: src/rc-insert.c:1594 src/rc-insert.c:2611
+#: src/rc-insert.c:1596 src/rc-insert.c:2613
 msgid "pm"
 msgstr "em"
 
@@ -6126,7 +6142,7 @@ msgstr "em"
 #. *** Translators, please translate this as a fixed 2-character text.
 #. *** This text should be a proper abbreviation of "ante meridiem".
 #.
-#: src/rc-insert.c:1607 src/rc-insert.c:2623
+#: src/rc-insert.c:1609 src/rc-insert.c:2625
 msgid "am"
 msgstr "fm"
 
@@ -6134,7 +6150,7 @@ msgstr "fm"
 #. *** Translators, please translate this as a fixed 2-character text.
 #. *** This text should contain the proper abbreviations for "degrees" and "minutes".
 #.
-#: src/rc-insert.c:1877 src/rc-insert.c:1889
+#: src/rc-insert.c:1879 src/rc-insert.c:1891
 #, fuzzy
 msgid "d'\""
 msgstr "d"
@@ -6143,11 +6159,11 @@ msgstr "d"
 #. *** Translators, please translate this as a fixed 3-character text.
 #. *** This text should contain the proper abbreviations for "hours", "minutes" and "seconds".
 #.
-#: src/rc-insert.c:1901
+#: src/rc-insert.c:1903
 msgid "h'\""
 msgstr ""
 
-#: src/rc-insert.c:3452 src/rc-utils.c:2677
+#: src/rc-insert.c:3458 src/rc-utils.c:2677
 #, c-format
 msgid ""
 "Cannot execute command in file `%s'\n"
@@ -6156,7 +6172,7 @@ msgstr ""
 "Kan inte utföra kommando i filen \"%s\"\n"
 "Rad: %ld %s"
 
-#: src/rc-insert.c:3474 src/rc-utils.c:2700
+#: src/rc-insert.c:3480 src/rc-utils.c:2700
 #, c-format
 msgid ""
 "Command executed (exit code=%d) in file `%s'\n"
@@ -6169,7 +6185,7 @@ msgstr ""
 #. *** Translators, please translate this as a fixed 3-character text.
 #. *** This text should be a proper abbreviation of "Emotional".
 #.
-#: src/rc-use.c:541
+#: src/rc-use.c:545
 msgid "Emo"
 msgstr "Emo"
 
@@ -6177,7 +6193,7 @@ msgstr "Emo"
 #. *** Translators, please translate this as a fixed 3-character text.
 #. *** This text should be a proper abbreviation of "Intellectual".
 #.
-#: src/rc-use.c:546
+#: src/rc-use.c:550
 msgid "Int"
 msgstr "Int"
 
@@ -6185,28 +6201,24 @@ msgstr "Int"
 #. *** Translators, please translate this as a fixed 3-character text.
 #. *** This text should be a proper abbreviation of "Physical".
 #.
-#: src/rc-use.c:551
+#: src/rc-use.c:555
 msgid "Phy"
 msgstr "Fys"
 
-#: src/rc-use.c:1116 src/rc-use.c:1215
+#: src/rc-use.c:1120 src/rc-use.c:1219
 msgid "`Eternal holiday list'"
 msgstr "\"Evighetskalender för helgdagar\""
 
-#: src/rc-use.c:1906 src/rc-use.c:1970
+#: src/rc-use.c:1910 src/rc-use.c:1974 src/rc-use.c:2075 src/rc-use.c:2172
 msgid "`Internal'"
 msgstr "\"Intern\""
 
-#: src/rc-use.c:2138
-msgid "Fixed date list"
-msgstr "Lista med fasta datum"
-
-#: src/rc-use.c:2318
+#: src/rc-use.c:2415
 #, c-format
 msgid " ; Week %s"
 msgstr " ; Vecka %s"
 
-#: src/rc-use.c:2332
+#: src/rc-use.c:2429
 #, c-format
 msgid "Week %s"
 msgstr "Vecka %s"
@@ -6381,40 +6393,40 @@ msgstr "måste ha \"%s\""
 msgid "corrupted opcode"
 msgstr "skadad opcode"
 
-#: src/tty.c:449
+#: src/tty.c:456
 #, fuzzy, c-format
 msgid "%s: <Return> for more, <%s> to quit..."
 msgstr "<Vagnretur> för mer , <%s> för att avsluta..."
 
-#: src/tty.c:1067
+#: src/tty.c:1074
 #, fuzzy, c-format
 msgid "environment variable `%s' not found"
 msgstr ""
 "\n"
 "Miljövariabeln \"%s\" ej funnen"
 
-#: src/tty.c:1078
+#: src/tty.c:1085
 #, fuzzy, c-format
 msgid "environment variable `%s' not set"
 msgstr ""
 "\n"
 "Miljövariabeln \"%s\" ej satt"
 
-#: src/tty.c:1121
+#: src/tty.c:1128
 #, fuzzy
 msgid "`termcap' file not found"
 msgstr ""
 "\n"
 "\"termcap\"-fil ej funnen"
 
-#: src/tty.c:1131
+#: src/tty.c:1138
 #, fuzzy, c-format
 msgid "unknown terminal type defined in `%s'"
 msgstr ""
 "\n"
 "Okänd terminaltyp definierad i \"%s\""
 
-#: src/tty.c:1145
+#: src/tty.c:1152
 #, c-format
 msgid ""
 "\n"

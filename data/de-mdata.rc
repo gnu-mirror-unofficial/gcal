@@ -1,8 +1,8 @@
 ; Some Moon based astronomical times and data for locations in Germany for Gcal-2.20 or newer
 ;
-; $Id: de-mdata.rc 0.05 2000/04/10 00:00:05 tom Exp $
+; $Id: de-mdata.rc 0.06 2000/06/30 00:00:06 tom Exp $
 ;
-; Copyright (c) 2000   Thomas Esken      <esken@uni-muenster.de>
+; Copyright (c) 2000   Thomas Esken      <esken@gmx.net>
 ;                      Im Hagenfeld 84
 ;                      D-48147 M"unster
 ;                      GERMANY
@@ -304,27 +304,27 @@ $t=ESD moon/sun standard set delta                      %)K$c
 $p $a $t,$w
 $p $b $t,$s
 ;
-$t=QE6 day length moon's upper limb (standard r/s)      %[5$c
+$t=QE6 moon's upper limb (standard r/s) visible         %[5$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QE7 night length moon's upper limb (standard r/s)    %]5$c
+$t=QE7 moon's upper limb (standard r/s) non-visible     %]5$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QF6 day length moon's center                         %[4$c
+$t=QF6 moon's center visible                            %[4$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QF7 night length moon's center                       %]4$c
+$t=QF7 moon's center non-visible                        %]4$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QG6 day length math-horizon moon's upper limb        %[3$c
+$t=QG6 math-horizon moon's upper limb visible           %[3$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QG7 night length math-horizon moon's upper limb      %]3$c
+$t=QG7 math-horizon moon's upper limb non-visible       %]3$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QH6 day length math-horizon moon's center            %[2$c
+$t=QH6 math-horizon moon's center visible               %[2$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QH7 night length math-horizon moon's center          %]2$c
+$t=QH7 math-horizon moon's center non-visible           %]2$c
 $p $a $t,$w
 $p $b $t,$s

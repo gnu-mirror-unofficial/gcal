@@ -3,7 +3,7 @@
 *               eternal holiday list.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -27,7 +27,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: hd-data1.c 3.00 2000/03/30 03:00:00 tom Exp $";
+static char rcsid[]="$Id: hd-data1.c 3.01 2000/06/24 03:00:01 tom Exp $";
 #endif
 
 
@@ -1065,7 +1065,7 @@ jp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
       if (year < 1888)
        {
          /*
-            Meridian Bejing (116 25' degrees East), UTC/GMT time difference.
+            Meridian Beijing (116 25' degrees East), UTC/GMT time difference.
          */
          hour = 7;
          min = 45;

@@ -6,7 +6,7 @@
 *             (advanced  -ct  respectively  --period-of-fixed-dates=t  option).
 *             Works *only* for Gregorian years!
 *
-*  Copyright (c) 1995-1997, 2000 Thomas Esken
+*  Copyright (c) 1995, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -29,7 +29,7 @@
 
 
 
-static char rcsid[]="$Id: tcal.c 3.00 2000/03/04 03:00:00 tom Exp $";
+static char rcsid[]="$Id: tcal.c 3.01 2000/06/14 03:00:01 tom Exp $";
 
 
 
@@ -263,7 +263,7 @@ version_msg (fp, prgr_name, exit_status)
 
    *(ptr_rcsid + 4) = '\0';
    fprintf(fp, "%s (GNU cal %s) %s\n", prgr_name, VERSION_NO, ptr_rcsid);
-   fprintf(fp, "Copyright (c) 1995-1997, 2000 Thomas Esken\n");
+   fprintf(fp, "Copyright (c) 1995, 96, 1997, 2000 Thomas Esken\n");
 #if USE_DE
    fprintf(fp, "Dies ist freie Software; in den Quellen befindet sich die Lizenz-");
    S_NEWLINE(fp);

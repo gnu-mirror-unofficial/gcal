@@ -1,13 +1,13 @@
-#  $Id: cal2gcal.awk 0.11 2000/01/12 00:01:01 tom Exp $
+#  $Id: cal2gcal.awk 0.12 2000/06/14 00:01:02 tom Exp $
 #
 #  cal2gcal.awk:  Very simple, slow and silly AWK script for converting
 #                   "BSD-calendar" appointments into the `gcal' format.
 #
 #
-#  Copyright (c) 1995-1996, 2000  Thomas Esken      <esken@uni-muenster.de>
-#                                 Im Hagenfeld 84
-#                                 D-48147 M"unster
-#                                 GERMANY
+#  Copyright (c) 1995, 1996, 2000  Thomas Esken      <esken@gmx.net>
+#                                  Im Hagenfeld 84
+#                                  D-48147 M"unster
+#                                  GERMANY
 #
 #  This software doesn't claim completeness, correctness or usability.
 #  On principle I will not be liable for ANY damages or losses (implicit

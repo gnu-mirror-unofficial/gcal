@@ -2,7 +2,7 @@
 *  hd-data.c:  All data which is composed into the eternal holiday list.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: hd-data.c 3.00 2000/03/30 03:00:00 tom Exp $";
+static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
 #endif
 
 
@@ -149,7 +149,7 @@ PUBLIC const Cc_struct  cc_holidays[]=
   { "BI",    "Burundi #",                                       bi_hdy },
   { "BJ",    "Benin #",                                         bj_hdy },
   { "BM",    "Bermuda",                                         bm_hdy },
-  { "BN",    "Brunei Darussalam",                               bn_hdy },
+  { "BN",    "Brunei",                                          bn_hdy },
   { "BO",    "Bolivien",                                        bo_hdy },
   { "BR",    "Brasilien",                                       br_hdy },
   { "BS",    "Bahamas",                                         bs_hdy },
@@ -284,7 +284,7 @@ PUBLIC const Cc_struct  cc_holidays[]=
   { "JP",    "Japan",                                           jp_hdy },
   { "KE",    "Kenia #",                                         ke_hdy },
   { "KG",    "Kirgisien",                                       kg_hdy },
-  { "KH",    "Kambotscha #",                                    kh_hdy },
+  { "KH",    "Kambodscha #",                                    kh_hdy },
   { "KI",    "Kiribati #",                                      ki_hdy },
   { "KM",    "Komoren",                                         km_hdy },
   { "KN",    "St. Kitts und Nevis",                             kn_hdy },
@@ -494,7 +494,7 @@ PUBLIC const Cc_struct  cc_holidays[]=
   { "BI",    N_("Burundi #"),                                   bi_hdy },
   { "BJ",    N_("Benin #"),                                     bj_hdy },
   { "BM",    N_("Bermuda"),                                     bm_hdy },
-  { "BN",    N_("Brunei Darussalam"),                           bn_hdy },
+  { "BN",    N_("Brunei"),                                      bn_hdy },
   { "BO",    N_("Bolivia"),                                     bo_hdy },
   { "BR",    N_("Brazil"),                                      br_hdy },
   { "BS",    N_("Bahamas"),                                     bs_hdy },
@@ -2644,7 +2644,7 @@ chinese_hdy (init_data, detected, year, hd_elems, fday, count, cc, is_any_meridi
          if (year < 1929)
           {
             /*
-               Meridian Bejing (116 25' degrees East), UTC/GMT time difference.
+               Meridian Beijing (116 25' degrees East), UTC/GMT time difference.
             */
             hour = 7;
             min = 45;
@@ -3191,7 +3191,7 @@ chinese_mth (init_data, detected, year, hd_elems, fday, count,
             if (year < 1929)
              {
                /*
-                  Meridian Bejing (116 25' degrees East), UTC/GMT time difference.
+                  Meridian Beijing (116 25' degrees East), UTC/GMT time difference.
                */
                hour = 7;
                min = 45;
@@ -3213,7 +3213,7 @@ chinese_mth (init_data, detected, year, hd_elems, fday, count,
             if (year < 1888)
              {
                /*
-                  Meridian Bejing (116 25' degrees East), UTC/GMT time difference.
+                  Meridian Beijing (116 25' degrees East), UTC/GMT time difference.
                */
                hour = 7;
                min = 45;
@@ -4681,7 +4681,7 @@ japanese_hdy (init_data, detected, year, hd_elems, fday, count, cc, is_any_merid
          if (year < 1888)
           {
             /*
-               Meridian Bejing (116 25' degrees East), UTC/GMT time difference.
+               Meridian Beijing (116 25' degrees East), UTC/GMT time difference.
             */
             hour = 7;
             min = 45;

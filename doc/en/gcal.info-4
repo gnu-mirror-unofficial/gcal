@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -567,16 +567,16 @@ is displayed as follows:
      -|
      -| Fixed date list:
      -|
-     -| Sat, Jun   3rd 2000:      sh $0 & $0 &
-     -| Sat, Jun   3rd 2000:   a  \  b  \\  c  \\\  d
-     -| Sat, Jun   3rd 2000:  main(){for(;;)fork();}
-     -| Sat, Jun   3rd 2000: BANG BANG
-     -| Sat, Jun   3rd 2000: What happens now?~0  \  That!
-     -| Sat, Jun   3rd 2000: What happens now?
+     -| Wed, Jun  14th 2000:      sh $0 & $0 &
+     -| Wed, Jun  14th 2000:   a  \  b  \\  c  \\\  d
+     -| Wed, Jun  14th 2000:  main(){for(;;)fork();}
+     -| Wed, Jun  14th 2000: BANG BANG
+     -| Wed, Jun  14th 2000: What happens now?~0  \  That!
+     -| Wed, Jun  14th 2000: What happens now?
      -|                      0  \  This!
-     -| Sat, Jun   3rd 2000: \hello world
-     -| Sat, Jun   3rd 2000: bogomips
-     -| Sat, Jun   3rd 2000: bogus
+     -| Wed, Jun  14th 2000: \hello world
+     -| Wed, Jun  14th 2000: bogomips
+     -| Wed, Jun  14th 2000: bogus
 
 
 File: gcal.info,  Node: Text part of a line-Footnotes,  Up: Text part of a line
@@ -635,7 +635,7 @@ is displayed as follows (in case today's date is the 4th October 1996):
      -| Mon, Oct   4th 1999: 1. Today is MONDAY, 04th October 1999!
      -|                      2. It's the 277th day of the year.
      -|                      3. The actual week number is: 40.
-     -|                      4. Currently, it's 04:05am o'clock, Mr. esken.
+     -|                      4. Currently, it's 06:53pm o'clock, Mr. esken.
      -|                      5. Hurry up with your work
      -|                         by reason sunrise is at 07:33.
 

@@ -2,7 +2,7 @@
 *  help.c:  The help, version and license screens.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: help.c 3.00 2000/05/22 03:00:00 tom Exp $";
+static char rcsid[]="$Id: help.c 3.01 2000/06/20 03:00:01 tom Exp $";
 #endif
 
 
@@ -1375,6 +1375,18 @@ my_extended_help (fp, longopt_symbolic)
    switch (longopt_symbolic)
     {
       case SYM_NIL:
+      case SYM_HEADING_TEXT:
+        sprintf(s1, "          %s", get_longopt_description (SYM_HEADING_TEXT, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, "            %-3s          = Benutzter Text f%sr Terminlisten-%sberschrift",
+                larg_lit, UE, UUE);
+        print_text (fp, s1);
+        sprintf(s1, "                           Aktuell:  `%s'", rc_heading_text+2);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
       case SYM_GROUPING_TEXT:
         sprintf(s1, "          %s", get_longopt_description (SYM_GROUPING_TEXT, TRUE));
         print_text (fp, s1);
@@ -2896,6 +2908,18 @@ my_extended_help (fp, longopt_symbolic)
    switch (longopt_symbolic)
     {
       case SYM_NIL:
+      case SYM_HEADING_TEXT:
+        sprintf(s1, "          %s", get_longopt_description (SYM_HEADING_TEXT, TRUE));
+        print_text (fp, s1);
+        sprintf(s1, _("            %-3s         = Heading/Title text used for fixed date list"),
+                larg_lit);
+        print_text (fp, s1);
+        sprintf(s1, _("                          Actual:  `%s'"), rc_heading_text+2);
+        print_text (fp, s1);
+        if (longopt_symbolic != SYM_NIL)
+          break;
+        /* Fallthrough. */
+        print_text (fp, s1);
       case SYM_GROUPING_TEXT:
         sprintf(s1, "          %s", get_longopt_description (SYM_GROUPING_TEXT, TRUE));
         print_text (fp, s1);
@@ -3918,7 +3942,7 @@ my_copyright (fp, with_short_license)
 my_help_head_text (fp)
    FILE *fp;
 /*
-   Prints the help header text to file `fp' using the central
+   Prints the help heading text to file `fp' using the central
      output function `print_text()', and uses the global text buffer
      `s1' internally.
 */

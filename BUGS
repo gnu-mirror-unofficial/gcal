@@ -11,7 +11,7 @@ Here are all known bugs of `gcal'; some will be corrected in the future:
    * By reason of setting the Gregorian Reformation period by a command
      line option, it is possible to corrupt the calendars likewise the
      fixed date feature logically (which works correctly now for the
-     year in which the Gregorian Reformation has occured) if this
+     year in which the Gregorian Reformation has occurred) if this
      option is not used with care.
 
    * Fixed dates (inclusive lists or ranges of days, or repeated dates)

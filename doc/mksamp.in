@@ -2,7 +2,7 @@
 #
 #  @configure_input@
 #
-#  $Id: mksamp.in 0.04 2000/05/28 00:00:04 tom Exp $
+#  $Id: mksamp.in 0.06 2000/06/21 00:00:06 tom Exp $
 #
 #  mksamp.in: When listing example programm calls in a Texinfo document,
 #             the author normally has to write down the call of the program
@@ -10,13 +10,13 @@
 #             to it), and the result this call creates.  Of course this
 #             can be done by redirecting the output of such a call into
 #             a file and inserting it into the Texinfo document source
-#             (or by means of directlly including this data stream in
+#             (or by means of directly including this data stream into
 #             the document if the used editor allows this operation),
 #             providing each line of this output with the proper Texinfo
 #             command(s).
-#             But all last, it's not very convenient to work like this.
+#             But at last, it's not very convenient to work like this.
 #             It would be much better, if, on the one hand, there would be a 
-#             shell script file, which allows the user to ``test'' this program
+#             shell script file which allows the user to ``test'' this program
 #             example by himself.  And, on the other hand, it would be also
 #             very fine to insert all the required texts (which are Texinfo
 #             commands, the above mentioned shell prompt line and the created
@@ -33,7 +33,7 @@
 #             the commands that are run by the created shell script file,
 #             are created.  If no data file is needed, it will not be created.
 #             In the input file `FILE.in', some special character sequences
-#             must be used to mark the different classes of actions, which
+#             must be used to mark the different classes of action, which
 #             should all be given in this required order:
 #               * The command(s) used within the example are
 #                   either prefixed with `%%%' for using the '$ ' shell
@@ -117,7 +117,7 @@ Sed_script1=mksamp-1.sed
 Sed_script2=mksamp-2.sed
 #
 myname=`$Echo "$0" | $Sed -e 's,.*/,,'`
-myversion=0.03
+myversion=0.06
 myinternalname="$myname ($PACKAGE $VERSION) $myversion"
 #
 shellscriptfile_suffix=.sh

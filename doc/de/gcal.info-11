@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -55,7 +55,7 @@ Veraltete Spezialtexte und Formatelemente
 * Tabelle der veralteten Datumformatelemente::
 * Tabelle der veralteten Datumformate::
 
-Da ja Gcal 3.00 in der Lage ist, die meisten Spezialtexte, die im
+Da ja Gcal 3.01 in der Lage ist, die meisten Spezialtexte, die im
 Textteil einer Ressourcendateizeile auftreten dürfen (*note
 Beschreibung aller `%?'... Spezialtexte: Spezialtexte (lang).), sowie
 die meisten Formatelemente, wie sie im Datumformattext der
@@ -65,7 +65,7 @@ Formatanweisung besonders darzustellen, sind nun einige Spezialtexte
 bzw. Formatelemente, die hauptsächlich in den Gcal Versionen 2.20 und
 2.40 eingeführt wurden, veraltet.  Es folgen nun die vollständigen
 Tabellen aller dieser veralteten Spezialtexte bzw. Formatelemente,
-sowie deren neue Darstellung, wie sie nun von Gcal 3.00 benutzt wird.
+sowie deren neue Darstellung, wie sie nun von Gcal 3.01 benutzt wird.
 
 
 File: gcal.info,  Node: Tabelle der veralteten Spezialtexte,  Next: Tabelle der veralteten Datumformatelemente,  Prev: Veraltete Spezialtexte,  Up: Veraltete Spezialtexte
@@ -76,7 +76,7 @@ Tabelle der veralteten Spezialtexte
 In dieser Tabelle werden alle veralteten Spezialtexte gegenübergestellt,
 wie sie im Textteil einer Ressourcendateizeile auftreten dürfen (*note
 Beschreibung aller `%?'... Spezialtexte: Spezialtexte (lang).), sowie
-deren neue Darstellung, wie sie nun von Gcal 3.00 benutzt wird.
+deren neue Darstellung, wie sie nun von Gcal 3.01 benutzt wird.
 
 *Symbolischer Name*                         *Alter Stil*      *Neuer Stil*
 
@@ -131,7 +131,7 @@ In dieser Tabelle werden alle veralteten Datumformatelemente
 gegenübergestellt, wie sie im individuellen Datumformattext der
 `--date-format' Option benutzt werden dürfen (*note Kalender Option
 `--date-format=de|us|gb|TEXT': x-date-format.), sowie deren neue
-Darstellung, wie sie nun von Gcal 3.00 benutzt wird.
+Darstellung, wie sie nun von Gcal 3.01 benutzt wird.
 
 *Symbolischer Name*                  *Alter Stil*      *Neuer Stil*
 
@@ -169,7 +169,7 @@ landesspezifischen Datumformate der `--date-format' Option für deutsche
 Benutzer, US amerikanische Benutzer und Benutzer in Großbritannien
 benutzt werden dürfen (*note Kalender Option
 `--date-format=de|us|gb|TEXT': x-date-format.), sowie deren neue
-Darstellung, wie sie nun von Gcal 3.00 benutzt wird.
+Darstellung, wie sie nun von Gcal 3.01 benutzt wird.
 
 *CC*    *Alter Stil*               *Neuer Stil*
 
@@ -183,7 +183,7 @@ File: gcal.info,  Node: Formatanweisung,  Next: Kodierschema,  Prev: Veraltete S
 Formatanweisung
 ***************
 
-Gcal 3.00 ist in der Lage, Textvariablen, Spezialtexte und Datumformate
+Gcal 3.01 ist in der Lage, Textvariablen, Spezialtexte und Datumformate
 in sehr komfortabler und einheitlicher Weise mittels einer
 Formatanweisung besonders darzustellen.
 

@@ -2,7 +2,7 @@
 *  tty.c:  Screen support functions and major output function.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: tty.c 3.00 2000/03/04 03:00:00 tom Exp $";
+static char rcsid[]="$Id: tty.c 3.01 2000/06/29 03:00:01 tom Exp $";
 #endif
 
 
@@ -241,12 +241,15 @@ print_text (fp, text_line)
             hls_pos=hls1_pos=hls2_pos = SPECIAL_VALUE;
             if (*(text_line + i))
              {
-               ptr_1hls = strstr(text_line+i, ehls1s.seq);
-               if (ptr_1hls != (char *)NULL)
-                 hls1_pos = i + (int)(ptr_1hls - (text_line + i));
-               ptr_2hls = strstr(text_line+i, ehls2s.seq);
-               if (ptr_2hls != (char *)NULL)
-                 hls2_pos = i + (int)(ptr_2hls - (text_line + i));
+               if (tty_cols != SPECIAL_VALUE)
+                {
+                  ptr_1hls = strstr(text_line+i, ehls1s.seq);
+                  if (ptr_1hls != (char *)NULL)
+                    hls1_pos = i + (int)(ptr_1hls - (text_line + i));
+                  ptr_2hls = strstr(text_line+i, ehls2s.seq);
+                  if (ptr_2hls != (char *)NULL)
+                    hls2_pos = i + (int)(ptr_2hls - (text_line + i));
+                }
                if (   (hls1_pos != SPECIAL_VALUE)
                    && (hls2_pos != SPECIAL_VALUE))
                 {
@@ -334,7 +337,8 @@ print_text (fp, text_line)
 #  endif /* !GCAL_TCAP || !USE_HLS */
                         hls_chars += ehls1s.len;
                         i += ehls1s.len;
-                        ptr_1hls = strstr(text_line+i, ehls1e.seq);
+                        if (tty_cols != SPECIAL_VALUE)
+                          ptr_1hls = strstr(text_line+i, ehls1e.seq);
                         if (ptr_1hls != (char *)NULL)
                           hls_pos=hls1_pos = i + (int)(ptr_1hls - (text_line + i));
                         else
@@ -350,7 +354,8 @@ print_text (fp, text_line)
 #  endif /* !GCAL_TCAP || !USE_HLS */
                         hls_chars += ehls1e.len;
                         i += ehls1e.len;
-                        ptr_1hls = strstr(text_line+i, ehls1s.seq);
+                        if (tty_cols != SPECIAL_VALUE)
+                          ptr_1hls = strstr(text_line+i, ehls1s.seq);
                         if (ptr_1hls != (char *)NULL)
                           hls_pos=hls1_pos = i + (int)(ptr_1hls - (text_line + i));
                         else
@@ -374,7 +379,8 @@ print_text (fp, text_line)
 #  endif /* !GCAL_TCAP || !USE_HLS */
                           hls_chars += ehls2s.len;
                           i += ehls2s.len;
-                          ptr_2hls = strstr(text_line+i, ehls2e.seq);
+                          if (tty_cols != SPECIAL_VALUE)
+                            ptr_2hls = strstr(text_line+i, ehls2e.seq);
                           if (ptr_2hls != (char *)NULL)
                             hls_pos=hls2_pos = i + (int)(ptr_2hls - (text_line + i));
                           else
@@ -390,7 +396,8 @@ print_text (fp, text_line)
 #  endif /* !GCAL_TCAP || !USE_HLS */
                           hls_chars += ehls2e.len;
                           i += ehls2e.len;
-                          ptr_2hls = strstr(text_line+i, ehls2s.seq);
+                          if (tty_cols != SPECIAL_VALUE)
+                            ptr_2hls = strstr(text_line+i, ehls2s.seq);
                           if (ptr_2hls != (char *)NULL)
                             hls_pos=hls2_pos = i + (int)(ptr_2hls - (text_line + i));
                           else
@@ -552,7 +559,7 @@ print_text (fp, text_line)
 get_tty_hls (sequence_str)
    const char *sequence_str;
 /*
-   Reads the colours/highlighting sequences from Termcap and assigns them
+   Reads the colors/highlighting sequences from Termcap and assigns them
      to the according variables.  If Termcap isn't present, defaults are used.
 */
 {
@@ -1321,7 +1328,7 @@ get_termcap_hls (hls1_set, hls2_set)
    Bool *hls1_set;
    Bool *hls2_set;
 /*
-   Inspects the Termcap buffer `tc_buf' to detect the tty colour/highlighting
+   Inspects the Termcap buffer `tc_buf' to detect the tty color/highlighting
      sequences.  The module global vector `tc_buf[]' must be filled previously.
      May be called only once.
      Returns FALSE if an error occurs, otherwise TRUE.

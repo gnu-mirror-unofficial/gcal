@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -51,7 +51,7 @@ Obsolete Special Texts and Format Elements
 * Table of Obsolete Date Format Elements::
 * Table of Obsolete Date Formats::
 
-  Because Gcal 3.00 is able to represent most special texts which may
+  Because Gcal 3.01 is able to represent most special texts which may
 occur in the text part of a resource file line (*note Description of
 all `%?'... Special Texts: Special Texts.), and most of the format
 elements as they may be used in the date format text of the
@@ -60,7 +60,7 @@ x-date-format, by using a format instruction, some of them --mainly
 introduced in the Gcal versions 2.20 and 2.40-- are obsolete now.  The
 following complete tables of all these obsolete special texts
 respectively format elements with their new representation, as used by
-Gcal 3.00 now, show the changes made.
+Gcal 3.01 now, show the changes made.
 
 
 File: gcal.info,  Node: Table of Obsolete Special Texts,  Next: Table of Obsolete Date Format Elements,  Prev: Obsolete Special Texts,  Up: Obsolete Special Texts
@@ -71,7 +71,7 @@ Table of Obsolete Special Texts
   This table opposes all obsolete special texts as they may be used in
 the text part of a resource file line (*note Description of all `%?'...
 Special Texts: Special Texts.), and their new representation, as used
-by Gcal 3.00 now:
+by Gcal 3.01 now:
 
 *Symbolic name*                             *Old-style*       *New-style*
 
@@ -125,7 +125,7 @@ Table of Obsolete Date Format Elements
   This table opposes all obsolete date format elements as they may be
 used in the date format text of the `--date-format' option (*note
 Calendar option `--date-format=de|us|gb|TEXT': x-date-format.), and
-their new representation, as used by Gcal 3.00 now:
+their new representation, as used by Gcal 3.01 now:
 
 *Symbolic name*                      *Old-style*       *New-style*
 
@@ -162,7 +162,7 @@ in the fixed defaults of the country specific date formats of the
 `--date-format' option for German users, U.S. american users and users
 in Great Britain (*note Calendar option `--date-format=de|us|gb|TEXT':
 x-date-format.), and their new representation, as used by Gcal
-3.00 now:
+3.01 now:
 
 *CC*    *Old-style*                *New-style*
 
@@ -176,7 +176,7 @@ File: gcal.info,  Node: Format Instruction,  Next: Coding Scheme,  Prev: Obsolet
 Format Instruction
 ******************
 
-  Gcal 3.00 is able to represent text variables, special texts and date
+  Gcal 3.01 is able to represent text variables, special texts and date
 formats especially in a very comfortable and uniform manner by using a
 format instruction.
 

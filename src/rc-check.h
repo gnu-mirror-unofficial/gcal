@@ -4,7 +4,7 @@
 *  rc-check.h:  Checks if a line (of a resource file) must be inserted into `rc_elems_table[]' header file.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -28,7 +28,7 @@
 
 
 /*
-*  $Id: rc-check.h 3.00 2000/03/04 03:00:00 tom Exp $
+*  $Id: rc-check.h 3.01 2000/06/14 03:00:01 tom Exp $
 */
 
 

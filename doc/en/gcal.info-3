@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -1389,7 +1389,7 @@ event, and that shall be valid during all the year.  Instead of
 creating such a fixed date with a `000000WWW' date part (that is
 likewise respected in some few fixed date periods only), it should be
 defined with a date part like `0*d1WWW#99WWW.7'.  *Note Ranges of
-days::, und *Note Appearance factor of days::, for further information.
+days::, and *Note Appearance factor of days::, for further information.
 
 
 File: gcal.info,  Node: Further date part attributes,  Next: Text part of a line,  Prev: Date part of a line,  Up: Resource file

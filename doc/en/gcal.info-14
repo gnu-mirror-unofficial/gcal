@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -118,7 +118,7 @@ Concept Index
 * %[FORMAT]`[ARGUMENT] special text, actual Universal time in M[M...]/DATE format: Actual clocktime.
 * %[FORMAT]b[ARGUMENT] special text, geographical distance and course angle: Geographical distance and course angle.
 * %[FORMAT]D[DATE] special text, day number: Day number.
-* %[FORMAT]j[ARGUMENT] special text, julian day number: Julian day number.
+* %[FORMAT]j[ARGUMENT] special text, Julian day number: Julian day number.
 * %[FORMAT]K[DATE] special text, weekday name: Weekday name.
 * %[FORMAT]M[DATE] special text, month number: Month number.
 * %[FORMAT]N[DATE] special text, day-of-year number: Day-of-year number.
@@ -263,7 +263,7 @@ Concept Index
 * ^ line break-up character:             Fixed date options.
 * ^ regexp, anchor metacharacter:        Regexp Operators.
 * _ pseudo space character:              Fixed date options.
-* Accurancy of astronomical calculations: Preface.
+* Accuracy of astronomical calculations: Preface.
 * Activate fixed date function:          Fixed date options.
 * Actual clocktime %[FORMAT]?[ARGUMENT] special texts <1>: Special Texts Summary.
 * Actual clocktime %[FORMAT]?[ARGUMENT] special texts: Actual clocktime.
@@ -325,7 +325,7 @@ Concept Index
 * Assignments to text variables <1>:     Text variables.
 * Assignments to text variables <2>:     Structure of resource file.
 * Assignments to text variables:         Fixed date options.
-* Astronomical calculations, accurancy:  Preface.
+* Astronomical calculations, accuracy:   Preface.
 * Astronomical calculations, precision:  Preface.
 * Astronomical data and times, more precise representation: Fixed date options.
 * Astronomical data in eternal holiday list: Calendar options.
@@ -901,6 +901,7 @@ Concept Index
 * Fixed date list, suppression of title text: Fixed date options.
 * Fixed date option class <1>:           Glossary.
 * Fixed date option class:               Options.
+* Fixed date option, --heading-text=TEXT: Fixed date options.
 * Fixed date options:                    Fixed date options.
 * Fixed date period long-style option, --end-of-month: Fixed date options.
 * Fixed date period long-style option, --end-of-week: Fixed date options.
@@ -2409,9 +2410,6 @@ Concept Index
 * Signed angular value, Sun and Moon oriented special texts: Sun data.
 * Signed decimal based rational number value, Sun and Moon oriented special texts: Sun data.
 * Signed time value, Sun and Moon oriented special texts: Sun data.
-* Signless angular value, Sun and Moon oriented special texts: Sun data.
-* Signless decimal based rational number value, Sun and Moon oriented special texts: Sun data.
-* Signless time value, Sun and Moon oriented special texts: Sun data.
 * Simple decrement of date variables:    Date variables.
 * Simple decrement of text variables:    Text variables.
 * Simple file name <1>:                  Glossary.
@@ -2529,7 +2527,7 @@ Concept Index
 * Special text %[FORMAT]`[ARGUMENT], actual Universal time in M[M...]/DATE format: Actual clocktime.
 * Special text %[FORMAT]b[ARGUMENT], geographical distance and course angle: Geographical distance and course angle.
 * Special text %[FORMAT]D[DATE], day number: Day number.
-* Special text %[FORMAT]j[ARGUMENT], julian day number: Julian day number.
+* Special text %[FORMAT]j[ARGUMENT], Julian day number: Julian day number.
 * Special text %[FORMAT]K[DATE], weekday name: Weekday name.
 * Special text %[FORMAT]M[DATE], month number: Month number.
 * Special text %[FORMAT]N[DATE], day-of-year number: Day-of-year number.
@@ -2675,9 +2673,9 @@ Concept Index
 * Sun and Moon oriented special texts, signed angular value: Sun data.
 * Sun and Moon oriented special texts, signed decimal based rational number value: Sun data.
 * Sun and Moon oriented special texts, signed time value: Sun data.
-* Sun and Moon oriented special texts, signless angular value: Sun data.
-* Sun and Moon oriented special texts, signless decimal based rational number value: Sun data.
-* Sun and Moon oriented special texts, signless time value: Sun data.
+* Sun and Moon oriented special texts, unsigned angular value: Sun data.
+* Sun and Moon oriented special texts, unsigned decimal based rational number value: Sun data.
+* Sun and Moon oriented special texts, unsigned time value: Sun data.
 * Sun data %[FORMAT]?ARGUMENT special texts <1>: Special Texts Summary.
 * Sun data %[FORMAT]?ARGUMENT special texts: Sun data.
 * Sun data and times, default mode:      Sun data.
@@ -3358,6 +3356,9 @@ Concept Index
 * Universal time in M[M...]/DATE format, display: Actual clocktime.
 * Universal time minute, display:        Actual clocktime.
 * Unix:                                  Glossary.
+* Unsigned angular value, Sun and Moon oriented special texts: Sun data.
+* Unsigned decimal based rational number value, Sun and Moon oriented special texts: Sun data.
+* Unsigned time value, Sun and Moon oriented special texts: Sun data.
 * Use Eastern Orthodox churches' leap year rule: Calendar options.
 * USER environment variable <1>:         Environment Variables.
 * USER environment variable:             Global options.

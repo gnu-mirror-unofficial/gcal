@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -1227,7 +1227,7 @@ Stichwortverzeichnis
 * Mittlere Sonne:                        Sonnendaten.
 * Mittlere Sonnenzeit <1>:               Glossar.
 * Mittlere Sonnenzeit:                   Sonnendaten.
-* Mittlerer Erdäquatoradius:             Glossar.
+* Mittlerer Erdäquatorradius:            Glossar.
 * Mittlerer Sonnentag <1>:               Glossar.
 * Mittlerer Sonnentag:                   Sonnendaten.
 * Modifizierer <1>:                      Glossar.
@@ -3060,6 +3060,7 @@ Stichwortverzeichnis
 * Termintext-Modifizierer, Z:            Termin Optionen.
 * Termintext-Modifizierer, z:            Termin Optionen.
 * Termintext-Option, --biorhythm-axis=ANZAHL: Termin Optionen.
+* Termintext-Option, --heading-text=TEXT: Termin Optionen.
 * Termintext-Option, --moonimage-lines=ANZAHL: Termin Optionen.
 * Termintexte, Filtern von:              Termin Optionen.
 * Terminzeitraum-Langoption, --end-of-month: Termin Optionen.

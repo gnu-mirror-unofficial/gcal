@@ -2,7 +2,7 @@
 *  utils.c:  Pool of common functions.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: utils.c 3.00 2000/03/26 03:00:00 tom Exp $";
+static char rcsid[]="$Id: utils.c 3.01 2000/06/14 03:00:01 tom Exp $";
 #endif
 
 

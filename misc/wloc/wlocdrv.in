@@ -2,7 +2,7 @@
 #
 #  @configure_input@
 #
-#  $Id: wlocdrv.in 0.07 2000/07/24 00:00:07 tom Exp $
+#  $Id: wlocdrv.in 0.08 2000/06/14 00:00:08 tom Exp $
 #
 #  wlocdrv.in:  Uses `wlocdrv1[.awk|.pl]' and `wlocdrv2[.awk|.pl]'
 #                 for processing the ZONE file `zone.tab' to generate the
@@ -74,7 +74,7 @@ transform=@program_transform_name@
 mydefaultname=wlocdrv
 #
 myname=`$Echo "$0" | $Sed -e 's,.*/,,' -e "$transform"`
-myversion=0.07
+myversion=0.08
 myinternalname="$myname ($PACKAGE $VERSION) $myversion"
 #
 pool=$packagedatamiscdir/zone.tab

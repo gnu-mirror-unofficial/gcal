@@ -1,13 +1,13 @@
-#  $Id: makefile.sas 0.16 2000/03/05 00:01:06 tom Exp $
+#  $Id: makefile.sas 0.17 2000/06/14 00:01:07 tom Exp $
 ###############################################################################
 #
 #  Amiga SAS-C 6.3
 #  Makefile to create the extended `gcal' program.
 #
-#  Copyright (c) 1994-1996, 2000  Thomas Esken          <esken@uni-muenster.de>
-#                                 Im Hagenfeld 84
-#                                 D-48147 M"unster
-#                                 GERMANY
+#  Copyright (c) 1994, 95, 1996, 2000  Thomas Esken      <esken@gmx.net>
+#                                      Im Hagenfeld 84
+#                                      D-48147 M"unster
+#                                      GERMANY
 #
 ###############################################################################
 #

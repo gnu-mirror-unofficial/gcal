@@ -7,8 +7,8 @@
 @cartouche
 $ gcal -fsun-1.rc -Ux -Hno
 @print{} 
-@print{} 04:02/12-Sep-1999 aktuelle Ortszeit in Muenster
-@print{} 09:02/12-Sep-1999 aktuelle Ortszeit in Bangkok
+@print{} 18:49/12-Sep-1999 aktuelle Ortszeit in Muenster
+@print{} 23:49/12-Sep-1999 aktuelle Ortszeit in Bangkok
 @print{} Sonne:
 @print{} 01:06auf, 13:22unter, 12h16'tag, 11h44'nacht
 @print{} Bangkok-Zeit umgerechnet in Muensters Ortszeit

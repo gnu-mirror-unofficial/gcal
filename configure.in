@@ -1,6 +1,6 @@
 dnl Template file for GNU Autoconf
 dnl
-dnl Copyright (c) 1995-1997, 2000 Thomas Esken
+dnl Copyright (c) 1995, 96, 97, 2000 Thomas Esken
 dnl
 dnl This software doesn't claim completeness, correctness or usability.
 dnl On principle I will not be liable for ANY damages or losses (implicit
@@ -31,7 +31,7 @@ dnl
 AC_INIT(src/defines.h)dnl
 AC_PREREQ(2.13)dnl
 AM_CONFIG_HEADER(config.h:config.hin)dnl
-AC_REVISION($Id: configure.in 2.29 2000/04/05 02:02:09 tom Exp $)dnl
+AC_REVISION($Id: configure.in 2.30 2000/06/14 02:03:00 tom Exp $)dnl
 
 dnl
 dnl Declare package name and version number.
@@ -46,7 +46,7 @@ AC_SUBST(VERSION)
 dnl
 dnl Emit some text.  (I know that some people dislike a talkative `configure'
 dnl script, but those persons should really use the `--quiet' option instead
-dnl of writing me that I have to remove this behaviour, because I like it!)
+dnl of writing me that I have to remove this behavior, because I like it!)
 dnl
 AC_MSG_RESULT()
 AC_MSG_RESULT(this is the automatical configuration step of $PACKAGE-$VERSION)

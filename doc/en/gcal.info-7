@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -379,7 +379,7 @@ actual clocktime `%[FORMAT]?[ARGUMENT]' special texts are respected:
           calculations are always based on the timezone of the
           Universal time UTC/GMT.
 
-     In case Gcal is unable to compute the numerical Univeral time
+     In case Gcal is unable to compute the numerical Universal time
      timezone offset value by reason of a misspecified ARGUMENT, a
      `+????' text will be created instead of the numerical Universal
      time timezone offset value `+|-HHMM'.
@@ -449,7 +449,7 @@ text always by one, e.g. `%j-1'.
      ==> `Julian day 2437929 since 01-Jan-4713 BCE', in case you call
      Gcal with the `-c %19620921' option and no command.
 
-  If the `%[FORMAT]j' text is directly trailed by a signless number,
+  If the `%[FORMAT]j' text is directly trailed by an unsigned number,
 this number is always subtracted from the real Julian day number.  So
 you are able to work with any quantities referenced, e.g.:
 
@@ -483,7 +483,7 @@ represented by the `0'...`2' characters:
             another quantity, and that in "statute miles"; where one
             statute mile is equal to 1.609344 kilometer.  If Gcal is
             unable to compute the approximate distance between the two
-            geografic point locations by reason of a misspecified
+            geographic point locations by reason of a misspecified
             ARGUMENT, a `??' text will be created instead of the
             distance value.
 
@@ -498,7 +498,7 @@ represented by the `0'...`2' characters:
             causes Gcal to display the course angle value using another
             style; and that in decimal degrees.  If Gcal is unable to
             compute the approximate course angle between the two
-            geografic point locations by reason of a misspecified
+            geographic point locations by reason of a misspecified
             ARGUMENT, a `???d??'' text will be created instead of the
             course angle value.
 
@@ -563,14 +563,14 @@ character which is removed in output!
 File: gcal.info,  Node: Geographical distance and course angle-Footnotes,  Up: Geographical distance and course angle
 
   (1) The course angle gives the direction, which is the vertex of a
-great circle's arc ("Orthodrome") that is casted between two points on
-a surface of a sphere, at a meridian (Gcal uses a geoid (rotation
+great circles arc ("Orthodrome") that is casted between two points on a
+surface of a sphere, at a meridian (Gcal uses a geoid (rotation
 ellipsoid) that is calculated taking pattern from the `World Geodetic
 System', short W.G.S, that was designed in 1961).  Such an arc is the
 shortest geodetic connecting line between two points on a sphere.
-Indeed, the course angles on such an arc are changeing continually,
+Indeed, the course angles on such an arc are changing continually,
 because the circular line that is casted intersects each meridian with
-another angle -- except the case, that both co-ordinates are refering
+another angle -- except the case, that both co-ordinates are referring
 to exactly the same "meridian" (longitude), or to exactly the same
 latitude.
 
@@ -580,14 +580,14 @@ File: gcal.info,  Node: Sun data,  Next: Moon data,  Prev: Geographical distance
 Sun data `%[FORMAT]?ARGUMENT' special texts
 ...........................................
 
-  `%[FORMAT]o[*][MODE]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+  `%[FORMAT]o[*][MODE]ISO-6709:1983-CO-ORDINATE[,[+|-]MMMM|HH:[MM]]'
 references the approximate time of *sunrise* by default,
-`%[FORMAT]s[*][MODE]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+`%[FORMAT]s[*][MODE]ISO-6709:1983-CO-ORDINATE[,[+|-]MMMM|HH:[MM]]'
 references the approximate time of *sunset* by default,
-`%[FORMAT]u[*][MODE]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+`%[FORMAT]u[*][MODE]ISO-6709:1983-CO-ORDINATE[,[+|-]MMMM|HH:[MM]]'
 references the approximate period of *visibility* of the Sun (solar day
 length) by default,
-`%[FORMAT]z[*][MODE]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+`%[FORMAT]z[*][MODE]ISO-6709:1983-CO-ORDINATE[,[+|-]MMMM|HH:[MM]]'
 references the approximate period of *non-visibility* of the Sun (solar
 night length) by default.
 
@@ -656,15 +656,15 @@ described in the table:
 `2'     `o'           Calculates the approximate time when the center of
                       the Sun passes a reference altitude of 0 degrees on
                       a "mathematical-geocentric" horizon in the morning;
-                      thus rising.  A mathematical horizion is a purely
+                      thus rising.  A mathematical horizon is a purely
                       geometrically-built horizon which disregards the
                       phenomenon of refraction as it arises in reality by
                       the influence of the Earth's atmosphere.  A
                       geocentrical horizon is the horizontal plane that
                       passes through the Earth's center, orthogonal to
                       the observer's local vertical.  In the further
-                      context, the shorter term _mathematical horizion_
-                      is used which actually means the
+                      context, the shorter term _mathematical horizon_ is
+                      used which actually means the
                       mathematical-geocentric horizon.
 
 `2'     `s'           Calculates the approximate time when the center of
@@ -686,10 +686,11 @@ described in the table:
                       rising.  The above mentioned reference altitude is
                       computed from the value of the Sun's semidiameter
                       as it appear at that clocktime.  If the reference
-                      altitude that is refering to the Sun's upper limb is
-                      converted to a reference altitude that is refering
-                      to the Sun's center, this results in a value of
-                      about 16 arcminutes below the geocentric horizon.
+                      altitude that is referring to the Sun's upper limb
+                      is converted to a reference altitude that is
+                      referring to the Sun's center, this results in a
+                      value of about 16 arcminutes below the geocentric
+                      horizon.
 
 `3'     `s'           Calculates the approximate time when the upper limb
                       of the Sun passes a reference altitude of 0 degrees
@@ -762,10 +763,11 @@ described in the table:
                       is computed from the respective values of the Sun's
                       semidiameter and (standard) refraction as they
                       appear at that clocktime.  If the reference
-                      altitude that is refering to the Sun's upper limb is
-                      converted to a reference altitude that is refering
-                      to the Sun's center, this results in a value of
-                      about 50 arcminutes below the geocentric horizon.
+                      altitude that is referring to the Sun's upper limb
+                      is converted to a reference altitude that is
+                      referring to the Sun's center, this results in a
+                      value of about 50 arcminutes below the geocentric
+                      horizon.
 
 `5'     `s'           Calculates the approximate time when the upper limb
                       of the Sun passes a reference altitude of 34
@@ -927,18 +929,18 @@ described in the table:
                       the horizon.  Observations of celestial objects
                       that are done from the surface of the Earth yield
                       in topocentrically based data.  The locations of
-                      the celestial bodys are oftenly at another place if
-                      the data is topocentrially determined instead of
-                      determing it "geocentrically", i.e. at the fictious
-                      center of the Earth.  This is mainly caused by the
-                      refraction, which raises a celestial body to
-                      another location as it is been in reality.  Because
-                      the terrestrial globe flattens towards the pole
-                      caps and therefore cannot be taken as an ideally
-                      shaped sphere, the individual Earth radius between
-                      the observer's location and the center of the Earth
-                      also affects the computation of topocentrically
-                      based data.
+                      the celestial bodies are often at another place if
+                      the data is topocentrically determined instead of
+                      determine it "geocentrically", i.e. at the
+                      fictitious center of the Earth.  This is mainly
+                      caused by the refraction, which raises a celestial
+                      body to another location as it is been in reality.
+                      Because the terrestrial globe flattens towards the
+                      pole caps and therefore cannot be taken as an
+                      ideally shaped sphere, the individual Earth radius
+                      between the observer's location and the center of
+                      the Earth also affects the computation of
+                      topocentrically based data.
 
 `b'     `o', `s'      Calculates the approximate topocentric, apparent
                       azimuth of the Sun in degrees and arcminutes as it
@@ -1089,7 +1091,7 @@ described in the table:
                       due to the Earth's orbit around the Sun, the star
                       day and the true solar day have a different length.
                       As the true Sun namely moves irregularly through
-                      the ecliptic, a fictious "mean Sun" with a
+                      the ecliptic, a fictitious "mean Sun" with a
                       symmetrical motion through the celestial equator is
                       used for deriving the mean solar time.  So, this
                       difference in time is a consequence of the
@@ -1305,7 +1307,7 @@ described in the table:
                       happen at standard rise time of the Sun
                       (topocentric "rise azimuth").  The horizontal
                       angular distance between the topocentric rise
-                      azimuth und the East direction is also known as the
+                      azimuth and the East direction is also known as the
                       topocentric "morning width" of the Sun.  *Note
                       Standard rise time of the Sun: x-Sun-standard-rise,
                       for further details.
@@ -1314,7 +1316,7 @@ described in the table:
                       azimuth of the Sun in degrees and arcminutes as it
                       happen at standard set time of the Sun (topocentric
                       "set azimuth").  The horizontal angular distance
-                      between the topocentric set azimuth und the West
+                      between the topocentric set azimuth and the West
                       direction is also known as the topocentric "evening
                       width" of the Sun.  *Note Standard set time of the
                       Sun: x-Sun-standard-set, for further details.
@@ -1350,7 +1352,7 @@ described in the table:
                       azimuth of the Sun in degrees and arcminutes as it
                       happen at standard rise time of the Sun (geocentric
                       "rise azimuth").  The horizontal angular distance
-                      between the geocentric rise azimuth und the East
+                      between the geocentric rise azimuth and the East
                       direction is also known as the geocentric "morning
                       width" of the Sun.  *Note Standard rise time of the
                       Sun: x-Sun-standard-rise, for further details.
@@ -1359,7 +1361,7 @@ described in the table:
                       azimuth of the Sun in degrees and arcminutes as it
                       happen at standard set time of the Sun (geocentric
                       "set azimuth").  The horizontal angular distance
-                      between the geocentric set azimuth und the West
+                      between the geocentric set azimuth and the West
                       direction is also known as the geocentric "evening
                       width" of the Sun.  *Note Standard set time of the
                       Sun: x-Sun-standard-set, for further details.
@@ -1445,8 +1447,8 @@ the mode character `5'.
   Gcal represents the Sun oriented special texts depending on the
 selected mode using the following types and styles:
 
-  1. Signless decimal based rational number value
-     Signless decimal based rational number values are represented using
+  1. Unsigned decimal based rational number value
+     Unsigned decimal based rational number values are represented using
      the `N.N...' format by default.  A `*' character that is directly
      given before some mode characters causes Gcal to represent the
      value for another quantity.  For the mode characters, which
@@ -1516,8 +1518,8 @@ selected mode using the following types and styles:
           altitude, a `--:--' text will be created instead of the
           clocktime text.
 
-  4. Signless time value
-     Signless time values, which mostly denote a period or interval of
+  4. Unsigned time value
+     Unsigned time values, which mostly denote a period or interval of
      time, are represented in hours and minutes using the `HHhMM''
      format by default.  A `*' character that is directly given before
      a mode character causes Gcal to represent the time value using
@@ -1548,8 +1550,8 @@ selected mode using the following types and styles:
      analogously used for the type of representation as it is described
      here.
 
-  6. Signless angular value
-     Signless angular values are represented in degrees and arcminutes
+  6. Unsigned angular value
+     Unsigned angular values are represented in degrees and arcminutes
      using the `DDDdMM'' format by default.  A `*' character that is
      directly given before a mode character causes Gcal to represent
      the angular value using another style, and that in decimal
@@ -1659,7 +1661,7 @@ change the respective clocktime that is used for calculating such
 values).  In a next table column, it is listed whether the given
 co-ordinate of the location influences the determination of a value,
 and the last column of the table gives you the information whether a
-given timezone value affects the value's determination:
+given timezone value affects the values determination:
 
 *Mode*  *Representation Type*  *Dynamical*    *Co-ordinate*  *Timezone*
 
@@ -1768,9 +1770,9 @@ oriented special texts:
      Nevertheless in most cases, these results can be treated as more
      as sufficiently precise if one measures their practical use.
 
-   * All azimuth and elevation values are always refering to the center
-     of the respective astronomical object, except the case, it is
-     stated otherwise.
+   * All azimuth and elevation values are always referring to the
+     center of the respective astronomical object, except the case, it
+     is stated otherwise.
 
    * The base point of azimuth values, right ascension values and other
      ecliptic co-ordinate values is always measured clockwise relative
@@ -1790,7 +1792,7 @@ oriented special texts:
      the horizon, so that the precalculated rise and set times may
      throughout be in error by a minute or more.
 
-   * The accurancy of rise and set computations decreases again at high
+   * The accuracy of rise and set computations decreases again at high
      latitudes, i.e. within in the solar Arctic Circle.  There, small
      variations in atmospheric refraction can change the time of
      sunrise or sunset by many minutes, since the Sun intersects the
@@ -1800,9 +1802,9 @@ oriented special texts:
      actually observed, or even whether the phenomena are observed to
      occur at all.
 
-   * The short explainations that are given to the different twilight
+   * The short explanations that are given to the different twilight
      phases all assume the model of ideal atmospheric conditions by
-     default.  It is obvious that these explainations all become
+     default.  It is obvious that these explanations all become
      meaningless if other conditions occur in reality, like a cloudy
      sky or a badly polluted atmosphere.
 

@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -187,10 +187,10 @@ Fixed date options
 
 `--adjust-value=ARGUMENT'
      Causes on the one hand, that the number given as ARGUMENT to the
-     `--adjustv-value' option is used as reference altitude to
-     calculate the rise and set times by the Sun and Moon oriented
-     special texts.  The option argument must be a rational number in
-     range -90.0...+90.0, which declares the angle distance in decimal
+     `--adjust-value' option is used as reference altitude to calculate
+     the rise and set times by the Sun and Moon oriented special texts.
+     The option argument must be a rational number in range
+     -90.0...+90.0, which declares the angle distance in decimal
      degrees from the center of astronomical object to the horizon.
      For example, you can detect the time when the center of the Sun or
      the Moon is 20.5 decimal degrees below the horizon if you use
@@ -230,7 +230,7 @@ Fixed date options
      Causes when calculating the rise and set times by the Sun oriented
      special texts for high latitudes, that a rise or set event which
      possibly occurs on a previous or next day, is not displayed as
-     occuring on the actual day as it is done by default.  At high
+     occurring on the actual day as it is done by default.  At high
      latitudes, i.e. above the solar Arctic Circle, it is fact that no,
      or more than one sunrise or sunset happens during a day at
      definite dates of the year.  As a special text basically leads in a
@@ -288,7 +288,7 @@ Fixed date options
      argument which may be given to the `--time-offset' option, thus
      `t|@|[t|@][+|-]MMMM|HH:[MM]'.  *Note Calendar option
      `--time-offset=ARGUMENT': x-time-offset, for the detailed
-     explaination of the preceding option argument.  Thus, the
+     explanation of the preceding option argument.  Thus, the
      `--cycle-end' option is used to fix the ending time of the time
      interval, whereas the `--time-offset' option is *implicitly* used
      to fix the starting time of the time interval, that is 0 o'clock
@@ -350,11 +350,11 @@ Fixed date options
      change syntactically according to the argument which may be given
      to the `--time-offset' option, and that relative time offset value
      references based on the actual local time and Universal time
-     cannot be made, respectively.  Gcal always uses the amout of the
+     cannot be made, respectively.  Gcal always uses the amount of the
      given timestep value.  Thus, the template for the argument that
      may be given to the `--cycle-step' option is `[+|-]MMMM|HH:[MM]'.
      *Note Calendar option `--time-offset=ARGUMENT': x-time-offset, for
-     the detailed explaination of the preceding option argument.
+     the detailed explanation of the preceding option argument.
 
      The timestep value between the starting and the ending time of the
      time interval that is respected by Gcal is one minute by default.
@@ -760,7 +760,7 @@ information!
      not given, the built-in TEXT(10) (*note Fixed date
      options-Footnote-10::) is used for grouping, e.g.:
 
-          $ gcal -Cw -cg
+          $ gcal -Cxw -cg
           -|
           -| Sun, Nov   6th 1994: Text 1
           -| Sun, Nov   6th 1994: Text 2
@@ -771,7 +771,7 @@ information!
           ...
           
           
-          $ gcal -Cw -g'-A_user\_defined-~-grouping text-'
+          $ gcal -Cxw -g'-A_user\_defined-~-grouping text-'
           -|
           -| Sun, Nov   6th 1994: Text 1
           -| Sun, Nov   6th 1994: Text 2
@@ -783,14 +783,23 @@ information!
           -| Tue, Nov   8th 1994: Text 4
           ...
 
-     Each time a `~' (tilde) character is found in TEXT, this character
-     is replaced by a real `\n' (newline) character.
+     The TEXT may contain references to global date and text variables
+     (*note Fixed date option `--date-variable=ARGUMENT':
+     x-date-variable., and *Note Fixed date option
+     `--date-variable=ARGUMENT': x-text-variable).  Furthermore, all
+     special texts which cause a text replacement may be used in the
+     TEXT (*note `%?'... special texts for text replacement:
+     Replacements.).
+
+     Each time a `~' (tilde) or `^' (caret) character is found in TEXT,
+     this character is replaced by a real `\n' (newline) character.
 
      You may depreciate the special meaning of the `~' (tilde) character
      --in case this character itself is needed-- by placing a `\'
      (backslash) character before it, e.g. `\~'.  If you need the `\~'
      characters themselves, you have to protect the `\' (backslash)
-     character by another `\' (backslash) character, e.g. `\\_'.
+     character by another `\' (backslash) character, e.g. `\\_'.  All
+     above mentioned facts are also valid for the `^' (caret) character.
 
      Each time a `_' (underscore) character is found in TEXT, this
      character is replaced by a real ` ' (space) character.
@@ -817,7 +826,7 @@ information!
      more than one message refers to that date(11) (*note Fixed date
      options-Footnote-11::), e.g.:
 
-          $ gcal -co
+          $ gcal -cxo
           -|
           -| Sun, Nov   6th 1994: Text 1
           -|                      Text 2
@@ -837,7 +846,7 @@ information!
 `--suppress-date-part'
      Suppress displaying the leading date of a fixed date message, e.g.:
 
-          $ gcal -cU
+          $ gcal -cxU
           -|
           -| Text 1
           -| Text 2
@@ -847,7 +856,7 @@ information!
 `--suppress-text-part'
      Suppress displaying the text part of a fixed date message, e.g.:
 
-          $ gcal -cJ
+          $ gcal -cxJ
           -|
           -| Sun, Nov   6th 1994:
           -| Sun, Nov   6th 1994:
@@ -856,6 +865,47 @@ information!
 `x'
 `--exclude-fixed-dates-list-title'
      Suppress the title text line of the fixed date list.
+
+`--heading-text=TEXT'
+     Changes the title text line of the fixed date list.  Instead of
+     displaying the default `Fixed date list:' text, any other text can
+     be used as heading text of the fixed date list, e.g.:
+
+          $ gcal -cUJ --heading-text=Hello,_it_is_%K_,~%t__o'clock
+          -|
+          -| Hello, it is Sunday,
+          -| 14:32 o'clock
+          -|
+          -| Sun, Nov   6th 1994:
+          ...
+
+     The TEXT may contain references to global date and text variables
+     (*note Fixed date option `--date-variable=ARGUMENT':
+     x-date-variable., and *Note Fixed date option
+     `--date-variable=ARGUMENT': x-text-variable).  Furthermore, all
+     special texts which cause a text replacement may be used in the
+     TEXT (*note `%?'... special texts for text replacement:
+     Replacements.).
+
+     Each time a `~' (tilde) or `^' (caret) character is found in TEXT,
+     this character is replaced by a real `\n' (newline) character.
+
+     You may depreciate the special meaning of the `~' (tilde) character
+     --in case this character itself is needed-- by placing a `\'
+     (backslash) character before it, e.g. `\~'.  If you need the `\~'
+     characters themselves, you have to protect the `\' (backslash)
+     character by another `\' (backslash) character, e.g. `\\_'.  All
+     above mentioned facts are also valid for the `^' (caret) character.
+
+     Each time a `_' (underscore) character is found in TEXT, this
+     character is replaced by a real ` ' (space) character.
+
+     You may depreciate the special meaning of the `_' (underscore)
+     character --in case this character itself is needed-- by placing a
+     `\' (backslash) character before it, e.g. `\_'.  If you need the
+     `\_' characters themselves, you have to protect the `\'
+     (backslash) character by another `\' (backslash) character, e.g.
+     `\\_'.
 
 `z'
 `--include-consecutive-number'

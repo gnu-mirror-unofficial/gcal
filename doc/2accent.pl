@@ -1,4 +1,4 @@
-#  $Id: 2accent.pl 0.08 2000/01/12 00:00:08 tom Exp $
+#  $Id: 2accent.pl 0.09 2000/06/14 00:00:09 tom Exp $
 #
 #  2accent.pl:  Very simple and silly `Perl' script for converting
 #                 "a "A "s ...  or  @"a @"A @ss{} ... character sequences
@@ -6,10 +6,10 @@
 #                 to a few real ISO-8859-1 Umlaute and accent characters.
 #
 #
-#  Copyright (c) 1995-1996, 2000  Thomas Esken      <esken@uni-muenster.de>
-#                                 Im Hagenfeld 84
-#                                 D-48147 M"unster
-#                                 GERMANY
+#  Copyright (c) 1995, 1996, 2000  Thomas Esken      <esken@gmx.net>
+#                                  Im Hagenfeld 84
+#                                  D-48147 M"unster
+#                                  GERMANY
 #
 #  This software doesn't claim completeness, correctness or usability.
 #  On principle I will not be liable for ANY damages or losses (implicit

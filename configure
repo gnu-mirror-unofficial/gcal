@@ -544,7 +544,7 @@ fi
 
 
 
-# From configure.in Id: configure.in 2.29 2000/04/05 02:02:09 tom Exp 
+# From configure.in Id: configure.in 2.30 2000/06/14 02:03:00 tom Exp 
 PACKAGE=`sed -e '/PRGR_NAME/!d' -e 's/^.*"\(.*\)".*$/\1/' $srcdir/$ac_unique_file`
 VERSION=`sed -e '/VERSION_NO/!d' -e 's/^.*"\(.*\)".*$/\1/' $srcdir/$ac_unique_file`
 cat >> confdefs.h <<EOF

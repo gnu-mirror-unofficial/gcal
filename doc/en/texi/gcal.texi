@@ -6,11 +6,11 @@
 
 
 
-@c $Id: gcal.texi v3.00 2000/06/07 03:00:00 tom Exp $
+@c $Id: gcal.texi v3.01 2000/06/24 03:00:01 tom Exp $
 @c
 @c gcal.texi:  American-English Texinfo source of info/html/dvi/text file
 @c
-@c Copyright (c) 1994-1997, 2000 Thomas Esken
+@c Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 @c
 @c
 @c Permission is granted to make and distribute verbatim copies of
@@ -41,10 +41,10 @@
 @c
 @c Some necessary constant definitions
 @c
-@set EDITION 3.00
-@set UPDATE-DATE 7 June 2000
+@set EDITION 3.01
+@set UPDATE-DATE 24 June 2000
 @set UPDATE-MONTH June 2000
-@set GCAL-VERSION 3.00
+@set GCAL-VERSION 3.01
 @c
 @settitle Gcal @value{GCAL-VERSION}
 @c
@@ -85,7 +85,7 @@
 @ifinfo
 This file documents Gcal, a program for calculating and printing calendars.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
 This edition is for Gcal version @value{GCAL-VERSION}@.
 
@@ -137,7 +137,7 @@ D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 @author by Thomas Esken
 @page
 @vskip 0pt plus 1filll
-Copyright @copyright{} 1994-1997, 2000 Thomas Esken
+Copyright @copyright{} 1994, 95, 96, 1997, 2000 Thomas Esken
 
 @sp 2
 
@@ -411,7 +411,7 @@ The reason why I have written Gcal was mainly to have an @emph{off-line}
 tool@footnote{I.e.@: no need to search for calendar information in the net so
 phone and Internet Service Provider (@acronym{ISP}) costs are reduced, and
 furthermore, neither searching for such information in books or data files
-nor the need to use several other software which alltogether do what Gcal
+nor the need to use several other software which altogether do what Gcal
 actually also does.} which is able to display Julian and Gregorian calendar
 sheets in a highly flexible and internationalized manner, fixed date lists
 for reminding purposes and country respectively territory specific holiday
@@ -421,13 +421,13 @@ based data, sunset, sunrise, different twilight times and other Sun based
 data, zodiacal markers, solar and lunar eclipses, equinoxes and solstices.
 Other gimmicks like biorhythm calculation and the computation of a distance
 between two geographical point locations and their course angles (true tracks)
-are also done by it now, plus alot more.
+are also done by it now, plus a lot more.
 
 @cindex Precision of astronomical calculations
 @cindex Astronomical calculations, precision
-@cindex Accurancy of astronomical calculations
-@cindex Astronomical calculations, accurancy
-The accurancy of most of the astronomical calculations done by Gcal is
+@cindex Accuracy of astronomical calculations
+@cindex Astronomical calculations, accuracy
+The accuracy of most of the astronomical calculations done by Gcal is
 low because it is really hard to perform accurate astronomical predictions
 more that 100 years ahead.  Of course, this also has consequences for some
 country specific holidays which are based on such astronomical calculations.
@@ -475,7 +475,7 @@ of this software.
 Some words to the build-in country specific holidays now@dots{}
 
 As you certainly know, there are several other calendar systems actually
-exsting around the world among the Gregorian calendar.  The Gregorian
+existing around the world among the Gregorian calendar.  The Gregorian
 calendar that Gcal mainly represents as a software is only one calendar of
 many others, but it is that one which is most respected around the world
 today.  Even countries which use another calendar system officially mostly
@@ -484,9 +484,9 @@ respect the Gregorian calendar for civil and administrative purposes.
 But when Gcal offers the ability to include holidays from a definite country
 into its eternal holiday list, it is possible that not all holidays are
 displayed which are respected in that country.  One reason is that my
-various sources simply don't tell me about the existance of a holiday.
+various sources simply don't tell me about the existence of a holiday.
 A second reason is that the holiday is just designed or changed or removed
-by political or society reality during Gcal's developement phase.  And another
+by political or society reality during Gcal's development phase.  And another
 reason is that the method to calculate a holiday is not build-in Gcal yet.
 This case is marked by a @samp{#} character behind the country name in the
 list of countries, which are respected by Gcal.
@@ -495,13 +495,13 @@ for the above mentioned list.@*
 The holidays of @dfn{early} years that are included into the eternal holiday
 list ---i.e.@: those within the period @acronym{AD} 30 until the midth
 of the 20th century--- are certainly not accomplishing the requirements of
-historicans to such a list.  Gcal cannot be understood as a complete and
+historians to such a list.  Gcal cannot be understood as a complete and
 historically correct data base, and it is not designed for that purpose!
 This is caused by the fact that the territorial borders and names of the
 national structures and the settlement in earlier times was partly quite
 different as it is nowadays.  Moreover, I am yet lacking reliable information
 that tells me the precise date of the introduction of a holiday in a region.
-Here I appeal to the historicans to support me with the concrete country
+Here I appeal to the historians to support me with the concrete country
 and culture based data if they are bothered by this fact and they want to
 have it removed.
 
@@ -609,17 +609,17 @@ $\pm$ 1\dots 2
 @end tex
 days in some years.@*
 The main difficulty to implement the religious Islamic calendar correctly
-into Gcal are the several different criterias that are existing for the first
-sighting of the crescrent Moon after a New Moon phase --- that event, which
+into Gcal are the several different criteria that are existing for the first
+sighting of the crescent Moon after a New Moon phase --- that event, which
 defines the beginning of a new (lunar) month in the religious oriented Islamic
 calendar.  So on the one hand, there are quite astronomically-based
-criterias, and on the other hand, there are also quite religiously-based
-criterias.  Furthermore, the local predominant weather conditions, the
+criteria, and on the other hand, there are also quite religiously-based
+criteria.  Furthermore, the local predominant weather conditions, the
 geographical @w{co-ordinate} of the observer's location and the kind of
-the observance method used also affect these criterias.  Moreover, to
+the observance method used also affect these criteria.  Moreover, to
 render all more difficult, I as yet do not have any reliable information
 that tells me which kind of criteria is used in the countries (around
-60 @w{world-wide}) which respect this religous Islamic calendar.  So due
+60 @w{world-wide}) which respect this religious Islamic calendar.  So due
 to all the above mentioned facts of problematic nature, this religious
 Islamic calendar is not included into Gcal yet.
 
@@ -629,9 +629,9 @@ Islamic calendar is not included into Gcal yet.
 @cindex Calendar, Japanese
 The Chinese (and Japanese) holidays also inserted into the country specific
 holiday list are calculated by using that algorithm as it is used by the
-Purple Mountain Observatory in Nanjing for determing the astronomical lunisolar
+Purple Mountain Observatory in Nanjing to determine the astronomical lunisolar
 Chinese calendar.  This calendar is obligatory for (the Peoples Republic of)
-China since 1929 and is determined annualy always new.  Nevertheless and
+China since 1929 and is determined annually always new.  Nevertheless and
 strictly speaking, in the historic reality and depending on the region, the
 Chinese calendar, especially in the 17th and 18th century, was either
 calculated using this @emph{modern} algorithm, or by the use of a different
@@ -646,12 +646,12 @@ And last@dots{}
 This manual shows the possible use of the Gcal program only briefly
 and deliberately renounces to present the topics that are covered by
 this software arranged in a novel-like style.
-The use of Gcal is illustrated in an examplary manner only!
+The use of Gcal is illustrated in an exemplary manner only!
 A detailed description of all possible use is inexpedient here because there
-are simply too many of such possiblities which are caused by the existing
+are simply too many of such possibilities which are caused by the existing
 variety of combinations of all useable modes of operation.
 
-Furthermore, this manual does not contain detailed explainations about
+Furthermore, this manual does not contain detailed explanations about
 the calendar systems supported by Gcal, nor it can be understood as a
 reference-book for the basics in celestial mechanics or spherical
 trigonometry!  A detailed discussion of the above topics is completely
@@ -659,7 +659,7 @@ beyond the scope of this manual.  If you are interested to learn more
 about these subjects, you unfortunately have to read the specific
 pertinent literature.
 
-Any further errors occuring in the output of the above mentioned holiday
+Any further errors occurring in the output of the above mentioned holiday
 lists and in the astronomical calculations are my own fault, and are not
 intended to offend members of any culture, religion or profession!
 
@@ -717,7 +717,7 @@ A list of all usable command line arguments and their descriptions can be
 found in the next chapter, which helps one to use Gcal in the most efficient
 and productive way possible.  After it follows the description how to use
 the eternal holiday list, and in the succeeding chapter, how to use the
-fixed date list.  Comprehensive explainations respectively summaries and
+fixed date list.  Comprehensive explanations respectively summaries and
 tables to definite details or themes from other disciplines can be found
 in the numerous appendices.
 
@@ -907,7 +907,7 @@ Option @option{--foo} may have one @var{bar} argument.  If no argument list
 is given, any argument can be given to this option.  If an argument list is
 given, exactly one @var{bar} argument may be selected from the given list.
 If there is no argument chosen in this case, the first @var{bar} argument of
-the argument list is pre-selected by default.
+the argument list is preselected by default.
 
 @item
 @option{--foo=@var{bar}@r{|@dots{}|}@var{bar}}@*
@@ -1378,7 +1378,7 @@ if an eMail must be send; no matter if the @option{--force-highlighting}
 option was given or not.  This behavior of Gcal is an imperative necessity,
 because it is possible that the @command{mail} program cannot perform the
 mailing correctly.  Please pay attention in this context to the further
-explainations concerning the limitations of the @emph{text part} of a
+explanations concerning the limitations of the @emph{text part} of a
 resource file line
 (@pxref{Text part of a line})@.
 
@@ -1535,7 +1535,7 @@ for further details.
 @anchor{x-chinese-holidays}
 Provide the eternal holiday list additionally with Chinese holidays
 (only for dates after @acronym{AD} 1644)@.  For dates until @acronym{AD} 1928
-all computations done are depending fixed on Bejing local time, for later
+all computations done are depending fixed on Beijing local time, for later
 dates fixed on the timezone @w{GMT-8}@.
 @xref{Preface},
 for further details.
@@ -1581,7 +1581,7 @@ in a flexible manner.
 @anchor{x-japanese-holidays}
 Provide the eternal holiday list additionally with Japanese holidays
 (only for dates after @acronym{AD} 1644)@.  For dates until @acronym{AD} 1887
-all computations done are depending fixed on Bejing local time, for later
+all computations done are depending fixed on Beijing local time, for later
 dates fixed on the timezone @w{GMT-9}@.
 
 @item --multicultural-new-year-holidays
@@ -1787,7 +1787,7 @@ Benin #
 Bermuda
 
 @item BN
-Brunei Darussalam
+Brunei
 
 @item BO
 Bolivia
@@ -2910,7 +2910,7 @@ which Gcal uses by default, is as follows:
 
 @quotation
 A leap year is any year which number can be divided by 4 without a remainder,
-and years ending in hundrets are no leap years unless they are divisible by
+and years ending in hundreds are no leap years unless they are divisible by
 400@.
 @end quotation
 
@@ -2919,7 +2919,7 @@ calendar by using another rule:
 
 @quotation
 A leap year is any year which number can be divided by 4 without a remainder,
-and years ending in hundrets are leap years, if a remainder of 2 or 6 occurs
+and years ending in hundreds are leap years, if a remainder of 2 or 6 occurs
 when such a year is divided by 9@.
 @end quotation
 
@@ -3335,7 +3335,7 @@ for further details.
 
 Please note that it is possible to corrupt the calendars likewise the
 fixed date feature logically (which works correctly now for the year
-in which the Gregorian Reformation has occured) if the argument of the
+in which the Gregorian Reformation has occurred) if the argument of the
 @w{@option{--gregorian-reform}} option is not used with care.
 
 @item --date-format=de@r{|}us@r{|}gb@r{|}@var{text}
@@ -3739,7 +3739,7 @@ for more details.
 @cindex Moonrise and moonset, set reference altitude
 @anchor{x-adjust-value}
 Causes on the one hand, that the number given as @var{argument} to the
-@w{@option{--adjustv-value}} option is used as reference altitude to
+@w{@option{--adjust-value}} option is used as reference altitude to
 calculate the rise and set times by the Sun and Moon oriented special texts.
 The option argument must be a rational number in range @w{-90.0@dots{}+90.0},
 which declares the angle distance in decimal degrees from the center
@@ -3803,7 +3803,7 @@ for further information.
 @anchor{x-limit}
 Causes when calculating the rise and set times by the Sun oriented special
 texts for high latitudes, that a rise or set event which possibly occurs
-on a previous or next day, is not displayed as occuring on the actual day
+on a previous or next day, is not displayed as occurring on the actual day
 as it is done by default.  At high latitudes, i.e.@: above the solar Arctic
 Circle, it is fact that no, or more than one sunrise or sunset happens during
 a day at definite dates of the year.  As a special text basically leads in a
@@ -3852,7 +3852,7 @@ option is syntactically according to the argument which may be given to
 the @w{@option{--time-offset}} option, thus
 @w{@option{t@r{|}@@@r{|[}t@r{|}@@@r{][}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}@r{:[}@var{mm}@r{]}}@.}
 @xref{x-time-offset, , Calendar option @option{--time-offset=@var{argument}}},
-for the detailed explaination of the preceding option argument.
+for the detailed explanation of the preceding option argument.
 Thus, the @w{@option{--cycle-end}} option is used to fix the ending time
 of the time interval, whereas the @w{@option{--time-offset}} option is
 @strong{implicitly} used to fix the starting time of the time interval,
@@ -3909,12 +3909,12 @@ It also does not enable Gcal's cycle mode.  The @var{argument} of the
 @w{@option{--cycle-step}} option is by change syntactically according to the
 argument which may be given to the @w{@option{--time-offset}} option, and
 that relative time offset value references based on the actual local time
-and Universal time cannot be made, respectively.  Gcal always uses the amout
+and Universal time cannot be made, respectively.  Gcal always uses the amount
 of the given timestep value.  Thus, the template for the argument that
 may be given to the @w{@option{--cycle-step}} option is
 @w{@option{@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}@r{:[}@var{mm}@r{]}}@.}
 @xref{x-time-offset, , Calendar option @option{--time-offset=@var{argument}}},
-for the detailed explaination of the preceding option argument.
+for the detailed explanation of the preceding option argument.
 
 The timestep value between the starting and the ending time of the time
 interval that is respected by Gcal is one minute by default.
@@ -4571,7 +4571,7 @@ is not given, the built-in @var{text}@footnote{@w{@code{RC_GROUP_SEP}}
 @example
 @group
 @cartouche
-$ gcal -Cw -cg
+$ gcal -Cxw -cg
 @print{}
 @print{} Sun, Nov   6th 1994: Text 1
 @print{} Sun, Nov   6th 1994: Text 2
@@ -4582,7 +4582,7 @@ $ gcal -Cw -cg
 @dots{}
 
 
-$ gcal -Cw -g'-A_user\_defined-~-grouping text-'
+$ gcal -Cxw -g'-A_user\_defined-~-grouping text-'
 @print{}
 @print{} Sun, Nov   6th 1994: Text 1
 @print{} Sun, Nov   6th 1994: Text 2
@@ -4597,11 +4597,21 @@ $ gcal -Cw -g'-A_user\_defined-~-grouping text-'
 @end group
 @end example
 
+The @var{text} may contain references to global date and text variables
+(@pxref{x-date-variable, , Fixed date option @w{@option{--date-variable=@var{argument}}}},
+and
+@ref{x-text-variable, , Fixed date option @w{@option{--date-variable=@var{argument}}}})@.
+Furthermore, all special texts which cause a text replacement may be used in
+the @var{text}
+(@pxref{Replacements, , @code{%@var{?}}@dots{} special texts for text replacement})@.
+
 @cindex Force line break-up
 @cindex Line break-up character, @samp{~}
+@cindex Line break-up character, @samp{^}
 @cindex @samp{~} line break-up character
-Each time a @samp{~} (tilde) character is found in @var{text}, this
-character is replaced by a real @samp{\n} (newline) character.
+@cindex @samp{^} line break-up character
+Each time a @samp{~} (tilde) or @samp{^} (caret) character is found in
+@var{text}, this character is replaced by a real @samp{\n} (newline) character.
 
 @cindex Depreciation of special characters
 @cindex Special characters, depreciation
@@ -4616,6 +4626,7 @@ You may depreciate the special meaning of the @samp{~} (tilde) character
 (backslash) character before it, e.g.@: @samp{\~}@.  If you need the @samp{\~}
 characters themselves, you have to protect the @samp{\} (backslash) character
 by another @samp{\} (backslash) character, e.g.@: @samp{\\_}@.
+All above mentioned facts are also valid for the @samp{^} (caret) character.
 
 @cindex Pseudo space character, @samp{_}
 @cindex @samp{_} pseudo space character
@@ -4668,7 +4679,7 @@ option or the @option{A} modifier is not given.}, e.g.@::
 @example
 @group
 @cartouche
-$ gcal -co
+$ gcal -cxo
 @print{}
 @print{} Sun, Nov   6th 1994: Text 1
 @print{}                      Text 2
@@ -4709,7 +4720,7 @@ Suppress displaying the leading date of a fixed date message, e.g.@::
 @example
 @group
 @cartouche
-$ gcal -cU
+$ gcal -cxU
 @print{}
 @print{} Text 1
 @print{} Text 2
@@ -4730,7 +4741,7 @@ Suppress displaying the text part of a fixed date message, e.g.@::
 @example
 @group
 @cartouche
-$ gcal -cJ
+$ gcal -cxJ
 @print{}
 @print{} Sun, Nov   6th 1994:
 @print{} Sun, Nov   6th 1994:
@@ -4747,6 +4758,77 @@ $ gcal -cJ
 @cindex Fixed date list, suppression of title text
 @cindex Suppress title text of fixed date list
 Suppress the title text line of the fixed date list.
+
+@item --heading-text=@var{text}
+@arindex --heading-text=@var{text}
+@cindex Fixed date option, @option{--heading-text=@var{text}}
+Changes the title text line of the fixed date list.  Instead of displaying
+the default @samp{Fixed date list:} text, any other text can be used as
+heading text of the fixed date list, e.g.@::
+
+@example
+@group
+@cartouche
+$ gcal -cUJ --heading-text=Hello,_it_is_%K_,~%t__o'clock
+@print{}
+@print{} Hello, it is Sunday,
+@print{} 14:32 o'clock
+@print{}
+@print{} Sun, Nov   6th 1994:
+@dots{}
+@end cartouche
+@end group
+@end example
+
+The @var{text} may contain references to global date and text variables
+(@pxref{x-date-variable, , Fixed date option @w{@option{--date-variable=@var{argument}}}},
+and
+@ref{x-text-variable, , Fixed date option @w{@option{--date-variable=@var{argument}}}})@.
+Furthermore, all special texts which cause a text replacement may be used in
+the @var{text}
+(@pxref{Replacements, , @code{%@var{?}}@dots{} special texts for text replacement})@.
+
+@cindex Force line break-up
+@cindex Line break-up character, @samp{~}
+@cindex Line break-up character, @samp{^}
+@cindex @samp{~} line break-up character
+@cindex @samp{^} line break-up character
+Each time a @samp{~} (tilde) or @samp{^} (caret) character is found in
+@var{text}, this character is replaced by a real @samp{\n} (newline) character.
+
+@cindex Depreciation of special characters
+@cindex Special characters, depreciation
+@cindex Depreciation character, @samp{\}
+@cindex @samp{\} depreciation character
+@cindex Protection of special characters
+@cindex Special characters, protection
+@cindex Protection character, @samp{\}
+@cindex @samp{\} protection character
+You may depreciate the special meaning of the @samp{~} (tilde) character
+---in case this character itself is needed--- by placing a @samp{\}
+(backslash) character before it, e.g.@: @samp{\~}@.  If you need the @samp{\~}
+characters themselves, you have to protect the @samp{\} (backslash) character
+by another @samp{\} (backslash) character, e.g.@: @samp{\\_}@.
+All above mentioned facts are also valid for the @samp{^} (caret) character.
+
+@cindex Pseudo space character, @samp{_}
+@cindex @samp{_} pseudo space character
+Each time a @samp{_} (underscore) character is found in @var{text}, this
+character is replaced by a real @samp{ } (space) character.
+
+@cindex Depreciation of special characters
+@cindex Special characters, depreciation
+@cindex Depreciation character, @samp{\}
+@cindex @samp{\} depreciation character
+@cindex Protection of special characters
+@cindex Special characters, protection
+@cindex Protection character, @samp{\}
+@cindex @samp{\} protection character
+You may depreciate the special meaning of the @samp{_} (underscore) character
+---in case this character itself is needed--- by placing a @samp{\}
+(backslash) character before it, e.g.@: @samp{\_}@.  If you need the @samp{\_}
+characters themselves, you have to protect the @samp{\} (backslash) character
+by another @samp{\} (backslash) character, e.g.@: @samp{\\_}@.
 
 @item z
 @itemx --include-consecutive-number
@@ -7854,7 +7936,7 @@ with a @w{@code{000000@var{www}}} date part (that is likewise respected in some
 few fixed date periods only), it should be defined with a date part like
 @w{@code{0*d1@var{www}#99@var{www}.7}}@.
 @xref{Ranges of days},
-und
+and
 @ref{Appearance factor of days},
 for further information.
 
@@ -9106,7 +9188,7 @@ instead of the simple @w{@samp{$a?cat text}}@.  See the pertinent literature
 for more details.
 
 If the output of external commands, which appears on the @emph{standard
-output channel}, is assigned to text variables in an interpreterd manner,
+output channel}, is assigned to text variables in an interpreted manner,
 this output is internally directed by Gcal into a temporary file.  Thereafter,
 the contents of the temporary file is transfered to the text variable and the
 temporary file is removed.
@@ -9115,7 +9197,7 @@ temporary file is removed.
 @cindex @env{TXT2GCALPROG} environment variable
 @vindex TXT2GCALPROG
 If the output of external commands, which appears on the @emph{standard
-output channel}, is assigned to text variables in an uninterpreterd manner,
+output channel}, is assigned to text variables in an uninterpreted manner,
 this output is internally processed by the Txt2gcal program first
 (@pxref{Invoking txt2gcal, , Invoking @command{txt2gcal}}),
 and then this output is directed by Gcal into a temporary file.  Thereafter,
@@ -9209,7 +9291,7 @@ If a resource file line contains a reference to a text variable which is not
 locally defined in that file, Gcal will try to use the global values held
 by this variable.  If this fails because no global definition of this text
 variable is given, Gcal keeps the name of this text variable untouched
-in this line, except this text variable helds an @emph{empty value}@.
+in this line, except this text variable held an @emph{empty value}@.
 In such a case, Gcal completely ignores this text variable while processing
 and displaying instead of keeping its name untouched in this line.
 
@@ -9479,7 +9561,7 @@ methods, is as follows:
 
 @page
 And finally a resource file by the name of @file{swtim-1.rc} which produces
-fixed date messages reminding Dayligh Saving that are valid since 1981 for
+fixed date messages reminding Daylight Saving that are valid since 1981 for
 the Federal Republic of Germany@footnote{Two days before adaptation till
 two days after adaptation.}@.
 
@@ -9994,7 +10076,7 @@ For CEN syntax (Comit@'e Europ@'en de Normalisation):
 @sp 2
 @end iftex
 
-Both syntax's contain the @var{language} and @var{territory} components,
+Both syntaxes contain the @var{language} and @var{territory} components,
 which are used by Gcal to select the native language and the other criteria.
 The @var{language} component is equivalent to the simple language code
 information and the @var{territory} component is a two-letter territory or
@@ -10850,7 +10932,7 @@ But Gcal is also able to represent such special texts in a special way by
 using a format instruction, and that by using an indirect method.  For
 displaying, you simply assign the special text exclusively to a text variable
 which contains a format instruction.  Nevertheless, it is important to note
-that the field width component of the format instruction is choosen in the
+that the field width component of the format instruction is chosen in the
 way that it refers to the assigned contents of the text variable, if the
 format instruction has a fixed format component.  The contents assigned to
 the text variable is only the special text, and not its expanded result.
@@ -10958,7 +11040,7 @@ periods in a highly flexible manner, for example:
 references an inclusive date period, i.e.@: all dates which are part of the
 specified period are valid and are displayed.  Of course this means, that all
 fixed dates which are not part of this period (not covered by it) are invalid
-and remain un-displayed therefore.
+and remain undisplayed therefore.
 
 @cindex Fixed date, starting date
 @cindex Starting date of fixed date
@@ -11072,7 +11154,7 @@ For example:
 
 @w{@code{%e@r{[}@var{date}@r{][}#@r{[}@var{date}@r{]]}}}
 references an exclusive date period, i.e.@: all dates which are part of the
-specified period are invalid and remain un-displayed therefore.  Of course
+specified period are invalid and remain undisplayed therefore.  Of course
 this means, that all fixed dates which are not part of this period
 (not covered by it) are valid and are displayed.
 
@@ -12605,7 +12687,7 @@ at which calculations are always based on the timezone of the Universal time
 @w{UTC/GMT}.
 @end quotation
 
-In case Gcal is unable to compute the numerical Univeral time timezone offset
+In case Gcal is unable to compute the numerical Universal time timezone offset
 value by reason of a misspecified @var{argument}, a @w{@code{+????}} text
 will be created instead of the numerical Universal time timezone offset value
 @w{@code{+@r{|}-@var{hhmm}}}@.
@@ -12666,8 +12748,8 @@ in case you call Gcal with the simple @option{-c} option and the command
 
 @node Julian day number, Geographical distance and course angle, Textual date, Replacements with other argument
 @appendixsubsubsec Julian day number @code{%@r{[}@var{format}@r{]}j@r{[}@var{argument}@r{]}} special text
-@cindex @code{%@r{[}@var{format}@r{]}j@r{[}@var{argument}@r{]}} special text, julian day number
-@cindex Special text @code{%@r{[}@var{format}@r{]}j@r{[}@var{argument}@r{]}}, julian day number
+@cindex @code{%@r{[}@var{format}@r{]}j@r{[}@var{argument}@r{]}} special text, Julian day number
+@cindex Special text @code{%@r{[}@var{format}@r{]}j@r{[}@var{argument}@r{]}}, Julian day number
 @cindex Julian day number @code{%@r{[}@var{format}@r{]}j@r{[}@var{argument}@r{]}} special text
 
 @cindex Universal time (UTC)
@@ -12695,7 +12777,7 @@ will be expanded to@*
 in case you call Gcal with the @w{@option{-c %19620921}} option and no command.
 @end quotation
 
-If the @code{%@r{[}@var{format}@r{]}j} text is directly trailed by a signless
+If the @code{%@r{[}@var{format}@r{]}j} text is directly trailed by an unsigned
 number, this number is always subtracted from the real Julian day number.  So
 you are able to work with any quantities referenced, e.g.@::
 
@@ -12717,15 +12799,15 @@ in case you call Gcal with the @w{@option{-c %19000105}} option and no command.
 @code{%@r{[}@var{format}@r{]}b@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-co-ordinate-1}/@var{@acronym{ISO}-6709:1983-co-ordinate-2}}
 references either the approximate @strong{air line distance} or the
 approximate @strong{course angle (true track)}@footnote{The course angle
-gives the direction, which is the vertex of a great circle's arc
+gives the direction, which is the vertex of a great circles arc
 (@dfn{Orthodrome}) that is casted between two points on a surface of a sphere,
 at a meridian (Gcal uses a geoid (rotation ellipsoid) that is calculated
 taking pattern from the @cite{World Geodetic System}, short @acronym{W.G.S},
 that was designed in 1961)@.  Such an arc is the shortest geodetic connecting
 line between two points on a sphere.  Indeed, the course angles on such an arc
-are changeing continually, because the circular line that is casted intersects
+are changing continually, because the circular line that is casted intersects
 each meridian with another angle --- except the case, that both co-ordinates
-are refering to exactly the same @dfn{meridian} (longitude), or to exactly the
+are referring to exactly the same @dfn{meridian} (longitude), or to exactly the
 same latitude.} between any of two geographic point locations.  The selection,
 which value has to be calculated by using this special text is done by
 specifying the @var{mode} part of the preceding argument.  Actually,
@@ -12754,7 +12836,7 @@ default.  A @samp{*} character directly before this mode character causes
 Gcal to display the distance value for another quantity, and that in
 @dfn{statute miles}; where one statute mile is equal to @w{1.609344}
 kilometer.  If Gcal is unable to compute the approximate distance between
-the two geografic point locations by reason of a misspecified @var{argument},
+the two geographic point locations by reason of a misspecified @var{argument},
 a @w{@code{??}} text will be created instead of the distance value.
 @item @ 
 @item @code{1}
@@ -12770,7 +12852,7 @@ for the North direction are both denoted as 0 degree and 360 degree.
 A @samp{*} character directly before this mode character causes Gcal to display
 the course angle value using another style; and that in decimal degrees.
 If Gcal is unable to compute the approximate course angle between the two
-geografic point locations by reason of a misspecified @var{argument}, a
+geographic point locations by reason of a misspecified @var{argument}, a
 @w{@code{???d??'}} text will be created instead of the course angle value.
 @item @ 
 @item @code{2}
@@ -12872,14 +12954,14 @@ character which is removed in output!
 @cindex Sunset
 @cindex Solar day length
 @cindex Solar night length
-@code{%@r{[}@var{format}@r{]}o@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-Koordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
+@code{%@r{[}@var{format}@r{]}o@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
 references the approximate time of @strong{sunrise} by default,@*
-@code{%@r{[}@var{format}@r{]}s@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-Koordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
+@code{%@r{[}@var{format}@r{]}s@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
 references the approximate time of @strong{sunset} by default,@*
-@code{%@r{[}@var{format}@r{]}u@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-Koordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
+@code{%@r{[}@var{format}@r{]}u@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
 references the approximate period of @strong{visibility} of the Sun
 (solar day length) by default,@*
-@code{%@r{[}@var{format}@r{]}z@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-Koordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
+@code{%@r{[}@var{format}@r{]}z@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
 references the approximate period of @strong{non-visibility} of the Sun
 (solar night length) by default.
 
@@ -12989,12 +13071,12 @@ for further details.
 @tab Calculates the approximate time when the center of the Sun
 passes a reference altitude of 0 degrees on a @dfn{mathematical-geocentric}
 horizon in the morning; thus rising.
-A mathematical horizion is a purely geometrically-built horizon which
+A mathematical horizon is a purely geometrically-built horizon which
 disregards the phenomenon of refraction as it arises in reality by the
 influence of the Earth's atmosphere.  A geocentrical horizon is the
 horizontal plane that passes through the Earth's center, orthogonal
 to the observer's local vertical.  In the further context, the shorter
-term @emph{mathematical horizion} is used which actually means the
+term @emph{mathematical horizon} is used which actually means the
 mathematical-geocentric horizon.
 @item @ 
 @item @code{2}
@@ -13030,8 +13112,8 @@ passes a reference altitude of 0 degrees on a mathematical horizon
 in the morning; thus rising.
 The above mentioned reference altitude is computed from the
 value of the Sun's semidiameter as it appear at that clocktime.
-If the reference altitude that is refering to the Sun's upper limb is
-converted to a reference altitude that is refering to the Sun's center,
+If the reference altitude that is referring to the Sun's upper limb is
+converted to a reference altitude that is referring to the Sun's center,
 this results in a value of about 16 arcminutes below the geocentric horizon.
 @item @ 
 @item @code{3}
@@ -13125,8 +13207,8 @@ conditions as defined by it are used to calculate the amount of refraction.
 The above mentioned reference altitude is computed from the respective
 values of the Sun's semidiameter and (standard) refraction as they appear
 at that clocktime.
-If the reference altitude that is refering to the Sun's upper limb is
-converted to a reference altitude that is refering to the Sun's center,
+If the reference altitude that is referring to the Sun's upper limb is
+converted to a reference altitude that is referring to the Sun's center,
 this results in a value of about 50 arcminutes below the geocentric horizon.
 @item @ 
 @item @code{5}
@@ -13377,8 +13459,8 @@ horizon at the moment, and results with a positive sign mean that the
 momentary center of the Sun is above the horizon.
 Observations of celestial objects that are done from the surface of the
 Earth yield in topocentrically based data.  The locations of the celestial
-bodys are oftenly at another place if the data is topocentrially determined
-instead of determing it @dfn{geocentrically}, i.e.@: at the fictious
+bodies are often at another place if the data is topocentrically determined
+instead of determine it @dfn{geocentrically}, i.e.@: at the fictitious
 center of the Earth.
 This is mainly caused by the refraction, which raises a celestial body to
 another location as it is been in reality.  Because the terrestrial globe
@@ -13690,7 +13772,7 @@ star day is also known as a @cite{mean solar day}@.  Because the Sun apparently
 shifts with respect to the vernal equinox point on the ecliptic due to
 the Earth's orbit around the Sun, the star day and the true solar day
 have a different length.  As the true Sun namely moves irregularly through
-the ecliptic, a fictious @dfn{mean Sun} with a symmetrical motion through
+the ecliptic, a fictitious @dfn{mean Sun} with a symmetrical motion through
 the celestial equator is used for deriving the mean solar time.
 So, this difference in time is a consequence of the ellipticity and tilt
 of the Earth's orbit, causing the irregular apparent movement of the Sun
@@ -14008,7 +14090,7 @@ for further details.
 of the Sun in degrees and arcminutes
 as it happen at standard rise time of the Sun
 (topocentric @dfn{rise azimuth})@.  The horizontal angular distance
-between the topocentric rise azimuth und the East direction is also
+between the topocentric rise azimuth and the East direction is also
 known as the topocentric @dfn{morning width} of the Sun.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
@@ -14025,7 +14107,7 @@ for further details.
 of the Sun in degrees and arcminutes
 as it happen at standard set time of the Sun
 (topocentric @dfn{set azimuth})@.  The horizontal angular distance
-between the topocentric set azimuth und the West direction is also
+between the topocentric set azimuth and the West direction is also
 known as the topocentric @dfn{evening width} of the Sun.
 @xref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
@@ -14098,7 +14180,7 @@ for further details.
 of the Sun in degrees and arcminutes
 as it happen at standard rise time of the Sun
 (geocentric @dfn{rise azimuth})@.  The horizontal angular distance
-between the geocentric rise azimuth und the East direction is also
+between the geocentric rise azimuth and the East direction is also
 known as the geocentric @dfn{morning width} of the Sun.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
@@ -14115,7 +14197,7 @@ for further details.
 of the Sun in degrees and arcminutes
 as it happen at standard set time of the Sun
 (geocentric @dfn{set azimuth})@.  The horizontal angular distance
-between the geocentric set azimuth und the West direction is also
+between the geocentric set azimuth and the West direction is also
 known as the geocentric @dfn{evening width} of the Sun.
 @xref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
@@ -14260,10 +14342,10 @@ Gcal represents the Sun oriented special texts depending on the selected
 mode using the following types and styles:
 
 @enumerate 1
-@item Signless decimal based rational number value@*
-@cindex Signless decimal based rational number value, Sun and Moon oriented special texts
-@cindex Sun and Moon oriented special texts, signless decimal based rational number value
-Signless decimal based rational number values are represented using
+@item Unsigned decimal based rational number value@*
+@cindex Unsigned decimal based rational number value, Sun and Moon oriented special texts
+@cindex Sun and Moon oriented special texts, unsigned decimal based rational number value
+Unsigned decimal based rational number values are represented using
 the @w{@code{@var{n}.@var{n}@dots{}}} format by default.
 A @samp{*} character that is directly given before some mode characters
 causes Gcal to represent the value for another quantity.  For the mode
@@ -14355,10 +14437,10 @@ reference altitude, a @w{@code{--:--}} text will be created instead of the
 clocktime text.
 @end itemize
 
-@item Signless time value@*
-@cindex Signless time value, Sun and Moon oriented special texts
-@cindex Sun and Moon oriented special texts, signless time value
-Signless time values, which mostly denote a period or interval of time,
+@item Unsigned time value@*
+@cindex Unsigned time value, Sun and Moon oriented special texts
+@cindex Sun and Moon oriented special texts, unsigned time value
+Unsigned time values, which mostly denote a period or interval of time,
 are represented in hours and minutes using
 the @w{@code{@var{hh}h@var{mm}'}} format by default.
 A @samp{*} character that is directly given before a mode character
@@ -14389,10 +14471,10 @@ where you can find the event oriented texts that are created
 for clocktime values, which are schematically and analogously
 used for the type of representation as it is described here.
 
-@item Signless angular value@*
-@cindex Signless angular value, Sun and Moon oriented special texts
-@cindex Sun and Moon oriented special texts, signless angular value
-Signless angular values are represented in degrees and arcminutes using
+@item Unsigned angular value@*
+@cindex Unsigned angular value, Sun and Moon oriented special texts
+@cindex Sun and Moon oriented special texts, unsigned angular value
+Unsigned angular values are represented in degrees and arcminutes using
 the @w{@code{@var{ddd}d@var{mm}'}} format by default.
 A @samp{*} character that is directly given before a mode character causes
 Gcal to represent the angular value using another style, and that in
@@ -14520,13 +14602,13 @@ by a mode.  The previously defined numbering scheme, as it has been used
 for the introduction of the types of representations, is used as key value
 in the column that holds the type of representation.  The table also
 contains a column that shows whether a mode enables dynamical values,
-i.e.@: values that are depending on the respective clocktime (if you use the
-@w{@option{--time-offset=@var{argument}}} option, you can change the
+i.e.@: values that are depending on the respective clocktime (if you use
+the @w{@option{--time-offset=@var{argument}}} option, you can change the
 respective clocktime that is used for calculating such values)@.  In a next
 table column, it is listed whether the given co-ordinate of the location
 influences the determination of a value, and the last column of the table
 gives you the information whether a given timezone value affects the
-value's determination:
+values determination:
 @iftex
 @sp 1
 @end iftex
@@ -14892,7 +14974,7 @@ can be treated as more as sufficiently precise if one measures their practical
 use.
 
 @item
-All azimuth and elevation values are always refering to the center of the
+All azimuth and elevation values are always referring to the center of the
 respective astronomical object, except the case, it is stated otherwise.
 
 @item
@@ -14916,7 +14998,7 @@ set times may throughout be in error by a minute or more.
 
 @cindex Solar Arctic Circle
 @item
-The accurancy of rise and set computations decreases again at high latitudes,
+The accuracy of rise and set computations decreases again at high latitudes,
 i.e.@: within in the solar Arctic Circle.  There, small variations in
 atmospheric refraction can change the time of sunrise or sunset by many
 minutes, since the Sun intersects the horizon at a very shallow angle.
@@ -14926,9 +15008,9 @@ of the phenomena actually observed, or even whether the phenomena are
 observed to occur at all.
 
 @item
-The short explainations that are given to the different twilight phases
+The short explanations that are given to the different twilight phases
 all assume the model of ideal atmospheric conditions by default.  It is
-obvious that these explainations all become meaningless if other conditions
+obvious that these explanations all become meaningless if other conditions
 occur in reality, like a cloudy sky or a badly polluted atmosphere.
 @end itemize
 
@@ -14985,14 +15067,14 @@ All Sun oriented special texts @strong{must} always be trailed by a
 @cindex Moonset
 @cindex Lunar day length
 @cindex Lunar night length
-@code{%@r{[}@var{format}@r{]}(@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-Koordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
+@code{%@r{[}@var{format}@r{]}(@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
 references the approximate time of @strong{moonrise} by default,@*
-@code{%@r{[}@var{format}@r{]})@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-Koordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
+@code{%@r{[}@var{format}@r{]})@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
 references the approximate time of @strong{moonset} by default,@*
-@code{%@r{[}@var{format}@r{]}[@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-Koordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
+@code{%@r{[}@var{format}@r{]}[@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
 references the approximate period of @strong{visibility} of the Moon
 (lunar day length) by default,@*
-@code{%@r{[}@var{format}@r{]}]@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-Koordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
+@code{%@r{[}@var{format}@r{]}]@r{[}*@r{][}@var{mode}@r{]}@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}}
 references the approximate period of @strong{non-visibility} of the Moon
 (lunar night length) by default.
 
@@ -15094,12 +15176,12 @@ no lunar noon happens.
 passes a reference altitude which is between about 54 and 61 arcminutes
 above a @dfn{mathematical-geocentric} horizon before lunar noon time;
 thus rising.
-A mathematical horizion is a purely geometrically-built horizon which
+A mathematical horizon is a purely geometrically-built horizon which
 disregards the phenomenon of refraction as it arises in reality by the
 influence of the Earth's atmosphere.  A geocentrical horizon is the
 horizontal plane that passes through the Earth's center, orthogonal
 to the observer's local vertical.  In the further context, the shorter
-term @emph{mathematical horizion} is used which actually means the
+term @emph{mathematical horizon} is used which actually means the
 mathematical-geocentric horizon.
 The above mentioned reference altitude is computed from the
 value of the Moon's parallax as it appear at that clocktime.
@@ -15145,8 +15227,8 @@ above a mathematical horizon before lunar noon time; thus rising.
 The above mentioned reference altitude is computed from the respective
 values of the Moon's semidiameter and Moon's parallax as they appear
 at that clocktime.
-If the reference altitude that is refering to the Moon's upper limb is
-converted to a reference altitude that is refering to the Moon's center,
+If the reference altitude that is referring to the Moon's upper limb is
+converted to a reference altitude that is referring to the Moon's center,
 this results in a value which is between about 39 and 44 arcminutes
 above the geocentric horizon.
 Nevertheless, there is exactly one day during a synodic month at which
@@ -15256,8 +15338,8 @@ conditions as defined by it are used to calculate the amount of refraction.
 The above mentioned reference altitude is computed from the respective
 values of the Moon's semidiameter, Moon's parallax and (standard) refraction
 as they appear at that clocktime.
-If the reference altitude that is refering to the Moon's upper limb is
-converted to a reference altitude that is refering to the Moon's center,
+If the reference altitude that is referring to the Moon's upper limb is
+converted to a reference altitude that is referring to the Moon's center,
 this results in a value which is between about 5 and 10 arcminutes above
 the geocentric horizon.
 Nevertheless, there is exactly one day during a synodic month at which
@@ -15275,7 +15357,7 @@ passes a reference altitude which is between about 20 and 27 arcminutes
 above the geocentric horizon after lunar noon time; thus setting.
 This kind of set time calculation is done according to the standard
 calculation method as it is commonly used internationally.
-The phenomenon of refraction is alread respected in this as it arises in
+The phenomenon of refraction is already respected in this as it arises in
 reality by the influence of the Earth's atmosphere, and that with the standard
 value of 34 arcminutes, which can indirectly be changed by using the
 @w{@option{--atmosphere}} option.
@@ -15327,8 +15409,8 @@ The Moon's parallax states the diameter of the Earth as it is seen from
 the surface of the Moon.
 Observations of celestial objects that are done from the surface of the
 Earth yield in topocentrically based data.  The locations of the celestial
-bodys are oftenly at another place if the data is topocentrially determined
-instead of determing it @dfn{geocentrically}, i.e.@: at the fictious
+bodies are often at another place if the data is topocentrically determined
+instead of determine it @dfn{geocentrically}, i.e.@: at the fictitious
 center of the Earth.
 This is mainly caused by the refraction, which raises a celestial body to
 another location as it is been in reality.  Because the terrestrial globe
@@ -15358,11 +15440,11 @@ as it happen at civil midnight time.
 @tab Calculates the approximate topocentric, apparent brightness
 of the Moon in @dfn{magnitude units}
 as it happen at civil midnight time.
-The magnitude (latin term @cite{magnitudo}, abbreviated @acronym{m}) is used
+The magnitude (Latin term @cite{magnitudo}, abbreviated @acronym{m}) is used
 to define the brightness of a star, and is a non-metrical value.  The
 difference between two consecutive magnitudes is 1 to @w{2.512}@.  Therefore,
 a star with the brightness of @w{1@acronym{m}} is @w{2.512} times brighter than
-a star of @w{2@acronym{m}}@.  A negative magitude denotes a very bright star,
+a star of @w{2@acronym{m}}@.  A negative magnitude denotes a very bright star,
 for example almost @w{-27@acronym{m}} for the Sun, whereas the hardly visible
 planet Pluto has a magnitude of a bit more than @w{+14@acronym{m}}@.  The Full
 Moon has a visual brightness of about @w{-12@acronym{m}.55}@.
@@ -16058,7 +16140,7 @@ for further details.
 of the Moon in degrees and arcminutes
 as it happen at standard rise time of the Moon
 (topocentric @dfn{rise azimuth})@.  The horizontal angular distance
-between the topocentric rise azimuth und the East direction is also
+between the topocentric rise azimuth and the East direction is also
 known as the topocentric @dfn{rise width} of the Moon.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
@@ -16075,7 +16157,7 @@ for further details.
 of the Moon in degrees and arcminutes
 as it happen at standard set time of the Moon
 (topocentric @dfn{set azimuth})@.  The horizontal angular distance
-between the topocentric set azimuth und the West direction is also
+between the topocentric set azimuth and the West direction is also
 known as the topocentric @dfn{set width} of the Moon.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
@@ -16204,7 +16286,7 @@ for further details.
 of the Moon in degrees and arcminutes
 as it happen at standard rise time of the Moon
 (geocentric @dfn{rise azimuth})@.  The horizontal angular distance
-between the geocentric rise azimuth und the East direction is also
+between the geocentric rise azimuth and the East direction is also
 known as the geocentric @dfn{rise width} of the Moon.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
@@ -16221,7 +16303,7 @@ for further details.
 of the Moon in degrees and arcminutes
 as it happen at standard set time of the Moon
 (geocentric @dfn{set azimuth})@.  The horizontal angular distance
-between the geocentric set azimuth und the West direction is also
+between the geocentric set azimuth and the West direction is also
 known as the geocentric @dfn{set width} of the Moon.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
@@ -16296,7 +16378,7 @@ i.e.@: values that are depending on the respective clocktime (if you use the
 clocktime that is used for calculating such values)@.  In a next table column,
 it is listed whether the given co-ordinate of the location influences the
 determination of a value, and the last column of the table gives you the
-information whether a given timezone value affects the value's
+information whether a given timezone value affects the values
 determination:
 @iftex
 @sp 1
@@ -16699,7 +16781,7 @@ can be treated as more as sufficiently precise if one measures their practical
 use.
 
 @item
-All azimuth and elevation values are always refering to the center of the
+All azimuth and elevation values are always referring to the center of the
 respective astronomical object, except the case, it is stated otherwise.
 
 @need 500
@@ -16724,7 +16806,7 @@ set times may throughout be in error by a minute or more.
 
 @cindex Lunar Arctic Circle
 @item
-The accurancy of rise and set computations decreases again at high latitudes,
+The accuracy of rise and set computations decreases again at high latitudes,
 i.e.@: within in the lunar Arctic Circle.  There, small variations in
 atmospheric refraction can change the time of moonrise or moonset by many
 minutes, since the Moon intersects the horizon at a very shallow angle.
@@ -16767,7 +16849,7 @@ how the dynamical, i.e.@: depending on the respective clocktime, Moon oriented
 special texts are calculated for a series of clocktimes for the current day.
 
 @item
-Furthermode, see
+Furthermore, see
 @ref{x-adjust-value, , Fixed dates option @option{--adjust-value=@var{argument}}},
 how to change the reference altitude that is used to calculate the rise and
 set times.
@@ -19187,14 +19269,14 @@ in @w{@code{@var{hh}.@var{h}@dots{}}} format
 @itemx %)g@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}
 @cindex Moon, topocentric distance @code{%(g@var{argument}} special text
 @cindex Moon, topocentric distance @code{%)g@var{argument}} special text
-Topocentric distance of Moon in mittleren Erd@"aquatorradien
+Topocentric distance of Moon in mean Earth equator radii
 in @w{@code{@var{n}.@var{n}@dots{}}} format
 
 @item %(*g@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}
 @itemx %)*g@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}
 @cindex Moon, topocentric distance @code{%(*g@var{argument}} special text
 @cindex Moon, topocentric distance @code{%)*g@var{argument}} special text
-Topocentric distance of Moon in Kilometern
+Topocentric distance of Moon in kilometers
 in @w{@code{@var{n}.@var{n}@dots{}}} format
 
 @item %(h@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}
@@ -21313,7 +21395,7 @@ The vertical angular distance between the celestial body and the horizon.
 @item Celestial equator
 @cindex Celestial equator
 A celestial great circle, which is vertical to the celestial axis
-and simultaneaously represents the Earth's equator that is projected
+and simultaneously represents the Earth's equator that is projected
 onto the celestial sphere.
 
 @item Celestial Pole
@@ -21344,7 +21426,7 @@ of @acronym{ASCII} known as @w{@acronym{ISO}-8859-1}
 
 @item Civil Islamic calendar
 @cindex Civil Islamic calendar
-The arithmetically determinded Islamic lunar calendar.
+The arithmetically determined Islamic lunar calendar.
 
 @item Civil midnight time
 @cindex Civil midnight time
@@ -21480,7 +21562,7 @@ such as @code{\E} or @code{\033} or @code{\x1B} for the @acronym{ASCII}
 @cindex Evening width
 @cindex Set width
 The horizontal angular distance between the set azimuth of a celestial body
-und the West direction.
+and the West direction.
 
 @item Exclusive day period
 @itemx Exclusive date period
@@ -21528,12 +21610,12 @@ the author of the original Emacs editor.
 
 @item Geocentric data
 @cindex Geocentric data
-Observations of celestial bodys that are done from the
-fictious center of the Earth yield in geocentrically based values.
+Observations of celestial bodies that are done from the
+fictitious center of the Earth yield in geocentrically based values.
 
 @item Geocentrical horizon
 @cindex Geocentrical horizon
-That fictious horizontal plane that passes through the Earth's center,
+That fictitious horizontal plane that passes through the Earth's center,
 orthogonal to the observer's local vertical.
 
 @item Geometrical horizon
@@ -21673,11 +21755,11 @@ The 29th February in the Gregorian calendar.
 @item Leap year
 @cindex Leap year
 In the Gregorian calendar, a leap year is any year which number can be
-divided by 4 without a remainder, and years ending in hundrets are no
+divided by 4 without a remainder, and years ending in hundreds are no
 leap years unless they are divisible by 400@.  But the Eastern Orthodox
 churches compute leap years within the Gregorian calendar by using another
 rule; and that, a leap year is any year which number can be divided by 4
-without a remainder, and years ending in hundrets are leap years, if a
+without a remainder, and years ending in hundreds are leap years, if a
 remainder of 2 or 6 occurs when such a year is divided by 9@.
 
 @item Legal holiday
@@ -21739,10 +21821,10 @@ of the @emph{Isha} prayer time.
 @item Magnitude unit
 @cindex Magnitude unit
 Is used to define the brightness of a star, and is a non-metrical value
-(latin term @cite{magnitudo}, abbreviated @acronym{m})@.  The difference
+(Latin term @cite{magnitudo}, abbreviated @acronym{m})@.  The difference
 between two consecutive magnitudes is 1 to @w{2.512}@.  Therefore, a star
 with the brightness of @w{1@acronym{m}} is @w{2.512} times brighter than
-a star of @w{2@acronym{m}}@.  A negative magitude denotes a very bright star,
+a star of @w{2@acronym{m}}@.  A negative magnitude denotes a very bright star,
 for example almost @w{-27@acronym{m}} for the Sun, whereas the hardly visible
 planet Pluto has a magnitude of a bit more than @w{+14@acronym{m}}@.  The Full
 Moon has a visual brightness of about @w{-12@acronym{m}.55}@.
@@ -21766,7 +21848,7 @@ A star day is also known as a @emph{mean solar day}@.  Because the Sun
 apparently shifts with respect to the vernal equinox point on the ecliptic
 due to the Earth's orbit around the Sun, the star day and the true solar day
 have a different length.  As the true Sun namely moves irregularly through
-the ecliptic, a fictious @emph{mean Sun} with a symmetrical motion through
+the ecliptic, a fictitious @emph{mean Sun} with a symmetrical motion through
 the celestial equator is used for deriving the mean solar time.
 
 @item Meridian
@@ -21800,7 +21882,7 @@ and which define a special mode of operation for this option.
 @cindex Morning width
 @cindex Rise width
 The horizontal angular distance between the rise azimuth of a celestial body
-und the East direction.
+and the East direction.
 
 @item Nautical twilight
 @cindex Nautical twilight
@@ -21827,7 +21909,7 @@ as it happen at astronomical noon time of the celestial body.
 
 @item Noon line
 @cindex Noon line
-The straight line which connets the North and the South point.
+The straight line which connects the North and the South point.
 
 @item Noon phase angle
 @cindex Noon phase angle
@@ -21841,7 +21923,7 @@ Base-eight notation, where the digits are @w{@code{0}@dots{}@code{7}}@.
 @item Opposition
 @cindex Opposition
 The Earth is in one line between the celestial body and the Sun, and
-therefore, the celestial body is completly visible from the Earth.
+therefore, the celestial body is completely visible from the Earth.
 In terms of the Moon, this is the Full Moon phase.
 
 @item Option
@@ -21851,7 +21933,7 @@ which controls how Gcal behaves.
 
 @item Orthodrome
 @cindex Orthodrome
-A great circle's arc that is casted between two points on a surface of a
+A great circles arc that is casted between two points on a surface of a
 sphere.  Is the shortest geodetic connecting line between two points on a
 sphere.
 
@@ -22071,7 +22153,7 @@ That part of a Gcal resource file line that contains the fixed date text.
 
 @item Topocentric data
 @cindex Topocentric data
-Observations of celestial bodys that are done from the
+Observations of celestial bodies that are done from the
 surface of the Earth yield in topocentrically based values.
 
 @item True solar time
@@ -22086,15 +22168,15 @@ time (as it is also shown by a sundial during the day)@.
 @itemx Course angle
 @cindex True track
 @cindex Course angle
-The course angle gives the direction, which is the vertex of a great circle's
+The course angle gives the direction, which is the vertex of a great circles
 arc (Orthodrome) that is casted between two points on a surface of a sphere,
 at a meridian (Gcal uses a geoid (rotation ellipsoid) that is calculated
 taking pattern from the @cite{World Geodetic System}, short @acronym{W.G.S},
 that was designed in 1961)@.  Such an arc is the shortest geodetic connecting
 line between two points on a sphere.  Indeed, the course angles on such an arc
-are changeing continually, because the circular line that is casted intersects
+are changing continually, because the circular line that is casted intersects
 each meridian with another angle --- except the case, that both co-ordinates
-are refering to exactly the same longitude or to exactly the same latitude.
+are referring to exactly the same longitude or to exactly the same latitude.
 
 @item Twilight
 @cindex Twilight

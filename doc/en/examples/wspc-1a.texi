@@ -9,16 +9,16 @@ $ gcal --resource-file=./wspc-1.rc --disable-highlighting
 @print{} 
 @print{} Fixed date list:
 @print{} 
-@print{} Sat, Jun   3rd 2000:      sh $0 & $0 &
-@print{} Sat, Jun   3rd 2000:   a  \  b  \\  c  \\\  d
-@print{} Sat, Jun   3rd 2000:  main()@{for(;;)fork();@}
-@print{} Sat, Jun   3rd 2000: BANG BANG
-@print{} Sat, Jun   3rd 2000: What happens now?~0  \  That!
-@print{} Sat, Jun   3rd 2000: What happens now?
+@print{} Wed, Jun  14th 2000:      sh $0 & $0 &
+@print{} Wed, Jun  14th 2000:   a  \  b  \\  c  \\\  d
+@print{} Wed, Jun  14th 2000:  main()@{for(;;)fork();@}
+@print{} Wed, Jun  14th 2000: BANG BANG
+@print{} Wed, Jun  14th 2000: What happens now?~0  \  That!
+@print{} Wed, Jun  14th 2000: What happens now?
 @print{}                      0  \  This!
-@print{} Sat, Jun   3rd 2000: \hello world
-@print{} Sat, Jun   3rd 2000: bogomips
-@print{} Sat, Jun   3rd 2000: bogus
+@print{} Wed, Jun  14th 2000: \hello world
+@print{} Wed, Jun  14th 2000: bogomips
+@print{} Wed, Jun  14th 2000: bogus
 @end cartouche
 @end group
 @end example

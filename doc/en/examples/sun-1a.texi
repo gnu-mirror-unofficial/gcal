@@ -7,8 +7,8 @@
 @cartouche
 $ gcal -fsun-1.rc -Ux -Hno
 @print{} 
-@print{} 04:05/12-Sep-1999 actual local time in Muenster
-@print{} 09:05/12-Sep-1999 actual local time in Bangkok
+@print{} 18:53/12-Sep-1999 actual local time in Muenster
+@print{} 23:53/12-Sep-1999 actual local time in Bangkok
 @print{} Sun:
 @print{} 01:06rise, 13:22set, 12h16'day, 11h44'night
 @print{} Bangkok-time converted to Muenster's local time

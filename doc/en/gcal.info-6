@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -506,7 +506,7 @@ way by using a format instruction, and that by using an indirect
 method.  For displaying, you simply assign the special text exclusively
 to a text variable which contains a format instruction.  Nevertheless,
 it is important to note that the field width component of the format
-instruction is choosen in the way that it refers to the assigned
+instruction is chosen in the way that it refers to the assigned
 contents of the text variable, if the format instruction has a fixed
 format component.  The contents assigned to the text variable is only
 the special text, and not its expanded result.  Gcal has to proceed
@@ -604,7 +604,7 @@ Inclusive date period `%i[DATE][#[DATE]]' special text
 dates which are part of the specified period are valid and are
 displayed.  Of course this means, that all fixed dates which are not
 part of this period (not covered by it) are invalid and remain
-un-displayed therefore.
+undisplayed therefore.
 
   The first specified date defines the "starting date" of the fixed
 date, i.e. the first date the fixed date may occur.  For the starting
@@ -689,7 +689,7 @@ Exclusive date period `%e[DATE][#[DATE]]' special text
 
   `%e[DATE][#[DATE]]' references an exclusive date period, i.e. all
 dates which are part of the specified period are invalid and remain
-un-displayed therefore.  Of course this means, that all fixed dates
+undisplayed therefore.  Of course this means, that all fixed dates
 which are not part of this period (not covered by it) are valid and are
 displayed.
 

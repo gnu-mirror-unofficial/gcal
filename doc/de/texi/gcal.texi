@@ -6,11 +6,11 @@
 
 
 
-@c $Id: gcal.texi v3.00 2000/06/07 03:00:00 tom Exp $
+@c $Id: gcal.texi v3.01 2000/06/24 03:00:01 tom Exp $
 @c
 @c gcal.texi:  German Texinfo source of info/html/dvi/text file
 @c
-@c Copyright (c) 1994-1997, 2000 Thomas Esken
+@c Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 @c
 @c
 @c Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
@@ -44,10 +44,10 @@
 @c
 @c Some necessary constant definitions
 @c
-@set EDITION 3.00
-@set UPDATE-DATE 7 Juni 2000
+@set EDITION 3.01
+@set UPDATE-DATE 24 Juni 2000
 @set UPDATE-MONTH Juni 2000
-@set GCAL-VERSION 3.00
+@set GCAL-VERSION 3.01
 @c
 @settitle Gcal @value{GCAL-VERSION}
 @c
@@ -280,7 +280,7 @@ Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
 @c @noindent
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
 @c @noindent
 Diese Ausgabe ist f@"ur Gcal Version @value{GCAL-VERSION}@.
@@ -344,7 +344,7 @@ D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 @page
 @vskip 0pt plus 1filll
 @c @noindent
-Copyright @copyright{} 1994-1997, 2000 Thomas Esken
+Copyright @copyright{} 1994, 95, 96, 1997, 2000 Thomas Esken
 
 @sp 2
 
@@ -741,7 +741,7 @@ Die in die ewige Feiertagsliste eingebrachten Feiertage @dfn{fr@"uher} Jahre
 ---also in etwa die im Zeitraum @acronym{A.D.@:} 30 bis zur Mitte des 20'ten
 Jahrhunderts--- werden mit ziemlicher Sicherheit nicht den Anspr@"uchen
 gen@"ugen, die Historiker an eine solche Liste haben.  Gcal kann nicht als
-eine vollst@"andige und historisch korrekte Datenbasis aufgefasst werden,
+eine vollst@"andige und historisch korrekte Datenbasis aufgefa@ss{}t werden,
 und ist auch nicht zu diesem Zweck erstellt worden!  Das liegt darin
 begr@"undet, da@ss{} sowohl die territorialen Grenzen und Bezeichnungen
 der Staatsgebilde sowie deren Besiedelung in fr@"uheren Zeiten teilweise
@@ -789,7 +789,7 @@ Kontakt aufnehmen.
 
 @c @noindent
 Ich habe die l@"anderspezifischen Feiertagsdaten so gut wie ich nur
-konnte erfasst, aber ich kann nicht garantieren, da@ss{} mir w@"ahrend
+konnte erfa@ss{}t, aber ich kann nicht garantieren, da@ss{} mir w@"ahrend
 der Datenerfassung keinerlei Fehler unterlaufen sind.  So kann es durchaus
 sein, da@ss{} einige l@"anderspezifische Feiertagslisten fehlerbehaftet sind.
 
@@ -1897,7 +1897,7 @@ f@"ur weitere Details.
 @anchor{x-chinese-holidays}
 Die ewige Feiertagsliste wird zus@"atzlich mit chinesischen Feiertagen
 ausgestattet (nur f@"ur Jahre nach @acronym{A.D.@:} 1644)@.  F@"ur Jahre bis
-@acronym{A.D.@:} 1928 beruhen alle vorgenommenen Berechnungen fest auf Bejing
+@acronym{A.D.@:} 1928 beruhen alle vorgenommenen Berechnungen fest auf Beijing
 Ortszeit, f@"ur sp@"atere Jahre fest auf der Zeitzone @w{GMT-8}@.
 @xref{Vorwort},
 f@"ur weitere Details.
@@ -1947,7 +1947,7 @@ werden, ge@"andert werden kann.
 @anchor{x-japanese-holidays}
 Die ewige Feiertagsliste wird zus@"atzlich mit japanischen Feiertagen
 ausgestattet (nur f@"ur Jahre nach @acronym{A.D.@:} 1644)@.  F@"ur Jahre bis
-@acronym{A.D.@:} 1887 beruhen alle vorgenommenen Berechnungen fest auf Bejing
+@acronym{A.D.@:} 1887 beruhen alle vorgenommenen Berechnungen fest auf Beijing
 Ortszeit, f@"ur sp@"atere Jahre fest auf der Zeitzone @w{GMT-9}@.
 
 @item --multicultural-new-year-holidays
@@ -2048,7 +2048,7 @@ franz@"osische und italienische Feiertage.
 @tbindex Feiertage, landesspezifische
 Derzeit ber@"ucksichtigt Gcal die folgenden Landeskodes, wobei L@"ander
 die mit einem @samp{#} Zeichen markiert sind, derzeit nur unvollst@"andig
-erfasste Feiertage enthalten:
+erfa@ss{}te Feiertage enthalten:
 
 @table @code
 @item AD
@@ -2157,7 +2157,7 @@ Benin #
 Bermuda
 
 @item BN
-Brunei Darussalam
+Brunei
 
 @item BO
 Bolivien
@@ -2562,7 +2562,7 @@ Kenia #
 Kirgisien
 
 @item KH
-Kambotscha #
+Kambodscha #
 
 @item KI
 Kiribati #
@@ -4015,7 +4015,7 @@ auftritt, an diese Textvariable zugewiesen.
 @item
 Folgt dem Namen der Textvariablen ein @samp{?} Zuweisungsoperator,
 so wird der gesamte Text, der rechts von diesem Zuweisungsoperator
-auftritt, von Gcal als externes Kommando aufgefasst und ausgef@"uhrt.
+auftritt, von Gcal als externes Kommando aufgefa@ss{}t und ausgef@"uhrt.
 Die Ausgabe, die das Kommando auf dem @emph{Standardausgabe-Ger@"atekanal}
 erzeugt hat, wird an diese Textvariable zugewiesen; und zwar interpretiert.
 Das hei@ss{}t, Gcal interpretiert alle in dieser Ausgabe enthaltenen
@@ -4028,7 +4028,7 @@ f@"ur weitere Informationen.
 @item
 Folgt dem Namen der Textvariablen ein @samp{:} Zuweisungsoperator,
 so wird der gesamte Text, der rechts von diesem Zuweisungsoperator
-auftritt, von Gcal als externes Kommando aufgefasst und ausgef@"uhrt.
+auftritt, von Gcal als externes Kommando aufgefa@ss{}t und ausgef@"uhrt.
 Die Ausgabe, die das Kommando auf dem @emph{Standardausgabe-Ger@"atekanal}
 erzeugt hat, wird an diese Textvariable zugewiesen; und zwar uninterpretiert.
 Das hei@ss{}t, Gcal interpretiert keine in dieser Ausgabe enthaltenen
@@ -4135,7 +4135,7 @@ f@"ur weitere Details.
 @cindex Mondauf- und untergang, Referenzh@"ohe f@"ur
 @anchor{x-adjust-value}
 Bewirkt einerseits, da@ss{} die als @var{Argument} @"ubergebene Zahl als
-Referenzh@"ohe f@"ur die Berechung der Aufgangs- und Untergangszeiten von den
+Referenzh@"ohe f@"ur die Berechnung der Aufgangs- und Untergangszeiten von den
 sonnen- und mondbezogenen Spezialtexten verwendet wird.  Das Optionsargument
 mu@ss{} einer reellen Zahl im Bereich @w{-90.0@dots{}+90.0} entsprechen, die
 den Winkelabstand in Dezimalgrad vom Mittelpunkt des astronomischen Objekts zum
@@ -4146,7 +4146,7 @@ oder des Mondes @w{20,5} Dezimalgrad unterhalb des Horizont befindet.
 @cindex Schattenl@"angenfaktor, Festlegen des
 @cindex Festlegen des Schattenl@"angenfaktors
 Bewirkt andererseits, da@ss{} die als @var{Argument} @"ubergebene Zahl als
-Faktor f@"ur die Berechung der Schattenl@"ange eines senkrechten Stabes von
+Faktor f@"ur die Berechnung der Schattenl@"ange eines senkrechten Stabes von
 den sonnenbezogenen Spezialtexten verwendet wird.  Das Optionsargument mu@ss{}
 einer reellen Zahl im Bereich @w{0.0@dots{}+90.0} entsprechen, die die
 Schattenl@"ange angibt.  Zum Beispiel kann mittels
@@ -4230,7 +4230,7 @@ liegt der Fall vor, da@ss{} am 8'ten Mai 2000 das Ende der astronomischen
 D@"ammerung um @w{23:57} Uhr Ortszeit stattfindet, am 9'ten Mai kein Ende
 der astronomischen D@"ammerung stattfindet, da sich der Sonnenmittelpunkt
 stets oberhalb 18 Grad unterhalb eines geometrischen Horizonts (der
-Refererenzh@"ohe der astronomischen D@"ammerung) befindet, jedoch am 10'ten
+Referenzh@"ohe der astronomischen D@"ammerung) befindet, jedoch am 10'ten
 Mai um @w{00:01} Uhr Ortszeit diese Referenzh@"ohe wieder durchschritten wird.
 Somit geh@"ort die f@"ur den 9'ten Mai ermittelte Uhrzeit eigentlich auf den
 10'ten Mai verschoben usw.@:, wie es durch die Ausgabe, die mit der
@@ -4994,7 +4994,7 @@ zum Gruppieren verwendet, z.B.@::
 @example
 @group
 @cartouche
-$ gcal -Cw -cg
+$ gcal -Cxw -cg
 @print{}
 @print{} So,   6 Nov 1994: Text 1
 @print{} So,   6 Nov 1994: Text 2
@@ -5005,7 +5005,7 @@ $ gcal -Cw -cg
 @dots{}
 
 
-$ gcal -Cw -g'-Ein_vom\_Benutzer-~-definierter Text-'
+$ gcal -Cxw -g'-Ein_vom\_Benutzer-~-definierter Text-'
 @print{}
 @print{} So,   6 Nov 1994: Text 1
 @print{} So,   6 Nov 1994: Text 2
@@ -5020,12 +5020,22 @@ $ gcal -Cw -g'-Ein_vom\_Benutzer-~-definierter Text-'
 @end group
 @end example
 
+Der @var{Text} darf Referenzen auf globale Datum- und Textvariablen enthalten
+(@pxref{x-date-variable, , Termin Option @w{@option{--date-variable=@var{Argument}}}},
+und
+@ref{x-text-variable, , Termin Option @w{@option{--text-variable=@var{Argument}}}})@.
+Zudem d@"urfen im @var{Text} alle Spezialtexte benutzt werden, die einen
+Textersatz bewirken
+(@pxref{Ersetzen, , @code{%@var{?}}@dots{} Spezialtexte zum Textersatz})@.
+
 @cindex Zeilenumbruch erzwingen
 @cindex Zeilenumbruchzeichen, @samp{~}
+@cindex Zeilenumbruchzeichen, @samp{^}
 @cindex @samp{~} Zeilenumbruchzeichen
-Jedesmal wenn ein @samp{~} (Tilde) Zeichen in @var{Text} vorgefunden
-wird, so wird dieses Zeichen durch ein echtes @samp{\n} (Newline)
-Zeichen ersetzt.
+@cindex @samp{^} Zeilenumbruchzeichen
+Jedesmal wenn ein @samp{~} (Tilde) oder @samp{^} (Caret) Zeichen in
+@var{Text} vorgefunden wird, so wird dieses Zeichen durch ein echtes
+@samp{\n} (Newline) Zeichen ersetzt.
 
 @cindex Entwertung von Spezialzeichen
 @cindex Entwertungszeichen, @samp{\}
@@ -5039,6 +5049,7 @@ hinsichtlich seiner speziellen Bedeutung entwertet werden, z.B.@: @samp{\~}@.
 Wenn die Zeichen @samp{\~} selbst als Zeichenfolge verwendet werden sollen,
 so mu@ss{} das @samp{\} (Backslash) Zeichen durch ein weiteres
 @samp{\} (Backslash) Zeichen gesch@"utzt werden, z.B.@: @samp{\\~}@.
+Alles vorgenannte gilt auch f@"ur das @samp{^} (Caret) Zeichen.
 
 @cindex Pseudo-Leerzeichen, @samp{_}
 @cindex @samp{_} Pseudo-Leerzeichen
@@ -5092,7 +5103,7 @@ oder der @option{A} Modifizierer nicht angegeben wurde.}, z.B.@::
 @example
 @group
 @cartouche
-$ gcal -co
+$ gcal -cxo
 @print{}
 @print{} So,   6 Nov 1994: Text 1
 @print{}                   Text 2
@@ -5136,7 +5147,7 @@ Datum in der Terminliste, z.B.@::
 @example
 @group
 @cartouche
-$ gcal -cU
+$ gcal -cxU
 @print{}
 @print{} Text 1
 @print{} Text 2
@@ -5156,7 +5167,7 @@ Unterdr@"uckt die Ausgabe aller Textteile in der Terminliste, z.B.@::
 @example
 @group
 @cartouche
-$ gcal -cJ
+$ gcal -cxJ
 @print{}
 @print{} So,   6 Nov 1994:
 @print{} So,   6 Nov 1994:
@@ -5173,7 +5184,78 @@ $ gcal -cJ
 @cindex Termintext-Modifizierer, @option{x}
 @cindex Terminliste, @"Uberschrift unterdr@"ucken
 @cindex @"Uberschrift unterdr@"ucken in Terminliste
-Die Ausgabe der @"Uberschrift in der Terminliste unterdr@"ucken.
+Die Ausgabe der @"Uberschrift der Terminliste unterdr@"ucken.
+
+@item --heading-text=@var{Text}
+@arindex --heading-text=@var{Text}
+@cindex Termintext-Option, @option{--heading-text=@var{Text}}
+Die @"Uberschrift der Terminliste @"andern.  Anstelle des voreingestellten
+@samp{Terminliste:} Textes kann ein beliebiger anderer Text zur Ausgabe
+gebracht werden, z.B.@::
+
+@example
+@group
+@cartouche
+$ gcal -cUJ --heading-text=Hallo,_es_ist_%K_,~%t__Uhr
+@print{}
+@print{} Hallo, es ist Sonntag,
+@print{} 14:32 Uhr
+@print{}
+@print{} So,   6 Nov 1994:
+@dots{}
+@end cartouche
+@end group
+@end example
+
+Der @var{Text} darf Referenzen auf globale Datum- und Textvariablen enthalten
+(@pxref{x-date-variable, , Termin Option @w{@option{--date-variable=@var{Argument}}}},
+und
+@ref{x-text-variable, , Termin Option @w{@option{--text-variable=@var{Argument}}}})@.
+Zudem d@"urfen im @var{Text} alle Spezialtexte benutzt werden, die einen
+Textersatz bewirken
+(@pxref{Ersetzen, , @code{%@var{?}}@dots{} Spezialtexte zum Textersatz})@.
+
+@cindex Zeilenumbruch erzwingen
+@cindex Zeilenumbruchzeichen, @samp{~}
+@cindex Zeilenumbruchzeichen, @samp{^}
+@cindex @samp{~} Zeilenumbruchzeichen
+@cindex @samp{^} Zeilenumbruchzeichen
+Jedesmal wenn ein @samp{~} (Tilde) oder @samp{^} (Caret) Zeichen in
+@var{Text} vorgefunden wird, so wird dieses Zeichen durch ein echtes
+@samp{\n} (Newline) Zeichen ersetzt.
+
+@cindex Entwertung von Spezialzeichen
+@cindex Entwertungszeichen, @samp{\}
+@cindex @samp{\} Entwertungszeichen
+@cindex Schutz von Spezialzeichen
+@cindex Schutzzeichen, @samp{\}
+@cindex @samp{\} Schutzzeichen
+Falls das @samp{~} (Tilde) Zeichen als Zeichen selbst verwendet werden
+soll, so mu@ss{} dieses durch ein f@"uhrendes @samp{\} (Backslash) Zeichen
+hinsichtlich seiner speziellen Bedeutung entwertet werden, z.B.@: @samp{\~}@.
+Wenn die Zeichen @samp{\~} selbst als Zeichenfolge verwendet werden sollen,
+so mu@ss{} das @samp{\} (Backslash) Zeichen durch ein weiteres
+@samp{\} (Backslash) Zeichen gesch@"utzt werden, z.B.@: @samp{\\~}@.
+Alles vorgenannte gilt auch f@"ur das @samp{^} (Caret) Zeichen.
+
+@cindex Pseudo-Leerzeichen, @samp{_}
+@cindex @samp{_} Pseudo-Leerzeichen
+Jedesmal wenn ein @samp{_} (Unterstrich) Zeichen in @var{Text} vorgefunden
+wird, so wird dieses Zeichen durch ein echtes @samp{ } (Leerzeichen)
+Zeichen ersetzt.
+
+@cindex Entwertung von Spezialzeichen
+@cindex Entwertungszeichen, @samp{\}
+@cindex @samp{\} Entwertungszeichen
+@cindex Schutz von Spezialzeichen
+@cindex Schutzzeichen, @samp{\}
+@cindex @samp{\} Schutzzeichen
+Falls das @samp{_} (Unterstrich) Zeichen als Zeichen selbst verwendet werden
+soll, so mu@ss{} dieses durch ein f@"uhrendes @samp{\} (Backslash) Zeichen
+hinsichtlich seiner speziellen Bedeutung entwertet werden, z.B.@: @samp{\_}@.
+Wenn die Zeichen @samp{\_} selbst als Zeichenfolge verwendet werden sollen,
+so mu@ss{} das @samp{\} (Backslash) Zeichen durch ein weiteres
+@samp{\} (Backslash) Zeichen gesch@"utzt werden, z.B.@: @samp{\\_}@.
 
 @item z
 @itemx --include-consecutive-number
@@ -9653,7 +9735,7 @@ auftritt, an diese Textvariable zugewiesen.
 @item
 Wird der Name der Textvariablen von einem @samp{?} Zuweisungsoperator
 gefolgt, so wird der gesamte Text, der rechts von diesem Zuweisungsoperator
-auftritt, von Gcal als externes Kommando aufgefasst und ausgef@"uhrt.  Die
+auftritt, von Gcal als externes Kommando aufgefa@ss{}t und ausgef@"uhrt.  Die
 Ausgabe, die das Kommando auf dem @emph{Standardausgabe-Ger@"atekanal}
 erzeugt hat, wird an diese Textvariable zugewiesen; und zwar interpretiert.
 Das hei@ss{}t, Gcal interpretiert alle in dieser Ausgabe enthaltenen
@@ -9664,7 +9746,7 @@ f@"ur weitere Informationen.
 @item
 Wird der Name der Textvariablen von einem @samp{:} Zuweisungsoperator
 gefolgt, so wird der gesamte Text, der rechts von diesem Zuweisungsoperator
-auftritt, von Gcal als externes Kommando aufgefasst und ausgef@"uhrt.  Die
+auftritt, von Gcal als externes Kommando aufgefa@ss{}t und ausgef@"uhrt.  Die
 Ausgabe, die das Kommando auf dem @emph{Standardausgabe-Ger@"atekanal}
 erzeugt hat, wird an diese Textvariable zugewiesen; und zwar uninterpretiert.
 Das hei@ss{}t, Gcal interpretiert keine in dieser Ausgabe enthaltenen
@@ -11545,7 +11627,7 @@ Kleinbuchstaben, und nicht etwa auf einen @samp{W} Gro@ss{}buchstaben.
 @c @noindent
 Der einfachste Weg, um ein gro@ss{}-/ kleinschreibungsunabh@"angiges Zeichen
 aufzusp@"uren, ist die Benutzung einer Zeichenliste: @w{@samp{[Ww]}}@.  Wie
-auch immer, so kann es doch sehr l@"astig sein, falls soetwas des @"ofteren
+auch immer, so kann es doch sehr l@"astig sein, falls so etwas des @"ofteren
 gebraucht wird; und ungl@"ucklicherweise kann der regul@"are Ausdruck dadurch
 schwer lesbar werden.  Abhilfe bietet hier Gcal's @option{--ignore-case}
 Option, welche die Unterschiede zwischen Gro@ss{}- und Kleinschreibung
@@ -14388,7 +14470,7 @@ also am fiktiven Erdmittelpunkt, ermittelten Daten.
 Das hat im wesentlichen mit der Refraktion zu tun, die ein Gestirn an einem
 anderen Ort erscheinen l@"a@ss{}t, als es sich in Wirklichkeit befindet.
 Da sich die Erdkugel zu den Polkappen hin abflacht und somit nicht als
-ideale Kugelgestalt aufgefasst werden kann, hat der individuelle Erdradius,
+ideale Kugelgestalt aufgefa@ss{}t werden kann, hat der individuelle Erdradius,
 der sich zwischen Beobachtungsstandort und Erdmittelpunkt ergibt, auch noch
 Einflu@ss{} auf die Berechnung von topozentrisch-basierten Daten.
 @item @ 
@@ -15136,7 +15218,7 @@ Jedoch wird die minimale Schattenl@"ange, die der senkrechte Stab zum
 astronomischen Mittagzeitpunkt wirft, von der der Schattenl@"ange subtrahiert,
 bevor dieser mit der L@"ange des Stabes verglichen wird.
 @xref{x-adjust-value, , Termin Option @option{--adjust-value=@var{Argument}}},
-wie der Schattenl@"angefaktor ver@"andert werden kann.
+wie der Schattenl@"angenfaktor ver@"andert werden kann.
 @item @ 
 @item @code{Q}
 @cindex Sonne, einfache Schattenl@"ange am Nachmittag @code{%sQ@var{Argument}} Spezialtext
@@ -15993,7 +16075,7 @@ werden k@"onnen.
 Und siehe auch
 @ref{x-adjust-value, , Termin Option @option{--adjust-value=@var{Argument}}},
 wie sowohl die Referenzh@"ohe f@"ur die Berechnung der Auf- und
-Untergangszeiten, als auch der Schattenl@"angefaktor ver@"andert
+Untergangszeiten, als auch der Schattenl@"angenfaktor ver@"andert
 werden kann.
 
 @item
@@ -16391,7 +16473,7 @@ also am fiktiven Erdmittelpunkt, ermittelten Daten.
 Das hat im wesentlichen mit der Refraktion zu tun, die ein Gestirn an einem
 anderen Ort erscheinen l@"a@ss{}t, als es sich in Wirklichkeit befindet.
 Da sich die Erdkugel zu den Polkappen hin abflacht und somit nicht als
-ideale Kugelgestalt aufgefasst werden kann, hat der individuelle Erdradius,
+ideale Kugelgestalt aufgefa@ss{}t werden kann, hat der individuelle Erdradius,
 der sich zwischen Beobachtungsstandort und Erdmittelpunkt ergibt, auch noch
 Einflu@ss{} auf die Berechnung von topozentrisch-basierten Daten.
 @item @ 
@@ -16541,7 +16623,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @cindex Einheit, Erd@"aquatorradius
 @tab @code{(}, @code{)}
 @tab Die ungef@"ahre, topozentrische Entfernung
-des Mondes von der Erde in mittleren @dfn{Erd@"aquatoradien} berechnen,
+des Mondes von der Erde in mittleren @dfn{Erd@"aquatorradien} berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 Der mittlere Radius der Erde am @"Aquator betr@"agt etwa @w{6.378,137}
 Kilometer.
@@ -16644,7 +16726,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 Ergebnisse mit negativem Vorzeichen besagen, da@ss{} sich der momentane
 Mondmittelpunkt unterhalb des Himmels@"aquators befindet, und Ergebnisse mit
 positivem Vorzeichen besagen, da@ss{} sich der momentane Mondmittelpunkt
-oberhalbe des Himmels@"aquators befindet.
+oberhalb des Himmels@"aquators befindet.
 @item @ 
 @item @code{q}
 @cindex Mond, ekliptischer L@"angengrad geozentrisch @code{%(q@var{Argument}} Spezialtext
@@ -16687,7 +16769,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @cindex Mond, Entfernung geozentrisch @code{%)*t@var{Argument}} Spezialtext
 @tab @code{(}, @code{)}
 @tab Die ungef@"ahre, geozentrische Entfernung des Mondes
-von der Erde in mittleren Erd@"aquatoradien berechnen,
+von der Erde in mittleren Erd@"aquatorradien berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @item @ 
 @item @code{u}
@@ -22945,8 +23027,8 @@ Ekliptik bewegt, l@"a@ss{}t man eine fiktive @emph{mittlere Sonne}
 gleichm@"a@ss{}ig durch den Himmels@"aquator laufen und bezieht die
 mittlere Sonnenzeit auf diese.
 
-@item Mittlerer Erd@"aquatoradius
-@cindex Mittlerer Erd@"aquatoradius
+@item Mittlerer Erd@"aquatorradius
+@cindex Mittlerer Erd@"aquatorradius
 Der mittlere Radius der Erde am @"Aquator betr@"agt etwa @w{6.378,137}
 Kilometer.
 
@@ -23010,7 +23092,7 @@ zwei Punkten auf einer Kugel dar.
 
 @item Phasenwinkel
 @cindex Phasenwinkel
-Der Phasenwinkel gibt die Phase eines Himmelk@"orpers an,
+Der Phasenwinkel gibt die Phase eines Himmelsk@"orpers an,
 d.h.@: den beleuchteten Anteil des Himmelsk@"orpers,
 so wie er von der Erde aus zu sehen ist.
 
@@ -23206,7 +23288,7 @@ topozentrisch-basierte Werte.
 @item Unix
 @cindex Unix
 Ein Betriebssystem f@"ur Computer, da@ss{} Anfang 1970 von den @acronym{AT&T}
-Bell Labaratories entwickelt wurde.  Es wurde anf@"anglich weltweit an den
+Bell Laboratories entwickelt wurde.  Es wurde anf@"anglich weltweit an den
 Universit@"aten popl@"ar, und etablierte sich sp@"ater in kommerziellen
 Umgebungen als Entwicklungssystem f@"ur Software und als System f@"ur
 Netzwerkdienste.  Es gibt viele kommerzielle Versionen von Unix, ebenso wie

@@ -1,4 +1,4 @@
-#  $Id: makefile.mms 0.17 2000/03/05 00:01:07 tom Exp $
+#  $Id: makefile.mms 0.18 2000/06/14 00:01:08 tom Exp $
 ###############################################################################
 #
 #  Vax/VMS VAX-C with MMS
@@ -15,10 +15,10 @@
 #$ gcal2txt == "$disk:[directory]gcal2txt.exe"
 #
 #
-#  Copyright (c) 1994-1996, 2000  Thomas Esken          <esken@uni-muenster.de>
-#                                 Im Hagenfeld 84
-#                                 D-48147 M"unster
-#                                 GERMANY
+#  Copyright (c) 1994, 95, 1996, 2000  Thomas Esken      <esken@gmx.net>
+#                                      Im Hagenfeld 84
+#                                      D-48147 M"unster
+#                                      GERMANY
 #
 ###############################################################################
 #

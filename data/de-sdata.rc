@@ -1,8 +1,8 @@
 ; Some Sun based astronomical times and data for locations in Germany for Gcal-2.20 or newer
 ;
-; $Id: de-sdata.rc 0.05 2000/04/10 00:00:05 tom Exp $
+; $Id: de-sdata.rc 0.06 2000/06/30 00:00:06 tom Exp $
 ;
-; Copyright (c) 2000   Thomas Esken      <esken@uni-muenster.de>
+; Copyright (c) 2000   Thomas Esken      <esken@gmx.net>
 ;                      Im Hagenfeld 84
 ;                      D-48147 M"unster
 ;                      GERMANY
@@ -182,7 +182,7 @@ $p $b $t,$s
 $t=ER0 astronomical twilight starts at                  %o9$c
 $p $a $t,$w
 $p $b $t,$s
-$t=FR0 amateur-astonomers twilight starts at            %o8$c
+$t=FR0 amateur-astronomers twilight starts at           %o8$c
 $p $a $t,$w
 $p $b $t,$s
 $t=GR0 nautical twilight starts at                      %o7$c
@@ -288,70 +288,70 @@ $p $b $t,$s
 $t=GS1 nautical twilight ends at                        %s7$c
 $p $a $t,$w
 $p $b $t,$s
-$t=FS1 amateur-astonomers twilight ends at              %s8$c
+$t=FS1 amateur-astronomers twilight ends at             %s8$c
 $p $a $t,$w
 $p $b $t,$s
 $t=ES1 astronomical twilight ends at                    %s9$c
 $p $a $t,$w
 $p $b $t,$s
 ;
-$t=QE5 day length astronomical twilight                 %u9$c
+$t=QE5 astronomical twilight visible                    %u9$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QE6 night length astronomical twilight               %z9$c
+$t=QE6 astronomical twilight non-visible                %z9$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QF5 day length amateur-astonomers twilight           %u8$c
+$t=QF5 amateur-astronomers twilight visible             %u8$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QF6 night length amateur-astonomers twilight         %z8$c
+$t=QF6 amateur-astronomers twilight non-visible         %z8$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QG5 day length nautical twilight                     %u7$c
+$t=QG5 nautical twilight visible                        %u7$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QG6 night length nautical twilight                   %z7$c
+$t=QG6 nautical twilight non-visible                    %z7$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QH5 day length civil twilight                        %u6$c
+$t=QH5 civil twilight visible                           %u6$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QH6 night length civil twilight                      %z6$c
+$t=QH6 civil twilight non-visible                       %z6$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QI5 day length sun's upper limb (standard r/s)       %u5$c
+$t=QI5 sun's upper limb (standard r/s) visible          %u5$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QI6 night length sun's upper limb (standard r/s)     %z5$c
+$t=QI6 sun's upper limb (standard r/s) non-visible      %z5$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QJ5 day length sun's center                          %u4$c
+$t=QJ5 sun's center visible                             %u4$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QJ6 night length sun's center                        %z4$c
+$t=QJ6 sun's center non-visible                         %z4$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QK5 day length math-horizon sun's upper limb         %u3$c
+$t=QK5 math-horizon sun's upper limb visible            %u3$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QK6 night length math-horizon sun's upper limb       %z3$c
+$t=QK6 math-horizon sun's upper limb non-visible        %z3$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QL5 day length math-horizon sun's center             %u2$c
+$t=QL5 math-horizon sun's center visible                %u2$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QL6 night length math-horizon sun's center           %z2$c
+$t=QL6 math-horizon sun's center non-visible            %z2$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QM5 day length shadow length 2x object height        %uQ$c
+$t=QM5 shadow length 2x object height visible           %uQ$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QM6 night length shadow length 2x object height      %zQ$c
+$t=QM6 shadow length 2x object height non-visible       %zQ$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QN5 day length shadow length 1x object height        %uR$c
+$t=QN5 shadow length 1x object height visible           %uR$c
 $p $a $t,$w
 $p $b $t,$s
-$t=QN6 night length shadow length 1x object height      %zR$c
+$t=QN6 shadow length 1x object height non-visible       %zR$c
 $p $a $t,$w
 $p $b $t,$s

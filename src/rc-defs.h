@@ -4,7 +4,7 @@
 *  rc-defs.h:  Fixed dates/resource file specific statements, macros, typedefs, global variable declarations...
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -28,7 +28,7 @@
 
 
 /*
-*  $Id: rc-defs.h 3.00 2000/05/02 03:00:00 tom Exp $
+*  $Id: rc-defs.h 3.01 2000/06/20 03:00:01 tom Exp $
 */
 
 
@@ -83,35 +83,36 @@
 #  define  SYM_FIXED_DATES             218
 #  define  SYM_FIXED_DATES_LIST        219
 #  define  SYM_GROUPING_TEXT           220
-#  define  SYM_HERE_FILE               221
-#  define  SYM_IGNORE_CASE             222
-#  define  SYM_INCLUDE_CONS_NUMBER     223
-#  define  SYM_INCLUDE_FILENAME        224
-#  define  SYM_INCLUDE_HOLIDAY         225
-#  define  SYM_INCLUDE_TODAY           226
-#  define  SYM_INCLUDE_WEEK_NUMBER     227
-#  define  SYM_LEAP_DAY                228
-#  define  SYM_LIMIT                   229
-#  define  SYM_LIST_MODE               230
-#  define  SYM_MONTH                   231
-#  define  SYM_MOONIMAGE_LINES         232
-#  define  SYM_OMIT_DATE_PART          233
-#  define  SYM_PERIOD                  234
-#  define  SYM_PRECISE                 235
-#  define  SYM_RESOURCE_FILE           236
-#  define  SYM_REVERT_MATCH            237
-#  define  SYM_START_OF_MONTH          238
-#  define  SYM_START_OF_WEEK           239
-#  define  SYM_START_OF_YEAR           240
-#  define  SYM_SUPPRESS_DATE_PART      241
-#  define  SYM_SUPPRESS_FDLIST_SEP     242
-#  define  SYM_SUPPRESS_TEXT_PART      243
-#  define  SYM_TEXT_VARIABLE           244
-#  define  SYM_TODAY                   245
-#  define  SYM_TOMORROW                246
-#  define  SYM_WEEK                    247
-#  define  SYM_YEAR                    248
-#  define  SYM_ZERO_DATES              249
+#  define  SYM_HEADING_TEXT            221
+#  define  SYM_HERE_FILE               222
+#  define  SYM_IGNORE_CASE             223
+#  define  SYM_INCLUDE_CONS_NUMBER     224
+#  define  SYM_INCLUDE_FILENAME        225
+#  define  SYM_INCLUDE_HOLIDAY         226
+#  define  SYM_INCLUDE_TODAY           227
+#  define  SYM_INCLUDE_WEEK_NUMBER     228
+#  define  SYM_LEAP_DAY                229
+#  define  SYM_LIMIT                   230
+#  define  SYM_LIST_MODE               231
+#  define  SYM_MONTH                   232
+#  define  SYM_MOONIMAGE_LINES         233
+#  define  SYM_OMIT_DATE_PART          234
+#  define  SYM_PERIOD                  235
+#  define  SYM_PRECISE                 236
+#  define  SYM_RESOURCE_FILE           237
+#  define  SYM_REVERT_MATCH            238
+#  define  SYM_START_OF_MONTH          239
+#  define  SYM_START_OF_WEEK           240
+#  define  SYM_START_OF_YEAR           241
+#  define  SYM_SUPPRESS_DATE_PART      242
+#  define  SYM_SUPPRESS_FDLIST_SEP     243
+#  define  SYM_SUPPRESS_TEXT_PART      244
+#  define  SYM_TEXT_VARIABLE           245
+#  define  SYM_TODAY                   246
+#  define  SYM_TOMORROW                247
+#  define  SYM_WEEK                    248
+#  define  SYM_YEAR                    249
+#  define  SYM_ZERO_DATES              250
 
 
 
@@ -149,7 +150,7 @@
 #    define  DEGREEVAL_SEP         "g'\""
 
 /* Used heading for the fixed date list. */
-#    define  RC_LIST_TITLE         "Terminliste"
+#    define  RC_LIST_TITLE         "Terminliste:"
 #  endif /* USE_DE */
 
 
@@ -1174,6 +1175,9 @@ IMPORT char  *rc_filter_text;
 
 /* Fixed date list grouping separator `-cg[TEXT]'. */
 IMPORT char  *rc_grp_sep;
+
+/* Fixed date list heading text `--heading-text=TEXT'. */
+IMPORT char  *rc_heading_text;
 
 /* Name of tempfile used when a command is assigned to a TVAR. */
 IMPORT char  *rc_tvar_tfn;

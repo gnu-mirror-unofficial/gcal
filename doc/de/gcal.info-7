@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -1476,7 +1476,7 @@ astronomischen Wertes auslösen, wie er in der Tabelle beschrieben ist:
                       die ein Gestirn an einem anderen Ort erscheinen
                       läßt, als es sich in Wirklichkeit befindet.  Da
                       sich die Erdkugel zu den Polkappen hin abflacht und
-                      somit nicht als ideale Kugelgestalt aufgefasst
+                      somit nicht als ideale Kugelgestalt aufgefaßt
                       werden kann, hat der individuelle Erdradius, der
                       sich zwischen Beobachtungsstandort und
                       Erdmittelpunkt ergibt, auch noch Einfluß auf die
@@ -1949,7 +1949,7 @@ astronomischen Wertes auslösen, wie er in der Tabelle beschrieben ist:
                       der der Schattenlänge subtrahiert, bevor dieser mit
                       der Länge des Stabes verglichen wird.  *Note Termin
                       Option `--adjust-value=ARGUMENT': x-adjust-value,
-                      wie der Schattenlängefaktor verändert werden kann.
+                      wie der Schattenlängenfaktor verändert werden kann.
 
 `Q'     `s'           Die ungefähre Uhrzeit berechnen, zu der ein
                       senkrechter Stab nachmittags einen Schatten wirft,
@@ -2424,7 +2424,7 @@ den sonnenbezogenen Spezialtexten vorliegen:
 
    * Und siehe auch *Note Termin Option `--adjust-value=ARGUMENT':
      x-adjust-value, wie sowohl die Referenzhöhe für die Berechnung der
-     Auf- und Untergangszeiten, als auch der Schattenlängefaktor
+     Auf- und Untergangszeiten, als auch der Schattenlängenfaktor
      verändert werden kann.
 
    * Weitherhin siehe *Note Termin Option

@@ -2,7 +2,7 @@
 *  hd-astro.c:  Astronomical and support functions used by the eternal holiday list.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: hd-astro.c 3.00 2000/04/05 03:00:00 tom Exp $";
+static char rcsid[]="$Id: hd-astro.c 3.01 2000/06/14 03:00:01 tom Exp $";
 #endif
 
 
@@ -1016,7 +1016,7 @@ sun_longitude (longitude, day, month, year, hour, min, next_mode)
        "How to compute rise/set times and altitude above horizon"
        by Paul Schlyter, <http://welcome.to/pausch> or
        <http://hotel04.ausys.se/pausch>.
-   Btw., Keith Burnett publishes alot of diverse --good quality--
+   Btw., Keith Burnett publishes a lot of diverse --good quality--
      astronomical sources and links at <http://www.xylem.demon.co.uk/kepler>.
 */
 {

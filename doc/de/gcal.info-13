@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -125,6 +125,7 @@ Gcal verarbeitet werden:
 * --french-revolutionary-months:         Kalender Optionen.
 * --gregorian-reform=1582|1700|1752|1753|ARGUMENT: Kalender Optionen.
 * --grouping-text[=TEXT]:                Termin Optionen.
+* --heading-text=TEXT:                   Termin Optionen.
 * --hebrew-holidays:                     Kalender Optionen.
 * --hebrew-months:                       Kalender Optionen.
 * --help <1>:                            Aufruf von gcal2txt.

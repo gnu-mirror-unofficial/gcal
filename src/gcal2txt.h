@@ -5,7 +5,7 @@
 *               from a Gcal resource file header file.
 *
 *
-*  Copyright (c) 1996-1997, 2000 Thomas Esken
+*  Copyright (c) 1996, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -29,7 +29,7 @@
 
 
 /*
-*  $Id: gcal2txt.h 2.03 2000/01/01 02:00:03 tom Exp $
+*  $Id: gcal2txt.h 2.06 2000/06/14 02:00:06 tom Exp $
 */
 
 

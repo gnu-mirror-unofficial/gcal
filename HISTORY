@@ -4,6 +4,38 @@ HISTORY file for `gcal'.
 Incomplete history (dates and events from my brain):
 
 
+v3.01   20000630 Some minor changes in the `doc/LL/texi/gcal.texi'
+                   documentation (fixed some typos and extended the
+                   manuals with description text for the new options).
+                 Now, text variable references like `$[FORMAT]TVAR TEXT' at
+                   the beginning of a Gcal resource file are expanded correctly
+                   if the contents of the TVAR that is used with the FORMAT
+                   instruction results in a *valid* Gcal date-part, that may
+                   be used in a resource file line.
+                 Now, the `--execute-command' option also works correctly
+                   for global text variable assignments like `-r$a?echo $HOME'
+                   or `-r$b=expr 2 + 2 2>&1' if it is written *before* such a
+                   text variable option in the command line (Sorry, it still
+                   does not work if it is given *behind* such a text variable
+                   option in the command line).
+                 Changed behavior of Gcal in terms how it choses the default
+                   style of year calendar sheets if the `--type' option is used.
+                 Fixed some typos in `./doc/mksamp.in'.
+                 Now, the `--grouping-text[=TEXT]' option also recognizes
+                   a '^'-CARET character for line break-up, global $TVAR
+                   references and `%?'... special texts that are used for
+                   text replacement.
+                 New `--heading-text=TEXT' option that can be used
+                   to create a self-defined title text for the fixed
+                   date list.  The TEXT argument may contain '~'-TILDE
+                   and '^'-CARET characters for line break-up, global $TVAR
+                   references and `%?'... special texts that are used for
+                   text replacement.
+                 Fixed a typo in `./data/scripts/v2x2v300.pl'.
+                 Changed layout of Copyright texts to improve the
+                   legal clearness.
+                 Increased the version number to 3.01.
+
 v3.00   20000607 Some major changes in the `doc/LL/texi/gcal.texi'
                    documentation.
                  Changed my old and momentary (20000527) recent
@@ -174,7 +206,7 @@ v2.50   20000303 Increased the year of copyright to 2000.
                    solar terms resp., aka the Chinese ZhongQi's/JieQi's)
                    into the eternal holiday list added.
                  Removed the `--without-standard-holidays' option.
-                 Removed a bug that occured during century leap years when
+                 Removed a bug that occurred during century leap years when
                    displaying holidays of Orthodox Churches.
                  When using an external pager via $PAGER environment variable,
                    possible command line arguments stored there are passed now.
@@ -453,7 +485,7 @@ v2.50   20000303 Increased the year of copyright to 2000.
                    for copying files.
                  Version 1.6 of `misc/gcalltx/gcalltx.pl' added, which
                    superseeds previous versions.
-                 Fixed a bug that occured in case the `--starting-day'
+                 Fixed a bug that occurred in case the `--starting-day'
                    longoption was used with the argument `0'.
                  Fixed a bug that caused a core dump in case the argument ARG
                    given to the `--date-format' longoption contained a trailing
@@ -532,7 +564,7 @@ v2.41   19980712 Version 1.5 of `misc/gcalltx/gcalltx.*' added.
                    of `rc-check.c' in case an "appears" field was given in the
                    date part of a resource file line.
                  Removed a bug (changed format width from 2 to 3 digits)
-                   which occured in the two `%?[DATE]' "special texts with
+                   which occurred in the two `%?[DATE]' "special texts with
                    date argument" used for displaying a day number with
                    leading zeroes (`%*' and `%#').
                  The new `misc/moon/*' files show how advanced use
@@ -552,7 +584,7 @@ v2.41   19980712 Version 1.5 of `misc/gcalltx/gcalltx.*' added.
                    environment variable is set, but the file is NOT found there.
                  A few bugfixes in some `Makefile.in' files.
                  Fixed a memory allocation bug in the `file_read_line()'
-                   function of `src/file-io.c' which occured while expanding
+                   function of `src/file-io.c' which occurred while expanding
                    local text variables recursively.
                  The private `./install-inf.in' script doesn't create
                    a basic `dir' file anymore in case no `dir.texi' file
@@ -570,7 +602,7 @@ v2.40   19970625 Polish translation by Wojciech Marek Galazka.
                    conditionally highlighting of text (%5 , %6 ... %9 and %0).
                  Fixed date modifier [U] (== `--suppress-date-part') added.
                  Removed the `-m ADDRESS' short-style option for sending eMails.
-                 Fixed a memory allocation bug that occured while resizing
+                 Fixed a memory allocation bug that occurred while resizing
                    the internal string buffers in some cases.
                  The `--biorhythm-axis=NUMBER' option can be used now for
                    setting the width of a `%;[DATE]' biorhythm text graphics
@@ -599,7 +631,7 @@ v2.30   19970102 Changed layout of the texts which are emitted by the `--help',
                    for calculating the leap years as done by the Eastern
                    orthodox churches.
                  Corrected the fixed date feature for that year in which
-                   the Gregorian Reformation have occured.
+                   the Gregorian Reformation have occurred.
                  The burned-in Gregorian Reformation period 18-28 Feb 1753
                    (`--gregorian-reform=1753') is new.
                  The burned-in Gregorian Reformation period 19-28 Feb 1700
@@ -725,7 +757,7 @@ v2.01   19960617 The --version option informs about the compiler/OS used and
                    the complete textual weekday name of the current/specified
                    date in the text part of a resource file line.
                  Fixed a bug in writing response/shell script files, which
-                   occured if a "MM YYYY-YYYY" command must be written.
+                   occurred if a "MM YYYY-YYYY" command must be written.
                  Removed the lib/ directory and all references to it, because
                    GNU `gettext' doesn't need it any longer for creating a
                    libintl.a library, which is local to the package.
@@ -744,7 +776,7 @@ v2.01   19960617 The --version option informs about the compiler/OS used and
                    a range of days was given in a resource file and a
                    displacement factor of a range component was outside
                    the year bounds like `1996@e#-40sun'.
-                 Fixed a bug which occured if the table of command line
+                 Fixed a bug which occurred if the table of command line
                    arguments (`my_argv[]') was resized during processing
                    of response files.
                  `const char *usage_msg()' prototype changed to
@@ -768,7 +800,7 @@ v2.00   19960516 Created shell script file (-S ARG) now embraces all arguments
                    expanded resp., respected everywhere in a resource file
                    line if referenced there.
                  Removed the --assign=ARG long-style option.
-                 Eliminated a bug in `gcal_rcc.c', which occured if
+                 Eliminated a bug in `gcal_rcc.c', which occurred if
                    string resizing was performed and more than one whitespace
                    character was used for separating the "date-part" and the
                    "text-part" of a line.
@@ -810,7 +842,7 @@ v2.00   19960516 Created shell script file (-S ARG) now embraces all arguments
                  The contents of the GCALPATH environment variable will
                    be used now on all systems for searching resource and
                    response files.
-                 A highlighting management bug fixed which occured if the
+                 A highlighting management bug fixed which occurred if the
                    -j option and the -jc[b] options are both given and
                    highlighting must performed for holidays.
                  New GNU long-style option mode implemented, which either
@@ -824,7 +856,7 @@ v2.00   19960516 Created shell script file (-S ARG) now embraces all arguments
                    displayed now in the header part of created response files,
                    shell script files and outgoing Emails.
                  Serious bug in management of Termcap padding eliminated.
-                 Small bug eliminated, which occured if %... text macros
+                 Small bug eliminated, which occurred if %... text macros
                    were quoted.
                  The central `print_text()' function works a bit faster now.
                  Changed the file searching mechanism with the effect, that
@@ -910,7 +942,7 @@ v1.00   19960309 Table sizes of all STRINGS are managed dynamically now.
                    resp., at the 1'st March if the option `--leap-day=march'
                    is given.
                  Elimated a bug in `eval_longopt()' function which
-                   occured if option `--usage=version' was given.
+                   occurred if option `--usage=version' was given.
                  Splitted the `rc_check()' and the `rc_use()' functions.
                  The `--long-help=?' resp., `--usage=?' option now
                    prints a list of all valid long-style options.

@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -244,7 +244,7 @@ Eine Textvariable wird wie folgt definiert:
    * Wird der Name der Textvariablen von einem `?' Zuweisungsoperator
      gefolgt, so wird der gesamte Text, der rechts von diesem
      Zuweisungsoperator auftritt, von Gcal als externes Kommando
-     aufgefasst und ausgeführt.  Die Ausgabe, die das Kommando auf dem
+     aufgefaßt und ausgeführt.  Die Ausgabe, die das Kommando auf dem
      _Standardausgabe-Gerätekanal_ erzeugt hat, wird an diese
      Textvariable zugewiesen; und zwar interpretiert.  Das heißt, Gcal
      interpretiert alle in dieser Ausgabe enthaltenen Spezialtexte und
@@ -254,7 +254,7 @@ Eine Textvariable wird wie folgt definiert:
    * Wird der Name der Textvariablen von einem `:' Zuweisungsoperator
      gefolgt, so wird der gesamte Text, der rechts von diesem
      Zuweisungsoperator auftritt, von Gcal als externes Kommando
-     aufgefasst und ausgeführt.  Die Ausgabe, die das Kommando auf dem
+     aufgefaßt und ausgeführt.  Die Ausgabe, die das Kommando auf dem
      _Standardausgabe-Gerätekanal_ erzeugt hat, wird an diese
      Textvariable zugewiesen; und zwar uninterpretiert.  Das heißt,
      Gcal interpretiert keine in dieser Ausgabe enthaltenen
@@ -386,7 +386,7 @@ Gcal wie folgt verarbeitet:
      -| 0 \$y=---$y---
      -| 0 \$y=:::$>1u*y:::
      $ gcal -f tvarc-1a.rc -QUx --exe -r'$f=./tvarc-1.rc'
-     -| $x=---    04:03 bonjour +00123 BONSOIR     ---
+     -| $x=---    18:50 bonjour +00123 BONSOIR     ---
      -| $y=---%t  $a $>+06*b $>1u*c---
      -| $y=:::%T  $A $>+06*B $>1U*C:::
 
@@ -503,10 +503,10 @@ So erzeugt Gcal die folgenden Ausgaben:
 
      $ gcal -QUx -f ./tvar-3.rc
      -| $c=+00+000  $h=  $d=+00+000  $x=$x
-     -| 05:55 18:02
+     -| 05:57 18:04
      $ gcal -QUx -r '$h=+1000:$x=' -f ./tvar-3.rc
      -| $c=+00+000  $h=+1000  $d=+00+000+1000  $x=
-     -| 05:50 18:07
+     -| 05:52 18:09
 
 Nur fortgeschrittene Benutzer sollten die `--export-text-variables'
 Option benutzen, welche bewirkt, daß die aktuelle Inkarnation einer
@@ -939,8 +939,8 @@ Für den 12'ten September 1999 ist das Ergebnis wie folgt:
 
      $ gcal -fsun-1.rc -Ux -Hno
      -|
-     -| 04:02/12-Sep-1999 aktuelle Ortszeit in Muenster
-     -| 09:02/12-Sep-1999 aktuelle Ortszeit in Bangkok
+     -| 18:49/12-Sep-1999 aktuelle Ortszeit in Muenster
+     -| 23:49/12-Sep-1999 aktuelle Ortszeit in Bangkok
      -| Sonne:
      -| 01:06auf, 13:22unter, 12h16'tag, 11h44'nacht
      -| Bangkok-Zeit umgerechnet in Muensters Ortszeit
@@ -1119,7 +1119,7 @@ Gcal Hilfsprogramme
 * Aufruf von txt2gcal::  Wie starte ich das `txt2gcal' Programm?
 * Aufruf von gcal2txt::  Wie starte ich das `gcal2txt' Programm?
 
-Drei kleine Hilfsprogramme sind im Gcal 3.00 Paket enthalten.  Das Tcal
+Drei kleine Hilfsprogramme sind im Gcal 3.01 Paket enthalten.  Das Tcal
 Programm startet das Gcal Programm mit dem Datum des morgigen Tages.
 Das Txt2gcal Programm erzeugt eine wortgetreue Gcal Ressourcendatei aus
 einer Textdatei, und im Gegensatz dazu erstellt das Gcal2txt Programm

@@ -2,7 +2,7 @@
 #
 #  @configure_input@
 #
-#  $Id: install-inf.in 0.20 2000/01/12 00:02:00 tom Exp $
+#  $Id: install-inf.in 0.21 2000/06/14 00:02:01 tom Exp $
 #
 #  This is my private `install-info' script.
 #
@@ -28,10 +28,10 @@
 #  Returns 0 if success.
 #  Returns 1 in case an error occurs.
 #
-#  Copyright (c) 1996-1997, 2000   Thomas Esken      <esken@uni-muenster.de>
-#                                  Im Hagenfeld 84
-#                                  D-48147 M"unster
-#                                  GERMANY
+#  Copyright (c) 1996, 97, 2000   Thomas Esken      <esken@gmx.net>
+#                                 Im Hagenfeld 84
+#                                 D-48147 M"unster
+#                                 GERMANY
 #
 #  This software doesn't claim completeness, correctness or usability.
 #  On principle I will not be liable for ANY damages or losses (implicit
@@ -66,7 +66,7 @@ Echo=echo
 PACKAGE=@PACKAGE@
 VERSION=@VERSION@
 myname=`$Echo "$0" | $Sed -e 's,.*/,,'`
-myversion=0.20
+myversion=0.21
 myinternalname="$myname ($PACKAGE $VERSION) $myversion"
 usage1="usage: $myname --help | --version"
 usage2="usage: $myname [--verbose] [--debug] [--info[-]dir=DIR] INFOFILE..."

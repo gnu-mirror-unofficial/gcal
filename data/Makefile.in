@@ -1,12 +1,12 @@
-#  $Id: Makefile.in 0.38 2000/03/25 00:03:08 tom Exp $
+#  $Id: Makefile.in 0.39 2000/06/14 00:03:09 tom Exp $
 ###############################################################################
 #
 #  Generic Makefile to create the Gcal appointment/reminder files.
 #
-#  Copyright (c) 1994-1997, 2000  Thomas Esken          <esken@uni-muenster.de>
-#                                 Im Hagenfeld 84
-#                                 D-48147 M"unster
-#                                 GERMANY
+#  Copyright (c) 1994, 95, 96, 1997, 2000  Thomas Esken      <esken@gmx.net>
+#                                          Im Hagenfeld 84
+#                                          D-48147 M"unster
+#                                          GERMANY
 #
 ###############################################################################
 #

@@ -1,13 +1,13 @@
-#  $Id: makefile.djg 0.18 2000/03/05 00:01:08 tom Exp $
+#  $Id: makefile.djg 0.19 2000/06/14 00:01:09 tom Exp $
 ###############################################################################
 #
 #  DJGPP GNU-C 2.0.1 - 2.6.3
 #  (GNU-Make-2.3.7) Makefile to create the extended `gcal' program.
 #
-#  Copyright (c) 1994-1997, 2000  Thomas Esken          <esken@uni-muenster.de>
-#                                 Im Hagenfeld 84
-#                                 D-48147 M"unster
-#                                 GERMANY
+#  Copyright (c) 1994, 95, 96, 1997, 2000  Thomas Esken      <esken@gmx.net>
+#                                          Im Hagenfeld 84
+#                                          D-48147 M"unster
+#                                          GERMANY
 #
 ###############################################################################
 #

@@ -2,7 +2,7 @@
 *  gcal.c:  Main part which controls the extended calendar program.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -25,7 +25,7 @@
 
 
 
-static char rcsid[]="$Id: gcal.c 3.00 2000/05/02 03:00:00 tom Exp $";
+static char rcsid[]="$Id: gcal.c 3.01 2000/06/29 03:00:01 tom Exp $";
 
 
 
@@ -129,6 +129,8 @@ LOCAL void
 build_month_list __P_((char *argv[]));
 LOCAL void
 eliminate_invalid_data __P_((void));
+LOCAL void
+pseudo_blank_conversion __P_((char **text));
 #if USE_RC
 LOCAL int
 further_check __P_((char **option));
@@ -553,6 +555,13 @@ PUBLIC const Lopt_struct  lopt[]=
     "grouping-text",
     {"g", NULL},
     LARG_NO_OR_ONE,
+    {NULL}
+  },
+  {
+    SYM_HEADING_TEXT,
+    "heading-text",
+    {NULL},
+    LARG_ONE,
     {NULL}
   },
 #endif
@@ -1280,7 +1289,7 @@ PUBLIC int  tty_cols=SPECIAL_VALUE;
 #endif
 
 /* Number of month rows of a year calendar. */
-PUBLIC int  out_rows=3;
+PUBLIC int  out_rows=0;
 
 /* Number of month columns of a year calendar. */
 PUBLIC int  out_cols=0;
@@ -1515,9 +1524,6 @@ PUBLIC Bool  is_special_range=FALSE;
 PUBLIC Bool  is_multi_range=FALSE;
 
 #ifdef GCAL_NLS
-/* Support of German language? */
-PUBLIC Bool  is_de=FALSE;
-
 /* Support of English language? */
 PUBLIC Bool  is_en=FALSE;
 #endif
@@ -1620,7 +1626,6 @@ main (argc, argv)
    register     int     j;
    auto         char  **my_argv=(char **)NULL;
 #if USE_RC
-   auto         char   *ptr_optarg;
 #  ifdef GCAL_SHELL
    static const char   *these_short_opts_need_args="#DFHIPRSbfqrsv";
 #  else /* !GCAL_SHELL */
@@ -1713,6 +1718,7 @@ main (argc, argv)
    */
    special_calsheet_flag = FALSE;
    iso_week_number = TRUE;
+   out_rows = S_OUT_ROWS;
 #else /* !USE_DE */
 #  ifdef GCAL_NLS
    /*
@@ -1783,7 +1789,7 @@ main (argc, argv)
            /*
               We have to use German texts and territory specifics!
            */
-           is_de = TRUE;
+           is_en = FALSE;
          else
            if (!strncasecmp(s1, "en", 2))
              /*
@@ -1827,6 +1833,7 @@ main (argc, argv)
       */
       special_calsheet_flag = TRUE;
       iso_week_number = FALSE;
+      out_rows = J_OUT_ROWS;
       /*
          Set the date of Gregorian Reformation to 1752 (table index 2 !!)
       */
@@ -1872,6 +1879,7 @@ main (argc, argv)
       */
       special_calsheet_flag = FALSE;
       iso_week_number = TRUE;
+      out_rows = S_OUT_ROWS;
     }
 #  else /* !GCAL_NLS */
    /*
@@ -1879,6 +1887,7 @@ main (argc, argv)
    */
    special_calsheet_flag = TRUE;
    iso_week_number = FALSE;
+   out_rows = J_OUT_ROWS;
    /*
       Set the date of Gregorian Reformation to 1752 (table index 2 !!)
    */
@@ -2123,7 +2132,21 @@ main (argc, argv)
                                       ERR_NO_MEMORY_AVAILABLE,
                                       __FILE__, ((long)__LINE__)-2L,
                                       "lptrs3", 0);
-#endif
+   /*
+      Initial memory allocation for the fixed date list title text.
+   */
+#  if USE_DE
+   ptr_char = RC_LIST_TITLE;
+#  else /* !USE_DE */
+   ptr_char = _("Fixed date list:");
+#  endif /* !USE_DE */
+   rc_heading_text = (char *)my_malloc (strlen(ptr_char)+1+2,
+                                        ERR_NO_MEMORY_AVAILABLE,
+                                        __FILE__, ((long)__LINE__)-2L,
+                                        "rc_heading_text", 0);
+   strcpy(rc_heading_text, "0 ");
+   strcat(rc_heading_text, ptr_char);
+#endif /* USE_RC */
 #if !defined(AMIGA) || defined(__GNUC__)
    /*
       Detect whether a $GCAL_DATE_FORMAT environment variable is set.
@@ -2400,9 +2423,11 @@ main (argc, argv)
       Building of private `my_argv[]' table is done, so check first whether
         warning/debug option (`--debug[=0...WARN_LVL_MAX]') is given (needed
         to set correct warning level in case global date variable definitions
-        or operations follow) and then check whether global date variable
-        definitions/operations `-v<>' are given, so we can reference them
-        in the actual date modifier, e.g., %YYYY@DVAR[[-]N[WW[W]]].
+        follow) and the command execution option (`--execute-command') is
+        given, and then check whether global date variable definitions `-v<>'
+        (or global text variable definitions `-r<>') are given, so we can
+        reference them in the actual date modifier, e.g.,
+        %YYYY@DVAR[[-]N[WW[W]]].
    */
    if (my_argc > 1)
     {
@@ -2448,90 +2473,25 @@ main (argc, argv)
             else
               lopt_id = SYM_NIL;
             if (lopt_id == SYM_DEBUG)
-               warning_level = my_atoi (ptr_char);
+              warning_level = my_atoi (ptr_char);
 #if USE_RC
             else
-              if (*ptr_char == 'r')
-               {
-                 ptr_char++;
-                 /*
-                    Global text variable definition found (e.g. -r$a=TEXT1:$b=TEXT2:$c=$a...):
-                      So try to scan this argument and store found TEXT's into
-                      the text variable table.
-                 */
-                 while (*ptr_char)
-                  {
-                    /*
-                       Split the SEP (colon) separated list of text variables.
-                    */
-                    j = 0;
-                    while (   *ptr_char
-                           && (*ptr_char != *SEP))
-                     {
-                       if ((Uint)j >= maxlen_max)
-                         resize_all_strings (maxlen_max<<1, FALSE, __FILE__, (long)__LINE__);
-                       s1[j++] = *ptr_char++;
-                       /*
-                          Take a quoted SEP (colon) separator as is,
-                            but remove the quote character.
-                       */
-                       if (   (*ptr_char == *SEP)
-                           && (s1[j-1] == QUOTE_CHAR))
-                         s1[j-1] = *ptr_char++;
-                     }
-                    s1[j] = '\0';
-                    if (strchr(s1, PSEUDO_BLANK) != (char *)NULL)
-                     {
-                       auto char  *ptr2_char;
-
-
-                       /*
-                          Manage quoted or unquoted PSEUDO_BLANK characters.
-                       */
-                       ptr_optarg=ptr2_char = s1;
-                       while (*ptr2_char)
-                        {
-                          if (*ptr2_char == PSEUDO_BLANK)
-                           {
-                             ptr2_char++;
-                             *ptr_optarg++ = ' ';
-                           }
-                          else
-                            if (*ptr2_char == QUOTE_CHAR)
-                             {
-                               ptr2_char++;
-                               if (*ptr2_char == PSEUDO_BLANK)
-                                 *ptr_optarg++ = *ptr2_char++;
-                               else
-                                 *ptr_optarg++ = QUOTE_CHAR;
-                             }
-                            else
-                              *ptr_optarg++ = *ptr2_char++;
-                        }
-                       *ptr_optarg = '\0';
-                     }
-#  if USE_DE
-                    set_tvar (s1, INTERNAL_TXT, 0L, GLobal);
-#  else /* !USE_DE */
-                    set_tvar (s1, _("Internal"), 0L, GLobal);
-#  endif /* !USE_DE */
-                    if (*ptr_char)
-                      ptr_char++;
-                  }
-               }
+              if (lopt_id == SYM_EXECUTE_COMMAND)
+                rc_execute_command = TRUE;
               else
-                if (*ptr_char == 'v')
+                if (*ptr_char == 'r')
                  {
                    ptr_char++;
                    /*
-                      Global text variable definition found (e.g. -va=1227:b=0514:c=a...):
-                        So try to scan this argument and store found MMDD dates
-                        into the date variable table.
+                      Global text variable definition found
+                        (e.g.: -r$a=TEXT1:$b=TEXT2:$c=$a...):
+                        Try to scan this argument and store found TEXTs
+                        into the text variable table.
                    */
                    while (*ptr_char)
                     {
                       /*
-                         Split the SEP (colon) separated list of date variables.
+                         Split the SEP (colon) separated list of text variables.
                       */
                       j = 0;
                       while (   *ptr_char
@@ -2540,17 +2500,58 @@ main (argc, argv)
                          if ((Uint)j >= maxlen_max)
                            resize_all_strings (maxlen_max<<1, FALSE, __FILE__, (long)__LINE__);
                          s1[j++] = *ptr_char++;
+                         /*
+                            Take a quoted SEP (colon) separator as is,
+                              but remove the quote character.
+                         */
+                         if (   (*ptr_char == *SEP)
+                             && (s1[j-1] == QUOTE_CHAR))
+                           s1[j-1] = *ptr_char++;
                        }
                       s1[j] = '\0';
+                      pseudo_blank_conversion (&s1);
 #  if USE_DE
-                      set_dvar (s1, lineptrs, INTERNAL_TXT, 0L, GLobal);
+                      set_tvar (s1, INTERNAL_TXT, 0L, GLobal);
 #  else /* !USE_DE */
-                      set_dvar (s1, lineptrs, _("Internal"), 0L, GLobal);
+                      set_tvar (s1, _("Internal"), 0L, GLobal);
 #  endif /* !USE_DE */
                       if (*ptr_char)
                         ptr_char++;
                     }
                  }
+                else
+                  if (*ptr_char == 'v')
+                   {
+                     ptr_char++;
+                     /*
+                        Global text variable definition found
+                          (e.g.: -va=1227:b=0514:c=a...):
+                          Try to scan this argument and store found MMDD
+                          dates into the date variable table.
+                     */
+                     while (*ptr_char)
+                      {
+                        /*
+                           Split the SEP (colon) separated list of date variables.
+                        */
+                        j = 0;
+                        while (   *ptr_char
+                               && (*ptr_char != *SEP))
+                         {
+                           if ((Uint)j >= maxlen_max)
+                             resize_all_strings (maxlen_max<<1, FALSE, __FILE__, (long)__LINE__);
+                           s1[j++] = *ptr_char++;
+                         }
+                        s1[j] = '\0';
+#  if USE_DE
+                        set_dvar (s1, lineptrs, INTERNAL_TXT, 0L, GLobal);
+#  else /* !USE_DE */
+                        set_dvar (s1, lineptrs, _("Internal"), 0L, GLobal);
+#  endif /* !USE_DE */
+                        if (*ptr_char)
+                          ptr_char++;
+                      }
+                   }
 #endif /* USE_RC */
           }
          /*
@@ -2872,59 +2873,10 @@ main (argc, argv)
                && year)
            || is_fiscal_year))
      date_enables_year = TRUE;
-   /*
-      Manage quoted or unquoted PSEUDO_BLANK characters of some option arguments.
-   */
    if (rc_filename != (char *)NULL)
-     if (strchr(rc_filename, PSEUDO_BLANK) != (char *)NULL)
-      {
-        ptr_optarg=ptr_char = rc_filename;
-        while (*ptr_char)
-         {
-           if (*ptr_char == PSEUDO_BLANK)
-            {
-              ptr_char++;
-              *ptr_optarg++ = ' ';
-            }
-           else
-             if (*ptr_char == QUOTE_CHAR)
-              {
-                ptr_char++;
-                if (*ptr_char == PSEUDO_BLANK)
-                  *ptr_optarg++ = *ptr_char++;
-                else
-                  *ptr_optarg++ = QUOTE_CHAR;
-              }
-             else
-               *ptr_optarg++ = *ptr_char++;
-         }
-        *ptr_optarg = '\0';
-      }
+     pseudo_blank_conversion (&rc_filename);
    if (rc_filter_text != (char *)NULL)
-     if (strchr(rc_filter_text, PSEUDO_BLANK) != (char *)NULL)
-      {
-        ptr_optarg=ptr_char = rc_filter_text;
-        while (*ptr_char)
-         {
-           if (*ptr_char == PSEUDO_BLANK)
-            {
-              ptr_char++;
-              *ptr_optarg++ = ' ';
-            }
-           else
-             if (*ptr_char == QUOTE_CHAR)
-              {
-                ptr_char++;
-                if (*ptr_char == PSEUDO_BLANK)
-                  *ptr_optarg++ = *ptr_char++;
-                else
-                  *ptr_optarg++ = QUOTE_CHAR;
-              }
-             else
-               *ptr_optarg++ = *ptr_char++;
-         }
-        *ptr_optarg = '\0';
-      }
+     pseudo_blank_conversion (&rc_filter_text);
 #endif /* USE_RC */
    /*
       Check whether the arguments of command line are valid.
@@ -4096,6 +4048,17 @@ check_command_line (argc, argv)
                         case SYM_EXPORT_LOCAL_TVARS:
                           rc_export_ltvar_flag = TRUE;
                           break;
+                        case SYM_HEADING_TEXT:
+                          option = strchr(s2, *LARG_SEP) + 1;
+                          rc_heading_text = (char *)my_realloc ((VOID_PTR)rc_heading_text,
+                                                                strlen(option)+1+2,
+                                                                ERR_NO_MEMORY_AVAILABLE,
+                                                                __FILE__, ((long)__LINE__)-3L,
+                                                                "rc_heading_text", 0);
+                          strcpy(rc_heading_text, "0 ");
+                          strcat(rc_heading_text, option);
+                          pseudo_blank_conversion (&rc_heading_text);
+                          break;
                         case SYM_IGNORE_CASE:
                           rc_ignore_case_flag = TRUE;
                           break;
@@ -4845,14 +4808,26 @@ LABEL_short_option:
                    option++;
 #if USE_DE
                    special_calsheet_flag = TRUE;
+                   if (!year_flag)
+                     out_rows = J_OUT_ROWS;
 #else /* !USE_DE */
 #  ifdef GCAL_NLS
                    if (is_en)
-                     special_calsheet_flag = FALSE;
+                    {
+                      special_calsheet_flag = FALSE;
+                      if (!year_flag)
+                        out_rows = S_OUT_ROWS;
+                    }
                    else
-                     special_calsheet_flag = TRUE;
+                    {
+                      special_calsheet_flag = TRUE;
+                      if (!year_flag)
+                        out_rows = J_OUT_ROWS;
+                    }
 #  else /* !GCAL_NLS */
                    special_calsheet_flag = FALSE;
+                   if (!year_flag)
+                     out_rows = S_OUT_ROWS;
 #  endif /* !GCAL_NLS */
 #endif /* !USE_DE */
                    if (*option)
@@ -5520,37 +5495,7 @@ LABEL_short_option:
                       if ((Uint)len >= maxlen_max)
                         resize_all_strings (len+1, FALSE, __FILE__, (long)__LINE__);
                       strcpy(s2, option);
-                      /*
-                         Manage quoted or unquoted PSEUDO_BLANK characters
-                           of the option argument.
-                      */
-                      if (strchr(s2, PSEUDO_BLANK) != (char *)NULL)
-                       {
-                         auto char  *ptr_optarg;
-
-
-                         ptr_optarg=ptr_char = s2;
-                         while (*ptr_char)
-                          {
-                            if (*ptr_char == PSEUDO_BLANK)
-                             {
-                               ptr_char++;
-                               *ptr_optarg++ = ' ';
-                             }
-                            else
-                              if (*ptr_char == QUOTE_CHAR)
-                               {
-                                 ptr_char++;
-                                 if (*ptr_char == PSEUDO_BLANK)
-                                   *ptr_optarg++ = *ptr_char++;
-                                 else
-                                   *ptr_optarg++ = QUOTE_CHAR;
-                               }
-                              else
-                                *ptr_optarg++ = *ptr_char++;
-                          }
-                         *ptr_optarg = '\0';
-                       }
+                      pseudo_blank_conversion (&s2);
                       /*
                          And write the option argument into the temporary file.
                       */
@@ -5713,32 +5658,35 @@ LABEL_short_option:
                    if (*option)
                     {
                       if (rc_grp_sep == (char *)NULL)
-                        rc_grp_sep = (char *)my_malloc (strlen(option)+1,
+                        rc_grp_sep = (char *)my_malloc (strlen(option)+1+2,
                                                         ERR_NO_MEMORY_AVAILABLE,
                                                         __FILE__, ((long)__LINE__)-2L,
                                                         "rc_grp_sep", 0);
                       else
                         rc_grp_sep = (char *)my_realloc ((VOID_PTR)rc_grp_sep,
-                                                         strlen(option)+1,
+                                                         strlen(option)+1+2,
                                                          ERR_NO_MEMORY_AVAILABLE,
                                                          __FILE__, ((long)__LINE__)-3L,
                                                          "rc_grp_sep", 0);
-                      strcpy(rc_grp_sep, option);
+                      strcpy(rc_grp_sep, "0 ");
+                      strcat(rc_grp_sep, option);
+                      pseudo_blank_conversion (&rc_grp_sep);
                     }
                    else
                     {
                       if (rc_grp_sep == (char *)NULL)
-                        rc_grp_sep = (char *)my_malloc (strlen(RC_GROUP_SEP)+1,
+                        rc_grp_sep = (char *)my_malloc (strlen(RC_GROUP_SEP)+1+2,
                                                         ERR_NO_MEMORY_AVAILABLE,
                                                         __FILE__, ((long)__LINE__)-2L,
                                                         "rc_grp_sep", 0);
                       else
                         rc_grp_sep = (char *)my_realloc ((VOID_PTR)rc_grp_sep,
-                                                         strlen(RC_GROUP_SEP)+1,
+                                                         strlen(RC_GROUP_SEP)+1+2,
                                                          ERR_NO_MEMORY_AVAILABLE,
                                                          __FILE__, ((long)__LINE__)-3L,
                                                          "rc_grp_sep", 0);
-                      strcpy(rc_grp_sep, RC_GROUP_SEP);
+                      strcpy(rc_grp_sep, "0 ");
+                      strcat(rc_grp_sep, RC_GROUP_SEP);
                     }
                    skip_option = TRUE;
                    break;
@@ -7330,14 +7278,15 @@ eliminate_invalid_data ()
        && !(*month_list).ml_year)
      (*month_list).ml_year = year;
    /*
-      Set default amount of month rows and columns according to calendar format.
+      Set amount of month rows and columns according to the selected
+        or default year calendar sheet format.
    */
    if (   is_3month_mode
        || is_3month_mode2)
     {
       /*
-         Set fixed amount of month rows and columns for 3 month mode;
-           the `-b<>' option is ignored.
+         Set fixed amount of month rows and columns for 3 month mode
+           calendar sheets; the `-b<>' option is ignored.
       */
       if (special_calsheet_flag)
        {
@@ -7381,30 +7330,8 @@ eliminate_invalid_data ()
    else
     {
       /*
-         Set the default amount of month columns according to calendar format.
-      */
-      if (special_calsheet_flag)
-       {
-         if (cal_special_flag)
-           out_cols = JI_OUT_COLS;
-         else
-           if (cal_both_dates_flag)
-             out_cols = BI_OUT_COLS;
-           else
-             out_cols = SI_OUT_COLS;
-       }
-      else
-       {
-         if (cal_special_flag)
-           out_cols = J_OUT_COLS;
-         else
-           if (cal_both_dates_flag)
-             out_cols = B_OUT_COLS;
-           else
-             out_cols = S_OUT_COLS;
-       }
-      /*
-         Set the amount of month columns according to calendar format.
+         Set the number of month columns according to year calendar sheet style
+           that is either given by the `-b<>' option or by the default value.
       */
       switch (out_rows)
        {
@@ -7415,10 +7342,10 @@ eliminate_invalid_data ()
            out_cols = 6;
            break;
          case 3:
-           out_cols = 4;
+           out_cols = S_OUT_COLS;
            break;
          case 4:
-           out_cols = 3;
+           out_cols = J_OUT_COLS;
            break;
          case 6:
            out_cols = 2;
@@ -7428,28 +7355,44 @@ eliminate_invalid_data ()
            break;
          default:
            /*
-              Set default amounts of month rows according to calendar format.
+              This case MUST be an internal error!
            */
-           if (special_calsheet_flag)
-            {
-              if (cal_special_flag)
-                out_rows = JI_OUT_ROWS;
-              else
-                if (cal_both_dates_flag)
-                  out_rows = BI_OUT_ROWS;
-                else
-                  out_rows = SI_OUT_ROWS;
-            }
-           else
-            {
-              if (cal_special_flag)
-                out_rows = J_OUT_ROWS;
-              else
-                if (cal_both_dates_flag)
-                  out_rows = B_OUT_ROWS;
-                else
-                  out_rows = S_OUT_ROWS;
-            }
+           abort();
+       }
+      /*
+         If no `-b<>' option is given, set the year calendar sheet style
+           according to the `-j' or `jb' options if given.
+      */
+      if (!year_flag)
+       {
+         if (special_calsheet_flag)
+          {
+            if (cal_special_flag)
+             {
+               out_rows = JI_OUT_ROWS;
+               out_cols = JI_OUT_COLS;
+             }
+            else
+              if (cal_both_dates_flag)
+               {
+                 out_rows = BI_OUT_ROWS;
+                 out_cols = BI_OUT_COLS;
+               }
+          }
+         else
+          {
+            if (cal_special_flag)
+             {
+               out_rows = J_OUT_ROWS;
+               out_cols = J_OUT_COLS;
+             }
+            else
+              if (cal_both_dates_flag)
+               {
+                 out_rows = B_OUT_ROWS;
+                 out_cols = B_OUT_COLS;
+               }
+          }
        }
     }
    /*
@@ -7510,6 +7453,49 @@ eliminate_invalid_data ()
       len = (int)strlen(day_suffix (i));
       if (len > len_suffix_max)
         len_suffix_max = len;
+    }
+}
+
+
+
+   LOCAL void
+pseudo_blank_conversion (text)
+   char **text;
+/*
+   Perform conversion of quoted or unquoted PSEUDO_BLANK characters
+     in TEXT to real ' ' blank characters.
+*/
+{
+   if (strchr(*text, PSEUDO_BLANK) != (char *)NULL)
+    {
+      auto char  *ptr_char;
+      auto char  *ptr2_char;
+
+
+      /*
+         Manage quoted or unquoted PSEUDO_BLANK characters.
+      */
+      ptr_char=ptr2_char = *text;
+      while (*ptr2_char)
+       {
+         if (*ptr2_char == PSEUDO_BLANK)
+          {
+            ptr2_char++;
+            *ptr_char++ = ' ';
+          }
+         else
+           if (*ptr2_char == QUOTE_CHAR)
+            {
+              ptr2_char++;
+              if (*ptr2_char == PSEUDO_BLANK)
+                *ptr_char++ = *ptr2_char++;
+              else
+                *ptr_char++ = QUOTE_CHAR;
+            }
+           else
+             *ptr_char++ = *ptr2_char++;
+       }
+      *ptr_char = '\0';
     }
 }
 

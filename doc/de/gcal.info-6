@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -118,7 +118,7 @@ Ausgabe aller Meldungstexte verwendet, sofern keine andere Landessprache
 verwendet werden soll.  Werden Meldungstexte in einer anderen
 Landessprache gewünscht, so werden diese von Gcal aus einem so
 genannten _message catalog_ zur Laufzeit eingelesen.  Die folgenden
-Landessprachen werden von Gcal 3.00 unterstützt:
+Landessprachen werden von Gcal 3.01 unterstützt:
 
 *Landessprache*          *Sprachkode*
 
@@ -766,7 +766,7 @@ und nicht etwa auf einen `W' Großbuchstaben.
 
 Der einfachste Weg, um ein groß-/ kleinschreibungsunabhängiges Zeichen
 aufzuspüren, ist die Benutzung einer Zeichenliste: `[Ww]'.  Wie auch
-immer, so kann es doch sehr lästig sein, falls soetwas des öfteren
+immer, so kann es doch sehr lästig sein, falls so etwas des öfteren
 gebraucht wird; und unglücklicherweise kann der reguläre Ausdruck
 dadurch schwer lesbar werden.  Abhilfe bietet hier Gcal's
 `--ignore-case' Option, welche die Unterschiede zwischen Groß- und

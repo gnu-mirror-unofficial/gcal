@@ -1,13 +1,13 @@
-#  $Id: makefile.tcc 0.17 2000/03/05 00:01:07 tom Exp $
+#  $Id: makefile.tcc 0.18 2000/06/14 00:01:08 tom Exp $
 ###############################################################################
 #
 #  Turbo-C (v1.0++)
 #  Makefile to create the extended `gcal' program.
 #
-#  Copyright (c) 1994-1997, 2000  Thomas Esken          <esken@uni-muenster.de>
-#                                 Im Hagenfeld 84
-#                                 D-48147 M"unster
-#                                 GERMANY
+#  Copyright (c) 1994, 95, 96, 1997, 2000  Thomas Esken      <esken@gmx.net>
+#                                          Im Hagenfeld 84
+#                                          D-48147 M"unster
+#                                          GERMANY
 #
 ###############################################################################
 #

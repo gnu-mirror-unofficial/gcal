@@ -1,8 +1,8 @@
 ; Some Sun based astronomical times and data for Gcal-2.20 or newer
 ;
-; $Id: sdata.rc 0.06 2000/04/10 00:00:06 tom Exp $
+; $Id: sdata.rc 0.07 2000/06/30 00:00:07 tom Exp $
 ;
-; Copyright (c) 2000   Thomas Esken      <esken@uni-muenster.de>
+; Copyright (c) 2000   Thomas Esken      <esken@gmx.net>
 ;                      Im Hagenfeld 84
 ;                      D-48147 M"unster
 ;                      GERMANY
@@ -101,7 +101,7 @@ $p DN3 G sun's elevation angle      at sun's noon       %sN$c,$z
 $p DN4 sun/moon noon delta                              %sG$c,$z
 ;
 $p ER0 astronomical twilight starts at                  %o9$c,$z
-$p FR0 amateur-astonomers twilight starts at            %o8$c,$z
+$p FR0 amateur-astronomers twilight starts at           %o8$c,$z
 $p GR0 nautical twilight starts at                      %o7$c,$z
 $p HR0 civil twilight starts at                         %o6$c,$z
 $p IR0 sun's upper limb (standard rise) rises at        %o5$c,$z
@@ -137,26 +137,26 @@ $p ISA G sun/moon elevation delta   at sun's set        %sD$c,$z
 $p ISB sun/moon standard set delta                      %sH$c,$z
 $p HS1 civil twilight ends at                           %s6$c,$z
 $p GS1 nautical twilight ends at                        %s7$c,$z
-$p FS1 amateur-astonomers twilight ends at              %s8$c,$z
+$p FS1 amateur-astronomers twilight ends at             %s8$c,$z
 $p ES1 astronomical twilight ends at                    %s9$c,$z
 ;
-$p QE5 day length astronomical twilight                 %u9$c,$z
-$p QE6 night length astronomical twilight               %z9$c,$z
-$p QF5 day length amateur-astonomers twilight           %u8$c,$z
-$p QF6 night length amateur-astonomers twilight         %z8$c,$z
-$p QG5 day length nautical twilight                     %u7$c,$z
-$p QG6 night length nautical twilight                   %z7$c,$z
-$p QH5 day length civil twilight                        %u6$c,$z
-$p QH6 night length civil twilight                      %z6$c,$z
-$p QI5 day length sun's upper limb (standard r/s)       %u5$c,$z
-$p QI6 night length sun's upper limb (standard r/s)     %z5$c,$z
-$p QJ5 day length sun's center                          %u4$c,$z
-$p QJ6 night length sun's center                        %z4$c,$z
-$p QK5 day length math-horizon sun's upper limb         %u3$c,$z
-$p QK6 night length math-horizon sun's upper limb       %z3$c,$z
-$p QL5 day length math-horizon sun's center             %u2$c,$z
-$p QL6 night length math-horizon sun's center           %z2$c,$z
-$p QM5 day length shadow length 2x object height        %uQ$c,$z
-$p QM6 night length shadow length 2x object height      %zQ$c,$z
-$p QN5 day length shadow length 1x object height        %uR$c,$z
-$p QN6 night length shadow length 1x object height      %zR$c,$z
+$p QE5 astronomical twilight visible                    %u9$c,$z
+$p QE6 astronomical twilight non-visible                %z9$c,$z
+$p QF5 amateur-astronomers twilight visible             %u8$c,$z
+$p QF6 amateur-astronomers twilight non-visible         %z8$c,$z
+$p QG5 nautical twilight visible                        %u7$c,$z
+$p QG6 nautical twilight non-visible                    %z7$c,$z
+$p QH5 civil twilight visible                           %u6$c,$z
+$p QH6 civil twilight non-visible                       %z6$c,$z
+$p QI5 sun's upper limb (standard r/s) visible          %u5$c,$z
+$p QI6 sun's upper limb (standard r/s) non-visible      %z5$c,$z
+$p QJ5 sun's center visible                             %u4$c,$z
+$p QJ6 sun's center non-visible                         %z4$c,$z
+$p QK5 math-horizon sun's upper limb visible            %u3$c,$z
+$p QK6 math-horizon sun's upper limb non-visible        %z3$c,$z
+$p QL5 math-horizon sun's center visible                %u2$c,$z
+$p QL6 math-horizon sun's center non-visible            %z2$c,$z
+$p QM5 shadow length 2x object height visible           %uQ$c,$z
+$p QM6 shadow length 2x object height non-visible       %zQ$c,$z
+$p QN5 shadow length 1x object height visible           %uR$c,$z
+$p QN6 shadow length 1x object height non-visible       %zR$c,$z

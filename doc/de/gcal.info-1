@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -64,8 +64,8 @@ einige andere Kalendersysteme, zum Beispiel den chinesischen und
 japanischen Kalender, den hebräischen Kalender und den bürgerlichen
 islamischen Kalender.
 
-Das ist die Ausgabe 3.00 von `Gcal, ein erweitertes Kalenderprogramm',
-7 Juni 2000, für die Version 3.00 der GNU Implementierung
+Das ist die Ausgabe 3.01 von `Gcal, ein erweitertes Kalenderprogramm',
+24 Juni 2000, für die Version 3.01 der GNU Implementierung
 von `cal' und `calendar'.
 
 Jedwede Vorschläge, Verbesserungen, Erweiterungen, Fehlerberichte, Geld-
@@ -333,7 +333,7 @@ Die in die ewige Feiertagsliste eingebrachten Feiertage "früher" Jahre
 --also in etwa die im Zeitraum A.D. 30 bis zur Mitte des 20'ten
 Jahrhunderts-- werden mit ziemlicher Sicherheit nicht den Ansprüchen
 genügen, die Historiker an eine solche Liste haben.  Gcal kann nicht als
-eine vollständige und historisch korrekte Datenbasis aufgefasst werden,
+eine vollständige und historisch korrekte Datenbasis aufgefaßt werden,
 und ist auch nicht zu diesem Zweck erstellt worden!  Das liegt darin
 begründet, daß sowohl die territorialen Grenzen und Bezeichnungen der
 Staatsgebilde sowie deren Besiedelung in früheren Zeiten teilweise ganz
@@ -368,7 +368,7 @@ welche die noch fehlenden Kalendersysteme handhaben, so wäre ich auch
 sehr erfreut, wenn Sie mit mir Kontakt aufnehmen.
 
 Ich habe die länderspezifischen Feiertagsdaten so gut wie ich nur
-konnte erfasst, aber ich kann nicht garantieren, daß mir während der
+konnte erfaßt, aber ich kann nicht garantieren, daß mir während der
 Datenerfassung keinerlei Fehler unterlaufen sind.  So kann es durchaus
 sein, daß einige länderspezifische Feiertagslisten fehlerbehaftet sind.
 
@@ -1171,7 +1171,7 @@ Kalender Optionen
      Die ewige Feiertagsliste wird zusätzlich mit chinesischen
      Feiertagen ausgestattet (nur für Jahre nach A.D. 1644).  Für Jahre
      bis A.D. 1928 beruhen alle vorgenommenen Berechnungen fest auf
-     Bejing Ortszeit, für spätere Jahre fest auf der Zeitzone GMT-8.
+     Beijing Ortszeit, für spätere Jahre fest auf der Zeitzone GMT-8.
      *Note Vorwort::, für weitere Details.
 
 `--christian-holidays'
@@ -1199,7 +1199,7 @@ Kalender Optionen
 `--japanese-holidays'
      Die ewige Feiertagsliste wird zusätzlich mit japanischen Feiertagen
      ausgestattet (nur für Jahre nach A.D. 1644).  Für Jahre bis A.D.
-     1887 beruhen alle vorgenommenen Berechnungen fest auf Bejing
+     1887 beruhen alle vorgenommenen Berechnungen fest auf Beijing
      Ortszeit, für spätere Jahre fest auf der Zeitzone GMT-9.
 
 `--multicultural-new-year-holidays'
@@ -1269,7 +1269,7 @@ Kalender Optionen
 
      Derzeit berücksichtigt Gcal die folgenden Landeskodes, wobei Länder
      die mit einem `#' Zeichen markiert sind, derzeit nur unvollständig
-     erfasste Feiertage enthalten:
+     erfaßte Feiertage enthalten:
 
     `AD'
           Andorra
@@ -1377,7 +1377,7 @@ Kalender Optionen
           Bermuda
 
     `BN'
-          Brunei Darussalam
+          Brunei
 
     `BO'
           Bolivien
@@ -1782,7 +1782,7 @@ Kalender Optionen
           Kirgisien
 
     `KH'
-          Kambotscha #
+          Kambodscha #
 
     `KI'
           Kiribati #

@@ -1,8 +1,8 @@
 ; Some Moon based astronomical times and data for Gcal-2.20 or newer
 ;
-; $Id: mdata.rc 0.06 2000/04/10 00:00:06 tom Exp $
+; $Id: mdata.rc 0.07 2000/06/30 00:00:07 tom Exp $
 ;
-; Copyright (c) 2000   Thomas Esken      <esken@uni-muenster.de>
+; Copyright (c) 2000   Thomas Esken      <esken@gmx.net>
 ;                      Im Hagenfeld 84
 ;                      D-48147 M"unster
 ;                      GERMANY
@@ -143,11 +143,11 @@ $p ESB G moon/sun azimuth delta     at moon's set       %)H$c,$z
 $p ESC G moon/sun elevation delta   at moon's set       %)G$c,$z
 $p ESD moon/sun standard set delta                      %)K$c,$z
 ;
-$p QE6 day length moon's upper limb (standard r/s)      %[5$c,$z
-$p QE7 night length moon's upper limb (standard r/s)    %]5$c,$z
-$p QF6 day length moon's center                         %[4$c,$z
-$p QF7 night length moon's center                       %]4$c,$z
-$p QG6 day length math-horizon moon's upper limb        %[3$c,$z
-$p QG7 night length math-horizon moon's upper limb      %]3$c,$z
-$p QH6 day length math-horizon moon's center            %[2$c,$z
-$p QH7 night length math-horizon moon's center          %]2$c,$z
+$p QE6 moon's upper limb (standard r/s) visible         %[5$c,$z
+$p QE7 moon's upper limb (standard r/s) non-visible     %]5$c,$z
+$p QF6 moon's center visible                            %[4$c,$z
+$p QF7 moon's center non-visible                        %]4$c,$z
+$p QG6 math-horizon moon's upper limb visible           %[3$c,$z
+$p QG7 math-horizon moon's upper limb non-visible       %]3$c,$z
+$p QH6 math-horizon moon's center visible               %[2$c,$z
+$p QH7 math-horizon moon's center non-visible           %]2$c,$z

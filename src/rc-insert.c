@@ -2,7 +2,7 @@
 *  rc-insert.c:  Inserts a line (of a resource file) into `rc_elems_table[]'.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -35,7 +35,7 @@
 
 #if USE_RC
 #  ifdef RCSID
-static char rcsid[]="$Id: rc-insert.c 3.00 2000/05/24 03:00:00 tom Exp $";
+static char rcsid[]="$Id: rc-insert.c 3.01 2000/06/20 03:00:01 tom Exp $";
 #  endif
 
 
@@ -299,14 +299,16 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems, len_date, 
          If `--filter-period=ARG' is given and ARG matches the
            date of the fixed date, suppress this fixed date!
       */
-      if (rc_filter_period != (char *)NULL)
+      if (   (rc_filter_period != (char *)NULL)
+          && (line_number != SPECIAL_VALUE))
         print_line = rc_valid_period (rc_filter_period, d, m, y, incr_year, decr_year);
       /*
          If `--filter-day=ARG' is given and ARG matches the
            date of the fixed date, suppress this fixed date!
       */
       if (   print_line
-          && (rc_filter_day != (char *)NULL))
+          && (rc_filter_day != (char *)NULL)
+          && (line_number != SPECIAL_VALUE))
         print_line = rc_valid_day (rc_filter_day, d, m, year+incr_year-decr_year);
       if (!print_line)
         ok = TRUE;
@@ -3326,39 +3328,42 @@ LABEL_get_second_coordinate:
          else
            ok = TRUE;
        }
-      /*
-         Check whether a period to exclude is marked in the maps and
-           if so, avoid displaying the fixed date entry.
-      */
-      if (   ie_date_maps_set
-          && (   *inclusive_date_map
-              || *exclusive_date_map))
+      if (line_number != SPECIAL_VALUE)
        {
-         i = day_of_year (d, m, year+incr_year-decr_year);
-         if (   *inclusive_date_map
-             && *exclusive_date_map)
+         /*
+            Check whether a period to exclude is marked in the maps and
+              if so, avoid displaying the fixed date entry.
+         */
+         if (   ie_date_maps_set
+             && (   *inclusive_date_map
+                 || *exclusive_date_map))
           {
-            if (   !inclusive_date_map[i]
-                || !exclusive_date_map[i])
-              print_line = FALSE;
+            i = day_of_year (d, m, year+incr_year-decr_year);
+            if (   *inclusive_date_map
+                && *exclusive_date_map)
+             {
+               if (   !inclusive_date_map[i]
+                   || !exclusive_date_map[i])
+                 print_line = FALSE;
+             }
+            else
+              if (*inclusive_date_map)
+               {
+                 if (!inclusive_date_map[i])
+                   print_line = FALSE;
+               }
+              else
+                if (!exclusive_date_map[i])
+                  print_line = FALSE;
           }
-         else
-           if (*inclusive_date_map)
-            {
-              if (!inclusive_date_map[i])
-                print_line = FALSE;
-            }
-           else
-             if (!exclusive_date_map[i])
-               print_line = FALSE;
+         /*
+            Check whether a weekday to exclude is marked in the maps and
+              if so, avoid displaying the fixed date entry.
+         */
+         if (   print_line
+             && *date_text)
+           print_line = rc_valid_day (date_text, d, m, year+incr_year-decr_year);
        }
-      /*
-         Check whether a weekday to exclude is marked in the maps and
-           if so, avoid displaying the fixed date entry.
-      */
-      if (   print_line
-          && *date_text)
-        print_line = rc_valid_day (date_text, d, m, year+incr_year-decr_year);
       if (print_line)
        {
          s1[k]=s6[kk] = '\0';
@@ -3385,7 +3390,8 @@ LABEL_get_second_coordinate:
               the text of the fixed date, suppress this fixed date!
          */
          if (   print_line
-             && (rc_filter_text != (char *)NULL))
+             && (rc_filter_text != (char *)NULL)
+             && (line_number != SPECIAL_VALUE))
           {
 #  if HAVE_GNU_RE_COMPILE_PATTERN
             print_line = (Bool)(re_search(&regpattern, s6, kk, 0, kk, (struct re_registers *)NULL) >= 0);
@@ -3529,7 +3535,8 @@ LABEL_get_second_coordinate:
        }
       if (print_line)
        {
-         if (rc_enable_fn_flag)
+         if (   rc_enable_fn_flag
+             && (line_number != SPECIAL_VALUE))
           {
             sprintf(s6, "%0*d%02d%02d %c%s#%05ld%c",
                     len_year_max, year+incr_year-decr_year, m, d,
@@ -3557,7 +3564,8 @@ LABEL_get_second_coordinate:
               Week 53/1   == 7 chars text "|53/1| "  -> no filler text.
               Week 1...52 == 5 chars text "|nn| "    -> 2 chars filler text.
          */
-         if (rc_week_number_flag)
+         if (   rc_week_number_flag
+             && (line_number != SPECIAL_VALUE))
            if (week_number (d, m, year+incr_year-decr_year, iso_week_number, start_day) <= 0)
              len_fil_wt = 2;
          /*
@@ -3566,7 +3574,8 @@ LABEL_get_second_coordinate:
               avoid insertation of actual fixed date!
          */
          i = 1;
-         if (*rc_elems)
+         if (   *rc_elems
+             && (line_number != SPECIAL_VALUE))
            i = strcmp(s6, rc_elems_table[*rc_elems-1]);
          /*
             Store the constructed "raw" line in `rc_elems_table[]'.
@@ -3587,7 +3596,8 @@ LABEL_get_second_coordinate:
                                                      __FILE__, ((long)__LINE__)-3L,
                                                      "rc_elems_table[rc_elems_max]", rc_elems_max);
              }
-            if (rc_suppr_text_part_flag)
+            if (   rc_suppr_text_part_flag
+                && (line_number != SPECIAL_VALUE))
              {
                rc_elems_table[*rc_elems] = (char *)my_malloc (j+1,
                                                               ERR_NO_MEMORY_AVAILABLE,

@@ -1,6 +1,6 @@
-#  $Id: v2x2v300.pl 0.02 2000/05/30 00:00:02 tom Exp $
+#  $Id: v2x2v300.pl 0.03 2000/06/17 00:00:03 tom Exp $
 #
-#  v2x2v300.pl:  Very simple, slow and silly AWK script for converting
+#  v2x2v300.pl:  Very simple, slow and silly Perl script for converting
 #                  resource files of former Gcal versions, i.e. v2.20 and
 #                  v2.40, into the style which is used by Gcal-3.00 or newer.
 #                  This means, all `%?...' special texts which are obsolete

@@ -68,6 +68,14 @@ Table of incompatibilities:
                or
                $ perl v2x2v300.pl FILE-OLD.rc > FILE-v300.rc
 
+          It is very possible that the conversion done by using the
+          `v2x2v300' AWK respectively Perl scripts is not sufficient,
+          i.e. the resulting file contains unwanted Gcal special texts
+          or some of the required Gcal special texts are crippled or
+          protected by a `\' character.  In this case, you have to edit
+          the resulting file manually to correct the broken text.
+          Sorry!
+
         - By reason of implementing the optional format instruction
           which can be used by many date format texts now, some format
           elements which can be individually specified by the

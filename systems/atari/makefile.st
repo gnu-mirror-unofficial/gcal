@@ -1,4 +1,4 @@
-#  $Id: makefile.st 0.17 2000/03/05 00:01:07 tom Exp $
+#  $Id: makefile.st 0.18 2000/06/14 00:01:08 tom Exp $
 ###############################################################################
 #
 #  Atari ST GNU-C
@@ -8,10 +8,10 @@
 #  It can be modified (for efficiency) for an Atari TT according
 #  to the instructions given below.
 #
-#  Copyright (c) 1994-1996, 2000  Thomas Esken          <esken@uni-muenster.de>
-#                                 Im Hagenfeld 84
-#                                 D-48147 M"unster
-#                                 GERMANY
+#  Copyright (c) 1994, 95, 1996, 2000  Thomas Esken      <esken@gmx.net>
+#                                      Im Hagenfeld 84
+#                                      D-48147 M"unster
+#                                      GERMANY
 #
 ###############################################################################
 #

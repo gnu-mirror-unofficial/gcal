@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -58,8 +58,8 @@ precisely enough for most civil purposes.  Gcal supports some other
 calendar systems, for example the Chinese calendar, the Hebrew calendar
 and the civil Islamic calendar, too.
 
-  This is Edition 3.00 of `Gcal, an Extended Calendar Program',
-7 June 2000, for the 3.00 version of the GNU implementation
+  This is Edition 3.01 of `Gcal, an Extended Calendar Program',
+24 June 2000, for the 3.01 version of the GNU implementation
 of `cal' and `calendar'.
 
   Any suggestions, improvements, extensions, bug reports, donations,
@@ -251,10 +251,10 @@ data, sunset, sunrise, different twilight times and other Sun based
 data, zodiacal markers, solar and lunar eclipses, equinoxes and
 solstices.  Other gimmicks like biorhythm calculation and the
 computation of a distance between two geographical point locations and
-their course angles (true tracks) are also done by it now, plus alot
+their course angles (true tracks) are also done by it now, plus a lot
 more.
 
-  The accurancy of most of the astronomical calculations done by Gcal is
+  The accuracy of most of the astronomical calculations done by Gcal is
 low because it is really hard to perform accurate astronomical
 predictions more that 100 years ahead.  Of course, this also has
 consequences for some country specific holidays which are based on such
@@ -295,7 +295,7 @@ of this software.
   Some words to the build-in country specific holidays now...
 
   As you certainly know, there are several other calendar systems
-actually exsting around the world among the Gregorian calendar.  The
+actually existing around the world among the Gregorian calendar.  The
 Gregorian calendar that Gcal mainly represents as a software is only
 one calendar of many others, but it is that one which is most respected
 around the world today.  Even countries which use another calendar
@@ -305,10 +305,10 @@ administrative purposes.
   But when Gcal offers the ability to include holidays from a definite
 country into its eternal holiday list, it is possible that not all
 holidays are displayed which are respected in that country.  One reason
-is that my various sources simply don't tell me about the existance of
+is that my various sources simply don't tell me about the existence of
 a holiday.  A second reason is that the holiday is just designed or
 changed or removed by political or society reality during Gcal's
-developement phase.  And another reason is that the method to calculate
+development phase.  And another reason is that the method to calculate
 a holiday is not build-in Gcal yet.  This case is marked by a `#'
 character behind the country name in the list of countries, which are
 respected by Gcal.  *Note Calendar option
@@ -317,13 +317,13 @@ list.
 The holidays of "early" years that are included into the eternal holiday
 list --i.e. those within the period AD 30 until the midth of the 20th
 century-- are certainly not accomplishing the requirements of
-historicans to such a list.  Gcal cannot be understood as a complete and
+historians to such a list.  Gcal cannot be understood as a complete and
 historically correct data base, and it is not designed for that purpose!
 This is caused by the fact that the territorial borders and names of the
 national structures and the settlement in earlier times was partly quite
 different as it is nowadays.  Moreover, I am yet lacking reliable
 information that tells me the precise date of the introduction of a
-holiday in a region.  Here I appeal to the historicans to support me
+holiday in a region.  Here I appeal to the historians to support me
 with the concrete country and culture based data if they are bothered
 by this fact and they want to have it removed.
 
@@ -406,27 +406,27 @@ determined quite astronomically.  So don't be surprised too much if
 some holiday dates differ from the religious Islamic calendar about
 +/- 1...2 days in some years.
 The main difficulty to implement the religious Islamic calendar
-correctly into Gcal are the several different criterias that are
-existing for the first sighting of the crescrent Moon after a New Moon
+correctly into Gcal are the several different criteria that are
+existing for the first sighting of the crescent Moon after a New Moon
 phase -- that event, which defines the beginning of a new (lunar) month
 in the religious oriented Islamic calendar.  So on the one hand, there
-are quite astronomically-based criterias, and on the other hand, there
-are also quite religiously-based criterias.  Furthermore, the local
+are quite astronomically-based criteria, and on the other hand, there
+are also quite religiously-based criteria.  Furthermore, the local
 predominant weather conditions, the geographical co-ordinate of the
 observer's location and the kind of the observance method used also
-affect these criterias.  Moreover, to render all more difficult, I as
+affect these criteria.  Moreover, to render all more difficult, I as
 yet do not have any reliable information that tells me which kind of
 criteria is used in the countries (around 60 world-wide) which respect
-this religous Islamic calendar.  So due to all the above mentioned
+this religious Islamic calendar.  So due to all the above mentioned
 facts of problematic nature, this religious Islamic calendar is not
 included into Gcal yet.
 
   The Chinese (and Japanese) holidays also inserted into the country
 specific holiday list are calculated by using that algorithm as it is
-used by the Purple Mountain Observatory in Nanjing for determing the
+used by the Purple Mountain Observatory in Nanjing to determine the
 astronomical lunisolar Chinese calendar.  This calendar is obligatory
 for (the Peoples Republic of) China since 1929 and is determined
-annualy always new.  Nevertheless and strictly speaking, in the
+annually always new.  Nevertheless and strictly speaking, in the
 historic reality and depending on the region, the Chinese calendar,
 especially in the 17th and 18th century, was either calculated using
 this _modern_ algorithm, or by the use of a different method, so that a
@@ -438,12 +438,12 @@ calculated as result.
   This manual shows the possible use of the Gcal program only briefly
 and deliberately renounces to present the topics that are covered by
 this software arranged in a novel-like style.  The use of Gcal is
-illustrated in an examplary manner only!  A detailed description of all
+illustrated in an exemplary manner only!  A detailed description of all
 possible use is inexpedient here because there are simply too many of
-such possiblities which are caused by the existing variety of
+such possibilities which are caused by the existing variety of
 combinations of all useable modes of operation.
 
-  Furthermore, this manual does not contain detailed explainations about
+  Furthermore, this manual does not contain detailed explanations about
 the calendar systems supported by Gcal, nor it can be understood as a
 reference-book for the basics in celestial mechanics or spherical
 trigonometry!  A detailed discussion of the above topics is completely
@@ -451,7 +451,7 @@ beyond the scope of this manual.  If you are interested to learn more
 about these subjects, you unfortunately have to read the specific
 pertinent literature.
 
-  Any further errors occuring in the output of the above mentioned
+  Any further errors occurring in the output of the above mentioned
 holiday lists and in the astronomical calculations are my own fault,
 and are not intended to offend members of any culture, religion or
 profession!
@@ -462,7 +462,7 @@ File: gcal.info,  Node: Preface-Footnotes,  Up: Preface
   (1) I.e. no need to search for calendar information in the net so
 phone and Internet Service Provider (ISP) costs are reduced, and
 furthermore, neither searching for such information in books or data
-files nor the need to use several other software which alltogether do
+files nor the need to use several other software which altogether do
 what Gcal actually also does.
 
   (2) The "General Public License" of the Free Software Foundation.
@@ -527,7 +527,7 @@ arguments which are given further in the command line.
 can be found in the next chapter, which helps one to use Gcal in the
 most efficient and productive way possible.  After it follows the
 description how to use the eternal holiday list, and in the succeeding
-chapter, how to use the fixed date list.  Comprehensive explainations
+chapter, how to use the fixed date list.  Comprehensive explanations
 respectively summaries and tables to definite details or themes from
 other disciplines can be found in the numerous appendices.
 
@@ -674,7 +674,7 @@ way.  There are five different types of long-style options:
      given, any argument can be given to this option.  If an argument
      list is given, exactly one BAR argument may be selected from the
      given list.  If there is no argument chosen in this case, the
-     first BAR argument of the argument list is pre-selected by default.
+     first BAR argument of the argument list is preselected by default.
 
   4. `--foo=BAR|...|BAR'
      Option `--foo' requires exactly one BAR argument which must be
@@ -972,7 +972,7 @@ Global options
      `--force-highlighting' option was given or not.  This behavior of
      Gcal is an imperative necessity, because it is possible that the
      `mail' program cannot perform the mailing correctly.  Please pay
-     attention in this context to the further explainations concerning
+     attention in this context to the further explanations concerning
      the limitations of the _text part_ of a resource file line (*note
      Text part of a line::).
 
@@ -1075,7 +1075,7 @@ Calendar options
 `--chinese-holidays'
      Provide the eternal holiday list additionally with Chinese holidays
      (only for dates after AD 1644).  For dates until AD 1928 all
-     computations done are depending fixed on Bejing local time, for
+     computations done are depending fixed on Beijing local time, for
      later dates fixed on the timezone GMT-8.  *Note Preface::, for
      further details.
 
@@ -1101,7 +1101,7 @@ Calendar options
 `--japanese-holidays'
      Provide the eternal holiday list additionally with Japanese
      holidays (only for dates after AD 1644).  For dates until AD 1887
-     all computations done are depending fixed on Bejing local time,
+     all computations done are depending fixed on Beijing local time,
      for later dates fixed on the timezone GMT-9.
 
 `--multicultural-new-year-holidays'
@@ -1275,7 +1275,7 @@ Calendar options
           Bermuda
 
     `BN'
-          Brunei Darussalam
+          Brunei
 
     `BO'
           Bolivia
@@ -2327,14 +2327,14 @@ Calendar options
      default, is as follows:
 
           A leap year is any year which number can be divided by 4
-          without a remainder, and years ending in hundrets are no leap
+          without a remainder, and years ending in hundreds are no leap
           years unless they are divisible by 400.
 
      But the Eastern Orthodox churches compute leap years within the
      Gregorian calendar by using another rule:
 
           A leap year is any year which number can be divided by 4
-          without a remainder, and years ending in hundrets are leap
+          without a remainder, and years ending in hundreds are leap
           years, if a remainder of 2 or 6 occurs when such a year is
           divided by 9.
 
@@ -2610,7 +2610,7 @@ Calendar options
 
      Please note that it is possible to corrupt the calendars likewise
      the fixed date feature logically (which works correctly now for
-     the year in which the Gregorian Reformation has occured) if the
+     the year in which the Gregorian Reformation has occurred) if the
      argument of the `--gregorian-reform' option is not used with care.
 
 `--date-format=de|us|gb|TEXT'

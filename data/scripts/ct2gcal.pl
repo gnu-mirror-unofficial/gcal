@@ -1,13 +1,13 @@
-#  $Id: ct2gcal.pl 0.20 2000/01/12 00:02:00 tom Exp $
+#  $Id: ct2gcal.pl 0.21 2000/06/14 00:02:01 tom Exp $
 #
 #  ct2gcal.pl:  Very simple, slow and silly Perl script for converting
 #                 "[X]Calentool-2.3" appointments into the `gcal' format.
 #
 #
-#  Copyright (c) 1994-1996, 2000  Thomas Esken      <esken@uni-muenster.de>
-#                                 Im Hagenfeld 84
-#                                 D-48147 M"unster
-#                                 GERMANY
+#  Copyright (c) 1994, 95, 1996, 2000  Thomas Esken      <esken@gmx.net>
+#                                      Im Hagenfeld 84
+#                                      D-48147 M"unster
+#                                      GERMANY
 #
 #  This software doesn't claim completeness, correctness or usability.
 #  On principle I will not be liable for ANY damages or losses (implicit

@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -41,313 +41,313 @@ D-48147 Muenster; Germany    \____) ~ (____/    MotD : 2old2live, 2young2die
 
 
 Indirect:
-gcal.info-1: 1788
-gcal.info-2: 85240
-gcal.info-3: 147521
-gcal.info-4: 197430
-gcal.info-5: 234574
-gcal.info-6: 284405
-gcal.info-7: 332925
-gcal.info-8: 429605
-gcal.info-9: 488801
-gcal.info-10: 501015
-gcal.info-11: 576849
-gcal.info-12: 599856
-gcal.info-13: 649514
-gcal.info-14: 657356
+gcal.info-1: 1797
+gcal.info-2: 85233
+gcal.info-3: 149883
+gcal.info-4: 199792
+gcal.info-5: 236936
+gcal.info-6: 286764
+gcal.info-7: 335281
+gcal.info-8: 432014
+gcal.info-9: 491218
+gcal.info-10: 503432
+gcal.info-11: 579264
+gcal.info-12: 602271
+gcal.info-13: 651997
+gcal.info-14: 659839
 
 Tag Table:
 (Indirect)
-Node: Top1788
-Node: Preface8233
-Node: Preface-Footnotes19314
-Ref: Preface-Footnote-119373
-Ref: Preface-Footnote-219676
-Node: Gcal Introduction19745
-Node: Gcal Introduction-Footnotes23309
-Ref: Gcal Introduction-Footnote-123388
-Ref: Gcal Introduction-Footnote-223419
-Ref: Gcal Introduction-Footnote-323440
-Node: Invoking Gcal23459
-Node: Invoking Gcal-Footnotes24821
-Ref: Invoking Gcal-Footnote-124892
-Node: Command line arguments24982
-Node: Command line arguments-Footnotes26651
-Ref: Command line arguments-Footnote-126740
-Node: Options26778
-Node: Options-Footnotes30104
-Ref: Options-Footnote-130163
-Node: Common options30200
-Node: Global options31427
-Ref: x-response-file31595
-Ref: x-debug-internal32470
-Ref: x-debug-abort33007
-Ref: x-pager33223
-Ref: x-highlighting35952
-Ref: x-mail39931
-Node: Global options-Footnotes42059
-Ref: Global options-Footnote-142132
-Ref: Global options-Footnote-242198
-Ref: Global options-Footnote-342248
-Ref: Global options-Footnote-442294
-Ref: Global options-Footnote-542337
-Ref: Global options-Footnote-642406
-Ref: Global options-Footnote-742461
-Node: Calendar options42510
-Ref: x-holiday-list42734
-Ref: x-astronomical-holidays44091
-Ref: x-bahai-holidays44516
-Ref: x-chinese-flexible-holidays44901
-Ref: x-chinese-holidays45293
-Ref: x-islamic-civil-holidays45818
-Ref: x-japanese-flexible-holidays46049
-Ref: x-japanese-holidays46400
-Ref: x-persian-jalaali-holidays47618
-Ref: x-cc-holidays48294
-Ref: x-type65565
-Ref: x-orthodox-calendar66640
-Ref: x-iso-week-number68177
-Ref: x-blocks69602
-Ref: x-starting-day72418
-Ref: x-time-offset73078
-Ref: x-date-format79725
-Ref: x-translate-string83538
-Node: Calendar options-Footnotes85240
-Ref: Calendar options-Footnote-185317
-Ref: Calendar options-Footnote-285401
-Ref: Calendar options-Footnote-385439
-Ref: Calendar options-Footnote-485508
-Ref: Calendar options-Footnote-585705
-Node: Fixed date options85806
-Ref: x-date-variable85971
-Ref: x-text-variable87071
-Ref: x-adjust-value91653
-Ref: x-atmosphere92866
-Ref: x-limit93947
-Ref: x-cycle-end96541
-Ref: x-cycle-step99734
-Ref: x-precise102221
-Ref: x-execute-command102857
-Ref: x-filter-text105016
-Ref: x-ignore-case106194
-Ref: x-list-of-fixed-dates106720
-Ref: x-resource-file108558
-Ref: x-biorhythm-axis115403
-Ref: x-moonimage-lines116700
-Ref: x-list-mode123008
-Ref: x-period-of-fixed-dates123295
-Node: Fixed date options-Footnotes147521
-Ref: Fixed date options-Footnote-1147602
-Ref: Fixed date options-Footnote-2147868
-Ref: Fixed date options-Footnote-3148026
-Ref: Fixed date options-Footnote-4148277
-Ref: Fixed date options-Footnote-5148398
-Ref: Fixed date options-Footnote-6148575
-Ref: Fixed date options-Footnote-7148750
-Ref: Fixed date options-Footnote-8148806
-Ref: Fixed date options-Footnote-9148878
-Ref: Fixed date options-Footnote-10148924
-Ref: Fixed date options-Footnote-11148970
-Ref: Fixed date options-Footnote-12149054
-Ref: Fixed date options-Footnote-13149081
-Ref: Fixed date options-Footnote-14149135
-Ref: Fixed date options-Footnote-15149189
-Ref: Fixed date options-Footnote-16149255
-Node: Response file149321
-Node: Actual date modifier151515
-Node: Commands160748
-Node: Single commands162915
-Ref: x-mm-yyyy163763
-Node: 3-Month mode commands164876
-Node: Lists of commands165725
-Node: Ranges of commands166894
-Node: The GCAL environment variable167984
-Node: Eternal Holidays168935
-Node: Fixed Dates173626
-Node: Resource file178563
-Ref: x-File-searching-mechanism179490
-Node: Resource file-Footnotes182953
-Ref: Resource file-Footnote-1183024
-Ref: Resource file-Footnote-2183166
-Ref: Resource file-Footnote-3183284
-Ref: Resource file-Footnote-4183321
-Ref: Resource file-Footnote-5183386
-Node: Structure of resource file183515
-Node: Structure of resource file-Footnotes186148
-Ref: Structure of resource file-Footnote-1186245
-Ref: Structure of resource file-Footnote-2186316
-Node: Date part of a line186509
-Node: Further date part attributes192931
-Node: Lists of days194292
-Node: Ranges of days197430
-Node: Ranges of days-Footnotes201986
-Ref: Ranges of days-Footnote-1202059
-Ref: Ranges of days-Footnote-2202142
-Node: Repetition factor of days202168
-Node: Repetition factor of days-Footnotes206224
-Ref: Repetition factor of days-Footnote-1206319
-Ref: Repetition factor of days-Footnote-2206350
-Node: Appearance factor of days206444
-Node: Appearance factor of days-Footnotes213055
-Ref: Appearance factor of days-Footnote-1213150
-Node: Text part of a line213233
-Node: Text part of a line-Footnotes219024
-Ref: Text part of a line-Footnote-1219107
-Ref: Text part of a line-Footnote-2219133
-Ref: Text part of a line-Footnote-3219177
-Ref: Text part of a line-Footnote-4219271
-Node: Special Texts processed219341
-Node: Special Texts processed-Footnotes221575
-Ref: Special Texts processed-Footnote-1221666
-Node: Comment line221683
-Node: Comment line-Footnotes224123
-Ref: Comment line-Footnote-1224192
-Node: Include directives224225
-Node: Include directives-Footnotes227113
-Ref: Include directives-Footnote-1227194
-Ref: Include directives-Footnote-2227269
-Ref: Include directives-Footnote-3227329
-Ref: Include directives-Footnote-4227436
-Ref: Include directives-Footnote-5227518
-Ref: Include directives-Footnote-6227574
-Node: Date variables227680
-Node: Date variables-Footnotes234055
-Ref: Date variables-Footnote-1234128
-Ref: Date variables-Footnote-2234394
-Ref: Date variables-Footnote-3234465
-Ref: Date variables-Footnote-4234539
-Node: Text variables234574
-Node: Text variables-Footnotes248920
-Ref: Text variables-Footnote-1248993
-Ref: Text variables-Footnote-2249067
-Node: Resource file examples249102
-Node: Resource file examples-Footnotes262439
-Ref: Resource file examples-Footnote-1262528
-Node: Todays Calendar262594
-Node: Gcal Utilities267249
-Node: Invoking tcal267935
-Node: Invoking tcal-Footnotes269771
-Ref: Invoking tcal-Footnote-1269842
-Node: Invoking txt2gcal269892
-Node: Invoking gcal2txt272244
-Node: Internationalization274227
-Node: Internationalization-Footnotes279997
-Ref: Internationalization-Footnote-1280082
-Ref: Internationalization-Footnote-2280142
-Ref: Internationalization-Footnote-3280199
-Ref: Internationalization-Footnote-4280264
-Ref: Internationalization-Footnote-5280369
-Ref: Internationalization-Footnote-6280450
-Node: Metasymbols280556
-Node: Regular Expressions281999
-Node: Regexp Usage283636
-Node: Regexp Usage-Footnotes284253
-Ref: Regexp Usage-Footnote-1284322
-Node: Regexp Operators284405
-Node: Regexp Operators-Footnotes295892
-Ref: Regexp Operators-Footnote-1295969
-Ref: Regexp Operators-Footnote-2296037
-Ref: Regexp Operators-Footnote-3296088
-Ref: Regexp Operators-Footnote-4296176
-Ref: Regexp Operators-Footnote-5296233
-Node: Regexp Summary296294
-Node: Regexp Summary-Footnotes298491
-Ref: Regexp Summary-Footnote-1298564
-Node: Special Texts298630
-Node: Exclusions302291
-Node: Exclusions with date argument302830
-Node: Inclusive date period303981
-Node: Exclusive date period307414
-Node: Exclusions without any argument310811
-Node: Inclusive day period311863
-Node: Exclusive day period313011
-Node: Replacements314100
-Node: Replacements with date argument314986
-Node: Replacements with date argument-Footnotes316579
-Ref: Replacements with date argument-Footnote-1316686
-Node: Weekday name316774
-Node: Weekday number317822
-Node: Day-of-year number323284
-Node: Day number324810
-Node: Week number326161
-Node: Month name326966
-Node: Month number327715
-Node: Year number329100
-Node: Moon phase329837
-Node: Biorhythm332925
-Node: Difference value337204
-Ref: x-Age-value337760
-Node: Replacements with other argument338730
-Node: Actual clocktime339878
-Ref: x-Actual-local-time341451
-Node: Actual clocktime-Footnotes349388
-Ref: Actual clocktime-Footnote-1349465
-Node: Textual date349523
-Node: Julian day number350203
-Node: Geographical distance and course angle351980
-Node: Geographical distance and course angle-Footnotes356721
-Ref: Geographical distance and course angle-Footnote-1356842
-Node: Sun data357541
-Ref: x-Sun-midnight359380
-Ref: x-Sun-noon360168
-Ref: x-Sun-standard-rise367429
-Ref: x-Sun-standard-set369114
-Ref: x-Sun-asr-1405357
-Ref: x-Sun-asr-2407591
-Ref: x-Sun-representation409561
-Ref: x-Sun-event-texts411915
-Ref: x-Sun-arguments416433
-Node: Moon data429605
-Ref: x-Moon-midnight431445
-Ref: x-Moon-noon432764
-Ref: x-Moon-standard-rise441219
-Ref: x-Moon-standard-set443143
-Node: Contents of Environment variable488801
-Node: Replacements without any argument489360
-Node: Other difference values489776
-Node: Highlighting492513
-Node: Shell Command499603
-Node: Special Texts Summary501015
-Node: Obsolete Special Texts576849
-Node: Table of Obsolete Special Texts577823
-Node: Table of Obsolete Date Format Elements580853
-Node: Table of Obsolete Date Formats582488
-Node: Format Instruction583294
-Node: Coding Scheme585978
-Node: Coding Scheme Table 1587439
-Node: Coding Scheme Table 2590407
-Node: Environment Variables592926
-Ref: x-GCAL593160
-Ref: x-GCAL_COLUMNS593249
-Ref: x-COLUMNS593249
-Ref: x-GCAL_DATE_FORMAT593438
-Ref: x-GCAL_LINES593606
-Ref: x-LINES593606
-Ref: x-GCAL_SYS_DATADIR593791
-Ref: x-GCAL_USR_DATADIR593990
-Ref: x-GCALANSI594221
-Ref: x-GCALPATH594455
-Ref: x-GCALPROG594650
-Ref: x-HOME595125
-Ref: x-LOGNAME595885
-Ref: x-MAILPROG596038
-Ref: x-MAILTO596321
-Ref: x-PAGER596521
-Ref: x-PATH596686
-Ref: x-TERM596872
-Ref: x-TXT2GCALPROG596954
-Ref: x-USER597652
-Node: Error Codes597833
-Ref: x-126-Error-code598095
-Ref: x-119-Error-code598550
-Ref: x-118-Error-code598650
-Ref: x-113-Error-code598982
-Ref: x-2-Error-code599639
-Ref: x-1-Error-code599706
-Node: Glossary599856
-Node: Argument Index627250
-Node: Variable Index649514
-Node: Table Index653008
-Node: Concept Index657356
+Node: Top1797
+Node: Preface8243
+Node: Preface-Footnotes19319
+Ref: Preface-Footnote-119378
+Ref: Preface-Footnote-219680
+Node: Gcal Introduction19749
+Node: Gcal Introduction-Footnotes23312
+Ref: Gcal Introduction-Footnote-123391
+Ref: Gcal Introduction-Footnote-223422
+Ref: Gcal Introduction-Footnote-323443
+Node: Invoking Gcal23462
+Node: Invoking Gcal-Footnotes24824
+Ref: Invoking Gcal-Footnote-124895
+Node: Command line arguments24985
+Node: Command line arguments-Footnotes26654
+Ref: Command line arguments-Footnote-126743
+Node: Options26781
+Node: Options-Footnotes30106
+Ref: Options-Footnote-130165
+Node: Common options30202
+Node: Global options31429
+Ref: x-response-file31597
+Ref: x-debug-internal32472
+Ref: x-debug-abort33009
+Ref: x-pager33225
+Ref: x-highlighting35954
+Ref: x-mail39933
+Node: Global options-Footnotes42060
+Ref: Global options-Footnote-142133
+Ref: Global options-Footnote-242199
+Ref: Global options-Footnote-342249
+Ref: Global options-Footnote-442295
+Ref: Global options-Footnote-542338
+Ref: Global options-Footnote-642407
+Ref: Global options-Footnote-742462
+Node: Calendar options42511
+Ref: x-holiday-list42735
+Ref: x-astronomical-holidays44092
+Ref: x-bahai-holidays44517
+Ref: x-chinese-flexible-holidays44902
+Ref: x-chinese-holidays45294
+Ref: x-islamic-civil-holidays45820
+Ref: x-japanese-flexible-holidays46051
+Ref: x-japanese-holidays46402
+Ref: x-persian-jalaali-holidays47621
+Ref: x-cc-holidays48297
+Ref: x-type65557
+Ref: x-orthodox-calendar66632
+Ref: x-iso-week-number68169
+Ref: x-blocks69594
+Ref: x-starting-day72410
+Ref: x-time-offset73070
+Ref: x-date-format79718
+Ref: x-translate-string83531
+Node: Calendar options-Footnotes85233
+Ref: Calendar options-Footnote-185310
+Ref: Calendar options-Footnote-285394
+Ref: Calendar options-Footnote-385432
+Ref: Calendar options-Footnote-485501
+Ref: Calendar options-Footnote-585698
+Node: Fixed date options85799
+Ref: x-date-variable85964
+Ref: x-text-variable87064
+Ref: x-adjust-value91646
+Ref: x-atmosphere92857
+Ref: x-limit93938
+Ref: x-cycle-end96533
+Ref: x-cycle-step99725
+Ref: x-precise102212
+Ref: x-execute-command102848
+Ref: x-filter-text105007
+Ref: x-ignore-case106185
+Ref: x-list-of-fixed-dates106711
+Ref: x-resource-file108549
+Ref: x-biorhythm-axis115394
+Ref: x-moonimage-lines116691
+Ref: x-list-mode125370
+Ref: x-period-of-fixed-dates125657
+Node: Fixed date options-Footnotes149883
+Ref: Fixed date options-Footnote-1149964
+Ref: Fixed date options-Footnote-2150230
+Ref: Fixed date options-Footnote-3150388
+Ref: Fixed date options-Footnote-4150639
+Ref: Fixed date options-Footnote-5150760
+Ref: Fixed date options-Footnote-6150937
+Ref: Fixed date options-Footnote-7151112
+Ref: Fixed date options-Footnote-8151168
+Ref: Fixed date options-Footnote-9151240
+Ref: Fixed date options-Footnote-10151286
+Ref: Fixed date options-Footnote-11151332
+Ref: Fixed date options-Footnote-12151416
+Ref: Fixed date options-Footnote-13151443
+Ref: Fixed date options-Footnote-14151497
+Ref: Fixed date options-Footnote-15151551
+Ref: Fixed date options-Footnote-16151617
+Node: Response file151683
+Node: Actual date modifier153877
+Node: Commands163110
+Node: Single commands165277
+Ref: x-mm-yyyy166125
+Node: 3-Month mode commands167238
+Node: Lists of commands168087
+Node: Ranges of commands169256
+Node: The GCAL environment variable170346
+Node: Eternal Holidays171297
+Node: Fixed Dates175988
+Node: Resource file180925
+Ref: x-File-searching-mechanism181852
+Node: Resource file-Footnotes185315
+Ref: Resource file-Footnote-1185386
+Ref: Resource file-Footnote-2185528
+Ref: Resource file-Footnote-3185646
+Ref: Resource file-Footnote-4185683
+Ref: Resource file-Footnote-5185748
+Node: Structure of resource file185877
+Node: Structure of resource file-Footnotes188510
+Ref: Structure of resource file-Footnote-1188607
+Ref: Structure of resource file-Footnote-2188678
+Node: Date part of a line188871
+Node: Further date part attributes195293
+Node: Lists of days196654
+Node: Ranges of days199792
+Node: Ranges of days-Footnotes204348
+Ref: Ranges of days-Footnote-1204421
+Ref: Ranges of days-Footnote-2204504
+Node: Repetition factor of days204530
+Node: Repetition factor of days-Footnotes208586
+Ref: Repetition factor of days-Footnote-1208681
+Ref: Repetition factor of days-Footnote-2208712
+Node: Appearance factor of days208806
+Node: Appearance factor of days-Footnotes215417
+Ref: Appearance factor of days-Footnote-1215512
+Node: Text part of a line215595
+Node: Text part of a line-Footnotes221386
+Ref: Text part of a line-Footnote-1221469
+Ref: Text part of a line-Footnote-2221495
+Ref: Text part of a line-Footnote-3221539
+Ref: Text part of a line-Footnote-4221633
+Node: Special Texts processed221703
+Node: Special Texts processed-Footnotes223937
+Ref: Special Texts processed-Footnote-1224028
+Node: Comment line224045
+Node: Comment line-Footnotes226485
+Ref: Comment line-Footnote-1226554
+Node: Include directives226587
+Node: Include directives-Footnotes229475
+Ref: Include directives-Footnote-1229556
+Ref: Include directives-Footnote-2229631
+Ref: Include directives-Footnote-3229691
+Ref: Include directives-Footnote-4229798
+Ref: Include directives-Footnote-5229880
+Ref: Include directives-Footnote-6229936
+Node: Date variables230042
+Node: Date variables-Footnotes236417
+Ref: Date variables-Footnote-1236490
+Ref: Date variables-Footnote-2236756
+Ref: Date variables-Footnote-3236827
+Ref: Date variables-Footnote-4236901
+Node: Text variables236936
+Node: Text variables-Footnotes251278
+Ref: Text variables-Footnote-1251351
+Ref: Text variables-Footnote-2251425
+Node: Resource file examples251460
+Node: Resource file examples-Footnotes264798
+Ref: Resource file examples-Footnote-1264887
+Node: Todays Calendar264953
+Node: Gcal Utilities269608
+Node: Invoking tcal270294
+Node: Invoking tcal-Footnotes272130
+Ref: Invoking tcal-Footnote-1272201
+Node: Invoking txt2gcal272251
+Node: Invoking gcal2txt274603
+Node: Internationalization276586
+Node: Internationalization-Footnotes282356
+Ref: Internationalization-Footnote-1282441
+Ref: Internationalization-Footnote-2282501
+Ref: Internationalization-Footnote-3282558
+Ref: Internationalization-Footnote-4282623
+Ref: Internationalization-Footnote-5282728
+Ref: Internationalization-Footnote-6282809
+Node: Metasymbols282915
+Node: Regular Expressions284358
+Node: Regexp Usage285995
+Node: Regexp Usage-Footnotes286612
+Ref: Regexp Usage-Footnote-1286681
+Node: Regexp Operators286764
+Node: Regexp Operators-Footnotes298251
+Ref: Regexp Operators-Footnote-1298328
+Ref: Regexp Operators-Footnote-2298396
+Ref: Regexp Operators-Footnote-3298447
+Ref: Regexp Operators-Footnote-4298535
+Ref: Regexp Operators-Footnote-5298592
+Node: Regexp Summary298653
+Node: Regexp Summary-Footnotes300850
+Ref: Regexp Summary-Footnote-1300923
+Node: Special Texts300989
+Node: Exclusions304649
+Node: Exclusions with date argument305188
+Node: Inclusive date period306339
+Node: Exclusive date period309771
+Node: Exclusions without any argument313167
+Node: Inclusive day period314219
+Node: Exclusive day period315367
+Node: Replacements316456
+Node: Replacements with date argument317342
+Node: Replacements with date argument-Footnotes318935
+Ref: Replacements with date argument-Footnote-1319042
+Node: Weekday name319130
+Node: Weekday number320178
+Node: Day-of-year number325640
+Node: Day number327166
+Node: Week number328517
+Node: Month name329322
+Node: Month number330071
+Node: Year number331456
+Node: Moon phase332193
+Node: Biorhythm335281
+Node: Difference value339560
+Ref: x-Age-value340116
+Node: Replacements with other argument341086
+Node: Actual clocktime342234
+Ref: x-Actual-local-time343807
+Node: Actual clocktime-Footnotes351745
+Ref: Actual clocktime-Footnote-1351822
+Node: Textual date351880
+Node: Julian day number352560
+Node: Geographical distance and course angle354338
+Node: Geographical distance and course angle-Footnotes359081
+Ref: Geographical distance and course angle-Footnote-1359202
+Node: Sun data359900
+Ref: x-Sun-midnight361743
+Ref: x-Sun-noon362531
+Ref: x-Sun-standard-rise369814
+Ref: x-Sun-standard-set371523
+Ref: x-Sun-asr-1407769
+Ref: x-Sun-asr-2410003
+Ref: x-Sun-representation411973
+Ref: x-Sun-event-texts414327
+Ref: x-Sun-arguments418845
+Node: Moon data432014
+Ref: x-Moon-midnight433858
+Ref: x-Moon-noon435177
+Ref: x-Moon-standard-rise443632
+Ref: x-Moon-standard-set445558
+Node: Contents of Environment variable491218
+Node: Replacements without any argument491777
+Node: Other difference values492193
+Node: Highlighting494930
+Node: Shell Command502020
+Node: Special Texts Summary503432
+Node: Obsolete Special Texts579264
+Node: Table of Obsolete Special Texts580238
+Node: Table of Obsolete Date Format Elements583268
+Node: Table of Obsolete Date Formats584903
+Node: Format Instruction585709
+Node: Coding Scheme588393
+Node: Coding Scheme Table 1589854
+Node: Coding Scheme Table 2592822
+Node: Environment Variables595341
+Ref: x-GCAL595575
+Ref: x-GCAL_COLUMNS595664
+Ref: x-COLUMNS595664
+Ref: x-GCAL_DATE_FORMAT595853
+Ref: x-GCAL_LINES596021
+Ref: x-LINES596021
+Ref: x-GCAL_SYS_DATADIR596206
+Ref: x-GCAL_USR_DATADIR596405
+Ref: x-GCALANSI596636
+Ref: x-GCALPATH596870
+Ref: x-GCALPROG597065
+Ref: x-HOME597540
+Ref: x-LOGNAME598300
+Ref: x-MAILPROG598453
+Ref: x-MAILTO598736
+Ref: x-PAGER598936
+Ref: x-PATH599101
+Ref: x-TERM599287
+Ref: x-TXT2GCALPROG599369
+Ref: x-USER600067
+Node: Error Codes600248
+Ref: x-126-Error-code600510
+Ref: x-119-Error-code600965
+Ref: x-118-Error-code601065
+Ref: x-113-Error-code601397
+Ref: x-2-Error-code602054
+Ref: x-1-Error-code602121
+Node: Glossary602271
+Node: Argument Index629672
+Node: Variable Index651997
+Node: Table Index655491
+Node: Concept Index659839
 
 End Tag Table

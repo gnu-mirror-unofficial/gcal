@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -45,14 +45,14 @@ File: gcal.info,  Node: Moon data,  Next: Contents of Environment variable,  Pre
 Moon data `%[FORMAT]?ARGUMENT' special texts
 ............................................
 
-  `%[FORMAT]([*][MODE]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+  `%[FORMAT]([*][MODE]ISO-6709:1983-CO-ORDINATE[,[+|-]MMMM|HH:[MM]]'
 references the approximate time of *moonrise* by default,
-`%[FORMAT])[*][MODE]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+`%[FORMAT])[*][MODE]ISO-6709:1983-CO-ORDINATE[,[+|-]MMMM|HH:[MM]]'
 references the approximate time of *moonset* by default,
-`%[FORMAT][[*][MODE]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+`%[FORMAT][[*][MODE]ISO-6709:1983-CO-ORDINATE[,[+|-]MMMM|HH:[MM]]'
 references the approximate period of *visibility* of the Moon (lunar
 day length) by default,
-`%[FORMAT]][*][MODE]ISO-6709:1983-KOORDINATE[,[+|-]MMMM|HH:[MM]]'
+`%[FORMAT]][*][MODE]ISO-6709:1983-CO-ORDINATE[,[+|-]MMMM|HH:[MM]]'
 references the approximate period of *non-visibility* of the Moon
 (lunar night length) by default.
 
@@ -112,15 +112,15 @@ described in the table:
                       the Moon passes a reference altitude which is
                       between about 54 and 61 arcminutes above a
                       "mathematical-geocentric" horizon before lunar noon
-                      time; thus rising.  A mathematical horizion is a
+                      time; thus rising.  A mathematical horizon is a
                       purely geometrically-built horizon which disregards
                       the phenomenon of refraction as it arises in
                       reality by the influence of the Earth's atmosphere.
                       A geocentrical horizon is the horizontal plane
                       that passes through the Earth's center, orthogonal
                       to the observer's local vertical.  In the further
-                      context, the shorter term _mathematical horizion_
-                      is used which actually means the
+                      context, the shorter term _mathematical horizon_ is
+                      used which actually means the
                       mathematical-geocentric horizon.  The above
                       mentioned reference altitude is computed from the
                       value of the Moon's parallax as it appear at that
@@ -156,13 +156,13 @@ described in the table:
                       computed from the respective values of the Moon's
                       semidiameter and Moon's parallax as they appear at
                       that clocktime.  If the reference altitude that is
-                      refering to the Moon's upper limb is converted to a
-                      reference altitude that is refering to the Moon's
-                      center, this results in a value which is between
-                      about 39 and 44 arcminutes above the geocentric
-                      horizon.  Nevertheless, there is exactly one day
-                      during a synodic month at which no such moonrise
-                      happens.
+                      referring to the Moon's upper limb is converted to
+                      a reference altitude that is referring to the
+                      Moon's center, this results in a value which is
+                      between about 39 and 44 arcminutes above the
+                      geocentric horizon.  Nevertheless, there is exactly
+                      one day during a synodic month at which no such
+                      moonrise happens.
 
 `3'     `)'           Calculates the approximate time when the upper limb
                       of the Moon passes a reference altitude which is
@@ -252,9 +252,9 @@ described in the table:
                       is computed from the respective values of the
                       Moon's semidiameter, Moon's parallax and (standard)
                       refraction as they appear at that clocktime.  If
-                      the reference altitude that is refering to the
+                      the reference altitude that is referring to the
                       Moon's upper limb is converted to a reference
-                      altitude that is refering to the Moon's center,
+                      altitude that is referring to the Moon's center,
                       this results in a value which is between about 5
                       and 10 arcminutes above the geocentric horizon.
                       Nevertheless, there is exactly one day during a
@@ -267,7 +267,7 @@ described in the table:
                       setting.  This kind of set time calculation is done
                       according to the standard calculation method as it
                       is commonly used internationally.  The phenomenon
-                      of refraction is alread respected in this as it
+                      of refraction is already respected in this as it
                       arises in reality by the influence of the Earth's
                       atmosphere, and that with the standard value of 34
                       arcminutes, which can indirectly be changed by
@@ -303,18 +303,18 @@ described in the table:
                       Observations of celestial objects that are done
                       from the surface of the Earth yield in
                       topocentrically based data.  The locations of the
-                      celestial bodys are oftenly at another place if the
-                      data is topocentrially determined instead of
-                      determing it "geocentrically", i.e. at the fictious
-                      center of the Earth.  This is mainly caused by the
-                      refraction, which raises a celestial body to
-                      another location as it is been in reality.  Because
-                      the terrestrial globe flattens towards the pole
-                      caps and therefore cannot be taken as an ideally
-                      shaped sphere, the individual Earth radius between
-                      the observer's location and the center of the Earth
-                      also affects the computation of topocentrically
-                      based data.
+                      celestial bodies are often at another place if the
+                      data is topocentrically determined instead of
+                      determine it "geocentrically", i.e. at the
+                      fictitious center of the Earth.  This is mainly
+                      caused by the refraction, which raises a celestial
+                      body to another location as it is been in reality.
+                      Because the terrestrial globe flattens towards the
+                      pole caps and therefore cannot be taken as an
+                      ideally shaped sphere, the individual Earth radius
+                      between the observer's location and the center of
+                      the Earth also affects the computation of
+                      topocentrically based data.
 
 `7'     `(', `)'      Calculates the approximate topocentric, apparent
                       semidiameter of the Moon in degrees and arcminutes
@@ -323,12 +323,12 @@ described in the table:
 `8'     `(', `)'      Calculates the approximate topocentric, apparent
                       brightness of the Moon in "magnitude units" as it
                       happen at civil midnight time.  The magnitude
-                      (latin term `magnitudo', abbreviated m) is used to
+                      (Latin term `magnitudo', abbreviated m) is used to
                       define the brightness of a star, and is a
                       non-metrical value.  The difference between two
                       consecutive magnitudes is 1 to 2.512.  Therefore, a
                       star with the brightness of 1m is 2.512 times
-                      brighter than a star of 2m.  A negative magitude
+                      brighter than a star of 2m.  A negative magnitude
                       denotes a very bright star, for example almost -27m
                       for the Sun, whereas the hardly visible planet
                       Pluto has a magnitude of a bit more than +14m.  The
@@ -729,7 +729,7 @@ described in the table:
                       happen at standard rise time of the Moon
                       (topocentric "rise azimuth").  The horizontal
                       angular distance between the topocentric rise
-                      azimuth und the East direction is also known as the
+                      azimuth and the East direction is also known as the
                       topocentric "rise width" of the Moon.  *Note
                       Standard rise time of the Moon:
                       x-Moon-standard-rise, for further details.
@@ -739,7 +739,7 @@ described in the table:
                       happen at standard set time of the Moon
                       (topocentric "set azimuth").  The horizontal
                       angular distance between the topocentric set
-                      azimuth und the West direction is also known as the
+                      azimuth and the West direction is also known as the
                       topocentric "set width" of the Moon.  *Note
                       Standard set time of the Moon: x-Moon-standard-set,
                       for further details.
@@ -805,7 +805,7 @@ described in the table:
                       happen at standard rise time of the Moon
                       (geocentric "rise azimuth").  The horizontal
                       angular distance between the geocentric rise
-                      azimuth und the East direction is also known as the
+                      azimuth and the East direction is also known as the
                       geocentric "rise width" of the Moon.  *Note
                       Standard rise time of the Moon:
                       x-Moon-standard-rise, for further details.
@@ -814,7 +814,7 @@ described in the table:
                       azimuth of the Moon in degrees and arcminutes as it
                       happen at standard set time of the Moon (geocentric
                       "set azimuth").  The horizontal angular distance
-                      between the geocentric set azimuth und the West
+                      between the geocentric set azimuth and the West
                       direction is also known as the geocentric "set
                       width" of the Moon.  *Note Standard set time of the
                       Moon: x-Moon-standard-set, for further details.
@@ -863,7 +863,7 @@ change the respective clocktime that is used for calculating such
 values).  In a next table column, it is listed whether the given
 co-ordinate of the location influences the determination of a value,
 and the last column of the table gives you the information whether a
-given timezone value affects the value's determination:
+given timezone value affects the values determination:
 
 *Mode*  *Representation Type*  *Dynamical*    *Co-ordinate*  *Timezone*
 
@@ -979,9 +979,9 @@ oriented special texts:
      Nevertheless in most cases, these results can be treated as more
      as sufficiently precise if one measures their practical use.
 
-   * All azimuth and elevation values are always refering to the center
-     of the respective astronomical object, except the case, it is
-     stated otherwise.
+   * All azimuth and elevation values are always referring to the
+     center of the respective astronomical object, except the case, it
+     is stated otherwise.
 
    * The base point of azimuth values, right ascension values and other
      ecliptic co-ordinate values is always measured clockwise relative
@@ -1001,7 +1001,7 @@ oriented special texts:
      the horizon, so that the precalculated rise and set times may
      throughout be in error by a minute or more.
 
-   * The accurancy of rise and set computations decreases again at high
+   * The accuracy of rise and set computations decreases again at high
      latitudes, i.e. within in the lunar Arctic Circle.  There, small
      variations in atmospheric refraction can change the time of
      moonrise or moonset by many minutes, since the Moon intersects the
@@ -1038,7 +1038,7 @@ oriented special texts:
      clocktime, Moon oriented special texts are calculated for a series
      of clocktimes for the current day.
 
-   * Furthermode, see *Note Fixed dates option
+   * Furthermore, see *Note Fixed dates option
      `--adjust-value=ARGUMENT': x-adjust-value, how to change the
      reference altitude that is used to calculate the rise and set
      times.

@@ -195,3 +195,10 @@ manually into the Gcal-3.00 style by processing them using the
      or
      $ perl v2x2v300.pl FILE-OLD.rc > FILE-v300.rc
 
+It is very possible that the conversion done by using the `v2x2v300'
+AWK respectively Perl scripts is not sufficient, i.e. the resulting file
+contains unwanted Gcal special texts or some of the required Gcal
+special texts are crippled or protected by a `\' character.  In this
+case, you have to edit the resulting file manually to correct the
+broken text.  Sorry!
+

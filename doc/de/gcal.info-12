@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -524,7 +524,7 @@ Erklärungen, die in diesem Handbuch eingeführt und benutzt werden:
      fiktive _mittlere Sonne_ gleichmäßig durch den Himmelsäquator
      laufen und bezieht die mittlere Sonnenzeit auf diese.
 
-"Mittlerer Erdäquatoradius"
+"Mittlerer Erdäquatorradius"
      Der mittlere Radius der Erde am Äquator beträgt etwa 6.378,137
      Kilometer.
 
@@ -577,7 +577,7 @@ Erklärungen, die in diesem Handbuch eingeführt und benutzt werden:
      Verbindungslinie zwischen zwei Punkten auf einer Kugel dar.
 
 "Phasenwinkel"
-     Der Phasenwinkel gibt die Phase eines Himmelkörpers an, d.h. den
+     Der Phasenwinkel gibt die Phase eines Himmelskörpers an, d.h. den
      beleuchteten Anteil des Himmelskörpers, so wie er von der Erde aus
      zu sehen ist.
 
@@ -745,7 +745,7 @@ Erklärungen, die in diesem Handbuch eingeführt und benutzt werden:
 
 "Unix"
      Ein Betriebssystem für Computer, daß Anfang 1970 von den AT&T Bell
-     Labaratories entwickelt wurde.  Es wurde anfänglich weltweit an den
+     Laboratories entwickelt wurde.  Es wurde anfänglich weltweit an den
      Universitäten poplär, und etablierte sich später in kommerziellen
      Umgebungen als Entwicklungssystem für Software und als System für
      Netzwerkdienste.  Es gibt viele kommerzielle Versionen von Unix,

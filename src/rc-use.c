@@ -3,7 +3,7 @@
 *             and displays the results.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -36,7 +36,7 @@
 
 #if USE_RC
 #  ifdef RCSID
-static char rcsid[]="$Id: rc-use.c 3.00 2000/05/02 03:00:00 tom Exp $";
+static char rcsid[]="$Id: rc-use.c 3.01 2000/06/21 03:00:01 tom Exp $";
 #  endif
 
 
@@ -61,6 +61,7 @@ static char rcsid[]="$Id: rc-use.c 3.00 2000/05/02 03:00:00 tom Exp $";
 #  include "hd-use.h"
 #  include "rc-astro.h"
 #  include "rc-check.h"
+#  include "rc-insert.h"
 #  include "rc-utils.h"
 #  include "tty.h"
 #  include "utils.h"
@@ -266,6 +267,9 @@ PUBLIC char  *rc_filter_text=(char *)NULL;
 
 /* Fixed date list grouping separator `-cg[TEXT]'. */
 PUBLIC char  *rc_grp_sep=(char *)NULL;
+
+/* Fixed date list heading text `--heading-text=TEXT'. */
+PUBLIC char  *rc_heading_text=(char *)NULL;
 
 /* The biorhythm's "Emo" text. */
 PUBLIC char  *rc_bio_emo_lit=(char *)NULL;
@@ -697,7 +701,7 @@ rc_use ()
            ed = day_of_year (DAY_MIN, month+1, year);
        }
       /*
-         Then clean all flags, which are related to the fixed date period.
+         Then clean all flags which are related to the fixed date period.
       */
       rc_clean_flags ();
       if (date_enables_year)
@@ -1808,9 +1812,9 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
    register int   i;
    register int   j=0;
    register int   tindex=0;
-   auto     int   d=0;
-   auto     int   m=0;
-   auto     int   y=0;
+   auto     int   ld=0;
+   auto     int   lm=0;
+   auto     int   ly=0;
    auto     int   dd=0;
    auto     int   mm=0;
    auto     int   yy=0;
@@ -1840,11 +1844,11 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
         qsort((VOID_PTR)rc_elems_table, rc_elems, sizeof *rc_elems_table, (Cmp_func)asc_sort);
       if (rc_elems)
 #  if USE_DE
-        (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &d, &m, &y,
+        (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                            &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                            INTERNAL_TXT, (long)j, rc_elems_table[j], TRUE);
 #  else /* !USE_DE */
-        (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &d, &m, &y,
+        (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                            &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                            _("Internal"), (long)j, rc_elems_table[j], TRUE);
 #  endif /* !USE_DE */
@@ -1892,11 +1896,11 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
               break;
           }
          if (   j == rc_e
-             || mm < m
-             || yy < y
-             || (   (dd < d)
-                 && (mm <= m)
-                 && (yy <= y)))
+             || mm < lm
+             || yy < ly
+             || (   (dd < ld)
+                 && (mm <= lm)
+                 && (yy <= ly)))
           {
             sprintf(line_buffer, "%0*d%02d%02d ", len_year_max, yy, mm, dd);
 #  if USE_DE
@@ -1908,18 +1912,18 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
 #  endif /* !USE_DE */
           }
          else
-           while (   (dd == d)
-                  && (mm == m)
-                  && (yy == y))
+           while (   (dd == ld)
+                  && (mm == lm)
+                  && (yy == ly))
              if (j+1 < rc_e)
               {
                 j++;
 #  if USE_DE
-                (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &d, &m, &y,
+                (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                                    &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                    INTERNAL_TXT, (long)j, rc_elems_table[j], TRUE);
 #  else /* !USE_DE */
-                (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &d, &m, &y,
+                (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                                    &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                    _("Internal"), (long)j, rc_elems_table[j], TRUE);
 #  endif /* !USE_DE */
@@ -1956,11 +1960,11 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
             if (!ok)
               break;
             if (   j == rc_e
-                || mm < m
-                || yy < y
-                || (   (dd < d)
-                    && (mm <= m)
-                    && (yy <= y)))
+                || mm < lm
+                || yy < ly
+                || (   (dd < ld)
+                    && (mm <= lm)
+                    && (yy <= ly)))
              {
                sprintf(line_buffer, "%0*d%02d%02d ", len_year_max, yy, mm, dd);
 #  if USE_DE
@@ -1972,18 +1976,18 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
 #  endif /* !USE_DE */
              }
             else
-              while (   (dd == d)
-                     && (mm == m)
-                     && (yy == y))
+              while (   (dd == ld)
+                     && (mm == lm)
+                     && (yy == ly))
                 if (j+1 < rc_e)
                  {
                    j++;
 #  if USE_DE
-                   (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &d, &m, &y,
+                   (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                                       &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                       INTERNAL_TXT, (long)j, rc_elems_table[j], TRUE);
 #  else /* !USE_DE */
-                   (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &d, &m, &y,
+                   (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                                       &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                       _("Internal"), (long)j, rc_elems_table[j], TRUE);
 #  endif /* !USE_DE */
@@ -2047,22 +2051,43 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                */
                reverse_order (rc_elems_table, rc_elems);
        }
+      d = tmp_ad;
+      m = tmp_am;
       /*
-         Copy `rc_grp_sep' [-c]g[] to text buffer variable `s3' for further use.
-           Perform the `~'-TILDE expansion on the one hand and the conversion
-           of '_'-PSEUDO_BLANK characters to real blank (' ') characters.
+         Copy `rc_grp_sep' [-c]g[] to text buffer variable `s3' for further use,
+           which will be first evaluated for text variable references and
+           some special texts.  Thereafter, perform the '~'-TILDE or '^'-CARET
+           expansion on the one hand.
       */
       if (rc_grp_sep != (char *)NULL)
        {
-         i = (int)strlen(rc_grp_sep);
+         register int  x1=year;
+         register int  x2=incr_year;
+         register int  x3=decr_year;
+
+
+         year = act_year;
+         incr_year=decr_year = 0;
+#  if USE_DE
+         insert_line_into_table (rc_grp_sep, "`"INTERNAL_TXT"'",
+                                 (long)SPECIAL_VALUE, &rc_elems, 1, 1);
+#  else /* !USE_DE */
+         insert_line_into_table (rc_grp_sep, _("`Internal'"),
+                                 (long)SPECIAL_VALUE, &rc_elems, 1, 1);
+#  endif /* !USE_DE */
+         decr_year = x3;
+         incr_year = x2;
+         year = x1;
+         i = (int)strlen(rc_elems_table[--rc_elems]);
          if ((Uint)i >= maxlen_max)
            resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
-         strcpy(s3, rc_grp_sep);
+         strcpy(s3, rc_elems_table[rc_elems]+len_year_max+5);
+         free(rc_elems_table[rc_elems]);
          ptr_char = s3;
          if (*ptr_char)
           {
             /*
-               A text used for grouping is defined.
+               A text for grouping is defined.
             */
             i = 0;
             while (*ptr_char)
@@ -2070,26 +2095,27 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                switch (*ptr_char)
                 {
                   case RC_NL_CHAR:
+                  case RC_NL2_CHAR:
                     if (i)
                      {
                        /*
-                          RC_NL_CHAR is single `\~' quoted
-                                     or double `\\~' quoted:
-                            Replace QUOTE_CHAR by RC_NL_CHAR resp.,
+                          RC_NL[2]_CHAR is single `\~' or `\^' quoted
+                                        or double `\\~' or `\\^' quoted:
+                            Replace QUOTE_CHAR by RC_NL[2]_CHAR resp.,
                             replace last QUOTE_CHAR by RC_NL_CHAR.
                        */
                        if (s3[i-1] == QUOTE_CHAR)
                          s3[i-1] = *ptr_char;
                        else
                          /*
-                            RC_NL_CHAR is not quoted `~':
+                            RC_NL[2]_CHAR is not quoted '~' or '^':
                               Insert a real `\n'-NEWLINE character.
                          */
                          s3[i++] = '\n';
                      }
                     else
                       /*
-                         RC_NL_CHAR is not quoted `~':
+                         RC_NL[2]_CHAR is not quoted '~' or '^':
                            Insert a real `\n'-NEWLINE character.
                       */
                       s3[i++] = '\n';
@@ -2098,8 +2124,8 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                     ptr_char++;
                     if (*ptr_char)
                      {
-                       if (   *ptr_char == PSEUDO_BLANK
-                           || *ptr_char == RC_NL_CHAR)
+                       if (   *ptr_char == RC_NL_CHAR
+                           || *ptr_char == RC_NL2_CHAR)
                          s3[i++] = *ptr_char;
                        else
                         {
@@ -2109,9 +2135,6 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                      }
                     else
                       s3[i++] = QUOTE_CHAR;
-                    break;
-                  case PSEUDO_BLANK:
-                    s3[i++] = ' ';
                     break;
                   default:
                     s3[i++] = *ptr_char;
@@ -2128,15 +2151,89 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
       if (!rc_suppr_list_sep_flag)
         print_text (stdout, s1);
       /*
-         Now display the leading title text of the fixed date list.
+         Now display the leading title/heading text of the fixed date list,
+           which will be first evaluated for text variable references and
+           some special texts.  Thereafter, perform the '~'-TILDE or '^'-CARET
+           expansion on the one hand.
       */
       if (rc_title_flag)
        {
+         register int  x1=year;
+         register int  x2=incr_year;
+         register int  x3=decr_year;
+
+
+         year = act_year;
+         incr_year=decr_year = 0;
 #  if USE_DE
-         sprintf(s1, "%s:", RC_LIST_TITLE);
+         insert_line_into_table (rc_heading_text, "`"INTERNAL_TXT"'",
+                                 (long)SPECIAL_VALUE, &rc_elems, 1, 1);
 #  else /* !USE_DE */
-         sprintf(s1, "%s:", _("Fixed date list"));
+         insert_line_into_table (rc_heading_text, _("`Internal'"),
+                                 (long)SPECIAL_VALUE, &rc_elems, 1, 1);
 #  endif /* !USE_DE */
+         decr_year = x3;
+         incr_year = x2;
+         year = x1;
+         i = (int)strlen(rc_elems_table[--rc_elems]);
+         if ((Uint)i >= maxlen_max)
+           resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
+         strcpy(s1, rc_elems_table[rc_elems]+len_year_max+5);
+         free(rc_elems_table[rc_elems]);
+         ptr_char = s1;
+         i = 0;
+         while (*ptr_char)
+          {
+            switch (*ptr_char)
+             {
+               case RC_NL_CHAR:
+               case RC_NL2_CHAR:
+                 if (i)
+                  {
+                    /*
+                       RC_NL[2]_CHAR is single `\~' or `\^' quoted
+                                     or double `\\~' `\\^' quoted:
+                         Replace QUOTE_CHAR by RC_NL[2]_CHAR resp.,
+                         replace last QUOTE_CHAR by RC_NL[2]_CHAR.
+                    */
+                    if (s1[i-1] == QUOTE_CHAR)
+                      s1[i-1] = *ptr_char;
+                    else
+                      /*
+                         RC_NL[2]_CHAR is not quoted '~' or '^':
+                           Insert a real `\n'-NEWLINE character.
+                      */
+                      s1[i++] = '\n';
+                  }
+                 else
+                   /*
+                      RC_NL[2]_CHAR is not quoted '~' or '^':
+                        Insert a real `\n'-NEWLINE character.
+                   */
+                   s1[i++] = '\n';
+                 break;
+               case QUOTE_CHAR:
+                 ptr_char++;
+                 if (*ptr_char)
+                  {
+                    if (   *ptr_char == RC_NL_CHAR
+                        || *ptr_char == RC_NL2_CHAR)
+                      s1[i++] = *ptr_char;
+                    else
+                     {
+                       s1[i++] = QUOTE_CHAR;
+                       s1[i++] = *ptr_char;
+                     }
+                  }
+                 else
+                   s1[i++] = QUOTE_CHAR;
+                 break;
+               default:
+                 s1[i++] = *ptr_char;
+             }
+            ptr_char++;
+          }
+         s1[i] = '\0';
          print_text (stdout, s1);
          print_text (stdout, s1);
        }
@@ -2171,11 +2268,11 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
       LOOP
        {
 #if USE_DE
-         lineptrs = rc_get_date (rc_elems_table[tindex], lineptrs, FALSE, &b_dummy, &day, &m, &y,
+         lineptrs = rc_get_date (rc_elems_table[tindex], lineptrs, FALSE, &b_dummy, &day, &lm, &ly,
                                  &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                  INTERNAL_TXT, (long)tindex, rc_elems_table[tindex], TRUE);
 #  else /* !USE_DE */
-         lineptrs = rc_get_date (rc_elems_table[tindex], lineptrs, FALSE, &b_dummy, &day, &m, &y,
+         lineptrs = rc_get_date (rc_elems_table[tindex], lineptrs, FALSE, &b_dummy, &day, &lm, &ly,
                                  &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                  _("Internal"), (long)tindex, rc_elems_table[tindex], TRUE);
 #  endif /* !USE_DE */
@@ -2185,8 +2282,8 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                  || rc_grp_sep != (char *)NULL))
           {
             dd = day;
-            mm = m;
-            yy = y;
+            mm = lm;
+            yy = ly;
           }
          /*
             Avoid displaying duplicate resource file entries by storing
@@ -2207,8 +2304,8 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                 || rc_grp_sep != (char *)NULL)
              {
                if (   (day == dd)
-                   && (m == mm)
-                   && (y == yy))
+                   && (lm == mm)
+                   && (ly == yy))
                 {
                   /*
                      Same date:
@@ -2224,8 +2321,8 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                   */
                   same_date = FALSE;
                   dd = day;
-                  mm = m;
-                  yy = y;
+                  mm = lm;
+                  yy = ly;
                   if (rc_grp_sep != (char *)NULL)
                    {
                      /*
@@ -2241,7 +2338,7 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
             */
             if (rc_week_number_flag)
              {
-               j = week_number (day, m, y, iso_week_number, start_day);
+               j = week_number (day, lm, ly, iso_week_number, start_day);
                /*
                   We convert the computed week number to a week number text
                     (this looks nicer in output).
@@ -2285,28 +2382,28 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                   && rc_count_flag)
                 sprintf(s1, "%0*d)  ", len_rce, abs((tindex-skipped)+1));
             wd = day;
-            d = day_of_year (day, m, y);
+            ld = day_of_year (day, lm, ly);
             if (!rc_both_dates_flag)
              {
                if (!rc_special_flag)
-                 d = 0;
+                 ld = 0;
                else
                  day = 0;
              }
             if (!rc_suppr_date_part_flag)
              {
-               if (   (y == tmp_ay)
-                   && (m == tmp_am)
+               if (   (ly == tmp_ay)
+                   && (lm == tmp_am)
                    && (wd == tmp_ad))
-                 hls_len = decode_date_format (date_format->df_format, &s1, day, m, y, d,
+                 hls_len = decode_date_format (date_format->df_format, &s1, day, lm, ly, ld,
                                                TRUE, FALSE, !rc_alternative_format_flag);
                else
                 {
-                  if (hd_ldays[((m-1)*MONTH_LAST)+(wd-1)])
-                    hls_len = decode_date_format (date_format->df_format, &s1, day, m, y, d,
+                  if (hd_ldays[((lm-1)*MONTH_LAST)+(wd-1)])
+                    hls_len = decode_date_format (date_format->df_format, &s1, day, lm, ly, ld,
                                                   FALSE, TRUE, !rc_alternative_format_flag);
                   else
-                    hls_len = decode_date_format (date_format->df_format, &s1, day, m, y, d,
+                    hls_len = decode_date_format (date_format->df_format, &s1, day, lm, ly, ld,
                                                   FALSE, FALSE, !rc_alternative_format_flag);
                 }
                if (   rc_alternative_format_flag
@@ -2507,8 +2604,8 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                else
                 {
                   /*
-                     `~'-TILDE, `^'-CARET or quoted `\~'-TILDE resp., CARET found in
-                       "text"-part of fixed date:
+                     `~'-TILDE, `^'-CARET or quoted `\~'-TILDE resp., CARET found
+                     in "text"-part of fixed date:
                        Quote TILDE/CARET resp., insert a real `\n'-NEWLINE character
                   */
                   while (*lineptrs->text_part)
@@ -2528,7 +2625,7 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                         else
                          {
                            /*
-                              RC_NL_CHAR is not quoted `~':
+                              RC_NL_CHAR is not quoted '~':
                                 Insert a real `\n'_NEWLINE character.
                            */
                            s1[len_line++] = '\n';
@@ -2556,16 +2653,16 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                        if (*lineptrs->text_part == RC_NL2_CHAR)
                         {
                           /*
-                             RC_NL2_CHAR is single `\~' quoted
-                                         or double `\\~' quoted:
-                               Replace QUOTE_CHAR by RC_NL_CHAR resp.,
-                               replace last QUOTE_CHAR by RC_NL_CHAR.
+                             RC_NL2_CHAR is single `\^' quoted
+                                         or double `\\^' quoted:
+                               Replace QUOTE_CHAR by RC_NL2_CHAR resp.,
+                               replace last QUOTE_CHAR by RC_NL2_CHAR.
                           */
                           if (s1[len_line-1] == QUOTE_CHAR)
                             s1[len_line-1] = *lineptrs->text_part;
                           else
                             /*
-                               RC_NL2_CHAR is not quoted `^':
+                               RC_NL2_CHAR is not quoted '^':
                                  Insert a real `\n'_NEWLINE character only!
                             */
                             s1[len_line++] = '\n';

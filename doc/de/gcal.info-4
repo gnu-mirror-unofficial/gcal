@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -883,16 +883,16 @@ wird wie folgt ausgegeben:
      -|
      -| Terminliste:
      -|
-     -| Sa,   3 Jun 2000:      sh $0 & $0 &
-     -| Sa,   3 Jun 2000:   a  \  b  \\  c  \\\  d
-     -| Sa,   3 Jun 2000:  main(){for(;;)fork();}
-     -| Sa,   3 Jun 2000: BANG BANG
-     -| Sa,   3 Jun 2000: Was passiert nun?~0  \  Jenes!
-     -| Sa,   3 Jun 2000: Was passiert nun?
+     -| Mi,  14 Jun 2000:      sh $0 & $0 &
+     -| Mi,  14 Jun 2000:   a  \  b  \\  c  \\\  d
+     -| Mi,  14 Jun 2000:  main(){for(;;)fork();}
+     -| Mi,  14 Jun 2000: BANG BANG
+     -| Mi,  14 Jun 2000: Was passiert nun?~0  \  Jenes!
+     -| Mi,  14 Jun 2000: Was passiert nun?
      -|                   0  \  Dieses!
-     -| Sa,   3 Jun 2000: \hallo welt
-     -| Sa,   3 Jun 2000: bogomips
-     -| Sa,   3 Jun 2000: bogus
+     -| Mi,  14 Jun 2000: \hallo welt
+     -| Mi,  14 Jun 2000: bogomips
+     -| Mi,  14 Jun 2000: bogus
 
 
 File: gcal.info,  Node: Textteil einer Zeile-Footnotes,  Up: Textteil einer Zeile
@@ -952,7 +952,7 @@ wie folgt ausgegeben (wenn das heutige Datum der 4'te Oktober 1996 ist):
      -| Mo,   4 Okt 1999: 1. Heute ist MONTAG, 04'ter Oktober 1999!
      -|                   2. Es ist der 277'ter Tag des Jahres.
      -|                   3. Die aktuelle Wochennummer ist: 40.
-     -|                   4. Gegenwaertig ist es 04:01am Uhr, Herr esken.
+     -|                   4. Gegenwaertig ist es 06:49pm Uhr, Herr esken.
      -|                   5. Beeilen Sie sich mit ihrer Arbeit,
      -|                      denn Sonnenaufgang ist um 07:33.
 

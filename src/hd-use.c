@@ -2,7 +2,7 @@
 *  hd-use.c:  Manage the eternal holiday list.
 *
 *
-*  Copyright (c) 1994-1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -26,7 +26,7 @@
 
 
 #ifdef RCSID
-static char rcsid[]="$Id: hd-use.c 3.00 2000/03/13 03:00:00 tom Exp $";
+static char rcsid[]="$Id: hd-use.c 3.01 2000/06/14 03:00:01 tom Exp $";
 #endif
 
 
@@ -407,7 +407,7 @@ find_chinese_leap_month (conjunction_vector, nh_ws_prev_year, year, hour, min)
 /*
    Calculates the leap month of the Chinese calendar (based on the method
      used since AD 1645, which implemented the use of true -- astronomically
-     detected -- sun), which occurs in the given Julian/Gregorian year YEAR.
+     detected -- Sun), which occurs in the given Julian/Gregorian year YEAR.
      * If the computation of the leap month fails by any reason,
        SPECIAL_VALUE is returned.
      * If there is no leap month in the YEAR,

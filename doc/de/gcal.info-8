@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -335,7 +335,7 @@ astronomischen Wertes auslösen, wie er in der Tabelle beschrieben ist:
                       die ein Gestirn an einem anderen Ort erscheinen
                       läßt, als es sich in Wirklichkeit befindet.  Da
                       sich die Erdkugel zu den Polkappen hin abflacht und
-                      somit nicht als ideale Kugelgestalt aufgefasst
+                      somit nicht als ideale Kugelgestalt aufgefaßt
                       werden kann, hat der individuelle Erdradius, der
                       sich zwischen Beobachtungsstandort und
                       Erdmittelpunkt ergibt, auch noch Einfluß auf die
@@ -422,7 +422,7 @@ astronomischen Wertes auslösen, wie er in der Tabelle beschrieben ist:
                       Mitternachtzeitpunkt ergibt.
 
 `g'     `(', `)'      Die ungefähre, topozentrische Entfernung des Mondes
-                      von der Erde in mittleren "Erdäquatoradien"
+                      von der Erde in mittleren "Erdäquatorradien"
                       berechnen, die sich zum bürgerlichen
                       Mitternachtzeitpunkt ergibt.  Der mittlere Radius
                       der Erde am Äquator beträgt etwa 6.378,137
@@ -476,7 +476,7 @@ astronomischen Wertes auslösen, wie er in der Tabelle beschrieben ist:
                       sich der momentane Mondmittelpunkt unterhalb des
                       Himmelsäquators befindet, und Ergebnisse mit
                       positivem Vorzeichen besagen, daß sich der
-                      momentane Mondmittelpunkt oberhalbe des
+                      momentane Mondmittelpunkt oberhalb des
                       Himmelsäquators befindet.
 
 `q'     `(', `)'      Den ungefähren, scheinbaren, geozentrischen,
@@ -500,9 +500,9 @@ astronomischen Wertes auslösen, wie er in der Tabelle beschrieben ist:
                       Mitternachtzeitpunkt ergibt.
 
 `t'     `(', `)'      Die ungefähre, geozentrische Entfernung des Mondes
-                      von der Erde in mittleren Erdäquatoradien berechnen,
-                      die sich zum bürgerlichen Mitternachtzeitpunkt
-                      ergibt.
+                      von der Erde in mittleren Erdäquatorradien
+                      berechnen, die sich zum bürgerlichen
+                      Mitternachtzeitpunkt ergibt.
 
 `u'     `(', `)'      Die ungefähre geozentrische Elongation des Mondes
                       in Grad und Altminuten berechnen, die sich zum

@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -146,13 +146,13 @@ you have to write `$a?(cat text)' instead of the simple `$a?cat text'.
 See the pertinent literature for more details.
 
   If the output of external commands, which appears on the _standard
-output channel_, is assigned to text variables in an interpreterd
-manner, this output is internally directed by Gcal into a temporary
-file.  Thereafter, the contents of the temporary file is transfered to
-the text variable and the temporary file is removed.
+output channel_, is assigned to text variables in an interpreted manner,
+this output is internally directed by Gcal into a temporary file.
+Thereafter, the contents of the temporary file is transfered to the
+text variable and the temporary file is removed.
 
   If the output of external commands, which appears on the _standard
-output channel_, is assigned to text variables in an uninterpreterd
+output channel_, is assigned to text variables in an uninterpreted
 manner, this output is internally processed by the Txt2gcal program
 first (*note Invoking `txt2gcal': Invoking txt2gcal.), and then this
 output is directed by Gcal into a temporary file.  Thereafter, the
@@ -201,7 +201,7 @@ Gcal as follows:
      -| 0 \$y=---$y---
      -| 0 \$y=:::$>1u*y:::
      $ gcal -f tvarc-1a.rc -QUx --exe -r'$f=./tvarc-1.rc'
-     -| $x=---    04:06 bonjour +00123 BONSOIR     ---
+     -| $x=---    18:54 bonjour +00123 BONSOIR     ---
      -| $y=---%t  $a $>+06*b $>1u*c---
      -| $y=:::%T  $A $>+06*B $>1U*C:::
 
@@ -292,8 +292,8 @@ a resource file line contains a reference to a text variable which is
 not locally defined in that file, Gcal will try to use the global
 values held by this variable.  If this fails because no global
 definition of this text variable is given, Gcal keeps the name of this
-text variable untouched in this line, except this text variable helds
-an _empty value_.  In such a case, Gcal completely ignores this text
+text variable untouched in this line, except this text variable held an
+_empty value_.  In such a case, Gcal completely ignores this text
 variable while processing and displaying instead of keeping its name
 untouched in this line.
 
@@ -313,10 +313,10 @@ So Gcal creates the following output:
 
      $ gcal -QUx -f ./tvar-3.rc
      -| $c=+00+000  $h=  $d=+00+000  $x=$x
-     -| 05:55 18:02
+     -| 05:57 18:04
      $ gcal -QUx -r '$h=+1000:$x=' -f ./tvar-3.rc
      -| $c=+00+000  $h=+1000  $d=+00+000+1000  $x=
-     -| 05:50 18:07
+     -| 05:52 18:09
 
   Only advanced users should apply the `--export-text-variables' option
 which causes that the actual incarnation of a local text variable
@@ -733,8 +733,8 @@ The result for the 12th September 1999 is as follows:
 
      $ gcal -fsun-1.rc -Ux -Hno
      -|
-     -| 04:05/12-Sep-1999 actual local time in Muenster
-     -| 09:05/12-Sep-1999 actual local time in Bangkok
+     -| 18:53/12-Sep-1999 actual local time in Muenster
+     -| 23:53/12-Sep-1999 actual local time in Bangkok
      -| Sun:
      -| 01:06rise, 13:22set, 12h16'day, 11h44'night
      -| Bangkok-time converted to Muenster's local time
@@ -765,7 +765,7 @@ methods, is as follows:
      -| XX
 
   And finally a resource file by the name of `swtim-1.rc' which produces
-fixed date messages reminding Dayligh Saving that are valid since 1981
+fixed date messages reminding Daylight Saving that are valid since 1981
 for the Federal Republic of Germany(1) (*note Resource file
 examples-Footnote-1::).
 
@@ -904,7 +904,7 @@ Gcal Utilities
 * Invoking txt2gcal::  How to run `txt2gcal' and a summary of its options.
 * Invoking gcal2txt::  How to run `gcal2txt' and a summary of its options.
 
-  Three small utility programs are part of the Gcal 3.00 package.  The
+  Three small utility programs are part of the Gcal 3.01 package.  The
 Tcal program runs the Gcal program with the date set one day ahead.
 The Txt2gcal program creates a verbatim Gcal resource file from a text
 file, and in contrast to this, the Gcal2txt program creates a verbatim
@@ -1092,7 +1092,7 @@ Software.  *Note Introduction: (gettext)Top, for more details.
   By default, Gcal displays all message texts using the English native
 language in case no other native language is wanted.  A so-called
 _message catalog_ is read by Gcal at run-time if message texts from
-another native language are required.  Gcal 3.00 supports the following
+another native language are required.  Gcal 3.01 supports the following
 native languages:
 
 *Native Language*        *Language Code*
@@ -1216,7 +1216,7 @@ follows:
    * For CEN syntax (Comité Europén de Normalisation):
           LANGUAGE[_TERRITORY][+AUDIENCE][+SPECIAL][,SPONSOR][_REVISION]
 
-  Both syntax's contain the LANGUAGE and TERRITORY components, which
+  Both syntaxes contain the LANGUAGE and TERRITORY components, which
 are used by Gcal to select the native language and the other criteria.
 The LANGUAGE component is equivalent to the simple language code
 information and the TERRITORY component is a two-letter territory or

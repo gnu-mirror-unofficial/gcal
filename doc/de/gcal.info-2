@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
 Diese Datei beschreibt Gcal, ein Programm um Kalender zu berechnen und
 auszugeben.
 
-Copyright (c) 1994-1997, 2000 Thomas Esken
+Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-Diese Ausgabe ist für Gcal Version 3.00.
+Diese Ausgabe ist für Gcal Version 3.01.
 
 Hiermit wird die Erlaubnis erteilt, wortgetreue Kopien dieses Handbuchs
 zu erstellen und zu vertreiben, sofern alle gemachten Kopien mit dem
@@ -115,7 +115,7 @@ Termin Optionen
         * Folgt dem Namen der Textvariablen ein `?' Zuweisungsoperator,
           so wird der gesamte Text, der rechts von diesem
           Zuweisungsoperator auftritt, von Gcal als externes Kommando
-          aufgefasst und ausgeführt.  Die Ausgabe, die das Kommando auf
+          aufgefaßt und ausgeführt.  Die Ausgabe, die das Kommando auf
           dem _Standardausgabe-Gerätekanal_ erzeugt hat, wird an diese
           Textvariable zugewiesen; und zwar interpretiert.  Das heißt,
           Gcal interpretiert alle in dieser Ausgabe enthaltenen
@@ -126,7 +126,7 @@ Termin Optionen
         * Folgt dem Namen der Textvariablen ein `:' Zuweisungsoperator,
           so wird der gesamte Text, der rechts von diesem
           Zuweisungsoperator auftritt, von Gcal als externes Kommando
-          aufgefasst und ausgeführt.  Die Ausgabe, die das Kommando auf
+          aufgefaßt und ausgeführt.  Die Ausgabe, die das Kommando auf
           dem _Standardausgabe-Gerätekanal_ erzeugt hat, wird an diese
           Textvariable zugewiesen; und zwar uninterpretiert.  Das
           heißt, Gcal interpretiert keine in dieser Ausgabe enthaltenen
@@ -193,7 +193,7 @@ Termin Optionen
 
 `--adjust-value=ARGUMENT'
      Bewirkt einerseits, daß die als ARGUMENT übergebene Zahl als
-     Referenzhöhe für die Berechung der Aufgangs- und Untergangszeiten
+     Referenzhöhe für die Berechnung der Aufgangs- und Untergangszeiten
      von den sonnen- und mondbezogenen Spezialtexten verwendet wird.
      Das Optionsargument muß einer reellen Zahl im Bereich
      -90.0...+90.0 entsprechen, die den Winkelabstand in Dezimalgrad
@@ -203,7 +203,7 @@ Termin Optionen
      Mondes 20,5 Dezimalgrad unterhalb des Horizont befindet.
 
      Bewirkt andererseits, daß die als ARGUMENT übergebene Zahl als
-     Faktor für die Berechung der Schattenlänge eines senkrechten
+     Faktor für die Berechnung der Schattenlänge eines senkrechten
      Stabes von den sonnenbezogenen Spezialtexten verwendet wird.  Das
      Optionsargument muß einer reellen Zahl im Bereich 0.0...+90.0
      entsprechen, die die Schattenlänge angibt.  Zum Beispiel kann
@@ -282,7 +282,7 @@ Termin Optionen
      Dämmerung um 23:57 Uhr Ortszeit stattfindet, am 9'ten Mai kein Ende
      der astronomischen Dämmerung stattfindet, da sich der
      Sonnenmittelpunkt stets oberhalb 18 Grad unterhalb eines
-     geometrischen Horizonts (der Refererenzhöhe der astronomischen
+     geometrischen Horizonts (der Referenzhöhe der astronomischen
      Dämmerung) befindet, jedoch am 10'ten Mai um 00:01 Uhr Ortszeit
      diese Referenzhöhe wieder durchschritten wird.  Somit gehört die
      für den 9'ten Mai ermittelte Uhrzeit eigentlich auf den 10'ten Mai
@@ -804,7 +804,7 @@ wird.
      (*note Termin Optionen-Footnote-12::) zum Gruppieren verwendet,
      z.B.:
 
-          $ gcal -Cw -cg
+          $ gcal -Cxw -cg
           -|
           -| So,   6 Nov 1994: Text 1
           -| So,   6 Nov 1994: Text 2
@@ -815,7 +815,7 @@ wird.
           ...
           
           
-          $ gcal -Cw -g'-Ein_vom\_Benutzer-~-definierter Text-'
+          $ gcal -Cxw -g'-Ein_vom\_Benutzer-~-definierter Text-'
           -|
           -| So,   6 Nov 1994: Text 1
           -| So,   6 Nov 1994: Text 2
@@ -827,9 +827,16 @@ wird.
           -| Di,   8 Nov 1994: Text 4
           ...
 
-     Jedesmal wenn ein `~' (Tilde) Zeichen in TEXT vorgefunden wird, so
-     wird dieses Zeichen durch ein echtes `\n' (Newline) Zeichen
-     ersetzt.
+     Der TEXT darf Referenzen auf globale Datum- und Textvariablen
+     enthalten (*note Termin Option `--date-variable=ARGUMENT':
+     x-date-variable., und *Note Termin Option
+     `--text-variable=ARGUMENT': x-text-variable).  Zudem dürfen im
+     TEXT alle Spezialtexte benutzt werden, die einen Textersatz
+     bewirken (*note `%?'... Spezialtexte zum Textersatz: Ersetzen.).
+
+     Jedesmal wenn ein `~' (Tilde) oder `^' (Caret) Zeichen in TEXT
+     vorgefunden wird, so wird dieses Zeichen durch ein echtes `\n'
+     (Newline) Zeichen ersetzt.
 
      Falls das `~' (Tilde) Zeichen als Zeichen selbst verwendet werden
      soll, so muß dieses durch ein führendes `\' (Backslash) Zeichen
@@ -837,6 +844,7 @@ wird.
      `\~'.  Wenn die Zeichen `\~' selbst als Zeichenfolge verwendet
      werden sollen, so muß das `\' (Backslash) Zeichen durch ein
      weiteres `\' (Backslash) Zeichen geschützt werden, z.B. `\\~'.
+     Alles vorgenannte gilt auch für das `^' (Caret) Zeichen.
 
      Jedesmal wenn ein `_' (Unterstrich) Zeichen in TEXT vorgefunden
      wird, so wird dieses Zeichen durch ein echtes ` ' (Leerzeichen)
@@ -865,7 +873,7 @@ wird.
      auf dieses Datum beziehen(13) (*note Termin
      Optionen-Footnote-13::), z.B.:
 
-          $ gcal -co
+          $ gcal -cxo
           -|
           -| So,   6 Nov 1994: Text 1
           -|                   Text 2
@@ -887,7 +895,7 @@ wird.
      Unterdrückt die Ausgabe von einem jede Einzelzeile anführendem
      Datum in der Terminliste, z.B.:
 
-          $ gcal -cU
+          $ gcal -cxU
           -|
           -| Text 1
           -| Text 2
@@ -897,7 +905,7 @@ wird.
 `--suppress-text-part'
      Unterdrückt die Ausgabe aller Textteile in der Terminliste, z.B.:
 
-          $ gcal -cJ
+          $ gcal -cxJ
           -|
           -| So,   6 Nov 1994:
           -| So,   6 Nov 1994:
@@ -905,7 +913,50 @@ wird.
 
 `x'
 `--exclude-fixed-dates-list-title'
-     Die Ausgabe der Überschrift in der Terminliste unterdrücken.
+     Die Ausgabe der Überschrift der Terminliste unterdrücken.
+
+`--heading-text=TEXT'
+     Die Überschrift der Terminliste ändern.  Anstelle des
+     voreingestellten `Terminliste:' Textes kann ein beliebiger anderer
+     Text zur Ausgabe gebracht werden, z.B.:
+
+          $ gcal -cUJ --heading-text=Hallo,_es_ist_%K_,~%t__Uhr
+          -|
+          -| Hallo, es ist Sonntag,
+          -| 14:32 Uhr
+          -|
+          -| So,   6 Nov 1994:
+          ...
+
+     Der TEXT darf Referenzen auf globale Datum- und Textvariablen
+     enthalten (*note Termin Option `--date-variable=ARGUMENT':
+     x-date-variable., und *Note Termin Option
+     `--text-variable=ARGUMENT': x-text-variable).  Zudem dürfen im
+     TEXT alle Spezialtexte benutzt werden, die einen Textersatz
+     bewirken (*note `%?'... Spezialtexte zum Textersatz: Ersetzen.).
+
+     Jedesmal wenn ein `~' (Tilde) oder `^' (Caret) Zeichen in TEXT
+     vorgefunden wird, so wird dieses Zeichen durch ein echtes `\n'
+     (Newline) Zeichen ersetzt.
+
+     Falls das `~' (Tilde) Zeichen als Zeichen selbst verwendet werden
+     soll, so muß dieses durch ein führendes `\' (Backslash) Zeichen
+     hinsichtlich seiner speziellen Bedeutung entwertet werden, z.B.
+     `\~'.  Wenn die Zeichen `\~' selbst als Zeichenfolge verwendet
+     werden sollen, so muß das `\' (Backslash) Zeichen durch ein
+     weiteres `\' (Backslash) Zeichen geschützt werden, z.B. `\\~'.
+     Alles vorgenannte gilt auch für das `^' (Caret) Zeichen.
+
+     Jedesmal wenn ein `_' (Unterstrich) Zeichen in TEXT vorgefunden
+     wird, so wird dieses Zeichen durch ein echtes ` ' (Leerzeichen)
+     Zeichen ersetzt.
+
+     Falls das `_' (Unterstrich) Zeichen als Zeichen selbst verwendet
+     werden soll, so muß dieses durch ein führendes `\' (Backslash)
+     Zeichen hinsichtlich seiner speziellen Bedeutung entwertet werden,
+     z.B. `\_'.  Wenn die Zeichen `\_' selbst als Zeichenfolge
+     verwendet werden sollen, so muß das `\' (Backslash) Zeichen durch
+     ein weiteres `\' (Backslash) Zeichen geschützt werden, z.B. `\\_'.
 
 `z'
 `--include-consecutive-number'

@@ -11,9 +11,9 @@ END-INFO-DIR-ENTRY
   This file documents Gcal, a program for calculating and printing
 calendars.
 
-  Copyright (c) 1994-1997, 2000 Thomas Esken
+  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 
-  This edition is for Gcal version 3.00.
+  This edition is for Gcal version 3.01.
 
   Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -117,8 +117,8 @@ are introduced and used in this manual:
 
 "Celestial equator"
      A celestial great circle, which is vertical to the celestial axis
-     and simultaneaously represents the Earth's equator that is
-     projected onto the celestial sphere.
+     and simultaneously represents the Earth's equator that is projected
+     onto the celestial sphere.
 
 "Celestial Pole"
      The northern and southern lengthening of the Earth's rotation axis,
@@ -143,7 +143,7 @@ are introduced and used in this manual:
      known as ISO-8859-1 (ISO Latin-1).
 
 "Civil Islamic calendar"
-     The arithmetically determinded Islamic lunar calendar.
+     The arithmetically determined Islamic lunar calendar.
 
 "Civil midnight time"
      In terms of Gcal, this is 0 o'clock, the day change just took part.
@@ -258,7 +258,7 @@ are introduced and used in this manual:
 "Evening width"
 "Set width"
      The horizontal angular distance between the set azimuth of a
-     celestial body und the West direction.
+     celestial body and the West direction.
 
 "Exclusive day period"
 "Exclusive date period"
@@ -297,11 +297,11 @@ are introduced and used in this manual:
      Richard M. Stallman, the author of the original Emacs editor.
 
 "Geocentric data"
-     Observations of celestial bodys that are done from the fictious
+     Observations of celestial bodies that are done from the fictitious
      center of the Earth yield in geocentrically based values.
 
 "Geocentrical horizon"
-     That fictious horizontal plane that passes through the Earth's
+     That fictitious horizontal plane that passes through the Earth's
      center, orthogonal to the observer's local vertical.
 
 "Geometrical horizon"
@@ -415,11 +415,11 @@ are introduced and used in this manual:
 "Leap year"
      In the Gregorian calendar, a leap year is any year which number
      can be divided by 4 without a remainder, and years ending in
-     hundrets are no leap years unless they are divisible by 400.  But
+     hundreds are no leap years unless they are divisible by 400.  But
      the Eastern Orthodox churches compute leap years within the
      Gregorian calendar by using another rule; and that, a leap year is
      any year which number can be divided by 4 without a remainder, and
-     years ending in hundrets are leap years, if a remainder of 2 or 6
+     years ending in hundreds are leap years, if a remainder of 2 or 6
      occurs when such a year is divided by 9.
 
 "Legal holiday"
@@ -469,10 +469,10 @@ are introduced and used in this manual:
 
 "Magnitude unit"
      Is used to define the brightness of a star, and is a non-metrical
-     value (latin term `magnitudo', abbreviated m).  The difference
+     value (Latin term `magnitudo', abbreviated m).  The difference
      between two consecutive magnitudes is 1 to 2.512.  Therefore, a
      star with the brightness of 1m is 2.512 times brighter than a star
-     of 2m.  A negative magitude denotes a very bright star, for
+     of 2m.  A negative magnitude denotes a very bright star, for
      example almost -27m for the Sun, whereas the hardly visible planet
      Pluto has a magnitude of a bit more than +14m.  The Full Moon has
      a visual brightness of about -12m.55.
@@ -492,7 +492,7 @@ are introduced and used in this manual:
      apparently shifts with respect to the vernal equinox point on the
      ecliptic due to the Earth's orbit around the Sun, the star day and
      the true solar day have a different length.  As the true Sun
-     namely moves irregularly through the ecliptic, a fictious _mean
+     namely moves irregularly through the ecliptic, a fictitious _mean
      Sun_ with a symmetrical motion through the celestial equator is
      used for deriving the mean solar time.
 
@@ -518,7 +518,7 @@ are introduced and used in this manual:
 "Morning width"
 "Rise width"
      The horizontal angular distance between the rise azimuth of a
-     celestial body und the East direction.
+     celestial body and the East direction.
 
 "Nautical twilight"
      The time when the center of the Sun passes a reference altitude of
@@ -539,7 +539,7 @@ are introduced and used in this manual:
      noon time of the celestial body.
 
 "Noon line"
-     The straight line which connets the North and the South point.
+     The straight line which connects the North and the South point.
 
 "Noon phase angle"
      The phase angle of a celestial body as it happen at astronomical
@@ -550,7 +550,7 @@ are introduced and used in this manual:
 
 "Opposition"
      The Earth is in one line between the celestial body and the Sun,
-     and therefore, the celestial body is completly visible from the
+     and therefore, the celestial body is completely visible from the
      Earth.  In terms of the Moon, this is the Full Moon phase.
 
 "Option"
@@ -558,9 +558,9 @@ are introduced and used in this manual:
      behaves.
 
 "Orthodrome"
-     A great circle's arc that is casted between two points on a
-     surface of a sphere.  Is the shortest geodetic connecting line
-     between two points on a sphere.
+     A great circles arc that is casted between two points on a surface
+     of a sphere.  Is the shortest geodetic connecting line between two
+     points on a sphere.
 
 "Pattern"
      A pattern is an arbitrary conditional expression against which
@@ -734,7 +734,7 @@ are introduced and used in this manual:
      date text.
 
 "Topocentric data"
-     Observations of celestial bodys that are done from the surface of
+     Observations of celestial bodies that are done from the surface of
      the Earth yield in topocentrically based values.
 
 "True solar time"
@@ -747,15 +747,15 @@ are introduced and used in this manual:
 "True track"
 "Course angle"
      The course angle gives the direction, which is the vertex of a
-     great circle's arc (Orthodrome) that is casted between two points
+     great circles arc (Orthodrome) that is casted between two points
      on a surface of a sphere, at a meridian (Gcal uses a geoid
      (rotation ellipsoid) that is calculated taking pattern from the
      `World Geodetic System', short W.G.S, that was designed in 1961).
      Such an arc is the shortest geodetic connecting line between two
      points on a sphere.  Indeed, the course angles on such an arc are
-     changeing continually, because the circular line that is casted
+     changing continually, because the circular line that is casted
      intersects each meridian with another angle -- except the case,
-     that both co-ordinates are refering to exactly the same longitude
+     that both co-ordinates are referring to exactly the same longitude
      or to exactly the same latitude.
 
 "Twilight"
@@ -878,6 +878,7 @@ Gcal:
 * --french-revolutionary-months:         Calendar options.
 * --gregorian-reform=1582|1700|1752|1753|ARGUMENT: Calendar options.
 * --grouping-text[=TEXT]:                Fixed date options.
+* --heading-text=TEXT:                   Fixed date options.
 * --hebrew-holidays:                     Calendar options.
 * --hebrew-months:                       Calendar options.
 * --help <1>:                            Invoking gcal2txt.

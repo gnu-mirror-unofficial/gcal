@@ -17,7 +17,7 @@ $ cat tvarc-1a.rc
 @print{} 0 \$y=---$y---
 @print{} 0 \$y=:::$>1u*y:::
 $ gcal -f tvarc-1a.rc -QUx --exe -r'$f=./tvarc-1.rc'
-@print{} $x=---    04:03 bonjour +00123 BONSOIR     ---
+@print{} $x=---    18:50 bonjour +00123 BONSOIR     ---
 @print{} $y=---%t  $a $>+06*b $>1u*c---
 @print{} $y=:::%T  $A $>+06*B $>1U*C:::
 @end cartouche

@@ -1,8 +1,8 @@
 ; Sun and Moon rise/set/twilights for Bangkok, THAILAND, for Gcal-2.20 or newer
 ;
-; $Id: bkk.rc 0.02 2000/04/10 00:00:02 tom Exp $
+; $Id: bkk.rc 0.03 2000/06/30 00:00:03 tom Exp $
 ;
-; Copyright (c) 2000   Thomas Esken      <esken@uni-muenster.de>
+; Copyright (c) 2000   Thomas Esken      <esken@gmx.net>
 ;                      Im Hagenfeld 84
 ;                      D-48147 M"unster
 ;                      GERMANY
@@ -50,25 +50,25 @@ $x=$t ~\
 6 > %o6$c,$z    %u6$c,$z ~\
 5 * %o5$c,$z    %u5$c,$z  %oL$c,$z ~\
 4 > %o4$c,$z    %u4$c,$z ~\
-2x> %oQ$c,$z    %uQ$c,$z ~\
-1x> %oR$c,$z    %uR$c,$z ~\
-1 + %o1$c,$z  %oJ$c,$z ~\
-1x< %sR$c,$z    %zR$c,$z ~\
-2x< %sQ$c,$z    %zQ$c,$z ~\
+x2> %oQ$c,$z    %uQ$c,$z ~\
+x1> %oR$c,$z    %uR$c,$z ~\
+1 = %o1$c,$z  %oJ$c,$z ~\
+x1< %sR$c,$z    %zR$c,$z ~\
+x2< %sQ$c,$z    %zQ$c,$z ~\
 4 < %s4$c,$z    %z4$c,$z ~\
 5 * %s5$c,$z    %z5$c,$z  %sL$c,$z ~\
 6 < %s6$c,$z    %z6$c,$z ~\
 7 < %s7$c,$z    %z7$c,$z ~\
 8 < %s8$c,$z    %z8$c,$z ~\
 9 < %s9$c,$z    %z9$c,$z ~\
-0 - %s0$c,$z  %sI$c,$z ~\
+0 = %s0$c,$z  %sI$c,$z ~\
 $m ~\
 5 * %(5$c,$z    %[5$c,$z  %(Q$c,$z  %(*R$c,$z % ~\
 4 > %(4$c,$z    %[4$c,$z ~\
-1 + %)1$c,$z  %)N$c,$z  %)*O$c,$z % ~\
+1 = %)1$c,$z  %)N$c,$z  %)*O$c,$z % ~\
 4 < %)4$c,$z    %]4$c,$z ~\
 5 * %)5$c,$z    %]5$c,$z  %)Q$c,$z  %)*R$c,$z % ~\
-0 - %(0$c,$z  %(L$c,$z  %(*M$c,$z %
+0 = %(0$c,$z  %(L$c,$z  %(*M$c,$z %
 ;
 ; Name of location, geographical co-ordinate and timezone
 ;

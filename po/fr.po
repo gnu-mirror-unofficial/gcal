@@ -5325,7 +5325,7 @@ msgstr ""
 
 #: src/help.c:2698
 #, fuzzy, c-format
-msgid "          and \"TVAR[%s|%c%s]COMMAND\" assigments"
+msgid "          and \"TVAR[%s|%c%s]COMMAND\" assignments"
 msgstr "                           = %s   passés"
 
 #: src/help.c:2709

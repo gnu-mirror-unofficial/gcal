@@ -5025,7 +5025,7 @@ msgstr ""
 
 #: src/help.c:2698
 #, c-format
-msgid "          and \"TVAR[%s|%c%s]COMMAND\" assigments"
+msgid "          and \"TVAR[%s|%c%s]COMMAND\" assignments"
 msgstr ""
 
 #: src/help.c:2709

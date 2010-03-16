@@ -5238,7 +5238,7 @@ msgstr "          # B            = Не исполнять команды оболочки `%c%c[%s]'"
 
 #: src/help.c:2698
 #, fuzzy, c-format
-msgid "          and \"TVAR[%s|%c%s]COMMAND\" assigments"
+msgid "          and \"TVAR[%s|%c%s]COMMAND\" assignments"
 msgstr "                           = %s   Назад"
 
 #: src/help.c:2709

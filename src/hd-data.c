@@ -1382,7 +1382,8 @@ PUBLIC const Ht_struct  hd_text[]=
   { HD_WEST_VIRGINIA_DAY,                 "West-Virginia-Tag" },
   { HD_WHITSUN_EVE,                       "Pfingstvorabend" },
   { HD_W_TUBMANS_BIRTHDAY,                "W. Tubmans Geburtstag" },
-  { HD_YAP_DAY,                           "Yap-Tag" }
+  { HD_YAP_DAY,                           "Yap-Tag" },
+  { HD_DAY_OF_CZECH_STATEHOOD,            "Tag der Tschechische Staatlichkeit" }
 #  endif /* !HD_TOP20CC */
 #else /* !USE_DE */
   /*
@@ -1948,7 +1949,8 @@ PUBLIC const Ht_struct  hd_text[]=
   { HD_WEST_VIRGINIA_DAY,                 N_("West Virginia Day") },
   { HD_WHITSUN_EVE,                       N_("Whitsun Eve") },
   { HD_W_TUBMANS_BIRTHDAY,                N_("W. Tubman's Birthday") },
-  { HD_YAP_DAY,                           N_("Yap Day") }
+  { HD_YAP_DAY,                           N_("Yap Day") },
+  { HD_DAY_OF_CZECH_STATEHOOD,            N_("Day of Czech Statehood") }
 #  endif /* !HD_TOP20CC */
 #endif /* !USE_DE */
 };

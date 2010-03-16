@@ -662,6 +662,7 @@
 #    define  HD_WHITSUN_EVE                        548
 #    define  HD_W_TUBMANS_BIRTHDAY                 549
 #    define  HD_YAP_DAY                            550
+#    define  HD_DAY_OF_CZECH_STATEHOOD             551
 #  endif /* !HD_TOP20CC */
 
 

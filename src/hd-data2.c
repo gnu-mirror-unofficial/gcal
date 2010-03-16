@@ -762,8 +762,13 @@ at_hdy (init_data, detected, easter, year, hd_elems, fday, count)
             ptr_cc_id, "+", DAY_MIN, 11, year, hd_elems, fday, count);
    if (*init_data)
      *init_data = FALSE;
+//according to §7 Arbeitsruhegesetz
+// (BGBl. Nr. 144/1983 zuletzt geändert durch BGBl. I Nr. 159/2004)
+//All Souls day is no holiday in Austria
+//   holiday (*init_data, detected, _(hd_text[HD_ALL_SOULS_DAY].ht_text),
+//           ptr_cc_id, DIS_HLS_PREF2, 2, 11, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_ALL_SOULS_DAY].ht_text),
-            ptr_cc_id, DIS_HLS_PREF2, 2, 11, year, hd_elems, fday, count);
+            ptr_cc_id, DIS_HLS_PREF, 2, 11, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_BOXING_DAY].ht_text),
             ptr_cc_id, "+", 26, MONTH_MAX, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_CHRISTS_ASCENSION_DAY].ht_text),
@@ -3843,50 +3848,87 @@ cz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 {
    register int  day;
 
-
    ptr_cc_id = "CZ";
-   holiday (*init_data, detected, _(hd_text[HD_ALL_SAINTS_DAY].ht_text),
-            ptr_cc_id, DIS_HLS_PREF, DAY_MIN, 11, year, hd_elems, fday, count);
    if (*init_data)
      *init_data = FALSE;
-   holiday (*init_data, detected, _(hd_text[HD_BOXING_DAY].ht_text),
-            ptr_cc_id, "#", 26, MONTH_MAX, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_CHRISTMAS_DAY].ht_text),
-            ptr_cc_id, "+", 25, MONTH_MAX, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_CHRISTMAS_EVE].ht_text),
-            ptr_cc_id, "+", 24, MONTH_MAX, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_DAY_OF_STUDENTS_REVOLT].ht_text),
-            ptr_cc_id, DIS_HLS_PREF, 17, 11, year, hd_elems, fday, count);
+
+   /*
+    * Several important days which are not state holidays.
+    */
+   day = eval_holiday (DAY_MIN, 5, year, DAY_MAX, TRUE) + DAY_MAX;
+   holiday (*init_data, detected, _(hd_text[HD_MOTHERS_DAY].ht_text),
+            ptr_cc_id, DIS_HLS_PREF, day, 5, year, hd_elems, fday, count);
+   holiday (*init_data, detected, _(hd_text[HD_PEOPLES_UPRISING_DAY].ht_text),
+            ptr_cc_id, DIS_HLS_PREF, 5, 5, year, hd_elems, fday, count);
+   holiday (*init_data, detected, _(hd_text[HD_ALL_SAINTS_DAY].ht_text),
+            ptr_cc_id, DIS_HLS_PREF, 1, 11, year, hd_elems, fday, count);
+   holiday (*init_data, detected, _(hd_text[HD_ST_NICHOLAS_DAY].ht_text),
+            ptr_cc_id, DIS_HLS_PREF, 6, 12, year, hd_elems, fday, count);
+   holiday (*init_data, detected, _(hd_text[HD_SYLVESTER].ht_text), ptr_cc_id,
+            DIS_HLS_PREF, dvec[MONTH_MAX-1], MONTH_MAX, year, hd_elems, fday, count);
+
+   /*
+    * I've tried to capture the somewhat complex evolution of the Czech holidays,
+    * but so far I have only a little information on the state before year 1975,
+    * so if you know more, please let me know.
+    *				Martin Mares <mj@ucw.cz>, September 2003
+    *
+    * This is a brief sketch of the history:
+    *
+    * Law:		56/75	141/88	167/90	204/90	218/91	245/00
+    * Effective:	23.6.75	21.9.88	10.5.90	18.5.90	31.5.91	9.8.00
+    *  1. 1.		+	+	+	+	+	+
+    *  Easter		+	+	+	+	+	+
+    *  1. 5.		+	+	+	+	+	+
+    *  5. 5.				
+    *  8. 5.						+	+
+    *  9. 5.		+	+	+	+
+    *  5. 7.				+	+	+	+
+    *  6. 7.					+	+	+
+    * 28. 9.							+
+    * 28.10.			+	+	+	+	+
+    * 17.11.							+
+    * 24.12.				+	+	+	+
+    * 25.12.		+	+	+	+	+	+
+    * 26.12.		+	+	+	+	+	+
+    */
+   holiday (*init_data, detected, _(hd_text[HD_NEW_YEARS_DAY].ht_text),
+            ptr_cc_id, "+", 1, 1, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_EASTER_MONDAY].ht_text),
             ptr_cc_id, "+", easter+1, 0, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_EASTER_SUNDAY].ht_text),
             ptr_cc_id, "+", easter, 0, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_KONSTANTIN_AND_METHODIUS].ht_text),
-            ptr_cc_id, "+", 5, 7, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_LABOUR_DAY].ht_text),
-            ptr_cc_id, "#", DAY_MIN, 5, year, hd_elems, fday, count);
-   day = eval_holiday (DAY_MIN, 5, year, DAY_MAX, TRUE) + DAY_MAX;
-   holiday (*init_data, detected, _(hd_text[HD_MOTHERS_DAY].ht_text),
-            ptr_cc_id, DIS_HLS_PREF, day, 5, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_NEW_YEARS_DAY].ht_text),
-            ptr_cc_id, "+", DAY_MIN, MONTH_MIN, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_ST_NICHOLAS_DAY].ht_text),
-            ptr_cc_id, DIS_HLS_PREF, 6, MONTH_MAX, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_SYLVESTER].ht_text), ptr_cc_id,
-            DIS_HLS_PREF, dvec[MONTH_MAX-1], MONTH_MAX, year, hd_elems, fday, count);
-   if (year > 1414)
-     holiday (*init_data, detected, _(hd_text[HD_BURNING_OF_JAN_HUS].ht_text),
-              ptr_cc_id, "+", 6, 7, year, hd_elems, fday, count);
-   if (year > 1917)
+            ptr_cc_id, "+", 1, 5, year, hd_elems, fday, count);
+   if (year >= 1992)
+     holiday (*init_data, detected, _(hd_text[HD_LIBERATION_DAY].ht_text),
+              ptr_cc_id, "+", 8, 5, year, hd_elems, fday, count);
+   else
+     holiday (*init_data, detected, _(hd_text[HD_LIBERATION_DAY].ht_text),
+              ptr_cc_id, "+", 9, 5, year, hd_elems, fday, count);
+   if (year >= 1990)
+     {
+       holiday (*init_data, detected, _(hd_text[HD_KONSTANTIN_AND_METHODIUS].ht_text),
+                ptr_cc_id, "+", 5, 7, year, hd_elems, fday, count);
+       holiday (*init_data, detected, _(hd_text[HD_BURNING_OF_JAN_HUS].ht_text),
+                ptr_cc_id, "+", 6, 7, year, hd_elems, fday, count);
+     }
+   if (year >= 2000)
+     holiday (*init_data, detected, _(hd_text[HD_DAY_OF_CZECH_STATEHOOD].ht_text),
+              ptr_cc_id, "+", 28, 9, year, hd_elems, fday, count);
+   if (year >= 1988)
      holiday (*init_data, detected, _(hd_text[HD_INDEPENDENCE_DAY].ht_text),
               ptr_cc_id, "+", 28, 10, year, hd_elems, fday, count);
-   if (year > 1944)
-    {
-      holiday (*init_data, detected, _(hd_text[HD_PEOPLES_UPRISING_DAY].ht_text),
-               ptr_cc_id, DIS_HLS_PREF, 5, 5, year, hd_elems, fday, count);
-      holiday (*init_data, detected, _(hd_text[HD_LIBERATION_DAY].ht_text),
-               ptr_cc_id, "#", 8, 5, year, hd_elems, fday, count);
-    }
+   if (year >= 2000)
+     holiday (*init_data, detected, _(hd_text[HD_DAY_OF_STUDENTS_REVOLT].ht_text),
+              ptr_cc_id, "+", 17, 11, year, hd_elems, fday, count);
+   if (year >= 1990)
+     holiday (*init_data, detected, _(hd_text[HD_CHRISTMAS_EVE].ht_text),
+              ptr_cc_id, "+", 24, 12, year, hd_elems, fday, count);
+   holiday (*init_data, detected, _(hd_text[HD_CHRISTMAS_DAY].ht_text),
+            ptr_cc_id, "+", 25, 12, year, hd_elems, fday, count);
+   holiday (*init_data, detected, _(hd_text[HD_BOXING_DAY].ht_text),
+            ptr_cc_id, "+", 26, 12, year, hd_elems, fday, count);
 }
 
 

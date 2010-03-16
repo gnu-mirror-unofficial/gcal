@@ -18,6 +18,11 @@ v3.01.1 20091201 Typo fixed in data/dates/lotr: Sm8 = Smaug
 		   Patch by Sandro Tosi
 		 Fix German translation
 		   Patch by Jens Seidel
+		 Changes to src/{hd-data2.c,hd-data3.c,hd-defs.h,hd-data.c}
+		   -fixed Czech holidays; bug report and patch by Martin Mares
+		   -removed non ASCII char
+		   -All Saints Day on some states; patch by Marc-Jano Knopp
+		   -All Souls day is no holiday; patch by Thorsten Alteholz
 
 v3.01   20000630 Some minor changes in the `doc/LL/texi/gcal.texi'
                    documentation (fixed some typos and extended the

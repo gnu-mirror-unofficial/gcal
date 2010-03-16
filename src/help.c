@@ -2695,7 +2695,7 @@ my_extended_help (fp, longopt_symbolic)
         sprintf(s1, _("          Execute `%c%c[%s]' shell commands"),
                 RC_SPECIAL_TEXT_CHAR, RC_SHELL_ESC_CHAR, larg_lit);
         print_text (fp, s1);
-        sprintf(s1, _("          and \"TVAR[%s|%c%s]COMMAND\" assigments"),
+        sprintf(s1, _("          and \"TVAR[%s|%c%s]COMMAND\" assignments"),
                 RC_TVAR_ICMD_ASSIGN, QUOTE_CHAR, RC_TVAR_UCMD_ASSIGN);
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)

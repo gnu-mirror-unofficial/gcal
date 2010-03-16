@@ -7,8 +7,10 @@ v*.**   ********
 
 v3.01.1 20091201 Typo fixed in data/dates/lotr: Sm8 = Smaug
 		 Typo fixed in src/help.c and *.po: assigments -> assignments
-		 Date of Nikolaustag changed
+		 Date of Nikolaustag changed in data/dates/world
 		   Bug report and patch by Wolfram Kleff
+		 Spell check in doc/en/texi/gcal.texi
+                   Patch by James Troup
 
 v3.01   20000630 Some minor changes in the `doc/LL/texi/gcal.texi'
                    documentation (fixed some typos and extended the

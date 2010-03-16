@@ -1210,7 +1210,7 @@ current day, holiday or text explicitly.
 @arindex -H @var{text}
 @arindex --highlighting=@var{text}
 @cindex Highlighting sequences, setting
-@cindex Set highlighing sequences
+@cindex Set highlighting sequences
 @cindex Marking characters, setting
 @cindex Set marking characters
 @cindex @samp{:} separator character
@@ -8565,7 +8565,7 @@ mentioned above.
 
 @cindex Line continuation character, @samp{\}
 @cindex @samp{\} line continuation character
-@cindex Resource file, line contination
+@cindex Resource file, line continuation
 @cindex Continue line in resource file
 A line of the resource file is continued on the next line if a
 @w{@samp{\@r{-}\n}} @w{(backslash-newline)} character sequence is found,
@@ -9580,7 +9580,7 @@ The result for the year 1998 is as follows:
 @cindex Julian calendar
 
 The nowadays calendar was first formulated in several inaccurate variations by
-the Romans based on methods developed by the Babylonians and Egypts.  The aim
+the Romans based on methods developed by the Babylonians and Egyptians.  The aim
 of all these calendars was to harmonize the cycles of the Moon and the Sun.
 During Julius Caesar's reign, January was falling in autumn so he ordered
 @w{Sosigenes} to make changes to the calendar.  He added 90 days to the year

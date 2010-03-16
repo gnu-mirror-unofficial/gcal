@@ -2953,7 +2953,7 @@ msgstr "Chiang Kai-sheks Geburtstag"
 
 #: src/hd-data.c:1735
 msgid "Children's White Sunday"
-msgstr "Weisser Sonntag der Kinder"
+msgstr "Weißer Sonntag der Kinder"
 
 #: src/hd-data.c:1736
 msgid "Colon Day"
@@ -4593,7 +4593,7 @@ msgstr ""
 msgid ""
 "          Provide eternal holiday list with Chinese flexible calendar months"
 msgstr ""
-"          Ewige Feiertagsliste mit flexbilen chinesischen Monaten ausstatten"
+"          Ewige Feiertagsliste mit flexiblen chinesischen Monaten ausstatten"
 
 #: src/help.c:2414
 msgid "          Provide eternal holiday list with Chinese calendar holidays"
@@ -4781,7 +4781,7 @@ msgstr "          `%c%c[%s]' Shell-Kommandos und"
 
 #: src/help.c:2698
 #, c-format
-msgid "          and \"TVAR[%s|%c%s]COMMAND\" assigments"
+msgid "          and \"TVAR[%s|%c%s]COMMAND\" assignments"
 msgstr "          \"TVAR[%s|%c%s]KOMMANDO\" Zuweisungen ausführen"
 
 #: src/help.c:2709
@@ -4907,7 +4907,7 @@ msgstr ""
 msgid ""
 "            the preceding special characters in an individual date format,"
 msgstr ""
-"            Sonderzeichen in einem selbstdefinierten Datumformat, welches "
+"            Sonderzeichen in einem selbstdefinierten Datumsformat, welches "
 "eine"
 
 #: src/help.c:2855
@@ -5080,7 +5080,7 @@ msgid ""
 "          # d            = Include actual date if list of periods is "
 "generated"
 msgstr ""
-"          # d            = Aktuelles Datum einschliessen bei Datumliste"
+"          # d            = Aktuelles Datum einschließen bei Datumliste"
 
 #: src/help.c:3110
 msgid ""
@@ -5348,7 +5348,7 @@ msgstr "Vorgegebenes `DATUM' anstelle heutiges Datum verwenden"
 msgid ""
 "Date format:  %s[%s[%s|%s[N]]], %s%c%c|%c|DVAR[[%s|%s]N[%s]], %s%cdN[%s]"
 msgstr ""
-"Datumformat:  %s[%s[%s|%s[N]]], %s%c%c|%c|DVAR[[%s|%s]N[%s]], %s%cdN[%s]"
+"Datumsformat: %s[%s[%s|%s[N]]], %s%c%c|%c|DVAR[[%s|%s]N[%s]], %s%cdN[%s]"
 
 #: src/help.c:3324
 #, c-format
@@ -5506,7 +5506,7 @@ msgstr "Gregorianische Reformation: %02d-%02d %s %0*d"
 #: src/help.c:3684
 #, c-format
 msgid "Date format: (%s) `%s' (%s)"
-msgstr "Datumformat: (%s) `%s' (%s)"
+msgstr "Datumsformat: (%s) `%s' (%s)"
 
 #: src/help.c:3695
 #, c-format
@@ -6109,7 +6109,7 @@ msgstr "`%s' Zeile %ld: (`%s') ungültiger Wert für Tabellengröe `sizeof %s>%d'"
 #: src/utils.c:479
 #, c-format
 msgid "(`%s') date format `%s' is invalid"
-msgstr "(`%s') Datumformat `%s' ist ungültig"
+msgstr "(`%s') Datumsformat `%s' ist ungültig"
 
 #: src/utils.c:484
 #, c-format

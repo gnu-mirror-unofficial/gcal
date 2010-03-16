@@ -185,7 +185,7 @@ install: installdirs installdates installdata
 
 installdirs: $(top_srcdir)/mkinstalldirs
 	$(NORMAL_INSTALL)
-	$(SHELL) $(top_srcdir)/mkinstalldirs $(homedir)
+#	$(SHELL) $(top_srcdir)/mkinstalldirs $(homedir)
 	$(SHELL) $(top_srcdir)/mkinstalldirs $(packagedatadir)
 	if test -n "$(AWK)" || test -n "$(PERL)"; \
 	then \
@@ -199,7 +199,7 @@ installdirs: $(top_srcdir)/mkinstalldirs
 #
 installdata: $(dataGCALRCFILE) $(dataEXAMPLEFILES) $(dataREADMEFILE) installdirs
 	$(NORMAL_INSTALL)
-	@install_target=`echo "$(dataGCALRCFILE)" | sed -e 's,.*/,,'` ;\
+#	@install_target=`echo "$(dataGCALRCFILE)" | sed -e 's,.*/,,'` ;\
 	if test -f "$(homedir)/.$$install_target"; \
 	then \
 	  if test -n "$(CP)"; \

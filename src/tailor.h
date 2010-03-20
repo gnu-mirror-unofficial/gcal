@@ -5,6 +5,7 @@
 *
 *
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 2010 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -43,6 +44,7 @@
 
 #  define  GCAL_NLS
 #  include <locale.h>
+#  include <langinfo.h>
 
 #  include <libintl.h>
 

@@ -3,6 +3,7 @@
 *
 *
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 2010 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -6056,10 +6057,7 @@ LABEL_option_error:
         start_day = DAY_MIN;
 #else /* !USE_DE */
 #  ifdef GCAL_NLS
-        if (!is_en)
-          start_day = DAY_MIN;
-        else
-          start_day = DAY_MAX;
+        start_day = (nl_langinfo (_NL_TIME_FIRST_WEEKDAY)[0] + 5) % 7 + 1;
 #  else /* !GCAL_NLS */
         start_day = DAY_MAX;
 #  endif /* !GCAL_NLS */

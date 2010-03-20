@@ -5,12 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gcal 2.01\n"
-"POT-Creation-Date: 2000-06-30 23:38+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-20 16:29+0100\n"
 "PO-Revision-Date: 1996-10-22 09:38 MET DST\n"
 "Last-Translator: Erick Branderhorst <branderh@debian.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: src/file-io.c:1568
@@ -125,11 +126,11 @@ msgstr ""
 "%s: commando in omgevingsvariabele `%s' gevonden -- %s\n"
 "%s\n"
 
-#: src/gcal.c:2516 src/gcal.c:2549 src/gcal.c:6269 src/gcal2txt.c:331
-#: src/gcal2txt.c:335 src/rc-use.c:1853 src/rc-use.c:1928 src/rc-use.c:1992
-#: src/rc-use.c:2277 src/rc-utils.c:424 src/rc-utils.c:454 src/tcal.c:403
-#: src/tcal.c:410 src/txt2gcal.c:331 src/txt2gcal.c:335 src/utils.c:457
-#: src/utils.c:476 src/utils.c:491 src/utils.c:797
+#: src/gcal.c:2516 src/gcal.c:2549 src/gcal.c:6269 src/rc-use.c:1853
+#: src/rc-use.c:1928 src/rc-use.c:1992 src/rc-use.c:2277 src/rc-utils.c:424
+#: src/rc-utils.c:454 src/utils.c:457 src/utils.c:476 src/utils.c:491
+#: src/utils.c:797 src/tcal.c:403 src/tcal.c:410 src/txt2gcal.c:331
+#: src/txt2gcal.c:335 src/gcal2txt.c:331 src/gcal2txt.c:335
 msgid "Internal"
 msgstr "Intern"
 
@@ -164,7 +165,7 @@ msgstr ""
 msgid "%s: option `%s' is ambiguous"
 msgstr "%s: optie `%s' is dubbelzinnig"
 
-#: src/gcal.c:5938 src/gcal2txt.c:792 src/tcal.c:994 src/txt2gcal.c:793
+#: src/gcal.c:5938 src/tcal.c:994 src/txt2gcal.c:793 src/gcal2txt.c:792
 #, c-format
 msgid "%s: unrecognized option `%s'"
 msgstr "%s: onbekende optie `%s'"
@@ -321,7 +322,7 @@ msgid "Netherlands Antilles/Bonaire"
 msgstr ""
 
 #: src/hd-data.c:470
-msgid "Netherlands Antilles/Curaçao"
+msgid "Netherlands Antilles/CuraÃ§ao"
 msgstr ""
 
 #: src/hd-data.c:471
@@ -496,7 +497,7 @@ msgid "Canada/Prince Edward Island"
 msgstr ""
 
 #: src/hd-data.c:515
-msgid "Canada/Québec"
+msgid "Canada/QuÃ©bec"
 msgstr ""
 
 #: src/hd-data.c:516
@@ -552,7 +553,7 @@ msgid "Switzerland/Fribourg"
 msgstr ""
 
 #: src/hd-data.c:529
-msgid "Switzerland/Graubünden"
+msgid "Switzerland/GraubÃ¼nden"
 msgstr ""
 
 #: src/hd-data.c:530
@@ -560,7 +561,7 @@ msgid "Switzerland/Glarus"
 msgstr ""
 
 #: src/hd-data.c:531
-msgid "Switzerland/Genève"
+msgid "Switzerland/GenÃ¨ve"
 msgstr ""
 
 #: src/hd-data.c:532
@@ -572,7 +573,7 @@ msgid "Switzerland/Luzern"
 msgstr ""
 
 #: src/hd-data.c:534
-msgid "Switzerland/Neuchâtel"
+msgid "Switzerland/NeuchÃ¢tel"
 msgstr ""
 
 #: src/hd-data.c:535
@@ -620,11 +621,11 @@ msgid "Switzerland/Zug"
 msgstr ""
 
 #: src/hd-data.c:546
-msgid "Switzerland/Zürich"
+msgid "Switzerland/ZÃ¼rich"
 msgstr ""
 
 #: src/hd-data.c:547
-msgid "Côte d'Ivoire"
+msgid "CÃ´te d'Ivoire"
 msgstr ""
 
 #: src/hd-data.c:548
@@ -688,7 +689,7 @@ msgid "Germany/Bremen"
 msgstr "Duitsland"
 
 #: src/hd-data.c:563
-msgid "Germany/Baden-Württemberg"
+msgid "Germany/Baden-WÃ¼rttemberg"
 msgstr ""
 
 #: src/hd-data.c:564
@@ -1208,7 +1209,7 @@ msgid "Qatar"
 msgstr ""
 
 #: src/hd-data.c:700
-msgid "Réunion"
+msgid "RÃ©union"
 msgstr ""
 
 #: src/hd-data.c:701
@@ -1281,7 +1282,7 @@ msgid "Suriname #"
 msgstr ""
 
 #: src/hd-data.c:719
-msgid "Sao Tomé and Principe"
+msgid "Sao TomÃ© and Principe"
 msgstr ""
 
 #: src/hd-data.c:720
@@ -1641,2562 +1642,2566 @@ msgstr ""
 #. *** 32 characters (if the COUNTRY-CODE suffix has 4 characters)
 #. *** 31 characters (if the COUNTRY-CODE_TERRITORY suffix has 5 characters).
 #.
-#: src/hd-data.c:1396
+#: src/hd-data.c:1397
 msgid "1st Advent"
 msgstr ""
 
-#: src/hd-data.c:1397
+#: src/hd-data.c:1398
 msgid "1st Sunday in Lent"
 msgstr ""
 
-#: src/hd-data.c:1398
+#: src/hd-data.c:1399
 msgid "2nd Advent"
 msgstr ""
 
-#: src/hd-data.c:1399
+#: src/hd-data.c:1400
 msgid "2nd Sunday in Lent"
 msgstr ""
 
-#: src/hd-data.c:1400
+#: src/hd-data.c:1401
 msgid "3rd Advent"
 msgstr ""
 
-#: src/hd-data.c:1401
+#: src/hd-data.c:1402
 msgid "3rd Sunday in Lent"
 msgstr ""
 
-#: src/hd-data.c:1402
+#: src/hd-data.c:1403
 msgid "4th Advent"
 msgstr ""
 
-#: src/hd-data.c:1403
+#: src/hd-data.c:1404
 msgid "4th Sunday in Lent"
 msgstr ""
 
-#: src/hd-data.c:1404
+#: src/hd-data.c:1405
 msgid "7-5-3 Festival"
 msgstr ""
 
-#: src/hd-data.c:1405
+#: src/hd-data.c:1406
 #, fuzzy
 msgid "Aborigines Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1406
+#: src/hd-data.c:1407
 msgid "All Fool's Day"
 msgstr "1 april"
 
-#: src/hd-data.c:1407
+#: src/hd-data.c:1408
 msgid "All Saints' Day"
 msgstr "Allerheiligen"
 
-#: src/hd-data.c:1408
+#: src/hd-data.c:1409
 msgid "All Souls' Day"
 msgstr "Allerzielen"
 
-#: src/hd-data.c:1409
+#: src/hd-data.c:1410
 msgid "Alphabet Day"
 msgstr ""
 
-#: src/hd-data.c:1410
+#: src/hd-data.c:1411
 msgid "Anniversary of Auckland"
 msgstr ""
 
-#: src/hd-data.c:1411
+#: src/hd-data.c:1412
 msgid "Anniversary of Canterbury North"
 msgstr ""
 
-#: src/hd-data.c:1412
+#: src/hd-data.c:1413
 msgid "Anniversary of Canterbury South"
 msgstr ""
 
-#: src/hd-data.c:1413
+#: src/hd-data.c:1414
 msgid "Anniversary of Chatham Islands"
 msgstr ""
 
-#: src/hd-data.c:1414
+#: src/hd-data.c:1415
 msgid "Anniversary of Hawkes' Bay"
 msgstr ""
 
-#: src/hd-data.c:1415
+#: src/hd-data.c:1416
 msgid "Anniversary of Marlborough"
 msgstr ""
 
-#: src/hd-data.c:1416
+#: src/hd-data.c:1417
 msgid "Anniversary of Nelson"
 msgstr ""
 
-#: src/hd-data.c:1417
+#: src/hd-data.c:1418
 msgid "Anniversary of Otago"
 msgstr ""
 
-#: src/hd-data.c:1418
+#: src/hd-data.c:1419
 msgid "Anniversary of Southland"
 msgstr ""
 
-#: src/hd-data.c:1419
+#: src/hd-data.c:1420
 msgid "Anniversary of Taranaki"
 msgstr ""
 
-#: src/hd-data.c:1420
+#: src/hd-data.c:1421
 msgid "Anniversary of Wellington"
 msgstr ""
 
-#: src/hd-data.c:1421
+#: src/hd-data.c:1422
 msgid "Anniversary of Westland"
 msgstr ""
 
-#: src/hd-data.c:1422
+#: src/hd-data.c:1423
 msgid "Anzac Day"
 msgstr ""
 
-#: src/hd-data.c:1423
+#: src/hd-data.c:1424
 msgid "Arbor Day"
 msgstr ""
 
-#: src/hd-data.c:1424
+#: src/hd-data.c:1425
 #, fuzzy
 msgid "Armed Forces Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1425
+#: src/hd-data.c:1426
 #, fuzzy
 msgid "Armistice Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1426
+#: src/hd-data.c:1427
 #, fuzzy
 msgid "Ash Monday"
 msgstr "Maandag"
 
-#: src/hd-data.c:1427
+#: src/hd-data.c:1428
 msgid "Ash Wednesday"
 msgstr "Aswoensdag"
 
-#: src/hd-data.c:1428
+#: src/hd-data.c:1429
 msgid "Ascension of Abdu'l-Baha"
 msgstr ""
 
-#: src/hd-data.c:1429
+#: src/hd-data.c:1430
 msgid "Ascension of Baha'u'llah"
 msgstr ""
 
-#: src/hd-data.c:1430
+#: src/hd-data.c:1431
 msgid "Birth of Baha'u'llah"
 msgstr ""
 
-#: src/hd-data.c:1431
+#: src/hd-data.c:1432
 msgid "Birth of the Bab"
 msgstr ""
 
-#: src/hd-data.c:1432
+#: src/hd-data.c:1433
 msgid "Day of the Covenant"
 msgstr ""
 
-#: src/hd-data.c:1433
+#: src/hd-data.c:1434
 msgid "Declaration of the Bab"
 msgstr ""
 
-#: src/hd-data.c:1434
+#: src/hd-data.c:1435
 msgid "First Day of Ridvan"
 msgstr ""
 
-#: src/hd-data.c:1435
+#: src/hd-data.c:1436
 msgid "Martyrdom of the Bab"
 msgstr ""
 
-#: src/hd-data.c:1436
+#: src/hd-data.c:1437
 #, fuzzy
-msgid "Bahá'i New Year's Day"
+msgid "BahÃ¡'i New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1437
+#: src/hd-data.c:1438
 msgid "Ninth Day of Ridvan"
 msgstr ""
 
-#: src/hd-data.c:1438
+#: src/hd-data.c:1439
 msgid "Twelfth Day of Ridvan"
 msgstr ""
 
-#: src/hd-data.c:1439
+#: src/hd-data.c:1440
 msgid "Bank Holiday"
 msgstr ""
 
-#: src/hd-data.c:1440
+#: src/hd-data.c:1441
 #, fuzzy
 msgid "Basque National Day"
 msgstr "Pasen"
 
-#: src/hd-data.c:1441
+#: src/hd-data.c:1442
 msgid "Battle of Boyne"
 msgstr ""
 
-#: src/hd-data.c:1442
+#: src/hd-data.c:1443
 msgid "Battle of Puebla"
 msgstr ""
 
-#: src/hd-data.c:1443
+#: src/hd-data.c:1444
 msgid "Beginning of Financial Year"
 msgstr ""
 
-#: src/hd-data.c:1444
+#: src/hd-data.c:1445
 #, fuzzy
-msgid "Benito Juárez Day"
+msgid "Benito JuÃ¡rez Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1445
+#: src/hd-data.c:1446
 #, fuzzy
 msgid "Bodhidharma's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1446
+#: src/hd-data.c:1447
 #, fuzzy
 msgid "Bosses' Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1447
+#: src/hd-data.c:1448
 msgid "Boxing Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1448
+#: src/hd-data.c:1449
 msgid "Bringing Home the Herds Day"
 msgstr ""
 
-#: src/hd-data.c:1449
+#: src/hd-data.c:1450
 msgid "Bringing in the Harvest Day"
 msgstr ""
 
-#: src/hd-data.c:1450
+#: src/hd-data.c:1451
 #, fuzzy
 msgid "Buddha's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1451
+#: src/hd-data.c:1452
 msgid "Burns Night"
 msgstr ""
 
-#: src/hd-data.c:1452
+#: src/hd-data.c:1453
 #, fuzzy
 msgid "Camoes Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1453
+#: src/hd-data.c:1454
 msgid "Carnival"
 msgstr ""
 
-#: src/hd-data.c:1454
+#: src/hd-data.c:1455
 msgid "Beltane"
 msgstr ""
 
-#: src/hd-data.c:1455
+#: src/hd-data.c:1456
 msgid "Imbolg"
 msgstr ""
 
-#: src/hd-data.c:1456
+#: src/hd-data.c:1457
 msgid "Lughnasa"
 msgstr ""
 
-#: src/hd-data.c:1457
+#: src/hd-data.c:1458
 #, fuzzy
 msgid "Samhain/Celtic New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1458
+#: src/hd-data.c:1459
 #, fuzzy
 msgid "Children's Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1459
+#: src/hd-data.c:1460
 msgid "Cycle"
 msgstr ""
 
-#: src/hd-data.c:1460
+#: src/hd-data.c:1461
 #, fuzzy
 msgid "Chinese New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1461
+#: src/hd-data.c:1462
 #, fuzzy
 msgid "Chinese New Year's Eve"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1462
+#: src/hd-data.c:1463
 msgid "Christmas Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1463
+#: src/hd-data.c:1464
 msgid "Christmas Eve"
 msgstr "Kerstavond"
 
-#: src/hd-data.c:1464
+#: src/hd-data.c:1465
 msgid "Christ's Ascension Day"
 msgstr ""
 
-#: src/hd-data.c:1465
+#: src/hd-data.c:1466
 #, fuzzy
 msgid "Chrysanthenum Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1466
+#: src/hd-data.c:1467
 #, fuzzy
 msgid "Citizenship Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1467
+#: src/hd-data.c:1468
 msgid "Civic Holiday"
 msgstr ""
 
-#: src/hd-data.c:1468
+#: src/hd-data.c:1469
 msgid "Columbus Day"
 msgstr ""
 
-#: src/hd-data.c:1469
+#: src/hd-data.c:1470
 msgid "Coming of Age Day"
 msgstr ""
 
-#: src/hd-data.c:1470
+#: src/hd-data.c:1471
 msgid "Confucius' Birthday"
 msgstr ""
 
-#: src/hd-data.c:1471
+#: src/hd-data.c:1472
 msgid "Constitution Anniversary"
 msgstr ""
 
-#: src/hd-data.c:1472
+#: src/hd-data.c:1473
 #, fuzzy
 msgid "Coptic New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1473
+#: src/hd-data.c:1474
 #, fuzzy
 msgid "Cosmonauts' Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1474
+#: src/hd-data.c:1475
 #, fuzzy
 msgid "Cross Raising Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1475
+#: src/hd-data.c:1476
 msgid "Culture Day"
 msgstr ""
 
-#: src/hd-data.c:1476
+#: src/hd-data.c:1477
 msgid "Day after Mid-Autumn Festival"
 msgstr ""
 
-#: src/hd-data.c:1477
+#: src/hd-data.c:1478
 #, fuzzy
 msgid "Day after Tomb-Sweeping Day"
 msgstr "Onafhankelijkheidsdag"
 
-#: src/hd-data.c:1478
+#: src/hd-data.c:1479
 msgid "Day of Andalucia"
 msgstr ""
 
-#: src/hd-data.c:1479
+#: src/hd-data.c:1480
 msgid "Day of Catalonia"
 msgstr ""
 
-#: src/hd-data.c:1480
+#: src/hd-data.c:1481
 msgid "Day of Galicia"
 msgstr ""
 
-#: src/hd-data.c:1481
+#: src/hd-data.c:1482
 msgid "Day of Prayer and Repentance"
 msgstr ""
 
-#: src/hd-data.c:1482
+#: src/hd-data.c:1483
 msgid "Day of Reconciliation"
 msgstr ""
 
-#: src/hd-data.c:1483
+#: src/hd-data.c:1484
 msgid "Defenders of Motherland Day"
 msgstr ""
 
-#: src/hd-data.c:1484
+#: src/hd-data.c:1485
 #, fuzzy
 msgid "Double-9 Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1485
+#: src/hd-data.c:1486
 msgid "Dragon Boat Festival"
 msgstr ""
 
-#: src/hd-data.c:1486
+#: src/hd-data.c:1487
 msgid "Dynasty Day"
 msgstr ""
 
-#: src/hd-data.c:1487
+#: src/hd-data.c:1488
 msgid "Easter Monday"
 msgstr "Tweede Paasdag"
 
-#: src/hd-data.c:1488
+#: src/hd-data.c:1489
 msgid "Easter Sunday"
 msgstr "Pasen"
 
-#: src/hd-data.c:1489
+#: src/hd-data.c:1490
 msgid "Lunar Eclipse"
 msgstr ""
 
-#: src/hd-data.c:1490
+#: src/hd-data.c:1491
 msgid "Solar Eclipse"
 msgstr ""
 
-#: src/hd-data.c:1491
+#: src/hd-data.c:1492
 msgid "Annular"
 msgstr ""
 
-#: src/hd-data.c:1492
+#: src/hd-data.c:1493
 msgid "Partial"
 msgstr ""
 
-#: src/hd-data.c:1493
+#: src/hd-data.c:1494
 #, fuzzy
 msgid "Penumbral"
 msgstr "Intern"
 
-#: src/hd-data.c:1494
+#: src/hd-data.c:1495
 #, fuzzy
 msgid "Total"
 msgstr "Intern"
 
-#: src/hd-data.c:1495
+#: src/hd-data.c:1496
 msgid "Eindhoven's Liberation"
 msgstr ""
 
-#: src/hd-data.c:1496
+#: src/hd-data.c:1497
 msgid "Election Day"
 msgstr ""
 
-#: src/hd-data.c:1497
+#: src/hd-data.c:1498
 #, fuzzy
 msgid "Emperor's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1498
+#: src/hd-data.c:1499
 msgid "Equinox Day"
 msgstr ""
 
-#: src/hd-data.c:1499
+#: src/hd-data.c:1500
 #, fuzzy
 msgid "Ethiopic New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1500
+#: src/hd-data.c:1501
 #, fuzzy
 msgid "Father's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1501
+#: src/hd-data.c:1502
 msgid "Feast of Corpus Christi"
 msgstr ""
 
-#: src/hd-data.c:1502
+#: src/hd-data.c:1503
 msgid "Feast of Fortune"
 msgstr ""
 
-#: src/hd-data.c:1503
+#: src/hd-data.c:1504
 msgid "Feast of Heart Jesus"
 msgstr ""
 
-#: src/hd-data.c:1504
+#: src/hd-data.c:1505
 msgid "Festival of Lanterns"
 msgstr ""
 
-#: src/hd-data.c:1505
+#: src/hd-data.c:1506
 msgid "Festival of Sadeh"
 msgstr ""
 
-#: src/hd-data.c:1506
+#: src/hd-data.c:1507
 msgid "Flag Day"
 msgstr ""
 
-#: src/hd-data.c:1507
+#: src/hd-data.c:1508
 msgid "Flemish Culture Day"
 msgstr ""
 
-#: src/hd-data.c:1508
+#: src/hd-data.c:1509
 msgid "Founding of the Communist Party"
 msgstr ""
 
-#: src/hd-data.c:1509
+#: src/hd-data.c:1510
 msgid "French Culture Day"
 msgstr ""
 
-#: src/hd-data.c:1510
+#: src/hd-data.c:1511
 #, fuzzy
 msgid "French Revolutionary"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1511
+#: src/hd-data.c:1512
 #, fuzzy
 msgid "Friendship Day"
 msgstr "Martin L. King Dag"
 
-#: src/hd-data.c:1512
+#: src/hd-data.c:1513
 #, fuzzy
 msgid "German Unity Day"
 msgstr "Dag van de Duitse hereniging"
 
-#: src/hd-data.c:1513
+#: src/hd-data.c:1514
 msgid "Good Friday"
 msgstr "Goede Vrijdag"
 
-#: src/hd-data.c:1514
+#: src/hd-data.c:1515
 msgid "Good Saturday/Easter Eve"
 msgstr ""
 
-#: src/hd-data.c:1515
+#: src/hd-data.c:1516
 #, fuzzy
 msgid "Grandparents' Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1516
+#: src/hd-data.c:1517
 msgid "Greenery Day"
 msgstr ""
 
-#: src/hd-data.c:1517
+#: src/hd-data.c:1518
 msgid "Grotto Day"
 msgstr ""
 
-#: src/hd-data.c:1518
+#: src/hd-data.c:1519
 #, fuzzy
 msgid "Groundhog Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1519
+#: src/hd-data.c:1520
 msgid "Guadalupe Virgin's Day"
 msgstr ""
 
-#: src/hd-data.c:1520
+#: src/hd-data.c:1521
 msgid "Guy Fawke's Day"
 msgstr ""
 
-#: src/hd-data.c:1521
+#: src/hd-data.c:1522
 msgid "Halloween"
 msgstr ""
 
-#: src/hd-data.c:1522
+#: src/hd-data.c:1523
 #, fuzzy
 msgid "Health and Sport's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1523
+#: src/hd-data.c:1524
 msgid "Hannukah/Festival of Lights"
 msgstr ""
 
-#: src/hd-data.c:1524
+#: src/hd-data.c:1525
 msgid "Lag B'Omer"
 msgstr ""
 
-#: src/hd-data.c:1525
+#: src/hd-data.c:1526
 msgid "Pesach/Passover"
 msgstr ""
 
-#: src/hd-data.c:1526
+#: src/hd-data.c:1527
 msgid "Purim/Feast of Lots"
 msgstr ""
 
-#: src/hd-data.c:1527
+#: src/hd-data.c:1528
 #, fuzzy
 msgid "Rosh Hashana/New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1528
+#: src/hd-data.c:1529
 msgid "Shavuot/Giving of the Torah"
 msgstr ""
 
-#: src/hd-data.c:1529
+#: src/hd-data.c:1530
 msgid "Shushan Purim"
 msgstr ""
 
-#: src/hd-data.c:1530
+#: src/hd-data.c:1531
 msgid "Simchat Torah"
 msgstr ""
 
-#: src/hd-data.c:1531
+#: src/hd-data.c:1532
 msgid "Sukkot/Feast of Tabernacles"
 msgstr ""
 
-#: src/hd-data.c:1532
+#: src/hd-data.c:1533
 msgid "Tisha B'Av/Fasting Day"
 msgstr ""
 
-#: src/hd-data.c:1533
+#: src/hd-data.c:1534
 msgid "Tu B'Shevat/New Year of Trees"
 msgstr ""
 
-#: src/hd-data.c:1534
+#: src/hd-data.c:1535
 msgid "Yom Hashoah/Holocaust Memorial"
 msgstr ""
 
-#: src/hd-data.c:1535
+#: src/hd-data.c:1536
 msgid "Yom Hazikaron/Soldiers Memorial"
 msgstr ""
 
-#: src/hd-data.c:1536
+#: src/hd-data.c:1537
 #, fuzzy
 msgid "Yom Ha Azmaut/Independence Day"
 msgstr "Onafhankelijkheidsdag"
 
-#: src/hd-data.c:1537
+#: src/hd-data.c:1538
 msgid "Yom Kippur/Atonement Day"
 msgstr ""
 
-#: src/hd-data.c:1538
+#: src/hd-data.c:1539
 msgid "Yom Yerushalayim/Jerusalem Day"
 msgstr ""
 
-#: src/hd-data.c:1539
+#: src/hd-data.c:1540
 msgid "Holy Innocent's Day"
 msgstr ""
 
-#: src/hd-data.c:1540
+#: src/hd-data.c:1541
 msgid "Holy Trinity"
 msgstr ""
 
-#: src/hd-data.c:1541
+#: src/hd-data.c:1542
 #, fuzzy
 msgid "Huravee Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1542
-msgid "Independence Day"
-msgstr "Onafhankelijkheidsdag"
-
 #: src/hd-data.c:1543
-#, fuzzy
-msgid "Independence Movement Day"
+msgid "Independence Day"
 msgstr "Onafhankelijkheidsdag"
 
 #: src/hd-data.c:1544
 #, fuzzy
-msgid "Independence Proclamation"
+msgid "Independence Movement Day"
 msgstr "Onafhankelijkheidsdag"
 
 #: src/hd-data.c:1545
 #, fuzzy
+msgid "Independence Proclamation"
+msgstr "Onafhankelijkheidsdag"
+
+#: src/hd-data.c:1546
+#, fuzzy
 msgid "Indian New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1546
+#: src/hd-data.c:1547
 #, fuzzy
 msgid "Aga Khan's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1547
+#: src/hd-data.c:1548
 msgid "Ashura'"
 msgstr ""
 
-#: src/hd-data.c:1548
+#: src/hd-data.c:1549
 msgid "Eid-al-Adha"
 msgstr ""
 
-#: src/hd-data.c:1549
+#: src/hd-data.c:1550
 msgid "Eid-al-Fitr"
 msgstr ""
 
-#: src/hd-data.c:1550
+#: src/hd-data.c:1551
 msgid "Eid-i-Milad-un-Nabi"
 msgstr ""
 
-#: src/hd-data.c:1551
+#: src/hd-data.c:1552
 msgid "Ghadir"
 msgstr ""
 
-#: src/hd-data.c:1552
+#: src/hd-data.c:1553
 #, fuzzy
 msgid "Imamat Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1553
+#: src/hd-data.c:1554
 #, fuzzy
 msgid "Islamic New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1554
+#: src/hd-data.c:1555
 msgid "Nuzul-al-Qur'an"
 msgstr ""
 
-#: src/hd-data.c:1555
+#: src/hd-data.c:1556
 #, fuzzy
 msgid "Quds Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1556
+#: src/hd-data.c:1557
 msgid "Ramadan"
 msgstr ""
 
-#: src/hd-data.c:1557
+#: src/hd-data.c:1558
 msgid "Shab-e-Bara't"
 msgstr ""
 
-#: src/hd-data.c:1558
+#: src/hd-data.c:1559
 msgid "Shab-e-Mi'raj"
 msgstr ""
 
-#: src/hd-data.c:1559
+#: src/hd-data.c:1560
 msgid "Shab-e Qadr"
 msgstr ""
 
-#: src/hd-data.c:1560
+#: src/hd-data.c:1561
 msgid "Waqf-al-Arafat"
 msgstr ""
 
-#: src/hd-data.c:1561
+#: src/hd-data.c:1562
 #, fuzzy
 msgid "Japanese New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1562
+#: src/hd-data.c:1563
 #, fuzzy
 msgid "Japanese New Year's Eve"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1563
+#: src/hd-data.c:1564
 msgid "Jesus' Circumcision"
 msgstr ""
 
-#: src/hd-data.c:1564
+#: src/hd-data.c:1565
 msgid "Kwanzaa"
 msgstr ""
 
-#: src/hd-data.c:1565
+#: src/hd-data.c:1566
 msgid "Labour Day"
 msgstr ""
 
-#: src/hd-data.c:1566
+#: src/hd-data.c:1567
 msgid "Labour Thanksgiving Day"
 msgstr ""
 
-#: src/hd-data.c:1567
+#: src/hd-data.c:1568
 #, fuzzy
 msgid "Lao Tze's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1568
+#: src/hd-data.c:1569
 msgid "Liberation Day"
 msgstr ""
 
-#: src/hd-data.c:1569
+#: src/hd-data.c:1570
 #, fuzzy
 msgid "Marine Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1570
+#: src/hd-data.c:1571
 msgid "Martinimas"
 msgstr ""
 
-#: src/hd-data.c:1571
+#: src/hd-data.c:1572
 msgid "Martin L. King's Day"
 msgstr "Martin L. King Dag"
 
-#: src/hd-data.c:1572
+#: src/hd-data.c:1573
 #, fuzzy
 msgid "Martyrs' Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1573
+#: src/hd-data.c:1574
 msgid "Mary's Annunciation Day"
 msgstr ""
 
-#: src/hd-data.c:1574
+#: src/hd-data.c:1575
 msgid "Mary's Ascension Day"
 msgstr ""
 
-#: src/hd-data.c:1575
+#: src/hd-data.c:1576
 msgid "Mary's Candlemas"
 msgstr ""
 
-#: src/hd-data.c:1576
+#: src/hd-data.c:1577
 msgid "Mary's Expectation"
 msgstr ""
 
-#: src/hd-data.c:1577
+#: src/hd-data.c:1578
 msgid "Mary's Immaculate Conception"
 msgstr ""
 
-#: src/hd-data.c:1578
+#: src/hd-data.c:1579
 msgid "Mary's Maternity"
 msgstr ""
 
-#: src/hd-data.c:1579
+#: src/hd-data.c:1580
 msgid "Mary's Name"
 msgstr ""
 
-#: src/hd-data.c:1580
+#: src/hd-data.c:1581
 msgid "Mary's Nativity"
 msgstr ""
 
-#: src/hd-data.c:1581
+#: src/hd-data.c:1582
 msgid "Mary's Sacrifice"
 msgstr ""
 
-#: src/hd-data.c:1582
+#: src/hd-data.c:1583
 msgid "Mary's Visitation"
 msgstr ""
 
-#: src/hd-data.c:1583
+#: src/hd-data.c:1584
 msgid "Mary - Blessed Virgin"
 msgstr ""
 
-#: src/hd-data.c:1584
+#: src/hd-data.c:1585
 msgid "Maundy Thursday"
 msgstr ""
 
-#: src/hd-data.c:1585
+#: src/hd-data.c:1586
 #, fuzzy
 msgid "May Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1586
+#: src/hd-data.c:1587
 #, fuzzy
 msgid "St John's/Midsummer Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1587
+#: src/hd-data.c:1588
 msgid "Mid-Autumn Festival"
 msgstr ""
 
-#: src/hd-data.c:1588
+#: src/hd-data.c:1589
 msgid "Mid-Spring Festival"
 msgstr ""
 
-#: src/hd-data.c:1589
+#: src/hd-data.c:1590
 msgid "Mid-Year Festival"
 msgstr ""
 
-#: src/hd-data.c:1590
+#: src/hd-data.c:1591
 msgid "Waxing Half Moon"
 msgstr ""
 
-#: src/hd-data.c:1591
+#: src/hd-data.c:1592
 msgid "Full Moon"
 msgstr ""
 
-#: src/hd-data.c:1592
+#: src/hd-data.c:1593
 msgid "Waning Half Moon"
 msgstr ""
 
-#: src/hd-data.c:1593
+#: src/hd-data.c:1594
 msgid "New Moon"
 msgstr ""
 
-#: src/hd-data.c:1594
+#: src/hd-data.c:1595
 msgid "Mother's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1595
+#: src/hd-data.c:1596
 #, fuzzy
 msgid "Mother in Law's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1596
+#: src/hd-data.c:1597
 msgid "Music Water Banquet"
 msgstr ""
 
-#: src/hd-data.c:1597
+#: src/hd-data.c:1598
 msgid "National Foundation Day"
 msgstr ""
 
-#: src/hd-data.c:1598
+#: src/hd-data.c:1599
 msgid "National Holiday"
 msgstr ""
 
-#: src/hd-data.c:1599
+#: src/hd-data.c:1600
 #, fuzzy
 msgid "National Mourning Day"
 msgstr "Pasen"
 
-#: src/hd-data.c:1600
+#: src/hd-data.c:1601
 msgid "New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1601
+#: src/hd-data.c:1602
 #, fuzzy
 msgid "Nurses' Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1602
+#: src/hd-data.c:1603
 #, fuzzy
 msgid "Old-Armenic New Year"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1603
+#: src/hd-data.c:1604
 #, fuzzy
 msgid "Old-Egyptic New Year"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1604
+#: src/hd-data.c:1605
 #, fuzzy
 msgid "Orthodox New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1605
+#: src/hd-data.c:1606
 msgid "Our Lady Aparecida Day"
 msgstr ""
 
-#: src/hd-data.c:1606
+#: src/hd-data.c:1607
 msgid "Palm Sunday"
 msgstr "Palmzondag"
 
-#: src/hd-data.c:1607
+#: src/hd-data.c:1608
 #, fuzzy
 msgid "Parent's Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1608
+#: src/hd-data.c:1609
 #, fuzzy
 msgid "Passion Sunday"
 msgstr "Palmzondag"
 
-#: src/hd-data.c:1609
+#: src/hd-data.c:1610
 msgid "Peace Festival"
 msgstr ""
 
-#: src/hd-data.c:1610
+#: src/hd-data.c:1611
 msgid "Peach Festival"
 msgstr ""
 
-#: src/hd-data.c:1611
+#: src/hd-data.c:1612
 msgid "Whitsunday/Pentecost"
 msgstr ""
 
-#: src/hd-data.c:1612
+#: src/hd-data.c:1613
 #, fuzzy
 msgid "Noruz/Persian New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1613
+#: src/hd-data.c:1614
 msgid "Prayer Day"
 msgstr ""
 
-#: src/hd-data.c:1614
+#: src/hd-data.c:1615
 msgid "Presidential Inauguration"
 msgstr ""
 
-#: src/hd-data.c:1615
+#: src/hd-data.c:1616
 #, fuzzy
 msgid "Presidents' Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1616
+#: src/hd-data.c:1617
 msgid "Presidents' Inform"
 msgstr ""
 
-#: src/hd-data.c:1617
+#: src/hd-data.c:1618
 #, fuzzy
 msgid "President Lincoln's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1618
+#: src/hd-data.c:1619
 #, fuzzy
 msgid "Princess' Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1619
+#: src/hd-data.c:1620
 msgid "Quinquagesima Sunday"
 msgstr ""
 
-#: src/hd-data.c:1620
+#: src/hd-data.c:1621
 msgid "Reformation Day"
 msgstr ""
 
-#: src/hd-data.c:1621
+#: src/hd-data.c:1622
 msgid "Remembrance/Memorial Day"
 msgstr ""
 
-#: src/hd-data.c:1622
+#: src/hd-data.c:1623
 msgid "Republic Day"
 msgstr ""
 
-#: src/hd-data.c:1623
+#: src/hd-data.c:1624
 msgid "Respect for the Aged Day"
 msgstr ""
 
-#: src/hd-data.c:1624
+#: src/hd-data.c:1625
 msgid "Revolution Day"
 msgstr ""
 
-#: src/hd-data.c:1625
+#: src/hd-data.c:1626
 msgid "Rio de Janeiro Anniversary"
 msgstr ""
 
-#: src/hd-data.c:1626
+#: src/hd-data.c:1627
 #, fuzzy
 msgid "Rogation Sunday"
 msgstr "Pasen"
 
-#: src/hd-data.c:1627
+#: src/hd-data.c:1628
 msgid "Sao Paulo Anniversary"
 msgstr ""
 
-#: src/hd-data.c:1628
+#: src/hd-data.c:1629
 msgid "Sapporo Snow Festival"
 msgstr ""
 
-#: src/hd-data.c:1629
+#: src/hd-data.c:1630
 msgid "Season Change/Bean-Festival"
 msgstr ""
 
-#: src/hd-data.c:1630
+#: src/hd-data.c:1631
 #, fuzzy
 msgid "Septuagesima Sunday"
 msgstr "Palmzondag"
 
-#: src/hd-data.c:1631
+#: src/hd-data.c:1632
 #, fuzzy
 msgid "Seven Sleepers Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1632
+#: src/hd-data.c:1633
 #, fuzzy
 msgid "Sexagesima Sunday"
 msgstr "Palmzondag"
 
-#: src/hd-data.c:1633
+#: src/hd-data.c:1634
 msgid "Shrove Tuesday/Mardi Gras"
 msgstr ""
 
-#: src/hd-data.c:1634
+#: src/hd-data.c:1635
 #, fuzzy
 msgid "Solstice Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1635
+#: src/hd-data.c:1636
 #, fuzzy
 msgid "Soot-Sweeping Day"
 msgstr "Onafhankelijkheidsdag"
 
-#: src/hd-data.c:1636
+#: src/hd-data.c:1637
 msgid "Spring Festival"
 msgstr ""
 
-#: src/hd-data.c:1637
+#: src/hd-data.c:1638
 msgid "Start of common month"
 msgstr ""
 
-#: src/hd-data.c:1638
+#: src/hd-data.c:1639
 msgid "Start of leap month"
 msgstr ""
 
-#: src/hd-data.c:1639
+#: src/hd-data.c:1640
 msgid "Star Festival"
 msgstr ""
 
-#: src/hd-data.c:1640
+#: src/hd-data.c:1641
 #, fuzzy
 msgid "St Andrew's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1641
+#: src/hd-data.c:1642
 #, fuzzy
 msgid "St Bartholomew Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1642
+#: src/hd-data.c:1643
 #, fuzzy
 msgid "St Berchtold's Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1643
+#: src/hd-data.c:1644
 #, fuzzy
 msgid "St David's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1644
+#: src/hd-data.c:1645
 #, fuzzy
 msgid "St Edward's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1645
+#: src/hd-data.c:1646
 #, fuzzy
 msgid "St George's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1646
+#: src/hd-data.c:1647
 #, fuzzy
 msgid "St James' Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1647
+#: src/hd-data.c:1648
 #, fuzzy
 msgid "St Joseph's Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1648
+#: src/hd-data.c:1649
 #, fuzzy
 msgid "St Laurentius Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1649
+#: src/hd-data.c:1650
 #, fuzzy
 msgid "St Nicholas' Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1650
+#: src/hd-data.c:1651
 #, fuzzy
 msgid "St Nicholas' Eve"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1651
+#: src/hd-data.c:1652
 #, fuzzy
 msgid "St Patrick's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1652
+#: src/hd-data.c:1653
 msgid "St Peter and St Paul"
 msgstr ""
 
-#: src/hd-data.c:1653
+#: src/hd-data.c:1654
 #, fuzzy
 msgid "St Stephen's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1654
+#: src/hd-data.c:1655
 #, fuzzy
 msgid "St Valentine's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1655
+#: src/hd-data.c:1656
 msgid "Sunday of the Dead"
 msgstr ""
 
-#: src/hd-data.c:1656
+#: src/hd-data.c:1657
 msgid "Swallow Day"
 msgstr ""
 
-#: src/hd-data.c:1657
+#: src/hd-data.c:1658
 #, fuzzy
 msgid "Sweetest Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1658
+#: src/hd-data.c:1659
 msgid "Sylvester/New Year's Eve"
 msgstr ""
 
-#: src/hd-data.c:1659
+#: src/hd-data.c:1660
 #, fuzzy
 msgid "Teacher's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1660
+#: src/hd-data.c:1661
 #, fuzzy
 msgid "Thai New Year's Day"
 msgstr "Nieuwjaarsdag"
 
-#: src/hd-data.c:1661
+#: src/hd-data.c:1662
 msgid "Thanksgiving Day"
 msgstr ""
 
-#: src/hd-data.c:1662
+#: src/hd-data.c:1663
 #, fuzzy
 msgid "The King's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1663
+#: src/hd-data.c:1664
 msgid "The Queen's Birthday"
 msgstr ""
 
-#: src/hd-data.c:1664
+#: src/hd-data.c:1665
 #, fuzzy
 msgid "Epiphany/Three King's Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1665
+#: src/hd-data.c:1666
 #, fuzzy
 msgid "Tiradentes Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1666
+#: src/hd-data.c:1667
 #, fuzzy
 msgid "Tomb-Sweeping Day"
 msgstr "Onafhankelijkheidsdag"
 
-#: src/hd-data.c:1667
+#: src/hd-data.c:1668
 #, fuzzy
 msgid "Transfiguration Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1668
+#: src/hd-data.c:1669
 msgid "Tynwald Day"
 msgstr ""
 
-#: src/hd-data.c:1669
+#: src/hd-data.c:1670
 msgid "Valborg's Eve"
 msgstr ""
 
-#: src/hd-data.c:1670
+#: src/hd-data.c:1671
 msgid "Venice Carnival"
 msgstr ""
 
-#: src/hd-data.c:1671
+#: src/hd-data.c:1672
 #, fuzzy
 msgid "Veteran's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1672
+#: src/hd-data.c:1673
 msgid "Victoria Day"
 msgstr ""
 
-#: src/hd-data.c:1673
+#: src/hd-data.c:1674
 msgid "Victory Day"
 msgstr ""
 
-#: src/hd-data.c:1674
+#: src/hd-data.c:1675
 msgid "Whit Monday"
 msgstr ""
 
-#: src/hd-data.c:1675
+#: src/hd-data.c:1676
 #, fuzzy
 msgid "Women's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1676
+#: src/hd-data.c:1677
 msgid "Women's Shrove Day"
 msgstr ""
 
-#: src/hd-data.c:1677
+#: src/hd-data.c:1678
 msgid "World Animal Day"
 msgstr ""
 
-#: src/hd-data.c:1678
+#: src/hd-data.c:1679
 #, fuzzy
 msgid "Youth Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1684
+#: src/hd-data.c:1685
 msgid "Adelaide Cup Day"
 msgstr ""
 
-#: src/hd-data.c:1685
+#: src/hd-data.c:1686
 #, fuzzy
 msgid "Admission Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1686
+#: src/hd-data.c:1687
 #, fuzzy
 msgid "Alaska Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1687
+#: src/hd-data.c:1688
 msgid "Aleksis Kivi Day"
 msgstr ""
 
-#: src/hd-data.c:1688
+#: src/hd-data.c:1689
 msgid "Alice-Springs Show Day"
 msgstr ""
 
-#: src/hd-data.c:1689
+#: src/hd-data.c:1690
 #, fuzzy
 msgid "All Saints' Eve"
 msgstr "Allerheiligen"
 
-#: src/hd-data.c:1690
+#: src/hd-data.c:1691
 #, fuzzy
 msgid "Americas Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1691
+#: src/hd-data.c:1692
 #, fuzzy
 msgid "Angam Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1692
+#: src/hd-data.c:1693
 msgid "Anniversary of Amir's Succession"
 msgstr ""
 
-#: src/hd-data.c:1693
+#: src/hd-data.c:1694
 msgid "Anniversary of Armed Struggle"
 msgstr ""
 
-#: src/hd-data.c:1694
+#: src/hd-data.c:1695
 msgid "Anniversary of Green March"
 msgstr ""
 
-#: src/hd-data.c:1695
+#: src/hd-data.c:1696
 #, fuzzy
 msgid "Antillian Day"
 msgstr "Allerheiligen"
 
-#: src/hd-data.c:1696
+#: src/hd-data.c:1697
 #, fuzzy
 msgid "Arab League Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1697
+#: src/hd-data.c:1698
 msgid "Archbishop Makarios' Memorial Day"
 msgstr ""
 
-#: src/hd-data.c:1698
+#: src/hd-data.c:1699
 msgid "Archbishop Makarios' Name-Day"
 msgstr ""
 
-#: src/hd-data.c:1699
+#: src/hd-data.c:1700
 msgid "Arengo Anniversary"
 msgstr ""
 
-#: src/hd-data.c:1700
+#: src/hd-data.c:1701
 #, fuzzy
 msgid "Army Coup Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1701
+#: src/hd-data.c:1702
 msgid "Arrival of the Swiss"
 msgstr ""
 
-#: src/hd-data.c:1702
+#: src/hd-data.c:1703
 #, fuzzy
 msgid "Artigas' Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1703
+#: src/hd-data.c:1704
 #, fuzzy
 msgid "Asuncion Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1704
+#: src/hd-data.c:1705
 msgid "Ataturk Memorial Day"
 msgstr ""
 
-#: src/hd-data.c:1705
+#: src/hd-data.c:1706
 msgid "Authority's Power Day"
 msgstr ""
 
-#: src/hd-data.c:1706
+#: src/hd-data.c:1707
 #, fuzzy
 msgid "Ba'ath Revolution Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1707
+#: src/hd-data.c:1708
 #, fuzzy
 msgid "Baron Bliss Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1708
+#: src/hd-data.c:1709
 #, fuzzy
 msgid "Bataan Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1709
+#: src/hd-data.c:1710
 msgid "Battle of Angamos"
 msgstr ""
 
-#: src/hd-data.c:1710
-msgid "Battle of Boyacá"
-msgstr ""
-
 #: src/hd-data.c:1711
-msgid "Battle of Carabobo"
+msgid "Battle of BoyacÃ¡"
 msgstr ""
 
 #: src/hd-data.c:1712
-msgid "Battle of Iquique"
+msgid "Battle of Carabobo"
 msgstr ""
 
 #: src/hd-data.c:1713
-msgid "Battle of Las Piedras"
+msgid "Battle of Iquique"
 msgstr ""
 
 #: src/hd-data.c:1714
-msgid "Battle of Näfels"
+msgid "Battle of Las Piedras"
 msgstr ""
 
 #: src/hd-data.c:1715
-msgid "Beginning of Summer"
+msgid "Battle of NÃ¤fels"
 msgstr ""
 
 #: src/hd-data.c:1716
+msgid "Beginning of Summer"
+msgstr ""
+
+#: src/hd-data.c:1717
 #, fuzzy
 msgid "Belgrade's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1717
+#: src/hd-data.c:1718
 msgid "Bennington Battle Day"
 msgstr ""
 
-#: src/hd-data.c:1718
+#: src/hd-data.c:1719
 msgid "Blessing of the Water"
 msgstr ""
 
-#: src/hd-data.c:1719
+#: src/hd-data.c:1720
 msgid "Bloomsday"
 msgstr ""
 
-#: src/hd-data.c:1720
+#: src/hd-data.c:1721
 #, fuzzy
 msgid "Boganda Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1721
+#: src/hd-data.c:1722
 #, fuzzy
 msgid "Bonaire Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1722
+#: src/hd-data.c:1723
 msgid "Boqueron Battle Day"
 msgstr ""
 
-#: src/hd-data.c:1723
+#: src/hd-data.c:1724
 #, fuzzy
 msgid "Botswana Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1724
+#: src/hd-data.c:1725
 #, fuzzy
 msgid "Bounty Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1725
+#: src/hd-data.c:1726
 msgid "Bunker Hill Day"
 msgstr ""
 
-#: src/hd-data.c:1726
+#: src/hd-data.c:1727
 msgid "Burning of Jan Hus"
 msgstr ""
 
-#: src/hd-data.c:1727
+#: src/hd-data.c:1728
 #, fuzzy
 msgid "Canberra Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1728
+#: src/hd-data.c:1729
 #, fuzzy
 msgid "Caricom Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1729
+#: src/hd-data.c:1730
 #, fuzzy
 msgid "Casimir Pulaski's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1730
+#: src/hd-data.c:1731
 #, fuzzy
 msgid "Cassinga Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1731
+#: src/hd-data.c:1732
 msgid "Cayenne Festival"
 msgstr ""
 
-#: src/hd-data.c:1732
+#: src/hd-data.c:1733
 msgid "Cesar Chavez Day"
 msgstr ""
 
-#: src/hd-data.c:1733
+#: src/hd-data.c:1734
 #, fuzzy
 msgid "Charter Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1734
+#: src/hd-data.c:1735
 #, fuzzy
 msgid "Chiang Kai-shek's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1735
+#: src/hd-data.c:1736
 #, fuzzy
 msgid "Children's White Sunday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1736
+#: src/hd-data.c:1737
 #, fuzzy
 msgid "Colon Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1737
+#: src/hd-data.c:1738
 msgid "Colorado Day"
 msgstr ""
 
-#: src/hd-data.c:1738
+#: src/hd-data.c:1739
 msgid "Commonwealth Day"
 msgstr ""
 
-#: src/hd-data.c:1739
+#: src/hd-data.c:1740
 msgid "Compact Day"
 msgstr ""
 
-#: src/hd-data.c:1740
+#: src/hd-data.c:1741
 msgid "Confederal Agreement Day"
 msgstr ""
 
-#: src/hd-data.c:1741
+#: src/hd-data.c:1742
 msgid "Coronation Day"
 msgstr ""
 
-#: src/hd-data.c:1742
+#: src/hd-data.c:1743
 #, fuzzy
 msgid "Cup Match Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1743
+#: src/hd-data.c:1744
 #, fuzzy
 msgid "Custom Chief's Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1744
+#: src/hd-data.c:1745
 #, fuzzy
 msgid "C. Mapinduzi Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1745
+#: src/hd-data.c:1746
 #, fuzzy
 msgid "Darwin Show Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1746
+#: src/hd-data.c:1747
 msgid "Day of Goodwill"
 msgstr ""
 
-#: src/hd-data.c:1747
+#: src/hd-data.c:1748
 msgid "Day of Students Revolt"
 msgstr ""
 
-#: src/hd-data.c:1748
+#: src/hd-data.c:1749
 msgid "Day of the Free Laos"
 msgstr ""
 
-#: src/hd-data.c:1749
+#: src/hd-data.c:1750
 msgid "Death of H. Christophe"
 msgstr ""
 
-#: src/hd-data.c:1750
+#: src/hd-data.c:1751
 msgid "Death of J. Dessalines"
 msgstr ""
 
-#: src/hd-data.c:1751
+#: src/hd-data.c:1752
 msgid "Death of President Abdallah"
 msgstr ""
 
-#: src/hd-data.c:1752
+#: src/hd-data.c:1753
 msgid "Death of President Cheikh"
 msgstr ""
 
-#: src/hd-data.c:1753
+#: src/hd-data.c:1754
 msgid "Death of President Soilih"
 msgstr ""
 
-#: src/hd-data.c:1754
+#: src/hd-data.c:1755
 msgid "Death of Qaid-i-Azam"
 msgstr ""
 
-#: src/hd-data.c:1755
+#: src/hd-data.c:1756
 msgid "Death of T. Louverture"
 msgstr ""
 
-#: src/hd-data.c:1756
+#: src/hd-data.c:1757
 #, fuzzy
 msgid "Defenders Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1757
+#: src/hd-data.c:1758
 msgid "Dia del Padre"
 msgstr ""
 
-#: src/hd-data.c:1758
+#: src/hd-data.c:1759
 msgid "Dia de los Maestros"
 msgstr ""
 
-#: src/hd-data.c:1759
+#: src/hd-data.c:1760
 #, fuzzy
 msgid "Discovery Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1760
+#: src/hd-data.c:1761
 msgid "Downfall of the Dergue"
 msgstr ""
 
-#: src/hd-data.c:1761
+#: src/hd-data.c:1762
 msgid "Dry Season Celebration"
 msgstr ""
 
-#: src/hd-data.c:1762
+#: src/hd-data.c:1763
 msgid "Dr. Sun Yat-sen's Birthday"
 msgstr ""
 
-#: src/hd-data.c:1763
+#: src/hd-data.c:1764
 #, fuzzy
 msgid "Duarte's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1764
+#: src/hd-data.c:1765
 #, fuzzy
 msgid "Easter Tuesday"
 msgstr "Pasen"
 
-#: src/hd-data.c:1765
+#: src/hd-data.c:1766
 msgid "Economic Liberation Day"
 msgstr ""
 
-#: src/hd-data.c:1766
+#: src/hd-data.c:1767
 msgid "Eight Hours Day"
 msgstr ""
 
-#: src/hd-data.c:1767
+#: src/hd-data.c:1768
 msgid "Elections for National Assembly"
 msgstr ""
 
-#: src/hd-data.c:1768
+#: src/hd-data.c:1769
 msgid "Errol Barrow Day"
 msgstr ""
 
-#: src/hd-data.c:1769
+#: src/hd-data.c:1770
 msgid "Evacuation Day"
 msgstr ""
 
-#: src/hd-data.c:1770
+#: src/hd-data.c:1771
 msgid "Eve of Epiphany"
 msgstr ""
 
-#: src/hd-data.c:1771
+#: src/hd-data.c:1772
 msgid "Expedition of the 33"
 msgstr ""
 
-#: src/hd-data.c:1772
+#: src/hd-data.c:1773
 #, fuzzy
 msgid "E. Hostos' Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1773
+#: src/hd-data.c:1774
 #, fuzzy
 msgid "Family Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1774
+#: src/hd-data.c:1775
 msgid "FAO Day"
 msgstr ""
 
-#: src/hd-data.c:1775
+#: src/hd-data.c:1776
 #, fuzzy
 msgid "Farmers' Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1776
+#: src/hd-data.c:1777
 #, fuzzy
 msgid "Father Leval Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1777
+#: src/hd-data.c:1778
 msgid "Feast of Our Theotokos"
 msgstr ""
 
-#: src/hd-data.c:1778
+#: src/hd-data.c:1779
 #, fuzzy
 msgid "Fisherman's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1779
+#: src/hd-data.c:1780
 msgid "Foundation of NPLA Day"
 msgstr ""
 
-#: src/hd-data.c:1780
+#: src/hd-data.c:1781
 msgid "Founding of People's Party"
 msgstr ""
 
-#: src/hd-data.c:1781
+#: src/hd-data.c:1782
 #, fuzzy
 msgid "Garifuna Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1782
+#: src/hd-data.c:1783
 msgid "General San Martin's Anniversary"
 msgstr ""
 
-#: src/hd-data.c:1783
+#: src/hd-data.c:1784
 msgid "Gospel Day"
 msgstr ""
 
-#: src/hd-data.c:1784
+#: src/hd-data.c:1785
 msgid "Guacanaste Day"
 msgstr ""
 
-#: src/hd-data.c:1785
+#: src/hd-data.c:1786
 msgid "Gustavus Adolphus' Day"
 msgstr ""
 
-#: src/hd-data.c:1786
+#: src/hd-data.c:1787
 #, fuzzy
 msgid "Heritage Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1787
+#: src/hd-data.c:1788
 #, fuzzy
 msgid "Heroes Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1788
+#: src/hd-data.c:1789
 #, fuzzy
 msgid "Hobart Show Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1789
+#: src/hd-data.c:1790
 #, fuzzy
 msgid "Holy Wednesday"
 msgstr "Woensdag"
 
-#: src/hd-data.c:1790
+#: src/hd-data.c:1791
 #, fuzzy
 msgid "Ho Chi Minh's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1791
+#: src/hd-data.c:1792
 #, fuzzy
 msgid "Human Rights Day"
 msgstr "Dag van de Duitse hereniging"
 
-#: src/hd-data.c:1792
+#: src/hd-data.c:1793
 msgid "Hurricane Supplication Day"
 msgstr ""
 
-#: src/hd-data.c:1793
+#: src/hd-data.c:1794
 msgid "Hurricane Thanksgiving Day"
 msgstr ""
 
-#: src/hd-data.c:1794
+#: src/hd-data.c:1795
 #, fuzzy
 msgid "Independence of Cartagena"
 msgstr "Onafhankelijkheidsdag"
 
-#: src/hd-data.c:1795
+#: src/hd-data.c:1796
 #, fuzzy
 msgid "Independence of Cuenca"
 msgstr "Onafhankelijkheidsdag"
 
-#: src/hd-data.c:1796
+#: src/hd-data.c:1797
 #, fuzzy
 msgid "Independence of Guayaquil"
 msgstr "Onafhankelijkheidsdag"
 
-#: src/hd-data.c:1797
+#: src/hd-data.c:1798
 #, fuzzy
 msgid "Independence of Quito"
 msgstr "Onafhankelijkheidsdag"
 
-#: src/hd-data.c:1798
+#: src/hd-data.c:1799
 msgid "Indian Arrival Day"
 msgstr ""
 
-#: src/hd-data.c:1799
+#: src/hd-data.c:1800
 msgid "Internal Autonomy Day"
 msgstr ""
 
-#: src/hd-data.c:1800
+#: src/hd-data.c:1801
 #, fuzzy
 msgid "Jefferson Davis' Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1801
+#: src/hd-data.c:1802
 msgid "June Holiday"
 msgstr ""
 
-#: src/hd-data.c:1802
+#: src/hd-data.c:1803
 #, fuzzy
 msgid "J. Barbosa's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1803
+#: src/hd-data.c:1804
 msgid "J. Chilembwe Day"
 msgstr ""
 
-#: src/hd-data.c:1804
+#: src/hd-data.c:1805
 #, fuzzy
 msgid "J. Diego's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1805
+#: src/hd-data.c:1806
 #, fuzzy
 msgid "J. Robert's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1806
+#: src/hd-data.c:1807
 msgid "Kamarampaka Day"
 msgstr ""
 
-#: src/hd-data.c:1807
+#: src/hd-data.c:1808
 #, fuzzy
 msgid "Kartini Day"
 msgstr "Martin L. King Dag"
 
-#: src/hd-data.c:1808
+#: src/hd-data.c:1809
 #, fuzzy
 msgid "Catherine Show Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1809
+#: src/hd-data.c:1810
 #, fuzzy
 msgid "Kiev Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1810
+#: src/hd-data.c:1811
 #, fuzzy
 msgid "Kim Il-Sung's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1811
+#: src/hd-data.c:1812
 #, fuzzy
 msgid "Kim Jong-Il's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1812
+#: src/hd-data.c:1813
 msgid "King Kamehameha Day"
 msgstr ""
 
-#: src/hd-data.c:1813
+#: src/hd-data.c:1814
 msgid "King Rama I Memorial Day/Chakri"
 msgstr ""
 
-#: src/hd-data.c:1814
+#: src/hd-data.c:1815
 msgid "King Rama V Memorial Day"
 msgstr ""
 
-#: src/hd-data.c:1815
+#: src/hd-data.c:1816
 msgid "Knabenschiessen"
 msgstr ""
 
-#: src/hd-data.c:1816
+#: src/hd-data.c:1817
 msgid "Konstantin and Methodius"
 msgstr ""
 
-#: src/hd-data.c:1817
+#: src/hd-data.c:1818
 msgid "Lapp National Holiday"
 msgstr ""
 
-#: src/hd-data.c:1818
+#: src/hd-data.c:1819
 msgid "Launceston Cup Day"
 msgstr ""
 
-#: src/hd-data.c:1819
+#: src/hd-data.c:1820
 msgid "Liberty Day"
 msgstr ""
 
-#: src/hd-data.c:1820
+#: src/hd-data.c:1821
 msgid "Loss of Muslim Nation"
 msgstr ""
 
-#: src/hd-data.c:1821
+#: src/hd-data.c:1822
 msgid "Luxembourg City Kermis"
 msgstr ""
 
-#: src/hd-data.c:1822
+#: src/hd-data.c:1823
 #, fuzzy
 msgid "Lyndon B. Johnson Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1823
+#: src/hd-data.c:1824
 #, fuzzy
 msgid "L. Rivera's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1824
+#: src/hd-data.c:1825
 #, fuzzy
 msgid "Madaraka Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1825
+#: src/hd-data.c:1826
 #, fuzzy
 msgid "Mahatma Gandhi's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1826
+#: src/hd-data.c:1827
 #, fuzzy
 msgid "Malvinas Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1827
+#: src/hd-data.c:1828
 #, fuzzy
 msgid "Manila Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1828
+#: src/hd-data.c:1829
 #, fuzzy
 msgid "Maputo City Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1829
+#: src/hd-data.c:1830
 #, fuzzy
 msgid "Marien Ngouabi Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1830
+#: src/hd-data.c:1831
 #, fuzzy
 msgid "Maryland Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1831
+#: src/hd-data.c:1832
 msgid "Melbourne Cup Day"
 msgstr ""
 
-#: src/hd-data.c:1832
+#: src/hd-data.c:1833
 #, fuzzy
 msgid "Merchant Day"
 msgstr "Dag van de Duitse hereniging"
 
-#: src/hd-data.c:1833
+#: src/hd-data.c:1834
 #, fuzzy
 msgid "St John's/Midsummers Eve"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1834
+#: src/hd-data.c:1835
 #, fuzzy
 msgid "Missionary Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1835
+#: src/hd-data.c:1836
 #, fuzzy
-msgid "Mi-Carême Day"
+msgid "Mi-CarÃªme Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1836
+#: src/hd-data.c:1837
 #, fuzzy
 msgid "Morazan Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1837
+#: src/hd-data.c:1838
 #, fuzzy
 msgid "Mosheshoe's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1838
+#: src/hd-data.c:1839
 msgid "Motherhood and Beauty Day"
 msgstr ""
 
-#: src/hd-data.c:1839
+#: src/hd-data.c:1840
 #, fuzzy
 msgid "Naming Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1840
+#: src/hd-data.c:1841
 #, fuzzy
 msgid "National Bun Day"
 msgstr "Pasen"
 
-#: src/hd-data.c:1841
+#: src/hd-data.c:1842
 msgid "National Heroes Day"
 msgstr ""
 
-#: src/hd-data.c:1842
+#: src/hd-data.c:1843
 #, fuzzy
 msgid "National Redemption Day"
 msgstr "Pasen"
 
-#: src/hd-data.c:1843
+#: src/hd-data.c:1844
 msgid "National Resistance Day"
 msgstr ""
 
-#: src/hd-data.c:1844
+#: src/hd-data.c:1845
 #, fuzzy
 msgid "National Revival Day"
 msgstr "Pasen"
 
-#: src/hd-data.c:1845
+#: src/hd-data.c:1846
 #, fuzzy
 msgid "National Unity Day"
 msgstr "Pasen"
 
-#: src/hd-data.c:1846
+#: src/hd-data.c:1847
 #, fuzzy
 msgid "Ndadaye Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1847
+#: src/hd-data.c:1848
 #, fuzzy
 msgid "Neutrality Day"
 msgstr "Dag van de Duitse hereniging"
 
-#: src/hd-data.c:1848
+#: src/hd-data.c:1849
 #, fuzzy
 msgid "Nevada Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1849
+#: src/hd-data.c:1850
 msgid "New Regime Anniversary"
 msgstr ""
 
-#: src/hd-data.c:1850
+#: src/hd-data.c:1851
 msgid "Nobel Day"
 msgstr ""
 
-#: src/hd-data.c:1851
+#: src/hd-data.c:1852
 #, fuzzy
 msgid "Noi Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1852
+#: src/hd-data.c:1853
 #, fuzzy
 msgid "OAU Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1853
+#: src/hd-data.c:1854
 #, fuzzy
 msgid "October Holiday"
 msgstr "October"
 
-#: src/hd-data.c:1854
+#: src/hd-data.c:1855
 msgid "Oil Industry Day"
 msgstr ""
 
-#: src/hd-data.c:1855
+#: src/hd-data.c:1856
 msgid "Our Lady of Altagracia Day"
 msgstr ""
 
-#: src/hd-data.c:1856
+#: src/hd-data.c:1857
 msgid "Our Lady of Camarin Day"
 msgstr ""
 
-#: src/hd-data.c:1857
+#: src/hd-data.c:1858
 msgid "Our Lady of Las Mercedes Day"
 msgstr ""
 
-#: src/hd-data.c:1858
+#: src/hd-data.c:1859
 msgid "Our Lady of Los Angeles Day"
 msgstr ""
 
-#: src/hd-data.c:1859
+#: src/hd-data.c:1860
 msgid "Our Lady of Seven Sorrows"
 msgstr ""
 
-#: src/hd-data.c:1860
+#: src/hd-data.c:1861
 msgid "Our Lady of Victories Day"
 msgstr ""
 
-#: src/hd-data.c:1861
+#: src/hd-data.c:1862
 #, fuzzy
 msgid "Panama City Day"
 msgstr "Dag van de Duitse hereniging"
 
-#: src/hd-data.c:1862
+#: src/hd-data.c:1863
 #, fuzzy
 msgid "Panamerica Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1863
+#: src/hd-data.c:1864
 msgid "Paris Peace Agreement Day"
 msgstr ""
 
-#: src/hd-data.c:1864
+#: src/hd-data.c:1865
 #, fuzzy
 msgid "Patriot's Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1865
+#: src/hd-data.c:1866
 #, fuzzy
 msgid "People's Uprising Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1866
+#: src/hd-data.c:1867
 msgid "People Power Day"
 msgstr ""
 
-#: src/hd-data.c:1867
+#: src/hd-data.c:1868
 msgid "Philippine-American Friendship"
 msgstr ""
 
-#: src/hd-data.c:1868
+#: src/hd-data.c:1869
 #, fuzzy
 msgid "Pichincha Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1869
+#: src/hd-data.c:1870
 #, fuzzy
 msgid "Picnic Day"
 msgstr "Kerst"
 
-#: src/hd-data.c:1870
+#: src/hd-data.c:1871
 #, fuzzy
 msgid "Pioneer Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1871
+#: src/hd-data.c:1872
 #, fuzzy
 msgid "Poya Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1872
+#: src/hd-data.c:1873
 msgid "Prince Kalanianaole Day"
 msgstr ""
 
-#: src/hd-data.c:1873
+#: src/hd-data.c:1874
 msgid "Prince of Wales' Birthday"
 msgstr ""
 
-#: src/hd-data.c:1874
+#: src/hd-data.c:1875
 msgid "Proclamation Day"
 msgstr ""
 
-#: src/hd-data.c:1875
+#: src/hd-data.c:1876
 #, fuzzy
 msgid "Qaid-i-Azam's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1876
+#: src/hd-data.c:1877
 msgid "Ratu Sukuma Day"
 msgstr ""
 
-#: src/hd-data.c:1877
+#: src/hd-data.c:1878
 #, fuzzy
 msgid "Recreation Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1878
+#: src/hd-data.c:1879
 msgid "Referendum Day"
 msgstr ""
 
-#: src/hd-data.c:1879
+#: src/hd-data.c:1880
 #, fuzzy
 msgid "Regatta Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1880
+#: src/hd-data.c:1881
 msgid "Regency Exchange"
 msgstr ""
 
-#: src/hd-data.c:1881
+#: src/hd-data.c:1882
 #, fuzzy
 msgid "Restoration Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1882
+#: src/hd-data.c:1883
 #, fuzzy
 msgid "Return Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1883
+#: src/hd-data.c:1884
 #, fuzzy
 msgid "Reunification Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1884
+#: src/hd-data.c:1885
 #, fuzzy
 msgid "Rizal Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1885
+#: src/hd-data.c:1886
 #, fuzzy
 msgid "Rwagasore Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1886
+#: src/hd-data.c:1887
 #, fuzzy
 msgid "Saba Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1887
+#: src/hd-data.c:1888
 #, fuzzy
 msgid "San Jacinto Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1888
+#: src/hd-data.c:1889
 #, fuzzy
-msgid "San José Day"
+msgid "San JosÃ© Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1889
+#: src/hd-data.c:1890
 msgid "SAR Establishment Day"
 msgstr ""
 
-#: src/hd-data.c:1890
+#: src/hd-data.c:1891
 #, fuzzy
 msgid "School Holiday"
 msgstr "October"
 
-#: src/hd-data.c:1891
-msgid "Sechseläuten"
-msgstr ""
-
 #: src/hd-data.c:1892
-msgid "Separation Day"
+msgid "SechselÃ¤uten"
 msgstr ""
 
 #: src/hd-data.c:1893
-msgid "Seretse Khama Day"
+msgid "Separation Day"
 msgstr ""
 
 #: src/hd-data.c:1894
+msgid "Seretse Khama Day"
+msgstr ""
+
+#: src/hd-data.c:1895
 #, fuzzy
 msgid "Settlers Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1895
+#: src/hd-data.c:1896
 #, fuzzy
 msgid "Seward's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1896
+#: src/hd-data.c:1897
 #, fuzzy
 msgid "Shaheed Day"
 msgstr "Onafhankelijkheidsdag"
 
-#: src/hd-data.c:1897
+#: src/hd-data.c:1898
 msgid "Sheep Festival"
 msgstr ""
 
-#: src/hd-data.c:1898
+#: src/hd-data.c:1899
 msgid "Sheikh Zayed's Ascension Day"
 msgstr ""
 
-#: src/hd-data.c:1899
+#: src/hd-data.c:1900
 msgid "Simon Bolivar's Day"
 msgstr ""
 
-#: src/hd-data.c:1900
+#: src/hd-data.c:1901
 #, fuzzy
 msgid "Sinai-Liberation Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1901
+#: src/hd-data.c:1902
 msgid "Slave-Liberation Day"
 msgstr ""
 
-#: src/hd-data.c:1902
+#: src/hd-data.c:1903
 msgid "Sniff the Breeze Day"
 msgstr ""
 
-#: src/hd-data.c:1903
+#: src/hd-data.c:1904
 msgid "Solidarity Day"
 msgstr ""
 
-#: src/hd-data.c:1904
+#: src/hd-data.c:1905
 #, fuzzy
 msgid "Somers Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1905
+#: src/hd-data.c:1906
 msgid "Statia-American Day"
 msgstr ""
 
-#: src/hd-data.c:1906
+#: src/hd-data.c:1907
 #, fuzzy
 msgid "Student's Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1907
+#: src/hd-data.c:1908
 #, fuzzy
 msgid "St Agata Day"
 msgstr "Mei"
 
-#: src/hd-data.c:1908
+#: src/hd-data.c:1909
 #, fuzzy
 msgid "St Canute's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1909
+#: src/hd-data.c:1910
 #, fuzzy
 msgid "St Cedilia's Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1910
+#: src/hd-data.c:1911
 #, fuzzy
 msgid "St Charles' Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1911
+#: src/hd-data.c:1912
 #, fuzzy
 msgid "St Demetrius' Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1912
+#: src/hd-data.c:1913
 #, fuzzy
-msgid "St Dévote Day"
+msgid "St DÃ©vote Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1913
+#: src/hd-data.c:1914
 #, fuzzy
 msgid "St Eliah's Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1914
+#: src/hd-data.c:1915
 #, fuzzy
 msgid "St Jean Baptiste Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1915
+#: src/hd-data.c:1916
 #, fuzzy
 msgid "St Lucia's Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1916
+#: src/hd-data.c:1917
 #, fuzzy
 msgid "St Marguerite's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1917
+#: src/hd-data.c:1918
 #, fuzzy
 msgid "St Maroon's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1918
+#: src/hd-data.c:1919
 #, fuzzy
 msgid "St Michael's Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1919
+#: src/hd-data.c:1920
 #, fuzzy
 msgid "St Olav's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1920
+#: src/hd-data.c:1921
 #, fuzzy
 msgid "St Olav's Eve"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1921
+#: src/hd-data.c:1922
 msgid "St Paul's Shipswreck"
 msgstr ""
 
-#: src/hd-data.c:1922
+#: src/hd-data.c:1923
 #, fuzzy
 msgid "St Rose of Lima"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1923
+#: src/hd-data.c:1924
 #, fuzzy
 msgid "St Ursula's Day"
 msgstr "Sinterklaas"
 
-#: src/hd-data.c:1924
+#: src/hd-data.c:1925
 #, fuzzy
 msgid "St Vincent de Paul's Day"
 msgstr "Valentijnsdag"
 
-#: src/hd-data.c:1925
+#: src/hd-data.c:1926
 #, fuzzy
 msgid "Suez Victory Day"
 msgstr "Dag van de Duitse hereniging"
 
-#: src/hd-data.c:1926
+#: src/hd-data.c:1927
 #, fuzzy
 msgid "Sultan Qaboos' Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1927
+#: src/hd-data.c:1928
 msgid "Svetitskhovloba"
 msgstr ""
 
-#: src/hd-data.c:1928
+#: src/hd-data.c:1929
 #, fuzzy
 msgid "Sweden Day"
 msgstr "Onafhankelijkheidsdag"
 
-#: src/hd-data.c:1929
+#: src/hd-data.c:1930
 #, fuzzy
 msgid "S. Doe's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1930
+#: src/hd-data.c:1931
 msgid "Tennant-Creek Show Day"
 msgstr ""
 
-#: src/hd-data.c:1931
+#: src/hd-data.c:1932
 #, fuzzy
 msgid "Territory Day"
 msgstr "Dag van de Duitse hereniging"
 
-#: src/hd-data.c:1932
+#: src/hd-data.c:1933
 msgid "The Crown Princesse's Birthday"
 msgstr ""
 
-#: src/hd-data.c:1933
+#: src/hd-data.c:1934
 msgid "The Crown Princesse's Name-Day"
 msgstr ""
 
-#: src/hd-data.c:1934
+#: src/hd-data.c:1935
 #, fuzzy
 msgid "The Crown Prince's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1935
+#: src/hd-data.c:1936
 #, fuzzy
 msgid "The King's Name-Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1936
+#: src/hd-data.c:1937
 #, fuzzy
 msgid "The Queen's Name-Day"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1937
+#: src/hd-data.c:1938
 msgid "Topou I Day"
 msgstr ""
 
-#: src/hd-data.c:1938
+#: src/hd-data.c:1939
 #, fuzzy
 msgid "Town Meeting Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1939
+#: src/hd-data.c:1940
 #, fuzzy
 msgid "Traditional Day"
 msgstr "Pasen"
 
-#: src/hd-data.c:1940
+#: src/hd-data.c:1941
 #, fuzzy
 msgid "Transfer Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1941
+#: src/hd-data.c:1942
 #, fuzzy
 msgid "Truman Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1942
+#: src/hd-data.c:1943
 #, fuzzy
 msgid "Union Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1943
+#: src/hd-data.c:1944
 msgid "Union with Sweden dissolved"
 msgstr ""
 
-#: src/hd-data.c:1944
+#: src/hd-data.c:1945
 msgid "United Nations Day"
 msgstr ""
 
-#: src/hd-data.c:1945
+#: src/hd-data.c:1946
 #, fuzzy
 msgid "Unity Factory Day"
 msgstr "Tweede Kerstdag"
 
-#: src/hd-data.c:1946
+#: src/hd-data.c:1947
 msgid "Victor-Schoelcher Day"
 msgstr ""
 
-#: src/hd-data.c:1947
+#: src/hd-data.c:1948
 msgid "Vidovdan"
 msgstr ""
 
-#: src/hd-data.c:1948
+#: src/hd-data.c:1949
 #, fuzzy
 msgid "West Virginia Day"
 msgstr "Moederdag"
 
-#: src/hd-data.c:1949
+#: src/hd-data.c:1950
 #, fuzzy
 msgid "Whitsun Eve"
 msgstr "Kerstavond"
 
-#: src/hd-data.c:1950
+#: src/hd-data.c:1951
 #, fuzzy
 msgid "W. Tubman's Birthday"
 msgstr "Drie Koningen"
 
-#: src/hd-data.c:1951
+#: src/hd-data.c:1952
 #, fuzzy
 msgid "Yap Day"
 msgstr "Mei"
 
-#: src/hd-data.c:2028
+#: src/hd-data.c:1953
+msgid "Day of Czech Statehood"
+msgstr ""
+
+#: src/hd-data.c:2030
 msgid "Zi/Rat"
 msgstr ""
 
-#: src/hd-data.c:2028
+#: src/hd-data.c:2030
 msgid "Chou/Ox"
 msgstr ""
 
-#: src/hd-data.c:2029
+#: src/hd-data.c:2031
 msgid "Yin/Tiger"
 msgstr ""
 
-#: src/hd-data.c:2029
+#: src/hd-data.c:2031
 msgid "Mao/Rabbit"
 msgstr ""
 
-#: src/hd-data.c:2030
+#: src/hd-data.c:2032
 msgid "Chen/Dragon"
 msgstr ""
 
-#: src/hd-data.c:2030
+#: src/hd-data.c:2032
 msgid "Si/Snake"
 msgstr ""
 
-#: src/hd-data.c:2031
+#: src/hd-data.c:2033
 msgid "Wu/Horse"
 msgstr ""
 
-#: src/hd-data.c:2031
+#: src/hd-data.c:2033
 msgid "Wei/Sheep"
 msgstr ""
 
-#: src/hd-data.c:2032
+#: src/hd-data.c:2034
 msgid "Shen/Monkey"
 msgstr ""
 
-#: src/hd-data.c:2032
+#: src/hd-data.c:2034
 msgid "You/Rooster"
 msgstr ""
 
-#: src/hd-data.c:2033
+#: src/hd-data.c:2035
 msgid "Xu/Dog"
 msgstr ""
 
-#: src/hd-data.c:2033
+#: src/hd-data.c:2035
 msgid "Hai/Pig"
 msgstr ""
 
-#: src/hd-data.c:2234
+#: src/hd-data.c:2236
 #, fuzzy
 msgid "Ast"
 msgstr "Augustus"
 
-#: src/hd-data.c:2350 src/hd-data.c:2417
+#: src/hd-data.c:2352 src/hd-data.c:2419
 msgid "Bah"
 msgstr ""
 
-#: src/hd-data.c:2486
+#: src/hd-data.c:2488
 msgid "Cel"
 msgstr ""
 
-#: src/hd-data.c:2622 src/hd-data.c:3161
+#: src/hd-data.c:2624 src/hd-data.c:3163
 msgid "Chi"
 msgstr ""
 
-#: src/hd-data.c:2737 src/hd-data.c:3266 src/hd-data.c:4761
+#: src/hd-data.c:2739 src/hd-data.c:3268 src/hd-data.c:4763
 #, c-format
 msgid "Cannot calculate lunisolar calendar for %d correctly"
 msgstr ""
 
-#: src/hd-data.c:3167 src/hd-data.c:4659
+#: src/hd-data.c:3169 src/hd-data.c:4661
 #, fuzzy
 msgid "Jap"
 msgstr "Jan"
 
-#: src/hd-data.c:3364
+#: src/hd-data.c:3366
 msgid "Chr"
 msgstr ""
 
-#: src/hd-data.c:3572 src/hd-data.c:5075
+#: src/hd-data.c:3574 src/hd-data.c:5077
 msgid "FRR"
 msgstr ""
 
-#: src/hd-data.c:3696 src/hd-data.c:3863
+#: src/hd-data.c:3698 src/hd-data.c:3865
 #, fuzzy
 msgid "Heb"
 msgstr "Feb"
 
-#: src/hd-data.c:4098 src/hd-data.c:4545
+#: src/hd-data.c:4100 src/hd-data.c:4547
 msgid "Isl"
 msgstr ""
 
-#: src/hd-data.c:5146 src/hd-data.c:5252
+#: src/hd-data.c:5148 src/hd-data.c:5254
 msgid "AMO"
 msgstr ""
 
-#: src/hd-data.c:5170 src/hd-data.c:5246
+#: src/hd-data.c:5172 src/hd-data.c:5248
 msgid "EGO"
 msgstr ""
 
-#: src/hd-data.c:5363
+#: src/hd-data.c:5365
 msgid "OxN"
 msgstr ""
 
-#: src/hd-data.c:5369
+#: src/hd-data.c:5371
 msgid "OxO"
 msgstr ""
 
-#: src/hd-data.c:5571 src/hd-data.c:5692
+#: src/hd-data.c:5573 src/hd-data.c:5694
 msgid "Per"
 msgstr ""
 
-#: src/hd-data.c:5763
+#: src/hd-data.c:5765
 msgid "Zod"
 msgstr ""
 
@@ -4499,6 +4504,7 @@ msgid "   %-3s    = Store arguments of command line in file %s"
 msgstr ""
 
 #: src/help.c:1905
+#, c-format
 msgid ""
 "          Create shell script which contains the arguments of command line"
 msgstr ""
@@ -4828,11 +4834,11 @@ msgid "          Provide eternal holiday list with astronomical data"
 msgstr ""
 
 #: src/help.c:2369
-msgid "          Provide eternal holiday list with Bahá'i calendar holidays"
+msgid "          Provide eternal holiday list with BahÃ¡'i calendar holidays"
 msgstr ""
 
 #: src/help.c:2378
-msgid "          Provide eternal holiday list with Bahá'i calendar months"
+msgid "          Provide eternal holiday list with BahÃ¡'i calendar months"
 msgstr ""
 
 #: src/help.c:2387
@@ -5046,8 +5052,8 @@ msgstr ""
 #: src/help.c:2725
 #, c-format
 msgid ""
-"   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  "
-"%s%02d%s%02d == GMT%s)"
+"   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  %s%02d"
+"%s%02d == GMT%s)"
 msgstr ""
 
 #: src/help.c:2739
@@ -5152,6 +5158,7 @@ msgid "            they are used by the character set used in Germany"
 msgstr ""
 
 #: src/help.c:2866
+#, c-format
 msgid "+++ FIXED DATES +++"
 msgstr ""
 
@@ -5730,25 +5737,28 @@ msgstr ""
 msgid "for more information."
 msgstr ""
 
-#: src/gcal2txt.c:171 src/help.c:3894 src/tcal.c:240 src/txt2gcal.c:171
+#: src/help.c:3894 src/tcal.c:240 src/txt2gcal.c:171 src/gcal2txt.c:171
 #, c-format
 msgid "Email bug reports to <%s>"
 msgstr ""
 
-#: src/gcal2txt.c:173 src/help.c:3896 src/tcal.c:242 src/txt2gcal.c:173
+#: src/help.c:3896 src/tcal.c:242 src/txt2gcal.c:173 src/gcal2txt.c:173
 #, c-format
 msgid "or (if this fails) to <%s>."
 msgstr ""
 
-#: src/gcal2txt.c:205 src/help.c:3928 src/tcal.c:274 src/txt2gcal.c:205
+#: src/help.c:3928 src/tcal.c:274 src/txt2gcal.c:205 src/gcal2txt.c:205
+#, c-format
 msgid "This is free software; see the source for copying conditions."
 msgstr ""
 
-#: src/gcal2txt.c:207 src/help.c:3930 src/tcal.c:276 src/txt2gcal.c:207
+#: src/help.c:3930 src/tcal.c:276 src/txt2gcal.c:207 src/gcal2txt.c:207
+#, c-format
 msgid "There is NO warranty, without even the implied warranty of"
 msgstr ""
 
-#: src/gcal2txt.c:209 src/help.c:3932 src/tcal.c:278 src/txt2gcal.c:209
+#: src/help.c:3932 src/tcal.c:278 src/txt2gcal.c:209 src/gcal2txt.c:209
+#, c-format
 msgid "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
 msgstr ""
 
@@ -5839,6 +5849,7 @@ msgid "version %d"
 msgstr ""
 
 #: src/help.c:4591
+#, c-format
 msgid "unknown version"
 msgstr ""
 
@@ -5900,6 +5911,10 @@ msgstr ""
 #.
 #. *** Translators, please translate this as a fixed 2-character text.
 #. *** This text should contain the proper abbreviations for "degrees" and "minutes".
+#.
+#.
+#. *** Translators, please translate this as a fixed 3-character text.
+#. *** This text should contain the proper abbreviations for "degrees", "minutes" and "seconds".
 #.
 #: src/rc-insert.c:1879 src/rc-insert.c:1891
 msgid "d'\""
@@ -6124,6 +6139,7 @@ msgid "start `%c' "
 msgstr ""
 
 #: src/regexp.c:1222
+#, c-format
 msgid "anchored "
 msgstr ""
 
@@ -6176,7 +6192,7 @@ msgid ""
 "Year must be in range (%d...%d)"
 msgstr ""
 
-#: src/gcal2txt.c:326 src/tcal.c:398 src/txt2gcal.c:326 src/utils.c:405
+#: src/utils.c:405 src/tcal.c:398 src/txt2gcal.c:326 src/gcal2txt.c:326
 #, c-format
 msgid "`%s' line %ld: virtual memory exhausted (%s=%d)"
 msgstr ""
@@ -6271,7 +6287,7 @@ msgid ""
 "Line %ld: %s"
 msgstr ""
 
-#: src/gcal2txt.c:330 src/tcal.c:402 src/txt2gcal.c:330 src/utils.c:475
+#: src/utils.c:475 src/tcal.c:402 src/txt2gcal.c:330 src/gcal2txt.c:330
 #, c-format
 msgid "`%s' line %ld: (`%s') invalid value for table size `sizeof %s>%d'"
 msgstr ""
@@ -6291,12 +6307,12 @@ msgstr ""
 msgid "invalid search pattern `%s' specified"
 msgstr ""
 
-#: src/gcal2txt.c:334 src/tcal.c:409 src/txt2gcal.c:334 src/utils.c:490
+#: src/utils.c:490 src/tcal.c:409 src/txt2gcal.c:334 src/gcal2txt.c:334
 #, c-format
 msgid "`%s' line %ld: (`%s') unmanaged error (%d)"
 msgstr ""
 
-#: src/gcal2txt.c:358 src/tcal.c:433 src/txt2gcal.c:358 src/utils.c:514
+#: src/utils.c:514 src/tcal.c:433 src/txt2gcal.c:358 src/gcal2txt.c:358
 #, c-format
 msgid ""
 "\n"
@@ -6638,7 +6654,7 @@ msgstr "December"
 msgid "Usage:  %s  [--%s | --%s] | [--%s=[+|-]NUMBER] [ARGUMENT...]\n"
 msgstr "Aanroep:  %s  [--help | --version] | [Tekstbestand | -] [Datumdeel]\n"
 
-#: src/gcal2txt.c:308 src/tcal.c:377 src/txt2gcal.c:308
+#: src/tcal.c:377 src/txt2gcal.c:308 src/gcal2txt.c:308
 #, c-format
 msgid ""
 "\n"
@@ -6665,12 +6681,12 @@ msgstr ""
 msgid "Usage:  %s  [--%s | --%s] | [TEXT-FILE | -] [DATE-PART]\n"
 msgstr "Aanroep:  %s  [--help | --version] | [Tekstbestand | -] [Datumdeel]\n"
 
-#: src/gcal2txt.c:835 src/txt2gcal.c:836
+#: src/txt2gcal.c:836 src/gcal2txt.c:835
 #, c-format
 msgid "%s: no regular file\n"
 msgstr "%s: geen gewoon bestand\n"
 
-#: src/gcal2txt.c:844 src/txt2gcal.c:845
+#: src/txt2gcal.c:845 src/gcal2txt.c:844
 #, c-format
 msgid "%s: file not found\n"
 msgstr "%s: bestand niet gevond\n"

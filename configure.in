@@ -28,8 +28,11 @@ dnl
 dnl
 dnl Starting operations.
 dnl
-AC_INIT(src/defines.h)dnl
-AC_PREREQ(2.13)dnl
+AC_INIT([GNU gcal],[3.01],[bug-gcal@gnu.org])
+AC_PREREQ(2.65)
+AM_INIT_AUTOMAKE([gnu])
+
+
 AM_CONFIG_HEADER(config.h:config.hin)dnl
 AC_REVISION($Id: configure.in 2.30 2000/06/14 02:03:00 tom Exp $)dnl
 
@@ -500,11 +503,6 @@ AC_MSG_RESULT()
 AC_CHECKING(for C compiler)
 dnl
 AC_PROG_CC
-if test -z "$ac_cv_prog_CC"; then
-  AC_MSG_RESULT(hmm... whats this??)
-  AC_MSG_RESULT()
-  AC_MSG_ERROR(no C compiler found -- aborting...)
-fi
 dnl
 AC_PROG_GCC_TRADITIONAL
 dnl
@@ -1031,6 +1029,7 @@ AC_OUTPUT([Makefile \
            install-inf \
            data/Makefile \
            doc/Makefile \
+           doc/en/Makefile \
            doc/mksamp \
            intl/Makefile \
            misc/Makefile \

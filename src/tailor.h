@@ -40,30 +40,14 @@
 #  if HAVE_CONFIG_H
 #    include <config.h>
 #  endif
-#  if ENABLE_NLS && !USE_DE
-/*
-*  National language support is only allowed on these systems.
-*/
-#    define  GCAL_NLS
-#    if HAVE_LOCALE_H
-#      include <locale.h>
-#    endif
-#    include <libintl.h>
-#if 0
-#    define  _(Str)  (Str)
-#endif /* 0 */
-#    define  _(Str) gettext(Str)
-#    ifdef gettext_noop
-#      define  N_(Str)  gettext_noop(Str)
-#    else /* !gettext_noop */
-#      define  N_(Str)  (Str)
-#    endif /* !gettext_noop */
-#  else /* !ENABLE_NLS || USE_DE */
-#    define   _(Str)  (Str)
-#    define  N_(Str)  (Str)
-#  endif /* !ENABLE_NLS || USE_DE */
 
+#  define  GCAL_NLS
+#  include <locale.h>
 
+#  include <libintl.h>
+
+#  define  _(Str) gettext(Str)
+#  define  N_(Str) (Str)
 
 /*
 *  Detect the machine / os.
@@ -905,4 +889,5 @@
 #  define  TC_MC_MAX  4
 /* Print blank character if highlighting is disabled. */
 #  define  NO_HLS  " "
+
 #endif /* __TAILOR_H */

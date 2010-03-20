@@ -1,35 +1,36 @@
 # Polish translation for gcal 2.30
 # Copyright (C) 1997 Free Software Foundation, Inc.
-# Wojciech Marek Ga≥±zka <wgalazka@chem.uw.edu.pl>, 1997.
+# Wojciech Marek Ga≈ÇƒÖzka <wgalazka@chem.uw.edu.pl>, 1997.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gcal 2.30\n"
-"POT-Creation-Date: 2000-06-30 23:38+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-20 16:29+0100\n"
 "PO-Revision-Date: 1997-05-03 18:31+0100\n"
-"Last-Translator: Wojciech Marek Ga≥±zka <wgalazka@chem.uw.edu.pl>\n"
+"Last-Translator: Wojciech Marek Ga≈ÇƒÖzka <wgalazka@chem.uw.edu.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: src/file-io.c:1568
 #, c-format
 msgid "Try to write %s `%s'... %s%s%s"
-msgstr "SprÛbuj napisaÊ %s `%s'... %s%s%s"
+msgstr "Spr√≥buj napisaƒá %s `%s'... %s%s%s"
 
 #: src/file-io.c:1570 src/file-io.c:1707 src/file-io.c:1721
 msgid "failed"
-msgstr "nie powiod≥o siÍ"
+msgstr "nie powiod≈Ço siƒô"
 
 #: src/file-io.c:1570 src/file-io.c:1707 src/file-io.c:1721
 msgid "success"
-msgstr "powiod≥o siÍ"
+msgstr "powiod≈Ço siƒô"
 
 #: src/file-io.c:1704
 #, fuzzy, c-format
 msgid "Try to open%sresource file `%s'... %s%s%s"
-msgstr "SprÛbuj otworzyÊ plik zasobÛw `%s'... %s%s%s"
+msgstr "Spr√≥buj otworzyƒá plik zasob√≥w `%s'... %s%s%s"
 
 #: src/file-io.c:1705
 msgid " `HERE' "
@@ -38,7 +39,7 @@ msgstr ""
 #: src/file-io.c:1718
 #, c-format
 msgid "Try to open (level: %02d) include file `%s'... %s%s%s"
-msgstr "SprÛbuj otworzyÊ (poziom: %02d) plik nag≥Ûwkowy `%s'... %s%s%s"
+msgstr "Spr√≥buj otworzyƒá (poziom: %02d) plik nag≈Ç√≥wkowy `%s'... %s%s%s"
 
 #. e.g.: "OTHER",
 #.
@@ -63,7 +64,7 @@ msgstr "Wielka Brytania"
 
 #: src/gcal.c:1909
 msgid "default"
-msgstr "domy∂lny"
+msgstr "domy≈õlny"
 
 #.
 #. *** Translators, please translate this as a fixed 1-character text.
@@ -114,7 +115,7 @@ msgstr "Ustalona lista dat"
 
 #: src/gcal.c:2161 src/gcal.c:2177
 msgid "environment variable"
-msgstr "zmienna ∂rodowiskowa"
+msgstr "zmienna ≈õrodowiskowa"
 
 #: src/gcal.c:2330
 #, fuzzy, c-format
@@ -123,16 +124,16 @@ msgid ""
 "%s\n"
 "%s\n"
 msgstr ""
-"%s: polecenie w zmiennej ∂rodowiskowej `%s' znaleziono -- %s\n"
+"%s: polecenie w zmiennej ≈õrodowiskowej `%s' znaleziono -- %s\n"
 "%s\n"
 
-#: src/gcal.c:2516 src/gcal.c:2549 src/gcal.c:6269 src/gcal2txt.c:331
-#: src/gcal2txt.c:335 src/rc-use.c:1853 src/rc-use.c:1928 src/rc-use.c:1992
-#: src/rc-use.c:2277 src/rc-utils.c:424 src/rc-utils.c:454 src/tcal.c:403
-#: src/tcal.c:410 src/txt2gcal.c:331 src/txt2gcal.c:335 src/utils.c:457
-#: src/utils.c:476 src/utils.c:491 src/utils.c:797
+#: src/gcal.c:2516 src/gcal.c:2549 src/gcal.c:6269 src/rc-use.c:1853
+#: src/rc-use.c:1928 src/rc-use.c:1992 src/rc-use.c:2277 src/rc-utils.c:424
+#: src/rc-utils.c:454 src/utils.c:457 src/utils.c:476 src/utils.c:491
+#: src/utils.c:797 src/tcal.c:403 src/tcal.c:410 src/txt2gcal.c:331
+#: src/txt2gcal.c:335 src/gcal2txt.c:331 src/gcal2txt.c:335
 msgid "Internal"
-msgstr "WewnÍtrzny"
+msgstr "Wewnƒôtrzny"
 
 #: src/gcal.c:2926
 msgid "response file"
@@ -144,7 +145,7 @@ msgstr "Utworzony"
 
 #: src/gcal.c:2937
 msgid "shell script"
-msgstr "skrypt pow≥oki"
+msgstr "skrypt pow≈Çoki"
 
 #: src/gcal.c:3154
 #, c-format
@@ -158,14 +159,14 @@ msgstr ""
 
 #: src/gcal.c:4978 src/gcal.c:5009
 msgid "command line"
-msgstr "linia poleceÒ"
+msgstr "linia polece≈Ñ"
 
 #: src/gcal.c:5933
 #, c-format
 msgid "%s: option `%s' is ambiguous"
 msgstr "%s: opcja `%s' jest niejednoznaczna"
 
-#: src/gcal.c:5938 src/gcal2txt.c:792 src/tcal.c:994 src/txt2gcal.c:793
+#: src/gcal.c:5938 src/tcal.c:994 src/txt2gcal.c:793 src/gcal2txt.c:792
 #, c-format
 msgid "%s: unrecognized option `%s'"
 msgstr "%s: nierozpoznana opcja `%s'"
@@ -173,7 +174,7 @@ msgstr "%s: nierozpoznana opcja `%s'"
 #: src/gcal.c:5941
 #, c-format
 msgid "%s: invalid option -- %s"
-msgstr "%s: b≥Ídna opcja -- %s"
+msgstr "%s: b≈Çƒôdna opcja -- %s"
 
 #: src/gcal.c:5946
 #, fuzzy, c-format
@@ -198,7 +199,7 @@ msgstr "%s: opcja wymaga podania argumentu -- %s"
 #: src/gcal.c:5961 src/tcal.c:1050
 #, c-format
 msgid "%s: option with invalid argument -- %s"
-msgstr "%s: opcja z b≥Ídnym argumentem -- %s"
+msgstr "%s: opcja z b≈Çƒôdnym argumentem -- %s"
 
 #: src/gcal.c:5965
 #, c-format
@@ -212,7 +213,7 @@ msgid ""
 "%s\n"
 "%s\n"
 msgstr ""
-"%s: podano b≥Ídna datÍ -- %c%s\n"
+"%s: podano b≈Çƒôdna datƒô -- %c%s\n"
 "%s\n"
 
 #: src/hd-data.c:94
@@ -245,7 +246,7 @@ msgstr ""
 #: src/hd-data.c:101 src/hd-data.c:585
 #, fuzzy
 msgid "Spain"
-msgstr "HiszpaÒski"
+msgstr "Hiszpa≈Ñski"
 
 #: src/hd-data.c:102 src/hd-data.c:592
 #, fuzzy
@@ -259,7 +260,7 @@ msgstr ""
 #: src/hd-data.c:105 src/hd-data.c:626
 #, fuzzy
 msgid "Italy"
-msgstr "W≥oski"
+msgstr "W≈Çoski"
 
 #: src/hd-data.c:106 src/hd-data.c:629
 #, fuzzy
@@ -269,12 +270,12 @@ msgstr "Sty"
 #: src/hd-data.c:107 src/hd-data.c:637
 #, fuzzy
 msgid "Republic of Korea"
-msgstr "DzieÒ Republiki"
+msgstr "Dzie≈Ñ Republiki"
 
 #: src/hd-data.c:108 src/hd-data.c:669
 #, fuzzy
 msgid "Mexico"
-msgstr "MeksykaÒski"
+msgstr "Meksyka≈Ñski"
 
 #: src/hd-data.c:109 src/hd-data.c:678
 msgid "Netherlands"
@@ -296,7 +297,7 @@ msgstr ""
 #: src/hd-data.c:113
 #, fuzzy
 msgid "United States"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:462
 msgid "Andorra"
@@ -331,7 +332,7 @@ msgid "Netherlands Antilles/Bonaire"
 msgstr ""
 
 #: src/hd-data.c:470
-msgid "Netherlands Antilles/CuraÁao"
+msgid "Netherlands Antilles/Cura√ßao"
 msgstr ""
 
 #: src/hd-data.c:471
@@ -353,7 +354,7 @@ msgstr ""
 #: src/hd-data.c:475
 #, fuzzy
 msgid "American Samoa"
-msgstr "DzieÒ ¶w. Patryka"
+msgstr "Dzie≈Ñ ≈öw. Patryka"
 
 #: src/hd-data.c:476
 #, fuzzy
@@ -513,7 +514,7 @@ msgstr ""
 
 #: src/hd-data.c:515
 #, fuzzy
-msgid "Canada/QuÈbec"
+msgid "Canada/Qu√©bec"
 msgstr "Kanadyjski"
 
 #: src/hd-data.c:516
@@ -540,7 +541,7 @@ msgstr ""
 #: src/hd-data.c:521
 #, fuzzy
 msgid "Republic of Congo #"
-msgstr "DzieÒ Republiki"
+msgstr "Dzie≈Ñ Republiki"
 
 #: src/hd-data.c:522
 msgid "Switzerland/Appenzell Ausserrhoden"
@@ -571,7 +572,7 @@ msgid "Switzerland/Fribourg"
 msgstr ""
 
 #: src/hd-data.c:529
-msgid "Switzerland/Graub¸nden"
+msgid "Switzerland/Graub√ºnden"
 msgstr ""
 
 #: src/hd-data.c:530
@@ -579,7 +580,7 @@ msgid "Switzerland/Glarus"
 msgstr ""
 
 #: src/hd-data.c:531
-msgid "Switzerland/GenËve"
+msgid "Switzerland/Gen√®ve"
 msgstr ""
 
 #: src/hd-data.c:532
@@ -591,7 +592,7 @@ msgid "Switzerland/Luzern"
 msgstr ""
 
 #: src/hd-data.c:534
-msgid "Switzerland/Neuch‚tel"
+msgid "Switzerland/Neuch√¢tel"
 msgstr ""
 
 #: src/hd-data.c:535
@@ -639,11 +640,11 @@ msgid "Switzerland/Zug"
 msgstr ""
 
 #: src/hd-data.c:546
-msgid "Switzerland/Z¸rich"
+msgid "Switzerland/Z√ºrich"
 msgstr ""
 
 #: src/hd-data.c:547
-msgid "CÙte d'Ivoire"
+msgid "C√¥te d'Ivoire"
 msgstr ""
 
 #: src/hd-data.c:548
@@ -661,7 +662,7 @@ msgstr ""
 #: src/hd-data.c:552
 #, fuzzy
 msgid "Colombia"
-msgstr "DzieÒ Kolumba"
+msgstr "Dzie≈Ñ Kolumba"
 
 #: src/hd-data.c:553
 msgid "Costa Rica"
@@ -678,7 +679,7 @@ msgstr ""
 #: src/hd-data.c:556
 #, fuzzy
 msgid "Christmas Islands"
-msgstr "Boøe Narodzenie"
+msgstr "Bo≈ºe Narodzenie"
 
 #: src/hd-data.c:557
 msgid "Cyprus"
@@ -687,7 +688,7 @@ msgstr ""
 #: src/hd-data.c:558
 #, fuzzy
 msgid "Czech Republic"
-msgstr "DzieÒ Republiki"
+msgstr "Dzie≈Ñ Republiki"
 
 #: src/hd-data.c:559
 #, fuzzy
@@ -709,7 +710,7 @@ msgid "Germany/Bremen"
 msgstr "Niemcy"
 
 #: src/hd-data.c:563
-msgid "Germany/Baden-W¸rttemberg"
+msgid "Germany/Baden-W√ºrttemberg"
 msgstr ""
 
 #: src/hd-data.c:564
@@ -775,7 +776,7 @@ msgstr ""
 #: src/hd-data.c:578
 #, fuzzy
 msgid "Dominican Republic"
-msgstr "DzieÒ Republiki"
+msgstr "Dzie≈Ñ Republiki"
 
 #: src/hd-data.c:579
 msgid "Algeria"
@@ -900,7 +901,7 @@ msgstr ""
 #: src/hd-data.c:610
 #, fuzzy
 msgid "Guam"
-msgstr "po po≥udniu"
+msgstr "po po≈Çudniu"
 
 #: src/hd-data.c:611
 msgid "Guinea-Bissau #"
@@ -921,12 +922,12 @@ msgstr ""
 #: src/hd-data.c:615
 #, fuzzy
 msgid "Honduras"
-msgstr "Poniedzia≥ki"
+msgstr "Poniedzia≈Çki"
 
 #: src/hd-data.c:616
 #, fuzzy
 msgid "Croatia"
-msgstr "DzieÒ Koronacji"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:617
 msgid "Haiti"
@@ -935,7 +936,7 @@ msgstr ""
 #: src/hd-data.c:618
 #, fuzzy
 msgid "Hungary"
-msgstr "WÍgierski"
+msgstr "Wƒôgierski"
 
 #: src/hd-data.c:619
 msgid "Indonesia #"
@@ -956,7 +957,7 @@ msgstr ""
 #: src/hd-data.c:624
 #, fuzzy
 msgid "Islamic Republic of Iran"
-msgstr "DzieÒ Republiki"
+msgstr "Dzie≈Ñ Republiki"
 
 #: src/hd-data.c:625
 msgid "Iceland"
@@ -998,7 +999,7 @@ msgstr ""
 #: src/hd-data.c:636
 #, fuzzy
 msgid "Democratic People's Republic of Korea"
-msgstr "DzieÒ Republiki"
+msgstr "Dzie≈Ñ Republiki"
 
 #: src/hd-data.c:638
 msgid "Kuwait"
@@ -1023,7 +1024,7 @@ msgstr ""
 #: src/hd-data.c:643
 #, fuzzy
 msgid "St Lucia"
-msgstr "DzieÒ ¶w. £ucji"
+msgstr "Dzie≈Ñ ≈öw. ≈Åucji"
 
 #: src/hd-data.c:644
 msgid "Liechtenstein"
@@ -1036,7 +1037,7 @@ msgstr ""
 #: src/hd-data.c:646
 #, fuzzy
 msgid "Liberia"
-msgstr "DzieÒ Wolno∂ci"
+msgstr "Dzie≈Ñ Wolno≈õci"
 
 #: src/hd-data.c:647
 msgid "Lesotho"
@@ -1070,7 +1071,7 @@ msgstr "Pon"
 #: src/hd-data.c:654
 #, fuzzy
 msgid "Republic of Moldova"
-msgstr "DzieÒ Republiki"
+msgstr "Dzie≈Ñ Republiki"
 
 #: src/hd-data.c:655
 msgid "Madagascar #"
@@ -1242,7 +1243,7 @@ msgid "Qatar"
 msgstr ""
 
 #: src/hd-data.c:700
-msgid "RÈunion"
+msgid "R√©union"
 msgstr ""
 
 #: src/hd-data.c:701
@@ -1287,7 +1288,7 @@ msgstr ""
 #: src/hd-data.c:711
 #, fuzzy
 msgid "Slovenia"
-msgstr "S≥oweÒski"
+msgstr "S≈Çowe≈Ñski"
 
 #: src/hd-data.c:712
 msgid "Svalbard and Jan Mayen Islands"
@@ -1296,7 +1297,7 @@ msgstr ""
 #: src/hd-data.c:713
 #, fuzzy
 msgid "Slovakia"
-msgstr "S≥oweÒski"
+msgstr "S≈Çowe≈Ñski"
 
 #: src/hd-data.c:714
 msgid "Sierra Leone"
@@ -1313,14 +1314,14 @@ msgstr ""
 #: src/hd-data.c:717
 #, fuzzy
 msgid "Somalia"
-msgstr "S≥oweÒski"
+msgstr "S≈Çowe≈Ñski"
 
 #: src/hd-data.c:718
 msgid "Suriname #"
 msgstr ""
 
 #: src/hd-data.c:719
-msgid "Sao TomÈ and Principe"
+msgid "Sao Tom√© and Principe"
 msgstr ""
 
 #: src/hd-data.c:720
@@ -1356,7 +1357,7 @@ msgstr "Thai"
 #: src/hd-data.c:727
 #, fuzzy
 msgid "Tajikistan"
-msgstr "W≥oski"
+msgstr "W≈Çoski"
 
 #: src/hd-data.c:728
 msgid "Tokelau"
@@ -1390,7 +1391,7 @@ msgstr ""
 #: src/hd-data.c:735
 #, fuzzy
 msgid "Taiwan"
-msgstr "W≥oski"
+msgstr "W≈Çoski"
 
 #: src/hd-data.c:736
 msgid "Tanzania"
@@ -1409,37 +1410,37 @@ msgstr "Kanadyjski"
 #: src/hd-data.c:739
 #, fuzzy
 msgid "United States/Alaska"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:740
 #, fuzzy
 msgid "United States/Alabama"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:741
 #, fuzzy
 msgid "United States/Arkansas"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:742
 #, fuzzy
 msgid "United States/Arizona"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:743
 #, fuzzy
 msgid "United States/California"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:744
 #, fuzzy
 msgid "United States/Colorado"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:745
 #, fuzzy
 msgid "United States/Connecticut"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:746
 msgid "United States/District of Columbia"
@@ -1448,217 +1449,217 @@ msgstr ""
 #: src/hd-data.c:747
 #, fuzzy
 msgid "United States/Delaware"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:748
 #, fuzzy
 msgid "United States/Florida"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:749
 #, fuzzy
 msgid "United States/Georgia"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:750
 #, fuzzy
 msgid "United States/Hawaii"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:751
 #, fuzzy
 msgid "United States/Iowa"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:752
 #, fuzzy
 msgid "United States/Idaho"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:753
 #, fuzzy
 msgid "United States/Illinois"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:754
 #, fuzzy
 msgid "United States/Indiana"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:755
 #, fuzzy
 msgid "United States/Kansas"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:756
 #, fuzzy
 msgid "United States/Kentucky"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:757
 #, fuzzy
 msgid "United States/Louisiana"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:758
 #, fuzzy
 msgid "United States/Massachusetts"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:759
 #, fuzzy
 msgid "United States/Maryland"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:760
 #, fuzzy
 msgid "United States/Maine"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:761
 #, fuzzy
 msgid "United States/Michigan"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:762
 #, fuzzy
 msgid "United States/Minnesota"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:763
 #, fuzzy
 msgid "United States/Missouri"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:764
 #, fuzzy
 msgid "United States/Mississippi"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:765
 #, fuzzy
 msgid "United States/Montana"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:766
 #, fuzzy
 msgid "United States/North Carolina"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:767
 #, fuzzy
 msgid "United States/North Dakota"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:768
 #, fuzzy
 msgid "United States/Nebraska"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:769
 #, fuzzy
 msgid "United States/New Hampshire"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:770
 #, fuzzy
 msgid "United States/New Jersey"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:771
 #, fuzzy
 msgid "United States/New Mexico"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:772
 #, fuzzy
 msgid "United States/Nevada"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:773
 #, fuzzy
 msgid "United States/New York"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:774
 #, fuzzy
 msgid "United States/Ohio"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:775
 #, fuzzy
 msgid "United States/Oklahoma"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:776
 #, fuzzy
 msgid "United States/Oregon"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:777
 #, fuzzy
 msgid "United States/Pennsylvania"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:778
 #, fuzzy
 msgid "United States/Rhode Island"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:779
 #, fuzzy
 msgid "United States/South Carolina"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:780
 #, fuzzy
 msgid "United States/South Dakota"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:781
 #, fuzzy
 msgid "United States/Tennessee"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:782
 #, fuzzy
 msgid "United States/Texas"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:783
 #, fuzzy
 msgid "United States/Utah"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:784
 #, fuzzy
 msgid "United States/Virginia"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:785
 #, fuzzy
 msgid "United States/Vermont"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:786
 #, fuzzy
 msgid "United States/Washington"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:787
 #, fuzzy
 msgid "United States/Wisconsin"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:788
 #, fuzzy
 msgid "United States/West Virginia"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:789
 #, fuzzy
 msgid "United States/Wyoming"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:790
 msgid "Uruguay"
@@ -1732,2627 +1733,2631 @@ msgstr ""
 #. *** 32 characters (if the COUNTRY-CODE suffix has 4 characters)
 #. *** 31 characters (if the COUNTRY-CODE_TERRITORY suffix has 5 characters).
 #.
-#: src/hd-data.c:1396
+#: src/hd-data.c:1397
 msgid "1st Advent"
 msgstr "Pierwszy Adwent"
 
-#: src/hd-data.c:1397
+#: src/hd-data.c:1398
 msgid "1st Sunday in Lent"
 msgstr ""
 
-#: src/hd-data.c:1398
+#: src/hd-data.c:1399
 msgid "2nd Advent"
 msgstr "Drugi Adwent"
 
-#: src/hd-data.c:1399
+#: src/hd-data.c:1400
 msgid "2nd Sunday in Lent"
 msgstr ""
 
-#: src/hd-data.c:1400
+#: src/hd-data.c:1401
 msgid "3rd Advent"
 msgstr "Trzeci Adwent"
 
-#: src/hd-data.c:1401
+#: src/hd-data.c:1402
 msgid "3rd Sunday in Lent"
 msgstr ""
 
-#: src/hd-data.c:1402
+#: src/hd-data.c:1403
 msgid "4th Advent"
 msgstr "Czwarty Adwent"
 
-#: src/hd-data.c:1403
+#: src/hd-data.c:1404
 #, fuzzy
 msgid "4th Sunday in Lent"
-msgstr "¶miertelna Niedziela"
+msgstr "≈ömiertelna Niedziela"
 
-#: src/hd-data.c:1404
+#: src/hd-data.c:1405
 msgid "7-5-3 Festival"
 msgstr ""
 
-#: src/hd-data.c:1405
+#: src/hd-data.c:1406
 #, fuzzy
 msgid "Aborigines Day"
-msgstr "DzieÒ KsiÍøniczki"
+msgstr "Dzie≈Ñ Ksiƒô≈ºniczki"
 
-#: src/hd-data.c:1406
+#: src/hd-data.c:1407
 msgid "All Fool's Day"
 msgstr "Prima Aprilis"
 
-#: src/hd-data.c:1407
-msgid "All Saints' Day"
-msgstr "DzieÒ Wszystkich ¶wiÍtych"
-
 #: src/hd-data.c:1408
+msgid "All Saints' Day"
+msgstr "Dzie≈Ñ Wszystkich ≈öwiƒôtych"
+
+#: src/hd-data.c:1409
 msgid "All Souls' Day"
 msgstr "Zaduszki"
 
-#: src/hd-data.c:1409
+#: src/hd-data.c:1410
 #, fuzzy
 msgid "Alphabet Day"
-msgstr "DzieÒ chor±gwi"
+msgstr "Dzie≈Ñ chorƒÖgwi"
 
-#: src/hd-data.c:1410
+#: src/hd-data.c:1411
 msgid "Anniversary of Auckland"
 msgstr ""
 
-#: src/hd-data.c:1411
+#: src/hd-data.c:1412
 msgid "Anniversary of Canterbury North"
 msgstr ""
 
-#: src/hd-data.c:1412
+#: src/hd-data.c:1413
 msgid "Anniversary of Canterbury South"
 msgstr ""
 
-#: src/hd-data.c:1413
+#: src/hd-data.c:1414
 msgid "Anniversary of Chatham Islands"
 msgstr ""
 
-#: src/hd-data.c:1414
+#: src/hd-data.c:1415
 msgid "Anniversary of Hawkes' Bay"
 msgstr ""
 
-#: src/hd-data.c:1415
+#: src/hd-data.c:1416
 msgid "Anniversary of Marlborough"
 msgstr ""
 
-#: src/hd-data.c:1416
+#: src/hd-data.c:1417
 msgid "Anniversary of Nelson"
 msgstr ""
 
-#: src/hd-data.c:1417
+#: src/hd-data.c:1418
 msgid "Anniversary of Otago"
 msgstr ""
 
-#: src/hd-data.c:1418
+#: src/hd-data.c:1419
 msgid "Anniversary of Southland"
 msgstr ""
 
-#: src/hd-data.c:1419
+#: src/hd-data.c:1420
 msgid "Anniversary of Taranaki"
 msgstr ""
 
-#: src/hd-data.c:1420
+#: src/hd-data.c:1421
 msgid "Anniversary of Wellington"
 msgstr ""
 
-#: src/hd-data.c:1421
+#: src/hd-data.c:1422
 msgid "Anniversary of Westland"
 msgstr ""
 
-#: src/hd-data.c:1422
-msgid "Anzac Day"
-msgstr "DzieÒ Anzaca"
-
 #: src/hd-data.c:1423
-#, fuzzy
-msgid "Arbor Day"
-msgstr "¶wiÍto Pracy"
+msgid "Anzac Day"
+msgstr "Dzie≈Ñ Anzaca"
 
 #: src/hd-data.c:1424
 #, fuzzy
-msgid "Armed Forces Day"
-msgstr "DzieÒ Si≥ Zbrojnych"
+msgid "Arbor Day"
+msgstr "≈öwiƒôto Pracy"
 
 #: src/hd-data.c:1425
+#, fuzzy
+msgid "Armed Forces Day"
+msgstr "Dzie≈Ñ Si≈Ç Zbrojnych"
+
+#: src/hd-data.c:1426
 msgid "Armistice Day"
 msgstr "Armistice Day"
 
-#: src/hd-data.c:1426
+#: src/hd-data.c:1427
 msgid "Ash Monday"
 msgstr "Popielec"
 
-#: src/hd-data.c:1427
+#: src/hd-data.c:1428
 msgid "Ash Wednesday"
 msgstr "Popielec"
 
-#: src/hd-data.c:1428
+#: src/hd-data.c:1429
 msgid "Ascension of Abdu'l-Baha"
 msgstr ""
 
-#: src/hd-data.c:1429
+#: src/hd-data.c:1430
 msgid "Ascension of Baha'u'llah"
 msgstr ""
 
-#: src/hd-data.c:1430
+#: src/hd-data.c:1431
 msgid "Birth of Baha'u'llah"
 msgstr ""
 
-#: src/hd-data.c:1431
+#: src/hd-data.c:1432
 msgid "Birth of the Bab"
 msgstr ""
 
-#: src/hd-data.c:1432
+#: src/hd-data.c:1433
 #, fuzzy
 msgid "Day of the Covenant"
-msgstr "DzieÒ Rewolty Studenckiej"
+msgstr "Dzie≈Ñ Rewolty Studenckiej"
 
-#: src/hd-data.c:1433
+#: src/hd-data.c:1434
 msgid "Declaration of the Bab"
 msgstr ""
 
-#: src/hd-data.c:1434
+#: src/hd-data.c:1435
 msgid "First Day of Ridvan"
 msgstr ""
 
-#: src/hd-data.c:1435
+#: src/hd-data.c:1436
 msgid "Martyrdom of the Bab"
 msgstr ""
 
-#: src/hd-data.c:1436
+#: src/hd-data.c:1437
 #, fuzzy
-msgid "Bah·'i New Year's Day"
+msgid "Bah√°'i New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1437
+#: src/hd-data.c:1438
 msgid "Ninth Day of Ridvan"
 msgstr ""
 
-#: src/hd-data.c:1438
+#: src/hd-data.c:1439
 msgid "Twelfth Day of Ridvan"
 msgstr ""
 
-#: src/hd-data.c:1439
-msgid "Bank Holiday"
-msgstr "Dzisiaj banki zamkniÍte"
-
 #: src/hd-data.c:1440
-#, fuzzy
-msgid "Basque National Day"
-msgstr "Narodowy DzieÒ Cierpienia"
+msgid "Bank Holiday"
+msgstr "Dzisiaj banki zamkniƒôte"
 
 #: src/hd-data.c:1441
+#, fuzzy
+msgid "Basque National Day"
+msgstr "Narodowy Dzie≈Ñ Cierpienia"
+
+#: src/hd-data.c:1442
 msgid "Battle of Boyne"
 msgstr "Bitwa pod Boyne"
 
-#: src/hd-data.c:1442
+#: src/hd-data.c:1443
 #, fuzzy
 msgid "Battle of Puebla"
 msgstr "Bitwa pod Boyne"
 
-#: src/hd-data.c:1443
+#: src/hd-data.c:1444
 msgid "Beginning of Financial Year"
 msgstr ""
 
-#: src/hd-data.c:1444
-#, fuzzy
-msgid "Benito Ju·rez Day"
-msgstr "DzieÒ Benito Juareza"
-
 #: src/hd-data.c:1445
 #, fuzzy
-msgid "Bodhidharma's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Benito Ju√°rez Day"
+msgstr "Dzie≈Ñ Benito Juareza"
 
 #: src/hd-data.c:1446
 #, fuzzy
-msgid "Bosses' Day"
-msgstr "DzieÒ Ojca"
+msgid "Bodhidharma's Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1447
-msgid "Boxing Day"
-msgstr "Drugi dzieÒ Boøego Narodzenia"
+#, fuzzy
+msgid "Bosses' Day"
+msgstr "Dzie≈Ñ Ojca"
 
 #: src/hd-data.c:1448
+msgid "Boxing Day"
+msgstr "Drugi dzie≈Ñ Bo≈ºego Narodzenia"
+
+#: src/hd-data.c:1449
 msgid "Bringing Home the Herds Day"
 msgstr ""
 
-#: src/hd-data.c:1449
+#: src/hd-data.c:1450
 msgid "Bringing in the Harvest Day"
 msgstr ""
 
-#: src/hd-data.c:1450
+#: src/hd-data.c:1451
 #, fuzzy
 msgid "Buddha's Birthday"
-msgstr "Urodziny KrÛla"
+msgstr "Urodziny Kr√≥la"
 
-#: src/hd-data.c:1451
+#: src/hd-data.c:1452
 msgid "Burns Night"
 msgstr "Burns Night"
 
-#: src/hd-data.c:1452
+#: src/hd-data.c:1453
 #, fuzzy
 msgid "Camoes Day"
-msgstr "DzieÒ Ojca"
+msgstr "Dzie≈Ñ Ojca"
 
-#: src/hd-data.c:1453
+#: src/hd-data.c:1454
 #, fuzzy
 msgid "Carnival"
 msgstr "Kanadyjski"
 
-#: src/hd-data.c:1454
+#: src/hd-data.c:1455
 #, fuzzy
 msgid "Beltane"
 msgstr "Belgijski"
 
-#: src/hd-data.c:1455
+#: src/hd-data.c:1456
 msgid "Imbolg"
 msgstr ""
 
-#: src/hd-data.c:1456
+#: src/hd-data.c:1457
 msgid "Lughnasa"
 msgstr ""
 
-#: src/hd-data.c:1457
+#: src/hd-data.c:1458
 #, fuzzy
 msgid "Samhain/Celtic New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1458
-msgid "Children's Day"
-msgstr "DzieÒ Dziecka"
-
 #: src/hd-data.c:1459
+msgid "Children's Day"
+msgstr "Dzie≈Ñ Dziecka"
+
+#: src/hd-data.c:1460
 msgid "Cycle"
 msgstr ""
 
-#: src/hd-data.c:1460
+#: src/hd-data.c:1461
 #, fuzzy
 msgid "Chinese New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1461
+#: src/hd-data.c:1462
 #, fuzzy
 msgid "Chinese New Year's Eve"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1462
-msgid "Christmas Day"
-msgstr "Boøe Narodzenie"
-
 #: src/hd-data.c:1463
+msgid "Christmas Day"
+msgstr "Bo≈ºe Narodzenie"
+
+#: src/hd-data.c:1464
 msgid "Christmas Eve"
 msgstr "Wigilia"
 
-#: src/hd-data.c:1464
-msgid "Christ's Ascension Day"
-msgstr "DzieÒ Wniebowst±pienia PaÒskiego"
-
 #: src/hd-data.c:1465
-#, fuzzy
-msgid "Chrysanthenum Day"
-msgstr "Boøe Narodzenie"
+msgid "Christ's Ascension Day"
+msgstr "Dzie≈Ñ WniebowstƒÖpienia Pa≈Ñskiego"
 
 #: src/hd-data.c:1466
 #, fuzzy
-msgid "Citizenship Day"
-msgstr "DzieÒ Dziecka"
+msgid "Chrysanthenum Day"
+msgstr "Bo≈ºe Narodzenie"
 
 #: src/hd-data.c:1467
 #, fuzzy
-msgid "Civic Holiday"
-msgstr "Dzisiaj banki zamkniÍte"
+msgid "Citizenship Day"
+msgstr "Dzie≈Ñ Dziecka"
 
 #: src/hd-data.c:1468
-msgid "Columbus Day"
-msgstr "DzieÒ Kolumba"
+#, fuzzy
+msgid "Civic Holiday"
+msgstr "Dzisiaj banki zamkniƒôte"
 
 #: src/hd-data.c:1469
+msgid "Columbus Day"
+msgstr "Dzie≈Ñ Kolumba"
+
+#: src/hd-data.c:1470
 msgid "Coming of Age Day"
 msgstr ""
 
-#: src/hd-data.c:1470
+#: src/hd-data.c:1471
 #, fuzzy
 msgid "Confucius' Birthday"
-msgstr "Urodziny Koronowanej KsiÍøniczki"
+msgstr "Urodziny Koronowanej Ksiƒô≈ºniczki"
 
-#: src/hd-data.c:1471
+#: src/hd-data.c:1472
 msgid "Constitution Anniversary"
 msgstr "Stulecie Konstytucji"
 
-#: src/hd-data.c:1472
+#: src/hd-data.c:1473
 #, fuzzy
 msgid "Coptic New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1473
-#, fuzzy
-msgid "Cosmonauts' Day"
-msgstr "DzieÒ Koronacji"
-
 #: src/hd-data.c:1474
 #, fuzzy
-msgid "Cross Raising Day"
-msgstr "DzieÒ Koronacji"
+msgid "Cosmonauts' Day"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:1475
-msgid "Culture Day"
-msgstr "DzieÒ Kultury"
+#, fuzzy
+msgid "Cross Raising Day"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:1476
+msgid "Culture Day"
+msgstr "Dzie≈Ñ Kultury"
+
+#: src/hd-data.c:1477
 msgid "Day after Mid-Autumn Festival"
 msgstr ""
 
-#: src/hd-data.c:1477
+#: src/hd-data.c:1478
 #, fuzzy
 msgid "Day after Tomb-Sweeping Day"
-msgstr "DzieÒ Prezydenta"
+msgstr "Dzie≈Ñ Prezydenta"
 
-#: src/hd-data.c:1478
+#: src/hd-data.c:1479
 msgid "Day of Andalucia"
 msgstr ""
 
-#: src/hd-data.c:1479
+#: src/hd-data.c:1480
 msgid "Day of Catalonia"
 msgstr ""
 
-#: src/hd-data.c:1480
+#: src/hd-data.c:1481
 #, fuzzy
 msgid "Day of Galicia"
-msgstr "DzieÒ Rewolty Studenckiej"
-
-#: src/hd-data.c:1481
-msgid "Day of Prayer and Repentance"
-msgstr "DzieÒ Modlitwy i Øalu"
+msgstr "Dzie≈Ñ Rewolty Studenckiej"
 
 #: src/hd-data.c:1482
+msgid "Day of Prayer and Repentance"
+msgstr "Dzie≈Ñ Modlitwy i ≈ªalu"
+
+#: src/hd-data.c:1483
 msgid "Day of Reconciliation"
 msgstr ""
 
-#: src/hd-data.c:1483
+#: src/hd-data.c:1484
 msgid "Defenders of Motherland Day"
 msgstr ""
 
-#: src/hd-data.c:1484
+#: src/hd-data.c:1485
 #, fuzzy
 msgid "Double-9 Day"
-msgstr "DzieÒ Matki"
+msgstr "Dzie≈Ñ Matki"
 
-#: src/hd-data.c:1485
+#: src/hd-data.c:1486
 msgid "Dragon Boat Festival"
 msgstr ""
 
-#: src/hd-data.c:1486
-msgid "Dynasty Day"
-msgstr "DzieÒ Rodziny KrÛlewskiej"
-
 #: src/hd-data.c:1487
-msgid "Easter Monday"
-msgstr "Poniedzia≥ek Wielkanocny"
+msgid "Dynasty Day"
+msgstr "Dzie≈Ñ Rodziny Kr√≥lewskiej"
 
 #: src/hd-data.c:1488
+msgid "Easter Monday"
+msgstr "Poniedzia≈Çek Wielkanocny"
+
+#: src/hd-data.c:1489
 msgid "Easter Sunday"
 msgstr "Wielkanoc"
 
-#: src/hd-data.c:1489
+#: src/hd-data.c:1490
 msgid "Lunar Eclipse"
 msgstr ""
 
-#: src/hd-data.c:1490
+#: src/hd-data.c:1491
 msgid "Solar Eclipse"
 msgstr ""
 
-#: src/hd-data.c:1491
+#: src/hd-data.c:1492
 msgid "Annular"
 msgstr ""
 
-#: src/hd-data.c:1492
+#: src/hd-data.c:1493
 #, fuzzy
 msgid "Partial"
 msgstr "Portugalski"
 
-#: src/hd-data.c:1493
+#: src/hd-data.c:1494
 #, fuzzy
 msgid "Penumbral"
-msgstr "WewnÍtrzny"
+msgstr "Wewnƒôtrzny"
 
-#: src/hd-data.c:1494
+#: src/hd-data.c:1495
 #, fuzzy
 msgid "Total"
 msgstr "Portugalski"
 
-#: src/hd-data.c:1495
+#: src/hd-data.c:1496
 msgid "Eindhoven's Liberation"
 msgstr "Eindhoven's Liberation"
 
-#: src/hd-data.c:1496
+#: src/hd-data.c:1497
 msgid "Election Day"
 msgstr "Wybory prezydenckie"
 
-#: src/hd-data.c:1497
+#: src/hd-data.c:1498
 #, fuzzy
 msgid "Emperor's Birthday"
-msgstr "Urodziny KrÛla"
+msgstr "Urodziny Kr√≥la"
 
-#: src/hd-data.c:1498
+#: src/hd-data.c:1499
 #, fuzzy
 msgid "Equinox Day"
 msgstr "Wybory prezydenckie"
 
-#: src/hd-data.c:1499
+#: src/hd-data.c:1500
 #, fuzzy
 msgid "Ethiopic New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1500
-msgid "Father's Day"
-msgstr "DzieÒ Ojca"
-
 #: src/hd-data.c:1501
-msgid "Feast of Corpus Christi"
-msgstr "Boøe Cia≥o"
+msgid "Father's Day"
+msgstr "Dzie≈Ñ Ojca"
 
 #: src/hd-data.c:1502
-#, fuzzy
-msgid "Feast of Fortune"
-msgstr "Boøe Cia≥o"
+msgid "Feast of Corpus Christi"
+msgstr "Bo≈ºe Cia≈Ço"
 
 #: src/hd-data.c:1503
+#, fuzzy
+msgid "Feast of Fortune"
+msgstr "Bo≈ºe Cia≈Ço"
+
+#: src/hd-data.c:1504
 #, fuzzy
 msgid "Feast of Heart Jesus"
 msgstr "Feast of Our Theotokos"
 
-#: src/hd-data.c:1504
+#: src/hd-data.c:1505
 msgid "Festival of Lanterns"
 msgstr ""
 
-#: src/hd-data.c:1505
+#: src/hd-data.c:1506
 msgid "Festival of Sadeh"
 msgstr ""
 
-#: src/hd-data.c:1506
-msgid "Flag Day"
-msgstr "DzieÒ chor±gwi"
-
 #: src/hd-data.c:1507
-msgid "Flemish Culture Day"
-msgstr "DzieÒ Kultury Flandryjskiej"
+msgid "Flag Day"
+msgstr "Dzie≈Ñ chorƒÖgwi"
 
 #: src/hd-data.c:1508
+msgid "Flemish Culture Day"
+msgstr "Dzie≈Ñ Kultury Flandryjskiej"
+
+#: src/hd-data.c:1509
 msgid "Founding of the Communist Party"
 msgstr ""
 
-#: src/hd-data.c:1509
-msgid "French Culture Day"
-msgstr "DzieÒ Kultury Francuskiej"
-
 #: src/hd-data.c:1510
-#, fuzzy
-msgid "French Revolutionary"
-msgstr "DzieÒ Rewolucji"
+msgid "French Culture Day"
+msgstr "Dzie≈Ñ Kultury Francuskiej"
 
 #: src/hd-data.c:1511
+#, fuzzy
+msgid "French Revolutionary"
+msgstr "Dzie≈Ñ Rewolucji"
+
+#: src/hd-data.c:1512
 #, fuzzy
 msgid "Friendship Day"
 msgstr "Martinimas"
 
-#: src/hd-data.c:1512
-msgid "German Unity Day"
-msgstr "DzieÒ Zjednoczenia Niemiec"
-
 #: src/hd-data.c:1513
-msgid "Good Friday"
-msgstr "Wielki Pi±tek"
+msgid "German Unity Day"
+msgstr "Dzie≈Ñ Zjednoczenia Niemiec"
 
 #: src/hd-data.c:1514
+msgid "Good Friday"
+msgstr "Wielki PiƒÖtek"
+
+#: src/hd-data.c:1515
 msgid "Good Saturday/Easter Eve"
 msgstr "Wielka Sobota/Jutro Wielkanoc"
 
-#: src/hd-data.c:1515
-#, fuzzy
-msgid "Grandparents' Day"
-msgstr "DzieÒ Prezydenta"
-
 #: src/hd-data.c:1516
 #, fuzzy
-msgid "Greenery Day"
-msgstr "DzieÒ Modlitwy"
+msgid "Grandparents' Day"
+msgstr "Dzie≈Ñ Prezydenta"
 
 #: src/hd-data.c:1517
+#, fuzzy
+msgid "Greenery Day"
+msgstr "Dzie≈Ñ Modlitwy"
+
+#: src/hd-data.c:1518
 msgid "Grotto Day"
 msgstr "Grotto Day"
 
-#: src/hd-data.c:1518
+#: src/hd-data.c:1519
 #, fuzzy
 msgid "Groundhog Day"
 msgstr "Grotto Day"
 
-#: src/hd-data.c:1519
+#: src/hd-data.c:1520
 msgid "Guadalupe Virgin's Day"
 msgstr "Guadalupe Virgin's Day"
 
-#: src/hd-data.c:1520
-msgid "Guy Fawke's Day"
-msgstr "DzieÒ Guy Fawke'a"
-
 #: src/hd-data.c:1521
+msgid "Guy Fawke's Day"
+msgstr "Dzie≈Ñ Guy Fawke'a"
+
+#: src/hd-data.c:1522
 msgid "Halloween"
 msgstr "Halloween"
 
-#: src/hd-data.c:1522
+#: src/hd-data.c:1523
 #, fuzzy
 msgid "Health and Sport's Day"
-msgstr "DzieÒ Ojca"
+msgstr "Dzie≈Ñ Ojca"
 
-#: src/hd-data.c:1523
+#: src/hd-data.c:1524
 msgid "Hannukah/Festival of Lights"
 msgstr ""
 
-#: src/hd-data.c:1524
+#: src/hd-data.c:1525
 msgid "Lag B'Omer"
 msgstr ""
 
-#: src/hd-data.c:1525
+#: src/hd-data.c:1526
 msgid "Pesach/Passover"
 msgstr ""
 
-#: src/hd-data.c:1526
+#: src/hd-data.c:1527
 msgid "Purim/Feast of Lots"
 msgstr ""
 
-#: src/hd-data.c:1527
+#: src/hd-data.c:1528
 #, fuzzy
 msgid "Rosh Hashana/New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1528
+#: src/hd-data.c:1529
 msgid "Shavuot/Giving of the Torah"
 msgstr ""
 
-#: src/hd-data.c:1529
+#: src/hd-data.c:1530
 msgid "Shushan Purim"
 msgstr ""
 
-#: src/hd-data.c:1530
+#: src/hd-data.c:1531
 msgid "Simchat Torah"
 msgstr ""
 
-#: src/hd-data.c:1531
+#: src/hd-data.c:1532
 msgid "Sukkot/Feast of Tabernacles"
 msgstr ""
 
-#: src/hd-data.c:1532
+#: src/hd-data.c:1533
 msgid "Tisha B'Av/Fasting Day"
 msgstr ""
 
-#: src/hd-data.c:1533
+#: src/hd-data.c:1534
 msgid "Tu B'Shevat/New Year of Trees"
 msgstr ""
 
-#: src/hd-data.c:1534
+#: src/hd-data.c:1535
 msgid "Yom Hashoah/Holocaust Memorial"
 msgstr ""
 
-#: src/hd-data.c:1535
+#: src/hd-data.c:1536
 msgid "Yom Hazikaron/Soldiers Memorial"
 msgstr ""
 
-#: src/hd-data.c:1536
+#: src/hd-data.c:1537
 #, fuzzy
 msgid "Yom Ha Azmaut/Independence Day"
-msgstr "¶wiÍto Niepodleg≥o∂ci"
+msgstr "≈öwiƒôto Niepodleg≈Ço≈õci"
 
-#: src/hd-data.c:1537
+#: src/hd-data.c:1538
 msgid "Yom Kippur/Atonement Day"
 msgstr ""
 
-#: src/hd-data.c:1538
+#: src/hd-data.c:1539
 msgid "Yom Yerushalayim/Jerusalem Day"
 msgstr ""
 
-#: src/hd-data.c:1539
+#: src/hd-data.c:1540
 msgid "Holy Innocent's Day"
 msgstr "Holy Innocent's Day"
 
-#: src/hd-data.c:1540
+#: src/hd-data.c:1541
 msgid "Holy Trinity"
 msgstr ""
 
-#: src/hd-data.c:1541
+#: src/hd-data.c:1542
 #, fuzzy
 msgid "Huravee Day"
 msgstr "Armistice Day"
 
-#: src/hd-data.c:1542
-msgid "Independence Day"
-msgstr "¶wiÍto Niepodleg≥o∂ci"
-
 #: src/hd-data.c:1543
-#, fuzzy
-msgid "Independence Movement Day"
-msgstr "¶wiÍto Niepodleg≥o∂ci"
+msgid "Independence Day"
+msgstr "≈öwiƒôto Niepodleg≈Ço≈õci"
 
 #: src/hd-data.c:1544
 #, fuzzy
-msgid "Independence Proclamation"
-msgstr "Proklamacja Niepodleg≥o∂ci"
+msgid "Independence Movement Day"
+msgstr "≈öwiƒôto Niepodleg≈Ço≈õci"
 
 #: src/hd-data.c:1545
+#, fuzzy
+msgid "Independence Proclamation"
+msgstr "Proklamacja Niepodleg≈Ço≈õci"
+
+#: src/hd-data.c:1546
 #, fuzzy
 msgid "Indian New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1546
+#: src/hd-data.c:1547
 #, fuzzy
 msgid "Aga Khan's Birthday"
-msgstr "Urodziny KrÛla"
+msgstr "Urodziny Kr√≥la"
 
-#: src/hd-data.c:1547
+#: src/hd-data.c:1548
 msgid "Ashura'"
 msgstr ""
 
-#: src/hd-data.c:1548
+#: src/hd-data.c:1549
 msgid "Eid-al-Adha"
 msgstr ""
 
-#: src/hd-data.c:1549
+#: src/hd-data.c:1550
 msgid "Eid-al-Fitr"
 msgstr ""
 
-#: src/hd-data.c:1550
+#: src/hd-data.c:1551
 msgid "Eid-i-Milad-un-Nabi"
 msgstr ""
 
-#: src/hd-data.c:1551
+#: src/hd-data.c:1552
 msgid "Ghadir"
 msgstr ""
 
-#: src/hd-data.c:1552
+#: src/hd-data.c:1553
 #, fuzzy
 msgid "Imamat Day"
-msgstr "¶wiÍto Pracy"
+msgstr "≈öwiƒôto Pracy"
 
-#: src/hd-data.c:1553
+#: src/hd-data.c:1554
 #, fuzzy
 msgid "Islamic New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1554
+#: src/hd-data.c:1555
 msgid "Nuzul-al-Qur'an"
 msgstr ""
 
-#: src/hd-data.c:1555
+#: src/hd-data.c:1556
 #, fuzzy
 msgid "Quds Day"
-msgstr "DzieÒ Prezydenta"
+msgstr "Dzie≈Ñ Prezydenta"
 
-#: src/hd-data.c:1556
+#: src/hd-data.c:1557
 #, fuzzy
 msgid "Ramadan"
 msgstr "Kanadyjski"
 
-#: src/hd-data.c:1557
+#: src/hd-data.c:1558
 msgid "Shab-e-Bara't"
 msgstr ""
 
-#: src/hd-data.c:1558
+#: src/hd-data.c:1559
 msgid "Shab-e-Mi'raj"
 msgstr ""
 
-#: src/hd-data.c:1559
+#: src/hd-data.c:1560
 msgid "Shab-e Qadr"
 msgstr ""
 
-#: src/hd-data.c:1560
+#: src/hd-data.c:1561
 msgid "Waqf-al-Arafat"
 msgstr ""
 
-#: src/hd-data.c:1561
+#: src/hd-data.c:1562
 #, fuzzy
 msgid "Japanese New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1562
+#: src/hd-data.c:1563
 #, fuzzy
 msgid "Japanese New Year's Eve"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1563
+#: src/hd-data.c:1564
 msgid "Jesus' Circumcision"
 msgstr ""
 
-#: src/hd-data.c:1564
+#: src/hd-data.c:1565
 #, fuzzy
 msgid "Kwanzaa"
 msgstr "Kanadyjski"
 
-#: src/hd-data.c:1565
-msgid "Labour Day"
-msgstr "¶wiÍto Pracy"
-
 #: src/hd-data.c:1566
-#, fuzzy
-msgid "Labour Thanksgiving Day"
-msgstr "DzieÒ DziÍkczynienia"
+msgid "Labour Day"
+msgstr "≈öwiƒôto Pracy"
 
 #: src/hd-data.c:1567
 #, fuzzy
-msgid "Lao Tze's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Labour Thanksgiving Day"
+msgstr "Dzie≈Ñ Dziƒôkczynienia"
 
 #: src/hd-data.c:1568
-msgid "Liberation Day"
-msgstr "DzieÒ Wolno∂ci"
+#, fuzzy
+msgid "Lao Tze's Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1569
+msgid "Liberation Day"
+msgstr "Dzie≈Ñ Wolno≈õci"
+
+#: src/hd-data.c:1570
 #, fuzzy
 msgid "Marine Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1570
+#: src/hd-data.c:1571
 msgid "Martinimas"
 msgstr "Martinimas"
 
-#: src/hd-data.c:1571
-msgid "Martin L. King's Day"
-msgstr "DzieÒ Martina L. Kinga"
-
 #: src/hd-data.c:1572
+msgid "Martin L. King's Day"
+msgstr "Dzie≈Ñ Martina L. Kinga"
+
+#: src/hd-data.c:1573
 #, fuzzy
 msgid "Martyrs' Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1573
+#: src/hd-data.c:1574
 msgid "Mary's Annunciation Day"
 msgstr "Mary's Annunciation Day"
 
-#: src/hd-data.c:1574
-msgid "Mary's Ascension Day"
-msgstr "DzieÒ Wniebowst±pienia NMP"
-
 #: src/hd-data.c:1575
+msgid "Mary's Ascension Day"
+msgstr "Dzie≈Ñ WniebowstƒÖpienia NMP"
+
+#: src/hd-data.c:1576
 msgid "Mary's Candlemas"
 msgstr ""
 
-#: src/hd-data.c:1576
+#: src/hd-data.c:1577
 #, fuzzy
 msgid "Mary's Expectation"
 msgstr "Mary's Annunciation Day"
 
-#: src/hd-data.c:1577
+#: src/hd-data.c:1578
 msgid "Mary's Immaculate Conception"
 msgstr "Mary's Immaculate Conception"
 
-#: src/hd-data.c:1578
+#: src/hd-data.c:1579
 #, fuzzy
 msgid "Mary's Maternity"
-msgstr "DzieÒ Wniebowst±pienia NMP"
+msgstr "Dzie≈Ñ WniebowstƒÖpienia NMP"
 
-#: src/hd-data.c:1579
+#: src/hd-data.c:1580
 msgid "Mary's Name"
 msgstr ""
 
-#: src/hd-data.c:1580
+#: src/hd-data.c:1581
 msgid "Mary's Nativity"
 msgstr ""
 
-#: src/hd-data.c:1581
+#: src/hd-data.c:1582
 msgid "Mary's Sacrifice"
 msgstr ""
 
-#: src/hd-data.c:1582
+#: src/hd-data.c:1583
 #, fuzzy
 msgid "Mary's Visitation"
 msgstr "Mary's Annunciation Day"
 
-#: src/hd-data.c:1583
+#: src/hd-data.c:1584
 msgid "Mary - Blessed Virgin"
 msgstr ""
 
-#: src/hd-data.c:1584
+#: src/hd-data.c:1585
 msgid "Maundy Thursday"
 msgstr "Wielki Czwartek"
 
-#: src/hd-data.c:1585
+#: src/hd-data.c:1586
 msgid "May Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1586
+#: src/hd-data.c:1587
 #, fuzzy
 msgid "St John's/Midsummer Day"
-msgstr "¶rodek Lata"
+msgstr "≈örodek Lata"
 
-#: src/hd-data.c:1587
+#: src/hd-data.c:1588
 msgid "Mid-Autumn Festival"
 msgstr ""
 
-#: src/hd-data.c:1588
+#: src/hd-data.c:1589
 msgid "Mid-Spring Festival"
 msgstr ""
 
-#: src/hd-data.c:1589
+#: src/hd-data.c:1590
 msgid "Mid-Year Festival"
 msgstr ""
 
-#: src/hd-data.c:1590
+#: src/hd-data.c:1591
 msgid "Waxing Half Moon"
 msgstr ""
 
-#: src/hd-data.c:1591
+#: src/hd-data.c:1592
 msgid "Full Moon"
 msgstr ""
 
-#: src/hd-data.c:1592
+#: src/hd-data.c:1593
 msgid "Waning Half Moon"
 msgstr ""
 
-#: src/hd-data.c:1593
+#: src/hd-data.c:1594
 msgid "New Moon"
 msgstr ""
 
-#: src/hd-data.c:1594
-msgid "Mother's Day"
-msgstr "DzieÒ Matki"
-
 #: src/hd-data.c:1595
-#, fuzzy
-msgid "Mother in Law's Day"
-msgstr "DzieÒ Matki"
+msgid "Mother's Day"
+msgstr "Dzie≈Ñ Matki"
 
 #: src/hd-data.c:1596
+#, fuzzy
+msgid "Mother in Law's Day"
+msgstr "Dzie≈Ñ Matki"
+
+#: src/hd-data.c:1597
 msgid "Music Water Banquet"
 msgstr ""
 
-#: src/hd-data.c:1597
+#: src/hd-data.c:1598
 #, fuzzy
 msgid "National Foundation Day"
-msgstr "Narodowy DzieÒ Cierpienia"
+msgstr "Narodowy Dzie≈Ñ Cierpienia"
 
-#: src/hd-data.c:1598
+#: src/hd-data.c:1599
 msgid "National Holiday"
 msgstr "Narodowe wakacje"
 
-#: src/hd-data.c:1599
+#: src/hd-data.c:1600
 #, fuzzy
 msgid "National Mourning Day"
-msgstr "Narodowy DzieÒ Cierpienia"
+msgstr "Narodowy Dzie≈Ñ Cierpienia"
 
-#: src/hd-data.c:1600
+#: src/hd-data.c:1601
 msgid "New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1601
+#: src/hd-data.c:1602
 #, fuzzy
 msgid "Nurses' Day"
-msgstr "DzieÒ Ojca"
+msgstr "Dzie≈Ñ Ojca"
 
-#: src/hd-data.c:1602
+#: src/hd-data.c:1603
 #, fuzzy
 msgid "Old-Armenic New Year"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1603
+#: src/hd-data.c:1604
 #, fuzzy
 msgid "Old-Egyptic New Year"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1604
+#: src/hd-data.c:1605
 #, fuzzy
 msgid "Orthodox New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1605
+#: src/hd-data.c:1606
 msgid "Our Lady Aparecida Day"
 msgstr ""
 
-#: src/hd-data.c:1606
+#: src/hd-data.c:1607
 msgid "Palm Sunday"
 msgstr "Niedziela Palmowa"
 
-#: src/hd-data.c:1607
+#: src/hd-data.c:1608
 #, fuzzy
 msgid "Parent's Day"
-msgstr "DzieÒ Prezydenta"
+msgstr "Dzie≈Ñ Prezydenta"
 
-#: src/hd-data.c:1608
+#: src/hd-data.c:1609
 #, fuzzy
 msgid "Passion Sunday"
 msgstr "Niedziela Palmowa"
 
-#: src/hd-data.c:1609
+#: src/hd-data.c:1610
 msgid "Peace Festival"
 msgstr ""
 
-#: src/hd-data.c:1610
+#: src/hd-data.c:1611
 msgid "Peach Festival"
 msgstr ""
 
-#: src/hd-data.c:1611
-msgid "Whitsunday/Pentecost"
-msgstr "Zielone ¶wi±tki"
-
 #: src/hd-data.c:1612
+msgid "Whitsunday/Pentecost"
+msgstr "Zielone ≈öwiƒÖtki"
+
+#: src/hd-data.c:1613
 #, fuzzy
 msgid "Noruz/Persian New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1613
-msgid "Prayer Day"
-msgstr "DzieÒ Modlitwy"
-
 #: src/hd-data.c:1614
+msgid "Prayer Day"
+msgstr "Dzie≈Ñ Modlitwy"
+
+#: src/hd-data.c:1615
 #, fuzzy
 msgid "Presidential Inauguration"
 msgstr "President's Inform"
 
-#: src/hd-data.c:1615
+#: src/hd-data.c:1616
 #, fuzzy
 msgid "Presidents' Day"
-msgstr "DzieÒ Prezydenta"
+msgstr "Dzie≈Ñ Prezydenta"
 
-#: src/hd-data.c:1616
+#: src/hd-data.c:1617
 #, fuzzy
 msgid "Presidents' Inform"
 msgstr "President's Inform"
 
-#: src/hd-data.c:1617
+#: src/hd-data.c:1618
 #, fuzzy
 msgid "President Lincoln's Birthday"
-msgstr "DzieÒ Prezydenta"
-
-#: src/hd-data.c:1618
-msgid "Princess' Day"
-msgstr "DzieÒ KsiÍøniczki"
+msgstr "Dzie≈Ñ Prezydenta"
 
 #: src/hd-data.c:1619
+msgid "Princess' Day"
+msgstr "Dzie≈Ñ Ksiƒô≈ºniczki"
+
+#: src/hd-data.c:1620
 msgid "Quinquagesima Sunday"
 msgstr ""
 
-#: src/hd-data.c:1620
-msgid "Reformation Day"
-msgstr "DzieÒ Reformacji"
-
 #: src/hd-data.c:1621
-msgid "Remembrance/Memorial Day"
-msgstr "DzieÒ PamiÍci Poleg≥ych"
+msgid "Reformation Day"
+msgstr "Dzie≈Ñ Reformacji"
 
 #: src/hd-data.c:1622
-msgid "Republic Day"
-msgstr "DzieÒ Republiki"
+msgid "Remembrance/Memorial Day"
+msgstr "Dzie≈Ñ Pamiƒôci Poleg≈Çych"
 
 #: src/hd-data.c:1623
+msgid "Republic Day"
+msgstr "Dzie≈Ñ Republiki"
+
+#: src/hd-data.c:1624
 msgid "Respect for the Aged Day"
 msgstr ""
 
-#: src/hd-data.c:1624
-msgid "Revolution Day"
-msgstr "DzieÒ Rewolucji"
-
 #: src/hd-data.c:1625
+msgid "Revolution Day"
+msgstr "Dzie≈Ñ Rewolucji"
+
+#: src/hd-data.c:1626
 #, fuzzy
 msgid "Rio de Janeiro Anniversary"
 msgstr "Stulecie Konstytucji"
 
-#: src/hd-data.c:1626
+#: src/hd-data.c:1627
 #, fuzzy
 msgid "Rogation Sunday"
-msgstr "¶miertelna Niedziela"
+msgstr "≈ömiertelna Niedziela"
 
-#: src/hd-data.c:1627
+#: src/hd-data.c:1628
 #, fuzzy
 msgid "Sao Paulo Anniversary"
 msgstr "Stulecie Konstytucji"
 
-#: src/hd-data.c:1628
+#: src/hd-data.c:1629
 msgid "Sapporo Snow Festival"
 msgstr ""
 
-#: src/hd-data.c:1629
+#: src/hd-data.c:1630
 msgid "Season Change/Bean-Festival"
 msgstr ""
 
-#: src/hd-data.c:1630
+#: src/hd-data.c:1631
 #, fuzzy
 msgid "Septuagesima Sunday"
 msgstr "Niedziela Palmowa"
 
-#: src/hd-data.c:1631
+#: src/hd-data.c:1632
 #, fuzzy
 msgid "Seven Sleepers Day"
-msgstr "DzieÒ weterana"
+msgstr "Dzie≈Ñ weterana"
 
-#: src/hd-data.c:1632
+#: src/hd-data.c:1633
 #, fuzzy
 msgid "Sexagesima Sunday"
 msgstr "Niedziela Palmowa"
 
-#: src/hd-data.c:1633
-msgid "Shrove Tuesday/Mardi Gras"
-msgstr "T≥usty Czwartek"
-
 #: src/hd-data.c:1634
+msgid "Shrove Tuesday/Mardi Gras"
+msgstr "T≈Çusty Czwartek"
+
+#: src/hd-data.c:1635
 #, fuzzy
 msgid "Solstice Day"
 msgstr "Armistice Day"
 
-#: src/hd-data.c:1635
+#: src/hd-data.c:1636
 #, fuzzy
 msgid "Soot-Sweeping Day"
-msgstr "DzieÒ Prezydenta"
+msgstr "Dzie≈Ñ Prezydenta"
 
-#: src/hd-data.c:1636
+#: src/hd-data.c:1637
 msgid "Spring Festival"
 msgstr ""
 
-#: src/hd-data.c:1637
+#: src/hd-data.c:1638
 msgid "Start of common month"
 msgstr ""
 
-#: src/hd-data.c:1638
+#: src/hd-data.c:1639
 msgid "Start of leap month"
 msgstr ""
 
-#: src/hd-data.c:1639
+#: src/hd-data.c:1640
 msgid "Star Festival"
 msgstr ""
 
-#: src/hd-data.c:1640
-#, fuzzy
-msgid "St Andrew's Day"
-msgstr "DzieÒ ¶w. Grzegorza"
-
 #: src/hd-data.c:1641
 #, fuzzy
-msgid "St Bartholomew Day"
-msgstr "DzieÒ ¶w. Berchtolda"
+msgid "St Andrew's Day"
+msgstr "Dzie≈Ñ ≈öw. Grzegorza"
 
 #: src/hd-data.c:1642
 #, fuzzy
-msgid "St Berchtold's Day"
-msgstr "DzieÒ ¶w. Berchtolda"
+msgid "St Bartholomew Day"
+msgstr "Dzie≈Ñ ≈öw. Berchtolda"
 
 #: src/hd-data.c:1643
 #, fuzzy
-msgid "St David's Day"
-msgstr "DzieÒ ¶w. Dawida"
+msgid "St Berchtold's Day"
+msgstr "Dzie≈Ñ ≈öw. Berchtolda"
 
 #: src/hd-data.c:1644
 #, fuzzy
-msgid "St Edward's Day"
-msgstr "DzieÒ ¶w. Edwarda"
+msgid "St David's Day"
+msgstr "Dzie≈Ñ ≈öw. Dawida"
 
 #: src/hd-data.c:1645
 #, fuzzy
-msgid "St George's Day"
-msgstr "DzieÒ ¶w. Grzegorza"
+msgid "St Edward's Day"
+msgstr "Dzie≈Ñ ≈öw. Edwarda"
 
 #: src/hd-data.c:1646
 #, fuzzy
-msgid "St James' Day"
-msgstr "DzieÒ ¶w. Jamesa"
+msgid "St George's Day"
+msgstr "Dzie≈Ñ ≈öw. Grzegorza"
 
 #: src/hd-data.c:1647
 #, fuzzy
-msgid "St Joseph's Day"
-msgstr "DzieÒ ¶w. JÛzefa"
+msgid "St James' Day"
+msgstr "Dzie≈Ñ ≈öw. Jamesa"
 
 #: src/hd-data.c:1648
 #, fuzzy
-msgid "St Laurentius Day"
-msgstr "DzieÒ zakochanych"
+msgid "St Joseph's Day"
+msgstr "Dzie≈Ñ ≈öw. J√≥zefa"
 
 #: src/hd-data.c:1649
 #, fuzzy
-msgid "St Nicholas' Day"
-msgstr "Miko≥ajki"
+msgid "St Laurentius Day"
+msgstr "Dzie≈Ñ zakochanych"
 
 #: src/hd-data.c:1650
 #, fuzzy
-msgid "St Nicholas' Eve"
-msgstr "Jutro Miko≥ajki"
+msgid "St Nicholas' Day"
+msgstr "Miko≈Çajki"
 
 #: src/hd-data.c:1651
 #, fuzzy
-msgid "St Patrick's Day"
-msgstr "DzieÒ ¶w. Patryka"
+msgid "St Nicholas' Eve"
+msgstr "Jutro Miko≈Çajki"
 
 #: src/hd-data.c:1652
+#, fuzzy
+msgid "St Patrick's Day"
+msgstr "Dzie≈Ñ ≈öw. Patryka"
+
+#: src/hd-data.c:1653
 msgid "St Peter and St Paul"
 msgstr ""
 
-#: src/hd-data.c:1653
-#, fuzzy
-msgid "St Stephen's Day"
-msgstr "DzieÒ ¶w. Stefana"
-
 #: src/hd-data.c:1654
 #, fuzzy
-msgid "St Valentine's Day"
-msgstr "DzieÒ zakochanych"
+msgid "St Stephen's Day"
+msgstr "Dzie≈Ñ ≈öw. Stefana"
 
 #: src/hd-data.c:1655
 #, fuzzy
-msgid "Sunday of the Dead"
-msgstr "DzieÒ Rewolty Studenckiej"
+msgid "St Valentine's Day"
+msgstr "Dzie≈Ñ zakochanych"
 
 #: src/hd-data.c:1656
+#, fuzzy
+msgid "Sunday of the Dead"
+msgstr "Dzie≈Ñ Rewolty Studenckiej"
+
+#: src/hd-data.c:1657
 msgid "Swallow Day"
 msgstr "Swallow Day"
 
-#: src/hd-data.c:1657
+#: src/hd-data.c:1658
 #, fuzzy
 msgid "Sweetest Day"
-msgstr "DzieÒ weterana"
+msgstr "Dzie≈Ñ weterana"
 
-#: src/hd-data.c:1658
+#: src/hd-data.c:1659
 msgid "Sylvester/New Year's Eve"
 msgstr ""
 
-#: src/hd-data.c:1659
-msgid "Teacher's Day"
-msgstr "DzieÒ Nauczyciela"
-
 #: src/hd-data.c:1660
+msgid "Teacher's Day"
+msgstr "Dzie≈Ñ Nauczyciela"
+
+#: src/hd-data.c:1661
 #, fuzzy
 msgid "Thai New Year's Day"
 msgstr "Nowy Rok"
 
-#: src/hd-data.c:1661
+#: src/hd-data.c:1662
 #, fuzzy
 msgid "Thanksgiving Day"
-msgstr "DzieÒ DziÍkczynienia"
-
-#: src/hd-data.c:1662
-msgid "The King's Birthday"
-msgstr "Urodziny KrÛla"
+msgstr "Dzie≈Ñ Dziƒôkczynienia"
 
 #: src/hd-data.c:1663
-msgid "The Queen's Birthday"
-msgstr "Urodziny KrÛlowej"
+msgid "The King's Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1664
-msgid "Epiphany/Three King's Day"
-msgstr "¶wiÍto Trzech KrÛli"
+msgid "The Queen's Birthday"
+msgstr "Urodziny Kr√≥lowej"
 
 #: src/hd-data.c:1665
-#, fuzzy
-msgid "Tiradentes Day"
-msgstr "DzieÒ Prezydenta"
+msgid "Epiphany/Three King's Day"
+msgstr "≈öwiƒôto Trzech Kr√≥li"
 
 #: src/hd-data.c:1666
 #, fuzzy
-msgid "Tomb-Sweeping Day"
-msgstr "DzieÒ Prezydenta"
+msgid "Tiradentes Day"
+msgstr "Dzie≈Ñ Prezydenta"
 
 #: src/hd-data.c:1667
 #, fuzzy
-msgid "Transfiguration Day"
-msgstr "DzieÒ Modlitwy"
+msgid "Tomb-Sweeping Day"
+msgstr "Dzie≈Ñ Prezydenta"
 
 #: src/hd-data.c:1668
 #, fuzzy
-msgid "Tynwald Day"
-msgstr "DzieÒ Rodziny KrÛlewskiej"
+msgid "Transfiguration Day"
+msgstr "Dzie≈Ñ Modlitwy"
 
 #: src/hd-data.c:1669
+#, fuzzy
+msgid "Tynwald Day"
+msgstr "Dzie≈Ñ Rodziny Kr√≥lewskiej"
+
+#: src/hd-data.c:1670
 msgid "Valborg's Eve"
 msgstr ""
 
-#: src/hd-data.c:1670
+#: src/hd-data.c:1671
 #, fuzzy
 msgid "Venice Carnival"
 msgstr "Kanadyjski"
 
-#: src/hd-data.c:1671
-msgid "Veteran's Day"
-msgstr "DzieÒ weterana"
-
 #: src/hd-data.c:1672
-msgid "Victoria Day"
-msgstr "DzieÒ Wiktorii"
+msgid "Veteran's Day"
+msgstr "Dzie≈Ñ weterana"
 
 #: src/hd-data.c:1673
-msgid "Victory Day"
-msgstr "DzieÒ ZwyciÍstwa"
+msgid "Victoria Day"
+msgstr "Dzie≈Ñ Wiktorii"
 
 #: src/hd-data.c:1674
-msgid "Whit Monday"
-msgstr "Zes≥anie Ducha ¶wiÍtego"
+msgid "Victory Day"
+msgstr "Dzie≈Ñ Zwyciƒôstwa"
 
 #: src/hd-data.c:1675
-#, fuzzy
-msgid "Women's Day"
-msgstr "DzieÒ Matki"
+msgid "Whit Monday"
+msgstr "Zes≈Çanie Ducha ≈öwiƒôtego"
 
 #: src/hd-data.c:1676
+#, fuzzy
+msgid "Women's Day"
+msgstr "Dzie≈Ñ Matki"
+
+#: src/hd-data.c:1677
 #, fuzzy
 msgid "Women's Shrove Day"
 msgstr "Ostatki"
 
-#: src/hd-data.c:1677
-msgid "World Animal Day"
-msgstr "¶wiatowy DzieÒ Zwierz±t"
-
 #: src/hd-data.c:1678
+msgid "World Animal Day"
+msgstr "≈öwiatowy Dzie≈Ñ ZwierzƒÖt"
+
+#: src/hd-data.c:1679
 #, fuzzy
 msgid "Youth Day"
-msgstr "DzieÒ Matki"
+msgstr "Dzie≈Ñ Matki"
 
-#: src/hd-data.c:1684
+#: src/hd-data.c:1685
 msgid "Adelaide Cup Day"
 msgstr ""
 
-#: src/hd-data.c:1685
+#: src/hd-data.c:1686
 #, fuzzy
 msgid "Admission Day"
 msgstr "Armistice Day"
 
-#: src/hd-data.c:1686
+#: src/hd-data.c:1687
 #, fuzzy
 msgid "Alaska Day"
-msgstr "DzieÒ chor±gwi"
+msgstr "Dzie≈Ñ chorƒÖgwi"
 
-#: src/hd-data.c:1687
+#: src/hd-data.c:1688
 msgid "Aleksis Kivi Day"
 msgstr ""
 
-#: src/hd-data.c:1688
+#: src/hd-data.c:1689
 msgid "Alice-Springs Show Day"
 msgstr ""
 
-#: src/hd-data.c:1689
-#, fuzzy
-msgid "All Saints' Eve"
-msgstr "DzieÒ Wszystkich ¶wiÍtych"
-
 #: src/hd-data.c:1690
 #, fuzzy
-msgid "Americas Day"
-msgstr "DzieÒ Si≥ Zbrojnych"
+msgid "All Saints' Eve"
+msgstr "Dzie≈Ñ Wszystkich ≈öwiƒôtych"
 
 #: src/hd-data.c:1691
 #, fuzzy
-msgid "Angam Day"
-msgstr "DzieÒ Anzaca"
+msgid "Americas Day"
+msgstr "Dzie≈Ñ Si≈Ç Zbrojnych"
 
 #: src/hd-data.c:1692
+#, fuzzy
+msgid "Angam Day"
+msgstr "Dzie≈Ñ Anzaca"
+
+#: src/hd-data.c:1693
 msgid "Anniversary of Amir's Succession"
 msgstr ""
 
-#: src/hd-data.c:1693
+#: src/hd-data.c:1694
 msgid "Anniversary of Armed Struggle"
 msgstr ""
 
-#: src/hd-data.c:1694
+#: src/hd-data.c:1695
 msgid "Anniversary of Green March"
 msgstr ""
 
-#: src/hd-data.c:1695
-#, fuzzy
-msgid "Antillian Day"
-msgstr "DzieÒ Wszystkich ¶wiÍtych"
-
 #: src/hd-data.c:1696
 #, fuzzy
-msgid "Arab League Day"
-msgstr "¶wiÍto Pracy"
+msgid "Antillian Day"
+msgstr "Dzie≈Ñ Wszystkich ≈öwiƒôtych"
 
 #: src/hd-data.c:1697
+#, fuzzy
+msgid "Arab League Day"
+msgstr "≈öwiƒôto Pracy"
+
+#: src/hd-data.c:1698
 msgid "Archbishop Makarios' Memorial Day"
 msgstr ""
 
-#: src/hd-data.c:1698
+#: src/hd-data.c:1699
 msgid "Archbishop Makarios' Name-Day"
 msgstr ""
 
-#: src/hd-data.c:1699
+#: src/hd-data.c:1700
 #, fuzzy
 msgid "Arengo Anniversary"
 msgstr "Stulecie Konstytucji"
 
-#: src/hd-data.c:1700
+#: src/hd-data.c:1701
 #, fuzzy
 msgid "Army Coup Day"
-msgstr "¶wiÍto Pracy"
+msgstr "≈öwiƒôto Pracy"
 
-#: src/hd-data.c:1701
+#: src/hd-data.c:1702
 msgid "Arrival of the Swiss"
 msgstr ""
 
-#: src/hd-data.c:1702
-#, fuzzy
-msgid "Artigas' Birthday"
-msgstr "Urodziny KrÛla"
-
 #: src/hd-data.c:1703
 #, fuzzy
-msgid "Asuncion Day"
-msgstr "DzieÒ Koronacji"
+msgid "Artigas' Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1704
 #, fuzzy
-msgid "Ataturk Memorial Day"
-msgstr "DzieÒ PamiÍci Poleg≥ych"
+msgid "Asuncion Day"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:1705
+#, fuzzy
+msgid "Ataturk Memorial Day"
+msgstr "Dzie≈Ñ Pamiƒôci Poleg≈Çych"
+
+#: src/hd-data.c:1706
 msgid "Authority's Power Day"
 msgstr ""
 
-#: src/hd-data.c:1706
-#, fuzzy
-msgid "Ba'ath Revolution Day"
-msgstr "DzieÒ Rewolucji"
-
 #: src/hd-data.c:1707
 #, fuzzy
-msgid "Baron Bliss Day"
-msgstr "Drugi dzieÒ Boøego Narodzenia"
+msgid "Ba'ath Revolution Day"
+msgstr "Dzie≈Ñ Rewolucji"
 
 #: src/hd-data.c:1708
 #, fuzzy
-msgid "Bataan Day"
-msgstr "DzieÒ weterana"
+msgid "Baron Bliss Day"
+msgstr "Drugi dzie≈Ñ Bo≈ºego Narodzenia"
 
 #: src/hd-data.c:1709
+#, fuzzy
+msgid "Bataan Day"
+msgstr "Dzie≈Ñ weterana"
+
+#: src/hd-data.c:1710
 #, fuzzy
 msgid "Battle of Angamos"
 msgstr "Bitwa pod Boyne"
 
-#: src/hd-data.c:1710
-#, fuzzy
-msgid "Battle of Boyac·"
-msgstr "Bitwa pod Boyne"
-
 #: src/hd-data.c:1711
 #, fuzzy
-msgid "Battle of Carabobo"
+msgid "Battle of Boyac√°"
 msgstr "Bitwa pod Boyne"
 
 #: src/hd-data.c:1712
 #, fuzzy
-msgid "Battle of Iquique"
+msgid "Battle of Carabobo"
 msgstr "Bitwa pod Boyne"
 
 #: src/hd-data.c:1713
 #, fuzzy
-msgid "Battle of Las Piedras"
+msgid "Battle of Iquique"
 msgstr "Bitwa pod Boyne"
 
 #: src/hd-data.c:1714
 #, fuzzy
-msgid "Battle of N‰fels"
+msgid "Battle of Las Piedras"
 msgstr "Bitwa pod Boyne"
 
 #: src/hd-data.c:1715
+#, fuzzy
+msgid "Battle of N√§fels"
+msgstr "Bitwa pod Boyne"
+
+#: src/hd-data.c:1716
 msgid "Beginning of Summer"
 msgstr ""
 
-#: src/hd-data.c:1716
-#, fuzzy
-msgid "Belgrade's Day"
-msgstr "DzieÒ Ojca"
-
 #: src/hd-data.c:1717
 #, fuzzy
-msgid "Bennington Battle Day"
-msgstr "DzieÒ Benito Juareza"
+msgid "Belgrade's Day"
+msgstr "Dzie≈Ñ Ojca"
 
 #: src/hd-data.c:1718
+#, fuzzy
+msgid "Bennington Battle Day"
+msgstr "Dzie≈Ñ Benito Juareza"
+
+#: src/hd-data.c:1719
 msgid "Blessing of the Water"
 msgstr ""
 
-#: src/hd-data.c:1719
+#: src/hd-data.c:1720
 msgid "Bloomsday"
 msgstr ""
 
-#: src/hd-data.c:1720
-#, fuzzy
-msgid "Boganda Day"
-msgstr "Drugi dzieÒ Boøego Narodzenia"
-
 #: src/hd-data.c:1721
 #, fuzzy
-msgid "Bonaire Day"
-msgstr "Drugi dzieÒ Boøego Narodzenia"
+msgid "Boganda Day"
+msgstr "Drugi dzie≈Ñ Bo≈ºego Narodzenia"
 
 #: src/hd-data.c:1722
 #, fuzzy
-msgid "Boqueron Battle Day"
-msgstr "DzieÒ Koronacji"
+msgid "Bonaire Day"
+msgstr "Drugi dzie≈Ñ Bo≈ºego Narodzenia"
 
 #: src/hd-data.c:1723
 #, fuzzy
-msgid "Botswana Day"
-msgstr "DzieÒ weterana"
+msgid "Boqueron Battle Day"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:1724
 #, fuzzy
-msgid "Bounty Day"
-msgstr "DzieÒ Matki"
+msgid "Botswana Day"
+msgstr "Dzie≈Ñ weterana"
 
 #: src/hd-data.c:1725
+#, fuzzy
+msgid "Bounty Day"
+msgstr "Dzie≈Ñ Matki"
+
+#: src/hd-data.c:1726
 msgid "Bunker Hill Day"
 msgstr ""
 
-#: src/hd-data.c:1726
+#: src/hd-data.c:1727
 msgid "Burning of Jan Hus"
 msgstr "Spalenie Jana Husa na stosie"
 
-#: src/hd-data.c:1727
-#, fuzzy
-msgid "Canberra Day"
-msgstr "¶wiÍto Pracy"
-
 #: src/hd-data.c:1728
 #, fuzzy
-msgid "Caricom Day"
-msgstr "Boøe Narodzenie"
+msgid "Canberra Day"
+msgstr "≈öwiƒôto Pracy"
 
 #: src/hd-data.c:1729
 #, fuzzy
-msgid "Casimir Pulaski's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Caricom Day"
+msgstr "Bo≈ºe Narodzenie"
 
 #: src/hd-data.c:1730
 #, fuzzy
-msgid "Cassinga Day"
-msgstr "DzieÒ Koronacji"
+msgid "Casimir Pulaski's Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1731
+#, fuzzy
+msgid "Cassinga Day"
+msgstr "Dzie≈Ñ Koronacji"
+
+#: src/hd-data.c:1732
 msgid "Cayenne Festival"
 msgstr ""
 
-#: src/hd-data.c:1732
+#: src/hd-data.c:1733
 msgid "Cesar Chavez Day"
 msgstr ""
 
-#: src/hd-data.c:1733
-#, fuzzy
-msgid "Charter Day"
-msgstr "DzieÒ Ojca"
-
 #: src/hd-data.c:1734
 #, fuzzy
-msgid "Chiang Kai-shek's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Charter Day"
+msgstr "Dzie≈Ñ Ojca"
 
 #: src/hd-data.c:1735
 #, fuzzy
-msgid "Children's White Sunday"
-msgstr "DzieÒ Dziecka"
+msgid "Chiang Kai-shek's Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1736
 #, fuzzy
-msgid "Colon Day"
-msgstr "DzieÒ Koronacji"
+msgid "Children's White Sunday"
+msgstr "Dzie≈Ñ Dziecka"
 
 #: src/hd-data.c:1737
 #, fuzzy
-msgid "Colorado Day"
-msgstr "DzieÒ Koronacji"
+msgid "Colon Day"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:1738
 #, fuzzy
-msgid "Commonwealth Day"
-msgstr "DzieÒ Koronacji"
+msgid "Colorado Day"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:1739
 #, fuzzy
-msgid "Compact Day"
-msgstr "DzieÒ Koronacji"
+msgid "Commonwealth Day"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:1740
+#, fuzzy
+msgid "Compact Day"
+msgstr "Dzie≈Ñ Koronacji"
+
+#: src/hd-data.c:1741
 msgid "Confederal Agreement Day"
 msgstr ""
 
-#: src/hd-data.c:1741
-msgid "Coronation Day"
-msgstr "DzieÒ Koronacji"
-
 #: src/hd-data.c:1742
-#, fuzzy
-msgid "Cup Match Day"
-msgstr "DzieÒ Matki"
+msgid "Coronation Day"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:1743
 #, fuzzy
-msgid "Custom Chief's Day"
-msgstr "DzieÒ Dziecka"
+msgid "Cup Match Day"
+msgstr "Dzie≈Ñ Matki"
 
 #: src/hd-data.c:1744
+#, fuzzy
+msgid "Custom Chief's Day"
+msgstr "Dzie≈Ñ Dziecka"
+
+#: src/hd-data.c:1745
 #, fuzzy
 msgid "C. Mapinduzi Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1745
+#: src/hd-data.c:1746
 #, fuzzy
 msgid "Darwin Show Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1746
+#: src/hd-data.c:1747
 msgid "Day of Goodwill"
 msgstr ""
 
-#: src/hd-data.c:1747
-msgid "Day of Students Revolt"
-msgstr "DzieÒ Rewolty Studenckiej"
-
 #: src/hd-data.c:1748
-#, fuzzy
-msgid "Day of the Free Laos"
-msgstr "DzieÒ Rewolty Studenckiej"
+msgid "Day of Students Revolt"
+msgstr "Dzie≈Ñ Rewolty Studenckiej"
 
 #: src/hd-data.c:1749
 #, fuzzy
-msgid "Death of H. Christophe"
-msgstr "Boøe Cia≥o"
+msgid "Day of the Free Laos"
+msgstr "Dzie≈Ñ Rewolty Studenckiej"
 
 #: src/hd-data.c:1750
+#, fuzzy
+msgid "Death of H. Christophe"
+msgstr "Bo≈ºe Cia≈Ço"
+
+#: src/hd-data.c:1751
 msgid "Death of J. Dessalines"
 msgstr ""
 
-#: src/hd-data.c:1751
+#: src/hd-data.c:1752
 msgid "Death of President Abdallah"
 msgstr ""
 
-#: src/hd-data.c:1752
+#: src/hd-data.c:1753
 msgid "Death of President Cheikh"
 msgstr ""
 
-#: src/hd-data.c:1753
+#: src/hd-data.c:1754
 msgid "Death of President Soilih"
 msgstr ""
 
-#: src/hd-data.c:1754
+#: src/hd-data.c:1755
 msgid "Death of Qaid-i-Azam"
 msgstr ""
 
-#: src/hd-data.c:1755
+#: src/hd-data.c:1756
 msgid "Death of T. Louverture"
 msgstr ""
 
-#: src/hd-data.c:1756
+#: src/hd-data.c:1757
 #, fuzzy
 msgid "Defenders Day"
-msgstr "DzieÒ Modlitwy"
+msgstr "Dzie≈Ñ Modlitwy"
 
-#: src/hd-data.c:1757
+#: src/hd-data.c:1758
 msgid "Dia del Padre"
 msgstr ""
 
-#: src/hd-data.c:1758
+#: src/hd-data.c:1759
 msgid "Dia de los Maestros"
 msgstr ""
 
-#: src/hd-data.c:1759
+#: src/hd-data.c:1760
 #, fuzzy
 msgid "Discovery Day"
-msgstr "DzieÒ ZwyciÍstwa"
+msgstr "Dzie≈Ñ Zwyciƒôstwa"
 
-#: src/hd-data.c:1760
+#: src/hd-data.c:1761
 msgid "Downfall of the Dergue"
 msgstr ""
 
-#: src/hd-data.c:1761
+#: src/hd-data.c:1762
 msgid "Dry Season Celebration"
 msgstr ""
 
-#: src/hd-data.c:1762
-#, fuzzy
-msgid "Dr. Sun Yat-sen's Birthday"
-msgstr "Urodziny KrÛlowej"
-
 #: src/hd-data.c:1763
 #, fuzzy
-msgid "Duarte's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Dr. Sun Yat-sen's Birthday"
+msgstr "Urodziny Kr√≥lowej"
 
 #: src/hd-data.c:1764
+#, fuzzy
+msgid "Duarte's Birthday"
+msgstr "Urodziny Kr√≥la"
+
+#: src/hd-data.c:1765
 #, fuzzy
 msgid "Easter Tuesday"
 msgstr "Wielkanoc"
 
-#: src/hd-data.c:1765
-#, fuzzy
-msgid "Economic Liberation Day"
-msgstr "DzieÒ Wolno∂ci"
-
 #: src/hd-data.c:1766
 #, fuzzy
-msgid "Eight Hours Day"
-msgstr "DzieÒ ZwyciÍstwa"
+msgid "Economic Liberation Day"
+msgstr "Dzie≈Ñ Wolno≈õci"
 
 #: src/hd-data.c:1767
+#, fuzzy
+msgid "Eight Hours Day"
+msgstr "Dzie≈Ñ Zwyciƒôstwa"
+
+#: src/hd-data.c:1768
 msgid "Elections for National Assembly"
 msgstr ""
 
-#: src/hd-data.c:1768
+#: src/hd-data.c:1769
 msgid "Errol Barrow Day"
 msgstr ""
 
-#: src/hd-data.c:1769
+#: src/hd-data.c:1770
 #, fuzzy
 msgid "Evacuation Day"
 msgstr "Wybory prezydenckie"
 
-#: src/hd-data.c:1770
+#: src/hd-data.c:1771
 msgid "Eve of Epiphany"
 msgstr ""
 
-#: src/hd-data.c:1771
+#: src/hd-data.c:1772
 msgid "Expedition of the 33"
 msgstr ""
 
-#: src/hd-data.c:1772
+#: src/hd-data.c:1773
 #, fuzzy
 msgid "E. Hostos' Birthday"
-msgstr "Urodziny KrÛla"
+msgstr "Urodziny Kr√≥la"
 
-#: src/hd-data.c:1773
+#: src/hd-data.c:1774
 #, fuzzy
 msgid "Family Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1774
-#, fuzzy
-msgid "FAO Day"
-msgstr "DzieÒ chor±gwi"
-
 #: src/hd-data.c:1775
 #, fuzzy
-msgid "Farmers' Day"
-msgstr "DzieÒ Ojca"
+msgid "FAO Day"
+msgstr "Dzie≈Ñ chorƒÖgwi"
 
 #: src/hd-data.c:1776
 #, fuzzy
-msgid "Father Leval Day"
-msgstr "DzieÒ Ojca"
+msgid "Farmers' Day"
+msgstr "Dzie≈Ñ Ojca"
 
 #: src/hd-data.c:1777
+#, fuzzy
+msgid "Father Leval Day"
+msgstr "Dzie≈Ñ Ojca"
+
+#: src/hd-data.c:1778
 msgid "Feast of Our Theotokos"
 msgstr "Feast of Our Theotokos"
 
-#: src/hd-data.c:1778
-#, fuzzy
-msgid "Fisherman's Day"
-msgstr "DzieÒ Ojca"
-
 #: src/hd-data.c:1779
 #, fuzzy
-msgid "Foundation of NPLA Day"
-msgstr "Narodowy DzieÒ Cierpienia"
+msgid "Fisherman's Day"
+msgstr "Dzie≈Ñ Ojca"
 
 #: src/hd-data.c:1780
+#, fuzzy
+msgid "Foundation of NPLA Day"
+msgstr "Narodowy Dzie≈Ñ Cierpienia"
+
+#: src/hd-data.c:1781
 msgid "Founding of People's Party"
 msgstr ""
 
-#: src/hd-data.c:1781
+#: src/hd-data.c:1782
 #, fuzzy
 msgid "Garifuna Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1782
+#: src/hd-data.c:1783
 msgid "General San Martin's Anniversary"
 msgstr ""
 
-#: src/hd-data.c:1783
-#, fuzzy
-msgid "Gospel Day"
-msgstr "DzieÒ Nobla"
-
 #: src/hd-data.c:1784
 #, fuzzy
-msgid "Guacanaste Day"
-msgstr "DzieÒ Rodziny KrÛlewskiej"
+msgid "Gospel Day"
+msgstr "Dzie≈Ñ Nobla"
 
 #: src/hd-data.c:1785
-msgid "Gustavus Adolphus' Day"
-msgstr "DzieÒ Gustawa Adolfa"
+#, fuzzy
+msgid "Guacanaste Day"
+msgstr "Dzie≈Ñ Rodziny Kr√≥lewskiej"
 
 #: src/hd-data.c:1786
+msgid "Gustavus Adolphus' Day"
+msgstr "Dzie≈Ñ Gustawa Adolfa"
+
+#: src/hd-data.c:1787
 #, fuzzy
 msgid "Heritage Day"
 msgstr "Armistice Day"
 
-#: src/hd-data.c:1787
-#, fuzzy
-msgid "Heroes Day"
-msgstr "DzieÒ Ojca"
-
 #: src/hd-data.c:1788
 #, fuzzy
-msgid "Hobart Show Day"
-msgstr "DzieÒ Ojca"
+msgid "Heroes Day"
+msgstr "Dzie≈Ñ Ojca"
 
 #: src/hd-data.c:1789
 #, fuzzy
-msgid "Holy Wednesday"
-msgstr "¶roda"
+msgid "Hobart Show Day"
+msgstr "Dzie≈Ñ Ojca"
 
 #: src/hd-data.c:1790
 #, fuzzy
-msgid "Ho Chi Minh's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Holy Wednesday"
+msgstr "≈öroda"
 
 #: src/hd-data.c:1791
 #, fuzzy
-msgid "Human Rights Day"
-msgstr "DzieÒ Zjednoczenia Niemiec"
+msgid "Ho Chi Minh's Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1792
+#, fuzzy
+msgid "Human Rights Day"
+msgstr "Dzie≈Ñ Zjednoczenia Niemiec"
+
+#: src/hd-data.c:1793
 msgid "Hurricane Supplication Day"
 msgstr ""
 
-#: src/hd-data.c:1793
-#, fuzzy
-msgid "Hurricane Thanksgiving Day"
-msgstr "DzieÒ DziÍkczynienia"
-
 #: src/hd-data.c:1794
 #, fuzzy
-msgid "Independence of Cartagena"
-msgstr "¶wiÍto Niepodleg≥o∂ci"
+msgid "Hurricane Thanksgiving Day"
+msgstr "Dzie≈Ñ Dziƒôkczynienia"
 
 #: src/hd-data.c:1795
 #, fuzzy
-msgid "Independence of Cuenca"
-msgstr "¶wiÍto Niepodleg≥o∂ci"
+msgid "Independence of Cartagena"
+msgstr "≈öwiƒôto Niepodleg≈Ço≈õci"
 
 #: src/hd-data.c:1796
 #, fuzzy
-msgid "Independence of Guayaquil"
-msgstr "¶wiÍto Niepodleg≥o∂ci"
+msgid "Independence of Cuenca"
+msgstr "≈öwiƒôto Niepodleg≈Ço≈õci"
 
 #: src/hd-data.c:1797
 #, fuzzy
-msgid "Independence of Quito"
-msgstr "¶wiÍto Niepodleg≥o∂ci"
+msgid "Independence of Guayaquil"
+msgstr "≈öwiƒôto Niepodleg≈Ço≈õci"
 
 #: src/hd-data.c:1798
+#, fuzzy
+msgid "Independence of Quito"
+msgstr "≈öwiƒôto Niepodleg≈Ço≈õci"
+
+#: src/hd-data.c:1799
 msgid "Indian Arrival Day"
 msgstr ""
 
-#: src/hd-data.c:1799
-#, fuzzy
-msgid "Internal Autonomy Day"
-msgstr "MiÍdzynarodowy DzieÒ Kobiet"
-
 #: src/hd-data.c:1800
 #, fuzzy
-msgid "Jefferson Davis' Birthday"
-msgstr "Urodziny Koronowanej KsiÍøniczki"
+msgid "Internal Autonomy Day"
+msgstr "Miƒôdzynarodowy Dzie≈Ñ Kobiet"
 
 #: src/hd-data.c:1801
 #, fuzzy
-msgid "June Holiday"
-msgstr "Dzisiaj banki zamkniÍte"
+msgid "Jefferson Davis' Birthday"
+msgstr "Urodziny Koronowanej Ksiƒô≈ºniczki"
 
 #: src/hd-data.c:1802
 #, fuzzy
-msgid "J. Barbosa's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "June Holiday"
+msgstr "Dzisiaj banki zamkniƒôte"
 
 #: src/hd-data.c:1803
+#, fuzzy
+msgid "J. Barbosa's Birthday"
+msgstr "Urodziny Kr√≥la"
+
+#: src/hd-data.c:1804
 msgid "J. Chilembwe Day"
 msgstr ""
 
-#: src/hd-data.c:1804
-#, fuzzy
-msgid "J. Diego's Birthday"
-msgstr "Urodziny KrÛla"
-
 #: src/hd-data.c:1805
 #, fuzzy
-msgid "J. Robert's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "J. Diego's Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1806
+#, fuzzy
+msgid "J. Robert's Birthday"
+msgstr "Urodziny Kr√≥la"
+
+#: src/hd-data.c:1807
 msgid "Kamarampaka Day"
 msgstr ""
 
-#: src/hd-data.c:1807
+#: src/hd-data.c:1808
 #, fuzzy
 msgid "Kartini Day"
 msgstr "Martinimas"
 
-#: src/hd-data.c:1808
+#: src/hd-data.c:1809
 #, fuzzy
 msgid "Catherine Show Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1809
+#: src/hd-data.c:1810
 #, fuzzy
 msgid "Kiev Day"
 msgstr "Swallow Day"
 
-#: src/hd-data.c:1810
-#, fuzzy
-msgid "Kim Il-Sung's Birthday"
-msgstr "Urodziny KrÛla"
-
 #: src/hd-data.c:1811
 #, fuzzy
-msgid "Kim Jong-Il's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Kim Il-Sung's Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1812
 #, fuzzy
-msgid "King Kamehameha Day"
-msgstr "DzieÒ PamiÍci Poleg≥ych"
+msgid "Kim Jong-Il's Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1813
 #, fuzzy
-msgid "King Rama I Memorial Day/Chakri"
-msgstr "DzieÒ PamiÍci Poleg≥ych"
+msgid "King Kamehameha Day"
+msgstr "Dzie≈Ñ Pamiƒôci Poleg≈Çych"
 
 #: src/hd-data.c:1814
 #, fuzzy
-msgid "King Rama V Memorial Day"
-msgstr "DzieÒ PamiÍci Poleg≥ych"
+msgid "King Rama I Memorial Day/Chakri"
+msgstr "Dzie≈Ñ Pamiƒôci Poleg≈Çych"
 
 #: src/hd-data.c:1815
+#, fuzzy
+msgid "King Rama V Memorial Day"
+msgstr "Dzie≈Ñ Pamiƒôci Poleg≈Çych"
+
+#: src/hd-data.c:1816
 msgid "Knabenschiessen"
 msgstr ""
 
-#: src/hd-data.c:1816
+#: src/hd-data.c:1817
 msgid "Konstantin and Methodius"
 msgstr ""
 
-#: src/hd-data.c:1817
+#: src/hd-data.c:1818
 msgid "Lapp National Holiday"
 msgstr "Lapp National Holiday"
 
-#: src/hd-data.c:1818
+#: src/hd-data.c:1819
 msgid "Launceston Cup Day"
 msgstr ""
 
-#: src/hd-data.c:1819
+#: src/hd-data.c:1820
 #, fuzzy
 msgid "Liberty Day"
-msgstr "DzieÒ Wolno∂ci"
+msgstr "Dzie≈Ñ Wolno≈õci"
 
-#: src/hd-data.c:1820
+#: src/hd-data.c:1821
 msgid "Loss of Muslim Nation"
 msgstr ""
 
-#: src/hd-data.c:1821
+#: src/hd-data.c:1822
 msgid "Luxembourg City Kermis"
 msgstr ""
 
-#: src/hd-data.c:1822
-#, fuzzy
-msgid "Lyndon B. Johnson Day"
-msgstr "DzieÒ ¶w. Jana"
-
 #: src/hd-data.c:1823
 #, fuzzy
-msgid "L. Rivera's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Lyndon B. Johnson Day"
+msgstr "Dzie≈Ñ ≈öw. Jana"
 
 #: src/hd-data.c:1824
 #, fuzzy
-msgid "Madaraka Day"
-msgstr "DzieÒ weterana"
+msgid "L. Rivera's Birthday"
+msgstr "Urodziny Kr√≥la"
 
 #: src/hd-data.c:1825
 #, fuzzy
-msgid "Mahatma Gandhi's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Madaraka Day"
+msgstr "Dzie≈Ñ weterana"
 
 #: src/hd-data.c:1826
+#, fuzzy
+msgid "Mahatma Gandhi's Birthday"
+msgstr "Urodziny Kr√≥la"
+
+#: src/hd-data.c:1827
 #, fuzzy
 msgid "Malvinas Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1827
+#: src/hd-data.c:1828
 #, fuzzy
 msgid "Manila Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1828
+#: src/hd-data.c:1829
 #, fuzzy
 msgid "Maputo City Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1829
+#: src/hd-data.c:1830
 #, fuzzy
 msgid "Marien Ngouabi Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1830
+#: src/hd-data.c:1831
 #, fuzzy
 msgid "Maryland Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1831
+#: src/hd-data.c:1832
 msgid "Melbourne Cup Day"
 msgstr ""
 
-#: src/hd-data.c:1832
-#, fuzzy
-msgid "Merchant Day"
-msgstr "DzieÒ Zjednoczenia Niemiec"
-
 #: src/hd-data.c:1833
 #, fuzzy
-msgid "St John's/Midsummers Eve"
-msgstr "Jutro ¶rodek Lata"
+msgid "Merchant Day"
+msgstr "Dzie≈Ñ Zjednoczenia Niemiec"
 
 #: src/hd-data.c:1834
 #, fuzzy
-msgid "Missionary Day"
-msgstr "DzieÒ ZwyciÍstwa"
+msgid "St John's/Midsummers Eve"
+msgstr "Jutro ≈örodek Lata"
 
 #: src/hd-data.c:1835
 #, fuzzy
-msgid "Mi-CarÍme Day"
-msgstr "1 Maja"
+msgid "Missionary Day"
+msgstr "Dzie≈Ñ Zwyciƒôstwa"
 
 #: src/hd-data.c:1836
 #, fuzzy
-msgid "Morazan Day"
-msgstr "DzieÒ weterana"
+msgid "Mi-Car√™me Day"
+msgstr "1 Maja"
 
 #: src/hd-data.c:1837
 #, fuzzy
-msgid "Mosheshoe's Day"
-msgstr "DzieÒ Matki"
+msgid "Morazan Day"
+msgstr "Dzie≈Ñ weterana"
 
 #: src/hd-data.c:1838
+#, fuzzy
+msgid "Mosheshoe's Day"
+msgstr "Dzie≈Ñ Matki"
+
+#: src/hd-data.c:1839
 msgid "Motherhood and Beauty Day"
 msgstr ""
 
-#: src/hd-data.c:1839
-#, fuzzy
-msgid "Naming Day"
-msgstr "Drugi dzieÒ Boøego Narodzenia"
-
 #: src/hd-data.c:1840
 #, fuzzy
-msgid "National Bun Day"
-msgstr "Narodowy DzieÒ Cierpienia"
+msgid "Naming Day"
+msgstr "Drugi dzie≈Ñ Bo≈ºego Narodzenia"
 
 #: src/hd-data.c:1841
+#, fuzzy
+msgid "National Bun Day"
+msgstr "Narodowy Dzie≈Ñ Cierpienia"
+
+#: src/hd-data.c:1842
 #, fuzzy
 msgid "National Heroes Day"
 msgstr "Narodowe wakacje"
 
-#: src/hd-data.c:1842
+#: src/hd-data.c:1843
 #, fuzzy
 msgid "National Redemption Day"
-msgstr "Narodowy DzieÒ Cierpienia"
-
-#: src/hd-data.c:1843
-msgid "National Resistance Day"
-msgstr "DzieÒ Narodowego Ruchu Oporu"
+msgstr "Narodowy Dzie≈Ñ Cierpienia"
 
 #: src/hd-data.c:1844
-#, fuzzy
-msgid "National Revival Day"
-msgstr "DzieÒ Narodowego Ruchu Oporu"
+msgid "National Resistance Day"
+msgstr "Dzie≈Ñ Narodowego Ruchu Oporu"
 
 #: src/hd-data.c:1845
 #, fuzzy
-msgid "National Unity Day"
-msgstr "Narodowy DzieÒ Cierpienia"
+msgid "National Revival Day"
+msgstr "Dzie≈Ñ Narodowego Ruchu Oporu"
 
 #: src/hd-data.c:1846
+#, fuzzy
+msgid "National Unity Day"
+msgstr "Narodowy Dzie≈Ñ Cierpienia"
+
+#: src/hd-data.c:1847
 #, fuzzy
 msgid "Ndadaye Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1847
+#: src/hd-data.c:1848
 #, fuzzy
 msgid "Neutrality Day"
-msgstr "DzieÒ Zjednoczenia Niemiec"
+msgstr "Dzie≈Ñ Zjednoczenia Niemiec"
 
-#: src/hd-data.c:1848
+#: src/hd-data.c:1849
 #, fuzzy
 msgid "Nevada Day"
 msgstr "Swallow Day"
 
-#: src/hd-data.c:1849
+#: src/hd-data.c:1850
 #, fuzzy
 msgid "New Regime Anniversary"
 msgstr "Stulecie Konstytucji"
 
-#: src/hd-data.c:1850
-msgid "Nobel Day"
-msgstr "DzieÒ Nobla"
-
 #: src/hd-data.c:1851
-#, fuzzy
-msgid "Noi Day"
-msgstr "DzieÒ Nobla"
+msgid "Nobel Day"
+msgstr "Dzie≈Ñ Nobla"
 
 #: src/hd-data.c:1852
 #, fuzzy
-msgid "OAU Day"
-msgstr "DzieÒ Anzaca"
+msgid "Noi Day"
+msgstr "Dzie≈Ñ Nobla"
 
 #: src/hd-data.c:1853
+#, fuzzy
+msgid "OAU Day"
+msgstr "Dzie≈Ñ Anzaca"
+
+#: src/hd-data.c:1854
 #, fuzzy
 msgid "October Holiday"
 msgstr "Narodowe wakacje"
 
-#: src/hd-data.c:1854
+#: src/hd-data.c:1855
 msgid "Oil Industry Day"
 msgstr ""
 
-#: src/hd-data.c:1855
+#: src/hd-data.c:1856
 msgid "Our Lady of Altagracia Day"
 msgstr ""
 
-#: src/hd-data.c:1856
+#: src/hd-data.c:1857
 msgid "Our Lady of Camarin Day"
 msgstr ""
 
-#: src/hd-data.c:1857
+#: src/hd-data.c:1858
 msgid "Our Lady of Las Mercedes Day"
 msgstr ""
 
-#: src/hd-data.c:1858
+#: src/hd-data.c:1859
 msgid "Our Lady of Los Angeles Day"
 msgstr ""
 
-#: src/hd-data.c:1859
+#: src/hd-data.c:1860
 msgid "Our Lady of Seven Sorrows"
 msgstr ""
 
-#: src/hd-data.c:1860
+#: src/hd-data.c:1861
 msgid "Our Lady of Victories Day"
 msgstr ""
 
-#: src/hd-data.c:1861
-#, fuzzy
-msgid "Panama City Day"
-msgstr "DzieÒ Zjednoczenia Niemiec"
-
 #: src/hd-data.c:1862
 #, fuzzy
-msgid "Panamerica Day"
-msgstr "DzieÒ ¶w. Patryka"
+msgid "Panama City Day"
+msgstr "Dzie≈Ñ Zjednoczenia Niemiec"
 
 #: src/hd-data.c:1863
+#, fuzzy
+msgid "Panamerica Day"
+msgstr "Dzie≈Ñ ≈öw. Patryka"
+
+#: src/hd-data.c:1864
 msgid "Paris Peace Agreement Day"
 msgstr ""
 
-#: src/hd-data.c:1864
+#: src/hd-data.c:1865
 #, fuzzy
 msgid "Patriot's Day"
-msgstr "DzieÒ Prezydenta"
+msgstr "Dzie≈Ñ Prezydenta"
 
-#: src/hd-data.c:1865
+#: src/hd-data.c:1866
 #, fuzzy
 msgid "People's Uprising Day"
 msgstr "Majowe Powstanie Ludu Czeskiego"
 
-#: src/hd-data.c:1866
+#: src/hd-data.c:1867
 msgid "People Power Day"
 msgstr ""
 
-#: src/hd-data.c:1867
+#: src/hd-data.c:1868
 msgid "Philippine-American Friendship"
 msgstr ""
 
-#: src/hd-data.c:1868
-#, fuzzy
-msgid "Pichincha Day"
-msgstr "DzieÒ Wiktorii"
-
 #: src/hd-data.c:1869
 #, fuzzy
-msgid "Picnic Day"
-msgstr "DzieÒ Wiktorii"
+msgid "Pichincha Day"
+msgstr "Dzie≈Ñ Wiktorii"
 
 #: src/hd-data.c:1870
 #, fuzzy
-msgid "Pioneer Day"
-msgstr "DzieÒ Koronacji"
+msgid "Picnic Day"
+msgstr "Dzie≈Ñ Wiktorii"
 
 #: src/hd-data.c:1871
+#, fuzzy
+msgid "Pioneer Day"
+msgstr "Dzie≈Ñ Koronacji"
+
+#: src/hd-data.c:1872
 #, fuzzy
 msgid "Poya Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:1872
+#: src/hd-data.c:1873
 msgid "Prince Kalanianaole Day"
 msgstr ""
 
-#: src/hd-data.c:1873
-#, fuzzy
-msgid "Prince of Wales' Birthday"
-msgstr "Urodziny Koronowanej KsiÍøniczki"
-
 #: src/hd-data.c:1874
 #, fuzzy
-msgid "Proclamation Day"
-msgstr "DzieÒ Koronacji"
+msgid "Prince of Wales' Birthday"
+msgstr "Urodziny Koronowanej Ksiƒô≈ºniczki"
 
 #: src/hd-data.c:1875
 #, fuzzy
-msgid "Qaid-i-Azam's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Proclamation Day"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:1876
+#, fuzzy
+msgid "Qaid-i-Azam's Birthday"
+msgstr "Urodziny Kr√≥la"
+
+#: src/hd-data.c:1877
 msgid "Ratu Sukuma Day"
 msgstr ""
 
-#: src/hd-data.c:1877
-#, fuzzy
-msgid "Recreation Day"
-msgstr "DzieÒ Reformacji"
-
 #: src/hd-data.c:1878
 #, fuzzy
-msgid "Referendum Day"
-msgstr "DzieÒ Reformacji"
+msgid "Recreation Day"
+msgstr "Dzie≈Ñ Reformacji"
 
 #: src/hd-data.c:1879
 #, fuzzy
-msgid "Regatta Day"
-msgstr "DzieÒ weterana"
+msgid "Referendum Day"
+msgstr "Dzie≈Ñ Reformacji"
 
 #: src/hd-data.c:1880
+#, fuzzy
+msgid "Regatta Day"
+msgstr "Dzie≈Ñ weterana"
+
+#: src/hd-data.c:1881
 msgid "Regency Exchange"
 msgstr ""
 
-#: src/hd-data.c:1881
-#, fuzzy
-msgid "Restoration Day"
-msgstr "DzieÒ Reformacji"
-
 #: src/hd-data.c:1882
 #, fuzzy
-msgid "Return Day"
-msgstr "DzieÒ Reformacji"
+msgid "Restoration Day"
+msgstr "Dzie≈Ñ Reformacji"
 
 #: src/hd-data.c:1883
 #, fuzzy
-msgid "Reunification Day"
-msgstr "DzieÒ Reformacji"
+msgid "Return Day"
+msgstr "Dzie≈Ñ Reformacji"
 
 #: src/hd-data.c:1884
 #, fuzzy
-msgid "Rizal Day"
-msgstr "DzieÒ Anzaca"
+msgid "Reunification Day"
+msgstr "Dzie≈Ñ Reformacji"
 
 #: src/hd-data.c:1885
 #, fuzzy
-msgid "Rwagasore Day"
-msgstr "¶wiÍto Pracy"
+msgid "Rizal Day"
+msgstr "Dzie≈Ñ Anzaca"
 
 #: src/hd-data.c:1886
 #, fuzzy
-msgid "Saba Day"
-msgstr "¶wiÍto Pracy"
+msgid "Rwagasore Day"
+msgstr "≈öwiƒôto Pracy"
 
 #: src/hd-data.c:1887
 #, fuzzy
-msgid "San Jacinto Day"
-msgstr "DzieÒ Wolno∂ci"
+msgid "Saba Day"
+msgstr "≈öwiƒôto Pracy"
 
 #: src/hd-data.c:1888
 #, fuzzy
-msgid "San JosÈ Day"
-msgstr "DzieÒ ¶w. Jana"
+msgid "San Jacinto Day"
+msgstr "Dzie≈Ñ Wolno≈õci"
 
 #: src/hd-data.c:1889
+#, fuzzy
+msgid "San Jos√© Day"
+msgstr "Dzie≈Ñ ≈öw. Jana"
+
+#: src/hd-data.c:1890
 msgid "SAR Establishment Day"
 msgstr ""
 
-#: src/hd-data.c:1890
+#: src/hd-data.c:1891
 #, fuzzy
 msgid "School Holiday"
 msgstr "Narodowe wakacje"
 
-#: src/hd-data.c:1891
-msgid "Sechsel‰uten"
+#: src/hd-data.c:1892
+msgid "Sechsel√§uten"
 msgstr ""
 
-#: src/hd-data.c:1892
+#: src/hd-data.c:1893
 #, fuzzy
 msgid "Separation Day"
-msgstr "DzieÒ Wolno∂ci"
+msgstr "Dzie≈Ñ Wolno≈õci"
 
-#: src/hd-data.c:1893
+#: src/hd-data.c:1894
 msgid "Seretse Khama Day"
 msgstr ""
 
-#: src/hd-data.c:1894
-#, fuzzy
-msgid "Settlers Day"
-msgstr "DzieÒ weterana"
-
 #: src/hd-data.c:1895
 #, fuzzy
-msgid "Seward's Day"
-msgstr "DzieÒ ¶w. Edwarda"
+msgid "Settlers Day"
+msgstr "Dzie≈Ñ weterana"
 
 #: src/hd-data.c:1896
 #, fuzzy
-msgid "Shaheed Day"
-msgstr "DzieÒ Prezydenta"
+msgid "Seward's Day"
+msgstr "Dzie≈Ñ ≈öw. Edwarda"
 
 #: src/hd-data.c:1897
+#, fuzzy
+msgid "Shaheed Day"
+msgstr "Dzie≈Ñ Prezydenta"
+
+#: src/hd-data.c:1898
 msgid "Sheep Festival"
 msgstr ""
 
-#: src/hd-data.c:1898
+#: src/hd-data.c:1899
 #, fuzzy
 msgid "Sheikh Zayed's Ascension Day"
-msgstr "DzieÒ Wniebowst±pienia NMP"
+msgstr "Dzie≈Ñ WniebowstƒÖpienia NMP"
 
-#: src/hd-data.c:1899
+#: src/hd-data.c:1900
 msgid "Simon Bolivar's Day"
 msgstr ""
 
-#: src/hd-data.c:1900
-#, fuzzy
-msgid "Sinai-Liberation Day"
-msgstr "DzieÒ Wolno∂ci"
-
 #: src/hd-data.c:1901
 #, fuzzy
-msgid "Slave-Liberation Day"
-msgstr "DzieÒ Wolno∂ci"
+msgid "Sinai-Liberation Day"
+msgstr "Dzie≈Ñ Wolno≈õci"
 
 #: src/hd-data.c:1902
+#, fuzzy
+msgid "Slave-Liberation Day"
+msgstr "Dzie≈Ñ Wolno≈õci"
+
+#: src/hd-data.c:1903
 msgid "Sniff the Breeze Day"
 msgstr ""
 
-#: src/hd-data.c:1903
-#, fuzzy
-msgid "Solidarity Day"
-msgstr "DzieÒ Wolno∂ci"
-
 #: src/hd-data.c:1904
 #, fuzzy
-msgid "Somers Day"
-msgstr "DzieÒ Matki"
+msgid "Solidarity Day"
+msgstr "Dzie≈Ñ Wolno≈õci"
 
 #: src/hd-data.c:1905
 #, fuzzy
-msgid "Statia-American Day"
-msgstr "DzieÒ ¶w. Patryka"
+msgid "Somers Day"
+msgstr "Dzie≈Ñ Matki"
 
 #: src/hd-data.c:1906
 #, fuzzy
-msgid "Student's Day"
-msgstr "DzieÒ Prezydenta"
+msgid "Statia-American Day"
+msgstr "Dzie≈Ñ ≈öw. Patryka"
 
 #: src/hd-data.c:1907
 #, fuzzy
-msgid "St Agata Day"
-msgstr "¶wiÍto Pracy"
+msgid "Student's Day"
+msgstr "Dzie≈Ñ Prezydenta"
 
 #: src/hd-data.c:1908
 #, fuzzy
-msgid "St Canute's Day"
-msgstr "DzieÒ ¶w. Kanuta"
+msgid "St Agata Day"
+msgstr "≈öwiƒôto Pracy"
 
 #: src/hd-data.c:1909
 #, fuzzy
-msgid "St Cedilia's Day"
-msgstr "DzieÒ ¶w. £ucji"
+msgid "St Canute's Day"
+msgstr "Dzie≈Ñ ≈öw. Kanuta"
 
 #: src/hd-data.c:1910
 #, fuzzy
-msgid "St Charles' Day"
-msgstr "DzieÒ ¶w. Jamesa"
+msgid "St Cedilia's Day"
+msgstr "Dzie≈Ñ ≈öw. ≈Åucji"
 
 #: src/hd-data.c:1911
 #, fuzzy
-msgid "St Demetrius' Day"
-msgstr "DzieÒ ¶w. Jamesa"
+msgid "St Charles' Day"
+msgstr "Dzie≈Ñ ≈öw. Jamesa"
 
 #: src/hd-data.c:1912
 #, fuzzy
-msgid "St DÈvote Day"
-msgstr "DzieÒ ¶w. Dawida"
+msgid "St Demetrius' Day"
+msgstr "Dzie≈Ñ ≈öw. Jamesa"
 
 #: src/hd-data.c:1913
 #, fuzzy
-msgid "St Eliah's Day"
-msgstr "DzieÒ ¶w. £ucji"
+msgid "St D√©vote Day"
+msgstr "Dzie≈Ñ ≈öw. Dawida"
 
 #: src/hd-data.c:1914
 #, fuzzy
-msgid "St Jean Baptiste Day"
-msgstr "DzieÒ ¶w. Jana Baptysty"
+msgid "St Eliah's Day"
+msgstr "Dzie≈Ñ ≈öw. ≈Åucji"
 
 #: src/hd-data.c:1915
 #, fuzzy
-msgid "St Lucia's Day"
-msgstr "DzieÒ ¶w. £ucji"
+msgid "St Jean Baptiste Day"
+msgstr "Dzie≈Ñ ≈öw. Jana Baptysty"
 
 #: src/hd-data.c:1916
 #, fuzzy
-msgid "St Marguerite's Day"
-msgstr "DzieÒ ¶w. Kanuta"
+msgid "St Lucia's Day"
+msgstr "Dzie≈Ñ ≈öw. ≈Åucji"
 
 #: src/hd-data.c:1917
 #, fuzzy
-msgid "St Maroon's Day"
-msgstr "DzieÒ ¶w. Jana"
+msgid "St Marguerite's Day"
+msgstr "Dzie≈Ñ ≈öw. Kanuta"
 
 #: src/hd-data.c:1918
 #, fuzzy
-msgid "St Michael's Day"
-msgstr "Miko≥ajki"
+msgid "St Maroon's Day"
+msgstr "Dzie≈Ñ ≈öw. Jana"
 
 #: src/hd-data.c:1919
 #, fuzzy
-msgid "St Olav's Day"
-msgstr "DzieÒ ¶w. Dawida"
+msgid "St Michael's Day"
+msgstr "Miko≈Çajki"
 
 #: src/hd-data.c:1920
 #, fuzzy
-msgid "St Olav's Eve"
-msgstr "Jutro Miko≥ajki"
+msgid "St Olav's Day"
+msgstr "Dzie≈Ñ ≈öw. Dawida"
 
 #: src/hd-data.c:1921
+#, fuzzy
+msgid "St Olav's Eve"
+msgstr "Jutro Miko≈Çajki"
+
+#: src/hd-data.c:1922
 msgid "St Paul's Shipswreck"
 msgstr ""
 
-#: src/hd-data.c:1922
-#, fuzzy
-msgid "St Rose of Lima"
-msgstr "DzieÒ ¶w. JÛzefa"
-
 #: src/hd-data.c:1923
 #, fuzzy
-msgid "St Ursula's Day"
-msgstr "DzieÒ ¶w. £ucji"
+msgid "St Rose of Lima"
+msgstr "Dzie≈Ñ ≈öw. J√≥zefa"
 
 #: src/hd-data.c:1924
 #, fuzzy
-msgid "St Vincent de Paul's Day"
-msgstr "DzieÒ zakochanych"
+msgid "St Ursula's Day"
+msgstr "Dzie≈Ñ ≈öw. ≈Åucji"
 
 #: src/hd-data.c:1925
 #, fuzzy
-msgid "Suez Victory Day"
-msgstr "DzieÒ ZwyciÍstwa"
+msgid "St Vincent de Paul's Day"
+msgstr "Dzie≈Ñ zakochanych"
 
 #: src/hd-data.c:1926
 #, fuzzy
-msgid "Sultan Qaboos' Birthday"
-msgstr "Urodziny KrÛlowej"
+msgid "Suez Victory Day"
+msgstr "Dzie≈Ñ Zwyciƒôstwa"
 
 #: src/hd-data.c:1927
+#, fuzzy
+msgid "Sultan Qaboos' Birthday"
+msgstr "Urodziny Kr√≥lowej"
+
+#: src/hd-data.c:1928
 msgid "Svetitskhovloba"
 msgstr ""
 
-#: src/hd-data.c:1928
-#, fuzzy
-msgid "Sweden Day"
-msgstr "DzieÒ Prezydenta"
-
 #: src/hd-data.c:1929
 #, fuzzy
-msgid "S. Doe's Birthday"
-msgstr "Urodziny KrÛlowej"
+msgid "Sweden Day"
+msgstr "Dzie≈Ñ Prezydenta"
 
 #: src/hd-data.c:1930
+#, fuzzy
+msgid "S. Doe's Birthday"
+msgstr "Urodziny Kr√≥lowej"
+
+#: src/hd-data.c:1931
 msgid "Tennant-Creek Show Day"
 msgstr ""
 
-#: src/hd-data.c:1931
+#: src/hd-data.c:1932
 #, fuzzy
 msgid "Territory Day"
-msgstr "DzieÒ ZwyciÍstwa"
-
-#: src/hd-data.c:1932
-msgid "The Crown Princesse's Birthday"
-msgstr "Urodziny Koronowanej KsiÍøniczki"
+msgstr "Dzie≈Ñ Zwyciƒôstwa"
 
 #: src/hd-data.c:1933
-msgid "The Crown Princesse's Name-Day"
-msgstr "DzieÒ Koronowanej KsiÍøniczki"
+msgid "The Crown Princesse's Birthday"
+msgstr "Urodziny Koronowanej Ksiƒô≈ºniczki"
 
 #: src/hd-data.c:1934
-#, fuzzy
-msgid "The Crown Prince's Birthday"
-msgstr "Urodziny Koronowanej KsiÍøniczki"
+msgid "The Crown Princesse's Name-Day"
+msgstr "Dzie≈Ñ Koronowanej Ksiƒô≈ºniczki"
 
 #: src/hd-data.c:1935
-msgid "The King's Name-Day"
-msgstr "DzieÒ KrÛla"
+#, fuzzy
+msgid "The Crown Prince's Birthday"
+msgstr "Urodziny Koronowanej Ksiƒô≈ºniczki"
 
 #: src/hd-data.c:1936
-msgid "The Queen's Name-Day"
-msgstr "DzieÒ KrÛlowej"
+msgid "The King's Name-Day"
+msgstr "Dzie≈Ñ Kr√≥la"
 
 #: src/hd-data.c:1937
+msgid "The Queen's Name-Day"
+msgstr "Dzie≈Ñ Kr√≥lowej"
+
+#: src/hd-data.c:1938
 msgid "Topou I Day"
 msgstr ""
 
-#: src/hd-data.c:1938
-#, fuzzy
-msgid "Town Meeting Day"
-msgstr "Drugi dzieÒ Boøego Narodzenia"
-
 #: src/hd-data.c:1939
 #, fuzzy
-msgid "Traditional Day"
-msgstr "Narodowy DzieÒ Cierpienia"
+msgid "Town Meeting Day"
+msgstr "Drugi dzie≈Ñ Bo≈ºego Narodzenia"
 
 #: src/hd-data.c:1940
 #, fuzzy
-msgid "Transfer Day"
-msgstr "DzieÒ Modlitwy"
+msgid "Traditional Day"
+msgstr "Narodowy Dzie≈Ñ Cierpienia"
 
 #: src/hd-data.c:1941
 #, fuzzy
-msgid "Truman Day"
-msgstr "DzieÒ Modlitwy"
+msgid "Transfer Day"
+msgstr "Dzie≈Ñ Modlitwy"
 
 #: src/hd-data.c:1942
 #, fuzzy
-msgid "Union Day"
-msgstr "DzieÒ Koronacji"
+msgid "Truman Day"
+msgstr "Dzie≈Ñ Modlitwy"
 
 #: src/hd-data.c:1943
-msgid "Union with Sweden dissolved"
-msgstr "Rozpad unii ze Szwecj±"
+#, fuzzy
+msgid "Union Day"
+msgstr "Dzie≈Ñ Koronacji"
 
 #: src/hd-data.c:1944
-msgid "United Nations Day"
-msgstr "DzieÒ NarodÛw Zjednoczonych"
+msgid "Union with Sweden dissolved"
+msgstr "Rozpad unii ze SzwecjƒÖ"
 
 #: src/hd-data.c:1945
-#, fuzzy
-msgid "Unity Factory Day"
-msgstr "DzieÒ ZwyciÍstwa"
+msgid "United Nations Day"
+msgstr "Dzie≈Ñ Narod√≥w Zjednoczonych"
 
 #: src/hd-data.c:1946
 #, fuzzy
-msgid "Victor-Schoelcher Day"
-msgstr "DzieÒ ZwyciÍstwa"
+msgid "Unity Factory Day"
+msgstr "Dzie≈Ñ Zwyciƒôstwa"
 
 #: src/hd-data.c:1947
+#, fuzzy
+msgid "Victor-Schoelcher Day"
+msgstr "Dzie≈Ñ Zwyciƒôstwa"
+
+#: src/hd-data.c:1948
 msgid "Vidovdan"
 msgstr ""
 
-#: src/hd-data.c:1948
+#: src/hd-data.c:1949
 #, fuzzy
 msgid "West Virginia Day"
-msgstr "DzieÒ Reformacji"
-
-#: src/hd-data.c:1949
-msgid "Whitsun Eve"
-msgstr "Jutro Boøe Cia≥o"
+msgstr "Dzie≈Ñ Reformacji"
 
 #: src/hd-data.c:1950
-#, fuzzy
-msgid "W. Tubman's Birthday"
-msgstr "Urodziny KrÛla"
+msgid "Whitsun Eve"
+msgstr "Jutro Bo≈ºe Cia≈Ço"
 
 #: src/hd-data.c:1951
+#, fuzzy
+msgid "W. Tubman's Birthday"
+msgstr "Urodziny Kr√≥la"
+
+#: src/hd-data.c:1952
 #, fuzzy
 msgid "Yap Day"
 msgstr "1 Maja"
 
-#: src/hd-data.c:2028
+#: src/hd-data.c:1953
+msgid "Day of Czech Statehood"
+msgstr ""
+
+#: src/hd-data.c:2030
 msgid "Zi/Rat"
 msgstr ""
 
-#: src/hd-data.c:2028
+#: src/hd-data.c:2030
 msgid "Chou/Ox"
 msgstr ""
 
-#: src/hd-data.c:2029
+#: src/hd-data.c:2031
 msgid "Yin/Tiger"
 msgstr ""
 
-#: src/hd-data.c:2029
+#: src/hd-data.c:2031
 msgid "Mao/Rabbit"
 msgstr ""
 
-#: src/hd-data.c:2030
+#: src/hd-data.c:2032
 msgid "Chen/Dragon"
 msgstr ""
 
-#: src/hd-data.c:2030
+#: src/hd-data.c:2032
 msgid "Si/Snake"
 msgstr ""
 
-#: src/hd-data.c:2031
+#: src/hd-data.c:2033
 msgid "Wu/Horse"
 msgstr ""
 
-#: src/hd-data.c:2031
+#: src/hd-data.c:2033
 msgid "Wei/Sheep"
 msgstr ""
 
-#: src/hd-data.c:2032
+#: src/hd-data.c:2034
 msgid "Shen/Monkey"
 msgstr ""
 
-#: src/hd-data.c:2032
+#: src/hd-data.c:2034
 msgid "You/Rooster"
 msgstr ""
 
-#: src/hd-data.c:2033
+#: src/hd-data.c:2035
 msgid "Xu/Dog"
 msgstr ""
 
-#: src/hd-data.c:2033
+#: src/hd-data.c:2035
 msgid "Hai/Pig"
 msgstr ""
 
-#: src/hd-data.c:2234
+#: src/hd-data.c:2236
 #, fuzzy
 msgid "Ast"
 msgstr ". "
 
-#: src/hd-data.c:2350 src/hd-data.c:2417
+#: src/hd-data.c:2352 src/hd-data.c:2419
 msgid "Bah"
 msgstr ""
 
-#: src/hd-data.c:2486
+#: src/hd-data.c:2488
 msgid "Cel"
 msgstr ""
 
-#: src/hd-data.c:2622 src/hd-data.c:3161
+#: src/hd-data.c:2624 src/hd-data.c:3163
 #, fuzzy
 msgid "Chi"
 msgstr "Chr"
 
-#: src/hd-data.c:2737 src/hd-data.c:3266 src/hd-data.c:4761
+#: src/hd-data.c:2739 src/hd-data.c:3268 src/hd-data.c:4763
 #, c-format
 msgid "Cannot calculate lunisolar calendar for %d correctly"
 msgstr ""
 
-#: src/hd-data.c:3167 src/hd-data.c:4659
+#: src/hd-data.c:3169 src/hd-data.c:4661
 #, fuzzy
 msgid "Jap"
 msgstr "Sty"
 
-#: src/hd-data.c:3364
+#: src/hd-data.c:3366
 msgid "Chr"
 msgstr "Chr"
 
-#: src/hd-data.c:3572 src/hd-data.c:5075
+#: src/hd-data.c:3574 src/hd-data.c:5077
 msgid "FRR"
 msgstr ""
 
-#: src/hd-data.c:3696 src/hd-data.c:3863
+#: src/hd-data.c:3698 src/hd-data.c:3865
 #, fuzzy
 msgid "Heb"
 msgstr "Lut"
 
-#: src/hd-data.c:4098 src/hd-data.c:4545
+#: src/hd-data.c:4100 src/hd-data.c:4547
 msgid "Isl"
 msgstr ""
 
-#: src/hd-data.c:5146 src/hd-data.c:5252
+#: src/hd-data.c:5148 src/hd-data.c:5254
 msgid "AMO"
 msgstr ""
 
-#: src/hd-data.c:5170 src/hd-data.c:5246
+#: src/hd-data.c:5172 src/hd-data.c:5248
 msgid "EGO"
 msgstr ""
 
-#: src/hd-data.c:5363
+#: src/hd-data.c:5365
 msgid "OxN"
 msgstr ""
 
-#: src/hd-data.c:5369
+#: src/hd-data.c:5371
 msgid "OxO"
 msgstr ""
 
-#: src/hd-data.c:5571 src/hd-data.c:5692
+#: src/hd-data.c:5573 src/hd-data.c:5694
 msgid "Per"
 msgstr ""
 
-#: src/hd-data.c:5763
+#: src/hd-data.c:5765
 msgid "Zod"
 msgstr ""
 
 #: src/hd-use.c:938
 msgid " day"
-msgstr " dzieÒ"
+msgstr " dzie≈Ñ"
 
 #: src/hd-use.c:1963 src/hd-use.c:1968 src/hd-use.c:1971 src/hd-use.c:1977
 #: src/hd-use.c:1980 src/hd-use.c:2086 src/hd-use.c:2276
@@ -4382,7 +4387,7 @@ msgstr "%s:%*sRok %d nie jest rokiem przestepnym"
 #: src/hd-use.c:2242
 #, c-format
 msgid " = %+4d day"
-msgstr " = %+4d dzieÒ"
+msgstr " = %+4d dzie≈Ñ"
 
 #: src/hd-use.c:2244
 #, c-format
@@ -4392,7 +4397,7 @@ msgstr " = %+4d dni"
 #: src/hd-use.c:2275
 #, c-format
 msgid "%s%s contains %d maximum entries now!%s"
-msgstr "%s%s zawiera obecnie maksymalnie %d rekordÛw!%s"
+msgstr "%s%s zawiera obecnie maksymalnie %d rekord√≥w!%s"
 
 #: src/help.c:87
 #, c-format
@@ -4402,21 +4407,21 @@ msgstr "Skompilowany z %s%s dla %s%s%s%s"
 #: src/help.c:137
 #, fuzzy
 msgid "# Day number (must be defined)"
-msgstr "Grupa dni (dok≥adnie jeden przedstawiciel musi byÊ zdefiniowany):"
+msgstr "Grupa dni (dok≈Çadnie jeden przedstawiciel musi byƒá zdefiniowany):"
 
 #: src/help.c:138
 #, fuzzy
 msgid "# Year number (must be defined)"
-msgstr "Grupa lat (dok≥adnie jeden przedstawiciel musi byÊ zdefiniowany):"
+msgstr "Grupa lat (dok≈Çadnie jeden przedstawiciel musi byƒá zdefiniowany):"
 
 #: src/help.c:139
 #, fuzzy
 msgid "# Weekday name (may be defined)"
-msgstr "Nazwa dnia (jeden przedstawiciel moøe byÊ zdefiniowany):"
+msgstr "Nazwa dnia (jeden przedstawiciel mo≈ºe byƒá zdefiniowany):"
 
 #: src/help.c:140
 msgid "Month group (exactly one member must be defined):"
-msgstr "Grupa miesiÍcy (dok≥adnie jeden przedstawiciel musi byÊ zdefiniowany):"
+msgstr "Grupa miesiƒôcy (dok≈Çadnie jeden przedstawiciel musi byƒá zdefiniowany):"
 
 #: src/help.c:141
 msgid "# Month number"
@@ -4425,19 +4430,19 @@ msgstr ""
 #: src/help.c:142
 #, fuzzy
 msgid "# Month name"
-msgstr "Pe≥na nazwa miesi±ca"
+msgstr "Pe≈Çna nazwa miesiƒÖca"
 
 #: src/help.c:143
 msgid "Highlighting group (all members must be defined):"
-msgstr "Grupa wyrÛøniaj±ca (naleøy zdefiniowaÊ wszystkich przedstawicieli):"
+msgstr "Grupa wyr√≥≈ºniajƒÖca (nale≈ºy zdefiniowaƒá wszystkich przedstawicieli):"
 
 #: src/help.c:144
 msgid "Start of highlighting sequence/marking character"
-msgstr "Pocz±tek sekwencji wyrÛøniaj±cej/znak zaznaczaj±cy"
+msgstr "PoczƒÖtek sekwencji wyr√≥≈ºniajƒÖcej/znak zaznaczajƒÖcy"
 
 #: src/help.c:145
 msgid "End of highlighting sequence/marking character"
-msgstr "Koniec sekwencji wyrÛøniaj±cej/znak zaznaczaj±cy"
+msgstr "Koniec sekwencji wyr√≥≈ºniajƒÖcej/znak zaznaczajƒÖcy"
 
 #: src/help.c:146
 msgid "Character replacement:"
@@ -4446,12 +4451,12 @@ msgstr "Zamiennik znaku:"
 #: src/help.c:147
 #, fuzzy, c-format
 msgid "Space/blank ('%c') character"
-msgstr "OdstÍp/znak pusty (' ')"
+msgstr "Odstƒôp/znak pusty (' ')"
 
 #: src/help.c:148
 #, fuzzy, c-format
 msgid "Underscore ('%c') character"
-msgstr "Znak podkre∂lenia ('_')"
+msgstr "Znak podkre≈õlenia ('_')"
 
 #: src/help.c:149
 #, fuzzy, c-format
@@ -4461,7 +4466,7 @@ msgstr "Znak procentu ('%')"
 #: src/help.c:150
 #, fuzzy, c-format
 msgid "Backslash ('%c') character"
-msgstr "OdstÍp/znak pusty (' ')"
+msgstr "Odstƒôp/znak pusty (' ')"
 
 #: src/help.c:151
 msgid "All format elements marked by # may optionally"
@@ -4478,7 +4483,7 @@ msgstr ""
 #: src/help.c:154
 #, fuzzy
 msgid "ALIGNMENT group (exactly one member must be defined):"
-msgstr "Grupa miesiÍcy (dok≥adnie jeden przedstawiciel musi byÊ zdefiniowany):"
+msgstr "Grupa miesiƒôcy (dok≈Çadnie jeden przedstawiciel musi byƒá zdefiniowany):"
 
 #: src/help.c:155
 msgid "Field contents placed at the left margin using width WIDTH"
@@ -4499,7 +4504,7 @@ msgstr ""
 #: src/help.c:159
 #, fuzzy
 msgid "Numerical value is provided with leading sign"
-msgstr "Numer dnia z poprzedzaj±cymi zerami"
+msgstr "Numer dnia z poprzedzajƒÖcymi zerami"
 
 #: src/help.c:160
 msgid "ZERO (may be defined):"
@@ -4508,7 +4513,7 @@ msgstr ""
 #: src/help.c:161
 #, fuzzy
 msgid "Numerical value is filled with leading zero(es)"
-msgstr "Numer dnia z poprzedzaj±cymi zerami"
+msgstr "Numer dnia z poprzedzajƒÖcymi zerami"
 
 #: src/help.c:162
 msgid "WIDTH (must be defined):"
@@ -4522,7 +4527,7 @@ msgstr ""
 #: src/help.c:164
 #, fuzzy
 msgid "STYLE group (exactly one member may be defined):"
-msgstr "Grupa miesiÍcy (dok≥adnie jeden przedstawiciel musi byÊ zdefiniowany):"
+msgstr "Grupa miesiƒôcy (dok≈Çadnie jeden przedstawiciel musi byƒá zdefiniowany):"
 
 #: src/help.c:165
 msgid "Field contents is converted to upper-case letters"
@@ -4547,7 +4552,7 @@ msgstr ""
 #: src/help.c:170
 #, fuzzy
 msgid "FORMAT group (exactly one member must be defined):"
-msgstr "Grupa miesiÍcy (dok≥adnie jeden przedstawiciel musi byÊ zdefiniowany):"
+msgstr "Grupa miesiƒôcy (dok≈Çadnie jeden przedstawiciel musi byƒá zdefiniowany):"
 
 #: src/help.c:171
 msgid "Field contents is not cut after position WIDTH"
@@ -4559,7 +4564,7 @@ msgstr ""
 
 #: src/help.c:201
 msgid "legal holidays"
-msgstr "∂wiÍta paÒstwowe"
+msgstr "≈õwiƒôta pa≈Ñstwowe"
 
 #: src/help.c:202
 msgid "holidays"
@@ -4567,7 +4572,7 @@ msgstr "dni wolne"
 
 #: src/help.c:203
 msgid "Mondays"
-msgstr "Poniedzia≥ki"
+msgstr "Poniedzia≈Çki"
 
 #: src/help.c:204
 msgid "Tuesdays"
@@ -4575,7 +4580,7 @@ msgstr "Wtorki"
 
 #: src/help.c:205
 msgid "Wednesdays"
-msgstr "¶rody"
+msgstr "≈örody"
 
 #: src/help.c:206
 msgid "Thursdays"
@@ -4583,7 +4588,7 @@ msgstr "Czwartki"
 
 #: src/help.c:207
 msgid "Fridays"
-msgstr "Pi±tki"
+msgstr "PiƒÖtki"
 
 #: src/help.c:208
 msgid "Saturdays"
@@ -4595,16 +4600,16 @@ msgstr "Niedziele"
 
 #: src/help.c:210
 msgid "Mondays...Thursdays"
-msgstr "Poniedzia≥ki...Czwartki"
+msgstr "Poniedzia≈Çki...Czwartki"
 
 #: src/help.c:211
 msgid "Mondays...Fridays"
-msgstr "Poniedzia≥ki...Pi±tki"
+msgstr "Poniedzia≈Çki...PiƒÖtki"
 
 #: src/help.c:247
 #, c-format
 msgid "%s: Use `%s %s' with one of these arguments"
-msgstr "%s: Uøyj `%s %s' z jednym z tych argumentÛw"
+msgstr "%s: U≈ºyj `%s %s' z jednym z tych argument√≥w"
 
 #: src/help.c:317
 msgid "OPTION"
@@ -4612,51 +4617,52 @@ msgstr "OPCJA"
 
 #: src/help.c:1836
 msgid "          Display help text and quit program"
-msgstr "          Wy∂wietl tekst pomocy i zakoÒcz program"
+msgstr "          Wy≈õwietl tekst pomocy i zako≈Ñcz program"
 
 #: src/help.c:1850
 msgid "          Display extended help text and quit program"
-msgstr "          Wy∂wietl obszerniejszy tekst pomocy i zakoÒcz program"
+msgstr "          Wy≈õwietl obszerniejszy tekst pomocy i zako≈Ñcz program"
 
 #: src/help.c:1865
 msgid "          Display software license and quit program"
-msgstr "          Wy∂wietl licencjÍ programu i zakoÒcz program"
+msgstr "          Wy≈õwietl licencjƒô programu i zako≈Ñcz program"
 
 #: src/help.c:1874
 #, fuzzy
 msgid "          Display version information and quit program"
-msgstr "          Wy∂wietl numer wersji i zakoÒcz program"
+msgstr "          Wy≈õwietl numer wersji i zako≈Ñcz program"
 
 #: src/help.c:1883
 #, fuzzy, c-format
 msgid "          Set EXIT status of program to %d on `%s' etc."
-msgstr "          Ustaw kod wyj∂cia programu na 127 dla --help, --version itp."
+msgstr "          Ustaw kod wyj≈õcia programu na 127 dla --help, --version itp."
 
 #: src/help.c:1893
 #, c-format
 msgid "          Create response file for the `%cFILE' option"
-msgstr "          UtwÛrz plik odpowiedzi dla opcji `%cPLIK'"
+msgstr "          Utw√≥rz plik odpowiedzi dla opcji `%cPLIK'"
 
 #: src/help.c:1895
 #, fuzzy, c-format
 msgid "   %-3s    = Store arguments of command line in file %s"
-msgstr "   ARG    = Zachowaj argumenty linii poleceÒ w pliku ARG"
+msgstr "   ARG    = Zachowaj argumenty linii polece≈Ñ w pliku ARG"
 
 #: src/help.c:1905
+#, c-format
 msgid ""
 "          Create shell script which contains the arguments of command line"
-msgstr "          UtwÛrz skrypt pow≥oki zawieraj±cy argumenty wiersza poleceÒ"
+msgstr "          Utw√≥rz skrypt pow≈Çoki zawierajƒÖcy argumenty wiersza polece≈Ñ"
 
 #: src/help.c:1907
 #, fuzzy, c-format
 msgid "   %-3s    = File name of the shell script"
-msgstr "   ARG    = Nazwa skryptu pow≥oki"
+msgstr "   ARG    = Nazwa skryptu pow≈Çoki"
 
 #: src/help.c:1918
 #, fuzzy
 msgid "          Define global date variable(s) \"DVAR->a...d|f...s|u...|z\""
 msgstr ""
-"          Zdefiniuj globaln± zmienn±(e) daty \"dvar->a...d|f...s|u...|z\""
+"          Zdefiniuj globalnƒÖ zmiennƒÖ(e) daty \"dvar->a...d|f...s|u...|z\""
 
 #: src/help.c:1920
 #, fuzzy, c-format
@@ -4672,13 +4678,13 @@ msgstr ""
 
 #: src/help.c:1933
 msgid "          Export local date variables from file to file"
-msgstr "          Eksportuj lokaln± zmienn± daty z pliku do pliku"
+msgstr "          Eksportuj lokalnƒÖ zmiennƒÖ daty z pliku do pliku"
 
 #: src/help.c:1942
 #, fuzzy, c-format
 msgid "          Define global text variable(s) \"TVAR->%ca...%cz\""
 msgstr ""
-"          Zdefiniuj globaln±(e) zmienn±(e) tekstow±(e) \"tvar->%ca...%cz\""
+"          Zdefiniuj globalnƒÖ(e) zmiennƒÖ(e) tekstowƒÖ(e) \"tvar->%ca...%cz\""
 
 #: src/help.c:1945
 #, fuzzy, c-format
@@ -4698,7 +4704,7 @@ msgstr ""
 #, fuzzy, c-format
 msgid ""
 "          = \"TVAR[%s|%c%s]COMMAND\" definitions separated by `%s' characters"
-msgstr "            wyraøenia rozdzielone przez znaki `%s'"
+msgstr "            wyra≈ºenia rozdzielone przez znaki `%s'"
 
 #: src/help.c:1955
 #, fuzzy, c-format
@@ -4717,22 +4723,22 @@ msgstr "          Eksportuj lokalne zmienne tekstowe z pliku do pliku"
 msgid ""
 "          Display only those fixed dates, whose date is not excluded by %s"
 msgstr ""
-"          Pokaø tylko te ustalone daty, ktÛre nie s± wy≥±czone przez ARG"
+"          Poka≈º tylko te ustalone daty, kt√≥re nie sƒÖ wy≈ÇƒÖczone przez ARG"
 
 #: src/help.c:1977
 #, fuzzy, c-format
 msgid "   %-3s    = One or more of the following characters.  If character"
-msgstr "   ARG    = Jeden lub kilka z nastÍpuj±cych znakÛw. Je∂li znak"
+msgstr "   ARG    = Jeden lub kilka z nastƒôpujƒÖcych znak√≥w. Je≈õli znak"
 
 #: src/help.c:1979
 #, fuzzy
 msgid "            is a LOWER-CASE-LETTER, it means a non-exclusion!"
-msgstr "            jest MA£° LITER°, oznacza on bez wykluczania!"
+msgstr "            jest MA≈ÅƒÑ LITERƒÑ, oznacza on bez wykluczania!"
 
 #: src/help.c:1983
 #, c-format
 msgid "            %c = Exclusion of all %s"
-msgstr "            %c = PominiÍcie wszystkich %s"
+msgstr "            %c = Pominiƒôcie wszystkich %s"
 
 #: src/help.c:1997
 #, fuzzy, c-format
@@ -4742,22 +4748,22 @@ msgstr "   ARG    = Lista `%c[DATA][%c[DATA]]' i/lub `%c[DATA][%c[DATA]]'"
 #: src/help.c:2000
 #, c-format
 msgid "            expressions separated by `%s' characters"
-msgstr "            wyraøenia rozdzielone przez znaki `%s'"
+msgstr "            wyra≈ºenia rozdzielone przez znaki `%s'"
 
 #: src/help.c:2009
 #, fuzzy, c-format
 msgid "          Display only those fixed dates, whose text is matched by %s"
-msgstr "           Pokaø tylko te ustalone daty, ktÛre pasuj± do ARG"
+msgstr "           Poka≈º tylko te ustalone daty, kt√≥re pasujƒÖ do ARG"
 
 #: src/help.c:2012
 #, fuzzy, c-format
 msgid "   %-3s    = Any text you like, metacharacters are not respected"
-msgstr "   ARG    = Dowolny w≥asny tekst, znaki specjalne s± pomijane"
+msgstr "   ARG    = Dowolny w≈Çasny tekst, znaki specjalne sƒÖ pomijane"
 
 #: src/help.c:2014
 #, fuzzy, c-format
 msgid "   %-3s    = Any text respectively \"regular expression\" you like"
-msgstr "   ARG   = Dowolny tekst albo \"wyraøenie regularne\" ktÛre lubisz"
+msgstr "   ARG   = Dowolny tekst albo \"wyra≈ºenie regularne\" kt√≥re lubisz"
 
 #: src/help.c:2024
 #, c-format
@@ -4767,12 +4773,12 @@ msgstr ""
 #: src/help.c:2034
 #, fuzzy, c-format
 msgid "          Revert the sense of matching of the `%s' option"
-msgstr "          UtwÛrz plik odpowiedzi dla opcji `%cPLIK'"
+msgstr "          Utw√≥rz plik odpowiedzi dla opcji `%cPLIK'"
 
 #: src/help.c:2045
 #, fuzzy
 msgid "          Display some debug information"
-msgstr "          Wy∂wietl informacje diagnostyczne"
+msgstr "          Wy≈õwietl informacje diagnostyczne"
 
 #.
 #. *** Translators, please don't translate the word `internal',
@@ -4783,7 +4789,7 @@ msgstr "          Wy∂wietl informacje diagnostyczne"
 msgid ""
 "  [%-3s]   = internal    Information if program internal maximums are reached"
 msgstr ""
-"  [ARG]   = internal    Informacja je∂li osi±gniÍto wewnÍtrzne ograniczenia "
+"  [ARG]   = internal    Informacja je≈õli osiƒÖgniƒôto wewnƒôtrzne ograniczenia "
 "programu"
 
 #.
@@ -4793,7 +4799,7 @@ msgstr ""
 #: src/help.c:2058
 msgid ""
 "          = handled     Like `internal' and file names which are handled"
-msgstr "          = handled     Tak jak `internal' oraz nazwy uøywanych plikÛw"
+msgstr "          = handled     Tak jak `internal' oraz nazwy u≈ºywanych plik√≥w"
 
 #.
 #. *** Translators, please don't translate the words `unhandled' and `internal',
@@ -4804,7 +4810,7 @@ msgid ""
 "          = unhandled   Like `internal' and file names which are unhandled"
 msgstr ""
 "          = unhandled   Tak jak `internal' oraz nazwy niewykorzystanych "
-"plikÛw"
+"plik√≥w"
 
 #.
 #. *** Translators, please don't translate the words `all', `handled' and `unhandled',
@@ -4822,7 +4828,7 @@ msgstr "          = all         Tak jak `handled' i `unhandled' razem"
 msgid ""
 "          = abort       Like `all' and abort if file name can't be handled"
 msgstr ""
-"          = abort       Tak jak `all' i przerwij jesli pliku nie moøna uøyÊ"
+"          = abort       Tak jak `all' i przerwij jesli pliku nie mo≈ºna u≈ºyƒá"
 
 #: src/help.c:2085
 msgid "          Use special format for calendar sheet"
@@ -4830,23 +4836,23 @@ msgstr "          Zastosuj specjalny format dla kartki kalendarza"
 
 #: src/help.c:2087
 msgid "  [MOD]   = -   Use standard format for calendar sheet"
-msgstr "  [MOD]   = -   Uøyj standardowego formatu kartki kalendarza"
+msgstr "  [MOD]   = -   U≈ºyj standardowego formatu kartki kalendarza"
 
 #: src/help.c:2096
 #, fuzzy
 msgid "          Use leap year rule of Eastern Orthodox churches"
 msgstr ""
-"          Uøyj regu≥y roku przestÍpnego Wschodnich Ko∂cio≥Ûw Ortodoksyjnych"
+"          U≈ºyj regu≈Çy roku przestƒôpnego Wschodnich Ko≈õcio≈Ç√≥w Ortodoksyjnych"
 
 #: src/help.c:2105
 #, fuzzy
 msgid "          Provide calendar sheet with week numbers"
-msgstr "          Pokaø kartkÍ kalendarza z numerami ISO tygodni"
+msgstr "          Poka≈º kartkƒô kalendarza z numerami ISO tygodni"
 
 #: src/help.c:2114
 #, fuzzy, c-format
 msgid "          Determine type of week numbers (actual:  %s)"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2115 src/help.c:3660
 msgid "Standard"
@@ -4868,95 +4874,95 @@ msgstr ""
 #: src/help.c:2127
 #, fuzzy
 msgid "          = no    Standard week numbers"
-msgstr "          Pokaø kartkÍ kalendarza z numerami ISO tygodni"
+msgstr "          Poka≈º kartkƒô kalendarza z numerami ISO tygodni"
 
 #: src/help.c:2136
 msgid "          Suppress output of calendar sheet explicitly"
-msgstr "          Nie wy∂wietlaj kartek kalendarza"
+msgstr "          Nie wy≈õwietlaj kartek kalendarza"
 
 #: src/help.c:2148
 #, fuzzy, c-format
 msgid "          Direct output through external `%s' pager"
-msgstr "          Prze∂lij wynik poprzez zewnetrzny pager `%s'"
+msgstr "          Prze≈õlij wynik poprzez zewnetrzny pager `%s'"
 
 #: src/help.c:2151 src/help.c:2153
 #, fuzzy
 msgid "          Direct output through simple internal pager"
-msgstr "          Prze∂lij wynik poprzez prosty pager wewnÍtrzny"
+msgstr "          Prze≈õlij wynik poprzez prosty pager wewnƒôtrzny"
 
 #: src/help.c:2166
 msgid "          Disable highlighting of text, holiday resp., actual day"
-msgstr "          Wy≥±cz wyrÛønianie tekstu, dni wolnych, b±dº aktualnego dnia"
+msgstr "          Wy≈ÇƒÖcz wyr√≥≈ºnianie tekstu, dni wolnych, bƒÖd≈∫ aktualnego dnia"
 
 #: src/help.c:2177
 msgid "          Forces highlighting sequences if output is redirected/piped"
 msgstr ""
-"          Wymuszaj kody wyrÛøniania je∂li wynik jest przeadresowany/idzie "
+"          Wymuszaj kody wyr√≥≈ºniania je≈õli wynik jest przeadresowany/idzie "
 "przez potok"
 
 #: src/help.c:2186
 msgid ""
 "          Set highlighting sequence pairs 1 (=actual day) and 2 (=holiday)"
 msgstr ""
-"          Ustaw pary kodÛw wyrÛøniania 1(=aktualny dzieÒ), 2(=dni wolne)"
+"          Ustaw pary kod√≥w wyr√≥≈ºniania 1(=aktualny dzie≈Ñ), 2(=dni wolne)"
 
 #: src/help.c:2188
 #, fuzzy, c-format
 msgid "   %-3s    = Highlighting sequence pairs separated by `%s' characters"
-msgstr "   ARG    = Pary kodÛw wyrÛøniania rozdzielone przez znaki `%s'"
+msgstr "   ARG    = Pary kod√≥w wyr√≥≈ºniania rozdzielone przez znaki `%s'"
 
 #: src/help.c:2191
 #, fuzzy, c-format
 msgid ""
 "            E.g.  %sH \\x2%s\\xAE   Use hex values 2 and AE for sequence 1"
 msgstr ""
-"            np.   %sH \\x2%s\\xAE   Uøyj warto∂Êi hex 2 I AE dla sekwencji 1"
+"            np.   %sH \\x2%s\\xAE   U≈ºyj warto≈õƒái hex 2 I AE dla sekwencji 1"
 
 #: src/help.c:2194
 #, fuzzy, c-format
 msgid ""
 "            E.g.  %sH %s%s*%s*      Use characters `*' and `*' for sequence 2"
 msgstr ""
-"            np.   %sH %s%s*%s*      Uøyj znakÛw `*' i `*' dla sekwencji 2"
+"            np.   %sH %s%s*%s*      U≈ºyj znak√≥w `*' i `*' dla sekwencji 2"
 
 #: src/help.c:2204
 msgid "          Modify format of year calendar"
-msgstr "          ZmieÒ format kalendarza lat"
+msgstr "          Zmie≈Ñ format kalendarza lat"
 
 #: src/help.c:2206
 #, fuzzy, c-format
 msgid "   %-3s    = 1|2|3|4|6|12   Number of blocks (actual:  %d)"
-msgstr "    ARG    = 1|2|3|4|6|12   Liczba blokÛw"
+msgstr "    ARG    = 1|2|3|4|6|12   Liczba blok√≥w"
 
 #: src/help.c:2216
 msgid "          Use consecutive day of year in calendar sheet"
-msgstr "          Uøyj kolejnych dni lat w kartce kalendarza"
+msgstr "          U≈ºyj kolejnych dni lat w kartce kalendarza"
 
 #: src/help.c:2218
 msgid "  [MOD]   = b   Use both date notations (day of month+year)"
-msgstr "  [MOD]   = b   Uøyj obu notacji daty (dzieÒ miesi±ca+rok)"
+msgstr "  [MOD]   = b   U≈ºyj obu notacji daty (dzie≈Ñ miesiƒÖca+rok)"
 
 #: src/help.c:2227
 msgid "          Use consecutive day of year in eternal holiday list"
-msgstr "          Uøyj kolejnych dni roku we wiecznej li∂cie dni wolnych"
+msgstr "          U≈ºyj kolejnych dni roku we wiecznej li≈õcie dni wolnych"
 
 #: src/help.c:2229 src/help.c:2241
 msgid "   [MOD]  = b   Use both date notations (day of month+year)"
-msgstr "   [MOD]  = b   Uøyj obu notacji daty (dzieÒ miesi±ca+rok)"
+msgstr "   [MOD]  = b   U≈ºyj obu notacji daty (dzie≈Ñ miesiƒÖca+rok)"
 
 #: src/help.c:2239
 msgid "          Use consecutive day of year in fixed date list"
-msgstr "          Uøyj kolejnych dni roku w li∂cie ustalonych dni"
+msgstr "          U≈ºyj kolejnych dni roku w li≈õcie ustalonych dni"
 
 #: src/help.c:2251
 #, fuzzy, c-format
 msgid "          Set starting day of week (actual:  %s)"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2283
 #, c-format
 msgid "          Send output via `%s' program to user"
-msgstr "          Prze∂lij wynik uøytkownikowi poprzez program `%s'"
+msgstr "          Prze≈õlij wynik u≈ºytkownikowi poprzez program `%s'"
 
 #: src/help.c:2311
 msgid "UNKNOWN"
@@ -4970,208 +4976,208 @@ msgstr ""
 #: src/help.c:2326
 #, c-format
 msgid "          Display eternal holiday list (Year in range: %d...%d)"
-msgstr "          Pokaø wieczn± listÍ dni wolych (Lata w zakresie: %d...%d)"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolych (Lata w zakresie: %d...%d)"
 
 #: src/help.c:2329
 msgid " n        = Legal days and memorial days"
-msgstr " n        = ¶wiÍta paÒstwowe i dni pamiÍci"
+msgstr " n        = ≈öwiƒôta pa≈Ñstwowe i dni pamiƒôci"
 
 #: src/help.c:2331
 msgid "   N      = Legal days only"
-msgstr "   N      = Tylko ∂wiÍta paÒstwowe"
+msgstr "   N      = Tylko ≈õwiƒôta pa≈Ñstwowe"
 
 #: src/help.c:2333 src/help.c:2896
 #, c-format
 msgid "    [MOD] = %s   Descending sort order"
-msgstr "    [MOD] = %s   Opadajacy porz±dek sortowania"
+msgstr "    [MOD] = %s   Opadajacy porzƒÖdek sortowania"
 
 #: src/help.c:2342
 #, fuzzy
 msgid "          Suppress leading blank line of eternal holiday list"
-msgstr "          Wy≥±cz tytu≥ wiecznej listy dni wolnych"
+msgstr "          Wy≈ÇƒÖcz tytu≈Ç wiecznej listy dni wolnych"
 
 #: src/help.c:2351
 msgid "          Exclude title of eternal holiday list"
-msgstr "          Wy≥±cz tytu≥ wiecznej listy dni wolnych"
+msgstr "          Wy≈ÇƒÖcz tytu≈Ç wiecznej listy dni wolnych"
 
 #: src/help.c:2360
 #, fuzzy
 msgid "          Provide eternal holiday list with astronomical data"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2369
 #, fuzzy
-msgid "          Provide eternal holiday list with Bah·'i calendar holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgid "          Provide eternal holiday list with Bah√°'i calendar holidays"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2378
 #, fuzzy
-msgid "          Provide eternal holiday list with Bah·'i calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgid "          Provide eternal holiday list with Bah√°'i calendar months"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2387
 #, fuzzy
 msgid "          Provide eternal holiday list with Celtic calendar holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2396
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Chinese flexible calendar "
 "holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2405
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Chinese flexible calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2414
 #, fuzzy
 msgid "          Provide eternal holiday list with Chinese calendar holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2423
 #, fuzzy
 msgid "          Provide eternal holiday list with Chinese calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2432
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Christian Western calendar "
 "holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2441
 #, fuzzy
 msgid "          Provide eternal holiday list with Coptic calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2450
 #, fuzzy
 msgid "          Provide eternal holiday list with Ethiopic calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych bez typowych dni wolnych"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych bez typowych dni wolnych"
 
 #: src/help.c:2459
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with French Revolutionary calendar "
 "months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych bez typowych dni wolnych"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych bez typowych dni wolnych"
 
 #: src/help.c:2468
 #, fuzzy
 msgid "          Provide eternal holiday list with Hebrew calendar holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2477
 #, fuzzy
 msgid "          Provide eternal holiday list with Hebrew calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2486
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Indian civil-calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych bez typowych dni wolnych"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych bez typowych dni wolnych"
 
 #: src/help.c:2495
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Islamic civil-calendar holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych bez typowych dni wolnych"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych bez typowych dni wolnych"
 
 #: src/help.c:2504
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Islamic civil-calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych bez typowych dni wolnych"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych bez typowych dni wolnych"
 
 #: src/help.c:2513
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Japanese flexible calendar "
 "holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2522
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Japanese flexible calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2531
 #, fuzzy
 msgid "          Provide eternal holiday list with Japanese calendar holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2540
 #, fuzzy
 msgid "          Provide eternal holiday list with Japanese calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2549
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with multicultural New Year holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2558
 #, fuzzy
 msgid "          Provide eternal holiday list with Old-Armenic calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych bez typowych dni wolnych"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych bez typowych dni wolnych"
 
 #: src/help.c:2567
 #, fuzzy
 msgid "          Provide eternal holiday list with Old-Egyptic calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2576
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Orthodox new-calendar holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych bez typowych dni wolnych"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych bez typowych dni wolnych"
 
 #: src/help.c:2585
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Orthodox old-calendar holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych bez typowych dni wolnych"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych bez typowych dni wolnych"
 
 #: src/help.c:2594
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Persian Jalaali-calendar holidays"
-msgstr "          Pokaø wieczn± listÍ dni wolnych bez typowych dni wolnych"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych bez typowych dni wolnych"
 
 #: src/help.c:2603
 #, fuzzy
 msgid ""
 "          Provide eternal holiday list with Persian Jalaali-calendar months"
-msgstr "          Pokaø wieczn± listÍ dni wolnych bez typowych dni wolnych"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych bez typowych dni wolnych"
 
 #: src/help.c:2612
 #, fuzzy
 msgid "          Provide eternal holiday list with zodiacal marker data"
-msgstr "          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami katolickimi"
+msgstr "          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami katolickimi"
 
 #: src/help.c:2621
 msgid "          Provide eternal holiday list with country specific holidays"
 msgstr ""
-"          Pokaø wieczn± listÍ dni wolnych ze ∂wiÍtami zaleønymi od kraju"
+"          Poka≈º wiecznƒÖ listƒô dni wolnych ze ≈õwiƒôtami zale≈ºnymi od kraju"
 
 #: src/help.c:2623
 #, fuzzy, c-format
 msgid "   %-3s    = Single country resp., territory code or a list of these,"
-msgstr "   ARG    = PojedyÒczy kod kraju albo lista kodÛw krajÛw"
+msgstr "   ARG    = Pojedy≈Ñczy kod kraju albo lista kod√≥w kraj√≥w"
 
 #: src/help.c:2625
 #, fuzzy, c-format
 msgid ""
 "            which are connected by `%s' characters. Countries/territories,"
-msgstr "            ktÛre s± po≥±czone znakami `%s'"
+msgstr "            kt√≥re sƒÖ po≈ÇƒÖczone znakami `%s'"
 
 #: src/help.c:2627
 msgid "            marked by # have an incomplete recording of holidays"
@@ -5200,17 +5206,17 @@ msgstr "          Zastosuj specjalny format dla kartki kalendarza"
 #: src/help.c:2662
 #, fuzzy, c-format
 msgid "   %-3s    = Air pressure and temperature separated by `%s' character"
-msgstr "   ARG    = Pary kodÛw wyrÛøniania rozdzielone przez znaki `%s'"
+msgstr "   ARG    = Pary kod√≥w wyr√≥≈ºniania rozdzielone przez znaki `%s'"
 
 #: src/help.c:2665
 #, fuzzy, c-format
 msgid "            Air pressure in Millibar (actual:  %.3f)"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2667
 #, fuzzy, c-format
 msgid "            Air temperature in degrees Celsius (actual:  %+.3f)"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2677
 #, fuzzy
@@ -5224,77 +5230,77 @@ msgstr ""
 #: src/help.c:2695
 #, fuzzy, c-format
 msgid "          Execute `%c%c[%s]' shell commands"
-msgstr "          # B            = Nie wykonuj komend pow≥oki`%c%c[ARG]'"
+msgstr "          # B            = Nie wykonuj komend pow≈Çoki`%c%c[ARG]'"
 
 #: src/help.c:2698
 #, fuzzy, c-format
 msgid "          and \"TVAR[%s|%c%s]COMMAND\" assignments"
-msgstr "                           = %s   Do ty≥u"
+msgstr "                           = %s   Do ty≈Çu"
 
 #: src/help.c:2709
 #, fuzzy
 msgid "          Change base time of astronomical functions"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2712
 #, fuzzy
 msgid "          respectively, change cycle-starting time"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2720
 #, fuzzy, c-format
 msgid ""
 "   %-3s    = %c|%c|[%c|%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  "
 "%s%02d%s%02d == GMT%s)"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2725
 #, fuzzy, c-format
 msgid ""
-"   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  "
-"%s%02d%s%02d == GMT%s)"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+"   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  %s%02d"
+"%s%02d == GMT%s)"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2739
 #, fuzzy
 msgid "          Change cycle-ending time"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2741
 #, fuzzy, c-format
 msgid ""
 "   %-3s    = %c|%c|[%c|%c][%s|%s]MMMM|HH%s[MM]   Ending time value (actual:  "
 "%02d%s%02d)"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2753
 #, fuzzy
 msgid "          Change cycle-timestep"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2755
 #, fuzzy, c-format
 msgid "   %-3s    = MMMM|HH%s[MM]   Timestep value (actual:  %02d%s%02d)"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2766
 #, fuzzy
 msgid "          Change base year of calendar"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2768
 #, fuzzy, c-format
 msgid "   %-3s    = [%s|%s]YYYY   Year offset value (actual:  %d)"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:2778
 msgid "          Set period of Gregorian Reformation"
-msgstr "          Ustaw okres reformacji gregoriaÒskiej"
+msgstr "          Ustaw okres reformacji gregoria≈Ñskiej"
 
 #: src/help.c:2780
 #, c-format
 msgid "          Actual respected period:  %02d-%02d %s %0*d"
-msgstr "          Obecnie brany pod uwagÍ okres:  %02d-%02d %s %0*d"
+msgstr "          Obecnie brany pod uwagƒô okres:  %02d-%02d %s %0*d"
 
 #: src/help.c:2786
 #, c-format
@@ -5310,7 +5316,7 @@ msgstr "   ARG    = %s%s%s%s%s%s%s   Ustaw jawnie okres"
 #, fuzzy, c-format
 msgid "          Set order of date elements using the %s format text"
 msgstr ""
-"          Ustaw porz±dek elementÛw daty uøywaj±c formatu tekstowego ARG"
+"          Ustaw porzƒÖdek element√≥w daty u≈ºywajƒÖc formatu tekstowego ARG"
 
 #: src/help.c:2804
 #, fuzzy, c-format
@@ -5359,9 +5365,10 @@ msgstr ""
 #: src/help.c:2857
 #, fuzzy
 msgid "            they are used by the character set used in Germany"
-msgstr "            ktÛre s± po≥±czone znakami `%s'"
+msgstr "            kt√≥re sƒÖ po≈ÇƒÖczone znakami `%s'"
 
 #: src/help.c:2866
+#, c-format
 msgid "+++ FIXED DATES +++"
 msgstr "+++ USTALONE DATY +++"
 
@@ -5369,13 +5376,13 @@ msgstr "+++ USTALONE DATY +++"
 #, c-format
 msgid "          Use standard resource file `.%s%s' for fixed date list"
 msgstr ""
-"          Uøyj standardowego pliku zasobÛw `.%s%s' dla listy ustalonych dat"
+"          U≈ºyj standardowego pliku zasob√≥w `.%s%s' dla listy ustalonych dat"
 
 #: src/help.c:2886
 #, c-format
 msgid "          Use standard resource file `%s%s' for fixed date list"
 msgstr ""
-"          Uøyj standardowego pliku zasobÛw `%s%s' dla listy ustalonych dat"
+"          U≈ºyj standardowego pliku zasob√≥w `%s%s' dla listy ustalonych dat"
 
 #: src/help.c:2890 src/help.c:3289
 msgid "          Implies period:  Today"
@@ -5383,34 +5390,34 @@ msgstr "          Przyjmuje okres:  Dzisiaj"
 
 #: src/help.c:2892
 msgid " c        = Display only those dates, for which fixed dates exists"
-msgstr " c        = Wy∂wietl tylko te dni dla ktÛrych istniej± ustalone daty"
+msgstr " c        = Wy≈õwietl tylko te dni dla kt√≥rych istniejƒÖ ustalone daty"
 
 #: src/help.c:2894
 msgid ""
 "   C      = Display those dates, for which fixed dates doesn't exist, too"
 msgstr ""
-"   C      = Wy∂wietl takøe te dni dla ktÛrych nie istniej± ustalone daty"
+"   C      = Wy≈õwietl tak≈ºe te dni dla kt√≥rych nie istniejƒÖ ustalone daty"
 
 #: src/help.c:2904
 msgid ""
 "    [MOD] = One or more of the following modifiers which are marked by #"
 msgstr ""
-"    [MOD] = Jeden lub kilka nastÍpuj±cych modyfikatorÛw oznaczonych przez #"
+"    [MOD] = Jeden lub kilka nastƒôpujƒÖcych modyfikator√≥w oznaczonych przez #"
 
 #: src/help.c:2914
 #, fuzzy, c-format
 msgid "            %-3s         = Heading/Title text used for fixed date list"
-msgstr "          # x            = PomiÒ tytu≥ w liscie ustalonych dat"
+msgstr "          # x            = Pomi≈Ñ tytu≈Ç w liscie ustalonych dat"
 
 #: src/help.c:2917
 #, fuzzy, c-format
 msgid "                          Actual:  `%s'"
-msgstr "                           = %s   Do ty≥u"
+msgstr "                           = %s   Do ty≈Çu"
 
 #: src/help.c:2926
 msgid "          # g[MOD]       = Group fixed dates by day using text MOD"
 msgstr ""
-"          # g[MOD]       = Grupa ustalonych dat co dzieÒ korzystaj±c z "
+"          # g[MOD]       = Grupa ustalonych dat co dzie≈Ñ korzystajƒÖc z "
 "tekstu MOD"
 
 #: src/help.c:2938
@@ -5420,49 +5427,49 @@ msgstr "          1. Przedstawienie tekstu"
 #: src/help.c:2947
 #, fuzzy
 msgid "                         = Set width of the biorhythm text graphics"
-msgstr "          # x            = PomiÒ tytu≥ w liscie ustalonych dat"
+msgstr "          # x            = Pomi≈Ñ tytu≈Ç w liscie ustalonych dat"
 
 #: src/help.c:2949
 #, fuzzy, c-format
 msgid "                           %-3s = %d...%d   Length of a single axis"
-msgstr "                           N = 99       Ostatni tydzieÒ"
+msgstr "                           N = 99       Ostatni tydzie≈Ñ"
 
 #: src/help.c:2959
 #, fuzzy
 msgid "                         = Set height of the Moon phase text graphics"
-msgstr "          # x            = PomiÒ tytu≥ w liscie ustalonych dat"
+msgstr "          # x            = Pomi≈Ñ tytu≈Ç w liscie ustalonych dat"
 
 #: src/help.c:2961
 #, fuzzy, c-format
 msgid "                           %-3s = %d...%d   Total number of lines"
-msgstr "                           = %s   Do ty≥u"
+msgstr "                           = %s   Do ty≈Çu"
 
 #: src/help.c:2971
 msgid "          # a            = Display origin of fixed date"
-msgstr "          # a            = Wy∂wietl ºrÛd≥o ustalonych dat"
+msgstr "          # a            = Wy≈õwietl ≈∫r√≥d≈Ço ustalonych dat"
 
 #: src/help.c:2980
 msgid "          # A            = Display using alternative list format"
 msgstr ""
-"          # A            = Wy∂wietl uøywaj±c alternatywnego formatu listy"
+"          # A            = Wy≈õwietl u≈ºywajƒÖc alternatywnego formatu listy"
 
 #: src/help.c:2989
 msgid "          # e            = Include legal days and memorial days"
-msgstr "          # e            = Do≥±cz ∂wiÍta paÒstwowe i dni pamiÍci"
+msgstr "          # e            = Do≈ÇƒÖcz ≈õwiƒôta pa≈Ñstwowe i dni pamiƒôci"
 
 #: src/help.c:2991
 msgid "          # E            = Include legal days only"
-msgstr "          # E            = Do≥±cz tylko ∂wiÍta paÒstwowe"
+msgstr "          # E            = Do≈ÇƒÖcz tylko ≈õwiƒôta pa≈Ñstwowe"
 
 #: src/help.c:3000
 #, fuzzy
 msgid "          # k            = Display week number"
-msgstr "          # k            = Wy∂wietl numer ISO tygodnia"
+msgstr "          # k            = Wy≈õwietl numer ISO tygodnia"
 
 #: src/help.c:3009
 msgid "          # o            = Omit repeating date part of fixed dates"
 msgstr ""
-"          # o            = PomiÒ powtarzaj±ca± siÍ czÍ∂Ê daty w ustalonych "
+"          # o            = Pomi≈Ñ powtarzajƒÖcaƒÖ siƒô czƒô≈õƒá daty w ustalonych "
 "datach"
 
 #: src/help.c:3018
@@ -5470,36 +5477,36 @@ msgstr ""
 msgid ""
 "          # Q            = Suppress leading blank line of fixed dates list"
 msgstr ""
-"          # o            = PomiÒ powtarzaj±ca± siÍ czÍ∂Ê daty w ustalonych "
+"          # o            = Pomi≈Ñ powtarzajƒÖcaƒÖ siƒô czƒô≈õƒá daty w ustalonych "
 "datach"
 
 #: src/help.c:3027
 #, fuzzy
 msgid "          # U            = Suppress date part of fixed dates"
 msgstr ""
-"          # o            = PomiÒ powtarzaj±ca± siÍ czÍ∂Ê daty w ustalonych "
+"          # o            = Pomi≈Ñ powtarzajƒÖcaƒÖ siƒô czƒô≈õƒá daty w ustalonych "
 "datach"
 
 #: src/help.c:3036
 #, fuzzy
 msgid "          # J            = Suppress text part of fixed dates"
 msgstr ""
-"          # o            = PomiÒ powtarzaj±ca± siÍ czÍ∂Ê daty w ustalonych "
+"          # o            = Pomi≈Ñ powtarzajƒÖcaƒÖ siƒô czƒô≈õƒá daty w ustalonych "
 "datach"
 
 #: src/help.c:3045
 msgid "          # x            = Exclude title of fixed date list"
-msgstr "          # x            = PomiÒ tytu≥ w liscie ustalonych dat"
+msgstr "          # x            = Pomi≈Ñ tytu≈Ç w liscie ustalonych dat"
 
 #: src/help.c:3054
 msgid "          # z            = Display consecutive number of fixed date"
-msgstr "          # z            = Wy∂wietl kolejny numer ustalonych dat"
+msgstr "          # z            = Wy≈õwietl kolejny numer ustalonych dat"
 
 #: src/help.c:3063
 msgid ""
 "          # Z            = Display dates, for which fixed dates doesn't exist"
 msgstr ""
-"          # Z            = Wy∂wietl daty, dla ktÛrych brak ustalonych dni"
+"          # Z            = Wy≈õwietl daty, dla kt√≥rych brak ustalonych dni"
 
 #: src/help.c:3071
 msgid "          2. Respected period"
@@ -5508,7 +5515,7 @@ msgstr "          2. Odpowiedni okres"
 #: src/help.c:3080
 msgid "                         = Manage `29-FEBRUARY' in non-leap years"
 msgstr ""
-"                         = UwzglÍdniaj `29 lutego' w latach nieprzestÍpnych"
+"                         = Uwzglƒôdniaj `29 lutego' w latach nieprzestƒôpnych"
 
 #.
 #. *** Translators, please don't translate the word `february',
@@ -5517,7 +5524,7 @@ msgstr ""
 #: src/help.c:3086
 #, fuzzy, c-format
 msgid "                           %-3s = february   Respect at `28-FEBRUARY'"
-msgstr "                           ARG = february   UwzglÍdniaj `28 lutego'"
+msgstr "                           ARG = february   Uwzglƒôdniaj `28 lutego'"
 
 #.
 #. *** Translators, please don't translate the word `march',
@@ -5526,14 +5533,14 @@ msgstr "                           ARG = february   UwzglÍdniaj `28 lutego'"
 #: src/help.c:3092
 #, fuzzy, c-format
 msgid "                           %-3s = march      Respect at `01-MARCH'"
-msgstr "                           ARG = march      UwzglÍdniaj `01 marca'"
+msgstr "                           ARG = march      Uwzglƒôdniaj `01 marca'"
 
 #: src/help.c:3101
 msgid ""
 "          # d            = Include actual date if list of periods is "
 "generated"
 msgstr ""
-"          # d            = Do≥±cz bieø±c± datÍ je∂li lista przedzia≥Ûw jest "
+"          # d            = Do≈ÇƒÖcz bie≈ºƒÖcƒÖ datƒô je≈õli lista przedzia≈Ç√≥w jest "
 "generowana"
 
 #: src/help.c:3110
@@ -5541,21 +5548,21 @@ msgid ""
 "          # l            = Generate list of periods instead of a single "
 "period"
 msgstr ""
-"          # l            = UtwÛrz listÍ przedzia≥Ûw zamiast pojedyÒczego "
-"przedzia≥u"
+"          # l            = Utw√≥rz listƒô przedzia≈Ç√≥w zamiast pojedy≈Ñczego "
+"przedzia≈Çu"
 
 #: src/help.c:3125
 msgid "          # Nd           = Single absolute day N"
-msgstr "          # Nd           = PojedyÒczy Nty dzieÒ roku"
+msgstr "          # Nd           = Pojedy≈Ñczy Nty dzie≈Ñ roku"
 
 #: src/help.c:3127
 #, c-format
 msgid "          # %cdN          = Single absolute day N"
-msgstr "          # %cdN          = PojedyÒczy Nty dzieÒ roku"
+msgstr "          # %cdN          = Pojedy≈Ñczy Nty dzie≈Ñ roku"
 
 #: src/help.c:3130
 msgid "          # NMOD         = Single day N relative to today"
-msgstr "          # NMOD         = PojedyÒczy Nty dzieÒ wzglÍdem dzisiaj"
+msgstr "          # NMOD         = Pojedy≈Ñczy Nty dzie≈Ñ wzglƒôdem dzisiaj"
 
 #: src/help.c:3132
 #, c-format
@@ -5565,114 +5572,114 @@ msgstr "             MOD           = %s   Do przodu"
 #: src/help.c:3134
 #, c-format
 msgid "                           = %s   Backwards"
-msgstr "                           = %s   Do ty≥u"
+msgstr "                           = %s   Do ty≈Çu"
 
 #: src/help.c:3137
 msgid "          # Nw           = Complete week N"
-msgstr "          # Nw           = Ca≥kowita liczba tygodni N"
+msgstr "          # Nw           = Ca≈Çkowita liczba tygodni N"
 
 #: src/help.c:3139
 msgid ""
 "                           N = 0        1st week / last week of previous year"
 msgstr ""
-"                           N = 0        1. tydzieÒ / ostatni tydzieÒ "
+"                           N = 0        1. tydzie≈Ñ / ostatni tydzie≈Ñ "
 "poprzedniego roku"
 
 #: src/help.c:3141
 msgid "                           N = 1...52   1st...52nd week (always)"
-msgstr "                           N = 1...52   1...52. tydzieÒ (zawsze)"
+msgstr "                           N = 1...52   1...52. tydzie≈Ñ (zawsze)"
 
 #: src/help.c:3143
 msgid "                           N = 53       53rd week (sometimes)"
-msgstr "                           N = 53       53. tydzieÒ (czasami)"
+msgstr "                           N = 53       53. tydzie≈Ñ (czasami)"
 
 #: src/help.c:3145
 msgid "                           N = 99       Last week"
-msgstr "                           N = 99       Ostatni tydzieÒ"
+msgstr "                           N = 99       Ostatni tydzie≈Ñ"
 
 #: src/help.c:3148
 #, fuzzy, c-format
 msgid "          # %s%s         = Single day %s of month %s"
-msgstr "          # `%s%s'       = PojedyÒczy dzieÒ `%s' miesi±ca `%s'"
+msgstr "          # `%s%s'       = Pojedy≈Ñczy dzie≈Ñ `%s' miesiƒÖca `%s'"
 
 #: src/help.c:3152
 #, fuzzy, c-format
 msgid "          # %s%sN       = Single N'th weekday %s of month %s"
 msgstr ""
-"          # `%s%s'N     = PojedyÒczy Nty dzieÒ tygodnia `%s' miesi±ca `%s'"
+"          # `%s%s'N     = Pojedy≈Ñczy Nty dzie≈Ñ tygodnia `%s' miesiƒÖca `%s'"
 
 #: src/help.c:3155
 #, fuzzy, c-format
 msgid "                           N = 1...4   1st...4th weekday %s (always)"
 msgstr ""
-"                           N = 1...4   1...4. dzieÒ tygodnia `%s' (zawsze)"
+"                           N = 1...4   1...4. dzie≈Ñ tygodnia `%s' (zawsze)"
 
 #: src/help.c:3157
 #, fuzzy, c-format
 msgid "                           N = 5       5th weekday %s (sometimes)"
 msgstr ""
-"                           N = 5       5. dzieÒ tygodnia `%s' (czasami)"
+"                           N = 5       5. dzie≈Ñ tygodnia `%s' (czasami)"
 
 #: src/help.c:3159
 #, fuzzy, c-format
 msgid "                           N = 9       Last weekday %s"
-msgstr "                           N = 9       Ostatni dzieÒ tygodnia `%s'"
+msgstr "                           N = 9       Ostatni dzie≈Ñ tygodnia `%s'"
 
 #: src/help.c:3162
 #, fuzzy, c-format
 msgid "          # %cdN%s       = Single N'th weekday %s"
-msgstr "          # %cdN`%s'     = PojedyÒczy Nty dzieÒ tygodnia `%s"
+msgstr "          # %cdN`%s'     = Pojedy≈Ñczy Nty dzie≈Ñ tygodnia `%s"
 
 #: src/help.c:3165
 #, fuzzy, c-format
 msgid "                           N = 1...51   1st...51st weekday %s (always)"
 msgstr ""
-"                           N = 1...51   1...51. dzieÒ tygodnia `%s' (zawsze)"
+"                           N = 1...51   1...51. dzie≈Ñ tygodnia `%s' (zawsze)"
 
 #: src/help.c:3167
 #, fuzzy, c-format
 msgid "                           N = 52|53    52|53rd weekday %s (sometimes)"
 msgstr ""
-"                           N = 52|53    52|53. dzieÒ tygodnia `%s' (czasami)"
+"                           N = 52|53    52|53. dzie≈Ñ tygodnia `%s' (czasami)"
 
 #: src/help.c:3169
 #, fuzzy, c-format
 msgid "                           N = 99       Last weekday %s"
-msgstr "                           N = 99       Ostatni dzieÒ tygodnia `%s'"
+msgstr "                           N = 99       Ostatni dzie≈Ñ tygodnia `%s'"
 
 #: src/help.c:3172
 #, fuzzy, c-format
 msgid "          # %cwN%s       = Single weekday %s of N'th week"
-msgstr "          # %cwN`%s'     = PojedyÒczy dzieÒ tygodnia `%s' z N tygodni"
+msgstr "          # %cwN`%s'     = Pojedy≈Ñczy dzie≈Ñ tygodnia `%s' z N tygodni"
 
 #: src/help.c:3175
 #, fuzzy, c-format
 msgid ""
 "                           N = 0        %s which isn't located in 1st week"
 msgstr ""
-"                           N = 0        `%s' ktÛry nie znajduje siÍ w 1. "
+"                           N = 0        `%s' kt√≥ry nie znajduje siƒô w 1. "
 "tygodniu"
 
 #: src/help.c:3177
 #, fuzzy, c-format
 msgid "                           N = 1...51   %s of 1st...51st week (always)"
-msgstr "                           N = 1...51   `%s' 1...51. tydzieÒ (zawsze)"
+msgstr "                           N = 1...51   `%s' 1...51. tydzie≈Ñ (zawsze)"
 
 #: src/help.c:3179
 #, fuzzy, c-format
 msgid "                           N = 52|53    %s of 52|53rd week (sometimes)"
-msgstr "                           N = 52|53    `%s' 52|53. tydzieÒ (czasami)"
+msgstr "                           N = 52|53    `%s' 52|53. tydzie≈Ñ (czasami)"
 
 #: src/help.c:3181
 #, fuzzy, c-format
 msgid "                           N = 99       %s of last week"
-msgstr "                           N = 99       `%s' ostatni tydzieÒ"
+msgstr "                           N = 99       `%s' ostatni tydzie≈Ñ"
 
 #: src/help.c:3184
 #, c-format
 msgid "          # %c%c[[%s|%s]N]   = Single day N relative to Easter Sunday"
 msgstr ""
-"          # %c%c[[%s|%s]N]   = PojedyÒczy Nty dzieÒ wzglÍdem Niedzieli "
+"          # %c%c[[%s|%s]N]   = Pojedy≈Ñczy Nty dzie≈Ñ wzglƒôdem Niedzieli "
 "Wielkanocnej"
 
 #: src/help.c:3188
@@ -5680,113 +5687,113 @@ msgstr ""
 msgid ""
 "          # %c%c[%s|%s]N%s  = Single N'th weekday relative to Easter Sunday"
 msgstr ""
-"          # %c%c[%s|%s]N`%s'= PojedyÒczy Nty dzieÒ tygodnia wzglÍdem "
+"          # %c%c[%s|%s]N`%s'= Pojedy≈Ñczy Nty dzie≈Ñ tygodnia wzglƒôdem "
 "Niedzieli Wielkanocnej"
 
 #: src/help.c:3192
 #, c-format
 msgid "          # %c%c[[%s|%s]N]   = Single day N relative to today's date"
 msgstr ""
-"          # %c%c[[%s|%s]N]   = PojedyÒczy Nty dzieÒ wzglÍdem dzisiejszej daty"
+"          # %c%c[[%s|%s]N]   = Pojedy≈Ñczy Nty dzie≈Ñ wzglƒôdem dzisiejszej daty"
 
 #: src/help.c:3196
 #, fuzzy, c-format
 msgid ""
 "          # %c%c[%s|%s]N%s  = Single N'th weekday relative to today's date"
 msgstr ""
-"          # %c%c[%s|%s]N`%s'= PojedyÒczy Nty dzieÒ tygodnia wzglÍdem "
+"          # %c%c[%s|%s]N`%s'= Pojedy≈Ñczy Nty dzie≈Ñ tygodnia wzglƒôdem "
 "dzisiejszej daty"
 
 #: src/help.c:3200
 #, c-format
 msgid "          # %c?[[%s|%s]N]   = Single day N relative to date variable"
 msgstr ""
-"          # %c?[[%s|%s]N]   = PojedyÒczy Nty dzieÒ wzglÍdem zmiennej daty"
+"          # %c?[[%s|%s]N]   = Pojedy≈Ñczy Nty dzie≈Ñ wzglƒôdem zmiennej daty"
 
 #: src/help.c:3204
 #, fuzzy, c-format
 msgid ""
 "          # %c?[%s|%s]N%s  = Single N'th weekday relative to date variable"
 msgstr ""
-"          # %c?[%s|%s]N`%s'= PojedyÒczy Nty dzieÒ tygodnia wzglÍdem zmieenej "
+"          # %c?[%s|%s]N`%s'= Pojedy≈Ñczy Nty dzie≈Ñ tygodnia wzglƒôdem zmieenej "
 "daty"
 
 #: src/help.c:3211
 msgid "          # t|T          = List tomorrow"
-msgstr "          # t|T          = Pokaø jutro"
+msgstr "          # t|T          = Poka≈º jutro"
 
 #: src/help.c:3226
 msgid "          # w|W[MOD]     = List complete week"
-msgstr "          # w|W[MOD]     = Pokaø ca≥y tydzieÒ"
+msgstr "          # w|W[MOD]     = Poka≈º ca≈Çy tydzie≈Ñ"
 
 #: src/help.c:3228
 #, c-format
 msgid ""
 "               [MOD]       = %s   List tomorrow until ending day of week"
-msgstr "               [MOD]       = %s   Pokaø od jutra aø do koÒca tygodnia"
+msgstr "               [MOD]       = %s   Poka≈º od jutra a≈º do ko≈Ñca tygodnia"
 
 #: src/help.c:3231
 #, c-format
 msgid ""
 "                           = %s   List yesterday until starting day of week"
 msgstr ""
-"                           = %s   Pokaº od wczoraj aø do pocz±tku tygodnia"
+"                           = %s   Poka≈∫ od wczoraj a≈º do poczƒÖtku tygodnia"
 
 #: src/help.c:3249
 msgid "          # m|M[MOD]     = List complete month"
-msgstr "          # m|M[MOD]     = Pokaø ca≥y miesi±c"
+msgstr "          # m|M[MOD]     = Poka≈º ca≈Çy miesiƒÖc"
 
 #: src/help.c:3251
 #, c-format
 msgid ""
 "               [MOD]       = %s   List tomorrow until ending day of month"
-msgstr "               [MOD]       = %s   Pokaø od jutra aø do koÒca miesi±ca"
+msgstr "               [MOD]       = %s   Poka≈º od jutra a≈º do ko≈Ñca miesiƒÖca"
 
 #: src/help.c:3254
 #, c-format
 msgid ""
 "                           = %s   List yesterday until starting day of month"
 msgstr ""
-"                           = %s   Pokaº od wczoraj aø do pocz±tku miesi±ca"
+"                           = %s   Poka≈∫ od wczoraj a≈º do poczƒÖtku miesiƒÖca"
 
 #: src/help.c:3272
 msgid "          # y|Y[MOD]     = List complete year"
-msgstr "          # y|Y[MOD]     = Pokaø ca≥y rok"
+msgstr "          # y|Y[MOD]     = Poka≈º ca≈Çy rok"
 
 #: src/help.c:3274
 #, c-format
 msgid ""
 "               [MOD]       = %s   List tomorrow until ending day of year"
-msgstr "               [MOD]       = %s   Pokaø od jutra aø do koÒca tygodnia"
+msgstr "               [MOD]       = %s   Poka≈º od jutra a≈º do ko≈Ñca tygodnia"
 
 #: src/help.c:3277
 #, c-format
 msgid ""
 "                           = %s   List yesterday until starting day of year"
-msgstr "                           = %s   Pokaº od wczoraj aø do pocz±tku roku"
+msgstr "                           = %s   Poka≈∫ od wczoraj a≈º do poczƒÖtku roku"
 
 #: src/help.c:3287
 msgid "          Use alternative file(s) instead of standard resource file"
-msgstr "          Uøyj plikÛw zastÍpczych zamiast standardowych pliku zasobÛw"
+msgstr "          U≈ºyj plik√≥w zastƒôpczych zamiast standardowych pliku zasob√≥w"
 
 #: src/help.c:3291
 msgid " f        = Display only those dates, for which fixed dates exists"
-msgstr " f        = Pokaø tylko te daty, dla ktÛrych istniej± ustalone daty"
+msgstr " f        = Poka≈º tylko te daty, dla kt√≥rych istniejƒÖ ustalone daty"
 
 #: src/help.c:3293
 msgid ""
 "   F      = Display those dates, for which fixed dates doesn't exist, too"
-msgstr "   F      = Pokaø takøe daty dla ktÛrych nie istniej± ustalone daty"
+msgstr "   F      = Poka≈º tak≈ºe daty dla kt√≥rych nie istniejƒÖ ustalone daty"
 
 #: src/help.c:3295
 #, fuzzy, c-format
 msgid "     %-3s  = Single file or list of files connected by `%s' characters"
-msgstr "     ARG  = PojedyÒczy plik albo lista plikÛw po≥±czone znakami `%s'"
+msgstr "     ARG  = Pojedy≈Ñczy plik albo lista plik√≥w po≈ÇƒÖczone znakami `%s'"
 
 #: src/help.c:3305
 #, fuzzy
 msgid "          Define additional resource file line"
-msgstr "          Uøyj plikÛw zastÍpczych zamiast standardowych pliku zasobÛw"
+msgstr "          U≈ºyj plik√≥w zastƒôpczych zamiast standardowych pliku zasob√≥w"
 
 #: src/help.c:3307
 #, c-format
@@ -5800,7 +5807,7 @@ msgstr "%cDATA"
 
 #: src/help.c:3318
 msgid "Use given `DATE' instead of today's date"
-msgstr "Uøyj podanej DATY zamiast dzisiejszej"
+msgstr "U≈ºyj podanej DATY zamiast dzisiejszej"
 
 #: src/help.c:3320
 #, fuzzy, c-format
@@ -5813,7 +5820,7 @@ msgstr ""
 #, c-format
 msgid "              %s%cwN[%s], month name[%s], weekday name[N] or %s"
 msgstr ""
-"              %s%cwN[%s]',nazwa miesi±ca[%s], nazwa dnia tygodnia[N] lub %s"
+"              %s%cwN[%s]',nazwa miesiƒÖca[%s], nazwa dnia tygodnia[N] lub %s"
 
 #: src/help.c:3333
 #, c-format
@@ -5822,7 +5829,7 @@ msgstr "%cPLIK"
 
 #: src/help.c:3335
 msgid "Preload options and commands from `FILE'"
-msgstr "Za≥aduj ustawienia i polecenia z 'PLIKu'"
+msgstr "Za≈Çaduj ustawienia i polecenia z 'PLIKu'"
 
 #: src/help.c:3339
 msgid "COMMAND"
@@ -5831,12 +5838,12 @@ msgstr "KOMENDA"
 #: src/help.c:3341
 #, c-format
 msgid "%s        = Month in range:  %d...%d"
-msgstr "%s        = Miesi±c w zakresie:  %d...%d"
+msgstr "%s        = MiesiƒÖc w zakresie:  %d...%d"
 
 #: src/help.c:3343
 #, c-format
 msgid "                        or:  month name | %s | %s%s | %s%s | %s%s"
-msgstr "                        lub:  nazwa miesi±ca | %s | %s%s | %s%s | %s%s"
+msgstr "                        lub:  nazwa miesiƒÖca | %s | %s%s | %s%s | %s%s"
 
 #: src/help.c:3347
 #, c-format
@@ -5866,78 +5873,78 @@ msgstr "            Zakres:  %s[%s%s]%s%s[%s%s] | %s%s%s%s%s | %s %s%s%s"
 #: src/help.c:3416
 #, fuzzy, c-format
 msgid "  %sh,  %s          Display this help text and quit program"
-msgstr "          Wy∂wietl tekst pomocy i zakoÒcz program"
+msgstr "          Wy≈õwietl tekst pomocy i zako≈Ñcz program"
 
 #: src/help.c:3419
 #, fuzzy, c-format
 msgid "  %shh, %s   Display extended help text and quit program"
-msgstr "          Wy∂wietl obszerniejszy tekst pomocy i zakoÒcz program"
+msgstr "          Wy≈õwietl obszerniejszy tekst pomocy i zako≈Ñcz program"
 
 #: src/help.c:3422
 #, fuzzy, c-format
 msgid "  %sL,  %s       Display software license and quit program"
-msgstr "          Wy∂wietl licencjÍ programu i zakoÒcz program"
+msgstr "          Wy≈õwietl licencjƒô programu i zako≈Ñcz program"
 
 #: src/help.c:3425
 #, fuzzy, c-format
 msgid "  %sV,  %s       Display version information and quit program"
-msgstr "          Wy∂wietl numer wersji i zakoÒcz program"
+msgstr "          Wy≈õwietl numer wersji i zako≈Ñcz program"
 
 #: src/help.c:3431
 #, fuzzy, c-format
 msgid "  %sp,  %s         Direct output through external `%s' pager"
-msgstr "          Prze∂lij wynik poprzez zewnetrzny pager `%s'"
+msgstr "          Prze≈õlij wynik poprzez zewnetrzny pager `%s'"
 
 #: src/help.c:3435 src/help.c:3438
 #, fuzzy, c-format
 msgid "  %sp,  %s         Direct output through simple internal pager"
-msgstr "          Prze∂lij wynik poprzez prosty pager wewnÍtrzny"
+msgstr "          Prze≈õlij wynik poprzez prosty pager wewnƒôtrzny"
 
 #: src/help.c:3489
 msgid "This software doesn't claim completeness, correctness or usability."
-msgstr "Te oprogramowanie niekoniecznie jest kompletne, poprawne lub uøyteczne"
+msgstr "Te oprogramowanie niekoniecznie jest kompletne, poprawne lub u≈ºyteczne"
 
 #: src/help.c:3491
 msgid "On principle I will not be liable for ANY damages or losses (implicit"
-msgstr "Z zasady nie mogÍ odpowiadaÊ za ØADNE zniszczenia lub straty (niejawne"
+msgstr "Z zasady nie mogƒô odpowiadaƒá za ≈ªADNE zniszczenia lub straty (niejawne"
 
 #: src/help.c:3493
 msgid "or explicit), which result from using or handling my software."
-msgstr "lub jawne), poniesione w wyniku uøywania lub dzia≥ania tego programu"
+msgstr "lub jawne), poniesione w wyniku u≈ºywania lub dzia≈Çania tego programu"
 
 #: src/help.c:3495
 msgid "If you use this software, you agree without any exception to this"
-msgstr "Korzystaj±c z tego programu zgadasz siÍ bez øadnych ograniczeÒ na to"
+msgstr "KorzystajƒÖc z tego programu zgadasz siƒô bez ≈ºadnych ogranicze≈Ñ na to"
 
 #: src/help.c:3497
 msgid "agreement, which binds you LEGALLY !!"
-msgstr "porozumienie, ktÛre wi±øe ciebie PRAWNIE !!"
+msgstr "porozumienie, kt√≥re wiƒÖ≈ºe ciebie PRAWNIE !!"
 
 #: src/help.c:3500
 msgid "This program is free software; you can redistribute it and/or modify"
-msgstr "Ten program jest darmowy, moøesz go rozpowszechniaÊ i/lub zmieniaÊ"
+msgstr "Ten program jest darmowy, mo≈ºesz go rozpowszechniaƒá i/lub zmieniaƒá"
 
 #: src/help.c:3502
 msgid "it under the terms of the `GNU General Public License' as published by"
 msgstr ""
-"zgodnie z warunkami 'OgÛlnej Licencji Publicznej GNU' opublikowanej przez"
+"zgodnie z warunkami 'Og√≥lnej Licencji Publicznej GNU' opublikowanej przez"
 
 #: src/help.c:3504
 msgid "the `Free Software Foundation'; either version 2, or (at your option)"
 msgstr ""
-"stowarzyszenie `Free Software Foundation', wersja 2 albo (je∂li wolisz)"
+"stowarzyszenie `Free Software Foundation', wersja 2 albo (je≈õli wolisz)"
 
 #: src/help.c:3506
 msgid "any later version."
-msgstr "dowolna pÛºniejsza wersja"
+msgstr "dowolna p√≥≈∫niejsza wersja"
 
 #: src/help.c:3509
 msgid "You should have received a copy of the `GNU General Public License'"
-msgstr "Powiniene∂ by≥ otrzymaÊ kopiÍ 'OgÛlnej Licencji Publicznej GNU'"
+msgstr "Powiniene≈õ by≈Ç otrzymaƒá kopiƒô 'Og√≥lnej Licencji Publicznej GNU'"
 
 #: src/help.c:3511
 msgid "along with this program; if not, write to the:"
-msgstr "razem z programem; je∂li jej nie masz napisz do: "
+msgstr "razem z programem; je≈õli jej nie masz napisz do: "
 
 #: src/help.c:3550
 msgid "Compilation options:"
@@ -5946,7 +5953,7 @@ msgstr "Opcje kompilacji:"
 #: src/help.c:3652
 #, fuzzy, c-format
 msgid "Starting day of week: %s"
-msgstr "          Ustaw pocz±tkowy dzieÒ tygodnia"
+msgstr "          Ustaw poczƒÖtkowy dzie≈Ñ tygodnia"
 
 #: src/help.c:3659
 #, c-format
@@ -5961,7 +5968,7 @@ msgstr ""
 #: src/help.c:3675
 #, fuzzy, c-format
 msgid "Gregorian Reformation: %02d-%02d %s %0*d"
-msgstr "Reformacja gregoriaÒska:  %02d-%02d %s %0*d"
+msgstr "Reformacja gregoria≈Ñska:  %02d-%02d %s %0*d"
 
 #: src/help.c:3684
 #, fuzzy, c-format
@@ -5983,39 +5990,42 @@ msgstr ""
 msgid ""
 "Usage:  %s [%s|%s{[?|h|??|hh|L|V]|{%sHKNOR%sXb%sijn%sq%ssu%s}}] [[%s] [%s]]"
 msgstr ""
-"Uøycie: %s [%s|%s{[?|h|??|hh|L|V]|{%sHKNOR%sXb%sij%sn%sq%ssu%s}}] [[%s] [%s]]"
+"U≈ºycie: %s [%s|%s{[?|h|??|hh|L|V]|{%sHKNOR%sXb%sij%sn%sq%ssu%s}}] [[%s] [%s]]"
 
 #: src/help.c:3770
 #, fuzzy, c-format
 msgid "Use `%s %s|[%s?]"
-msgstr "Uøyj `%s %s' albo "
+msgstr "U≈ºyj `%s %s' albo "
 
 #: src/help.c:3783
 #, fuzzy
 msgid "for more information."
-msgstr "`%s %s|[%s?]' dla pe≥niejszej informacji."
+msgstr "`%s %s|[%s?]' dla pe≈Çniejszej informacji."
 
-#: src/gcal2txt.c:171 src/help.c:3894 src/tcal.c:240 src/txt2gcal.c:171
+#: src/help.c:3894 src/tcal.c:240 src/txt2gcal.c:171 src/gcal2txt.c:171
 #, fuzzy, c-format
 msgid "Email bug reports to <%s>"
-msgstr "Prze∂lij informacje o b≥Ídach do esken@uni-muenster.de"
+msgstr "Prze≈õlij informacje o b≈Çƒôdach do esken@uni-muenster.de"
 
-#: src/gcal2txt.c:173 src/help.c:3896 src/tcal.c:242 src/txt2gcal.c:173
+#: src/help.c:3896 src/tcal.c:242 src/txt2gcal.c:173 src/gcal2txt.c:173
 #, fuzzy, c-format
 msgid "or (if this fails) to <%s>."
-msgstr "albo (jak siÍ nie uda) do bug-gnu-utils@prep.ai.mit.edu"
+msgstr "albo (jak siƒô nie uda) do bug-gnu-utils@prep.ai.mit.edu"
 
-#: src/gcal2txt.c:205 src/help.c:3928 src/tcal.c:274 src/txt2gcal.c:205
+#: src/help.c:3928 src/tcal.c:274 src/txt2gcal.c:205 src/gcal2txt.c:205
+#, c-format
 msgid "This is free software; see the source for copying conditions."
-msgstr "Oprogramowanie darmowe, zajrzyj do ºrÛde≥ po warunki kopiowania"
+msgstr "Oprogramowanie darmowe, zajrzyj do ≈∫r√≥de≈Ç po warunki kopiowania"
 
-#: src/gcal2txt.c:207 src/help.c:3930 src/tcal.c:276 src/txt2gcal.c:207
+#: src/help.c:3930 src/tcal.c:276 src/txt2gcal.c:207 src/gcal2txt.c:207
+#, c-format
 msgid "There is NO warranty, without even the implied warranty of"
-msgstr "Nie ma ØADNEJ gwarancji, nawet domy∂lnej gwarancji"
+msgstr "Nie ma ≈ªADNEJ gwarancji, nawet domy≈õlnej gwarancji"
 
-#: src/gcal2txt.c:209 src/help.c:3932 src/tcal.c:278 src/txt2gcal.c:209
+#: src/help.c:3932 src/tcal.c:278 src/txt2gcal.c:209 src/gcal2txt.c:209
+#, c-format
 msgid "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
-msgstr "UØYTECZNO¶CI DO OKRE¶LONEGO CELU."
+msgstr "U≈ªYTECZNO≈öCI DO OKRE≈öLONEGO CELU."
 
 #: src/help.c:3954
 #, fuzzy, c-format
@@ -6025,7 +6035,7 @@ msgstr ":%*s Kalendarz GNU  ("
 #: src/help.c:3967
 #, c-format
 msgid "Usage:  %s [[OPTION...] [%cDATE] [%cFILE...]] [COMMAND]"
-msgstr "Uøycie:  %s [[OPCJA...] [%cDATA] [%cPLIK...]] [POLECENIE]"
+msgstr "U≈ºycie:  %s [[OPCJA...] [%cDATA] [%cPLIK...]] [POLECENIE]"
 
 #: src/help.c:3974
 #, c-format
@@ -6036,12 +6046,12 @@ msgstr "Usage:  %s [[OPCJA...] [%cPLIK...]] [POLECENIE]"
 #, c-format
 msgid ""
 "   +++  If you specify two digits for the year I DON'T assume %2d%s  +++"
-msgstr "   +++ Je∂li podasz dwie cyfry dla roku NIE ZA£OØ , øe %2d%s +++"
+msgstr "   +++ Je≈õli podasz dwie cyfry dla roku NIE ZA≈ÅO≈ªƒò, ≈ºe %2d%s +++"
 
 #: src/help.c:4005
 #, c-format
 msgid "   +++  `%s' is free software, enjoy   =8^)  +++"
-msgstr "   +++ `%s' jest oprogramowaniem darmowym, baw siÍ  =8^) +++"
+msgstr "   +++ `%s' jest oprogramowaniem darmowym, baw siƒô  =8^) +++"
 
 #: src/help.c:4090 src/help.c:4271
 msgid " 4.0 or 4.02"
@@ -6049,7 +6059,7 @@ msgstr " 4.0 lub 4.02"
 
 #: src/help.c:4102 src/help.c:4283
 msgid " later than 5.0"
-msgstr " pÛºniejsza niø 5.0"
+msgstr " p√≥≈∫niejsza ni≈º 5.0"
 
 #: src/help.c:4117 src/help.c:4294
 msgid "++ 3.0 or later"
@@ -6057,7 +6067,7 @@ msgstr "++ 3.0 lub nowsza"
 
 #: src/help.c:4148 src/help.c:4426
 msgid "5.1 or earlier"
-msgstr "5.1 lub wcze∂niejsza"
+msgstr "5.1 lub wcze≈õniejsza"
 
 #: src/help.c:4155 src/help.c:4433 src/help.c:4639 src/help.c:4737
 msgid "unknown compiler"
@@ -6071,7 +6081,7 @@ msgstr " na"
 
 #: src/help.c:4242
 msgid "(bad version)"
-msgstr "(z≥a wersja)"
+msgstr "(z≈Ça wersja)"
 
 #: src/help.c:4308
 msgid "unknown compiler (SDK?)"
@@ -6079,7 +6089,7 @@ msgstr "nieznany kompilator (SDK?)"
 
 #: src/help.c:4385
 msgid " later than 4.5"
-msgstr " pÛºniejsza niø 4.5"
+msgstr " p√≥≈∫niejsza ni≈º 4.5"
 
 #: src/help.c:4399
 msgid "++ 1.0 or later"
@@ -6104,6 +6114,7 @@ msgid "version %d"
 msgstr "wersja %d"
 
 #: src/help.c:4591
+#, c-format
 msgid "unknown version"
 msgstr "nieznana wersja"
 
@@ -6143,7 +6154,7 @@ msgstr "CW"
 
 #: src/print.c:596
 msgid "Week"
-msgstr "TydzieÒ"
+msgstr "Tydzie≈Ñ"
 
 #.
 #. *** Translators, please translate this as a fixed 2-character text.
@@ -6151,7 +6162,7 @@ msgstr "TydzieÒ"
 #.
 #: src/rc-insert.c:1596 src/rc-insert.c:2613
 msgid "pm"
-msgstr "przed po≥udniem"
+msgstr "przed po≈Çudniem"
 
 #.
 #. *** Translators, please translate this as a fixed 2-character text.
@@ -6159,11 +6170,15 @@ msgstr "przed po≥udniem"
 #.
 #: src/rc-insert.c:1609 src/rc-insert.c:2625
 msgid "am"
-msgstr "po po≥udniu"
+msgstr "po po≈Çudniu"
 
 #.
 #. *** Translators, please translate this as a fixed 2-character text.
 #. *** This text should contain the proper abbreviations for "degrees" and "minutes".
+#.
+#.
+#. *** Translators, please translate this as a fixed 3-character text.
+#. *** This text should contain the proper abbreviations for "degrees", "minutes" and "seconds".
 #.
 #: src/rc-insert.c:1879 src/rc-insert.c:1891
 #, fuzzy
@@ -6184,7 +6199,7 @@ msgid ""
 "Cannot execute command in file `%s'\n"
 "Line: %ld %s"
 msgstr ""
-"Nie mogÍ wykonaÊ polecenia z pliku `%s'\n"
+"Nie mogƒô wykonaƒá polecenia z pliku `%s'\n"
 "Linia: %ld %s"
 
 #: src/rc-insert.c:3480 src/rc-utils.c:2700
@@ -6193,7 +6208,7 @@ msgid ""
 "Command executed (exit code=%d) in file `%s'\n"
 "Line %ld: %s"
 msgstr ""
-"Wykonano polecenie (kod wyj∂cia=%d) z pliku `%s'\n"
+"Wykonano polecenie (kod wyj≈õcia=%d) z pliku `%s'\n"
 "Linia: %ld %s"
 
 #.
@@ -6226,17 +6241,17 @@ msgstr "Wieczna lista dni wolnych"
 
 #: src/rc-use.c:1910 src/rc-use.c:1974 src/rc-use.c:2075 src/rc-use.c:2172
 msgid "`Internal'"
-msgstr "`WewnÍtrzny'"
+msgstr "`Wewnƒôtrzny'"
 
 #: src/rc-use.c:2415
 #, c-format
 msgid " ; Week %s"
-msgstr " ; TydzieÒ %s"
+msgstr " ; Tydzie≈Ñ %s"
 
 #: src/rc-use.c:2429
 #, fuzzy, c-format
 msgid "Week %s"
-msgstr " ; TydzieÒ %s"
+msgstr " ; Tydzie≈Ñ %s"
 
 #: src/rc-utils.c:435 src/rc-utils.c:462
 #, fuzzy, c-format
@@ -6245,13 +6260,13 @@ msgid ""
 "%s\n"
 "%s\n"
 msgstr ""
-"%s: podano b≥Ídna datÍ -- %c%s\n"
+"%s: podano b≈Çƒôdna datƒô -- %c%s\n"
 "%s\n"
 
 #: src/rc-utils.c:3349
 #, c-format
 msgid "Leap-day set to `%02d-%s' in file `%s'."
-msgstr "DzieÒ przestÍpny ustawiony na `%02d-%s' w pliku `%s'."
+msgstr "Dzie≈Ñ przestƒôpny ustawiony na `%02d-%s' w pliku `%s'."
 
 #: src/rc-utils.c:3356 src/rc-utils.c:3824
 #, c-format
@@ -6297,17 +6312,17 @@ msgstr "Zmienna daty `%c' niezdefiniowana w pliku `%s'."
 #: src/rc-utils.c:3791
 #, fuzzy, c-format
 msgid "invalid value assigned to variable `%c' in file `%s'"
-msgstr "Z≥a warto∂Ê daty (zmienna `%c') w pliku `%s'."
+msgstr "Z≈Ça warto≈õƒá daty (zmienna `%c') w pliku `%s'."
 
 #: src/rc-utils.c:3817
 #, fuzzy, c-format
 msgid "Invalid argument in command line given -- %s"
-msgstr "   ARG    = Zachowaj argumenty linii poleceÒ w pliku ARG"
+msgstr "   ARG    = Zachowaj argumenty linii polece≈Ñ w pliku ARG"
 
 #: src/rc-utils.c:3837
 #, fuzzy, c-format
 msgid "Argument `%s' of command line ignored."
-msgstr "Argument `%s' lini poleceÒ zignorowany"
+msgstr "Argument `%s' lini polece≈Ñ zignorowany"
 
 #: src/rc-utils.c:3843
 #, c-format
@@ -6320,7 +6335,7 @@ msgstr "Argument NULL"
 
 #: src/regexp.c:256
 msgid "regexp too big"
-msgstr "regexp za duøy"
+msgstr "regexp za du≈ºy"
 
 #: src/regexp.c:265
 msgid "out of space"
@@ -6328,7 +6343,7 @@ msgstr "brak miejsca na dysku"
 
 #: src/regexp.c:343
 msgid "too many ()"
-msgstr "za duøo ()"
+msgstr "za du≈ºo ()"
 
 #: src/regexp.c:386 src/regexp.c:393
 msgid "unmatched ()"
@@ -6336,19 +6351,19 @@ msgstr "brak nawiasu ()"
 
 #: src/regexp.c:399
 msgid "junk on end"
-msgstr "∂mieci na koÒcu"
+msgstr "≈õmieci na ko≈Ñcu"
 
 #: src/regexp.c:474
 msgid "*+ operand could be empty"
-msgstr "operand *+ moøe byÊ pusty"
+msgstr "operand *+ mo≈ºe byƒá pusty"
 
 #: src/regexp.c:509
 msgid "nested *?+"
-msgstr "zagnieødzone *?+"
+msgstr "zagnie≈ºdzone *?+"
 
 #: src/regexp.c:566
 msgid "invalid [] range"
-msgstr "b≥Ídny zakres []"
+msgstr "b≈Çƒôdny zakres []"
 
 #: src/regexp.c:580
 msgid "unmatched []"
@@ -6356,7 +6371,7 @@ msgstr "brak nawiasu []"
 
 #: src/regexp.c:598
 msgid "internal urp"
-msgstr "wewnÍtrzny urp"
+msgstr "wewnƒôtrzny urp"
 
 #: src/regexp.c:608
 msgid "?+* follows nothing"
@@ -6364,11 +6379,11 @@ msgstr "po ?+* nic nie ma"
 
 #: src/regexp.c:617
 msgid "trailing \\"
-msgstr "nastÍpuj±cy \\"
+msgstr "nastƒôpujƒÖcy \\"
 
 #: src/regexp.c:634
 msgid "internal disaster"
-msgstr "wewnÍtrzny krach"
+msgstr "wewnƒôtrzny krach"
 
 #: src/regexp.c:810
 msgid "NULL parameter"
@@ -6380,7 +6395,7 @@ msgstr "program jest uszkodzony"
 
 #: src/regexp.c:1080
 msgid "memory corruption"
-msgstr "b≥±d pamiÍci"
+msgstr "b≈ÇƒÖd pamiƒôci"
 
 #: src/regexp.c:1097
 msgid "corrupted pointers"
@@ -6388,7 +6403,7 @@ msgstr "uszkodzone znmienne dynamiczne"
 
 #: src/regexp.c:1142
 msgid "internal foulup"
-msgstr "wewnÍtrzny b≥±d"
+msgstr "wewnƒôtrzny b≈ÇƒÖd"
 
 #: src/regexp.c:1216
 #, c-format
@@ -6396,36 +6411,37 @@ msgid "start `%c' "
 msgstr "uruchom `%c' "
 
 #: src/regexp.c:1222
+#, c-format
 msgid "anchored "
 msgstr "zakotwiczony "
 
 #: src/regexp.c:1228
 #, c-format
 msgid "must have \"%s\""
-msgstr "musi mieÊ \"%s\""
+msgstr "musi mieƒá \"%s\""
 
 #: src/regexp.c:1310
 msgid "corrupted opcode"
-msgstr "b≥Ídny kod"
+msgstr "b≈Çƒôdny kod"
 
 #: src/tty.c:456
 #, fuzzy, c-format
 msgid "%s: <Return> for more, <%s> to quit..."
-msgstr "<Enter> aby kontynuowaÊ , <%s> by zakoÒczyÊ..."
+msgstr "<Enter> aby kontynuowaƒá , <%s> by zako≈Ñczyƒá..."
 
 #: src/tty.c:1074
 #, fuzzy, c-format
 msgid "environment variable `%s' not found"
 msgstr ""
 "\n"
-"Brak zmiennej ∂rodowiskowej `%s'"
+"Brak zmiennej ≈õrodowiskowej `%s'"
 
 #: src/tty.c:1085
 #, fuzzy, c-format
 msgid "environment variable `%s' not set"
 msgstr ""
 "\n"
-"Zmienna ∂rodowiskowa `%s' nie ustawiona"
+"Zmienna ≈õrodowiskowa `%s' nie ustawiona"
 
 #: src/tty.c:1128
 #, fuzzy
@@ -6455,13 +6471,13 @@ msgid ""
 "invalid year for computing Easter Sundays date\n"
 "Year must be in range (%d...%d)"
 msgstr ""
-"Z≥y rok do obliczenia daty Niedziel Wielkanocnych\n"
-"Lata musz± byÊ w zakresie (%d...%d)"
+"Z≈Çy rok do obliczenia daty Niedziel Wielkanocnych\n"
+"Lata muszƒÖ byƒá w zakresie (%d...%d)"
 
-#: src/gcal2txt.c:326 src/tcal.c:398 src/txt2gcal.c:326 src/utils.c:405
+#: src/utils.c:405 src/tcal.c:398 src/txt2gcal.c:326 src/gcal2txt.c:326
 #, c-format
 msgid "`%s' line %ld: virtual memory exhausted (%s=%d)"
-msgstr "`%s' linia %ld: zabrak≥o pamiÍci wirtualnej (%s=%d)"
+msgstr "`%s' linia %ld: zabrak≈Ço pamiƒôci wirtualnej (%s=%d)"
 
 #: src/utils.c:410
 #, c-format
@@ -6469,7 +6485,7 @@ msgid ""
 "invalid date part in file `%s'\n"
 "Line %ld: %s"
 msgstr ""
-"z≥a czÍ∂c daty w pliku `%s'\n"
+"z≈Ça czƒô≈õc daty w pliku `%s'\n"
 "Linia %ld: %s"
 
 #: src/utils.c:414
@@ -6478,7 +6494,7 @@ msgid ""
 "invalid month field(%02d) in file `%s'\n"
 "Line %ld: %s"
 msgstr ""
-"z≥e pole miesi±ca (%02d) w pliku `%s'\n"
+"z≈Çe pole miesiƒÖca (%02d) w pliku `%s'\n"
 "Linia %ld: %s"
 
 #: src/utils.c:418
@@ -6487,7 +6503,7 @@ msgid ""
 "invalid day field(%02d) in file `%s'\n"
 "Line %ld: %s"
 msgstr ""
-"z≥e pole dnia (%02d) w pliku `%s'\n"
+"z≈Çe pole dnia (%02d) w pliku `%s'\n"
 "Linia %ld: %s"
 
 #: src/utils.c:422
@@ -6496,7 +6512,7 @@ msgid ""
 "malformed %s in file `%s'\n"
 "Line %ld: %s"
 msgstr ""
-"ºle okre∂lona %s w pliku `%s'\n"
+"≈∫le okre≈õlona %s w pliku `%s'\n"
 "Linia %ld: %s"
 
 #: src/utils.c:426
@@ -6519,7 +6535,7 @@ msgid ""
 "invalid N'th weekday field(%d) in file `%s'\n"
 "Line %ld: %s"
 msgstr ""
-"z≥e Nte pole dnia tygodnia (%d) w pliku `%s'\n"
+"z≈Çe Nte pole dnia tygodnia (%d) w pliku `%s'\n"
 "Linia %ld: %s"
 
 #: src/utils.c:437
@@ -6528,7 +6544,7 @@ msgid ""
 "missing `whitespace' character after date part in file `%s'\n"
 "Line %ld: %s"
 msgstr ""
-"brak `bia≥ego' znaku po dacie w pliku `%s'\n"
+"brak `bia≈Çego' znaku po dacie w pliku `%s'\n"
 "Linia %ld: %s"
 
 #: src/utils.c:442
@@ -6537,13 +6553,13 @@ msgid ""
 "file `%s' can't be written\n"
 "Storage media full!"
 msgstr ""
-"nie moøna zapisaÊ do pliku `%s'\n"
-"Dysk ca≥kowicie zape≥niony!"
+"nie mo≈ºna zapisaƒá do pliku `%s'\n"
+"Dysk ca≈Çkowicie zape≈Çniony!"
 
 #: src/utils.c:447
 #, fuzzy, c-format
 msgid "sending eMail to <%s> failed"
-msgstr "prÛba wys≥ania listu do `%s' nie powiod≥a siÍ"
+msgstr "pr√≥ba wys≈Çania listu do `%s' nie powiod≈Ça siƒô"
 
 #: src/utils.c:449 src/utils.c:466
 #, c-format
@@ -6562,7 +6578,7 @@ msgstr "`%s' linia %ld: (`%s') `%s%d' bez powodzenia"
 #: src/utils.c:464
 #, c-format
 msgid "read error in file `%s'"
-msgstr "b≥±d czytania z pliku `%s'"
+msgstr "b≈ÇƒÖd czytania z pliku `%s'"
 
 #: src/utils.c:471
 #, c-format
@@ -6570,18 +6586,18 @@ msgid ""
 "illegal character in response file `%s'\n"
 "Line %ld: %s"
 msgstr ""
-"z≥y znak w pliku odpowiedzi `%s'\n"
+"z≈Çy znak w pliku odpowiedzi `%s'\n"
 "Linia %ld: %s"
 
-#: src/gcal2txt.c:330 src/tcal.c:402 src/txt2gcal.c:330 src/utils.c:475
+#: src/utils.c:475 src/tcal.c:402 src/txt2gcal.c:330 src/gcal2txt.c:330
 #, c-format
 msgid "`%s' line %ld: (`%s') invalid value for table size `sizeof %s>%d'"
-msgstr "`%s' linia %ld: (`%s') z≥a warto∂c rozmiaru tabeli `sizeof %s>%d'"
+msgstr "`%s' linia %ld: (`%s') z≈Ça warto≈õc rozmiaru tabeli `sizeof %s>%d'"
 
 #: src/utils.c:479
 #, c-format
 msgid "(`%s') date format `%s' is invalid"
-msgstr "(`%s') b≥Ídny format daty `%s'"
+msgstr "(`%s') b≈Çƒôdny format daty `%s'"
 
 #: src/utils.c:484
 #, c-format
@@ -6591,14 +6607,14 @@ msgstr "%s w szukanym wzorcu `%s'"
 #: src/utils.c:486
 #, c-format
 msgid "invalid search pattern `%s' specified"
-msgstr "podany b≥Ídny wzorzec `%s' przy przeszukiwaniu"
+msgstr "podany b≈Çƒôdny wzorzec `%s' przy przeszukiwaniu"
 
-#: src/gcal2txt.c:334 src/tcal.c:409 src/txt2gcal.c:334 src/utils.c:490
+#: src/utils.c:490 src/tcal.c:409 src/txt2gcal.c:334 src/gcal2txt.c:334
 #, c-format
 msgid "`%s' line %ld: (`%s') unmanaged error (%d)"
-msgstr "`%s' linia %ld: (`%s') nieoczekiwany b≥±d (%d)"
+msgstr "`%s' linia %ld: (`%s') nieoczekiwany b≈ÇƒÖd (%d)"
 
-#: src/gcal2txt.c:358 src/tcal.c:433 src/txt2gcal.c:358 src/utils.c:514
+#: src/utils.c:514 src/tcal.c:433 src/txt2gcal.c:358 src/gcal2txt.c:358
 #, c-format
 msgid ""
 "\n"
@@ -6635,7 +6651,7 @@ msgstr ". "
 
 #: src/utils.c:1292 src/utils.c:1354 src/utils.c:1417
 msgid "invalid day"
-msgstr "b≥Ídny dzieÒ"
+msgstr "b≈Çƒôdny dzie≈Ñ"
 
 #.
 #. *** Translators, please translate this as a fixed 3-character text.
@@ -6659,7 +6675,7 @@ msgstr "Wto"
 #.
 #: src/utils.c:1307
 msgid "Wed"
-msgstr "¶ro"
+msgstr "≈öro"
 
 #.
 #. *** Translators, please translate this as a fixed 3-character text.
@@ -6675,7 +6691,7 @@ msgstr "Czw"
 #.
 #: src/utils.c:1317
 msgid "Fri"
-msgstr "Pi±"
+msgstr "PiƒÖ"
 
 #.
 #. *** Translators, please translate this as a fixed 3-character text.
@@ -6715,7 +6731,7 @@ msgstr "Wt"
 #.
 #: src/utils.c:1369
 msgid "We"
-msgstr "¶r"
+msgstr "≈ör"
 
 #.
 #. *** Translators, please translate this as a fixed 2-character text.
@@ -6751,7 +6767,7 @@ msgstr "Nd"
 
 #: src/utils.c:1418
 msgid "Monday"
-msgstr "Poniedzia≥ek"
+msgstr "Poniedzia≈Çek"
 
 #: src/utils.c:1418
 msgid "Tuesday"
@@ -6759,7 +6775,7 @@ msgstr "Wtorek"
 
 #: src/utils.c:1418
 msgid "Wednesday"
-msgstr "¶roda"
+msgstr "≈öroda"
 
 #: src/utils.c:1418
 msgid "Thursday"
@@ -6767,7 +6783,7 @@ msgstr "Czwartek"
 
 #: src/utils.c:1419
 msgid "Friday"
-msgstr "Pi±tek"
+msgstr "PiƒÖtek"
 
 #: src/utils.c:1419
 msgid "Saturday"
@@ -6779,7 +6795,7 @@ msgstr "Niedziela"
 
 #: src/utils.c:1453 src/utils.c:1548
 msgid "invalid month"
-msgstr "b≥Ídny miesi±c"
+msgstr "b≈Çƒôdny miesiƒÖc"
 
 #.
 #. *** Translators, please translate this as a fixed 3-character text.
@@ -6859,7 +6875,7 @@ msgstr "Wrz"
 #.
 #: src/utils.c:1503
 msgid "Oct"
-msgstr "Paº"
+msgstr "Pa≈∫"
 
 #.
 #. *** Translators, please translate this as a fixed 3-character text.
@@ -6879,7 +6895,7 @@ msgstr "Gru"
 
 #: src/utils.c:1549
 msgid "January"
-msgstr "StyczeÒ"
+msgstr "Stycze≈Ñ"
 
 #: src/utils.c:1549
 msgid "February"
@@ -6891,7 +6907,7 @@ msgstr "Marzec"
 
 #: src/utils.c:1550
 msgid "April"
-msgstr "KwiecieÒ"
+msgstr "Kwiecie≈Ñ"
 
 #.
 #. *** Translators, please translate this as the complete month name "May".
@@ -6917,15 +6933,15 @@ msgstr "Lipiec"
 
 #: src/utils.c:1562
 msgid "August"
-msgstr "SierpieÒ"
+msgstr "Sierpie≈Ñ"
 
 #: src/utils.c:1562
 msgid "September"
-msgstr "WrzesieÒ"
+msgstr "Wrzesie≈Ñ"
 
 #: src/utils.c:1563
 msgid "October"
-msgstr "Paºdziernik"
+msgstr "Pa≈∫dziernik"
 
 #: src/utils.c:1563
 msgid "November"
@@ -6933,15 +6949,15 @@ msgstr "Listopad"
 
 #: src/utils.c:1563
 msgid "December"
-msgstr "GrudzieÒ"
+msgstr "Grudzie≈Ñ"
 
 #: src/tcal.c:235
 #, fuzzy, c-format
 msgid "Usage:  %s  [--%s | --%s] | [--%s=[+|-]NUMBER] [ARGUMENT...]\n"
 msgstr ""
-"Uøycie: %s  [--help | --version] | [--przes=[+|-]NUMER] [ARGUMENT...]\n"
+"U≈ºycie: %s  [--help | --version] | [--przes=[+|-]NUMER] [ARGUMENT...]\n"
 
-#: src/gcal2txt.c:308 src/tcal.c:377 src/txt2gcal.c:308
+#: src/tcal.c:377 src/txt2gcal.c:308 src/gcal2txt.c:308
 #, c-format
 msgid ""
 "\n"
@@ -6953,7 +6969,7 @@ msgstr ""
 #: src/tcal.c:406
 #, c-format
 msgid "shift value `%s' is invalid"
-msgstr "argument przesuniÍcia `%s' jest niepoprawny"
+msgstr "argument przesuniƒôcia `%s' jest niepoprawny"
 
 #: src/tcal.c:1011
 #, fuzzy, c-format
@@ -6963,19 +6979,19 @@ msgstr "%s: opcja `%s' wymaga podania argumentu"
 #: src/tcal.c:1182
 #, c-format
 msgid "%s: error during program execution of `%s'\n"
-msgstr "%s: b≥±d podczas dzia≥ania programu `%s'\n"
+msgstr "%s: b≈ÇƒÖd podczas dzia≈Çania programu `%s'\n"
 
 #: src/txt2gcal.c:166
 #, fuzzy, c-format
 msgid "Usage:  %s  [--%s | --%s] | [TEXT-FILE | -] [DATE-PART]\n"
-msgstr "Uøycie:  %s  [--help | --version] | Plik tekstowy | -] [Date-part]\n"
+msgstr "U≈ºycie:  %s  [--help | --version] | Plik tekstowy | -] [Date-part]\n"
 
-#: src/gcal2txt.c:835 src/txt2gcal.c:836
+#: src/txt2gcal.c:836 src/gcal2txt.c:835
 #, c-format
 msgid "%s: no regular file\n"
-msgstr "%s: brak zwyk≥ego pliku\n"
+msgstr "%s: brak zwyk≈Çego pliku\n"
 
-#: src/gcal2txt.c:844 src/txt2gcal.c:845
+#: src/txt2gcal.c:845 src/gcal2txt.c:844
 #, c-format
 msgid "%s: file not found\n"
 msgstr "%s: nie odnaleziono pliku\n"
@@ -6983,32 +6999,32 @@ msgstr "%s: nie odnaleziono pliku\n"
 #: src/gcal2txt.c:166
 #, fuzzy, c-format
 msgid "Usage:  %s  [--%s | --%s] | [RESOURCE-FILE | -]\n"
-msgstr "Uøycie:  %s  [--help | --version] | Plik zasobÛw | -]\n"
+msgstr "U≈ºycie:  %s  [--help | --version] | Plik zasob√≥w | -]\n"
 
 #~ msgid "Death Sunday"
-#~ msgstr "¶miertelna Niedziela"
+#~ msgstr "≈ömiertelna Niedziela"
 
 #, fuzzy
 #~ msgid "Holy Week"
-#~ msgstr "TydzieÒ"
+#~ msgstr "Tydzie≈Ñ"
 
 #, fuzzy
 #~ msgid "King Hussein's Birthday"
-#~ msgstr "Urodziny KrÛla"
+#~ msgstr "Urodziny Kr√≥la"
 
 #~ msgid "National Affliction Day"
-#~ msgstr "Narodowy DzieÒ Cierpienia"
+#~ msgstr "Narodowy Dzie≈Ñ Cierpienia"
 
 #~ msgid "Olsok Eve"
 #~ msgstr "Jutro Olsok"
 
 #, fuzzy
 #~ msgid "Peasant's Day"
-#~ msgstr "DzieÒ Prezydenta"
+#~ msgstr "Dzie≈Ñ Prezydenta"
 
 #, fuzzy
 #~ msgid "Prophet Mohammed's Birthday"
-#~ msgstr "Urodziny KrÛlowej"
+#~ msgstr "Urodziny Kr√≥lowej"
 
 #~ msgid "Sylvester"
 #~ msgstr "Sylwester"
@@ -7018,21 +7034,21 @@ msgstr "Uøycie:  %s  [--help | --version] | Plik zasobÛw | -]\n"
 #~ msgstr "Nowy Rok"
 
 #~ msgid "Trinity Sunday"
-#~ msgstr "Niedziela ¶w. TrÛjcy"
+#~ msgstr "Niedziela ≈öw. Tr√≥jcy"
 
 #~ msgid "Walpurgis Night"
 #~ msgstr "Walpurgis Night"
 
 #, fuzzy
 #~ msgid "Yan Di-Pertuan Agong's Birthday"
-#~ msgstr "Urodziny KrÛla"
+#~ msgstr "Urodziny Kr√≥la"
 
 #~ msgid "Std"
 #~ msgstr "Std"
 
 #, fuzzy
 #~ msgid "Use `%s %s|[%s?] %s' for more information."
-#~ msgstr "`%s %s|[%s?]' dla pe≥niejszej informacji."
+#~ msgstr "`%s %s|[%s?]' dla pe≈Çniejszej informacji."
 
 #~ msgid ""
 #~ "%sh|hh   = Help screen; %sL = License; %sV = Version; %su = Suppress "
@@ -7048,60 +7064,66 @@ msgstr "Uøycie:  %s  [--help | --version] | Plik zasobÛw | -]\n"
 #~ msgstr "%sp = Prosty pager; "
 
 #~ msgid "%sH yes = Use highlighting"
-#~ msgstr "%sH yes = WyrÛøniaj"
+#~ msgstr "%sH yes = Wyr√≥≈ºniaj"
 
 #, fuzzy
 #~ msgid ""
 #~ "%sb %-3s  = Year calendar with 1|2|3|4|6|12 blocks; %sH no = Disable "
 #~ "highlighting"
 #~ msgstr ""
-#~ "%sb ARG  = Kalendarz lat z 1|2|3|4|6|12 blokami; %sH no = Wy≥±cz wyrÛønianie"
+#~ "%sb ARG  = Kalendarz lat z 1|2|3|4|6|12 blokami; %sH no = Wy≈ÇƒÖcz "
+#~ "wyr√≥≈ºnianie"
 
 #~ msgid "%sj[]    = Output of consecutive day of year (Modifiers: [b n nb"
-#~ msgstr "%sj[]    = Wynik kolejnego dnia roku (Zmieniaj±: [b n nb"
+#~ msgstr "%sj[]    = Wynik kolejnego dnia roku (ZmieniajƒÖ: [b n nb"
 
 #, fuzzy
 #~ msgid ""
-#~ "%ss %-3s  = Starting day of week (%s = 0|today | %d|%s | %d|%s | ... | %d|%s)"
+#~ "%ss %-3s  = Starting day of week (%s = 0|today | %d|%s | %d|%s | ... | %d|"
+#~ "%s)"
 #~ msgstr ""
-#~ "%ss ARG  = Pocz±tkowy dzieÒ tygodnia (ARG = 0|Dzisiaj | %d|%s | %d|%s | ... "
-#~ "| %d|%s)"
+#~ "%ss ARG  = PoczƒÖtkowy dzie≈Ñ tygodnia (ARG = 0|Dzisiaj | %d|%s | %d|%s "
+#~ "| ... | %d|%s)"
 
 #~ msgid "%sn|N[%s] = Display eternal holiday list (Year in range: %d...%d)"
 #~ msgstr ""
-#~ "%sn|N[%s] = Wy∂wietl wieczn± listÍ dni wolnych (Lata w zakresie: %d...%d)"
+#~ "%sn|N[%s] = Wy≈õwietl wiecznƒÖ listƒô dni wolnych (Lata w zakresie: %d...%d)"
 
 #, fuzzy
 #~ msgid ""
-#~ "%sc|C[]  = Fixed date list of file `.%s%s'; %sf|F %s[%s%s%s...]=Use file %s"
+#~ "%sc|C[]  = Fixed date list of file `.%s%s'; %sf|F %s[%s%s%s...]=Use file %"
+#~ "s"
 #~ msgstr ""
-#~ "%sc|C[]  = Ustalona lista dat z pliku `.%s%s'; %sf|F ARG[%sARG%s...]=Uøyj "
+#~ "%sc|C[]  = Ustalona lista dat z pliku `.%s%s'; %sf|F ARG[%sARG%s...]=U≈ºyj "
 #~ "plik ARG"
 
 #, fuzzy
 #~ msgid ""
 #~ "%sc|C[]  = Fixed date list of file `%s%s'; %sf|F %s[%s%s%s...]=Use file %s"
 #~ msgstr ""
-#~ "%sc|C[]  = Ustalona lista dat z pliku `.%s%s'; %sf|F ARG[%sARG%s...]=Uøyj "
+#~ "%sc|C[]  = Ustalona lista dat z pliku `.%s%s'; %sf|F ARG[%sARG%s...]=U≈ºyj "
 #~ "plik ARG"
 
 #~ msgid ""
-#~ "%s    = Month in range: %d...%d                 List:  "
-#~ "%s[%s%s]%s...%s%s[%s%s]"
+#~ "%s    = Month in range: %d...%d                 List:  %s[%s%s]%s...%s%s[%"
+#~ "s%s]"
 #~ msgstr ""
-#~ "%s    = Miesi±ce w zakresie: %d...%d           Pokaø:  "
-#~ "%s[%s%s]%s...%s%s[%s%s]"
+#~ "%s    = MiesiƒÖce w zakresie: %d...%d           Poka≈º:  %s[%s%s]%s...%s%s[%"
+#~ "s%s]"
 
 #~ msgid ""
-#~ "                    or: month name|%s[%s|%s|%s]    Range: %s[%s%s]%s%s[%s%s]"
+#~ "                    or: month name|%s[%s|%s|%s]    Range: %s[%s%s]%s%s[%s%"
+#~ "s]"
 #~ msgstr ""
-#~ "                    lub: nazwa miesi±ca|%s[%s|%s|%s]  Zakres: "
-#~ "%s[%s%s]%s%s[%s%s]"
+#~ "                    lub: nazwa miesiƒÖca|%s[%s|%s|%s]  Zakres: %s[%s%s]%s%s"
+#~ "[%s%s]"
 
 #~ msgid ""
-#~ "%s  = Year  in range: %d...%d%*s%*s           List:  [%s%s]%s%s...%s[%s%s]%s"
+#~ "%s  = Year  in range: %d...%d%*s%*s           List:  [%s%s]%s%s...%s[%s%"
+#~ "s]%s"
 #~ msgstr ""
-#~ "%s  = Zakres lat: %d...%d%*s%*s               Pokaø:  [%s%s]%s%s...%s[%s%s]%s"
+#~ "%s  = Zakres lat: %d...%d%*s%*s               Poka≈º:  [%s%s]%s%s...%s[%s%"
+#~ "s]%s"
 
 #~ msgid ""
 #~ "                                               Range: [%s%s]%s%s[%s%s]%s"
@@ -7116,43 +7138,43 @@ msgstr "Uøycie:  %s  [--help | --version] | Plik zasobÛw | -]\n"
 #~ msgstr "            Zakres:  [%s%s]%s%s[%s%s]%s"
 
 #~ msgid "Day number with leading spaces"
-#~ msgstr "Numer dnia z poprzedzaj±cymi spacjami"
+#~ msgstr "Numer dnia z poprzedzajƒÖcymi spacjami"
 
 #~ msgid "Day number with leading zeroes and trailing suffix"
-#~ msgstr "Numer dnia z poprzedzaj±cymi zerami i nastÍpuj±cym rozszerzeniem"
+#~ msgstr "Numer dnia z poprzedzajƒÖcymi zerami i nastƒôpujƒÖcym rozszerzeniem"
 
 #~ msgid "Day number with leading spaces and trailing suffix"
-#~ msgstr "Numer dnia z poprzedzaj±cymi spacjami i nastÍpuj±cym rozszerzeniem"
+#~ msgstr "Numer dnia z poprzedzajƒÖcymi spacjami i nastƒôpujƒÖcym rozszerzeniem"
 
 #~ msgid "Abbreviated month name (3 letters)"
-#~ msgstr "SkrÛcona nazwa miesi±ca (3 litery)"
+#~ msgstr "Skr√≥cona nazwa miesiƒÖca (3 litery)"
 
 #~ msgid "Month number with leading zero"
-#~ msgstr "Numer miesi±ca z poprzedzaj±cymi zerami"
+#~ msgstr "Numer miesiƒÖca z poprzedzajƒÖcymi zerami"
 
 #~ msgid "Month number with leading space"
-#~ msgstr "Numer miesi±ca z poprzedzaj±cymi spacjami"
+#~ msgstr "Numer miesiƒÖca z poprzedzajƒÖcymi spacjami"
 
 #~ msgid "Complete year number with leading zeroes"
-#~ msgstr "Pe≥ny numer roku z poprzedzaj±cymi zerami"
+#~ msgstr "Pe≈Çny numer roku z poprzedzajƒÖcymi zerami"
 
 #~ msgid "Complete year number with leading spaces"
-#~ msgstr "Pe≥ny numer roku z poprzedzaj±cymi spacjami"
+#~ msgstr "Pe≈Çny numer roku z poprzedzajƒÖcymi spacjami"
 
 #~ msgid "Last two digits of year number with leading zero"
-#~ msgstr "Ostatnie dwie cyfry roku z poprzedzaj±cym zerem"
+#~ msgstr "Ostatnie dwie cyfry roku z poprzedzajƒÖcym zerem"
 
 #~ msgid "Last two digits of year number with leading space"
-#~ msgstr "Ostatnie dwie cyfry roku z poprzedzaj±c± spacj±"
+#~ msgstr "Ostatnie dwie cyfry roku z poprzedzajƒÖcƒÖ spacjƒÖ"
 
 #~ msgid "Complete weekday name"
-#~ msgstr "Pe≥na nazwa dnia"
+#~ msgstr "Pe≈Çna nazwa dnia"
 
 #~ msgid "Abbreviated weekday name (3 letters)"
-#~ msgstr "SkrÛcona nazwa dnia (3 litery)"
+#~ msgstr "Skr√≥cona nazwa dnia (3 litery)"
 
 #~ msgid "Abbreviated weekday name (2 letters)"
-#~ msgstr "SkrÛcona nazwa dnia (2 litery)"
+#~ msgstr "Skr√≥cona nazwa dnia (2 litery)"
 
 #~ msgid " on %s"
 #~ msgstr " na %s"
@@ -7161,7 +7183,7 @@ msgstr "Uøycie:  %s  [--help | --version] | Plik zasobÛw | -]\n"
 #~ msgstr " nieznana data"
 
 #~ msgid "St. John's Eve"
-#~ msgstr "Jutro DzieÒ ¶w. Jana"
+#~ msgstr "Jutro Dzie≈Ñ ≈öw. Jana"
 
 #~ msgid "Swiss"
 #~ msgstr "Szwajcarski"
@@ -7170,10 +7192,10 @@ msgstr "Uøycie:  %s  [--help | --version] | Plik zasobÛw | -]\n"
 #~ msgstr "Czeski"
 
 #~ msgid "Danish"
-#~ msgstr "DuÒski"
+#~ msgstr "Du≈Ñski"
 
 #~ msgid "Finnish"
-#~ msgstr "FiÒski"
+#~ msgstr "Fi≈Ñski"
 
 #~ msgid "British"
 #~ msgstr "Brytyjski"
@@ -7185,7 +7207,7 @@ msgstr "Uøycie:  %s  [--help | --version] | Plik zasobÛw | -]\n"
 #~ msgstr "Polski"
 
 #~ msgid "U.S. American"
-#~ msgstr "AmerykaÒski"
+#~ msgstr "Ameryka≈Ñski"
 
 #~ msgid "Slav Missionaries Method's Day"
 #~ msgstr "Slav Missionaries Method's Day"
@@ -7218,7 +7240,7 @@ msgstr "Uøycie:  %s  [--help | --version] | Plik zasobÛw | -]\n"
 #~ "%s: invalid date given -- %s\n"
 #~ "%s\n"
 #~ msgstr ""
-#~ "%s: podano b≥Ídna datÍ -- %s\n"
+#~ "%s: podano b≈Çƒôdna datƒô -- %s\n"
 #~ "%s\n"
 
 #~ msgid "Abort!"

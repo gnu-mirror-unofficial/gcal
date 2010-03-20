@@ -3,26 +3,24 @@ HISTORY file for `gcal'.
 
 Incomplete history (dates and events from my brain):
 
-v*.**   ********
-
-v3.01.1 20091201 Typo fixed in data/dates/lotr: Sm8 = Smaug
-		 Typo fixed in src/help.c and *.po: assigments -> assignments
-		 Hyphens corrected in gcal.1
-		 Date of Nikolaustag changed in data/dates/world
-		   Bug report and patch by Wolfram Kleff
-		 Spell check in doc/en/texi/gcal.texi
+v*.** Typo fixed in data/dates/lotr: Sm8 = Smaug
+		  Typo fixed in src/help.c and *.po: assigments -> assignments
+		  Hyphens corrected in gcal.1
+		  Date of Nikolaustag changed in data/dates/world
+		    Bug report and patch by Wolfram Kleff
+		  Spell check in doc/en/texi/gcal.texi
                    Patch by James Troup
-		 Do not install files in $(HOME)
+		  Do not install files in $(HOME)
 		   Patch by Edward Betts
-		 Add --from-code=iso-8859-1 to po/Makefile.in.in
-		   Patch by Sandro Tosi
-		 Fix German translation
-		   Patch by Jens Seidel
-		 Changes to src/{hd-data2.c,hd-data3.c,hd-defs.h,hd-data.c}
-		   -fixed Czech holidays; bug report and patch by Martin Mares
-		   -removed non ASCII char
-		   -All Saints Day on some states; patch by Marc-Jano Knopp
-		   -All Souls day is no holiday; patch by Thorsten Alteholz
+		  Add --from-code=iso-8859-1 to po/Makefile.in.in
+		    Patch by Sandro Tosi
+		  Fix German translation
+		    Patch by Jens Seidel
+		  Changes to src/{hd-data2.c,hd-data3.c,hd-defs.h,hd-data.c}
+        -fixed Czech holidays; bug report and patch by Martin Mares
+        -removed non ASCII char
+        -All Saints Day on some states; patch by Marc-Jano Knopp
+        -All Souls day is no holiday; patch by Thorsten Alteholz
 
 v3.01   20000630 Some minor changes in the `doc/LL/texi/gcal.texi'
                    documentation (fixed some typos and extended the

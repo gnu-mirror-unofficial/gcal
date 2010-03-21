@@ -4,6 +4,7 @@ HISTORY file for `gcal'.
 Incomplete history (dates and events from my brain):
 
 v*.** Use automake
+      Use the start of the week day specified by the locale.
       Typo fixed in data/dates/lotr: Sm8 = Smaug
 		  Typo fixed in src/help.c and *.po: assigments -> assignments
 		  Hyphens corrected in gcal.1

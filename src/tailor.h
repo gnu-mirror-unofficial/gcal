@@ -44,7 +44,10 @@
 
 #  define  GCAL_NLS
 #  include <locale.h>
+
 #  include <langinfo.h>
+/* FIXME: this is just a quick hack. Avoid the redefinition of ERA.  */
+#  undef ERA
 
 #  include <libintl.h>
 

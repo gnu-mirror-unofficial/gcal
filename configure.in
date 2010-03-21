@@ -28,23 +28,13 @@ dnl
 dnl
 dnl Starting operations.
 dnl
-AC_INIT([GNU gcal],[3.01],[bug-gcal@gnu.org])
+AC_INIT([gcal], [3.01], [bug-gcal@gnu.org])
 AC_PREREQ(2.65)
 AM_INIT_AUTOMAKE([gnu])
 
 
 AM_CONFIG_HEADER(config.h:config.hin)dnl
 AC_REVISION($Id: configure.in 2.30 2000/06/14 02:03:00 tom Exp $)dnl
-
-dnl
-dnl Declare package name and version number.
-dnl
-PACKAGE=`sed -e '/PRGR_NAME/!d' -e 's/^.*"\(.*\)".*$/\1/' $srcdir/$ac_unique_file`
-VERSION=`sed -e '/VERSION_NO/!d' -e 's/^.*"\(.*\)".*$/\1/' $srcdir/$ac_unique_file`
-AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
-AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
-AC_SUBST(PACKAGE)
-AC_SUBST(VERSION)
 
 dnl
 dnl Emit some text.  (I know that some people dislike a talkative `configure'

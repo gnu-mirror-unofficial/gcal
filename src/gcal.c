@@ -22,11 +22,6 @@
 */
 
 
-
-static char rcsid[]="$Id: gcal.c 3.01 2000/06/29 03:00:01 tom Exp $";
-
-
-
 /*
 *  Include header files.
 */

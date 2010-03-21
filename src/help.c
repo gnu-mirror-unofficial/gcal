@@ -19,9 +19,6 @@
 *  You should have received a copy of the `GNU General Public License'
 *  along with this program; if not, write to the:
 *
-*    Free Software Foundation, Inc.
-*    59 Temple Place - Suite 330
-*    Boston, MA 02111-1307,  USA
 */
 
 
@@ -3514,10 +3511,6 @@ my_license (fp)
    print_text (fp, s1);
    print_text (fp, s1);
    strcpy(s1, "   Free Software Foundation, Inc.");
-   print_text (fp, s1);
-   strcpy(s1, "   59 Temple Place - Suite 330");
-   print_text (fp, s1);
-   strcpy(s1, "   Boston, MA 02111-1307,  USA");
    print_text (fp, s1);
 }
 

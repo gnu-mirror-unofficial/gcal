@@ -1,6 +1,7 @@
 dnl Template file for GNU Autoconf
 dnl
 dnl Copyright (c) 1995, 96, 97, 2000 Thomas Esken
+dnl Copyright (c) 2010 Free Software Foundation, Inc.
 dnl
 dnl This software doesn't claim completeness, correctness or usability.
 dnl On principle I will not be liable for ANY damages or losses (implicit
@@ -15,11 +16,6 @@ dnl any later version.
 dnl
 dnl You should have received a copy of the `GNU General Public License'
 dnl along with this program; if not, write to the:
-dnl
-dnl   Free Software Foundation, Inc.
-dnl   59 Temple Place - Suite 330
-dnl   Boston, MA 02111-1307,  USA
-dnl
 
 dnl
 dnl Process this file with autoconf to produce a configure script for Gcal.

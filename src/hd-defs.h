@@ -334,7 +334,7 @@
 #  define  HD_QUINQUAGESIMA_SUNDAY               223
 #  define  HD_REFORMATION_DAY                    224
 #  define  HD_REMEMBRANCE_DAY                    225
-#  define  HD_REPUBLIC_DAY                       226
+#  define  HD_RE_DAY                       226
 #  define  HD_RESPECT_FOR_THE_AGED_DAY           227
 #  define  HD_REVOLUTION_DAY                     228
 #  define  HD_RIO_DE_JANEIRO_ANNIVERSARY         229
@@ -715,17 +715,17 @@ typedef
 *  GLOBAL variables declarations.
 */
 /* The table of country specific holidays. */
-IMPORT const Cc_struct  cc_holidays[];
+extern const Cc_struct  cc_holidays[];
 
 /* The table which contains all the holiday texts. */
-IMPORT const Ht_struct  hd_text[];
+extern const Ht_struct  hd_text[];
 
 /* U.S. holidays observance mode. */
-IMPORT int  observe_us_hdy;
+extern int  observe_us_hdy;
 
 /* The ISO-3166 character code used in the country specific `hdy_*()' functions. */
-IMPORT char  *ptr_cc_id;
+extern char  *ptr_cc_id;
 
 /* Toggle which indicates to use a different CC in output. */
-IMPORT Bool  use_other_cc;
+extern Bool  use_other_cc;
 #endif /* __HD_DEFS_H */

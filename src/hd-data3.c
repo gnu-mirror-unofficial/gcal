@@ -60,7 +60,7 @@ static char rcsid[]="$Id: hd-data3.c 3.01 2000/06/14 03:00:01 tom Exp $";
 /*
 *  All other D-L countries specific holiday management functions.
 */
-   PUBLIC void
+    void
 de_ba_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -90,7 +90,7 @@ de_ba_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_bb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -122,7 +122,7 @@ de_bb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -151,7 +151,7 @@ de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_br_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -173,7 +173,7 @@ de_br_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_bw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -199,7 +199,7 @@ de_bw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_ha_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -221,7 +221,7 @@ de_ha_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_hs_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -245,7 +245,7 @@ de_hs_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_mv_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -266,7 +266,7 @@ de_mv_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_ns_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -288,7 +288,7 @@ de_ns_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_nw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -319,7 +319,7 @@ de_nw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_rp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -343,7 +343,7 @@ de_rp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_sa_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -366,7 +366,7 @@ de_sa_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_sh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -388,7 +388,7 @@ de_sh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_sl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -416,7 +416,7 @@ de_sl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_sn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -452,7 +452,7 @@ de_sn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 de_tr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -479,7 +479,7 @@ de_tr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 dj_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -508,7 +508,7 @@ dj_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 dk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -562,7 +562,7 @@ dk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 dm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -609,7 +609,7 @@ dm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 do_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -659,7 +659,7 @@ do_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 dz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -690,7 +690,7 @@ dz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ec_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -751,7 +751,7 @@ ec_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ee_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -799,7 +799,7 @@ ee_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 eg_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -887,7 +887,7 @@ eg_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 eh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -908,7 +908,7 @@ eh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 er_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -988,7 +988,7 @@ er_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 et_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1055,7 +1055,7 @@ et_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 fi_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1141,7 +1141,7 @@ fi_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 fj_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1199,7 +1199,7 @@ fj_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 fk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1235,7 +1235,7 @@ fk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 fm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1289,7 +1289,7 @@ fm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 fo_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1332,7 +1332,7 @@ fo_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ga_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1383,7 +1383,7 @@ ga_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gb_en_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1408,7 +1408,7 @@ gb_en_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gb_ni_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1446,7 +1446,7 @@ gb_ni_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gb_sl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1488,7 +1488,7 @@ gb_sl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gd_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1541,7 +1541,7 @@ gd_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ge_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1609,7 +1609,7 @@ ge_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gf_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1640,7 +1640,7 @@ gf_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1677,7 +1677,7 @@ gh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
             ptr_cc_id, "+", DAY_MIN, 5, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_NEW_YEARS_DAY].ht_text),
             ptr_cc_id, "+", DAY_MIN, MONTH_MIN, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_REPUBLIC_DAY].ht_text),
+   holiday (*init_data, detected, _(hd_text[HD_RE_DAY].ht_text),
             ptr_cc_id, "+", DAY_MIN, 7, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_REVOLUTION_DAY].ht_text), ptr_cc_id,
             "+", dvec[MONTH_MAX-1], MONTH_MAX, year, hd_elems, fday, count);
@@ -1688,7 +1688,7 @@ gh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gi_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1767,7 +1767,7 @@ gi_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1794,7 +1794,7 @@ gl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1833,7 +1833,7 @@ gm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1852,9 +1852,9 @@ gn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    use_other_cc = !use_other_cc;
    holiday (*init_data, detected, _(hd_text[HD_REFERENDUM_DAY].ht_text),
             ptr_cc_id, "+", 28, 9, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_REPUBLIC_DAY].ht_text),
+   holiday (*init_data, detected, _(hd_text[HD_RE_DAY].ht_text),
             ptr_cc_id, "+", 3, 4, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_REPUBLIC_DAY].ht_text),
+   holiday (*init_data, detected, _(hd_text[HD_RE_DAY].ht_text),
             ptr_cc_id, "+", 2, 10, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_INDEPENDENCE_DAY].ht_text),
             ptr_cc_id, "+", 10, 11, year, hd_elems, fday, count);
@@ -1862,7 +1862,7 @@ gn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1889,7 +1889,7 @@ gp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gq_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1937,7 +1937,7 @@ gq_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -1995,7 +1995,7 @@ gr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gs_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2017,7 +2017,7 @@ gs_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gt_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2067,7 +2067,7 @@ gt_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2107,7 +2107,7 @@ gu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2140,7 +2140,7 @@ gw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 gy_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2186,7 +2186,7 @@ gy_hdy (init_data, detected, easter, year, hd_elems, fday, count)
             ptr_cc_id, "+", easter-3, 0, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_NEW_YEARS_DAY].ht_text),
             ptr_cc_id, "+", DAY_MIN, MONTH_MIN, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_REPUBLIC_DAY].ht_text),
+   holiday (*init_data, detected, _(hd_text[HD_RE_DAY].ht_text),
             ptr_cc_id, "+", 23, 2, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_SLAVE_LIBERATION_DAY].ht_text),
             ptr_cc_id, "+", 5, 5, year, hd_elems, fday, count);
@@ -2196,7 +2196,7 @@ gy_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 hk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2254,7 +2254,7 @@ hk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 hm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2275,7 +2275,7 @@ hm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 hn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2321,7 +2321,7 @@ hn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 hr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2371,7 +2371,7 @@ hr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ht_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2443,7 +2443,7 @@ ht_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 hu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2469,7 +2469,7 @@ hu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
             ptr_cc_id, "+", DAY_MIN, 5, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_NATIONAL_HOLIDAY].ht_text),
             ptr_cc_id, "+", 15, 3, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_REPUBLIC_DAY].ht_text),
+   holiday (*init_data, detected, _(hd_text[HD_RE_DAY].ht_text),
             ptr_cc_id, "+", 23, 10, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_SYLVESTER].ht_text), ptr_cc_id,
             DIS_HLS_PREF, dvec[MONTH_MAX-1], MONTH_MAX, year, hd_elems, fday, count);
@@ -2487,7 +2487,7 @@ hu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 id_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2528,7 +2528,7 @@ id_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ie_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2604,7 +2604,7 @@ ie_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 in_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2631,7 +2631,7 @@ in_hdy (init_data, detected, easter, year, hd_elems, fday, count)
             ptr_cc_id, "+", 15, 8, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_NEW_YEARS_DAY].ht_text),
             ptr_cc_id, "+", DAY_MIN, MONTH_MIN, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_REPUBLIC_DAY].ht_text),
+   holiday (*init_data, detected, _(hd_text[HD_RE_DAY].ht_text),
             ptr_cc_id, "+", 26, MONTH_MIN, year, hd_elems, fday, count);
    if (year > 1956)
     {
@@ -2651,7 +2651,7 @@ in_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 iq_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2688,7 +2688,7 @@ iq_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ir_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2710,7 +2710,7 @@ ir_hdy (init_data, detected, easter, year, hd_elems, fday, count)
             ptr_cc_id, "+", 20, 3, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_NATIONAL_HOLIDAY].ht_text),
             ptr_cc_id, "+", 2, 4, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_REPUBLIC_DAY].ht_text),
+   holiday (*init_data, detected, _(hd_text[HD_RE_DAY].ht_text),
             ptr_cc_id, "+", DAY_MIN, 4, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_REVOLUTION_DAY].ht_text),
             ptr_cc_id, "+", 11, 2, year, hd_elems, fday, count);
@@ -2718,7 +2718,7 @@ ir_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 is_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2766,7 +2766,7 @@ is_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 jm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2819,7 +2819,7 @@ jm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 jo_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2872,7 +2872,7 @@ jo_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ke_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2917,7 +2917,7 @@ ke_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 kg_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2997,7 +2997,7 @@ kg_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 kh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3042,7 +3042,7 @@ kh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ki_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3086,7 +3086,7 @@ ki_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 km_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3121,7 +3121,7 @@ km_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 kn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3171,7 +3171,7 @@ kn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 kp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3232,7 +3232,7 @@ kp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 }
 
 
-   PUBLIC void
+    void
 kw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3260,7 +3260,7 @@ kw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ky_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3309,7 +3309,7 @@ ky_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 kz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3346,7 +3346,7 @@ kz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
     }
    if (year > 1990)
     {
-      holiday (*init_data, detected, _(hd_text[HD_REPUBLIC_DAY].ht_text),
+      holiday (*init_data, detected, _(hd_text[HD_RE_DAY].ht_text),
                ptr_cc_id, "+", 25, 10, year, hd_elems, fday, count);
       holiday (*init_data, detected, _(hd_text[HD_INDEPENDENCE_DAY].ht_text),
                ptr_cc_id, "+", 15, MONTH_MAX, year, hd_elems, fday, count);
@@ -3385,7 +3385,7 @@ kz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 la_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3426,7 +3426,7 @@ la_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 lb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3516,7 +3516,7 @@ lb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 lc_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3597,7 +3597,7 @@ lc_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 li_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3650,7 +3650,7 @@ li_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 lk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3864,7 +3864,7 @@ lk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 lr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3918,7 +3918,7 @@ lr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ls_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3966,7 +3966,7 @@ ls_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 lt_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -4008,7 +4008,7 @@ lt_hdy (init_data, detected, easter, year, hd_elems, fday, count)
             ptr_cc_id, DIS_HLS_PREF, 14, 6, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_NEW_YEARS_DAY].ht_text),
             ptr_cc_id, "+", DAY_MIN, MONTH_MIN, year, hd_elems, fday, count);
-   holiday (*init_data, detected, _(hd_text[HD_REPUBLIC_DAY].ht_text),
+   holiday (*init_data, detected, _(hd_text[HD_RE_DAY].ht_text),
             ptr_cc_id, "+", 6, 7, year, hd_elems, fday, count);
    holiday (*init_data, detected, _(hd_text[HD_RESTORATION_DAY].ht_text),
             ptr_cc_id, "+", 11, 3, year, hd_elems, fday, count);
@@ -4018,7 +4018,7 @@ lt_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 lu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -4071,7 +4071,7 @@ lu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 lv_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -4134,7 +4134,7 @@ lv_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 ly_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;

@@ -73,8 +73,8 @@
 #  define  SYM_END_OF_YEAR             210
 #  define  SYM_EXCLUDE_RC_TITLE        211
 #  define  SYM_EXECUTE_COMMAND         212
-#  define  SYM_EXPORT_LOCAL_DVARS      213
-#  define  SYM_EXPORT_LOCAL_TVARS      214
+#  define  SYM_extern_static_DVARS      213
+#  define  SYM_extern_static_TVARS      214
 #  define  SYM_FILTER_DAY              215
 #  define  SYM_FILTER_PERIOD           216
 #  define  SYM_FILTER_TEXT             217
@@ -1015,344 +1015,344 @@ typedef
 *  GLOBAL variables declarations.
 */
 /* Points to the local coordinates 1. */
-IMPORT Coor_struct  *coor1;
+extern Coor_struct  *coor1;
 
 /* Points to the local coordinates 2. */
-IMPORT Coor_struct  *coor2;
+extern Coor_struct  *coor2;
 
 /* Date variables a[=MMDD]...z[] (YYYY@{a|b|...|z}[[-]N]). */
-IMPORT Dvar_struct  rc_dvar[];
+extern Dvar_struct  rc_dvar[];
 
 /* Temporary file used when a command is assigned to a TVAR. */
-IMPORT FILE  *rc_tvar_tfp;
+extern FILE  *rc_tvar_tfp;
 
 /* Temporary file used for managing `--here=ARG' options. */
-IMPORT FILE  *rc_here_fp;
+extern FILE  *rc_here_fp;
 
 /* Pointers to different parts of a (resource file) line. */
-IMPORT Line_struct  *lineptrs;
+extern Line_struct  *lineptrs;
 
 /* Pointers to different parts of a (resource file) line. */
-IMPORT Line_struct  *lptrs2;
+extern Line_struct  *lptrs2;
 
 /* Pointers to different parts of a (resource file) line. */
-IMPORT Line_struct  *lptrs3;
+extern Line_struct  *lptrs3;
 
 /* Pointers to different parts of a (resource file) line. */
-IMPORT Line_struct  *lptrs;
+extern Line_struct  *lptrs;
 
 /* Text variables $a[=TEXT]...$z[]. */
-IMPORT Tvar_struct  rc_tvar[];
+extern Tvar_struct  rc_tvar[];
 
 /* Time displacement value in days used by %sun* and %moon*
    (also used as cycle-starting time value for %sun* and %moon* special texts). */
-IMPORT double  time_offset;
+extern double  time_offset;
 
 /* Atmospheric pressure in millibar (`--atmosphere=PRESSURE,TEMPERATURE'). */
-IMPORT double  atm_pressure;
+extern double  atm_pressure;
 
 /* Atmospheric temperature in degrees Celsius (`--atmosphere=PRESSURE,TEMPERATURE'). */
-IMPORT double  atm_temperature;
+extern double  atm_temperature;
 
 /* Adjust rise/set-based reference altitude resp. shadow length factor (`--adjust-value=NUMBER'). */
-IMPORT double  adjust_value;
+extern double  adjust_value;
 
 /* Actual size of `rc_elems_table[]'. */
-IMPORT Uint  rc_elems_max;
+extern Uint  rc_elems_max;
 
 /* Cycle-ending time value in minutes for %sun* and %moon* special texts. */
-IMPORT int  loop_end;
+extern int  loop_end;
 
 /* Cycle-timestep value in minutes for %sun* and %moon* special texts. */
-IMPORT int  loop_step;
+extern int  loop_step;
 
 /* Buffer of actual GMT day. */
-IMPORT int  buf_gd;
+extern int  buf_gd;
 
 /* Buffer of actual GMT month. */
-IMPORT int  buf_gm;
+extern int  buf_gm;
 
 /* Buffer of actual GMT year. */
-IMPORT int  buf_gy;
+extern int  buf_gy;
 
 /* Day of event found in line. */
-IMPORT int  d;
+extern int  d;
 
 /* Buffered day of event. */
-IMPORT int  d_buf;
+extern int  d_buf;
 
 /* Indicates whether event also appears in previous year. */
-IMPORT int  decr_year;
+extern int  decr_year;
 
 /* Actual GMT hour. */
-IMPORT int  gmt_hour;
+extern int  gmt_hour;
 
 /* Day difference of GMT and local date. */
-IMPORT int  gmt_loc_diff;
+extern int  gmt_loc_diff;
 
 /* Actual GMT minute. */
-IMPORT int  gmt_min;
+extern int  gmt_min;
 
 /* The `N'th weekday of month' displacement value. */
-IMPORT int  hn;
+extern int  hn;
 
 /* The weekday number of `N'th weekday of month'*/
-IMPORT int  hwd;
+extern int  hwd;
 
 /* Indicates whether event also appears in next year. */
-IMPORT int  incr_year;
+extern int  incr_year;
 
 /* Filler length of week number text. */
-IMPORT int  len_fil_wt;
+extern int  len_fil_wt;
 
 /* Actual size of text buffer of "text"-part of a line. */
-IMPORT int  len_the_text;
+extern int  len_the_text;
 
 /* Month of event found in line. */
-IMPORT int  m;
+extern int  m;
 
 /* Buffered month of event. */
-IMPORT int  m_buf;
+extern int  m_buf;
 
 /* Length of a single axis of a biorhythm text graphics bar. */
-IMPORT int  rc_bio_axis_len;
+extern int  rc_bio_axis_len;
 
 /* Amount of resource file entries. */
-IMPORT int  rc_elems;
+extern int  rc_elems;
 
 /* `-cd'. */
-IMPORT int  rc_have_today_in_list;
+extern int  rc_have_today_in_list;
 
 /* Number of lines of a Moon phase text graphics image. */
-IMPORT int  rc_moonimage_lines;
+extern int  rc_moonimage_lines;
 
 /* Amount of period of fixed dates. */
-IMPORT int  rc_period;
+extern int  rc_period;
 
 /* Starting index of dummy resource file entries in table. */
-IMPORT int  rc_zero_pos;
+extern int  rc_zero_pos;
 
 /* Year of event found in line. */
-IMPORT int  y;
+extern int  y;
 
 /* The mode specifying character. */
-IMPORT char  hc;
+extern char  hc;
 
 /* Vector of holiday dates (memorial days). */
-IMPORT char  hd_mdays[];
+extern char  hd_mdays[];
 
 /* Stores the eternal holiday list texts. */
-IMPORT char  *hd_table[];
+extern char  *hd_table[];
 
 /* Text buffer of a line read from a resource file. */
-IMPORT char  *line_buffer;
+extern char  *line_buffer;
 
 /* Text containing modified actual date %DATE. */
-IMPORT char  *rc_adate;
+extern char  *rc_adate;
 
 /* The biorhythm's "Emo" text. */
-IMPORT char  *rc_bio_emo_lit;
+extern char  *rc_bio_emo_lit;
 
 /* The biorhythm's "Int" text. */
-IMPORT char  *rc_bio_int_lit;
+extern char  *rc_bio_int_lit;
 
 /* The biorhythm's "Phy" text. */
-IMPORT char  *rc_bio_phy_lit;
+extern char  *rc_bio_phy_lit;
 
 /* Name of alternative resource file(s) `-f|F<NAME[+...]>'. */
-IMPORT char  *rc_filename;
+extern char  *rc_filename;
 
 /* Argument used for filtering fixed date days. */
-IMPORT char  *rc_filter_day;
+extern char  *rc_filter_day;
 
 /* Argument used for filtering fixed date periods. */
-IMPORT char  *rc_filter_period;
+extern char  *rc_filter_period;
 
 /* REGEX used for filtering fixed date. */
-IMPORT char  *rc_filter_text;
+extern char  *rc_filter_text;
 
 /* Fixed date list grouping separator `-cg[TEXT]'. */
-IMPORT char  *rc_grp_sep;
+extern char  *rc_grp_sep;
 
 /* Fixed date list heading text `--heading-text=TEXT'. */
-IMPORT char  *rc_heading_text;
+extern char  *rc_heading_text;
 
 /* Name of tempfile used when a command is assigned to a TVAR. */
-IMPORT char  *rc_tvar_tfn;
+extern char  *rc_tvar_tfn;
 
 /* Name of tempfile used for managing `--here=ARG' options. */
-IMPORT char  *rc_here_fn;
+extern char  *rc_here_fn;
 
 /* General purpose text buffer 5. */
-IMPORT char  *s5;
+extern char  *s5;
 
 /* General purpose text buffer 6. */
-IMPORT char  *s6;
+extern char  *s6;
 
 /* General purpose text buffer 7. */
-IMPORT char  *s7;
+extern char  *s7;
 
 /* Text buffer of "text"-part of a line. */
-IMPORT char  *the_text;
+extern char  *the_text;
 
 /* Stores the valid fixed date texts. */
-IMPORT char  **rc_elems_table;
+extern char  **rc_elems_table;
 
 /* `-cNw' and actual date modified. */
-IMPORT Bool  adate_set;
+extern Bool  adate_set;
 
 /* Does the command enables a year implicitly? */
-IMPORT Bool  date_enables_year;
+extern Bool  date_enables_year;
 
 /* `-cNw' and complete week is in month. */
-IMPORT Bool  is_1month_mode;
+extern Bool  is_1month_mode;
 
 /* `-cNw' and only part of week is in month. */
-IMPORT Bool  is_2month_mode;
+extern Bool  is_2month_mode;
 
 /* Reference to a date variable found in line. */
-IMPORT Bool  is_2dvar;
+extern Bool  is_2dvar;
 
 /* Reference to Easter Sundays date found in line. */
-IMPORT Bool  is_2easter;
+extern Bool  is_2easter;
 
 /* Is a command (explicit date) given in the command line? */
-IMPORT Bool  is_date_given;
+extern Bool  is_date_given;
 
 /* `-C[]' or `-C[][T|W|M|Y]' or `-c[][T|W|M|Y]' or `-F<>'. */
-IMPORT Bool  rc_all_dates_flag;
+extern Bool  rc_all_dates_flag;
 
 /* `-cA'. */
-IMPORT Bool  rc_alternative_format_flag;
+extern Bool  rc_alternative_format_flag;
 
 /* `-c<N|w|m|y>'-. */
-IMPORT Bool  rc_backwards_flag;
+extern Bool  rc_backwards_flag;
 
 /* `-jcb'. */
-IMPORT Bool  rc_both_dates_flag;
+extern Bool  rc_both_dates_flag;
 
 /* Buffers the state of `rc_backwards_flag'. */
-IMPORT Bool  rc_bwdf_buffer;
+extern Bool  rc_bwdf_buffer;
 
 /* `-cz'. */
-IMPORT Bool  rc_count_flag;
+extern Bool  rc_count_flag;
 
 /* `-ca'. */
-IMPORT Bool  rc_enable_fn_flag;
+extern Bool  rc_enable_fn_flag;
 
 /* `-ce'. */
-IMPORT Bool  rc_enable_hda_flag;
+extern Bool  rc_enable_hda_flag;
 
 /* `-cE'. */
-IMPORT Bool  rc_enable_hdl_flag;
+extern Bool  rc_enable_hdl_flag;
 
 /* `--execute-command'. */
-IMPORT Bool  rc_execute_command;
+extern Bool  rc_execute_command;
 
 /* `--export-date-variables'. */
-IMPORT Bool  rc_export_ldvar_flag;
+extern Bool  rc_export_ldvar_flag;
 
 /* `--export-text-variables'. */
-IMPORT Bool  rc_export_ltvar_flag;
+extern Bool  rc_export_ltvar_flag;
 
 /* `--leap-day=february'. */
-IMPORT Bool  rc_feb_29_to_feb_28;
+extern Bool  rc_feb_29_to_feb_28;
 
 /* `--leap-day=march'. */
-IMPORT Bool  rc_feb_29_to_mar_01;
+extern Bool  rc_feb_29_to_mar_01;
 
 /* `--precise' to display precise, non-rounded, times and data. */
-IMPORT Bool  rc_precise;
+extern Bool  rc_precise;
 
 /* `-c<N|w|m|y>+'. */
-IMPORT Bool  rc_forwards_flag;
+extern Bool  rc_forwards_flag;
 
 /* Buffers the state of `rc_forwards_flag'. */
-IMPORT Bool  rc_fwdf_buffer;
+extern Bool  rc_fwdf_buffer;
 
 /* `--ignore-case' to ignore case distinctions in PATTERN. */
-IMPORT Bool  rc_ignore_case_flag;
+extern Bool  rc_ignore_case_flag;
 
 /* `--limit' to calculate rise/set time limited to the current day only. */
-IMPORT Bool  rc_limit;
+extern Bool  rc_limit;
 
 /* `-cm'. */
-IMPORT Bool  rc_month_flag;
+extern Bool  rc_month_flag;
 
 /* `-co'. */
-IMPORT Bool  rc_omit_date_flag;
+extern Bool  rc_omit_date_flag;
 
 /* `-cN[d|w|+|-]|MMDD|MMWW[W]N'. */
-IMPORT Bool  rc_period_flag;
+extern Bool  rc_period_flag;
 
 /* `-cl'. */
-IMPORT Bool  rc_period_list;
+extern Bool  rc_period_list;
 
 /* `--revert-match' to select non-matching PATTERN lines. */
-IMPORT Bool  rc_revert_match_flag;
+extern Bool  rc_revert_match_flag;
 
 /* `-c-'. */
-IMPORT Bool  rc_sort_des_flag;
+extern Bool  rc_sort_des_flag;
 
 /* `-jc'. */
-IMPORT Bool  rc_special_flag;
+extern Bool  rc_special_flag;
 
 /* `-cU'. */
-IMPORT Bool  rc_suppr_date_part_flag;
+extern Bool  rc_suppr_date_part_flag;
 
 /* `-cQ'. */
-IMPORT Bool  rc_suppr_list_sep_flag;
+extern Bool  rc_suppr_list_sep_flag;
 
 /* `-cJ'. */
-IMPORT Bool  rc_suppr_text_part_flag;
+extern Bool  rc_suppr_text_part_flag;
 
 /* `-cx'. */
-IMPORT Bool  rc_title_flag;
+extern Bool  rc_title_flag;
 
 /* `-ct'. */
-IMPORT Bool  rc_tomorrow_flag;
+extern Bool  rc_tomorrow_flag;
 
 /* `-c'. */
-IMPORT Bool  rc_use_flag;
+extern Bool  rc_use_flag;
 
 /* `-cw'. */
-IMPORT Bool  rc_week_flag;
+extern Bool  rc_week_flag;
 
 /* `-ck'. */
-IMPORT Bool  rc_week_number_flag;
+extern Bool  rc_week_number_flag;
 
 /* `-cNw'. */
-IMPORT Bool  rc_week_year_flag;
+extern Bool  rc_week_year_flag;
 
 /* `-cy'. */
-IMPORT Bool  rc_year_flag;
+extern Bool  rc_year_flag;
 
 /* `-cZ'. */
-IMPORT Bool  rc_zero_dates_flag;
+extern Bool  rc_zero_dates_flag;
 
 /* Remove highlighting sequences before searching PATTERN? */
-IMPORT Bool  remove_hls_in_regex;
+extern Bool  remove_hls_in_regex;
 
 /* Stores whether a %shell escape special text is run. */
-IMPORT Bool  shell_escape_done;
+extern Bool  shell_escape_done;
 
 #  if HAVE_GNU_RE_COMPILE_PATTERN
-IMPORT struct re_pattern_buffer  regpattern;
+extern struct re_pattern_buffer  regpattern;
 #  endif
 
 #  if HAVE_POSIX_REGCOMP
-IMPORT regex_t  regpattern;
+extern regex_t  regpattern;
 #  endif
 
 #  if HAVE_RE_COMP
-IMPORT int  re_pattern;
+extern int  re_pattern;
 #  endif
 
 #  if HAVE_REGCMP
-IMPORT char  *cpattern;
+extern char  *cpattern;
 #  endif
 
 #  if HAVE_V8_REGCOMP
-IMPORT struct regexp  *regpattern;
+extern struct regexp  *regpattern;
 #  endif
 #endif /* __RC_DEFS_H */

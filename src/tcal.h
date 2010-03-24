@@ -45,7 +45,7 @@
 *  GLOBAL functions prototypes.
 */
 __BEGIN_DECLARATIONS
-EXPORT int
+extern int
 main __P_((int   argc,
            char *argv[]));
 __END_DECLARATIONS

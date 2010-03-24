@@ -46,7 +46,7 @@
 #  include "rc-defs.h"
 #  include "regexp.h"
 #  if !HAVE_STRCSPN
-IMPORT char *my_strcspn __P_((const char *s1, const char *s2));
+extern char *my_strcspn __P_((const char *s1, const char *s2));
 #  endif /* !HAVE_STRCSPN */
 
 #if 0

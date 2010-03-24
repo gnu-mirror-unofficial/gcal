@@ -39,15 +39,15 @@ __BEGIN_DECLARATIONS
 *  The REGEX stuff.
 */
 #  if HAVE_RE_COMP
-IMPORT int re_exec();
+extern int re_exec();
 #  endif
 #  if HAVE_REGCMP
-IMPORT char *regex();
+extern char *regex();
 #  endif
 /*
 ************************************************** Defined in `rc-insert.c'.
 */
-EXPORT void
+extern void
 insert_line_into_table __P_((      char *line_buffer,
                              const char *filename,
                              const long  line_number,

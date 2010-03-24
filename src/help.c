@@ -49,47 +49,47 @@ static char rcsid[]="$Id: help.c 3.01 2000/06/20 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `help.c'.
 */
-LOCAL int
+static int
 gmt_timezone_value __P_((int hour));
-LOCAL const char *
+static const char *
 get_longopt_description __P_((const int  longopt_symbolic,
                               const Bool with_larglist));
-LOCAL void
+static void
 my_bug_report_address __P_((FILE *fp));
-LOCAL void
+static void
 my_copyright __P_((      FILE *fp,
                    const Bool  with_short_licence));
-LOCAL void
+static void
 my_help_head_text __P_((FILE *fp));
-LOCAL void
+static void
 my_help_tail_text __P_((FILE *fp));
-LOCAL void
+static void
 print_compiler_info __P_((FILE *fp));
 __END_DECLARATIONS
 
 
 
 /*
-*  LOCAL variables definitions.
+*  static variables definitions.
 */
 /* Compiler infotext. */
 #if USE_DE
-LOCAL const char *compiler_info[]={"Kompiliert mit %s%s f%sr %s%s%s%s"};
+static const char *compiler_info[]={"Kompiliert mit %s%s f%sr %s%s%s%s"};
 #else /* !USE_DE */
-LOCAL const char *compiler_info[]={N_("Compiled with %s%s for %s%s%s%s")};
+static const char *compiler_info[]={N_("Compiled with %s%s for %s%s%s%s")};
 #endif /* !USE_DE */
 
 /*
    The table used to inform about the supported date formats is a vector of
      `Di_struct' terminated by an element containing a `di_info' which is zero!
 */
-LOCAL const Di_struct  info_date_format[]=
+static const Di_struct  info_date_format[]=
 {
 /*
   { char *di_info, char di_1format, char di_2format },
@@ -178,7 +178,7 @@ LOCAL const Di_struct  info_date_format[]=
      %? inclusive/exclusive day special texts is a vector of
      `Ed_struct' terminated by an element containing an `ed_info' which is zero!
 */
-LOCAL const Ed_struct  info_exclusive_day[]=
+static const Ed_struct  info_exclusive_day[]=
 {
 /*
   { char ed_id, char *ed_info },
@@ -217,7 +217,7 @@ LOCAL const Ed_struct  info_exclusive_day[]=
 /*
 *  Function implementations.
 */
-   PUBLIC void
+    void
 my_help_on_help (fp, longopt, lopt_ambig, cols)
          FILE *fp;
    const char *longopt;
@@ -286,7 +286,7 @@ my_help_on_help (fp, longopt, lopt_ambig, cols)
 
 
 
-   PUBLIC void
+    void
 my_extended_help (fp, longopt_symbolic)
          FILE *fp;
    const int   longopt_symbolic;
@@ -418,8 +418,8 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_EXPORT_LOCAL_DVARS:
-        sprintf(s1, "          %s", get_longopt_description (SYM_EXPORT_LOCAL_DVARS, TRUE));
+      case SYM_extern_static_DVARS:
+        sprintf(s1, "          %s", get_longopt_description (SYM_extern_static_DVARS, TRUE));
         print_text (fp, s1);
         strcpy(s1, "          Lokale Datumvariablen von Datei zu Datei exportieren");
         print_text (fp, s1);
@@ -450,8 +450,8 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_EXPORT_LOCAL_TVARS:
-        sprintf(s1, "          %s", get_longopt_description (SYM_EXPORT_LOCAL_TVARS, TRUE));
+      case SYM_extern_static_TVARS:
+        sprintf(s1, "          %s", get_longopt_description (SYM_extern_static_TVARS, TRUE));
         print_text (fp, s1);
         strcpy(s1, "          Lokale Textvariablen von Datei zu Datei exportieren");
         print_text (fp, s1);
@@ -1188,7 +1188,7 @@ my_extended_help (fp, longopt_symbolic)
                 abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
 #  else /* !USE_RC */
         sprintf(s1, "   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Zeitversatzwert (aktuell:  %s%02d%s%02d == GMT%s)",
-                larg_lit, LOCALTIME_CHAR, LOCALTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
+                larg_lit, staticTIME_CHAR, staticTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
                 (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
                 abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
 #  endif /* !USE_RC */
@@ -1925,8 +1925,8 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_EXPORT_LOCAL_DVARS:
-        sprintf(s1, "          %s", get_longopt_description (SYM_EXPORT_LOCAL_DVARS, TRUE));
+      case SYM_extern_static_DVARS:
+        sprintf(s1, "          %s", get_longopt_description (SYM_extern_static_DVARS, TRUE));
         print_text (fp, s1);
         strcpy(s1, _("          Export local date variables from file to file"));
         print_text (fp, s1);
@@ -1957,8 +1957,8 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-      case SYM_EXPORT_LOCAL_TVARS:
-        sprintf(s1, "          %s", get_longopt_description (SYM_EXPORT_LOCAL_TVARS, TRUE));
+      case SYM_extern_static_TVARS:
+        sprintf(s1, "          %s", get_longopt_description (SYM_extern_static_TVARS, TRUE));
         print_text (fp, s1);
         strcpy(s1, _("          Export local text variables from file to file"));
         print_text (fp, s1);
@@ -2721,7 +2721,7 @@ my_extended_help (fp, longopt_symbolic)
                 abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
 #  else /* !USE_RC */
         sprintf(s1, _("   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  %s%02d%s%02d == GMT%s)"),
-                larg_lit, LOCALTIME_CHAR, LOCALTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
+                larg_lit, staticTIME_CHAR, staticTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
                 (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
                 abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
 #  endif /* !USE_RC */
@@ -3373,7 +3373,7 @@ my_extended_help (fp, longopt_symbolic)
 
 
 
-   PUBLIC void
+    void
 my_basic_help (fp)
    FILE *fp;
 /*
@@ -3447,7 +3447,7 @@ my_basic_help (fp)
 
 
 
-   PUBLIC void
+    void
 my_license (fp)
    FILE *fp;
 /*
@@ -3516,7 +3516,7 @@ my_license (fp)
 
 
 
-   PUBLIC void
+    void
 my_version (fp)
    FILE *fp;
 /*
@@ -3708,7 +3708,7 @@ my_version (fp)
 
 
 
-   PUBLIC char *
+    char *
 usage_msg ()
 /*
    Creates the usage text `usg_text' and includes the actual program name.
@@ -3740,7 +3740,7 @@ usage_msg ()
 
 
 
-   PUBLIC char *
+    char *
 lopt_msg ()
 /*
    Returns the `lopt_text' description text of the long-style options
@@ -3784,7 +3784,7 @@ lopt_msg ()
 
 
 
-   LOCAL int
+   static int
 gmt_timezone_value (hour)
    int hour;
 /*
@@ -3807,7 +3807,7 @@ gmt_timezone_value (hour)
 
 
 
-   LOCAL const char *
+   static const char *
 get_longopt_description (longopt_symbolic, with_larglist)
    const int  longopt_symbolic;
    const Bool with_larglist;
@@ -3871,7 +3871,7 @@ get_longopt_description (longopt_symbolic, with_larglist)
 
 
 
-   LOCAL void
+   static void
 my_bug_report_address (fp)
    FILE *fp;
 /*
@@ -3894,7 +3894,7 @@ my_bug_report_address (fp)
 
 
 
-   LOCAL void
+   static void
 my_copyright (fp, with_short_license)
          FILE *fp;
    const Bool  with_short_license;
@@ -3932,7 +3932,7 @@ my_copyright (fp, with_short_license)
 
 
 
-   LOCAL void
+   static void
 my_help_head_text (fp)
    FILE *fp;
 /*
@@ -3977,7 +3977,7 @@ my_help_head_text (fp)
 
 
 
-   LOCAL void
+   static void
 my_help_tail_text (fp)
    FILE *fp;
 /*
@@ -4024,7 +4024,7 @@ my_help_tail_text (fp)
      is based on copyrighted code by the Info-ZIP group).
 */
 #if defined(MSDOS)
-   LOCAL void
+   static void
 print_compiler_info (fp)
    FILE *fp;
 {
@@ -4199,7 +4199,7 @@ print_compiler_info (fp)
 }
 #else /* !MSDOS */
 #  if defined(WIN32)
-   LOCAL void
+   static void
 print_compiler_info (fp)
    FILE *fp;
 {
@@ -4319,7 +4319,7 @@ print_compiler_info (fp)
 }
 #  else /* !WIN32 */
 #    if defined(OS2)
-   LOCAL void
+   static void
 print_compiler_info (fp)
    FILE *fp;
 {
@@ -4479,7 +4479,7 @@ print_compiler_info (fp)
 }
 #    else /* !OS2 */
 #      if defined(ACORN)
-   LOCAL void
+   static void
 print_compiler_info (fp)
    FILE *fp;
 {
@@ -4526,7 +4526,7 @@ int WBversion = (int)
 10
 ;
 
-   LOCAL void
+   static void
 print_compiler_info (fp)
    FILE *fp;
 {
@@ -4603,7 +4603,7 @@ print_compiler_info (fp)
 }
 #        else /* !AMIGA */
 #          if defined(ATARI)
-   LOCAL void
+   static void
 print_compiler_info (fp)
    FILE *fp;
 {
@@ -4659,7 +4659,7 @@ print_compiler_info (fp)
 }
 #          else /* !ATARI */
 #            if defined(__50SERIES)   /* Prime/PRIMOS */
-   LOCAL void
+   static void
 print_compiler_info (fp)
    FILE *fp;
 {
@@ -4690,7 +4690,7 @@ print_compiler_info (fp)
 }
 #            else /* !__50SERIES */
 #              if defined(VAXC) || defined(VMS)   /* DEC Vax */
-   LOCAL void
+   static void
 print_compiler_info (fp)
    FILE *fp;
 {
@@ -4772,7 +4772,7 @@ print_compiler_info (fp)
 #include <sys/param.h> /* for the BSD4_4 define */
 #endif
 
-   LOCAL void
+   static void
 print_compiler_info (fp)
    FILE *fp;
 {

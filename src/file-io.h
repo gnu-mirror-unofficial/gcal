@@ -38,12 +38,12 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `file-io.c'.
 */
-EXPORT FILE *
+extern FILE *
 file_open __P_((      char       **filename,
                 const int          level,
                 const Fmode_enum   mode,
                       Bool        *bad_sys_include));
-EXPORT char *
+extern char *
 file_read_line __P_((      FILE        *fp,
                            char       **line_buffer,
                            int         *in_pool,
@@ -56,14 +56,14 @@ file_read_line __P_((      FILE        *fp,
                            Bool        *is_include,
                            Bool        *is_dvar,
                            Bool        *is_tvar));
-EXPORT char **
+extern char **
 insert_response_file __P_((      FILE *fp,
                                  char *filename,
                            const char *opt_list,
                                  Uint *my_argc_max,
                                  int  *my_argc,
                                  char *my_argv[]));
-EXPORT void
+extern void
 write_log_file __P_((const char       *filename,
                      const Fmode_enum  mode,
                      const char       *mode_txt,

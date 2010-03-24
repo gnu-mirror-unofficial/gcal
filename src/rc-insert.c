@@ -68,13 +68,13 @@ static char rcsid[]="$Id: rc-insert.c 3.01 2000/06/20 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL variables definitions.
+*  static variables definitions.
 */
 /*
    The table containing the codes that define the output and error format
    types used for formatting the data of the %sun* and %moon* special texts.
 */
-LOCAL const Aobj_oformat_struct  aobj_oformat[][AOBJ_MOON+1]=
+static const Aobj_oformat_struct  aobj_oformat[][AOBJ_MOON+1]=
 {
 /*
   { SUN::{char data_format, char error_format}, MOON::{char data_format, char error_format} }
@@ -168,7 +168,7 @@ LOCAL const Aobj_oformat_struct  aobj_oformat[][AOBJ_MOON+1]=
 /*
 *  Function implementations.
 */
-   PUBLIC void
+    void
 insert_line_into_table (line_buffer, filename, line_number, rc_elems, len_date, print_twice)
          char *line_buffer;
    const char *filename;

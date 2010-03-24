@@ -54,20 +54,20 @@ static char rcsid[]="$Id: hd-use.c 3.01 2000/06/14 03:00:01 tom Exp $";
 *  GLOBAL variables definitions.
 */
 /* Stores the fixed eternal holiday list texts. */
-PUBLIC char  *hd_table[HD_ELEMS_MAX]={(char *)NULL};
+ char  *hd_table[HD_ELEMS_MAX]={(char *)NULL};
 
 /* Vector of holiday dates (legal days). */
-PUBLIC char  hd_ldays[HD_MAX]={'\0'};
+ char  hd_ldays[HD_MAX]={'\0'};
 
 /* Vector of holiday dates (memorial days). */
-PUBLIC char  hd_mdays[HD_MAX]={'\0'};
+ char  hd_mdays[HD_MAX]={'\0'};
 
 
 
 /*
 *  Function implementations.
 */
-   PUBLIC int
+    int
 eval_holiday (day, month, year, wd, forwards)
          int  day;
    const int  month;
@@ -102,7 +102,7 @@ eval_holiday (day, month, year, wd, forwards)
 
 
 
-   PUBLIC int
+    int
 orthodox_easter (year, greg_diff, greg_year, greg_month, greg_first_day, greg_last_day)
    const int  year;
          int *greg_diff;
@@ -189,7 +189,7 @@ orthodox_easter (year, greg_diff, greg_year, greg_month, greg_first_day, greg_la
 
 
 
-   PUBLIC int
+    int
 tishri_1 (year)
    const int year;
 /*
@@ -244,7 +244,7 @@ tishri_1 (year)
 
 
 
-   PUBLIC int
+    int
 muharram_1 (year, doy)
    const int  year;
          int *doy;
@@ -395,7 +395,7 @@ muharram_1 (year, doy)
 
 
 
-     PUBLIC int
+      int
 find_chinese_leap_month (conjunction_vector, nh_ws_prev_year, year, hour, min)
          Ulint *conjunction_vector;
          Ulint *nh_ws_prev_year;
@@ -643,7 +643,7 @@ find_chinese_leap_month (conjunction_vector, nh_ws_prev_year, year, hour, min)
 
 
 
-   PUBLIC int
+    int
 decode_date_format (format_txt, result_txt, day, month, year, doy,
                     hls1_set, hls2_set, fixed_length_names)
          char  *format_txt;
@@ -1157,7 +1157,7 @@ decode_date_format (format_txt, result_txt, day, month, year, doy,
 
 
 
-   PUBLIC int
+    int
 decode_format (format_txt, pos, is_cformat, is_lformat, is_sign,
                is_lzero, is_suffix, is_fformat, fstyle, fwidth)
    char *format_txt;
@@ -1317,7 +1317,7 @@ decode_format (format_txt, pos, is_cformat, is_lformat, is_sign,
 
 
 
-   PUBLIC int
+    int
 use_format (result_txt, pos, string, value, is_numeric, is_cformat, is_lformat,
             is_sign, is_lzero, is_suffix, is_fformat, fstyle, fwidth, extra_len)
          char **result_txt;
@@ -1728,7 +1728,7 @@ use_format (result_txt, pos, string, value, is_numeric, is_cformat, is_lformat,
 
 
 
-   PUBLIC void
+    void
 print_all_holidays (init_data, detected)
          Bool init_data;
    const Bool detected;
@@ -2113,7 +2113,7 @@ print_all_holidays (init_data, detected)
 
 
 
-   PUBLIC void
+    void
 holiday (init_data, detected, holiday_name, country_code, holiday_prefix,
          day, month, year, hd_elems, fday, count)
          Bool  init_data;

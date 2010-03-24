@@ -66,13 +66,13 @@ static char rcsid[]="$Id: rc-utils.c 3.01 2000/06/14 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `rc-utils.c'.
 */
-LOCAL void
+static void
 var_warning __P_((const int   exit_status,
                   const int   var_name,
                   const char *line_buffer,
@@ -86,7 +86,7 @@ __END_DECLARATIONS
 *  Function implementations.
 */
 #  if HAVE_V8_REGCOMP
-   PUBLIC void
+    void
 regerror (msg)
    char *msg;
 /*
@@ -99,7 +99,7 @@ regerror (msg)
 
 
 
-   PUBLIC Bool
+    Bool
 rc_valid_day (date_text, day, month, year)
    const char *date_text;
    const int   day;
@@ -341,7 +341,7 @@ rc_valid_day (date_text, day, month, year)
 
 
 
-   PUBLIC Bool
+    Bool
 rc_valid_period (date_text, d, m, y, incr_year, decr_year)
          char *date_text;
    const int   d;
@@ -844,7 +844,7 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
 
 
 
-   PUBLIC void
+    void
 rc_clean_flags ()
 /*
    Cleans all global flags (except `rc_period_list')
@@ -857,7 +857,7 @@ rc_clean_flags ()
 
 
 
-   PUBLIC Line_struct *
+    Line_struct *
 rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, hc, hn, hwd,
              filename, line_number, line_buffer, on_error_exit)
          char        *the_line;
@@ -1596,7 +1596,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
 
 
 
-   PUBLIC Bool
+    Bool
 precomp_nth_wd (diff, wd, n, day, month, year, mode)
          int         diff;
    const int         wd;
@@ -1771,7 +1771,7 @@ precomp_nth_wd (diff, wd, n, day, month, year, mode)
 
 
 
-   PUBLIC Bool
+    Bool
 precomp_date (diff, wd, day, month, year, mode)
          int         diff;
    const int         wd;
@@ -1924,7 +1924,7 @@ precomp_date (diff, wd, day, month, year, mode)
 
 
 
-   PUBLIC void
+    void
 set_dvar (line_buffer, lineptrs, filename, line_number, mode)
    const char        *line_buffer;
          Line_struct *lineptrs;
@@ -2352,7 +2352,7 @@ LABEL_compute_dvar:
 
 
 
-   PUBLIC void
+    void
 set_tvar (line_buffer, filename, line_number, mode)
    const char     *line_buffer;
    const char     *filename;
@@ -3031,7 +3031,7 @@ set_tvar (line_buffer, filename, line_number, mode)
 
 
 
-   PUBLIC void
+    void
 nth_weekday_of_month (d, m, y, n, is_weekday_mode)
          int  *d;
          int  *m;
@@ -3221,7 +3221,7 @@ nth_weekday_of_month (d, m, y, n, is_weekday_mode)
 
 
 
-   PUBLIC Slint
+    Slint
 d_between (d1, m1, y1, d2, m2, y2)
    const int d1;
    const int m1;
@@ -3239,7 +3239,7 @@ d_between (d1, m1, y1, d2, m2, y2)
 
 
 
-   PUBLIC Slint
+    Slint
 w_between (d1, m1, y1, d2, m2, y2)
    const int d1;
    const int m1;
@@ -3269,7 +3269,7 @@ w_between (d1, m1, y1, d2, m2, y2)
 
 
 
-   PUBLIC Slint
+    Slint
 m_between (m1, y1, m2, y2)
    const int m1;
    const int y1;
@@ -3285,7 +3285,7 @@ m_between (m1, y1, m2, y2)
 
 
 
-   PUBLIC void
+    void
 manage_leap_day (day, month, year, line_buffer, filename, line_number)
          int  *day;
          int  *month;
@@ -3360,7 +3360,7 @@ manage_leap_day (day, month, year, line_buffer, filename, line_number)
 
 
 
-   PUBLIC char *
+    char *
 biorhythm (create_bar, axis_len, string,
            day, month, year, birth_day, birth_month, birth_year,
            emo_text, emo_phase, emo_waxes,
@@ -3574,7 +3574,7 @@ biorhythm (create_bar, axis_len, string,
 
 
 
-   PUBLIC double
+    double
 compute_distance (coor1, coor2)
    const Coor_struct *coor1;
    const Coor_struct *coor2;
@@ -3705,7 +3705,7 @@ compute_distance (coor1, coor2)
 
 
 
-   LOCAL void
+   static void
 var_warning (exit_status, var_name, line_buffer, filename, line_number)
    const int   exit_status;
    const int   var_name;

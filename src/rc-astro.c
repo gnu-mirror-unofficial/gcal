@@ -55,20 +55,20 @@ static char rcsid[]="$Id: rc-astro.c 3.01 2000/06/14 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `rc-astro.c'.
 */
-LOCAL double
+static double
 atmospheric_refraction __P_((const double altitude,
                                    double pressure,
                              const double temperature));
-LOCAL int
+static int
 moon_charpos __P_((const double x,
                    const int    lines));
-LOCAL double
+static double
 internal_moon_rise_set __P_((const Aevent_enum  event,
                                    int          day,
                                    int          month,
@@ -81,7 +81,7 @@ __END_DECLARATIONS
 /*
 *  Function implementations.
 */
-   LOCAL double
+   static double
 atmospheric_refraction (altitude, pressure, temperature)
    const double altitude;
          double pressure;
@@ -173,7 +173,7 @@ atmospheric_refraction (altitude, pressure, temperature)
 
 
 
-   LOCAL int
+   static int
 moon_charpos (x, lines)
    const double x;
    const int    lines;
@@ -196,7 +196,7 @@ moon_charpos (x, lines)
 
 
 
-   PUBLIC double
+    double
 gd_latitude2gc_latitude (gd_latitude, meters_above_sea_level, gc_latitude)
    const double  gd_latitude;
    const int     meters_above_sea_level;
@@ -239,7 +239,7 @@ gd_latitude2gc_latitude (gd_latitude, meters_above_sea_level, gc_latitude)
 
 
 
-   PUBLIC double
+    double
 sun_rise_set (event, is_limited, day, month, year, coordinates)
    const Aevent_enum  event;
    const Bool         is_limited;
@@ -1404,7 +1404,7 @@ LABEL_sun_iter_mt:
 
 
 
-   PUBLIC double
+    double
 moon_rise_set (event, day, month, year, coordinates)
    const Aevent_enum  event;
          int          day;
@@ -1492,7 +1492,7 @@ moon_rise_set (event, day, month, year, coordinates)
 
 
 
-   LOCAL double
+   static double
 internal_moon_rise_set (event, day, month, year, coordinates)
    const Aevent_enum  event;
          int          day;
@@ -3204,7 +3204,7 @@ LABEL_moon_iter_mt:
 
 
 
-   PUBLIC int
+    int
 moondisk (is_full_new, day, month, year, hour, min)
          Bool *is_full_new;
          int   day;
@@ -3282,7 +3282,7 @@ moondisk (is_full_new, day, month, year, hour, min)
 
 
 
-   PUBLIC void
+    void
 draw_moon (age, lines, string)
    const int    age;
    const int    lines;

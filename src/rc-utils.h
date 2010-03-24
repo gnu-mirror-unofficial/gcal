@@ -39,24 +39,24 @@ __BEGIN_DECLARATIONS
 ************************************************** Defined in `rc-utils.c'.
 */
 #  if HAVE_V8_REGCOMP
-EXPORT void
+extern void
 regerror __P_((char *msg));
 # endif
-EXPORT Bool
+extern Bool
 rc_valid_day __P_((const char *date_text,
                    const int   day,
                    const int   month,
                    const int   year));
-EXPORT Bool
+extern Bool
 rc_valid_period __P_((      char *date_text,
                       const int   d,
                       const int   m,
                       const int   y,
                       const int   incr_year,
                       const int   decr_year));
-EXPORT void
+extern void
 rc_clean_flags __P_((void));
-EXPORT Line_struct *
+extern Line_struct *
 rc_get_date __P_((      char        *the_line,
                         Line_struct *lineptrs,
                   const Bool         is_rc_file,
@@ -73,7 +73,7 @@ rc_get_date __P_((      char        *the_line,
                   const long         line_number,
                   const char        *line_buffer,
                   const Bool         on_error_exit));
-EXPORT Bool
+extern Bool
 precomp_nth_wd __P_((      int         diff,
                      const int         wd,
                            int        *n,
@@ -81,57 +81,57 @@ precomp_nth_wd __P_((      int         diff,
                            int        *month,
                            int        *year,
                      const Cmode_enum  mode));
-EXPORT Bool
+extern Bool
 precomp_date __P_((      int         diff,
                    const int         wd,
                          int        *day,
                          int        *month,
                    const int         year,
                    const Cmode_enum  mode));
-EXPORT void
+extern void
 set_dvar __P_((const char        *line_buffer,
                      Line_struct *lineptrs,
                const char        *filename,
                const long         line_number,
                const Var_enum     mode));
-EXPORT void
+extern void
 set_tvar __P_((const char     *line_buffer,
                const char     *filename,
                const long      line_number,
                const Var_enum  mode));
-EXPORT void
+extern void
 nth_weekday_of_month __P_((      int  *d,
                                  int  *m,
                                  int  *y,
                            const int  *n,
                                  Bool *is_weekday_mode));
-EXPORT Slint
+extern Slint
 d_between __P_((const int d1,
                 const int m1,
                 const int y1,
                 const int d2,
                 const int m2,
                 const int y2));
-EXPORT Slint
+extern Slint
 w_between __P_((const int d1,
                 const int m1,
                 const int y1,
                 const int d2,
                 const int m2,
                 const int y2));
-EXPORT Slint
+extern Slint
 m_between __P_((const int m1,
                 const int y1,
                 const int m2,
                 const int y2));
-EXPORT void
+extern void
 manage_leap_day __P_((      int  *day,
                             int  *month,
                             int   year,
                       const char *line_buffer,
                       const char *filename,
                       const long  line_number));
-EXPORT char *
+extern char *
 biorhythm __P_((const Bool  create_bar,
                       int   axis_len,
                       char *string,
@@ -153,7 +153,7 @@ biorhythm __P_((const Bool  create_bar,
                       int  *critical_day,
                       int  *positive_day,
                       int  *negative_day));
-EXPORT double
+extern double
 compute_distance __P_((const Coor_struct *coor1,
                        const Coor_struct *coor2));
 __END_DECLARATIONS

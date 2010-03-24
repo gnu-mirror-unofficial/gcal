@@ -38,9 +38,9 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `hd_data.c'.
 */
-EXPORT const Cc_struct *
+extern const Cc_struct *
 binsearch_cc_id __P_((char *id));
-EXPORT void
+extern void
 base_christian_hdy __P_((      Bool *init_data,
                          const Bool  detected,
                                int   easter,
@@ -48,14 +48,14 @@ base_christian_hdy __P_((      Bool *init_data,
                                int  *hd_elems,
                          const int   fday,
                          const int   count));
-EXPORT void
+extern void
 astronomical_hdy __P_((      Bool *init_data,
                        const Bool  detected,
                        const int   year,
                              int  *hd_elems,
                        const int   fday,
                        const int   count));
-EXPORT void
+extern void
 bahai_hdy __P_((      Bool *init_data,
                 const Bool  detected,
                 const int   year,
@@ -63,14 +63,14 @@ bahai_hdy __P_((      Bool *init_data,
                 const int   fday,
                 const int   count,
                 const char *cc));
-EXPORT void
+extern void
 bahai_mth __P_((      Bool *init_data,
                 const Bool  detected,
                 const int   year,
                       int  *hd_elems,
                 const int   fday,
                 const int   count));
-EXPORT void
+extern void
 celtic_hdy __P_((      Bool *init_data,
                  const Bool  detected,
                  const int   year,
@@ -78,7 +78,7 @@ celtic_hdy __P_((      Bool *init_data,
                  const int   fday,
                  const int   count,
                  const char *cc));
-EXPORT void
+extern void
 chinese_hdy __P_((      Bool *init_data,
                   const Bool  detected,
                   const int   year,
@@ -87,7 +87,7 @@ chinese_hdy __P_((      Bool *init_data,
                   const int   count,
                   const char *cc,
                   const Bool  is_any_meridian));
-EXPORT void
+extern void
 chinese_mth __P_((      Bool *init_data,
                   const Bool  detected,
                   const int   year,
@@ -96,7 +96,7 @@ chinese_mth __P_((      Bool *init_data,
                   const int   count,
                   const Bool  is_any_meridian,
                   const Bool  do_chinese));
-EXPORT void
+extern void
 christian_hdy __P_((      Bool *init_data,
                     const Bool  detected,
                           int   easter,
@@ -104,7 +104,7 @@ christian_hdy __P_((      Bool *init_data,
                           int  *hd_elems,
                     const int   fday,
                     const int   count));
-EXPORT void
+extern void
 coptic_mth __P_((      Bool *init_data,
                  const Bool  detected,
                  const int   year,
@@ -112,21 +112,21 @@ coptic_mth __P_((      Bool *init_data,
                  const int   fday,
                  const int   count,
                  const Bool  do_coptic));
-EXPORT void
+extern void
 french_revolutionary_mth __P_((      Bool *init_data,
                                const Bool  detected,
                                const int   year,
                                      int  *hd_elems,
                                const int   fday,
                                const int   count));
-EXPORT void
+extern void
 indian_civil_mth __P_((      Bool *init_data,
                        const Bool  detected,
                        const int   year,
                              int  *hd_elems,
                        const int   fday,
                        const int   count));
-EXPORT void
+extern void
 hebrew_hdy __P_((      Bool *init_data,
                  const Bool  detected,
                  const int   year,
@@ -134,14 +134,14 @@ hebrew_hdy __P_((      Bool *init_data,
                  const int   fday,
                  const int   count,
                  const char *cc));
-EXPORT void
+extern void
 hebrew_mth __P_((      Bool *init_data,
                  const Bool  detected,
                  const int   year,
                        int  *hd_elems,
                  const int   fday,
                  const int   count));
-EXPORT void
+extern void
 islamic_hdy __P_((      Bool *init_data,
                   const Bool  detected,
                   const int   year,
@@ -149,14 +149,14 @@ islamic_hdy __P_((      Bool *init_data,
                   const int   fday,
                   const int   count,
                   const char *cc));
-EXPORT void
+extern void
 islamic_mth __P_((      Bool *init_data,
                   const Bool  detected,
                   const int   year,
                         int  *hd_elems,
                   const int   fday,
                   const int   count));
-EXPORT void
+extern void
 japanese_hdy __P_((      Bool *init_data,
                    const Bool  detected,
                    const int   year,
@@ -165,14 +165,14 @@ japanese_hdy __P_((      Bool *init_data,
                    const int   count,
                    const char *cc,
                    const Bool  is_any_meridian));
-EXPORT void
+extern void
 multicultural_new_year_hdy __P_((      Bool *init_data,
                                  const Bool  detected,
                                  const int   year,
                                        int  *hd_elems,
                                  const int   fday,
                                  const int   count));
-EXPORT void
+extern void
 old_egyptic_mth __P_((      Bool *init_data,
                       const Bool  detected,
                       const int   year,
@@ -180,7 +180,7 @@ old_egyptic_mth __P_((      Bool *init_data,
                       const int   fday,
                       const int   count,
                       const Bool  do_old_egyptic));
-EXPORT void
+extern void
 orthodox_hdy __P_((      Bool *init_data,
                    const Bool  detected,
                          int   easter,
@@ -190,7 +190,7 @@ orthodox_hdy __P_((      Bool *init_data,
                    const int   count,
                    const char *cc,
                    const Bool  is_new_calendar));
-EXPORT void
+extern void
 persian_hdy __P_((      Bool *init_data,
                  const Bool  detected,
                  const int   year,
@@ -198,14 +198,14 @@ persian_hdy __P_((      Bool *init_data,
                  const int   fday,
                  const int   count,
                  const char *cc));
-EXPORT void
+extern void
 persian_mth __P_((      Bool *init_data,
                  const Bool  detected,
                  const int   year,
                        int  *hd_elems,
                  const int   fday,
                  const int   count));
-EXPORT void
+extern void
 zodiacal_marker_hdy __P_((      Bool *init_data,
                           const Bool  detected,
                           const int   year,

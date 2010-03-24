@@ -38,31 +38,31 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `hd_use.c'.
 */
-EXPORT int
+extern int
 eval_holiday __P_((      int  day,
                    const int  month,
                    const int  year,
                    const int  wd,
                    const Bool forwards));
-EXPORT int
+extern int
 orthodox_easter __P_((const int  year,
                             int *greg_diff,
                       const int  greg_year,
                       const int  greg_month,
                       const int  greg_first_day,
                       const int  greg_last_day));
-EXPORT int
+extern int
 tishri_1 __P_((const int year));
-EXPORT int
+extern int
 muharram_1 __P_((const int  year,
                        int *doy));
-EXPORT int
+extern int
 find_chinese_leap_month __P_((      Ulint *conjunction_vector,
                                     Ulint *nh_ws_prev_year,
                               const int    year,
                               const int    hour,
                               const int    min));
-EXPORT int
+extern int
 decode_date_format __P_((      char  *format_txt,
                                char **result_txt,
                                int    day,
@@ -72,7 +72,7 @@ decode_date_format __P_((      char  *format_txt,
                          const Bool   hls1_set,
                          const Bool   hls2_set,
                          const Bool   fixed_length_names));
-EXPORT int
+extern int
 decode_format __P_((char *format_txt,
                     int   pos,
                     Bool *is_cformat,
@@ -83,7 +83,7 @@ decode_format __P_((char *format_txt,
                     Bool *is_fformat,
                     int  *fstyle,
                     int  *fwidth));
-EXPORT int
+extern int
 use_format __P_((      char **result_txt,
                  const int    pos,
                  const char  *string,
@@ -98,10 +98,10 @@ use_format __P_((      char **result_txt,
                  const int    fstyle,
                  const int    fwidth,
                  const int    extra_len));
-EXPORT void
+extern void
 print_all_holidays __P_((      Bool init_data,
                          const Bool detected));
-EXPORT void
+extern void
 holiday __P_((      Bool  init_data,
               const Bool  detected,
               const char *holiday_name,

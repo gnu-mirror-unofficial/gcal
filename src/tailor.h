@@ -456,18 +456,6 @@
 #    endif /* !OS2 */
 #  endif /* !MSDOS && !DJG && !WIN32 */
 
-
-
-/*
-*  More precise attributes.
-*/
-#  define  LOCAL      static
-#  define  PUBLIC  /* Public */
-#  define  IMPORT     extern
-#  define  EXPORT     IMPORT
-
-
-
 /*
 *  Compiler specific macro for prototyping.
 */

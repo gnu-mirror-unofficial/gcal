@@ -38,7 +38,7 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `rc-check.c'.
 */
-EXPORT void
+extern void
 rc_check __P_((      char *line_buffer,
                const char *filename,
                const long  line_number,

@@ -67,25 +67,25 @@ static char rcsid[]="$Id: utils.c 3.01 2000/06/14 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `utils.c'.
 */
-LOCAL void
+static void
 gregorian2julian __P_((int *day,
                        int *month,
                        int *year));
-LOCAL int
+static int
 raw_week_number __P_((const int  day,
                       const int  month,
                       const int  year,
                       const Bool is_iso_week,
                       const int  start_day_of_week));
-LOCAL const char *
+static const char *
 dflt_day_name __P_((const int day));
-LOCAL const char *
+static const char *
 dflt_month_name __P_((const int month));
 __END_DECLARATIONS
 
@@ -94,7 +94,7 @@ __END_DECLARATIONS
 /*
 *  Function implementations.
 */
-   PUBLIC VOID_PTR
+    VOID_PTR
 my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents)
    const int   amount;
    const int   exit_status;
@@ -129,7 +129,7 @@ my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents
 
 
 
-   PUBLIC VOID_PTR
+    VOID_PTR
 my_realloc (ptr_memblock, amount, exit_status, module_name, module_line, var_name, var_contents)
          VOID_PTR  ptr_memblock;
    const int       amount;
@@ -165,7 +165,7 @@ my_realloc (ptr_memblock, amount, exit_status, module_name, module_line, var_nam
 
 
 
-   PUBLIC void
+    void
 allocate_all_strings (amount, module_name, module_line)
    const int   amount;
    const char *module_name;
@@ -222,7 +222,7 @@ allocate_all_strings (amount, module_name, module_line)
 
 
 
-   PUBLIC void
+    void
 resize_all_strings (amount, with_line_buffer, module_name, module_line)
    const int   amount;
    const Bool  with_line_buffer;
@@ -279,7 +279,7 @@ resize_all_strings (amount, with_line_buffer, module_name, module_line)
 
 
 
-   PUBLIC void
+    void
 my_error (exit_status, module_name, module_line, var_name, var_contents)
    const int   exit_status;
    const char *module_name;
@@ -496,7 +496,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 
 
 #if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
-   PUBLIC RETSIGTYPE
+    RETSIGTYPE
 handle_signal (the_signal)
    int the_signal;
 /*
@@ -517,7 +517,7 @@ handle_signal (the_signal)
 
 
 
-   PUBLIC void
+    void
 my_exit (exit_status)
    const int exit_status;
 /*
@@ -546,7 +546,7 @@ my_exit (exit_status)
 
 
 
-   PUBLIC int
+    int
 my_atoi (string)
    const char *string;
 /*
@@ -566,7 +566,7 @@ my_atoi (string)
 
 
 
-   PUBLIC int
+    int
 my_system (command)
    const char *command;
 /*
@@ -583,7 +583,7 @@ my_system (command)
 
 
 #if !HAVE_STRSTR
-   PUBLIC char *
+    char *
 my_strstr (text, pattern)
    const char *text;
    const char *pattern;
@@ -618,7 +618,7 @@ my_strstr (text, pattern)
 
 
 #if !HAVE_STRCSPN
-   PUBLIC int
+    int
 my_strcspn (s1, s2)
    const char *s1;
    const char *s2;
@@ -647,7 +647,7 @@ my_strcspn (s1, s2)
 
 
 #if !HAVE_STRCASECMP
-   PUBLIC int
+    int
 my_strcasecmp (s1, s2)
    const char *s1;
    const char *s2;
@@ -678,7 +678,7 @@ my_strcasecmp (s1, s2)
 
 
 #if !HAVE_STRNCASECMP
-   PUBLIC int
+    int
 my_strncasecmp (s1, s2, len)
    const char *s1;
    const char *s2;
@@ -713,7 +713,7 @@ my_strncasecmp (s1, s2, len)
 
 
 
-   PUBLIC Bool
+    Bool
 get_actual_date ()
 /*
    Gets the actual local/GMT date and time from the system resp.,
@@ -1026,7 +1026,7 @@ get_actual_date ()
 
 
 
-   PUBLIC int
+    int
 compare_d_m_name (string, mode)
    const char       *string;
    const Cmode_enum  mode;
@@ -1130,7 +1130,7 @@ compare_d_m_name (string, mode)
 
 
 
-   PUBLIC int
+    int
 asc_sort (a, b)
    const char **a;
    const char **b;
@@ -1143,7 +1143,7 @@ asc_sort (a, b)
 
 
 
-   PUBLIC int
+    int
 des_sort (a, b)
    const char **a;
    const char **b;
@@ -1156,7 +1156,7 @@ des_sort (a, b)
 
 
 
-   PUBLIC Bool
+    Bool
 is_presorted (table, elems)
    char **table;
    int    elems;
@@ -1187,7 +1187,7 @@ is_presorted (table, elems)
 
 
 
-   PUBLIC void
+    void
 reverse_order (table, elems)
          char **table;
    const int    elems;
@@ -1217,7 +1217,7 @@ reverse_order (table, elems)
 
 
 
-   PUBLIC const char *
+    const char *
 day_suffix (day)
    int day;
 /*
@@ -1268,7 +1268,7 @@ day_suffix (day)
 
 
 
-   PUBLIC const char *
+    const char *
 short3_day_name (day)
    const int day;
 /*
@@ -1331,7 +1331,7 @@ short3_day_name (day)
 
 
 
-   PUBLIC const char *
+    const char *
 short_day_name (day)
    const int day;
 /*
@@ -1393,7 +1393,7 @@ short_day_name (day)
 
 
 
-   PUBLIC const char *
+    const char *
 day_name (day)
    const int day;
 /*
@@ -1423,7 +1423,7 @@ day_name (day)
 
 
 
-   PUBLIC const char *
+    const char *
 short_month_name (month)
    const int month;
 /*
@@ -1517,7 +1517,7 @@ short_month_name (month)
 
 
 
-   PUBLIC const char *
+    const char *
 month_name (month)
    const int month;
 /*
@@ -1598,7 +1598,7 @@ month_name (month)
 
 
 
-   PUBLIC Ulint
+    Ulint
 date2num (day, month, year)
    const int day;
    const int month;
@@ -1637,7 +1637,7 @@ date2num (day, month, year)
 
 
 
-   PUBLIC void
+    void
 num2date (mjd, day, month, year)
    Ulint  mjd;
    int   *day;
@@ -1699,7 +1699,7 @@ num2date (mjd, day, month, year)
 
 
 
-   PUBLIC Bool
+    Bool
 doy2date (doy, is_leap_year, day, month)
          int  doy;
    const int  is_leap_year;
@@ -1759,7 +1759,7 @@ doy2date (doy, is_leap_year, day, month)
 
 
 
-   PUBLIC int
+    int
 weekday_of_date (day, month, year)
    const int day;
    const int month;
@@ -1776,7 +1776,7 @@ weekday_of_date (day, month, year)
 
 
 
-   PUBLIC int
+    int
 day_of_year (day, month, year)
    const int day;
    const int month;
@@ -1799,7 +1799,7 @@ day_of_year (day, month, year)
 
 
 
-   PUBLIC int
+    int
 days_of_february (year)
    const int year;
 /*
@@ -1835,7 +1835,7 @@ days_of_february (year)
 
 
 
-   PUBLIC Bool
+    Bool
 valid_date (day, month, year)
    const int day;
    const int month;
@@ -1858,7 +1858,7 @@ valid_date (day, month, year)
 
 
 
-   PUBLIC Bool
+    Bool
 prev_date (day, month, year)
    int *day;
    int *month;
@@ -1905,7 +1905,7 @@ prev_date (day, month, year)
 
 
 
-   PUBLIC Bool
+    Bool
 next_date (day, month, year)
    int *day;
    int *month;
@@ -1949,7 +1949,7 @@ next_date (day, month, year)
 
 
 
-   PUBLIC int
+    int
 week_number (day, month, year, is_iso_week, start_day_of_week)
    const int  day;
    const int  month;
@@ -2044,7 +2044,7 @@ week_number (day, month, year, is_iso_week, start_day_of_week)
 
 
 
-   PUBLIC int
+    int
 weekno2doy (week, year, is_iso_week, start_day_of_week)
          int  week;
    const int  year;
@@ -2125,7 +2125,7 @@ weekno2doy (week, year, is_iso_week, start_day_of_week)
 
 
 
-   PUBLIC int
+    int
 knuth_easter_formula (year)
    const int year;
 /*
@@ -2240,7 +2240,7 @@ LABEL_compute_gregorian:
 
 
 
-   PUBLIC int
+    int
 julian_gregorian_diff (day, month, year)
    const int day;
    const int month;
@@ -2264,7 +2264,7 @@ julian_gregorian_diff (day, month, year)
 
 
 
-   LOCAL void
+   static void
 gregorian2julian (day, month, year)
    int *day;
    int *month;
@@ -2317,7 +2317,7 @@ gregorian2julian (day, month, year)
 
 
 
-   LOCAL int
+   static int
 raw_week_number (day, month, year, is_iso_week, start_day_of_week)
    const int  day;
    const int  month;
@@ -2398,7 +2398,7 @@ raw_week_number (day, month, year, is_iso_week, start_day_of_week)
 
 
 
-   LOCAL const char *
+   static const char *
 dflt_day_name (day)
    const int day;
 /*
@@ -2418,7 +2418,7 @@ dflt_day_name (day)
 
 
 
-   LOCAL const char *
+   static const char *
 dflt_month_name (month)
    const int month;
 /*

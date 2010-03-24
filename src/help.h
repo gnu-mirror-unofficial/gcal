@@ -76,23 +76,23 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `help.c'.
 */
-EXPORT void
+extern void
 my_help_on_help __P_((      FILE *fp,
                       const char *longopt,
                       const Bool  lopt_ambig,
                       const int   cols));
-EXPORT void
+extern void
 my_extended_help __P_((      FILE *fp,
                        const int   longopt_symbolic));
-EXPORT void
+extern void
 my_basic_help __P_((FILE *fp));
-EXPORT void
+extern void
 my_license __P_((FILE *fp));
-EXPORT void
+extern void
 my_version __P_((FILE *fp));
-EXPORT char *
+extern char *
 usage_msg __P_((void));
-EXPORT char *
+extern char *
 lopt_msg __P_((void));
 __END_DECLARATIONS
 #endif /* __HELP_H */

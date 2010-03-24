@@ -84,25 +84,25 @@ static char rcsid[]="$Id: tcal.c 3.01 2000/06/14 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
-LOCAL void
+static void
 usage_msg __P_((      FILE *fp,
                 const char *prgr_name,
                       int   exit_status));
-LOCAL void
+static void
 version_msg __P_((      FILE *fp,
                   const char *prgr_name,
                         int   exit_status));
-LOCAL VOID_PTR
+static VOID_PTR
 my_malloc __P_((const int   amount,
                 const int   exit_status,
                 const char *module_name,
                 const long  module_line,
                 const char *var_name,
                 const int   var_contents));
-LOCAL VOID_PTR
+static VOID_PTR
 my_realloc __P_((      VOID_PTR  ptr_memblock,
                  const int       amount,
                  const int       exit_status,
@@ -110,39 +110,39 @@ my_realloc __P_((      VOID_PTR  ptr_memblock,
                  const long      module_line,
                  const char     *var_name,
                  const int       var_contents));
-LOCAL void
+static void
 my_error __P_((const int   exit_status,
                const char *module_name,
                const long  module_line,
                const char *var_name,
                const int   var_contents));
 #if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
-LOCAL RETSIGTYPE
+static RETSIGTYPE
 handle_signal __P_((int the_signal));
 #endif
 #if !HAVE_STRNCASECMP
-LOCAL int
+static int
 my_strncasecmp __P_((const char *s1,
                      const char *s2,
                            int   len));
 #endif /* !HAVE_STRNCASECMP */
-LOCAL int
+static int
 days_of_february __P_((const int year));
-LOCAL Bool
+static Bool
 doy2date __P_((      int  doy,
                const int  is_leap_year,
                      int *day,
                      int *month));
-LOCAL Ulint
+static Ulint
 date2num __P_((const int day,
                const int month,
                const int year));
-LOCAL void
+static void
 num2date __P_((Ulint  mjd,
                int   *day,
                int   *month,
                int   *year));
-LOCAL void
+static void
 get_actual_date __P_((int *day,
                       int *month,
                       int *year));
@@ -151,23 +151,23 @@ __END_DECLARATIONS
 
 
 /*
-*  LOCAL variables definitions.
+*  static variables definitions.
 */
 /*
    Number of days in months.
 */
-LOCAL const int  dvec[]={31, 28, 31, 30, 31, 30,31, 31, 30, 31, 30, 31};
+static const int  dvec[]={31, 28, 31, 30, 31, 30,31, 31, 30, 31, 30, 31};
 
 /*
    Number of past days of month.
 */
-LOCAL const int  mvec[]={0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+static const int  mvec[]={0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
 
 /*
    The Gregorian Reformation dates table is an unterminated vector
      of `Greg_struct'.
 */
-LOCAL Greg_struct  greg_reform_date[]=
+static Greg_struct  greg_reform_date[]=
 {
 /*
   { int year, int month, int f_day, int l_day },
@@ -177,37 +177,37 @@ LOCAL Greg_struct  greg_reform_date[]=
 };
 
 /* Points to the used Gregorian Reformation date. */
-LOCAL Greg_struct *greg=greg_reform_date;
+static Greg_struct *greg=greg_reform_date;
 
 #ifdef DJG
 /* Set to SHRT_MAX for checking the maximum table range. */
-LOCAL Usint  testval=(Usint)0;
+static Usint  testval=(Usint)0;
 #else
 /* Set to INT_MAX for checking the maximum table range. */
-LOCAL Uint  testval=(Uint)0;
+static Uint  testval=(Uint)0;
 #endif
 
 /* Actual length of all strings. */
-LOCAL Uint  maxlen_max=MAXLEN_MAX;
+static Uint  maxlen_max=MAXLEN_MAX;
 
 /* The name of this executable. */
-LOCAL char  *prgr_name=(char *)NULL;
+static char  *prgr_name=(char *)NULL;
 
 /* Text of `--help' option name. */
-LOCAL char  *help_option_name="help";
+static char  *help_option_name="help";
 
 /* Text of `--version' option name. */
-LOCAL char  *version_option_name="version";
+static char  *version_option_name="version";
 
 /* Text of `--shift' option name. */
-LOCAL char  *shift_option_name="shift";
+static char  *shift_option_name="shift";
 
 
 
 /*
 *  Function implementations.
 */
-   LOCAL void
+   static void
 usage_msg (fp, prgr_name, exit_status)
          FILE *fp;
    const char *prgr_name;
@@ -245,7 +245,7 @@ usage_msg (fp, prgr_name, exit_status)
 
 
 
-   LOCAL void
+   static void
 version_msg (fp, prgr_name, exit_status)
          FILE *fp;
    const char *prgr_name;
@@ -280,7 +280,7 @@ version_msg (fp, prgr_name, exit_status)
 
 
 
-   LOCAL VOID_PTR
+   static VOID_PTR
 my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents)
    const int   amount;
    const int   exit_status;
@@ -315,7 +315,7 @@ my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents
 
 
 
-   LOCAL VOID_PTR
+   static VOID_PTR
 my_realloc (ptr_memblock, amount, exit_status, module_name, module_line, var_name, var_contents)
          VOID_PTR  ptr_memblock;
    const int       amount;
@@ -351,7 +351,7 @@ my_realloc (ptr_memblock, amount, exit_status, module_name, module_line, var_nam
 
 
 
-   LOCAL void
+   static void
 my_error (exit_status, module_name, module_line, var_name, var_contents)
    const int   exit_status;
    const char *module_name;
@@ -414,7 +414,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 
 
 #if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
-   LOCAL RETSIGTYPE
+   static RETSIGTYPE
 handle_signal (the_signal)
    int the_signal;
 /*
@@ -436,7 +436,7 @@ handle_signal (the_signal)
 
 
 #if !HAVE_STRNCASECMP
-   LOCAL int
+   static int
 my_strncasecmp (s1, s2, len)
    const char *s1;
    const char *s2;
@@ -471,7 +471,7 @@ my_strncasecmp (s1, s2, len)
 
 
 
-   LOCAL int
+   static int
 days_of_february (year)
    const int year;
 /*
@@ -501,7 +501,7 @@ days_of_february (year)
 
 
 
-   LOCAL Bool
+   static Bool
 doy2date (doy, is_leap_year, day, month)
          int  doy;
    const int  is_leap_year;
@@ -546,7 +546,7 @@ doy2date (doy, is_leap_year, day, month)
 
 
 
-   LOCAL Ulint
+   static Ulint
 date2num (day, month, year)
    const int day;
    const int month;
@@ -585,7 +585,7 @@ date2num (day, month, year)
 
 
 
-   LOCAL void
+   static void
 num2date (mjd, day, month, year)
    Ulint  mjd;
    int   *day;
@@ -647,7 +647,7 @@ num2date (mjd, day, month, year)
 
 
 
-   LOCAL void
+   static void
 get_actual_date (day, month, year)
   int *day;
   int *month;
@@ -671,7 +671,7 @@ get_actual_date (day, month, year)
 
 
 
-   PUBLIC int
+    int
 main (argc, argv)
    int   argc;
    char *argv[];
@@ -767,13 +767,13 @@ main (argc, argv)
    /*
       Now initialize the NLS functions.
    */
-#    if HAVE_SETLOCALE
+#    if HAVE_SETstaticE
    setlocale(LC_ALL, "");
 #    endif
-#    ifndef LOCALEDIR
-#      define LOCALEDIR  NULL
+#    ifndef staticEDIR
+#      define staticEDIR  NULL
 #    endif
-   bindtextdomain(PACKAGE, LOCALEDIR);
+   bindtextdomain(PACKAGE, staticEDIR);
    textdomain(PACKAGE);
    /*
       Now check whether we have to use the Gregorian Reformation date of 1752

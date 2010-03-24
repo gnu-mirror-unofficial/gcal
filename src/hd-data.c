@@ -59,7 +59,7 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
      `Cc_struct' terminated by an element containing a `cc_info' which is zero!
      The `cc_id' entries in this table *MUST* be listed in ASCENDING SORT ORDER !!
 */
-PUBLIC const Cc_struct  cc_holidays[]=
+ const Cc_struct  cc_holidays[]=
 {
 /*
   The A2 (2-letters) country codes are taken from ISO-3166.
@@ -807,19 +807,19 @@ PUBLIC const Cc_struct  cc_holidays[]=
 };
 
 /* U.S. holidays observance mode. */
-PUBLIC int  observe_us_hdy=SAFR_SUMO;
+ int  observe_us_hdy=SAFR_SUMO;
 
 /* The ISO-3166 character code used in the country specific `hdy_*()' functions. */
-PUBLIC char  *ptr_cc_id=(char *)NULL;
+ char  *ptr_cc_id=(char *)NULL;
 
 /* Toggle which indicates to use a different CC in output. */
-PUBLIC Bool  use_other_cc=FALSE;
+ Bool  use_other_cc=FALSE;
 
 /*
    The table which contains all the holiday texts
      is an unterminated vector of `Ht_struct'.
 */
-PUBLIC const Ht_struct  hd_text[]=
+ const Ht_struct  hd_text[]=
 {
 /*
   { int ht_id, char *ht_text },
@@ -1051,7 +1051,7 @@ PUBLIC const Ht_struct  hd_text[]=
   { HD_QUINQUAGESIMA_SUNDAY,              "Quinquagesima-Sonntag" },
   { HD_REFORMATION_DAY,                   "Reformationstag" },
   { HD_REMEMBRANCE_DAY,                   "Gedenktag" },
-  { HD_REPUBLIC_DAY,                      "Tag der Republik" },
+  { HD_RE_DAY,                      "Tag der Republik" },
   { HD_RESPECT_FOR_THE_AGED_DAY,          "Tag der Ahnenverehrung" },
   { HD_REVOLUTION_DAY,                    "Jahrestag der Revolution" },
   { HD_RIO_DE_JANEIRO_ANNIVERSARY,        "Rio de Janeiro Jahrestag" },
@@ -1618,7 +1618,7 @@ PUBLIC const Ht_struct  hd_text[]=
   { HD_QUINQUAGESIMA_SUNDAY,              N_("Quinquagesima Sunday") },
   { HD_REFORMATION_DAY,                   N_("Reformation Day") },
   { HD_REMEMBRANCE_DAY,                   N_("Remembrance/Memorial Day") },
-  { HD_REPUBLIC_DAY,                      N_("Republic Day") },
+  { HD_RE_DAY,                      N_("Republic Day") },
   { HD_RESPECT_FOR_THE_AGED_DAY,          N_("Respect for the Aged Day") },
   { HD_REVOLUTION_DAY,                    N_("Revolution Day") },
   { HD_RIO_DE_JANEIRO_ANNIVERSARY,        N_("Rio de Janeiro Anniversary") },
@@ -1956,15 +1956,15 @@ PUBLIC const Ht_struct  hd_text[]=
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `hd-data.c'.
 */
-LOCAL char *
+static char *
 decode_eclipse __P_((double *eclipse));
-LOCAL void
+static void
 ocs_monthtext __P_((      Bool *init_data,
                     const Bool  detected,
                     const char *ptr_cc_id,
@@ -1983,10 +1983,10 @@ __END_DECLARATIONS
 
 
 /*
-*  LOCAL variables definitions.
+*  static variables definitions.
 */
 /* Number of past days of Hebrew month. */
-LOCAL const int    hmvec[][MONTH_MAX+1]={{  0,  30,  59,  88, 117, 147,
+static const int    hmvec[][MONTH_MAX+1]={{  0,  30,  59,  88, 117, 147,
                                           147, 176, 206, 235, 265, 294, 324},
                                          {  0,  30,  59,  89, 118, 148,
                                           148, 177, 207, 236, 266, 295, 325},
@@ -1999,14 +1999,14 @@ LOCAL const int    hmvec[][MONTH_MAX+1]={{  0,  30,  59,  88, 117, 147,
                                          {  0,  30,  60,  90, 119, 149,
                                           179, 208, 238, 267, 297, 326, 356}};
 /* Latin Zodiac names. */
-LOCAL const char  *zod_name[]={
+static const char  *zod_name[]={
                                 "Aries",       "Taurus",   "Gemini",
                                 "Cancer",      "Leo",      "Virgo",
                                 "Libra",       "Scorpius", "Sagittarius",
                                 "Capricornus", "Aquarius", "Pisces"
                               };
 /* Chinese (Mandarin??) names for the celestial stems. */
-LOCAL const char  *chi_stem[]={
+static const char  *chi_stem[]={
                                 "Jia",  "Yi",
                                 "Bing", "Ding",
                                 "Wu",   "Ji",
@@ -2015,7 +2015,7 @@ LOCAL const char  *chi_stem[]={
                               };
 /* Chinese (Mandarin??) names for the heavenly branches. */
 #if USE_DE
-LOCAL const char  *chi_branch[]={
+static const char  *chi_branch[]={
                                   "Zi/Ratte",    "Chou/Rind",
                                   "Yin/Tiger",   "Mao/Hase",
                                   "Chen/Drache", "Si/Schlange",
@@ -2024,7 +2024,7 @@ LOCAL const char  *chi_branch[]={
                                   "Xu/Hund",     "Hai/Schwein"
                                 };
 #else /* !USE_DE */
-LOCAL const char  *chi_branch[]={
+static const char  *chi_branch[]={
                                   N_("Zi/Rat"),      N_("Chou/Ox"),
                                   N_("Yin/Tiger"),   N_("Mao/Rabbit"),
                                   N_("Chen/Dragon"), N_("Si/Snake"),
@@ -2039,7 +2039,7 @@ LOCAL const char  *chi_branch[]={
 /*
 *  Function implementations.
 */
-   LOCAL char *
+   static char *
 decode_eclipse (eclipse)
    double *eclipse;
 /*
@@ -2081,7 +2081,7 @@ decode_eclipse (eclipse)
 
 
 
-   LOCAL void
+   static void
 ocs_monthtext (init_data, detected, ptr_cc_id, day, month, year,
                ocs_leap, ocs_month, ocs_year, ocs_extra, hd_elems, fday, count)
          Bool *init_data;
@@ -2125,7 +2125,7 @@ ocs_monthtext (init_data, detected, ptr_cc_id, day, month, year,
 
 
 
-   PUBLIC const Cc_struct *
+    const Cc_struct *
 binsearch_cc_id (id)
    char *id;
 /*
@@ -2164,7 +2164,7 @@ binsearch_cc_id (id)
 
 
 
-   PUBLIC void
+    void
 base_christian_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2196,7 +2196,7 @@ base_christian_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 /*
 *  All global holiday management functions.
 */
-   PUBLIC void
+    void
 astronomical_hdy (init_data, detected, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2319,7 +2319,7 @@ astronomical_hdy (init_data, detected, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 bahai_hdy (init_data, detected, year, hd_elems, fday, count, cc)
          Bool *init_data;
    const Bool  detected;
@@ -2388,7 +2388,7 @@ bahai_hdy (init_data, detected, year, hd_elems, fday, count, cc)
 
 
 
-   PUBLIC void
+    void
 bahai_mth (init_data, detected, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -2449,7 +2449,7 @@ bahai_mth (init_data, detected, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 celtic_hdy (init_data, detected, year, hd_elems, fday, count, cc)
          Bool *init_data;
    const Bool  detected;
@@ -2530,7 +2530,7 @@ celtic_hdy (init_data, detected, year, hd_elems, fday, count, cc)
 
 
 
-   PUBLIC void
+    void
 chinese_hdy (init_data, detected, year, hd_elems, fday, count, cc, is_any_meridian)
          Bool *init_data;
    const Bool  detected;
@@ -3109,7 +3109,7 @@ LABEL_chinese_new_year_twice:
 
 
 
-   PUBLIC void
+    void
 chinese_mth (init_data, detected, year, hd_elems, fday, count,
              is_any_meridian, do_chinese)
          Bool *init_data;
@@ -3341,7 +3341,7 @@ chinese_mth (init_data, detected, year, hd_elems, fday, count,
 
 
 
-   PUBLIC void
+    void
 christian_hdy (init_data, detected, easter, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3487,7 +3487,7 @@ christian_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 coptic_mth (init_data, detected, year, hd_elems, fday, count, do_coptic)
          Bool *init_data;
    const Bool  detected;
@@ -3543,7 +3543,7 @@ coptic_mth (init_data, detected, year, hd_elems, fday, count, do_coptic)
 
 
 
-   PUBLIC void
+    void
 french_revolutionary_mth (init_data, detected, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3602,7 +3602,7 @@ french_revolutionary_mth (init_data, detected, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 indian_civil_mth (init_data, detected, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3653,7 +3653,7 @@ indian_civil_mth (init_data, detected, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 hebrew_hdy (init_data, detected, year, hd_elems, fday, count, cc)
          Bool *init_data;
    const Bool  detected;
@@ -3832,7 +3832,7 @@ hebrew_hdy (init_data, detected, year, hd_elems, fday, count, cc)
 
 
 
-   PUBLIC void
+    void
 hebrew_mth (init_data, detected, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -3906,7 +3906,7 @@ hebrew_mth (init_data, detected, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 islamic_hdy (init_data, detected, year, hd_elems, fday, count, cc)
          Bool *init_data;
    const Bool  detected;
@@ -4506,7 +4506,7 @@ LABEL_ih_muharram_1_twice:
 
 
 
-   PUBLIC void
+    void
 islamic_mth (init_data, detected, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -4593,7 +4593,7 @@ LABEL_im_muharram_1_twice:
 
 
 
-   PUBLIC void
+    void
 japanese_hdy (init_data, detected, year, hd_elems, fday, count, cc, is_any_meridian)
          Bool *init_data;
    const Bool  detected;
@@ -5033,7 +5033,7 @@ LABEL_japanese_new_year_twice:
 
 
 
-   PUBLIC void
+    void
 multicultural_new_year_hdy (init_data, detected, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -5208,7 +5208,7 @@ multicultural_new_year_hdy (init_data, detected, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 old_egyptic_mth (init_data, detected, year, hd_elems, fday, count, do_egyptic)
          Bool *init_data;
    const Bool  detected;
@@ -5325,7 +5325,7 @@ old_egyptic_mth (init_data, detected, year, hd_elems, fday, count, do_egyptic)
 
 
 
-   PUBLIC void
+    void
 orthodox_hdy (init_data, detected, easter, year, hd_elems, fday, count, cc, is_new_calendar)
          Bool *init_data;
    const Bool  detected;
@@ -5510,7 +5510,7 @@ orthodox_hdy (init_data, detected, easter, year, hd_elems, fday, count, cc, is_n
 
 
 
-   PUBLIC void
+    void
 persian_hdy (init_data, detected, year, hd_elems, fday, count, cc)
          Bool *init_data;
    const Bool  detected;
@@ -5660,7 +5660,7 @@ persian_hdy (init_data, detected, year, hd_elems, fday, count, cc)
 
 
 
-   PUBLIC void
+    void
 persian_mth (init_data, detected, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;
@@ -5729,7 +5729,7 @@ persian_mth (init_data, detected, year, hd_elems, fday, count)
 
 
 
-   PUBLIC void
+    void
 zodiacal_marker_hdy (init_data, detected, year, hd_elems, fday, count)
          Bool *init_data;
    const Bool  detected;

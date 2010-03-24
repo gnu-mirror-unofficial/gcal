@@ -39,10 +39,10 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `gcal.c'.
 */
-EXPORT int
+extern int
 main __P_((int   argc,
            char *argv[]));
-EXPORT int
+extern int
 eval_longopt __P_((char *longopt,
                    int  *longopt_symbolic));
 __END_DECLARATIONS

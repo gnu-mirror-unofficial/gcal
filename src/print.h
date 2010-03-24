@@ -38,7 +38,7 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `print.c'.
 */
-EXPORT void
+extern void
 print_calendar __P_((void));
 __END_DECLARATIONS
 #endif /* __PRINT_H */

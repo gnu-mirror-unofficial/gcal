@@ -58,25 +58,25 @@ static char rcsid[]="$Id: gcal2txt.c 2.06 2000/06/14 02:00:06 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
-LOCAL void
+static void
 usage_msg __P_((      FILE *fp,
                 const char *prgr_name,
                       int   exit_status));
-LOCAL void
+static void
 version_msg __P_((      FILE *fp,
                   const char *prgr_name,
                         int   exit_status));
-LOCAL VOID_PTR
+static VOID_PTR
 my_malloc __P_((const int   amount,
                 const int   exit_status,
                 const char *module_name,
                 const long  module_line,
                 const char *var_name,
                 const int   var_contents));
-LOCAL VOID_PTR
+static VOID_PTR
 my_realloc __P_((      VOID_PTR  ptr_memblock,
                  const int       amount,
                  const int       exit_status,
@@ -84,23 +84,23 @@ my_realloc __P_((      VOID_PTR  ptr_memblock,
                  const long      module_line,
                  const char     *var_name,
                  const int       var_contents));
-LOCAL void
+static void
 my_error __P_((const int   exit_status,
                const char *module_name,
                const long  module_line,
                const char *var_name,
                const int   var_contents));
 #if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
-LOCAL RETSIGTYPE
+static RETSIGTYPE
 handle_signal __P_((int the_signal));
 #endif
 #if !HAVE_STRNCASECMP
-LOCAL int
+static int
 my_strncasecmp __P_((const char *s1,
                      const char *s2,
                            int   len));
 #endif /* !HAVE_STRNCASECMP */
-LOCAL char *
+static char *
 decode_format __P_((FILE *fp,
                     Bool *is_eof,
                     int  *flen,
@@ -111,34 +111,34 @@ __END_DECLARATIONS
 
 
 /*
-*  LOCAL variables definitions.
+*  static variables definitions.
 */
 #ifdef DJG
 /* Set to SHRT_MAX for checking the maximum table range. */
-LOCAL Usint  testval=(Usint)0;
+static Usint  testval=(Usint)0;
 #else
 /* Set to INT_MAX for checking the maximum table range. */
-LOCAL Uint  testval=(Uint)0;
+static Uint  testval=(Uint)0;
 #endif
 
 /* Actual length of all strings. */
-LOCAL Uint  maxlen_max=MAXLEN_MAX;
+static Uint  maxlen_max=MAXLEN_MAX;
 
 /* The name of this executable. */
-LOCAL char  *prgr_name=(char *)NULL;
+static char  *prgr_name=(char *)NULL;
 
 /* Text of `--help' option name. */
-LOCAL char  *help_option_name="help";
+static char  *help_option_name="help";
 
 /* Text of `--version' option name. */
-LOCAL char  *version_option_name="version";
+static char  *version_option_name="version";
 
 
 
 /*
 *  Function implementations.
 */
-   LOCAL void
+   static void
 usage_msg (fp, prgr_name, exit_status)
          FILE *fp;
    const char *prgr_name;
@@ -176,7 +176,7 @@ usage_msg (fp, prgr_name, exit_status)
 
 
 
-   LOCAL void
+   static void
 version_msg (fp, prgr_name, exit_status)
          FILE *fp;
    const char *prgr_name;
@@ -211,7 +211,7 @@ version_msg (fp, prgr_name, exit_status)
 
 
 
-   LOCAL VOID_PTR
+   static VOID_PTR
 my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents)
    const int   amount;
    const int   exit_status;
@@ -246,7 +246,7 @@ my_malloc (amount, exit_status, module_name, module_line, var_name, var_contents
 
 
 
-   LOCAL VOID_PTR
+   static VOID_PTR
 my_realloc (ptr_memblock, amount, exit_status, module_name, module_line, var_name, var_contents)
          VOID_PTR  ptr_memblock;
    const int       amount;
@@ -282,7 +282,7 @@ my_realloc (ptr_memblock, amount, exit_status, module_name, module_line, var_nam
 
 
 
-   LOCAL void
+   static void
 my_error (exit_status, module_name, module_line, var_name, var_contents)
    const int   exit_status;
    const char *module_name;
@@ -339,7 +339,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 
 
 #if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
-   LOCAL RETSIGTYPE
+   static RETSIGTYPE
 handle_signal (the_signal)
    int the_signal;
 /*
@@ -361,7 +361,7 @@ handle_signal (the_signal)
 
 
 #if !HAVE_STRNCASECMP
-   LOCAL int
+   static int
 my_strncasecmp (s1, s2, len)
    const char *s1;
    const char *s2;
@@ -396,7 +396,7 @@ my_strncasecmp (s1, s2, len)
 
 
 
-   LOCAL char *
+   static char *
 decode_format (fp, is_eof, flen, fwidth, ch)
    FILE *fp;
    Bool *is_eof;
@@ -608,7 +608,7 @@ decode_format (fp, is_eof, flen, fwidth, ch)
 
 
 
-   PUBLIC int
+    int
 main (argc, argv)
    int   argc;
    char *argv[];
@@ -638,13 +638,13 @@ main (argc, argv)
    /*
       Now initialize the NLS functions.
    */
-#  if HAVE_SETLOCALE
+#  if HAVE_SETstaticE
    setlocale(LC_ALL, "");
 #  endif
-#  ifndef LOCALEDIR
-#    define LOCALEDIR  NULL
+#  ifndef staticEDIR
+#    define staticEDIR  NULL
 #  endif
-   bindtextdomain(PACKAGE, LOCALEDIR);
+   bindtextdomain(PACKAGE, staticEDIR);
    textdomain(PACKAGE);
 #endif
    /*

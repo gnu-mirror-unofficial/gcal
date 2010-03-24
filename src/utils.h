@@ -38,14 +38,14 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `utils.c'.
 */
-EXPORT VOID_PTR
+extern VOID_PTR
 my_malloc __P_((const int   amount,
                 const int   exit_status,
                 const char *module_name,
                 const long  module_line,
                 const char *var_name,
                 const int   var_contents));
-EXPORT VOID_PTR
+extern VOID_PTR
 my_realloc __P_((      VOID_PTR  ptr_memblock,
                  const int       amount,
                  const int       exit_status,
@@ -53,131 +53,131 @@ my_realloc __P_((      VOID_PTR  ptr_memblock,
                  const long      module_line,
                  const char     *var_name,
                  const int       var_contents));
-EXPORT void
+extern void
 allocate_all_strings __P_((const int   amount,
                            const char *module_name,
                            const long  module_line));
-EXPORT void
+extern void
 resize_all_strings __P_((const int   amount,
                          const Bool  with_line_buffer,
                          const char *module_name,
                          const long  module_line));
-EXPORT void
+extern void
 my_error __P_((const int   exit_status,
                const char *module_name,
                const long  module_line,
                const char *var_name,
                const int   var_contents));
 #if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
-EXPORT RETSIGTYPE
+extern RETSIGTYPE
 handle_signal __P_((int the_signal));
 #endif
-EXPORT void
+extern void
 my_exit __P_((const int exit_status));
-EXPORT int
+extern int
 my_atoi __P_((const char *string));
-EXPORT int
+extern int
 my_system __P_((const char *command));
 #if !HAVE_STRSTR
-EXPORT char *
+extern char *
 my_strstr __P_((const char *text,
                 const char *pattern));
 #endif /* !HAVE_STRSTR */
 #if !HAVE_STRCSPN
-EXPORT char *
+extern char *
 my_strcspn __P_((const char *s1,
                  const char *s2));
 #endif /* !HAVE_STRCSPN */
 #if !HAVE_STRCASECMP
-EXPORT int
+extern int
 my_strcasecmp __P_((const char *s1,
                     const char *s2));
 #endif /* !HAVE_STRCASECMP */
 #if !HAVE_STRNCASECMP
-EXPORT int
+extern int
 my_strncasecmp __P_((const char *s1,
                      const char *s2,
                            int   len));
 #endif /* !HAVE_STRNCASECMP */
-EXPORT Bool
+extern Bool
 get_actual_date __P_((void));
-EXPORT int
+extern int
 compare_d_m_name __P_((const char       *string,
                        const Cmode_enum  mode));
-EXPORT int
+extern int
 asc_sort __P_((const char **a,
                const char **b));
-EXPORT int
+extern int
 des_sort __P_((const char **a,
                const char **b));
-EXPORT Bool
+extern Bool
 is_presorted __P_((char **table,
                    int    elems));
-EXPORT void
+extern void
 reverse_order __P_((      char **table,
                     const int    elems));
-EXPORT const char *
+extern const char *
 day_suffix __P_((int day));
-EXPORT const char *
+extern const char *
 short3_day_name __P_((const int day));
-EXPORT const char *
+extern const char *
 short_day_name __P_((const int day));
-EXPORT const char *
+extern const char *
 day_name __P_((const int day));
-EXPORT const char *
+extern const char *
 short_month_name __P_((const int month));
-EXPORT const char *
+extern const char *
 month_name __P_((const int month));
-EXPORT Ulint
+extern Ulint
 date2num __P_((const int day,
                const int month,
                const int year));
-EXPORT void
+extern void
 num2date __P_((Ulint  mjd,
                int   *day,
                int   *month,
                int   *year));
-EXPORT Bool
+extern Bool
 doy2date __P_((      int  doy,
                const int  is_leap_year,
                      int *day,
                      int *month));
-EXPORT int
+extern int
 weekday_of_date __P_((const int day,
                       const int month,
                       const int year));
-EXPORT int
+extern int
 day_of_year __P_((const int day,
                   const int month,
                   const int year));
-EXPORT int
+extern int
 days_of_february __P_((const int year));
-EXPORT Bool
+extern Bool
 valid_date __P_((const int day,
                  const int month,
                  const int year));
-EXPORT Bool
+extern Bool
 prev_date __P_((int *day,
                 int *month,
                 int *year));
-EXPORT Bool
+extern Bool
 next_date __P_((int *day,
                 int *month,
                 int *year));
-EXPORT int
+extern int
 week_number __P_((const int  day,
                   const int  month,
                   const int  year,
                   const Bool is_iso_week,
                   const int  start_day_of_week));
-EXPORT int
+extern int
 weekno2doy __P_((      int  week,
                  const int  year,
                  const Bool is_iso_week,
                  const int  start_day_of_week));
-EXPORT int
+extern int
 knuth_easter_formula __P_((const int year));
-EXPORT int
+extern int
 julian_gregorian_diff __P_((const int day,
                             const int month,
                             const int year));

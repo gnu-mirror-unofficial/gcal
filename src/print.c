@@ -50,17 +50,17 @@ static char rcsid[]="$Id: print.c 3.01 2000/06/14 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `print.c'.
 */
-LOCAL void
+static void
 fill_year_vector __P_((int year));
-LOCAL Bool
+static Bool
 print_unhighlighted_date __P_((Bool marker_flag));
-LOCAL Bool
+static Bool
 print_highlighted_date __P_((const Bool  last_item,
                              const Bool  marker_flag,
                              const char *hls_start,
@@ -72,20 +72,20 @@ __END_DECLARATIONS
 
 
 /*
-*  LOCAL variables definitions.
+*  static variables definitions.
 */
 /* Standard or special year dates. */
-LOCAL int  year_vector[VEC_ELEMS];
+static int  year_vector[VEC_ELEMS];
 
 /* Special year dates only. */
-LOCAL int  special_vector[VEC_ELEMS];
+static int  special_vector[VEC_ELEMS];
 
 
 
 /*
 *  Function implementations.
 */
-   PUBLIC void
+    void
 print_calendar ()
 /*
    Prints one or more single month/year calendar(s).
@@ -1328,7 +1328,7 @@ print_calendar ()
 
 
 
-   LOCAL void
+   static void
 fill_year_vector (year)
    int year;
 /*
@@ -1424,7 +1424,7 @@ fill_year_vector (year)
 
 
 
-   LOCAL Bool
+   static Bool
 print_unhighlighted_date (marker_flag)
    Bool marker_flag;
 /*
@@ -1503,7 +1503,7 @@ print_unhighlighted_date (marker_flag)
 
 
 
-   LOCAL Bool
+   static Bool
 print_highlighted_date (last_item, marker_flag, hls_start, hls_slen, hls_end, hls_elen)
    const Bool  last_item;
    const Bool  marker_flag;

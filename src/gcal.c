@@ -92,40 +92,40 @@
 #if USE_RC
 #  if defined(MSDOS) && defined(__TURBOC__)
 #    include <dos.h>
-IMPORT Uint _stklen=0x4000;
+extern Uint _stklen=0x4000;
 #  endif
 #endif
 
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `gcal.c'.
 */
-LOCAL Bool
+static Bool
 is_correct_date_format __P_((char *format_txt,
                              Bool *use_day_suffix,
                              Bool *use_short3_day_name,
                              Bool *use_day_zeroleaded,
                              Bool *use_year_zeroleaded));
-LOCAL void
+static void
 rearrange_argv __P_((const char *opt_list,
                            int  *argc,
                            char *argv[]));
-LOCAL void
+static void
 check_command_line __P_((int   argc,
                          char *argv[]));
-LOCAL void
+static void
 build_month_list __P_((char *argv[]));
-LOCAL void
+static void
 eliminate_invalid_data __P_((void));
-LOCAL void
+static void
 pseudo_blank_conversion __P_((char **text));
 #if USE_RC
-LOCAL int
+static int
 further_check __P_((char **option));
 #endif
 __END_DECLARATIONS
@@ -136,10 +136,10 @@ __END_DECLARATIONS
 *  GLOBAL variables definitions.
 */
 /* Number of days in Julian/Gregorian month. */
-PUBLIC const int  dvec[]={31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+ const int  dvec[]={31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 /* Number of past days of Julian/Gregorian month. */
-PUBLIC const int  mvec[]={0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+ const int  mvec[]={0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
 
 /*
    The long option table is a vector of `Lopt_struct' terminated by an element
@@ -191,7 +191,7 @@ PUBLIC const int  mvec[]={0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
                         is done unambigously; and they can be given case
                         insensitive.
 */
-PUBLIC const Lopt_struct  lopt[]=
+ const Lopt_struct  lopt[]=
 {
 /*
   { int symbolic_name, char *long_name, char *short_name[LARG_MAX], int larg_mode, char *largs[LARG_MAX] }
@@ -470,14 +470,14 @@ PUBLIC const Lopt_struct  lopt[]=
   },
 #if USE_RC
   {
-    SYM_EXPORT_LOCAL_DVARS,
+    SYM_extern_static_DVARS,
     "export-date-variables",
     {NULL},
     LARG_NO,
     {NULL}
   },
   {
-    SYM_EXPORT_LOCAL_TVARS,
+    SYM_extern_static_TVARS,
     "export-text-variables",
     {NULL},
     LARG_NO,
@@ -1093,7 +1093,7 @@ PUBLIC const Lopt_struct  lopt[]=
      LARG_TXT must always trail any new entry, which will be possibly added
      in future.
 */
-PUBLIC Df_struct  supported_date_format[LARG_MAX-1]=
+ Df_struct  supported_date_format[LARG_MAX-1]=
 {
 /*
   { char *df_id, char *df_info, char *df_format },
@@ -1122,7 +1122,7 @@ PUBLIC Df_struct  supported_date_format[LARG_MAX-1]=
 };
 
 /* Points to the used date format. */
-PUBLIC Df_struct  *date_format=supported_date_format;
+ Df_struct  *date_format=supported_date_format;
 
 /*
    The Gregorian Reformation dates table is a vector of `Greg_struct'
@@ -1136,7 +1136,7 @@ PUBLIC Df_struct  *date_format=supported_date_format;
      the `short_name' member and its corresponding LARG_TXT must always
      trail any new entry, which will be possibly added in future.
 */
-PUBLIC Greg_struct  greg_reform_date[LARG_MAX-1]=
+ Greg_struct  greg_reform_date[LARG_MAX-1]=
 {
 /*
   { int year, int month, int f_day, int l_day },
@@ -1153,458 +1153,458 @@ PUBLIC Greg_struct  greg_reform_date[LARG_MAX-1]=
 };
 
 /* Points to the used Gregorian Reformation date. */
-PUBLIC Greg_struct  *greg=greg_reform_date;
+ Greg_struct  *greg=greg_reform_date;
 
 /* User defined Gregorian Reformation date. */
-PUBLIC Greg_struct  users_greg;
+ Greg_struct  users_greg;
 
 #ifdef GCAL_EMAIL
 /* Temporary file which is send by the mailer. */
-PUBLIC FILE  *tfp=(FILE *)NULL;
+ FILE  *tfp=(FILE *)NULL;
 #endif
 
 /* Used if a list/range of months/years is given. */
-PUBLIC Ml_struct  *month_list=(Ml_struct *)NULL;
+ Ml_struct  *month_list=(Ml_struct *)NULL;
 
 /* Effective hls 1 start (current day). */
-PUBLIC Hls_struct  ehls1s;
+ Hls_struct  ehls1s;
 
 /* Effective hls 1 end (current day). */
-PUBLIC Hls_struct  ehls1e;
+ Hls_struct  ehls1e;
 
 /* Effective hls 2 start (holiday). */
-PUBLIC Hls_struct  ehls2s;
+ Hls_struct  ehls2s;
 
 /* Effective hls 2 end (holiday). */
-PUBLIC Hls_struct  ehls2e;
+ Hls_struct  ehls2e;
 
 #ifdef DJG
 /* Set to SHRT_MAX for checking the maximum table range. */
-PUBLIC Usint  testval=(Usint)0;
+ Usint  testval=(Usint)0;
 #else
 /* Set to INT_MAX for checking the maximum table range. */
-PUBLIC Uint  testval=(Uint)0;
+ Uint  testval=(Uint)0;
 #endif
 
 /* Actual size of all string vectors. */
-PUBLIC Uint  maxlen_max=MAXLEN_MAX;
+ Uint  maxlen_max=MAXLEN_MAX;
 
 /* String length of the maximum year able to compute. */
-PUBLIC int len_year_max=0;
+ int len_year_max=0;
 
 /* Maximum string length of a textual day_name(). */
-PUBLIC int  len_dayname_max=0;
+ int  len_dayname_max=0;
 
 /* Maximum string length of a textual month_name(). */
-PUBLIC int  len_monthname_max=0;
+ int  len_monthname_max=0;
 
 /* Maximum string length of a textual day_suffix() [if any]. */
-PUBLIC int  len_suffix_max=0;
+ int  len_suffix_max=0;
 
 /* `--debug[=0...WARN_LVL_MAX]', SPECIAL VALUE at startup. */
-PUBLIC int  warning_level=SPECIAL_VALUE;
+ int  warning_level=SPECIAL_VALUE;
 
 /* `-s<0,1...7|day name>'. */
-PUBLIC int  start_day=0;
+ int  start_day=0;
 
 /* `--transform-year=BASE_YEAR'. */
-PUBLIC int  transform_year=0;
+ int  transform_year=0;
 
 /* `--time-offset=t|@|[t|@][+|-]MMMM|HH:[MM]' for correcting astronomically based data. */
-PUBLIC int  time_hour_offset=0;
+ int  time_hour_offset=0;
 
 /* `--time-offset=t|@|[t|@][+|-]MMMM|HH:[MM]' for correcting astronomically based data. */
-PUBLIC int  time_min_offset=0;
+ int  time_min_offset=0;
 
 /* Current day. */
-PUBLIC int  day=0;
+ int  day=0;
 
 /* Current month. */
-PUBLIC int  month=0;
+ int  month=0;
 
 /* Current year. */
-PUBLIC int  year=0;
+ int  year=0;
 
 /* Actual second. */
-PUBLIC int  act_sec=0;
+ int  act_sec=0;
 
 /* Actual minute. */
-PUBLIC int  act_min=0;
+ int  act_min=0;
 
 /* Actual hour. */
-PUBLIC int  act_hour=0;
+ int  act_hour=0;
 
 /* Actual day. */
-PUBLIC int  act_day=0;
+ int  act_day=0;
 
 /* Actual month. */
-PUBLIC int  act_month=0;
+ int  act_month=0;
 
 /* Actual year. */
-PUBLIC int  act_year=0;
+ int  act_year=0;
 
 /* Buffer of actual day. */
-PUBLIC int  buf_ad=0;
+ int  buf_ad=0;
 
 /* Buffer of actual month. */
-PUBLIC int  buf_am=0;
+ int  buf_am=0;
 
 /* Buffer of actual year. */
-PUBLIC int  buf_ay=0;
+ int  buf_ay=0;
 
 /* True actual day as reported by the operating system. */
-PUBLIC int  true_day=0;
+ int  true_day=0;
 
 /* True actual month as reported by the operating system. */
-PUBLIC int  true_month=0;
+ int  true_month=0;
 
 /* True actual year as reported by the operating system. */
-PUBLIC int  true_year=0;
+ int  true_year=0;
 
 /* Starting month of a fiscal year. */
-PUBLIC int  fiscal_month=MONTH_MIN;
+ int  fiscal_month=MONTH_MIN;
 
 /* Is output displayed on a terminal? */
-PUBLIC int  is_tty=0;
+ int  is_tty=0;
 
 /* Is output directed to channel 1? */
-PUBLIC int  is_tty1=0;
+ int  is_tty1=0;
 
 /* Is output directed to channel 2? */
-PUBLIC int  is_tty2=0;
+ int  is_tty2=0;
 
 #if USE_PAGER
 /* Number of tty rows, SPECIAL_VALUE at startup. */
-PUBLIC int  tty_rows=SPECIAL_VALUE;
+ int  tty_rows=SPECIAL_VALUE;
 
 /* Number of tty columns, SPECIAL_VALUE at startup. */
-PUBLIC int  tty_cols=SPECIAL_VALUE;
+ int  tty_cols=SPECIAL_VALUE;
 #endif
 
 /* Number of month rows of a year calendar. */
-PUBLIC int  out_rows=0;
+ int  out_rows=0;
 
 /* Number of month columns of a year calendar. */
-PUBLIC int  out_cols=0;
+ int  out_cols=0;
 
 /* Format length of a standard/special/both day. */
-PUBLIC int  format_len=0;
+ int  format_len=0;
 
 /* Is current year a leap year? */
-PUBLIC int  is_leap_year=0;
+ int  is_leap_year=0;
 
 #ifdef GCAL_EMAIL
 /* Name of tempfile used by the mailer. */
-PUBLIC char  *tfn=(char *)NULL;
+ char  *tfn=(char *)NULL;
 
 /* Email address Gcal's output is send to. */
-PUBLIC char  *email_adr=(char *)NULL;
+ char  *email_adr=(char *)NULL;
 #endif
 
 /* `--cc-holidays=CC[+CC+...]'. */
-PUBLIC char  *cc=(char *)NULL;
+ char  *cc=(char *)NULL;
 
 /* The "YY" text. */
-PUBLIC char  *yy_lit=(char *)NULL;
+ char  *yy_lit=(char *)NULL;
 
 /* The "YYYY" text. */
-PUBLIC char  *yyyy_lit=(char *)NULL;
+ char  *yyyy_lit=(char *)NULL;
 
 /* The "MM" text. */
-PUBLIC char  *mm_lit=(char *)NULL;
+ char  *mm_lit=(char *)NULL;
 
 /* The "WWW" text. */
-PUBLIC char  *www_lit=(char *)NULL;
+ char  *www_lit=(char *)NULL;
 
 /* The "DD" text. */
-PUBLIC char  *dd_lit=(char *)NULL;
+ char  *dd_lit=(char *)NULL;
 
 /* The "ARG" text. */
-PUBLIC char  *larg_lit=(char *)NULL;
+ char  *larg_lit=(char *)NULL;
 
 /* General purpose text buffer 1. */
-PUBLIC char  *s1=(char *)NULL;
+ char  *s1=(char *)NULL;
 
 /* General purpose text buffer 2. */
-PUBLIC char  *s2=(char *)NULL;
+ char  *s2=(char *)NULL;
 
 /* General purpose text buffer 3. */
-PUBLIC char  *s3=(char *)NULL;
+ char  *s3=(char *)NULL;
 
 /* General purpose text buffer 4. */
-PUBLIC char  *s4=(char *)NULL;
+ char  *s4=(char *)NULL;
 
 /* Stores the actual program name. */
-PUBLIC char  *prgr_name=(char *)NULL;
+ char  *prgr_name=(char *)NULL;
 
 /* Character for separating HH:MM time values. */
-PUBLIC char  *time_sep=(char *)NULL;
+ char  *time_sep=(char *)NULL;
 
 /* `--translate-string=CHARACTER_PAIR...'. */
-PUBLIC char  *translate_string=(char *)NULL;
+ char  *translate_string=(char *)NULL;
 
 /* Pointer to the $TZ (timezone) environment variable. */
-PUBLIC char  *tz=(char *)NULL;
+ char  *tz=(char *)NULL;
 
 #ifdef GCAL_EPAGER
 /* Name of external pager program. */
-PUBLIC char  *ext_pager=(char *)NULL;
+ char  *ext_pager=(char *)NULL;
 #endif
 
 /* Day suffix format specifier given in date format?. */
-PUBLIC Bool  use_day_suffix=FALSE;
+ Bool  use_day_suffix=FALSE;
 
 /* 3 char day name format specifier given in date format? */
-PUBLIC Bool  use_short3_day_name=FALSE;
+ Bool  use_short3_day_name=FALSE;
 
 /* Day number leaded with zeroes format specifier given in date format? */
-PUBLIC Bool  use_day_zeroleaded=FALSE;
+ Bool  use_day_zeroleaded=FALSE;
 
 /* Year number leaded with zeroes format specifier given in date format? */
-PUBLIC Bool  use_year_zeroleaded=FALSE;
+ Bool  use_year_zeroleaded=FALSE;
 
 /* Don't use Astronomical holidays by default. */
-PUBLIC Bool  hdy_astronomical=FALSE;
+ Bool  hdy_astronomical=FALSE;
 
 /* Don't use Bahai calendar holidays by default. */
-PUBLIC Bool  hdy_bahai=FALSE;
+ Bool  hdy_bahai=FALSE;
 
 /* Don't use Celtic calendar holidays by default. */
-PUBLIC Bool  hdy_celtic=FALSE;
+ Bool  hdy_celtic=FALSE;
 
 /* Don't use Chinese calendar holidays by default. */
-PUBLIC Bool  hdy_chinese=FALSE;
+ Bool  hdy_chinese=FALSE;
 
 /* Don't use Chinese flexible calendar holidays by default. */
-PUBLIC Bool  hdy_chinese_flexible=FALSE;
+ Bool  hdy_chinese_flexible=FALSE;
 
 /* Don't use Christian Western churches calendar holidays by default. */
-PUBLIC Bool  hdy_christian=FALSE;
+ Bool  hdy_christian=FALSE;
 
 /* Don't use Hebrew calendar holidays by default. */
-PUBLIC Bool  hdy_hebrew=FALSE;
+ Bool  hdy_hebrew=FALSE;
 
 /* Don't use Islamic CIVIL calendar holidays by default. */
-PUBLIC Bool  hdy_islamic=FALSE;
+ Bool  hdy_islamic=FALSE;
 
 /* Don't use Japanese calendar holidays by default. */
-PUBLIC Bool  hdy_japanese=FALSE;
+ Bool  hdy_japanese=FALSE;
 
 /* Don't use Japanese flexible calendar holidays by default. */
-PUBLIC Bool  hdy_japanese_flexible=FALSE;
+ Bool  hdy_japanese_flexible=FALSE;
 
 /* Don't use Multicultural New_Year's_Day holidays by default. */
-PUBLIC Bool  hdy_multicultural_new_year=FALSE;
+ Bool  hdy_multicultural_new_year=FALSE;
 
 /* Don't use Orthodox Christian Eastern churches NEW calendar holidays by default. */
-PUBLIC Bool  hdy_orthodox_new=FALSE;
+ Bool  hdy_orthodox_new=FALSE;
 
 /* Don't use Orthodox Christian Eastern churches OLD calendar holidays by default. */
-PUBLIC Bool  hdy_orthodox_old=FALSE;
+ Bool  hdy_orthodox_old=FALSE;
 
 /* Don't use Persian Jalaali calendar holidays by default. */
-PUBLIC Bool  hdy_persian=FALSE;
+ Bool  hdy_persian=FALSE;
 
 /* Don't use Zodiacal Marker holidays by default. */
-PUBLIC Bool  hdy_zodiacal_marker=FALSE;
+ Bool  hdy_zodiacal_marker=FALSE;
 
 /* Don't use Bahai calendar months by default. */
-PUBLIC Bool  mth_bahai=FALSE;
+ Bool  mth_bahai=FALSE;
 
 /* Don't use Chinese calendar months by default. */
-PUBLIC Bool  mth_chinese=FALSE;
+ Bool  mth_chinese=FALSE;
 
 /* Don't use Chinese flexible calendar months by default. */
-PUBLIC Bool  mth_chinese_flexible=FALSE;
+ Bool  mth_chinese_flexible=FALSE;
 
 /* Don't use Coptic calendar months by default. */
-PUBLIC Bool  mth_coptic=FALSE;
+ Bool  mth_coptic=FALSE;
 
 /* Don't use Ethiopic calendar months by default. */
-PUBLIC Bool  mth_ethiopic=FALSE;
+ Bool  mth_ethiopic=FALSE;
 
 /* Don't use French Revolutionary calendar months by default. */
-PUBLIC Bool  mth_french_revolutionary=FALSE;
+ Bool  mth_french_revolutionary=FALSE;
 
 /* Don't use Hebrew calendar months by default. */
-PUBLIC Bool  mth_hebrew=FALSE;
+ Bool  mth_hebrew=FALSE;
 
 /* Don't use Indian CIVIL calendar months by default. */
-PUBLIC Bool  mth_indian_civil=FALSE;
+ Bool  mth_indian_civil=FALSE;
 
 /* Don't use Islamic CIVIL calendar months by default. */
-PUBLIC Bool  mth_islamic=FALSE;
+ Bool  mth_islamic=FALSE;
 
 /* Don't use Japanese calendar months by default. */
-PUBLIC Bool  mth_japanese=FALSE;
+ Bool  mth_japanese=FALSE;
 
 /* Don't use Japanese flexible calendar months by default. */
-PUBLIC Bool  mth_japanese_flexible=FALSE;
+ Bool  mth_japanese_flexible=FALSE;
 
 /* Don't use Old-Armenic calendar months by default. */
-PUBLIC Bool  mth_old_armenic=FALSE;
+ Bool  mth_old_armenic=FALSE;
 
 /* Don't use Old-Egyptic calendar months by default. */
-PUBLIC Bool  mth_old_egyptic=FALSE;
+ Bool  mth_old_egyptic=FALSE;
 
 /* Don't use Persian Jalaali calendar months by default. */
-PUBLIC Bool  mth_persian=FALSE;
+ Bool  mth_persian=FALSE;
 
 /* `-O' (compute leap years as done by Eastern churches). */
-PUBLIC Bool  orthodox_calendar=FALSE;
+ Bool  orthodox_calendar=FALSE;
 
 /* `-u'. */
-PUBLIC Bool  suppr_cal_flag=FALSE;
+ Bool  suppr_cal_flag=FALSE;
 
 /* `-H<yes>|<no>'. */
-PUBLIC Bool  highlight_flag=TRUE;
+ Bool  highlight_flag=TRUE;
 
 /* `--iso-week-number=<yes>|<no>'. */
-PUBLIC Bool  iso_week_number=FALSE;
+ Bool  iso_week_number=FALSE;
 
 /* `-K'. */
-PUBLIC Bool  cal_with_week_number=FALSE;
+ Bool  cal_with_week_number=FALSE;
 
 /* `-j'. */
-PUBLIC Bool  cal_special_flag=FALSE;
+ Bool  cal_special_flag=FALSE;
 
 /* `-jb'. */
-PUBLIC Bool  cal_both_dates_flag=FALSE;
+ Bool  cal_both_dates_flag=FALSE;
 
 /* `-n|N'. */
-PUBLIC Bool  holiday_flag=FALSE;
+ Bool  holiday_flag=FALSE;
 
 /* `-N'. */
-PUBLIC Bool  hd_legal_days_only=FALSE;
+ Bool  hd_legal_days_only=FALSE;
 
 /* `-n|N-'. */
-PUBLIC Bool  hd_sort_des_flag=FALSE;
+ Bool  hd_sort_des_flag=FALSE;
 
 /* `-jn'. */
-PUBLIC Bool  hd_special_flag=FALSE;
+ Bool  hd_special_flag=FALSE;
 
 /* `-jnb'. */
-PUBLIC Bool  hd_both_dates_flag=FALSE;
+ Bool  hd_both_dates_flag=FALSE;
 
 /* `-G'. */
-PUBLIC Bool  hd_suppr_list_sep_flag=FALSE;
+ Bool  hd_suppr_list_sep_flag=FALSE;
 
 /* `-X'. */
-PUBLIC Bool  hd_title_flag=TRUE;
+ Bool  hd_title_flag=TRUE;
 
 /* ':' char found in argument (MM:YYYY). */
-PUBLIC Bool  is_fiscal_year=FALSE;
+ Bool  is_fiscal_year=FALSE;
 
 /* Argument is `.' or `.+' or `.-'. */
-PUBLIC Bool  is_3month_mode=FALSE;
+ Bool  is_3month_mode=FALSE;
 
 /* Argument is `..' -> current quarter of actual year. */
-PUBLIC Bool  is_3month_mode2=FALSE;
+ Bool  is_3month_mode2=FALSE;
 
 /* Is an extended list/range of years given? */
-PUBLIC Bool  is_ext_year=FALSE;
+ Bool  is_ext_year=FALSE;
 
 /* Is an extended list of months/years given? */
-PUBLIC Bool  is_ext_list=FALSE;
+ Bool  is_ext_list=FALSE;
 
 /* Is an extended range of months/years given? */
-PUBLIC Bool  is_ext_range=FALSE;
+ Bool  is_ext_range=FALSE;
 
 /* Is a special range of a selected month of years given? */
-PUBLIC Bool  is_special_range=FALSE;
+ Bool  is_special_range=FALSE;
 
 /* Is a special range of selected months of years given? */
-PUBLIC Bool  is_multi_range=FALSE;
+ Bool  is_multi_range=FALSE;
 
 #ifdef GCAL_NLS
 /* Support of English language? */
-PUBLIC Bool  is_en=FALSE;
+ Bool  is_en=FALSE;
 #endif
 
 /* `-i[-]'. */
-PUBLIC Bool  special_calsheet_flag=FALSE;
+ Bool  special_calsheet_flag=FALSE;
 
 #if USE_HLS
 /* Must we emulate the highlighting sequences? */
-PUBLIC Bool  emu_hls=FALSE;
+ Bool  emu_hls=FALSE;
 #else /* !USE_HLS */
 /* Must we emulate the highlighting sequences? */
-PUBLIC Bool  emu_hls=TRUE;
+ Bool  emu_hls=TRUE;
 #endif /* !USE_HLS */
 
 #if USE_PAGER
 /* `-p'. */
-PUBLIC Bool  pager_flag=FALSE;
+ Bool  pager_flag=FALSE;
 #endif
 
 
 
 /*
-*  LOCAL variables definitions.
+*  static variables definitions.
 */
 #ifdef GCAL_EPAGER
 /* Child process id of external pager. */
-LOCAL pid_t  child_pid;
+static pid_t  child_pid;
 
 /* Pipe file descriptors. */
-LOCAL int  pipe_fd[2];
+static int  pipe_fd[2];
 
 /* Buffer of system file descriptors 0 and 1. */
-LOCAL int  sys_fd[2];
+static int  sys_fd[2];
 #endif
 
 /* User defined date format. */
-LOCAL Df_struct  users_date_format;
+static Df_struct  users_date_format;
 
 /* Maximum number of `month_list[]' table elems. */
-LOCAL Uint  month_list_max=MONTH_MAX+1;
+static Uint  month_list_max=MONTH_MAX+1;
 
 /* The index value of a long option. */
-LOCAL int  lopt_id=0;
+static int  lopt_id=0;
 
 /* Termination status on `--help', `--version' etc... */
-LOCAL int  exit_stat_help=EXIT_STAT_HELP;
+static int  exit_stat_help=EXIT_STAT_HELP;
 
 /* Buffers default value of `-s<ARG>' option. */
-LOCAL int  buf_start_day=0;
+static int  buf_start_day=0;
 
 #ifdef GCAL_EPAGER
 /*
    Possible options passed to the $PAGER external pager program.
 */
-LOCAL char  **pg_argv=(char **)NULL;
+static char  **pg_argv=(char **)NULL;
 
 /*
    The external pager program names table is a vector of char pointer
      elements, which must be terminated by a NULL element!
 */
-LOCAL char  *pagers[]={PAGER1_PROG, PAGER2_PROG, PAGER3_PROG, NULL};
+static char  *pagers[]={PAGER1_PROG, PAGER2_PROG, PAGER3_PROG, NULL};
 #endif
 
 
 #ifdef GCAL_SHELL
 /* File name of shell script to write `-S<NAME>'. */
-LOCAL char  *shl_filename=(char *)NULL;
+static char  *shl_filename=(char *)NULL;
 #endif
 
 /* Name of response file to read (@FILE) or write (-R<NAME>). */
-LOCAL char  *rsp_filename=(char *)NULL;
+static char  *rsp_filename=(char *)NULL;
 
 /* Text containing user defined highlighting sequences `-H<>'. */
-LOCAL char  *hl_seq=(char *)NULL;
+static char  *hl_seq=(char *)NULL;
 
 /* Points to "date format error location" description text. */
-LOCAL char  *errtxt_dformat=(char *)NULL;
+static char  *errtxt_dformat=(char *)NULL;
 
 /* `-b<1|2|3|4|6|12>'. */
-LOCAL Bool  year_flag=FALSE;
+static Bool  year_flag=FALSE;
 
 
 
 /*
 *  Function implementations.
 */
-   PUBLIC int
+    int
 main (argc, argv)
    int   argc;
    char *argv[];
@@ -1717,13 +1717,13 @@ main (argc, argv)
    /*
       Now initialize the NLS functions.
    */
-#    if HAVE_SETLOCALE
+#    if HAVE_SETstaticE
    setlocale(LC_ALL, "");
 #    endif
-#    ifndef LOCALEDIR
-#      define LOCALEDIR  NULL
+#    ifndef staticEDIR
+#      define staticEDIR  NULL
 #    endif
-   bindtextdomain(PACKAGE, LOCALEDIR);
+   bindtextdomain(PACKAGE, staticEDIR);
    textdomain(PACKAGE);
    /*
       Now check whether we use a native language message catalog
@@ -3242,7 +3242,7 @@ main (argc, argv)
 
 
 
-   PUBLIC int
+    int
 eval_longopt (longopt, longopt_symbolic)
    char *longopt;
    int  *longopt_symbolic;
@@ -3593,7 +3593,7 @@ eval_longopt (longopt, longopt_symbolic)
 
 
 
-   LOCAL Bool
+   static Bool
 is_correct_date_format (format_txt, use_day_suffix, use_short3_day_name,
                         use_day_zeroleaded, use_year_zeroleaded)
    char *format_txt;
@@ -3735,7 +3735,7 @@ is_correct_date_format (format_txt, use_day_suffix, use_short3_day_name,
 
 
 
-   LOCAL void
+   static void
 rearrange_argv (opt_list, argc, argv)
    const char *opt_list;
          int  *argc;
@@ -3877,7 +3877,7 @@ rearrange_argv (opt_list, argc, argv)
 
 
 
-   LOCAL void
+   static void
 check_command_line (argc, argv)
    int   argc;
    char *argv[];
@@ -4035,10 +4035,10 @@ check_command_line (argc, argv)
                         case SYM_EXECUTE_COMMAND:
                           rc_execute_command = TRUE;
                           break;
-                        case SYM_EXPORT_LOCAL_DVARS:
+                        case SYM_extern_static_DVARS:
                           rc_export_ldvar_flag = TRUE;
                           break;
-                        case SYM_EXPORT_LOCAL_TVARS:
+                        case SYM_extern_static_TVARS:
                           rc_export_ltvar_flag = TRUE;
                           break;
                         case SYM_HEADING_TEXT:
@@ -4233,7 +4233,7 @@ check_command_line (argc, argv)
                            if (   *option == RC_TIME_CHAR
                                || *option == RC_GMTIME_CHAR)
 #else /* !USE_RC */
-                           if (*option == LOCALTIME_CHAR)
+                           if (*option == staticTIME_CHAR)
 #endif /* !USE_RC */
                             {
                               if (lopt_id == SYM_TIME_OFFSET)
@@ -6836,7 +6836,7 @@ LABEL_option_error:
 
 
 
-   LOCAL void
+   static void
 build_month_list (argv)
    char *argv[];
 /*
@@ -7229,7 +7229,7 @@ build_month_list (argv)
 
 
 
-   LOCAL void
+   static void
 eliminate_invalid_data ()
 /*
    Eliminates invalid command line argument values
@@ -7448,7 +7448,7 @@ eliminate_invalid_data ()
 
 
 
-   LOCAL void
+   static void
 pseudo_blank_conversion (text)
    char **text;
 /*
@@ -7492,7 +7492,7 @@ pseudo_blank_conversion (text)
 
 
 #if USE_RC
-   LOCAL int
+   static int
 further_check (option)
    char **option;
 /*

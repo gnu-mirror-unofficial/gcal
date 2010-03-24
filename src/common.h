@@ -47,13 +47,13 @@
 #    if !HAVE_STRCHR
 #      ifndef strchr
 #        define strchr       index
-IMPORT char *strchr __P_((const char *s, int c));
+extern char *strchr __P_((const char *s, int c));
 #      endif
 #    endif /* !HAVE_STRCHR */
 #    if !HAVE_STRRCHR
 #      ifndef strrchr
 #        define strrchr      rindex
-IMPORT char *strrchr __P_((const char *s, int c));
+extern char *strrchr __P_((const char *s, int c));
 #      endif
 #    endif /* !HAVE_STRRCHR */
 #  endif /* !HAVE_STRING_H && !STDC_HEADERS */
@@ -65,10 +65,10 @@ IMPORT char *strrchr __P_((const char *s, int c));
 #    include <signal.h>
 #  endif
 #  if defined(AMIGA) && !defined(__GNUC__)
-IMPORT long atol __P_((const char *string));
+extern long atol __P_((const char *string));
 #  endif
 #  ifdef __50SERIES
-IMPORT char *getenv __P_((const char *env_var));
+extern char *getenv __P_((const char *env_var));
 #    if HAVE_SIGNAL && defined(SIGTERM)
 /* We don't want a signal handler for SIGTERM */
 #      undef  SIGTERM
@@ -525,7 +525,7 @@ IMPORT char *getenv __P_((const char *env_var));
 
 /* Identifier for actual local time based time offsets used in the `--time_offset=ARG' option. */
 #  if !USE_RC
-#    define  LOCALTIME_CHAR    't'
+#    define  staticTIME_CHAR    't'
 #  endif /* USE_RC */
 
 /* Default time separator for scanning HH:MM time expressions. */

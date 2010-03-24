@@ -39,7 +39,7 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `hd-data4.c'.
 */
-EXPORT void
+extern void
 ma_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -47,7 +47,7 @@ ma_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mc_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -55,7 +55,7 @@ mc_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 md_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -63,7 +63,7 @@ md_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mg_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -71,7 +71,7 @@ mg_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mh_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -79,7 +79,7 @@ mh_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mk_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -87,7 +87,7 @@ mk_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 ml_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -95,7 +95,7 @@ ml_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mn_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -103,7 +103,7 @@ mn_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mo_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -111,7 +111,7 @@ mo_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mp_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -119,7 +119,7 @@ mp_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mq_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -127,7 +127,7 @@ mq_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mr_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -135,7 +135,7 @@ mr_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 ms_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -143,7 +143,7 @@ ms_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mt_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -151,7 +151,7 @@ mt_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mu_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -159,7 +159,7 @@ mu_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mv_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -167,7 +167,7 @@ mv_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mw_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -175,7 +175,7 @@ mw_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 my_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -183,7 +183,7 @@ my_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 mz_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -191,7 +191,7 @@ mz_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 na_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -199,7 +199,7 @@ na_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 nc_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -207,7 +207,7 @@ nc_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 ne_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -215,7 +215,7 @@ ne_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 nf_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -223,7 +223,7 @@ nf_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 ng_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -231,7 +231,7 @@ ng_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 ni_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -239,7 +239,7 @@ ni_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 nm_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -247,7 +247,7 @@ nm_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 no_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -255,7 +255,7 @@ no_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 np_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -263,7 +263,7 @@ np_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 nr_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -271,7 +271,7 @@ nr_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 nu_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -279,7 +279,7 @@ nu_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 om_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -287,7 +287,7 @@ om_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 pa_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -295,7 +295,7 @@ pa_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 pe_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -303,7 +303,7 @@ pe_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 pf_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -311,7 +311,7 @@ pf_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 pg_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -319,7 +319,7 @@ pg_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 ph_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -327,7 +327,7 @@ ph_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 pk_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -335,7 +335,7 @@ pk_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 pl_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -343,7 +343,7 @@ pl_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 pm_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -351,7 +351,7 @@ pm_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 pn_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -359,7 +359,7 @@ pn_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 pr_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -367,7 +367,7 @@ pr_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 pw_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -375,7 +375,7 @@ pw_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 py_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -383,7 +383,7 @@ py_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 qa_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -391,7 +391,7 @@ qa_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 re_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -399,7 +399,7 @@ re_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 ro_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -407,7 +407,7 @@ ro_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 rw_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -415,7 +415,7 @@ rw_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sa_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -423,7 +423,7 @@ sa_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sb_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -431,7 +431,7 @@ sb_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sc_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -439,7 +439,7 @@ sc_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sd_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -447,7 +447,7 @@ sd_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 se_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -455,7 +455,7 @@ se_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sg_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -463,7 +463,7 @@ sg_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sh_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -471,7 +471,7 @@ sh_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 si_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -479,7 +479,7 @@ si_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sj_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -487,7 +487,7 @@ sj_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sk_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -495,7 +495,7 @@ sk_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sl_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -503,7 +503,7 @@ sl_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sm_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -511,7 +511,7 @@ sm_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sn_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -519,7 +519,7 @@ sn_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 so_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -527,7 +527,7 @@ so_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sr_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -535,7 +535,7 @@ sr_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 st_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -543,7 +543,7 @@ st_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sv_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -551,7 +551,7 @@ sv_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sy_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,
@@ -559,7 +559,7 @@ sy_hdy __P_((      Bool *init_data,
                    int  *hd_elems,
              const int   fday,
              const int   count));
-EXPORT void
+extern void
 sz_hdy __P_((      Bool *init_data,
              const Bool  detected,
                    int   easter,

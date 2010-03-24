@@ -65,17 +65,17 @@ static char rcsid[]="$Id: file-io.c 3.01 2000/06/30 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `file-io.c'.
 */
-LOCAL void
+static void
 make_absolute_filename __P_((      char **absolute_filename,
                              const char  *directory,
                              const char  *filename));
-LOCAL FILE *
+static FILE *
 get_file_ptr __P_((      FILE       *fp,
                    const char       *filename,
                    const int         level,
@@ -88,7 +88,7 @@ __END_DECLARATIONS
 /*
 *  Function implementations.
 */
-   PUBLIC FILE *
+    FILE *
 file_open (filename, level, mode, bad_sys_include)
          char       **filename;
    const int          level;
@@ -490,7 +490,7 @@ file_open (filename, level, mode, bad_sys_include)
 
 
 
-   PUBLIC char *
+    char *
 file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
                 line_number, line_length, mode, is_include, is_dvar, is_tvar)
          FILE        *fp;
@@ -1273,7 +1273,7 @@ file_read_line (fp, line_buffer, in_pool, pool, ptr_pool, filename,
 
 
 
-   PUBLIC char **
+    char **
 insert_response_file (fp, filename, opt_list, my_argc_max, my_argc, my_argv)
          FILE *fp;
          char *filename;
@@ -1395,7 +1395,7 @@ insert_response_file (fp, filename, opt_list, my_argc_max, my_argc, my_argv)
 
 
 
-   PUBLIC void
+    void
 write_log_file (filename, mode, mode_txt, created_txt, argc, argv)
    const char       *filename;
    const Fmode_enum  mode;
@@ -1597,7 +1597,7 @@ write_log_file (filename, mode, mode_txt, created_txt, argc, argv)
 
 
 
-   LOCAL void
+   static void
 make_absolute_filename (absolute_filename, directory, filename)
          char **absolute_filename;
    const char  *directory;
@@ -1623,7 +1623,7 @@ make_absolute_filename (absolute_filename, directory, filename)
 
 
 
-   LOCAL FILE *
+   static FILE *
 get_file_ptr (fp, filename, level, mode, is_first)
          FILE       *fp;
    const char       *filename;

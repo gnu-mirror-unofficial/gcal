@@ -95,46 +95,46 @@ static char rcsid[]="$Id: tty.c 3.01 2000/06/29 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `tty.c'.
 */
 #if defined(GCAL_TCAP) && USE_HLS
-LOCAL char *
+static char *
 skip_leading_padding_info __P_((char *sequence_str));
 #endif
 #if USE_HLS || USE_PAGER
 #  ifdef GCAL_TCAP
-LOCAL Bool open_termcap __P_((void));
+static Bool open_termcap __P_((void));
 #    if USE_HLS
-LOCAL void get_ospeed __P_((void));
-LOCAL int
+static void get_ospeed __P_((void));
+static int
 outchar __P_((int ch));
-LOCAL Bool
+static Bool
 get_termcap_hls __P_((Bool *hls1_set,
                       Bool *hls2_set));
 #    endif /* USE_HLS */
 #    if USE_PAGER
-LOCAL Bool
+static Bool
 get_termcap_scr_attrib __P_((int *rows,
                              int *cols));
 #    endif /* USE_PAGER */
 #  else /* !GCAL_TCAP */
 #    if defined(MSDOS) && USE_PAGER
-LOCAL Uchar
+static Uchar
 peek_byte __P_((Uint segment,
                 Uint offset));
 #    endif
 #  endif /* GCAL_TCAP */
 #endif /* USE_HLS || USE_PAGER */
-LOCAL void
+static void
 get_hl_seq __P_((const char *sequence_str,
                        Bool *hls1_set,
                        Bool *hls2_set));
 #if !HAVE_STRTOL
-LOCAL int
+static int
 sbyte2int __P_((const char *string,
                 const int   base));
 #endif
@@ -143,31 +143,31 @@ __END_DECLARATIONS
 
 
 /*
-*  LOCAL variables definitions.
+*  static variables definitions.
 */
 #if USE_PAGER || USE_HLS
 #  ifdef GCAL_TCAP
 /* Module global Termcap buffer. */
-LOCAL char  tc_buf[TC_BUFLEN];
+static char  tc_buf[TC_BUFLEN];
 
 /* Termcap access error occurred. */
-LOCAL Bool  tc_no_error=TRUE;
+static Bool  tc_no_error=TRUE;
 
 #    if USE_HLS
 /* Module global file which is used by the `tputs()' function. */
-LOCAL FILE  *fp_outchar=(FILE *)NULL;
+static FILE  *fp_outchar=(FILE *)NULL;
 
 /* Stores whether padding is used or not. */
-LOCAL Bool  is_padding=FALSE;
+static Bool  is_padding=FALSE;
 #    endif
 #  endif /* GCAL_TCAP */
 
 #  if USE_PAGER
 /* Terminal has automatic margins. */
-LOCAL Bool   tty_am=TRUE;
+static Bool   tty_am=TRUE;
 
 /* Terminal ignores newline after wrap. */
-LOCAL Bool   tty_xn=FALSE;
+static Bool   tty_xn=FALSE;
 #  endif /* USE_PAGER */
 #endif /* USE_PAGER || USE_HLS */
 
@@ -176,7 +176,7 @@ LOCAL Bool   tty_xn=FALSE;
 /*
 *  Function implementations.
 */
-   PUBLIC void
+    void
 print_text (fp, text_line)
    FILE *fp;
    char *text_line;
@@ -553,7 +553,7 @@ print_text (fp, text_line)
 
 
 
-   PUBLIC void
+    void
 get_tty_hls (sequence_str)
    const char *sequence_str;
 /*
@@ -782,7 +782,7 @@ get_tty_hls (sequence_str)
 
 
 #if USE_PAGER
-   PUBLIC void
+    void
 get_tty_scr_size (rows, cols)
    int *rows;
    int *cols;
@@ -996,7 +996,7 @@ get_tty_scr_size (rows, cols)
 
 
 #if defined(GCAL_TCAP) && USE_HLS
-   LOCAL char *
+   static char *
 skip_leading_padding_info (sequence_str)
    char *sequence_str;
 /*
@@ -1026,7 +1026,7 @@ skip_leading_padding_info (sequence_str)
 
 #if USE_PAGER || USE_HLS
 #  ifdef GCAL_TCAP
-   LOCAL Bool
+   static Bool
 open_termcap ()
 /*
    Tries to open the Termcap library and returns the terminal entry found
@@ -1158,7 +1158,7 @@ open_termcap ()
 
 
 #    if USE_HLS
-   LOCAL void
+   static void
 get_ospeed ()
 /*
    Tries to detect the terminal speed and store its value to
@@ -1308,7 +1308,7 @@ get_ospeed ()
 
 
 
-   LOCAL int
+   static int
 outchar (ch)
    int ch;
 /*
@@ -1321,7 +1321,7 @@ outchar (ch)
 
 
 
-   LOCAL Bool
+   static Bool
 get_termcap_hls (hls1_set, hls2_set)
    Bool *hls1_set;
    Bool *hls2_set;
@@ -1411,7 +1411,7 @@ get_termcap_hls (hls1_set, hls2_set)
 
 
 #    if USE_PAGER
-   LOCAL Bool
+   static Bool
 get_termcap_scr_attrib (rows, cols)
    int *rows;
    int *cols;
@@ -1454,7 +1454,7 @@ get_termcap_scr_attrib (rows, cols)
 #    endif /* USE_PAGER */
 #  else /* !GCAL_TCAP */
 #    if defined(MSDOS) && USE_PAGER
-   LOCAL Uchar
+   static Uchar
 peek_byte (segment, offset)
    Uint segment;
    Uint offset;
@@ -1479,7 +1479,7 @@ peek_byte (segment, offset)
 
 
 
-   LOCAL void
+   static void
 get_hl_seq (sequence_str, hls1_set, hls2_set)
    const char *sequence_str;
          Bool *hls1_set;
@@ -1779,7 +1779,7 @@ get_hl_seq (sequence_str, hls1_set, hls2_set)
 
 
 #if !HAVE_STRTOL
-   LOCAL int
+   static int
 sbyte2int (string, base)
    const char *string;
    const int   base;

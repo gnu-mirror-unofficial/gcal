@@ -72,20 +72,20 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `hd_astro.c'.
 */
-EXPORT double
+extern double
 equinox_solstice __P_((const double  longitude,
                              int    *day,
                              int    *month,
                              int    *year,
                              int     hour,
                              int     min));
-EXPORT double
+extern double
 delta_t __P_((const int day,
               const int month,
               const int year,
               const int hour,
               const int min));
-EXPORT double
+extern double
 moonphase __P_((const double  phase_selector,
                 const Bool    find_eclipse,
                       double *eclipse_type,
@@ -95,7 +95,7 @@ moonphase __P_((const double  phase_selector,
                       int    *year,
                       int     hour,
                       int     min));
-EXPORT double
+extern double
 next_sun_longitude __P_((      double *longitude,
                          const double  step,
                          const double  mjd,
@@ -104,7 +104,7 @@ next_sun_longitude __P_((      double *longitude,
                                int    *year,
                          const int     hour,
                          const int     min));
-EXPORT double
+extern double
 sun_longitude __P_((const double  longitude,
                           int    *day,
                           int    *month,
@@ -112,49 +112,49 @@ sun_longitude __P_((const double  longitude,
                           int     hour,
                           int     min,
                     const Bool    next_mode));
-EXPORT void
+extern void
 val2hours __P_((double  val,
                 int    *hour,
                 int    *min,
                 double *sec));
-EXPORT void
+extern void
 val2degrees __P_((double  val,
                   int    *degree,
                   int    *min,
                   double *sec));
-EXPORT double
+extern double
 my_cot __P_((double x));
-EXPORT double
+extern double
 my_acot __P_((double x));
-EXPORT double
+extern double
 my_atan2 __P_((double y,
                double x));
 #  if !HAVE_LIBM
-EXPORT double
+extern double
 my_floor __P_((double x));
-EXPORT double
+extern double
 my_ceil __P_((double x));
-EXPORT double
+extern double
 my_sqrt __P_((double x));
-EXPORT double
+extern double
 my_log __P_((double x));
-EXPORT double
+extern double
 my_log10 __P_((double x));
-EXPORT double
+extern double
 my_sin __P_((double x));
-EXPORT double
+extern double
 my_cos __P_((double x));
-EXPORT double
+extern double
 my_tan __P_((double x));
-EXPORT double
+extern double
 my_cot __P_((double x));
-EXPORT double
+extern double
 my_asin __P_((double x));
-EXPORT double
+extern double
 my_acos __P_((double x));
-EXPORT double
+extern double
 my_atan __P_((double x));
-EXPORT double
+extern double
 my_acot __P_((double x));
 #  endif /* !HAVE_LIBM */
 __END_DECLARATIONS

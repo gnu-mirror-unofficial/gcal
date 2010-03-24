@@ -72,31 +72,31 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `rc-astro.c'.
 */
-EXPORT double
+extern double
 gd_latitude2gc_latitude __P_((const double  gd_latitude,
                               const int     meters_above_sea_level,
                                     double *gc_latitude));
-EXPORT double
+extern double
 sun_rise_set __P_((const Aevent_enum  event,
                    const Bool         is_limited,
                          int          day,
                          int          month,
                          int          year,
                          Coor_struct *coordinates));
-EXPORT double
+extern double
 moon_rise_set __P_((const Aevent_enum  event,
                           int          day,
                           int          month,
                           int          year,
                           Coor_struct *coordinates));
-EXPORT int
+extern int
 moondisk __P_((      Bool *is_full_new,
                      int   day,
                      int   month,
                      int   year,
                const int   hour,
                const int   min));
-EXPORT void
+extern void
 draw_moon __P_((const int    age,
                 const int    lines,
                       char **string));

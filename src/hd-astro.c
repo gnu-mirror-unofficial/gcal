@@ -44,13 +44,13 @@ static char rcsid[]="$Id: hd-astro.c 3.01 2000/06/14 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `hd-astro.c'.
 */
-LOCAL double
+static double
 meeus_equinox_solstice __P_((const double mode,
                              const int    year,
                                    int    hour,
@@ -62,7 +62,7 @@ __END_DECLARATIONS
 /*
 *  Function implementations.
 */
-   LOCAL double
+   static double
 meeus_equinox_solstice (mode, year, hour, min)
    const double  mode;
    const int     year;
@@ -185,7 +185,7 @@ meeus_equinox_solstice (mode, year, hour, min)
 
 
 
-   PUBLIC double
+    double
 equinox_solstice (longitude, day, month, year, hour, min)
    const double  longitude;
          int    *day;
@@ -215,7 +215,7 @@ equinox_solstice (longitude, day, month, year, hour, min)
 
 
 
-   PUBLIC double
+    double
 delta_t __P_((day, month, year, hour, min))
    const int day;
    const int month;
@@ -498,7 +498,7 @@ delta_t __P_((day, month, year, hour, min))
 
 
 
-   PUBLIC double
+    double
 moonphase (phase_selector, find_eclipse, eclipse_type, lunation,
            day, month, year, hour, min)
    const double  phase_selector;
@@ -911,7 +911,7 @@ moonphase (phase_selector, find_eclipse, eclipse_type, lunation,
 
 
 
-   PUBLIC double
+    double
 next_sun_longitude (longitude, step, mjd, day, month, year, hour, min)
          double *longitude;
    const double  step;
@@ -967,7 +967,7 @@ next_sun_longitude (longitude, step, mjd, day, month, year, hour, min)
 
 
 
-   PUBLIC double
+    double
 sun_longitude (longitude, day, month, year, hour, min, next_mode)
    const double  longitude;
          int    *day;
@@ -1184,7 +1184,7 @@ LABEL_sel_start:
 
 
 
-   PUBLIC void
+    void
 val2hours (val, hour, min, sec)
    double  val;
    int    *hour;
@@ -1246,7 +1246,7 @@ val2hours (val, hour, min, sec)
 
 
 
-   PUBLIC void
+    void
 val2degrees (val, degree, min, sec)
    double  val;
    int    *degree;
@@ -1307,7 +1307,7 @@ val2degrees (val, degree, min, sec)
 
 
 
-   PUBLIC double
+    double
 my_cot (x)
    double x;
 /*
@@ -1329,7 +1329,7 @@ my_cot (x)
 
 
 
-   PUBLIC double
+    double
 my_acot (x)
    double x;
 /*
@@ -1358,7 +1358,7 @@ my_acot (x)
 
 
 
-   PUBLIC double
+    double
 my_atan2 (y, x)
    double y;
    double x;
@@ -1385,7 +1385,7 @@ my_atan2 (y, x)
 
 
 #if !HAVE_LIBM
-   PUBLIC double
+    double
 my_floor (x)
    double x;
 /*
@@ -1418,7 +1418,7 @@ my_floor (x)
 
 
 
-   PUBLIC double
+    double
 my_ceil (x)
    double x;
 /*
@@ -1451,7 +1451,7 @@ my_ceil (x)
 
 
 
-   PUBLIC double
+    double
 my_sqrt (x)
    double x;
 /*
@@ -1489,7 +1489,7 @@ my_sqrt (x)
 
 
 
-   PUBLIC double
+    double
 my_log (x)
    double x;
 /*
@@ -1564,7 +1564,7 @@ my_log (x)
 
 
 
-   PUBLIC double
+    double
 my_log10 (x)
    double x;
 /*
@@ -1582,7 +1582,7 @@ my_log10 (x)
 
 
 
-   PUBLIC double
+    double
 my_sin (x)
    double x;
 /*
@@ -1655,7 +1655,7 @@ my_sin (x)
 
 
 
-   PUBLIC double
+    double
 my_cos (x)
    double x;
 /*
@@ -1669,7 +1669,7 @@ my_cos (x)
 
 
 
-   PUBLIC double
+    double
 my_tan (x)
    double x;
 /*
@@ -1689,7 +1689,7 @@ my_tan (x)
 
 
 
-   PUBLIC double
+    double
 my_asin (x)
    double x;
 /*
@@ -1728,7 +1728,7 @@ my_asin (x)
 
 
 
-   PUBLIC double
+    double
 my_acos (x)
    double x;
 /*
@@ -1746,7 +1746,7 @@ my_acos (x)
 
 
 
-   PUBLIC double
+    double
 my_atan (x)
    double x;
 /*

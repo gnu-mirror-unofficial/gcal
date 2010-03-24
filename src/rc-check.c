@@ -56,38 +56,38 @@ static char rcsid[]="$Id: rc-check.c 3.01 2000/06/14 03:00:01 tom Exp $";
 
 
 /*
-*  LOCAL functions prototypes.
+*  static functions prototypes.
 */
 __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `rc-check.c'.
 */
-LOCAL Bool
+static Bool
 date_matches_period __P_((      int *print_twice,
                                 int  day,
                                 int  ed,
                           const int  wd));
-LOCAL int
+static int
 get_number __P_((char **string));
 __END_DECLARATIONS
 
 
 
 /*
-*  LOCAL variables definitions.
+*  static variables definitions.
 */
 /* Textual weekday name is found and must be respected. */
-LOCAL Bool  is_weekday_mode=FALSE;
+static Bool  is_weekday_mode=FALSE;
 
 /* No explicit month command is given in the command line. */
-LOCAL Bool  changed_month=FALSE;
+static Bool  changed_month=FALSE;
 
 
 
 /*
 *  Function implementations.
 */
-   PUBLIC void
+    void
 rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed, wd)
          char *line_buffer;
    const char *filename;
@@ -1687,7 +1687,7 @@ LABEL_range_day_name_given:
 
 
 
-   LOCAL Bool
+   static Bool
 date_matches_period (print_twice, day, ed, wd)
          int *print_twice;
          int  day;
@@ -2369,7 +2369,7 @@ date_matches_period (print_twice, day, ed, wd)
 
 
 
-   LOCAL int
+   static int
 get_number (string)
    char **string;
 /*

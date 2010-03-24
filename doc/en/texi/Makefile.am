@@ -15,6 +15,4 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS = examples texi
-
-info_TEXINFOS = texi/gcal.texi
+EXTRA_DIST = fdl.texi

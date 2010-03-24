@@ -998,7 +998,10 @@ LABEL_range_day_name_given:
                   /*
                      Swap the starting date of the event.
                   */
-                  i ^= (j ^= (i ^= j));
+                  int tmp = i;
+                  i = j;
+                  j = tmp;
+
                   d = tmp_d;
                   m = tmp_m;
                   y = tmp_y;

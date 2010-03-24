@@ -427,7 +427,7 @@ __END_DECLARATIONS
 # if HAVE_GNU_RE_COMPILE_PATTERN
  struct re_pattern_buffer  regpattern;
  char  *gnu_fastmap_table=(char *)NULL;
- char  *gnu_translate_table=(char *)NULL;
+ unsigned char  *gnu_translate_table=(unsigned char *)NULL;
 # endif
 
 # if HAVE_POSIX_REGCOMP
@@ -630,19 +630,19 @@ rc_use ()
          /*
             Initial memory allocation and initialization of GNU Regex translate table.
          */
-         gnu_translate_table = (char *)my_malloc (j+1, ERR_NO_MEMORY_AVAILABLE,
-                                                  __FILE__, ((long)__LINE__)-1L,
-                                                  "gnu_translate_table", 0);
+         gnu_translate_table = (unsigned char *)my_malloc (j+1, ERR_NO_MEMORY_AVAILABLE,
+                                                           __FILE__, ((long)__LINE__)-1L,
+                                                           "gnu_translate_table", 0);
          if (rc_ignore_case_flag)
            /*
               Set PATTERN to lower-case letters
                 if we have to ignore case distinctions.
            */
            for (i=0 ; i <= j ; i++)
-             gnu_translate_table[i] = (char)tolower(i);
+             gnu_translate_table[i] = (unsigned char)tolower(i);
          else
            for (i=0 ; i <= j ; i++)
-             gnu_translate_table[i] = (char)i;
+             gnu_translate_table[i] = (unsigned char)i;
          (void)re_set_syntax(   (RE_SYNTAX_POSIX_EXTENDED | RE_BACKSLASH_ESCAPE_IN_LISTS)
                              & ~(RE_DOT_NOT_NULL));
          regpattern.fastmap = gnu_fastmap_table;
@@ -1026,7 +1026,11 @@ rc_use ()
       */
       if (   swap_flag
           || rc_backwards_flag)
-        day ^= (ed ^= (day ^= ed));
+        {
+          int tmp = ed;
+          ed = day;
+          day = tmp;
+        }
       /*
          Correction in case date occurs during Gregorian Reformation period.
       */

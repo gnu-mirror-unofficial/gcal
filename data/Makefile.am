@@ -108,7 +108,7 @@ datascriptsFILES = \
 
 dist_pkgdata_DATA = \
   $(dataMISCFILES) \
-  $(datacalendarFILES) \
+  $(datacalendarsFILES) \
   $(datadatesFILES) \
   $(datadatesMISCFILES) \
   $(datascriptsFILES)

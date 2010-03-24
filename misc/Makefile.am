@@ -150,4 +150,5 @@ miscMISCFILES = \
 EXTRA_DIST = \
   $(miscDATAFILES) \
   $(miscINFOFILES) \
+  $(miscSCRIPTFILES) \
   $(miscMISCFILES)

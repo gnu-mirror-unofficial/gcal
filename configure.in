@@ -1016,6 +1016,7 @@ AC_OUTPUT([Makefile \
            data/Makefile \
            doc/Makefile \
            doc/en/Makefile \
+           doc/en/examples/Makefile \
            doc/mksamp \
            intl/Makefile \
            misc/Makefile \

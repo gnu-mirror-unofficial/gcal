@@ -34,11 +34,11 @@ static char rcsid[]="$Id: hd-use.c 3.01 2000/06/14 03:00:01 tom Exp $";
 */
 #include "tailor.h"
 #if HAVE_CTYPE_H
-#  include <ctype.h>
+# include <ctype.h>
 #endif
 #include "common.h"
 #if USE_RC
-#  include "rc-defs.h"
+# include "rc-defs.h"
 #endif /* USE_RC */
 #include "globals.h"
 #include "hd-astro.h"
@@ -2265,15 +2265,15 @@ holiday (init_data, detected, holiday_name, country_code, holiday_prefix,
       if (   (warning_level >= 0)
           && (*hd_elems >= HD_ELEMS_MAX))
        {
-#  if USE_DE
+#if USE_DE
          sprintf(s1, "%s%s hat nun %d Maximaleintr%sge!%s",
                  ((ehls1s.len != 1) ? ehls1s.seq : ""), HD_LIST_TITLE, HD_ELEMS_MAX, AE,
                  ((ehls1s.len != 1) ? ehls1e.seq : ""));
-#  else /* !USE_DE */
+#else /* !USE_DE */
          sprintf(s1, _("%s%s contains %d maximum entries now!%s"),
                  ((ehls1s.len != 1) ? ehls1s.seq : ""), _("Eternal holiday list"), HD_ELEMS_MAX,
                  ((ehls1s.len != 1) ? ehls1e.seq : ""));
-#  endif /* !USE_DE */
+#endif /* !USE_DE */
          print_text (stderr, s1);
        }
       if (init_data)

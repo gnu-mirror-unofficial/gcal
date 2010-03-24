@@ -34,7 +34,7 @@ static char rcsid[]="$Id: hd-astro.c 3.01 2000/06/14 03:00:01 tom Exp $";
 */
 #include "tailor.h"
 #if HAVE_MATH_H && HAVE_LIBM
-#  include <math.h>
+# include <math.h>
 #endif
 #include "common.h"
 #include "globals.h"

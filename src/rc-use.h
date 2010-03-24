@@ -1,5 +1,5 @@
 #ifndef __RC_USE_H
-#  define __RC_USE_H
+# define __RC_USE_H
 /*
 *  rc-use.h:  Central function, manages the resource file handling and displays the results file header.
 *
@@ -34,13 +34,13 @@
 /*
 *  The REGEX stuff.
 */
-#  if HAVE_POSIX_REGCOMP
-#    ifdef REG_EXTENDED
-#      define REGCOMP_FLAG  REG_EXTENDED
-#    else
-#      define REGCOMP_FLAG  0
-#    endif
+# if HAVE_POSIX_REGCOMP
+#  ifdef REG_EXTENDED
+#   define REGCOMP_FLAG  REG_EXTENDED
+#  else
+#   define REGCOMP_FLAG  0
 #  endif
+# endif
 
 
 
@@ -51,12 +51,12 @@ __BEGIN_DECLARATIONS
 /*
 *  The REGEX stuff.
 */
-#  if HAVE_RE_COMP
+# if HAVE_RE_COMP
 extern char *re_comp();
-#  endif
-#  if HAVE_REGCMP
+# endif
+# if HAVE_REGCMP
 extern char *regcmp();
-#  endif
+# endif
 /*
 ************************************************** Defined in `rc-use.c'.
 */

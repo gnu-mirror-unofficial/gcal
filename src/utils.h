@@ -1,5 +1,5 @@
 #ifndef __UTILS_H
-#  define __UTILS_H
+# define __UTILS_H
 /*
 *  utils.h:  Pool of common functions header file.
 *
@@ -68,37 +68,37 @@ my_error __P_((const int   exit_status,
                const long  module_line,
                const char *var_name,
                const int   var_contents));
-#if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
+# if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
 extern RETSIGTYPE
 handle_signal __P_((int the_signal));
-#endif
+# endif
 extern void
 my_exit __P_((const int exit_status));
 extern int
 my_atoi __P_((const char *string));
 extern int
 my_system __P_((const char *command));
-#if !HAVE_STRSTR
+# if !HAVE_STRSTR
 extern char *
 my_strstr __P_((const char *text,
                 const char *pattern));
-#endif /* !HAVE_STRSTR */
-#if !HAVE_STRCSPN
+# endif /* !HAVE_STRSTR */
+# if !HAVE_STRCSPN
 extern char *
 my_strcspn __P_((const char *s1,
                  const char *s2));
-#endif /* !HAVE_STRCSPN */
-#if !HAVE_STRCASECMP
+# endif /* !HAVE_STRCSPN */
+# if !HAVE_STRCASECMP
 extern int
 my_strcasecmp __P_((const char *s1,
                     const char *s2));
-#endif /* !HAVE_STRCASECMP */
-#if !HAVE_STRNCASECMP
+# endif /* !HAVE_STRCASECMP */
+# if !HAVE_STRNCASECMP
 extern int
 my_strncasecmp __P_((const char *s1,
                      const char *s2,
                            int   len));
-#endif /* !HAVE_STRNCASECMP */
+# endif /* !HAVE_STRNCASECMP */
 extern Bool
 get_actual_date __P_((void));
 extern int

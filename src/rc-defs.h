@@ -1,5 +1,5 @@
 #ifndef __RC_DEFS_H
-#  define __RC_DEFS_H
+# define __RC_DEFS_H
 /*
 *  rc-defs.h:  Fixed dates/resource file specific statements, macros, typedefs, global variable declarations...
 *
@@ -37,22 +37,22 @@
 /*
 *  Configuration dependent values.
 */
-#  define  ERR_NO_FIXED_DATES_LISTED   1
-#  define  ERR_EXTERNAL_CMD_FAILURE    2
-#  define  ERR_MAINTAINER_FAILURE      50
-#  define  ERR_INVALID_REGEX_PATTERN   104
-#  define  ERR_ILLEGAL_VAR_DEFINITION  105
-#  define  ERR_INVALID_VAR_ASSIGNMENT  112
-#  define  ERR_INVALID_VAR_REFERENCE   113
-#  define  ERR_ILLEGAL_VAR_OPERATION   114
-#  define  ERR_NO_SEPARATOR_CHAR       116
-#  define  ERR_INVALID_NWD_FIELD       117
-#  define  ERR_FILE_NOT_FOUND          118
-#  define  ERR_CYCLIC_INCLUDE          119
-#  define  ERR_MALFORMED_INCLUDE       120
-#  define  ERR_INVALID_DAY_FIELD       121
-#  define  ERR_INVALID_MONTH_FIELD     122
-#  define  ERR_INVALID_DATE_FIELD      123
+# define ERR_NO_FIXED_DATES_LISTED   1
+# define ERR_EXTERNAL_CMD_FAILURE    2
+# define ERR_MAINTAINER_FAILURE      50
+# define ERR_INVALID_REGEX_PATTERN   104
+# define ERR_ILLEGAL_VAR_DEFINITION  105
+# define ERR_INVALID_VAR_ASSIGNMENT  112
+# define ERR_INVALID_VAR_REFERENCE   113
+# define ERR_ILLEGAL_VAR_OPERATION   114
+# define ERR_NO_SEPARATOR_CHAR       116
+# define ERR_INVALID_NWD_FIELD       117
+# define ERR_FILE_NOT_FOUND          118
+# define ERR_CYCLIC_INCLUDE          119
+# define ERR_MALFORMED_INCLUDE       120
+# define ERR_INVALID_DAY_FIELD       121
+# define ERR_INVALID_MONTH_FIELD     122
+# define ERR_INVALID_DATE_FIELD      123
 
 
 
@@ -60,57 +60,57 @@
 *  Preprocessor statements for long options `Lopt_struct' field `symbolic_name'.
 */
 /* Configuration dependent values. */
-#  define  SYM_ADJUST_VALUE            200
-#  define  SYM_ALTERNATIVE_FORMAT      201
-#  define  SYM_ATMOSPHERE              202
-#  define  SYM_BIORHYTHM_AXIS_LEN      203
-#  define  SYM_CYCLE_END               204
-#  define  SYM_CYCLE_STEP              205
-#  define  SYM_DATE_VARIABLE           206
-#  define  SYM_DESC_FIXED_DATES_LIST   207
-#  define  SYM_END_OF_MONTH            208
-#  define  SYM_END_OF_WEEK             209
-#  define  SYM_END_OF_YEAR             210
-#  define  SYM_EXCLUDE_RC_TITLE        211
-#  define  SYM_EXECUTE_COMMAND         212
-#  define  SYM_extern_static_DVARS      213
-#  define  SYM_extern_static_TVARS      214
-#  define  SYM_FILTER_DAY              215
-#  define  SYM_FILTER_PERIOD           216
-#  define  SYM_FILTER_TEXT             217
-#  define  SYM_FIXED_DATES             218
-#  define  SYM_FIXED_DATES_LIST        219
-#  define  SYM_GROUPING_TEXT           220
-#  define  SYM_HEADING_TEXT            221
-#  define  SYM_HERE_FILE               222
-#  define  SYM_IGNORE_CASE             223
-#  define  SYM_INCLUDE_CONS_NUMBER     224
-#  define  SYM_INCLUDE_FILENAME        225
-#  define  SYM_INCLUDE_HOLIDAY         226
-#  define  SYM_INCLUDE_TODAY           227
-#  define  SYM_INCLUDE_WEEK_NUMBER     228
-#  define  SYM_LEAP_DAY                229
-#  define  SYM_LIMIT                   230
-#  define  SYM_LIST_MODE               231
-#  define  SYM_MONTH                   232
-#  define  SYM_MOONIMAGE_LINES         233
-#  define  SYM_OMIT_DATE_PART          234
-#  define  SYM_PERIOD                  235
-#  define  SYM_PRECISE                 236
-#  define  SYM_RESOURCE_FILE           237
-#  define  SYM_REVERT_MATCH            238
-#  define  SYM_START_OF_MONTH          239
-#  define  SYM_START_OF_WEEK           240
-#  define  SYM_START_OF_YEAR           241
-#  define  SYM_SUPPRESS_DATE_PART      242
-#  define  SYM_SUPPRESS_FDLIST_SEP     243
-#  define  SYM_SUPPRESS_TEXT_PART      244
-#  define  SYM_TEXT_VARIABLE           245
-#  define  SYM_TODAY                   246
-#  define  SYM_TOMORROW                247
-#  define  SYM_WEEK                    248
-#  define  SYM_YEAR                    249
-#  define  SYM_ZERO_DATES              250
+# define SYM_ADJUST_VALUE            200
+# define SYM_ALTERNATIVE_FORMAT      201
+# define SYM_ATMOSPHERE              202
+# define SYM_BIORHYTHM_AXIS_LEN      203
+# define SYM_CYCLE_END               204
+# define SYM_CYCLE_STEP              205
+# define SYM_DATE_VARIABLE           206
+# define SYM_DESC_FIXED_DATES_LIST   207
+# define SYM_END_OF_MONTH            208
+# define SYM_END_OF_WEEK             209
+# define SYM_END_OF_YEAR             210
+# define SYM_EXCLUDE_RC_TITLE        211
+# define SYM_EXECUTE_COMMAND         212
+# define SYM_extern_static_DVARS      213
+# define SYM_extern_static_TVARS      214
+# define SYM_FILTER_DAY              215
+# define SYM_FILTER_PERIOD           216
+# define SYM_FILTER_TEXT             217
+# define SYM_FIXED_DATES             218
+# define SYM_FIXED_DATES_LIST        219
+# define SYM_GROUPING_TEXT           220
+# define SYM_HEADING_TEXT            221
+# define SYM_HERE_FILE               222
+# define SYM_IGNORE_CASE             223
+# define SYM_INCLUDE_CONS_NUMBER     224
+# define SYM_INCLUDE_FILENAME        225
+# define SYM_INCLUDE_HOLIDAY         226
+# define SYM_INCLUDE_TODAY           227
+# define SYM_INCLUDE_WEEK_NUMBER     228
+# define SYM_LEAP_DAY                229
+# define SYM_LIMIT                   230
+# define SYM_LIST_MODE               231
+# define SYM_MONTH                   232
+# define SYM_MOONIMAGE_LINES         233
+# define SYM_OMIT_DATE_PART          234
+# define SYM_PERIOD                  235
+# define SYM_PRECISE                 236
+# define SYM_RESOURCE_FILE           237
+# define SYM_REVERT_MATCH            238
+# define SYM_START_OF_MONTH          239
+# define SYM_START_OF_WEEK           240
+# define SYM_START_OF_YEAR           241
+# define SYM_SUPPRESS_DATE_PART      242
+# define SYM_SUPPRESS_FDLIST_SEP     243
+# define SYM_SUPPRESS_TEXT_PART      244
+# define SYM_TEXT_VARIABLE           245
+# define SYM_TODAY                   246
+# define SYM_TOMORROW                247
+# define SYM_WEEK                    248
+# define SYM_YEAR                    249
+# define SYM_ZERO_DATES              250
 
 
 
@@ -118,48 +118,48 @@
 *  Further preprocessor symbols.
 */
 /* Number of default 2-month mode rows both dates. */
-#  define  A2_OUT_ROWS  1
+# define A2_OUT_ROWS  1
 
 /* Number of default 2-month mode columns both dates. */
-#  define  A2_OUT_COLS  2
+# define A2_OUT_COLS  2
 
 /* Number of default 2-month mode rows both dates. */
-#  define  B2_OUT_ROWS  2
+# define B2_OUT_ROWS  2
 
 /* Number of default 2-month mode columns both dates. */
-#  define  B2_OUT_COLS  1
+# define B2_OUT_COLS  1
 
 
 
 /*
 *  German language dependent preprocessor statements.
 */
-#  if USE_DE
+# if USE_DE
 /* Trailing text of a %[gm]time* or %sun* or %moon* special text. */
-#    define  RC_AM_TXT             "am"
+#  define RC_AM_TXT             "am"
 
 /* Trailing text of a %[gm]time* or %sun* or %moon* special text. */
-#    define  RC_PM_TXT             "pm"
+#  define RC_PM_TXT             "pm"
 
 /* Used time value separators for displaying HHhMM'[SS.SSS"]. */
-#    define  TIMEVAL_SEP           "h'\""
+#  define TIMEVAL_SEP           "h'\""
 
 /* Used degree value separators for displaying DDDdMM'[SS.SSS"]. */
-#    define  DEGREEVAL_SEP         "g'\""
+#  define DEGREEVAL_SEP         "g'\""
 
 /* Used heading for the fixed date list. */
-#    define  RC_LIST_TITLE         "Terminliste:"
-#  endif /* USE_DE */
+#  define RC_LIST_TITLE         "Terminliste:"
+# endif /* USE_DE */
 
 
 
 /*
 *  Additional usage texts.
 */
-#  define  USAGE_RC1  "CDFIP"
-#  define  USAGE_RC2  "cf"
-#  define  USAGE_RC3  "r"
-#  define  USAGE_RC4  "v"
+# define USAGE_RC1  "CDFIP"
+# define USAGE_RC2  "cf"
+# define USAGE_RC3  "r"
+# define USAGE_RC4  "v"
 
 
 
@@ -172,14 +172,14 @@
 *                  to avoid compilation errors.
 */
 /* Access file relative to $HOME directory. */
-#  ifndef  GCAL_USR_DATADIR
-#    define  GCAL_USR_DATADIR  "share"DIR_SEP""PRGR_NAME
-#  endif
+# ifndef GCAL_USR_DATADIR
+#  define GCAL_USR_DATADIR  "share"DIR_SEP""PRGR_NAME
+# endif
 
 /* Access file absolute to root directory. */
-#  ifndef  GCAL_SYS_DATADIR
-#    define  GCAL_SYS_DATADIR  DIR_SEP"usr"DIR_SEP"local"DIR_SEP"share"DIR_SEP""PRGR_NAME
-#  endif
+# ifndef GCAL_SYS_DATADIR
+#  define GCAL_SYS_DATADIR  DIR_SEP"usr"DIR_SEP"local"DIR_SEP"share"DIR_SEP""PRGR_NAME
+# endif
 
 
 
@@ -187,180 +187,180 @@
 *  Specific preprocessor statements for fixed dates/resource files.
 */
 /* Default number of `rc_elems_table[]' entries. */
-#  ifndef RC_ELEMS_MAX
-#    define  RC_ELEMS_MAX             1024
-#  endif
+# ifndef RC_ELEMS_MAX
+#  define RC_ELEMS_MAX             1024
+# endif
 
 /* Default number of `rc_files_table[]' entries. */
-#  ifndef RC_FILES_MAX
-#    define  RC_FILES_MAX             8
-#  endif
+# ifndef RC_FILES_MAX
+#  define RC_FILES_MAX             8
+# endif
 
 /* Maximum number of date variables. */
-#  define  RC_DVAR_MAX              26
+# define RC_DVAR_MAX              26
 
 /* Maximum number of text variables. */
-#  define  RC_TVAR_MAX              RC_DVAR_MAX
+# define RC_TVAR_MAX              RC_DVAR_MAX
 
 /* Separator of a list of days (WWW,WWW... or NWWW,NWWW... or WWWN,WWWN...). */
-#  define  RC_DLIST_CHAR            ','
+# define RC_DLIST_CHAR            ','
 
 /* Separator of a range of days (WWW#WWW or NWWW#NWWW or WWWN#WWWN). */
-#  define  RC_DRANGE_CHAR           '#'
+# define RC_DRANGE_CHAR           '#'
 
 /* Separator of a "repeat for N days since..." coding (e.g.: YYYYMMDD:10). */
-#  define  RC_REPEAT_CHAR           ':'
+# define RC_REPEAT_CHAR           ':'
 
 /* Separator of a "appears each N'th day since..." coding (e.g.: YYYYMMDD:10.3). */
-#  define  RC_APPEARS_CHAR          '.'
+# define RC_APPEARS_CHAR          '.'
 
 /* Leading char of a modified actual date %DATE. */
-#  define  RC_ADATE_CHAR            '%'
+# define RC_ADATE_CHAR            '%'
 
 /* RC-file holiday/date-variable prefix in date part. */
-#  define  RC_HDY_CHAR              '@'
+# define RC_HDY_CHAR              '@'
 
 /* RC-file N'th weekday prefix in date part. */
-#  define  RC_NWD_CHAR              '*'
+# define RC_NWD_CHAR              '*'
 
 /* Inserts a real newline '\n' character if found and breaks to colomn 1. */
-#  define  RC_NL_CHAR               '~'
+# define RC_NL_CHAR               '~'
 
 /* Inserts a real newline '\n' character if found. */
-#  define  RC_NL2_CHAR              '^'
+# define RC_NL2_CHAR              '^'
 
 /* Leading char of a @easter date part. */
-#  define  RC_EASTER_CHAR           'e'
+# define RC_EASTER_CHAR           'e'
 
 /* Leading char of a @today date part. */
-#  define  RC_TODAY_CHAR            't'
+# define RC_TODAY_CHAR            't'
 
 /* Modifier for selecting the 12-hrs format in %[gm]time* or %sun* or %moon* special texts. */
-#  define  RC_12_HOURS_FORMAT_CHAR  '*'
+# define RC_12_HOURS_FORMAT_CHAR  '*'
 
 /* Assignment operator of a date/text variable (DVAR=MMDD, $TVAR=TEXT). */
-#  define  RC_VAR_ASSIGN            "="
+# define RC_VAR_ASSIGN            "="
 
 /* Interpreted command assignment of a text variable ($TVAR?COMMAND). */
-#  define  RC_TVAR_ICMD_ASSIGN      "?"
+# define RC_TVAR_ICMD_ASSIGN      "?"
 
 /* Uninterpreted command assignment of a text variable ($TVAR:COMMAND). */
-#  define  RC_TVAR_UCMD_ASSIGN      ":"
+# define RC_TVAR_UCMD_ASSIGN      ":"
 
 /* Add operator of a date/text variable ([D|$T]VAR++ | [D|$T]VAR+=N ...). */
-#  define  RC_VAR_ADD               "+"
+# define RC_VAR_ADD               "+"
 
 /* Subtract operator of a date variable ([D|$T]VAR-- | [D|$T]VAR-=N ...). */
-#  define  RC_VAR_SUB               "-"
+# define RC_VAR_SUB               "-"
 
 /* RC-file text variable prefix. */
-#  define  RC_TVAR_CHAR             '$'
+# define RC_TVAR_CHAR             '$'
 
 /* Default grouping text of fixed date list option `-cg<TEXT>'. */
-#  define  RC_GROUP_SEP             ""
+# define RC_GROUP_SEP             ""
 
 /* Name of RC-file include statement (upper-case). */
-#  define  RC_INCL_STMENT           "#include"
+# define RC_INCL_STMENT           "#include"
 
 /* User include file name starts with. */
-#  define  RC_INCL_USR_ID           "\""
+# define RC_INCL_USR_ID           "\""
 
 /* User include file name ends with. */
-#  define  RC_INCL_USR_OD           RC_INCL_USR_ID
+# define RC_INCL_USR_OD           RC_INCL_USR_ID
 
 /* System include file name start with. */
-#  define  RC_INCL_SYS_ID           "<"
+# define RC_INCL_SYS_ID           "<"
 
 /* System include file name ends with. */
-#  define  RC_INCL_SYS_OD           ">"
+# define RC_INCL_SYS_OD           ">"
 
 /* Environment variable name for user datadir. */
-#  define  ENV_VAR_USR_DATADIR      "GCAL_USR_DATADIR"
+# define ENV_VAR_USR_DATADIR      "GCAL_USR_DATADIR"
 
 /* Environment variable name for system datadir. */
-#  define  ENV_VAR_SYS_DATADIR      "GCAL_SYS_DATADIR"
+# define ENV_VAR_SYS_DATADIR      "GCAL_SYS_DATADIR"
 
 /* Name part of default resource file. */
-#  define  RC_SUFFIX                "rc"
+# define RC_SUFFIX                "rc"
 
 /* Text displayed if an invalid parameter is given to %[gm]time* or %distance or %sun* or %moon*. */
-#  define  RC_INVALID_PARAM_TEXT    "??"
+# define RC_INVALID_PARAM_TEXT    "??"
 
 /* Text displayed if an invalid value is computed in %[gm]time* or %distance or %sun* or %moon*. */
-#  define  RC_INVALID_VALUE_TEXT    "**"
+# define RC_INVALID_VALUE_TEXT    "**"
 
 /* Text displayed if there is no rise/set/transit time because the astronomical
    object is always above the requested horizon in %sun* or %moon*. */
-#  define  RC_A_ABOVE_VALUE_TEXT    "++"
+# define RC_A_ABOVE_VALUE_TEXT    "++"
 
 /* Text displayed if there is no rise/set/transit time because the astronomical
    object is always below the requested horizon in %sun* or %moon*. */
-#  define  RC_A_BELOW_VALUE_TEXT    "--"
+# define RC_A_BELOW_VALUE_TEXT    "--"
 
 /* Separator used between two coordinates in %distance. */
-#  define  RC_COORDINATE_SEP        "/"
+# define RC_COORDINATE_SEP        "/"
 
 /* Modifier for selecting the statute miles format in %distance special texts. */
-#  define  RC_SMILES_FORMAT_CHAR    RC_12_HOURS_FORMAT_CHAR
+# define RC_SMILES_FORMAT_CHAR    RC_12_HOURS_FORMAT_CHAR
 
 /* Output redirection symbol. */
-#  ifndef REDIRECT_OUT
-#    define REDIRECT_OUT              ">"
-#  endif
+# ifndef REDIRECT_OUT
+#  define REDIRECT_OUT              ">"
+# endif
 
 /* Pipelining symbol. */
-#  ifndef PIPELINE
-#    define PIPELINE                  "|"
-#  endif
+# ifndef PIPELINE
+#  define PIPELINE                  "|"
+# endif
 
 /* Name of default Txt2gcal program if $TXT2GCALPROG is not set. */
-#  ifndef TXT2GCAL_PRGR
-#    define  TXT2GCAL_PRGR            "txt2gcal"
-#  endif
+# ifndef TXT2GCAL_PRGR
+#  define TXT2GCAL_PRGR            "txt2gcal"
+# endif
 
 /* Name of environment variable for accessing the Txt2gcal program. */
-#  ifndef ENV_VAR_TXT2GCALPROG
-#    define  ENV_VAR_TXT2GCALPROG     "TXT2GCALPROG"
-#  endif
+# ifndef ENV_VAR_TXT2GCALPROG
+#  define ENV_VAR_TXT2GCALPROG     "TXT2GCALPROG"
+# endif
 
 
 
 /*
 *  Kilometers to statute miles.
 */
-#  define  KM2SM(x)  ((x) * 0.621371192237)
+# define KM2SM(x)  ((x) * 0.621371192237)
 /*
 *  Astronomical units to kilometers.
 */
-#  define  AU2KM(x)  ((x) * ASTRONOMICAL_UNIT)
+# define AU2KM(x)  ((x) * ASTRONOMICAL_UNIT)
 /*
 *  Earth-equator radii to kilometers.
 */
-#  define  ER2KM(x)  ((x) * EQUATOR_EARTH_RADIUS * 0.001)
+# define ER2KM(x)  ((x) * EQUATOR_EARTH_RADIUS * 0.001)
 
 
 
 /*
 *  The suffixes used by the Moon phase special texts.
 */
-#  define  MOON_MIN    "!"
-#  define  MOON_MAX    "@"
-#  define  MOON_WANES  "-"
-#  define  MOON_WAXES  "+"
+# define MOON_MIN    "!"
+# define MOON_MAX    "@"
+# define MOON_WANES  "-"
+# define MOON_WAXES  "+"
 
 /*
 *  The minimum, maximum and default number of lines of the Moon phase text graphics image.
 */
-#  define  MOONIMAGE_MIN  6
-#  define  MOONIMAGE_MAX  30
-#  define  MOONIMAGE_DEF  12
+# define MOONIMAGE_MIN  6
+# define MOONIMAGE_MAX  30
+# define MOONIMAGE_DEF  12
 
 /*
 *  The widgets of the Moon phase text graphics image.
 */
-#  define  MOONIMAGE_BRIGHT  MOON_MAX
-#  define  MOONIMAGE_LEDGE   "("
-#  define  MOONIMAGE_REDGE   ")"
+# define MOONIMAGE_BRIGHT  MOON_MAX
+# define MOONIMAGE_LEDGE   "("
+# define MOONIMAGE_REDGE   ")"
 
 
 
@@ -368,21 +368,21 @@
 *  Some constant values necessary for using the %distance*
 *  or %sun* and %moon* special texts.
 */
-#  define  COOR_LON_DEG_MAX  ((int)DEGS_PER_12_HOURS)
-#  define  COOR_LON_MIN_MAX  MINS_PER_HOUR
-#  define  COOR_LON_SEC_MAX  SECS_PER_MIN
-#  define  COOR_LAT_DEG_MAX  ((int)DEGS_PER_06_HOURS)
-#  define  COOR_LAT_MIN_MAX  MINS_PER_HOUR
-#  define  COOR_LAT_SEC_MAX  SECS_PER_MIN
+# define COOR_LON_DEG_MAX  ((int)DEGS_PER_12_HOURS)
+# define COOR_LON_MIN_MAX  MINS_PER_HOUR
+# define COOR_LON_SEC_MAX  SECS_PER_MIN
+# define COOR_LAT_DEG_MAX  ((int)DEGS_PER_06_HOURS)
+# define COOR_LAT_MIN_MAX  MINS_PER_HOUR
+# define COOR_LAT_SEC_MAX  SECS_PER_MIN
 
 
 
 /*
 *  The astronomical objects.
 */
-#  define  AOBJ_NONE  SPECIAL_VALUE
-#  define  AOBJ_SUN   0
-#  define  AOBJ_MOON  1
+# define AOBJ_NONE  SPECIAL_VALUE
+# define AOBJ_SUN   0
+# define AOBJ_MOON  1
 
 
 
@@ -390,442 +390,442 @@
 *  The codes that define the output and error format types used for
 *  formatting the data of the %sun*, %moon* and %distance special texts.
 */
-#  define  FMT_NIL   SYM_NIL
+# define FMT_NIL   SYM_NIL
 /* Number with[out] fraction. */
-#  define  FMT_NNN   1
+# define FMT_NNN   1
 /* Number with fraction. */
-#  define  FMT_NND   2
+# define FMT_NND   2
 /* Number with sign and fraction. */
-#  define  FMT_NSD   3
+# define FMT_NSD   3
 /* Hour and minute [and second+fraction]. */
-#  define  FMT_HHH   4
+# define FMT_HHH   4
 /* Value in hours and minutes [and seconds+fraction]. */
-#  define  FMT_TTT   5
+# define FMT_TTT   5
 /* Value in hours and minutes [and seconds+fraction] with sign. */
-#  define  FMT_TTS   6
+# define FMT_TTS   6
 /* Value in hours and minutes with sign. */
-#  define  FMT_TXS   7
+# define FMT_TXS   7
 /* Degree and minute [and second+fraction]. */
-#  define  FMT_DDD   8
+# define FMT_DDD   8
 /* Degree and minute [and second+fraction] with sign. */
-#  define  FMT_DDS   9
-#  define  ERR_NIL   FMT_NIL
-#  define  ERR_NNN   1
-#  define  ERR_HHH   2
-#  define  ERR_TTT   3
-#  define  ERR_DDD   4
+# define FMT_DDS   9
+# define ERR_NIL   FMT_NIL
+# define ERR_NNN   1
+# define ERR_HHH   2
+# define ERR_TTT   3
+# define ERR_DDD   4
 
 
 
 /*
 *  The suffixes used by the biorhythm special texts.
 */
-#  define  BIO_WANES     MOON_WANES
-#  define  BIO_WAXES     MOON_WAXES
-#  define  BIO_STABLE    MOON_MAX
-#  define  BIO_CRITICAL  MOON_MIN
-#  define  BIO_OVERLAPS  BIO_STABLE
+# define BIO_WANES     MOON_WANES
+# define BIO_WAXES     MOON_WAXES
+# define BIO_STABLE    MOON_MAX
+# define BIO_CRITICAL  MOON_MIN
+# define BIO_OVERLAPS  BIO_STABLE
 
 /*
 *  The minimum, maximum and default single length of the biorhythm text graphics bar.
 */
 /* Minimum value that is divided by 2 without a remainder. */
-#  define  BIO_AXIS_MIN  1
+# define BIO_AXIS_MIN  1
 
 /* Maximum value that is divided by 2 without a remainder. */
-#  define  BIO_AXIS_MAX  100
+# define BIO_AXIS_MAX  100
 
 /* Default value that divides BIO_AXIS_MAX without a remainder. */
-#  define  BIO_AXIS_DEF  20
+# define BIO_AXIS_DEF  20
 
 /*
 *  Some scaling symbols/macros needed for creating the biorhythm text graphics bar.
 */
-#  define  BIO_AXIS_EXTRA     2
-#  define  BIO_AXIS_SCALE(x)  (100/(x))
-#  define  BIO_AXIS_ZERO(x)   (BIO_AXIS_EXTRA+(x))
-#  define  BIO_AXIS_TOTAL(x)  (((x)*2)+(BIO_AXIS_EXTRA*2)+2)
+# define BIO_AXIS_EXTRA     2
+# define BIO_AXIS_SCALE(x)  (100/(x))
+# define BIO_AXIS_ZERO(x)   (BIO_AXIS_EXTRA+(x))
+# define BIO_AXIS_TOTAL(x)  (((x)*2)+(BIO_AXIS_EXTRA*2)+2)
 
 
 
 /* Default timestep value in minutes used within a cycle. */
-#  define  DEFAULT_CYCLE_STEP  1
+# define DEFAULT_CYCLE_STEP  1
 
 
 
 /*
 *  Prefix character of a "special text" given in a line of a Gcal resource file.
 */
-#  define  RC_SPECIAL_TEXT_CHAR   DFORMAT_CHAR
+# define RC_SPECIAL_TEXT_CHAR   DFORMAT_CHAR
 
 /*
 *  %?[TEXT_TILL_EOL]  ---  Runs commands.
 */
 /* %shell escape special text. */
-#  define  RC_SHELL_ESC_CHAR      '!'
+# define RC_SHELL_ESC_CHAR      '!'
 
 /*
 *  %?TEXT  ---  Inserts contents of environment variable.
 */
 /* %shell environment variable special text. */
-#  define  RC_ENV_VAR_CHAR        '-'
+# define RC_ENV_VAR_CHAR        '-'
 
 /*
 *  %?  ---  Excludes special dates.
 */
 /* Exclude if date is in eternal holiday list (legal days only). */
-#  define  RC_EX_LHDY_CHAR        'V'
+# define RC_EX_LHDY_CHAR        'V'
 
 /* Exclude if date is not in eternal holiday list (legal days only). */
-#  define  RC_EX_NLHDY_CHAR       'v'
+# define RC_EX_NLHDY_CHAR       'v'
 
 /* Exclude if date is in eternal holiday list (all days). */
-#  define  RC_EX_AHDY_CHAR        'X'
+# define RC_EX_AHDY_CHAR        'X'
 
 /* Exclude if date is not in eternal holiday list (all days). */
-#  define  RC_EX_NAHDY_CHAR       'x'
+# define RC_EX_NAHDY_CHAR       'x'
 
 /* Exclude if date is a Monday. */
-#  define  RC_EX_MON_CHAR         'A'
+# define RC_EX_MON_CHAR         'A'
 
 /* Exclude if date is no Monday. */
-#  define  RC_EX_NMON_CHAR        'a'
+# define RC_EX_NMON_CHAR        'a'
 
 /* Exclude if date is a Tuesday. */
-#  define  RC_EX_TUE_CHAR         'C'
+# define RC_EX_TUE_CHAR         'C'
 
 /* Exclude if date is no Tuesday. */
-#  define  RC_EX_NTUE_CHAR        'c'
+# define RC_EX_NTUE_CHAR        'c'
 
 /* Exclude if date is a Wednesday. */
-#  define  RC_EX_WED_CHAR         'F'
+# define RC_EX_WED_CHAR         'F'
 
 /* Exclude if date is no Wednesday. */
-#  define  RC_EX_NWED_CHAR        'f'
+# define RC_EX_NWED_CHAR        'f'
 
 /* Exclude if date is a Thursday. */
-#  define  RC_EX_THU_CHAR         'G'
+# define RC_EX_THU_CHAR         'G'
 
 /* Exclude if date is no Thursday. */
-#  define  RC_EX_NTHU_CHAR        'g'
+# define RC_EX_NTHU_CHAR        'g'
 
 /* Exclude if date is a Friday. */
-#  define  RC_EX_FRI_CHAR         'H'
+# define RC_EX_FRI_CHAR         'H'
 
 /* Exclude if date is no Friday. */
-#  define  RC_EX_NFRI_CHAR        'h'
+# define RC_EX_NFRI_CHAR        'h'
 
 /* Exclude if date is a Saturday. */
-#  define  RC_EX_SAT_CHAR         'L'
+# define RC_EX_SAT_CHAR         'L'
 
 /* Exclude if date is no Saturday. */
-#  define  RC_EX_NSAT_CHAR        'l'
+# define RC_EX_NSAT_CHAR        'l'
 
 /* Exclude if date is a Sunday. */
-#  define  RC_EX_SUN_CHAR         'P'
+# define RC_EX_SUN_CHAR         'P'
 
 /* Exclude if date is no Sunday. */
-#  define  RC_EX_NSUN_CHAR        'p'
+# define RC_EX_NSUN_CHAR        'p'
 
 /* Exclude if date is a Monday...Thursday. */
-#  define  RC_EX_MON_2_THU_CHAR   'Q'
+# define RC_EX_MON_2_THU_CHAR   'Q'
 
 /* Exclude if date is no Monday...Thursday. */
-#  define  RC_EX_NMON_2_THU_CHAR  'q'
+# define RC_EX_NMON_2_THU_CHAR  'q'
 
 /* Exclude if date is a Monday...Friday. */
-#  define  RC_EX_MON_2_FRI_CHAR   'R'
+# define RC_EX_MON_2_FRI_CHAR   'R'
 
 /* Exclude if date is no Monday...Friday. */
-#  define  RC_EX_NMON_2_FRI_CHAR  'r'
+# define RC_EX_NMON_2_FRI_CHAR  'r'
 
 /*
 *  %?[STARTING_DATE][#[ENDING_DATE]]  ---  Excludes special dates.
 */
 /* %inclusive date special text. */
-#  define  RC_IDATE_CHAR          'i'
+# define RC_IDATE_CHAR          'i'
 
 /* %exclusive date special text. */
-#  define  RC_EDATE_CHAR          'e'
+# define RC_EDATE_CHAR          'e'
 
 /*
 *  %?[DATE]  --- Creates special texts.
 */
 /* %weekday name special text. */
-#  define  RC_WDNAME_CHAR         WDNAME_CHAR
+# define RC_WDNAME_CHAR         WDNAME_CHAR
 
 /* %weekday number (Mon=1...Sun=7) special text. */
-#  define  RC_WDNR_M1_2_S7_CHAR   'W'
+# define RC_WDNR_M1_2_S7_CHAR   'W'
 
 /* %weekday number (Mon=0...Sun=6) special text. */
-#  define  RC_WDNR_M0_2_S6_CHAR   'E'
+# define RC_WDNR_M0_2_S6_CHAR   'E'
 
 /* %weekday number (Sun=1...Sat=7) special text. */
-#  define  RC_WDNR_S1_2_S7_CHAR   'I'
+# define RC_WDNR_S1_2_S7_CHAR   'I'
 
 /* %weekday number (Sun=0...Sat=6) special text. */
-#  define  RC_WDNR_S0_2_S6_CHAR   'J'
+# define RC_WDNR_S0_2_S6_CHAR   'J'
 
 /* %weekday number (Monday=1...Sunday=7) special text. */
-#  define  RC_WDNR_X1_2_X7_CHAR   'S'
+# define RC_WDNR_X1_2_X7_CHAR   'S'
 
 /* %weekday number (Monday=0...Sunday=6) special text. */
-#  define  RC_WDNR_X0_2_X6_CHAR   'T'
+# define RC_WDNR_X0_2_X6_CHAR   'T'
 
 /* %day of year number special text. */
-#  define  RC_DOYNR_CHAR          'N'
+# define RC_DOYNR_CHAR          'N'
 
 /* %day number special text. */
-#  define  RC_DAYNR_CHAR          DAYNR_CHAR
+# define RC_DAYNR_CHAR          DAYNR_CHAR
 
 /* %month name special text. */
-#  define  RC_MONTHNAME_CHAR      MONTHNAME_CHAR
+# define RC_MONTHNAME_CHAR      MONTHNAME_CHAR
 
 /* %month number special text. */
-#  define  RC_MONTHNR_CHAR        MONTHNR_CHAR
+# define RC_MONTHNR_CHAR        MONTHNR_CHAR
 
 /* %year number special text. */
-#  define  RC_YEARNR_CHAR         YEARNR_CHAR
+# define RC_YEARNR_CHAR         YEARNR_CHAR
 
 /* %week number special text. */
-#  define  RC_WEEKNR_CHAR         'k'
+# define RC_WEEKNR_CHAR         'k'
 
 /* %birth age number special text. */
-#  define  RC_BYEAR_CHAR          'B'
+# define RC_BYEAR_CHAR          'B'
 
 /* %moon phase special text. */
-#  define  RC_MOON_CHAR           'O'
+# define RC_MOON_CHAR           'O'
 
 /* %moon phase text graphics image. */
-#  define  RC_MOON_IMAGE_CHAR     'Z'
+# define RC_MOON_IMAGE_CHAR     'Z'
 
 /* %biorhythm special text. */
-#  define  RC_BIO_CHAR            ','
+# define RC_BIO_CHAR            ','
 
 /* %biorhythm text graphics bar. */
-#  define  RC_BIO_BAR_CHAR        ';'
+# define RC_BIO_BAR_CHAR        ';'
 
 /*
 *  %?[OTHER_MODIFIER]  ---  Creates special texts.
 */
 /* %textual date special text. */
-#  define  RC_TDATE_CHAR          'n'
+# define RC_TDATE_CHAR          'n'
 
 /* %julian days since 1.5-Jan-4713 BCE special text. */
-#  define  RC_JDAYS_CHAR          'j'
+# define RC_JDAYS_CHAR          'j'
 
 /* %time special text. */
-#  define  RC_TIME_CHAR           't'
+# define RC_TIME_CHAR           't'
 
 /* %time total minutes special text. */
-#  define  RC_TIME_TMI_CHAR       '\''
+# define RC_TIME_TMI_CHAR       '\''
 
 /* %time hour special text. */
-#  define  RC_TIME_HR_CHAR        '_'
+# define RC_TIME_HR_CHAR        '_'
 
 /* %time minute special text. */
-#  define  RC_TIME_MI_CHAR        '?'
+# define RC_TIME_MI_CHAR        '?'
 
 /* %time `am|pm' suffix special text. */
-#  define  RC_TIME_AMPM_CHAR      '{'
+# define RC_TIME_AMPM_CHAR      '{'
 
 /* %gmtime special text. */
-#  define  RC_GMTIME_CHAR         '@'
+# define RC_GMTIME_CHAR         '@'
 
 /* %gmtime total minutes special text. */
-#  define  RC_GMTIME_TMI_CHAR     '`'
+# define RC_GMTIME_TMI_CHAR     '`'
 
 /* %gmtime hour special text. */
-#  define  RC_GMTIME_HR_CHAR      '.'
+# define RC_GMTIME_HR_CHAR      '.'
 
 /* %gmtime minute special text. */
-#  define  RC_GMTIME_MI_CHAR      '/'
+# define RC_GMTIME_MI_CHAR      '/'
 
 /* %gmtime `am|pm' suffix special text. */
-#  define  RC_GMTIME_AMPM_CHAR    '}'
+# define RC_GMTIME_AMPM_CHAR    '}'
 
 /* %timezone offset based on local time zone special text. */
-#  define  RC_LT_ZONE_OFFS_CHAR   '='
+# define RC_LT_ZONE_OFFS_CHAR   '='
 
 /* %timezone offset based on UTC/GMT zone special text. */
-#  define  RC_UT_ZONE_OFFS_CHAR   '"'
+# define RC_UT_ZONE_OFFS_CHAR   '"'
 
 /* %distance between two geographical point locations special text */
-#  define  RC_DISTANCE_CHAR       'b'
+# define RC_DISTANCE_CHAR       'b'
 
 /* %sunrise special text. */
-#  define  RC_SUN_RISE_CHAR       'o'
+# define RC_SUN_RISE_CHAR       'o'
 
 /* %sunset special text. */
-#  define  RC_SUN_SET_CHAR        's'
+# define RC_SUN_SET_CHAR        's'
 
 /* %day length special text. */
-#  define  RC_SUN_DAY_CHAR        'u'
+# define RC_SUN_DAY_CHAR        'u'
 
 /* %night length special text. */
-#  define  RC_SUN_NIGHT_CHAR      'z'
+# define RC_SUN_NIGHT_CHAR      'z'
 
 /* %moonrise special text. */
-#  define  RC_MOON_RISE_CHAR      '('
+# define RC_MOON_RISE_CHAR      '('
 
 /* %moonset special text. */
-#  define  RC_MOON_SET_CHAR       ')'
+# define RC_MOON_SET_CHAR       ')'
 
 /* %moons-day length special text. */
-#  define  RC_MOON_DAY_CHAR       '['
+# define RC_MOON_DAY_CHAR       '['
 
 /* %moons-night length special text. */
-#  define  RC_MOON_NIGHT_CHAR     ']'
+# define RC_MOON_NIGHT_CHAR     ']'
 
 /*
 *  %?  ---  Creates difference values.
 */
 /* %day difference special text. */
-#  define  RC_DAY_DIFF_CHAR       'd'
+# define RC_DAY_DIFF_CHAR       'd'
 
 /* %week difference special text. */
-#  define  RC_WEEK_DIFF_CHAR      'w'
+# define RC_WEEK_DIFF_CHAR      'w'
 
 /* %month difference special text. */
-#  define  RC_MONTH_DIFF_CHAR     'm'
+# define RC_MONTH_DIFF_CHAR     'm'
 
 /* %year | %year[DATE] difference special text. */
-#  define  RC_YEAR_DIFF_CHAR      'y'
+# define RC_YEAR_DIFF_CHAR      'y'
 
 /*
 *  %?  ---  Emits highlighting sequences/marking characters.
 */
 /* %highlighting sequence 1 enable special text. */
-#  define  RC_HLS1S_CHAR          HLS1S_CHAR
+# define RC_HLS1S_CHAR          HLS1S_CHAR
 
 /* %highlighting sequence 1 disable special text. */
-#  define  RC_HLS1E_CHAR          HLS1E_CHAR
+# define RC_HLS1E_CHAR          HLS1E_CHAR
 
 /* %highlighting sequence 2 enable special text. */
-#  define  RC_HLS2S_CHAR          '3'
+# define RC_HLS2S_CHAR          '3'
 
 /* %highlighting sequence 2 disable special text. */
-#  define  RC_HLS2E_CHAR          '4'
+# define RC_HLS2E_CHAR          '4'
 
 /* %highlighting sequence 1 enable special text if fixed date is on today's date. */
-#  define  RC_HLS3S_CHAR          '5'
+# define RC_HLS3S_CHAR          '5'
 
 /* %highlighting sequence 1 disable special text if fixed date is on today's date. */
-#  define  RC_HLS3E_CHAR          '6'
+# define RC_HLS3E_CHAR          '6'
 
 /* %highlighting sequence 2 enable special text if fixed date is on a legal holiday date. */
-#  define  RC_HLS4S_CHAR          '7'
+# define RC_HLS4S_CHAR          '7'
 
 /* %highlighting sequence 2 disable special text if fixed date is on a legal holiday date. */
-#  define  RC_HLS4E_CHAR          '8'
+# define RC_HLS4E_CHAR          '8'
 
 /* %highlighting sequence 1|2 enable special text if fixed date is on today's or legal holiday date. */
-#  define  RC_HLS5S_CHAR          '9'
+# define RC_HLS5S_CHAR          '9'
 
 /* %highlighting sequence 1|2 disable special text if fixed date is on today's or legal holiday date. */
-#  define  RC_HLS5E_CHAR          '0'
+# define RC_HLS5E_CHAR          '0'
 
 
 
 /*
 *  Common preprocessor macros for fixed dates/resource files.
 */
-#  ifdef IDX
-#    undef  IDX
-#  endif
-#  define  IDX(gc_c)      (tolower((gc_c)) - 'a')
-#  ifdef CHR2DIG
-#    undef  CHR2DIG
-#  endif
-#  define  CHR2DIG(gc_c)  ((gc_c) - '0')
-#  ifdef DIG2CHR
-#    undef  DIG2CHR
-#  endif
-#  define  DIG2CHR(gc_x)  ((gc_x) + '0')
+# ifdef IDX
+#  undef  IDX
+# endif
+# define IDX(gc_c)      (tolower((gc_c)) - 'a')
+# ifdef CHR2DIG
+#  undef  CHR2DIG
+# endif
+# define CHR2DIG(gc_c)  ((gc_c) - '0')
+# ifdef DIG2CHR
+#  undef  DIG2CHR
+# endif
+# define DIG2CHR(gc_x)  ((gc_x) + '0')
 
 
 
-#  ifdef CUT_LONGNAMES
+# ifdef CUT_LONGNAMES
 /*
 *  Cut resp., replace some long variable or function names to 6 significant
 *    places so ANY linker should be able to bind an executable file.
 */
-#    define  bio_emo_ptext                       V_bet
-#    define  bio_emo_phase                       V_bep
-#    define  bio_emo_waxes                       V_bew
-#    define  bio_int_ptext                       V_bit
-#    define  bio_int_phase                       V_bip
-#    define  bio_int_waxes                       V_biw
-#    define  bio_phy_ptext                       V_bpt
-#    define  bio_phy_phase                       V_bpp
-#    define  bio_phy_waxes                       V_bpw
-#    define  bio_positive_day                    V_bpd
-#    define  exclusive_date_map                  V_edm
-#    define  exclusive_weekday_map               V_ewm
-#    define  fiscal_month                        V_fm
-#    define  fiscal_year                         V_fy
-#    define  got_lat_min                         V_gmi
-#    define  got_lat_max                         V_gma
-#    define  inclusive_date_map                  V_idm
-#    define  inclusive_weekday_map               V_iwm
-#    define  insert_line_into_table              F_ilt
-#    define  insert_response_file                F_irf
-#    define  num_of_range_chars                  V_nrc
-#    define  num_of_repeat_chars                 V_noc
-#    define  num_of_appears_chars                V_nfc
-#    define  precomp_date                        F_pd
-#    define  precomp_nth_wd                      F_pwd
-#    define  print_line                          V_pl
-#    define  ptr_info_exclusive_day              V_ped
-#    define  print_twice                         V_ptw
-#    define  time_sep                            V_ts
-#    define  time_sep_found                      V_tsf
-#    define  rc_bio_axis_len                     V_rba
-#    define  rc_bio_emo_lit                      V_rbe
-#    define  rc_bio_int_lit                      V_rbi
-#    define  rc_bio_phy_lit                      V_rbp
-#    define  rc_elems_table                      V_ret
-#    define  rc_elems_max                        V_rem
-#    define  rc_elems                            V_rei
-#    define  rc_enable_fn_flag                   V_rff
-#    define  rc_enable_hda_flag                  V_rha
-#    define  rc_enable_hdl_flag                  V_rhl
-#    define  rc_export_ldvar_flag                V_red
-#    define  rc_export_ltvar_flag                V_ret
-#    define  rc_feb_29_to_feb_28                 V_f2f
-#    define  rc_feb_29_to_mar_01                 V_f2m
-#    define  rc_files_table                      V_rft
-#    define  rc_files_max                        V_rfm
-#    define  rc_files                            V_rfi
-#    define  rc_filename                         V_rfn
-#    define  rc_filter_day                       V_rfd
-#    define  rc_filter_period                    V_rfp
-#    define  rc_filter_text                      V_rfx
-#    define  rc_here_fn                          V_rhn
-#    define  rc_here_fp                          V_rhp
-#    define  rc_period                           V_rp
-#    define  rc_period_argv                      V_rpa
-#    define  rc_period_flag                      V_rpf
-#    define  rc_period_is_longopt                V_rpi
-#    define  rc_period_list                      V_rpl
-#    define  rc_period_option                    V_rpo
-#    define  rc_suppr_date_part_flag             V_rsd
-#    define  rc_suppr_list_sep_flag              V_rsl
-#    define  rc_suppr_text_part_flag             V_rst
-#    define  rc_tvar                             V_rt
-#    define  rc_tvar_tfn                         V_rtf
-#    define  rc_tvar_tfp                         V_rtp
-#    define  rc_use                              F_ru
-#    define  rc_use_flag                         V_ruf
-#    define  rc_valid_day                        F_rvd
-#    define  rc_valid_period                     F_rvp
-#    define  rc_week_flag                        V_rwf
-#    define  rc_weekno_flag                      V_rwn
-#    define  rc_week_year_flag                   V_rwy
-#    define  weekday_of_date                     F_wod
-#    define  weekday_map                         V_wm
-#    define  weekday_name_group                  V_wng
-#  endif /* CUT_LONGNAMES */
+#  define bio_emo_ptext                       V_bet
+#  define bio_emo_phase                       V_bep
+#  define bio_emo_waxes                       V_bew
+#  define bio_int_ptext                       V_bit
+#  define bio_int_phase                       V_bip
+#  define bio_int_waxes                       V_biw
+#  define bio_phy_ptext                       V_bpt
+#  define bio_phy_phase                       V_bpp
+#  define bio_phy_waxes                       V_bpw
+#  define bio_positive_day                    V_bpd
+#  define exclusive_date_map                  V_edm
+#  define exclusive_weekday_map               V_ewm
+#  define fiscal_month                        V_fm
+#  define fiscal_year                         V_fy
+#  define got_lat_min                         V_gmi
+#  define got_lat_max                         V_gma
+#  define inclusive_date_map                  V_idm
+#  define inclusive_weekday_map               V_iwm
+#  define insert_line_into_table              F_ilt
+#  define insert_response_file                F_irf
+#  define num_of_range_chars                  V_nrc
+#  define num_of_repeat_chars                 V_noc
+#  define num_of_appears_chars                V_nfc
+#  define precomp_date                        F_pd
+#  define precomp_nth_wd                      F_pwd
+#  define print_line                          V_pl
+#  define ptr_info_exclusive_day              V_ped
+#  define print_twice                         V_ptw
+#  define time_sep                            V_ts
+#  define time_sep_found                      V_tsf
+#  define rc_bio_axis_len                     V_rba
+#  define rc_bio_emo_lit                      V_rbe
+#  define rc_bio_int_lit                      V_rbi
+#  define rc_bio_phy_lit                      V_rbp
+#  define rc_elems_table                      V_ret
+#  define rc_elems_max                        V_rem
+#  define rc_elems                            V_rei
+#  define rc_enable_fn_flag                   V_rff
+#  define rc_enable_hda_flag                  V_rha
+#  define rc_enable_hdl_flag                  V_rhl
+#  define rc_export_ldvar_flag                V_red
+#  define rc_export_ltvar_flag                V_ret
+#  define rc_feb_29_to_feb_28                 V_f2f
+#  define rc_feb_29_to_mar_01                 V_f2m
+#  define rc_files_table                      V_rft
+#  define rc_files_max                        V_rfm
+#  define rc_files                            V_rfi
+#  define rc_filename                         V_rfn
+#  define rc_filter_day                       V_rfd
+#  define rc_filter_period                    V_rfp
+#  define rc_filter_text                      V_rfx
+#  define rc_here_fn                          V_rhn
+#  define rc_here_fp                          V_rhp
+#  define rc_period                           V_rp
+#  define rc_period_argv                      V_rpa
+#  define rc_period_flag                      V_rpf
+#  define rc_period_is_longopt                V_rpi
+#  define rc_period_list                      V_rpl
+#  define rc_period_option                    V_rpo
+#  define rc_suppr_date_part_flag             V_rsd
+#  define rc_suppr_list_sep_flag              V_rsl
+#  define rc_suppr_text_part_flag             V_rst
+#  define rc_tvar                             V_rt
+#  define rc_tvar_tfn                         V_rtf
+#  define rc_tvar_tfp                         V_rtp
+#  define rc_use                              F_ru
+#  define rc_use_flag                         V_ruf
+#  define rc_valid_day                        F_rvd
+#  define rc_valid_period                     F_rvp
+#  define rc_week_flag                        V_rwf
+#  define rc_weekno_flag                      V_rwn
+#  define rc_week_year_flag                   V_rwy
+#  define weekday_of_date                     F_wod
+#  define weekday_map                         V_wm
+#  define weekday_name_group                  V_wng
+# endif /* CUT_LONGNAMES */
 
 
 
@@ -989,25 +989,25 @@ typedef
 /*
 *  The REGEX stuff.
 */
-#  if HAVE_GNU_RE_COMPILE_PATTERN
-#    if HAVE_SYS_TYPES_H
-#      include <sys/types.h>
-#    endif
-#    if HAVE_REGEX_H
-#      include <regex.h>
-#    endif
+# if HAVE_GNU_RE_COMPILE_PATTERN
+#  if HAVE_SYS_TYPES_H
+#   include <sys/types.h>
 #  endif
-#  if HAVE_POSIX_REGCOMP
-#    if HAVE_SYS_TYPES_H
-#      include <sys/types.h>
-#    endif
-#    if HAVE_REGEX_H
-#      include <regex.h>
-#    endif
+#  if HAVE_REGEX_H
+#   include <regex.h>
 #  endif
-#  if HAVE_V8_REGCOMP
-#    include "regexp.h"
+# endif
+# if HAVE_POSIX_REGCOMP
+#  if HAVE_SYS_TYPES_H
+#   include <sys/types.h>
 #  endif
+#  if HAVE_REGEX_H
+#   include <regex.h>
+#  endif
+# endif
+# if HAVE_V8_REGCOMP
+#  include "regexp.h"
+# endif
 
 
 
@@ -1336,23 +1336,23 @@ extern Bool  remove_hls_in_regex;
 /* Stores whether a %shell escape special text is run. */
 extern Bool  shell_escape_done;
 
-#  if HAVE_GNU_RE_COMPILE_PATTERN
+# if HAVE_GNU_RE_COMPILE_PATTERN
 extern struct re_pattern_buffer  regpattern;
-#  endif
+# endif
 
-#  if HAVE_POSIX_REGCOMP
+# if HAVE_POSIX_REGCOMP
 extern regex_t  regpattern;
-#  endif
+# endif
 
-#  if HAVE_RE_COMP
+# if HAVE_RE_COMP
 extern int  re_pattern;
-#  endif
+# endif
 
-#  if HAVE_REGCMP
+# if HAVE_REGCMP
 extern char  *cpattern;
-#  endif
+# endif
 
-#  if HAVE_V8_REGCOMP
+# if HAVE_V8_REGCOMP
 extern struct regexp  *regpattern;
-#  endif
+# endif
 #endif /* __RC_DEFS_H */

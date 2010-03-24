@@ -1,5 +1,5 @@
 #ifndef __TXT2GAL_H
-#  define __TXT2GAL_H
+# define __TXT2GAL_H
 /*
 *  txt2gcal.h:  Creates a verbatim Gcal resource file from a text file header file.
 *

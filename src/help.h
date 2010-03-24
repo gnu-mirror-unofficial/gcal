@@ -1,5 +1,5 @@
 #ifndef __HELP_H
-#  define __HELP_H
+# define __HELP_H
 /*
 *  help.h:  The help, version and license screens header file.
 *
@@ -51,7 +51,7 @@ typedef
    }
   Di_struct;
 
-#  if USE_RC
+# if USE_RC
 /*
 *  The exclusion date information record.
 */
@@ -65,7 +65,7 @@ typedef
      char  *ed_info;
    }
   Ed_struct;
-#  endif /* USE_RC */
+# endif /* USE_RC */
 
 
 

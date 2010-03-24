@@ -1,5 +1,5 @@
 #ifndef __GCAL_H
-#  define __GCAL_H
+# define __GCAL_H
 /*
 *  gcal.h:  Get and process the program options
 *           and lauch the extended calendar program header file.

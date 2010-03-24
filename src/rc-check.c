@@ -33,25 +33,25 @@
 
 
 #if USE_RC
-#  ifdef RCSID
+# ifdef RCSID
 static char rcsid[]="$Id: rc-check.c 3.01 2000/06/14 03:00:01 tom Exp $";
-#  endif
+# endif
 
 
 
 /*
 *  Include header files.
 */
-#  if HAVE_CTYPE_H
-#    include <ctype.h>
-#  endif
-#  include "common.h"
-#  include "rc-defs.h"
-#  include "globals.h"
-#  include "rc-insert.h"
-#  include "rc-utils.h"
-#  include "utils.h"
-#  include "rc-check.h"
+# if HAVE_CTYPE_H
+#  include <ctype.h>
+# endif
+# include "common.h"
+# include "rc-defs.h"
+# include "globals.h"
+# include "rc-insert.h"
+# include "rc-utils.h"
+# include "utils.h"
+# include "rc-check.h"
 
 
 

@@ -1,5 +1,5 @@
 #ifndef __DEFINES_H
-#  define __DEFINES_H
+# define __DEFINES_H
 /*
 *  defines.h:  Program name, release number and modification symbols.
 *
@@ -35,10 +35,10 @@
 *  Define the program name and version.
 */
 /* Actual program name. */
-#  define  PRGR_NAME   "gcal"
+# define PRGR_NAME   "gcal"
 
 /* Actual version number. */
-#  define  VERSION_NO  "3.01"
+# define VERSION_NO  "3.01"
 
 
 
@@ -85,13 +85,13 @@
 */
 
 
-#if 0
-#  define  USE_EASC   0
-#  define  USE_DE     0
-#  define  USE_HLS    1
-#  define  USE_PAGER  1
-#  define  USE_RC     1
-#endif /* 0 */
+# if 0
+#  define USE_EASC   0
+#  define USE_DE     0
+#  define USE_HLS    1
+#  define USE_PAGER  1
+#  define USE_RC     1
+# endif /* 0 */
 
 
 /*

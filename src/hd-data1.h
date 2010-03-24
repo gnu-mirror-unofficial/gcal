@@ -1,5 +1,5 @@
 #ifndef __HD_DATA1_H
-#  define __HD_DATA1_H
+# define __HD_DATA1_H
 /*
 *  hd-data1.h:  All top 20 countries data which is composed into the
 *               eternal holiday list header file.

@@ -1,5 +1,5 @@
 #ifndef __HD_DATA5_H
-#  define __HD_DATA5_H
+# define __HD_DATA5_H
 /*
 *  hd-data4.h:  All other T-Z countries data which is composed into the
 *               eternal holiday list header file.

@@ -34,58 +34,58 @@ static char rcsid[]="$Id: tty.c 3.01 2000/06/29 03:00:01 tom Exp $";
 */
 #include "tailor.h"
 #if HAVE_CTYPE_H
-#  include <ctype.h>
+# include <ctype.h>
 #endif
 #if HAVE_SYS_TYPES_H
-#  include <sys/types.h>
+# include <sys/types.h>
 #endif
 #if USE_PAGER || USE_HLS
-#  if defined(UNIX) && !defined(DJG)
-#    if HAVE_TERMIOS_H && HAVE_TERMIOS_FUNCS
-#      include <termios.h>
-#      if HAVE_SYS_IOCTL_H && !defined(TIOCGWINSZ)
-#        include <sys/ioctl.h>
-#      endif
-#    else /* !HAVE_TERMIOS_H || !HAVE_TERMIOS_FUNCS */
-#      if HAVE_TERMIO_H
-#        include <termio.h>
-#      else /* !HAVE_TERMIO_H */
-#        include <sgtty.h>
-#        if HAVE_SYS_IOCTL_H && (defined(WIOCGETD) || defined(TIOCGWINSZ) || defined(TCGETA) || defined(TIOCGETP))
-#          include <sys/ioctl.h>
-#        endif
-#      endif /* !HAVE_TERMIO_H */
-#    endif /* !HAVE_TERMIOS_H || !HAVE_TERMIOS_FUNCS */
+# if defined(UNIX) && !defined(DJG)
+#  if HAVE_TERMIOS_H && HAVE_TERMIOS_FUNCS
+#   include <termios.h>
+#   if HAVE_SYS_IOCTL_H && !defined(TIOCGWINSZ)
+#    include <sys/ioctl.h>
+#   endif
+#  else /* !HAVE_TERMIOS_H || !HAVE_TERMIOS_FUNCS */
+#   if HAVE_TERMIO_H
+#    include <termio.h>
+#   else /* !HAVE_TERMIO_H */
+#    include <sgtty.h>
+#    if HAVE_SYS_IOCTL_H && (defined(WIOCGETD) || defined(TIOCGWINSZ) || defined(TCGETA) || defined(TIOCGETP))
+#     include <sys/ioctl.h>
+#    endif
+#   endif /* !HAVE_TERMIO_H */
+#  endif /* !HAVE_TERMIOS_H || !HAVE_TERMIOS_FUNCS */
 /*
 *  For the Unix PC (ATT 7300 & 3B1):  (taken from less-278 by Mark Nudelman)
 *  Since WIOCGETD is defined in sys/window.h, we can't use that to decide
 *  whether to include sys/window.h.  Use SIGPHONE from sys/signal.h instead.
 */
-#    ifndef TIOCGWINSZ
-#      include <sys/signal.h>
-#      ifdef SIGPHONE
-#        include <sys/window.h>
-#      endif
+#  ifndef TIOCGWINSZ
+#   include <sys/signal.h>
+#   ifdef SIGPHONE
+#    include <sys/window.h>
+#   endif
+#  endif
+#  if HAVE_SYS_STREAM_H
+#   include <sys/stream.h>
+#  endif
+#  if HAVE_SYS_PTEM_H
+#   include <sys/ptem.h>
+#  endif
+# endif /* UNIX && !DJG */
+# ifdef DJG
+#  include <pc.h>
+# else /* !DJG */
+#  if defined(UNIX) || (defined(OS2) && defined(__GNUC__))
+#   if HAVE_TERMCAP_H && HAVE_TTYLIBS
+#    if HAVE_TERMIOS_H && HAVE_TERMIOS_FUNCS && defined(OS2) && defined(__GNUC__)
+#     include <termios.h>
 #    endif
-#    if HAVE_SYS_STREAM_H
-#      include <sys/stream.h>
-#    endif
-#    if HAVE_SYS_PTEM_H
-#      include <sys/ptem.h>
-#    endif
-#  endif /* UNIX && !DJG */
-#  ifdef DJG
-#    include <pc.h>
-#  else /* !DJG */
-#    if defined(UNIX) || (defined(OS2) && defined(__GNUC__))
-#      if HAVE_TERMCAP_H && HAVE_TTYLIBS
-#        if HAVE_TERMIOS_H && HAVE_TERMIOS_FUNCS && defined(OS2) && defined(__GNUC__)
-#          include <termios.h>
-#        endif
-#        include <termcap.h>
-#      endif /* HAVE_TERMCAP_H && HAVE_TTYLIBS */
-#    endif /* UNIX || (OS2 && __GNUC__) */
-#  endif /* !DJG */
+#    include <termcap.h>
+#   endif /* HAVE_TERMCAP_H && HAVE_TTYLIBS */
+#  endif /* UNIX || (OS2 && __GNUC__) */
+# endif /* !DJG */
 #endif /* USE_PAGER || USE_HLS */
 #include "common.h"
 #include "globals.h"
@@ -106,28 +106,28 @@ static char *
 skip_leading_padding_info __P_((char *sequence_str));
 #endif
 #if USE_HLS || USE_PAGER
-#  ifdef GCAL_TCAP
+# ifdef GCAL_TCAP
 static Bool open_termcap __P_((void));
-#    if USE_HLS
+#  if USE_HLS
 static void get_ospeed __P_((void));
 static int
 outchar __P_((int ch));
 static Bool
 get_termcap_hls __P_((Bool *hls1_set,
                       Bool *hls2_set));
-#    endif /* USE_HLS */
-#    if USE_PAGER
+#  endif /* USE_HLS */
+#  if USE_PAGER
 static Bool
 get_termcap_scr_attrib __P_((int *rows,
                              int *cols));
-#    endif /* USE_PAGER */
-#  else /* !GCAL_TCAP */
-#    if defined(MSDOS) && USE_PAGER
+#  endif /* USE_PAGER */
+# else /* !GCAL_TCAP */
+#  if defined(MSDOS) && USE_PAGER
 static Uchar
 peek_byte __P_((Uint segment,
                 Uint offset));
-#    endif
-#  endif /* GCAL_TCAP */
+#  endif
+# endif /* GCAL_TCAP */
 #endif /* USE_HLS || USE_PAGER */
 static void
 get_hl_seq __P_((const char *sequence_str,
@@ -146,29 +146,29 @@ __END_DECLARATIONS
 *  static variables definitions.
 */
 #if USE_PAGER || USE_HLS
-#  ifdef GCAL_TCAP
+# ifdef GCAL_TCAP
 /* Module global Termcap buffer. */
 static char  tc_buf[TC_BUFLEN];
 
 /* Termcap access error occurred. */
 static Bool  tc_no_error=TRUE;
 
-#    if USE_HLS
+#  if USE_HLS
 /* Module global file which is used by the `tputs()' function. */
 static FILE  *fp_outchar=(FILE *)NULL;
 
 /* Stores whether padding is used or not. */
 static Bool  is_padding=FALSE;
-#    endif
-#  endif /* GCAL_TCAP */
+#  endif
+# endif /* GCAL_TCAP */
 
-#  if USE_PAGER
+# if USE_PAGER
 /* Terminal has automatic margins. */
 static Bool   tty_am=TRUE;
 
 /* Terminal ignores newline after wrap. */
 static Bool   tty_xn=FALSE;
-#  endif /* USE_PAGER */
+# endif /* USE_PAGER */
 #endif /* USE_PAGER || USE_HLS */
 
 
@@ -191,9 +191,9 @@ print_text (fp, text_line)
 {
 #if USE_PAGER || (defined(GCAL_TCAP) && USE_HLS)
    if (   is_tty
-#  if USE_PAGER && (!defined(GCAL_TCAP) || !USE_HLS)
+# if USE_PAGER && (!defined(GCAL_TCAP) || !USE_HLS)
        && pager_flag
-#  endif
+# endif
        && is_tty1
        && is_tty2)
     {
@@ -204,30 +204,30 @@ print_text (fp, text_line)
       register int    i=0;
       register int    nl;
       register int    j;
-#  if USE_PAGER
+# if USE_PAGER
       register int    k;
       register int    final_nl=0;
       static   int    lines_printed=0;
-#  endif
+# endif
       auto     char  *ptr_1hls=(char *)NULL;
       auto     char  *ptr_2hls=(char *)NULL;
       auto     Bool   hls_start;
-#  if USE_PAGER
+# if USE_PAGER
       auto     Bool   print_hls=(Bool)(is_tty&&highlight_flag&&!emu_hls);
-#  endif
+# endif
       auto     Bool   nl_found=FALSE;
       auto     Bool   buf_highlight_flag=highlight_flag;
 
 
-#  if defined(GCAL_TCAP) && USE_HLS
+# if defined(GCAL_TCAP) && USE_HLS
       fp_outchar = fp;
-#  endif
+# endif
       LOOP
        {
-#  if USE_PAGER
+# if USE_PAGER
          if (final_nl != SPECIAL_VALUE)
            final_nl = 0;
-#  endif
+# endif
          hls_chars=nl=j = 0;
          if (   highlight_flag
              && !emu_hls)
@@ -274,13 +274,13 @@ print_text (fp, text_line)
               --> Let's print the complete line as a whole!
          */
          if (   (   strchr(text_line+i, '\n') == (char *)NULL
-#  if USE_PAGER
+# if USE_PAGER
                  || !pager_flag
-#    ifdef GCAL_EPAGER
+#  ifdef GCAL_EPAGER
                  || (   pager_flag
                      && (ext_pager != (char *)NULL))
-#    endif
 #  endif
+# endif
                 )
              && (hls_pos == SPECIAL_VALUE))
           {
@@ -309,10 +309,10 @@ print_text (fp, text_line)
                   if (j)
                     nl++;
                   nl_found = TRUE;
-#  if USE_PAGER
+# if USE_PAGER
                   if (final_nl != SPECIAL_VALUE)
                     final_nl = 1;
-#  endif
+# endif
                   break;
                 }
                /*
@@ -328,11 +328,11 @@ print_text (fp, text_line)
                    {
                      if (hls_start)
                       {
-#  if defined(GCAL_TCAP) && USE_HLS
+# if defined(GCAL_TCAP) && USE_HLS
                         tputs((char *)ehls1s.seq, 1, outchar);
-#  else /* !GCAL_TCAP || !USE_HLS */
+# else /* !GCAL_TCAP || !USE_HLS */
                         fputs(ehls1s.seq, fp);
-#  endif /* !GCAL_TCAP || !USE_HLS */
+# endif /* !GCAL_TCAP || !USE_HLS */
                         hls_chars += ehls1s.len;
                         i += ehls1s.len;
                         if (tty_cols != SPECIAL_VALUE)
@@ -345,11 +345,11 @@ print_text (fp, text_line)
                       }
                      else
                       {
-#  if defined(GCAL_TCAP) && USE_HLS
+# if defined(GCAL_TCAP) && USE_HLS
                         tputs((char *)ehls1e.seq, 1, outchar);
-#  else /* !GCAL_TCAP || !USE_HLS */
+# else /* !GCAL_TCAP || !USE_HLS */
                         fputs(ehls1e.seq, fp);
-#  endif /* !GCAL_TCAP || !USE_HLS */
+# endif /* !GCAL_TCAP || !USE_HLS */
                         hls_chars += ehls1e.len;
                         i += ehls1e.len;
                         if (tty_cols != SPECIAL_VALUE)
@@ -370,11 +370,11 @@ print_text (fp, text_line)
                      {
                        if (hls_start)
                         {
-#  if defined(GCAL_TCAP) && USE_HLS
+# if defined(GCAL_TCAP) && USE_HLS
                           tputs((char *)ehls2s.seq, 1, outchar);
-#  else /* !GCAL_TCAP || !USE_HLS */
+# else /* !GCAL_TCAP || !USE_HLS */
                           fputs(ehls2s.seq, fp);
-#  endif /* !GCAL_TCAP || !USE_HLS */
+# endif /* !GCAL_TCAP || !USE_HLS */
                           hls_chars += ehls2s.len;
                           i += ehls2s.len;
                           if (tty_cols != SPECIAL_VALUE)
@@ -387,11 +387,11 @@ print_text (fp, text_line)
                         }
                        else
                         {
-#  if defined(GCAL_TCAP) && USE_HLS
+# if defined(GCAL_TCAP) && USE_HLS
                           tputs((char *)ehls2e.seq, 1, outchar);
-#  else /* !GCAL_TCAP || !USE_HLS */
+# else /* !GCAL_TCAP || !USE_HLS */
                           fputs(ehls2e.seq, fp);
-#  endif /* !GCAL_TCAP || !USE_HLS */
+# endif /* !GCAL_TCAP || !USE_HLS */
                           hls_chars += ehls2e.len;
                           i += ehls2e.len;
                           if (tty_cols != SPECIAL_VALUE)
@@ -418,11 +418,11 @@ print_text (fp, text_line)
              }
             S_NEWLINE(fp);
           }
-#  if USE_PAGER
+# if USE_PAGER
          if (   pager_flag
-#    ifdef GCAL_EPAGER
+#  ifdef GCAL_EPAGER
              && (ext_pager == (char *)NULL)
-#    endif
+#  endif
              )
           {
             /*
@@ -442,24 +442,24 @@ print_text (fp, text_line)
             if (lines_printed+j >= tty_rows-1)
              {
                if (print_hls)
-#    if defined(GCAL_TCAP) && USE_HLS
+#  if defined(GCAL_TCAP) && USE_HLS
                  tputs((char *)ehls1s.seq, 1, outchar);
-#    else /* !GCAL_TCAP || !USE_HLS */
+#  else /* !GCAL_TCAP || !USE_HLS */
                  fputs(ehls1s.seq, fp);
-#    endif /* !GCAL_TCAP || !USE_HLS */
-#    if USE_DE
+#  endif /* !GCAL_TCAP || !USE_HLS */
+#  if USE_DE
                fprintf(fp, "%s: Weiter mit <Return>, <%s> zum Beenden...",
                        prgr_name, PAGER_QUIT);
-#    else /* !USE_DE */
+#  else /* !USE_DE */
                fprintf(fp, _("%s: <Return> for more, <%s> to quit..."),
                        prgr_name, PAGER_QUIT);
-#    endif /* !USE_DE */
+#  endif /* !USE_DE */
                if (print_hls)
-#    if defined(GCAL_TCAP) && USE_HLS
+#  if defined(GCAL_TCAP) && USE_HLS
                  tputs((char *)ehls1e.seq, 1, outchar);
-#    else /* !GCAL_TCAP || !USE_HLS */
+#  else /* !GCAL_TCAP || !USE_HLS */
                  fputs(ehls1e.seq, fp);
-#    endif /* !GCAL_TCAP || !USE_HLS */
+#  endif /* !GCAL_TCAP || !USE_HLS */
                k = fgetc(stdin);
                /*
                   Quit the pager by the quit "key" command.
@@ -526,7 +526,7 @@ print_text (fp, text_line)
              }
           }
          else
-#  endif /* USE_PAGER */
+# endif /* USE_PAGER */
            if (!*(text_line + i))
              break;
        }
@@ -562,14 +562,14 @@ get_tty_hls (sequence_str)
 */
 {
 #if USE_HLS
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
    auto char  *ptr_env=getenv(ENV_VAR_GCALANSI);
-#  else /* AMIGA && !__GNUC__ */
+# else /* AMIGA && !__GNUC__ */
    auto char  *ptr_env=(char *)NULL;
-#  endif /* AMIGA && !__GNUC__ */
-#  ifdef GCAL_TCAP
+# endif /* AMIGA && !__GNUC__ */
+# ifdef GCAL_TCAP
    auto Bool   check_again=FALSE;
-#  endif
+# endif
 #endif
    auto Bool   hls1_set=FALSE;
    auto Bool   hls2_set=FALSE;
@@ -626,7 +626,7 @@ get_tty_hls (sequence_str)
           || !hls2_set)
        {
 #if USE_HLS
-#  ifdef GCAL_TCAP
+# ifdef GCAL_TCAP
          if (!emu_hls)
           {
             /*
@@ -676,7 +676,7 @@ get_tty_hls (sequence_str)
                }
           }
          else
-#  endif /* GCAL_TCAP */
+# endif /* GCAL_TCAP */
           {
             if (emu_hls)
              {
@@ -791,7 +791,7 @@ get_tty_scr_size (rows, cols)
      and stores the values found in `&rows' and `&cols'.
 */
 {
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
    register int    li=0;
    register int    co=0;
    auto     char  *ptr_env;
@@ -838,36 +838,36 @@ get_tty_scr_size (rows, cols)
        }
       else
        {
-#    if defined(OS2) && defined(__GNUC__)
+#  if defined(OS2) && defined(__GNUC__)
          auto int  info[2];
-#    endif /* OS2 && __GNUC__ */
-#    if defined(UNIX) && !defined(DJG)
-#      ifdef TIOCGWINSZ
+#  endif /* OS2 && __GNUC__ */
+#  if defined(UNIX) && !defined(DJG)
+#   ifdef TIOCGWINSZ
          auto struct winsize  wsz;
-#      else /* !TIOCGWINSZ */
-#        ifdef WIOCGETD
+#   else /* !TIOCGWINSZ */
+#    ifdef WIOCGETD
          auto struct uwdata   wsz;
-#        endif
-#      endif /* !TIOCGWINSZ */
-#    endif /* UNIX && !DJG */
+#    endif
+#   endif /* !TIOCGWINSZ */
+#  endif /* UNIX && !DJG */
 
 
-#    if !defined(DJG) && !defined(MSDOS) && !defined(OS2) && !defined(UNIX)
+#  if !defined(DJG) && !defined(MSDOS) && !defined(OS2) && !defined(UNIX)
          /*
             For these machines: Defaults only!
          */
          *rows = SCREEN_ROWS;
          *cols = SCREEN_COLS;
-#    else /* DJG || MSDOS || OS2 || UNIX */
-#      ifdef DJG
+#  else /* DJG || MSDOS || OS2 || UNIX */
+#   ifdef DJG
          /*
             Get the actual number of lines and columns of the video by
               using the DJGPP-GCC `ScreenRows()' and `ScreenCols()' functions.
          */
          *rows = ScreenRows();
          *cols = ScreenCols();
-#      else /* !DJG */
-#        if defined(MSDOS)
+#   else /* !DJG */
+#    if defined(MSDOS)
          /*
             Look directly into the PC-BIOS and get the actual number
               of lines and columns of the video.
@@ -882,8 +882,8 @@ get_tty_scr_size (rows, cols)
             Add higher part of 2-byte word.
          */
          *cols += peek_byte (0x40, 0x4a);
-#        else /* !MSDOS */
-#          if defined(OS2) && defined(__GNUC__)
+#    else /* !MSDOS */
+#     if defined(OS2) && defined(__GNUC__)
          /*
             Get the actual number of lines and columns of the
               video by using the EMX-GCC `_scrsize()' function.
@@ -891,13 +891,13 @@ get_tty_scr_size (rows, cols)
          _scrsize(info);
          *cols = s1[0];
          *rows = s1[1];
-#          else /* !OS2 || !__GNUC__ */
-#            if defined(UNIX)
+#     else /* !OS2 || !__GNUC__ */
+#      if defined(UNIX)
          /*
             Get the actual number of lines and columns of the
               video by using the `ioctl()' function.
          */
-#              ifdef TIOCGWINSZ
+#       ifdef TIOCGWINSZ
          if (   !ioctl(1, TIOCGWINSZ, &wsz)
              && (wsz.ws_row > 0))
           {
@@ -908,8 +908,8 @@ get_tty_scr_size (rows, cols)
             else
               *rows = SPECIAL_VALUE;
           }
-#              else /* !TIOCGWINSZ */
-#                ifdef WIOCGETD
+#       else /* !TIOCGWINSZ */
+#        ifdef WIOCGETD
          if (   !ioctl(1, WIOCGETD, &wsz)
              && (wsz.uw_height > 0))
           {
@@ -920,16 +920,16 @@ get_tty_scr_size (rows, cols)
             else
               *rows = SPECIAL_VALUE;
           }
-#                endif
-#              endif /* !TIOCGWINSZ */
-#            endif /* UNIX */
-#          endif /* !OS2 || !__GNUC__ */
-#        endif /* !MSDOS */
-#      endif /* !DJG */
+#        endif
+#       endif /* !TIOCGWINSZ */
+#      endif /* UNIX */
+#     endif /* !OS2 || !__GNUC__ */
+#    endif /* !MSDOS */
+#   endif /* !DJG */
          if (   (*rows == SPECIAL_VALUE)
              && (*cols == SPECIAL_VALUE))
           {
-#      if HAVE_TTYLIBS
+#   if HAVE_TTYLIBS
             /*
                If the previous actions have failed,
                  try to open the `[/etc/]termcap' file.
@@ -954,19 +954,19 @@ get_tty_scr_size (rows, cols)
                *rows = SCREEN_ROWS;
                *cols = SCREEN_COLS;
              }
-#      else /* !HAVE_TTYLIBS */
+#   else /* !HAVE_TTYLIBS */
             /*
                No `[/etc/]termcap' file available: Defaults only!
             */
             *rows = SCREEN_ROWS;
             *cols = SCREEN_COLS;
-#      endif /* !HAVE_TTYLIBS */
+#   endif /* !HAVE_TTYLIBS */
           }
-#    endif /* DJG || MSDOS || OS2 || UNIX */
+#  endif /* DJG || MSDOS || OS2 || UNIX */
        }
     }
-#  else /* AMIGA && !__GNUC__ */
-#    ifdef AMIGA
+# else /* AMIGA && !__GNUC__ */
+#  ifdef AMIGA
    /*
       Amiga gets the window size by asking the `console.device'.
    */
@@ -980,14 +980,14 @@ get_tty_scr_size (rows, cols)
      buf[len] = '\0';
      sscanf(&buf[5], "%d;%d", rows, cols);
    }
-#    else /* !AMIGA */
+#  else /* !AMIGA */
    /*
       All other systems: Defaults only.
    */
    *rows = SCREEN_ROWS;
    *cols = SCREEN_COLS;
-#    endif /* !AMIGA */
-#  endif /* AMIGA && !__GNUC__ */
+#  endif /* !AMIGA */
+# endif /* AMIGA && !__GNUC__ */
    if (*rows > 1)
      (*rows)--;
 }
@@ -1025,7 +1025,7 @@ skip_leading_padding_info (sequence_str)
 
 
 #if USE_PAGER || USE_HLS
-#  ifdef GCAL_TCAP
+# ifdef GCAL_TCAP
    static Bool
 open_termcap ()
 /*
@@ -1040,10 +1040,10 @@ open_termcap ()
      Returns FALSE if an error occurs, otherwise TRUE.
 */
 {
-#    if defined(OS2) && defined(__GNUC__)
+#  if defined(OS2) && defined(__GNUC__)
    auto   char  *ptr_env=getenv(ENV_VAR_TCAP);
    auto   char  *ptr_tc;
-#    endif /* OS2 && __GNUC__ */
+#  endif /* OS2 && __GNUC__ */
    auto   char  *term=getenv(ENV_VAR_TERM);
    static Bool   func_accessed=FALSE;
    auto   Bool   is_error=FALSE;
@@ -1052,7 +1052,7 @@ open_termcap ()
    if (!func_accessed)
     {
       func_accessed = TRUE;
-#    if defined(OS2) && defined(__GNUC__)
+#  if defined(OS2) && defined(__GNUC__)
       /*
          Under OS/2 with GNU-C, we use the default terminal type (ANSI)
            and access the Termcap library instead of printing an informational
@@ -1062,32 +1062,32 @@ open_termcap ()
       if (   term == (char *)NULL
           || !*term)
         term = DFLT_TERM;
-#    else /* !OS2 || !__GNUC__ */
+#  else /* !OS2 || !__GNUC__ */
       if (term == (char *)NULL)
        {
          if (warning_level >= 0)
-#      if USE_DE
+#   if USE_DE
            sprintf(s1, "Umgebungsvariable `%s' nicht vorhanden", ENV_VAR_TERM);
-#      else /* !USE_DE */
+#   else /* !USE_DE */
            sprintf(s1, _("environment variable `%s' not found"), ENV_VAR_TERM);
-#      endif /* !USE_DE */
+#   endif /* !USE_DE */
          is_error = TRUE;
        }
       else
         if (!*term)
          {
            if (warning_level >= 0)
-#      if USE_DE
+#   if USE_DE
              sprintf(s1, "Umgebungsvariable `%s' nicht gesetzt", ENV_VAR_TERM);
-#      else /* !USE_DE */
+#   else /* !USE_DE */
              sprintf(s1, _("environment variable `%s' not set"), ENV_VAR_TERM);
-#      endif /* !USE_DE */
+#   endif /* !USE_DE */
            is_error = TRUE;
          }
         else
-#    endif /* !OS2 || !__GNUC__ */
+#  endif /* !OS2 || !__GNUC__ */
          {
-#    if defined(OS2) && defined(__GNUC__)
+#  if defined(OS2) && defined(__GNUC__)
            /*
               Ensure the Termcap database is available,
                 i.e. store its access path in the environment explicitly
@@ -1115,27 +1115,27 @@ open_termcap ()
                }
               free(ptr_env);
             }
-#    endif /* OS2 && __GNUC__ */
+#  endif /* OS2 && __GNUC__ */
            switch (tgetent(tc_buf, term))
             {
               case -1:
                 if (warning_level >= 0)
-#    if USE_DE
+#  if USE_DE
                   strcpy(s1, "`termcap' Datei nicht vorgefunden");
-#    else /* !USE_DE */
+#  else /* !USE_DE */
                   strcpy(s1, _("`termcap' file not found"));
-#    endif /* !USE_DE */
+#  endif /* !USE_DE */
                 is_error = TRUE;
                 break;
               case 0:
                 if (warning_level >= 0)
-#    if USE_DE
+#  if USE_DE
                   sprintf(s1, "unbekannter Terminaltyp in `%s' eingetragen",
                           ENV_VAR_TERM);
-#    else /* !USE_DE */
+#  else /* !USE_DE */
                   sprintf(s1, _("unknown terminal type defined in `%s'"),
                           ENV_VAR_TERM);
-#    endif /* !USE_DE */
+#  endif /* !USE_DE */
                 is_error = TRUE;
                 break;
               default:
@@ -1144,11 +1144,11 @@ open_termcap ()
          }
       if (   is_error
           && (warning_level >= 0))
-#    if USE_DE
+#  if USE_DE
         fprintf(stderr, "\n%s: Warnung, %s.\n\n", prgr_name, s1);
-#    else /* !USE_DE */
+#  else /* !USE_DE */
         fprintf(stderr, _("\n%s: warning, %s.\n\n"), prgr_name, s1);
-#    endif /* !USE_DE */
+#  endif /* !USE_DE */
       return((Bool)!is_error);
     }
 
@@ -1157,7 +1157,7 @@ open_termcap ()
 
 
 
-#    if USE_HLS
+#  if USE_HLS
    static void
 get_ospeed ()
 /*
@@ -1165,7 +1165,7 @@ get_ospeed ()
      Termcap's global `ospeed' variable.
 */
 {
-#      if HAVE_TERMIOS_H && HAVE_TERMIOS_FUNCS
+#   if HAVE_TERMIOS_H && HAVE_TERMIOS_FUNCS
    auto struct termios  buf;
 
 
@@ -1176,105 +1176,105 @@ get_ospeed ()
    /*
       Get ospeed!
    */
-#        if HAVE_OSPEED
+#    if HAVE_OSPEED
    switch (cfgetospeed(&buf))
     {
-#          ifdef B0
+#     ifdef B0
       case B0:
         ospeed = 0;
         break;
-#          endif
-#          ifdef B50
+#     endif
+#     ifdef B50
       case B50:
         ospeed = 1;
         break;
-#          endif
-#          ifdef B75
+#     endif
+#     ifdef B75
       case B75:
         ospeed = 2;
         break;
-#          endif
-#          ifdef B110
+#     endif
+#     ifdef B110
       case B110:
         ospeed = 3;
         break;
-#          endif
-#          ifdef B134
+#     endif
+#     ifdef B134
       case B134:
         ospeed = 4;
         break;
-#          endif
-#          ifdef B150
+#     endif
+#     ifdef B150
       case B150:
         ospeed = 5;
         break;
-#          endif
-#          ifdef B200
+#     endif
+#     ifdef B200
       case B200:
         ospeed = 6;
         break;
-#          endif
-#          ifdef B300
+#     endif
+#     ifdef B300
       case B300:
         ospeed = 7;
         break;
-#          endif
-#          ifdef B600
+#     endif
+#     ifdef B600
       case B600:
         ospeed = 8;
         break;
-#          endif
-#          ifdef B1200
+#     endif
+#     ifdef B1200
       case B1200:
         ospeed = 9;
         break;
-#          endif
-#          ifdef B1800
+#     endif
+#     ifdef B1800
       case B1800:
         ospeed = 10;
         break;
-#          endif
-#          ifdef B2400
+#     endif
+#     ifdef B2400
       case B2400:
         ospeed = 11;
         break;
-#          endif
-#          ifdef B4800
+#     endif
+#     ifdef B4800
       case B4800:
         ospeed = 12;
         break;
-#          endif
-#          ifdef B9600
+#     endif
+#     ifdef B9600
       case B9600:
         ospeed = 13;
         break;
-#          endif
-#          ifdef EXTA
+#     endif
+#     ifdef EXTA
       case EXTA:
         ospeed = 14;
         break;
-#          endif
-#          ifdef EXTB
+#     endif
+#     ifdef EXTB
       case EXTB:
         ospeed = 15;
         break;
-#          endif
-#          ifdef B57600
+#     endif
+#     ifdef B57600
       case B57600:
         ospeed = 16;
         break;
-#          endif
-#          ifdef B115200
+#     endif
+#     ifdef B115200
       case B115200:
         ospeed = 17;
         break;
-#          endif
+#     endif
       default:
         ;   /* Void */
     }
-#        endif /* HAVE_OSPEED */
-#      else /* !HAVE_TERMIOS_H || !HAVE_TERMIOS_FUNC */
-#        if TCGETA
+#    endif /* HAVE_OSPEED */
+#   else /* !HAVE_TERMIOS_H || !HAVE_TERMIOS_FUNC */
+#    if TCGETA
    auto struct termio  buf;
 
 
@@ -1285,10 +1285,10 @@ get_ospeed ()
    /*
       Get ospeed!
    */
-#          if HAVE_OSPEED
+#     if HAVE_OSPEED
    ospeed = buf.c_cflag & CBAUD;
-#          endif
-#        else /* !TCGETA */
+#     endif
+#    else /* !TCGETA */
    auto struct sgttyb  buf;
 
 
@@ -1299,11 +1299,11 @@ get_ospeed ()
    /*
       Get ospeed!
    */
-#          if HAVE_OSPEED
+#     if HAVE_OSPEED
    ospeed = buf.sg_ospeed;
-#          endif
-#        endif /* !TCGETA */
-#      endif /* !HAVE_TERMIOS_H || !HAVE_TERMIOS_FUNC */
+#     endif
+#    endif /* !TCGETA */
+#   endif /* !HAVE_TERMIOS_H || !HAVE_TERMIOS_FUNC */
 }
 
 
@@ -1340,9 +1340,9 @@ get_termcap_hls (hls1_set, hls2_set)
                                    TC_MC_HL2S,
                                    TC_MC_HL2E
                                  };
-#      if HAVE_OSPEED
+#   if HAVE_OSPEED
    static   char  *padding;
-#      endif
+#   endif
    static   char  *area;
    auto     char  *ptr_char;
    auto     char  *ptr_area;
@@ -1357,7 +1357,7 @@ get_termcap_hls (hls1_set, hls2_set)
                                 __FILE__, ((long)__LINE__)-1L,
                                 "area", 0);
       ptr_area = area;
-#      if HAVE_OSPEED
+#   if HAVE_OSPEED
       /*
          Get the padding sequence.
       */
@@ -1367,7 +1367,7 @@ get_termcap_hls (hls1_set, hls2_set)
          Get the terminal speed.
       */
       get_ospeed ();
-#      endif
+#   endif
       for ( ; (i < j) && !is_error ; i++)
        {
          ptr_char = tgetstr(tc[i], &ptr_area);
@@ -1406,11 +1406,11 @@ get_termcap_hls (hls1_set, hls2_set)
 
    return((Bool)!is_error);
 }
-#    endif /* USE_HLS */
+#  endif /* USE_HLS */
 
 
 
-#    if USE_PAGER
+#  if USE_PAGER
    static Bool
 get_termcap_scr_attrib (rows, cols)
    int *rows;
@@ -1451,9 +1451,9 @@ get_termcap_scr_attrib (rows, cols)
 
    return(TRUE);
 }
-#    endif /* USE_PAGER */
-#  else /* !GCAL_TCAP */
-#    if defined(MSDOS) && USE_PAGER
+#  endif /* USE_PAGER */
+# else /* !GCAL_TCAP */
+#  if defined(MSDOS) && USE_PAGER
    static Uchar
 peek_byte (segment, offset)
    Uint segment;
@@ -1473,8 +1473,8 @@ peek_byte (segment, offset)
 
    return(*ptr_char);
 }
-#    endif /* MSDOS && USE_PAGER */
-#  endif /* !GCAL_TCAP */
+#  endif /* MSDOS && USE_PAGER */
+# endif /* !GCAL_TCAP */
 #endif /* USE_PAGER || USE_HLS */
 
 

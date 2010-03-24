@@ -1,5 +1,5 @@
 #ifndef __TCAL_H
-#  define __TCAL_H
+# define __TCAL_H
 /*
 *  tcal.h:  Start `gcal' with date set ONE day ahead header file.
 *
@@ -34,10 +34,10 @@
 *   Program specific preprocessor statements.
 */
 /* Name of environment variable for accessing the Gcal program. */
-#  define  ENV_VAR_GCALPROG     "GCALPROG"
+# define ENV_VAR_GCALPROG     "GCALPROG"
 
 /* Default shift value; may be set to "0"..."9". */
-#  define  SHIFT_VALUE_DEFAULT  "1"
+# define SHIFT_VALUE_DEFAULT  "1"
 
 
 

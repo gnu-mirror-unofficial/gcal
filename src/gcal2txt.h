@@ -1,5 +1,5 @@
 #ifndef __GCAL2TXT_H
-#  define __GCAL2TXT_H
+# define __GCAL2TXT_H
 /*
 *  gcal2txt.h:  Create a verbatim text file
 *               from a Gcal resource file header file.

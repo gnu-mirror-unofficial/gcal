@@ -35,47 +35,47 @@ static char rcsid[]="$Id: tcal.c 3.01 2000/06/14 03:00:01 tom Exp $";
 */
 #include "tailor.h"
 #if HAVE_ASSERT_H
-#  include <assert.h>
+# include <assert.h>
 #endif
 #if HAVE_CTYPE_H
-#  include <ctype.h>
+# include <ctype.h>
 #endif
 #if HAVE_UNISTD_H
-#  include <unistd.h>
+# include <unistd.h>
 #endif
 #if HAVE_LIMITS_H
-#  include <limits.h>
+# include <limits.h>
 #endif
 #if HAVE_ERRNO_H
-#  include <errno.h>
+# include <errno.h>
 #endif
 #if (!HAVE_SIGNAL_H || !HAVE_SIGNAL) && HAVE_SYS_TYPES_H
 /* Otherwise "gcal.h" includes <sys/types.h>. */
-#  include <sys/types.h>
+# include <sys/types.h>
 #endif
 #if HAVE_SYS_STAT_H
-#  include <sys/stat.h>
+# include <sys/stat.h>
 #endif
 #if TIME_WITH_SYS_TIME
-#  include <sys/time.h>
-#  include <time.h>
+# include <sys/time.h>
+# include <time.h>
 #else /* !TIME_WITH_SYS_TIME */
-#  if HAVE_SYS_TIME_H
-#    include <sys/time.h>
-#  else /* !HAVE_SYS_TIME_H */
-#    include <time.h>
-#  endif /* !HAVE_SYS_TIME_H */
+# if HAVE_SYS_TIME_H
+#  include <sys/time.h>
+# else /* !HAVE_SYS_TIME_H */
+#  include <time.h>
+# endif /* !HAVE_SYS_TIME_H */
 #endif /* !TIME_WITH_SYS_TIME */
 #ifdef MSDOS
-#  include <process.h>
+# include <process.h>
 #endif
 #ifndef USE_RC
-#  define  USE_RC  1
+# define USE_RC  1
 #else
-#  if !USE_RC
-#    undef  USE_RC
-#    define  USE_RC  1
-#  endif
+# if !USE_RC
+#  undef  USE_RC
+#  define USE_RC  1
+# endif
 #endif
 #include "common.h"
 #include "rc-defs.h"
@@ -424,11 +424,11 @@ handle_signal (the_signal)
 */
 {
    fflush(stdout);
-#if USE_DE
+# if USE_DE
    fprintf(stderr, "\n%s: Programmabbruch durch Signal %d\n", prgr_name, the_signal);
-#else /* !USE_DE */
+# else /* !USE_DE */
    fprintf(stderr, _("\n%s: program aborted by signal %d\n"), prgr_name, the_signal);
-#endif /* !USE_DE */
+# endif /* !USE_DE */
    exit(ERR_TERMINATION_BY_SIGNAL);
 }
 #endif /* HAVE_SIGNAL && (SIGINT || SIGTERM || SIGHUP) */
@@ -711,19 +711,19 @@ main (argc, argv)
         arithmethics based on "two complements".
    */
 #ifdef DJG
-#  ifdef SHRT_MAX
+# ifdef SHRT_MAX
    testval = SHRT_MAX;
-#  else /* !SHRT_MAX */
+# else /* !SHRT_MAX */
    testval = ~0;
    testval >>= 1;
-#  endif /* !SHRT_MAX */
+# endif /* !SHRT_MAX */
 #else /* !DJG */
-#  ifdef INT_MAX
+# ifdef INT_MAX
    testval = INT_MAX;
-#  else /* !INT_MAX */
+# else /* !INT_MAX */
    testval = ~0;
    testval >>= 1;
-#  endif /* !INT_MAX */
+# endif /* !INT_MAX */
 #endif /* !DJG */
 #if HAVE_ASSERT_H
    /*
@@ -763,23 +763,23 @@ main (argc, argv)
    assert((Uint)MY_ARGC_MAX<=testval);
 #endif /* HAVE_ASSERT_H */
 #if !USE_DE
-#  ifdef GCAL_NLS
+# ifdef GCAL_NLS
    /*
       Now initialize the NLS functions.
    */
-#    if HAVE_SETstaticE
+#  if HAVE_SETstaticE
    setlocale(LC_ALL, "");
-#    endif
-#    ifndef staticEDIR
-#      define staticEDIR  NULL
-#    endif
+#  endif
+#  ifndef staticEDIR
+#   define staticEDIR  NULL
+#  endif
    bindtextdomain(PACKAGE, staticEDIR);
    textdomain(PACKAGE);
    /*
       Now check whether we have to use the Gregorian Reformation date of 1752
         (table index 1 !!) by default!
    */
-#    if !defined(AMIGA) || defined(__GNUC__)
+#  if !defined(AMIGA) || defined(__GNUC__)
    /*
       Detect whether the $LANGUAGE environment variable (GNU specific) is set.
    */
@@ -797,7 +797,7 @@ main (argc, argv)
         if (!*ptr_char)
           ptr_char = (char *)NULL;
     }
-#      if HAVE_LC_MESSAGES
+#   if HAVE_LC_MESSAGES
    if (ptr_char == (char *)NULL)
     {
       /*
@@ -808,7 +808,7 @@ main (argc, argv)
         if (!*ptr_char)
           ptr_char = (char *)NULL;
     }
-#      endif
+#   endif
    if (ptr_char == (char *)NULL)
     {
       /*
@@ -854,7 +854,7 @@ main (argc, argv)
      /*
         No environment variable defined.
      */
-#    endif /* !AMIGA || __GNUC__ */
+#  endif /* !AMIGA || __GNUC__ */
      /*
         Let's use the Gregorian Reformation date of 1752 (table index 1 !!).
      */
@@ -864,12 +864,12 @@ main (argc, argv)
         Set the date of Gregorian Reformation to 1752 (table index 1 !!)
      */
      greg++;
-#  else /* !GCAL_NLS */
+# else /* !GCAL_NLS */
    /*
       Set the date of Gregorian Reformation to 1752 (table index 1 !!)
    */
    greg++;
-#  endif /* !GCAL_NLS */
+# endif /* !GCAL_NLS */
 #endif /* !USE_DE */
    /*
       Detect the own program name.
@@ -933,18 +933,18 @@ main (argc, argv)
       Now let's modify the signal handling a bit to make sure that
         temporary files are always deleted if such signals are raised.
    */
-#  ifdef SIGINT
+# ifdef SIGINT
    if (signal(SIGINT, SIG_IGN) != SIG_IGN)
      (void)signal(SIGINT, (Sig_type)handle_signal);
-#  endif
-#  ifdef SIGTERM
+# endif
+# ifdef SIGTERM
    if (signal(SIGTERM, SIG_IGN) != SIG_IGN)
      (void)signal(SIGTERM, (Sig_type)handle_signal);
-#  endif
-#  ifdef SIGHUP
+# endif
+# ifdef SIGHUP
    if (signal(SIGHUP, SIG_IGN) != SIG_IGN)
      (void)signal(SIGHUP, (Sig_type)handle_signal);
-#  endif
+# endif
 #endif /* HAVE_SIGNAL */
    buf_ptr_char = SHIFT_VALUE_DEFAULT;
    if (argc > 1)

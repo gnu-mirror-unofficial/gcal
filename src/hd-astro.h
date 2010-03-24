@@ -1,5 +1,5 @@
 #ifndef __HD_ASTRO_H
-#  define __HD_ASTRO_H
+# define __HD_ASTRO_H
 /*
 *  hd-astro.h:  Astronomical and support functions for the eternal holiday list header file.
 *
@@ -34,34 +34,34 @@
 /*
 *  Equinox and solstice MODE constants for northern and southern Hemisphere.
 */
-#  define  NH_VE  0.0
-#  define  SH_AE  NH_VE
-#  define  NH_SS  90.0
-#  define  SH_WS  NH_SS
-#  define  NH_AE  180.0
-#  define  SH_VE  NH_AE
-#  define  NH_WS  270.0
-#  define  SH_SS  NH_WS
+# define NH_VE  0.0
+# define SH_AE  NH_VE
+# define NH_SS  90.0
+# define SH_WS  NH_SS
+# define NH_AE  180.0
+# define SH_VE  NH_AE
+# define NH_WS  270.0
+# define SH_SS  NH_WS
 
 
 
 /*
 *  Solar and lunar eclipse type constants.
 */
-#define  ECLIPSE_PENUMBRAL  100000000.0
-#define  ECLIPSE_PARTIAL    200000000.0
-#define  ECLIPSE_ANNULAR    300000000.0
-#define  ECLIPSE_TOTAL      400000000.0
+# define ECLIPSE_PENUMBRAL  100000000.0
+# define ECLIPSE_PARTIAL    200000000.0
+# define ECLIPSE_ANNULAR    300000000.0
+# define ECLIPSE_TOTAL      400000000.0
 
 
 
 /*
 *  Moon phase constants.
 */
-#define  MPHASE_NEW  0.00
-#define  MPHASE_FQT  0.25
-#define  MPHASE_FUL  0.50
-#define  MPHASE_LQT  0.75
+# define MPHASE_NEW  0.00
+# define MPHASE_FQT  0.25
+# define MPHASE_FUL  0.50
+# define MPHASE_LQT  0.75
 
 
 
@@ -129,7 +129,7 @@ my_acot __P_((double x));
 extern double
 my_atan2 __P_((double y,
                double x));
-#  if !HAVE_LIBM
+# if !HAVE_LIBM
 extern double
 my_floor __P_((double x));
 extern double
@@ -156,6 +156,6 @@ extern double
 my_atan __P_((double x));
 extern double
 my_acot __P_((double x));
-#  endif /* !HAVE_LIBM */
+# endif /* !HAVE_LIBM */
 __END_DECLARATIONS
 #endif /* __HD_ASTRO_H */

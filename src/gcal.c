@@ -27,47 +27,47 @@
 */
 #include "tailor.h"
 #if HAVE_ASSERT_H
-#  include <assert.h>
+# include <assert.h>
 #endif
 #if HAVE_CTYPE_H
-#  include <ctype.h>
+# include <ctype.h>
 #endif
 #if HAVE_LIMITS_H
-#  include <limits.h>
+# include <limits.h>
 #endif
 #if HAVE_UNISTD_H
-#  include <unistd.h>
+# include <unistd.h>
 #endif
 #if (!HAVE_SIGNAL_H || !HAVE_SIGNAL) && HAVE_SYS_TYPES_H
 /* Otherwise "gcal.h" includes <sys/types.h>. */
-#  include <sys/types.h>
+# include <sys/types.h>
 #endif
 #if HAVE_SYS_STAT_H
-#  include <sys/stat.h>
+# include <sys/stat.h>
 #endif
 #ifdef GCAL_EPAGER
-#  if HAVE_FCNTL_H
-#    include <fcntl.h>
-#    if !HAVE_DUP
-#      define dup(old)        (fcntl(old, F_DUPFD, 0))
-#    endif
-#    if !HAVE_DUP2
-#      define dup2(old, new)  (close(new), fcntl(old, F_DUPFD, new))
-#    endif
+# if HAVE_FCNTL_H
+#  include <fcntl.h>
+#  if !HAVE_DUP
+#   define dup(old)        (fcntl(old, F_DUPFD, 0))
 #  endif
-#  if HAVE_SYS_WAIT_H
-#    include <sys/wait.h>
+#  if !HAVE_DUP2
+#   define dup2(old, new)  (close(new), fcntl(old, F_DUPFD, new))
 #  endif
-#  ifndef WEXITSTATUS
-#    define WEXITSTATUS(stat_val) ((unsigned int)(stat_val) >> 8)
-#  endif
-#  ifndef WIFEXITED
-#    define WIFEXITED(stat_val)   (((stat_val) & 0xff) == 0)
-#  endif
+# endif
+# if HAVE_SYS_WAIT_H
+#  include <sys/wait.h>
+# endif
+# ifndef WEXITSTATUS
+#  define WEXITSTATUS(stat_val) ((unsigned int)(stat_val) >> 8)
+# endif
+# ifndef WIFEXITED
+#  define WIFEXITED(stat_val)   (((stat_val) & 0xff) == 0)
+# endif
 #endif /* GCAL_EPAGER */
 #include "common.h"
 #if USE_RC
-#  include "rc-defs.h"
+# include "rc-defs.h"
 #endif /* USE_RC */
 #include "globals.h"
 #include "file-io.h"
@@ -77,8 +77,8 @@
 #include "help.h"
 #include "print.h"
 #if USE_RC
-#  include "rc-use.h"
-#  include "rc-utils.h"
+# include "rc-use.h"
+# include "rc-utils.h"
 #endif /* USE_RC */
 #include "tty.h"
 #include "utils.h"
@@ -90,10 +90,10 @@
 *  Set Borland/Turbo-C specific MSDOS stack length in case USE_RC is defined  ;<
 */
 #if USE_RC
-#  if defined(MSDOS) && defined(__TURBOC__)
-#    include <dos.h>
+# if defined(MSDOS) && defined(__TURBOC__)
+#  include <dos.h>
 extern Uint _stklen=0x4000;
-#  endif
+# endif
 #endif
 
 
@@ -1619,17 +1619,17 @@ main (argc, argv)
    register     int     j;
    auto         char  **my_argv=(char **)NULL;
 #if USE_RC
-#  ifdef GCAL_SHELL
+# ifdef GCAL_SHELL
    static const char   *these_short_opts_need_args="#DFHIPRSbfqrsv";
-#  else /* !GCAL_SHELL */
+# else /* !GCAL_SHELL */
    static const char   *these_short_opts_need_args="#DFHIPRbfqrsv";
-#  endif /* !GCAL_SHELL */
+# endif /* !GCAL_SHELL */
 #else /* !USE_RC */
-#  ifdef GCAL_SHELL
+# ifdef GCAL_SHELL
    static const char   *these_short_opts_need_args="HRSbqs";
-#  else /* !GCAL_SHELL */
+# else /* !GCAL_SHELL */
    static const char   *these_short_opts_need_args="HRbqs";
-#  endif /* !GCAL_SHELL */
+# endif /* !GCAL_SHELL */
 #endif /* !USE_RC */
    auto         char   *ptr_char;
    auto         char   *y_txt;
@@ -1646,19 +1646,19 @@ main (argc, argv)
         arithmethics based on "two complements".
    */
 #ifdef DJG
-#  ifdef SHRT_MAX
+# ifdef SHRT_MAX
    testval = SHRT_MAX;
-#  else /* !SHRT_MAX */
+# else /* !SHRT_MAX */
    testval = ~0;
    testval >>= 1;
-#  endif /* !SHRT_MAX */
+# endif /* !SHRT_MAX */
 #else /* !DJG */
-#  ifdef INT_MAX
+# ifdef INT_MAX
    testval = INT_MAX;
-#  else /* !INT_MAX */
+# else /* !INT_MAX */
    testval = ~0;
    testval >>= 1;
-#  endif /* !INT_MAX */
+# endif /* !INT_MAX */
 #endif /* !DJG */
 #if HAVE_ASSERT_H
    /*
@@ -1713,23 +1713,23 @@ main (argc, argv)
    iso_week_number = TRUE;
    out_rows = S_OUT_ROWS;
 #else /* !USE_DE */
-#  ifdef GCAL_NLS
+# ifdef GCAL_NLS
    /*
       Now initialize the NLS functions.
    */
-#    if HAVE_SETstaticE
+#  if HAVE_SETstaticE
    setlocale(LC_ALL, "");
-#    endif
-#    ifndef staticEDIR
-#      define staticEDIR  NULL
-#    endif
+#  endif
+#  ifndef staticEDIR
+#   define staticEDIR  NULL
+#  endif
    bindtextdomain(PACKAGE, staticEDIR);
    textdomain(PACKAGE);
    /*
       Now check whether we use a native language message catalog
         or the internal default (==English) language texts!
    */
-#    if !defined(AMIGA) || defined(__GNUC__)
+#  if !defined(AMIGA) || defined(__GNUC__)
    /*
       Detect whether the $LANGUAGE environment variable (GNU specific) is set.
    */
@@ -1747,7 +1747,7 @@ main (argc, argv)
         if (!*ptr_char)
           ptr_char = (char *)NULL;
     }
-#      if HAVE_LC_MESSAGES
+#   if HAVE_LC_MESSAGES
    if (ptr_char == (char *)NULL)
     {
       /*
@@ -1758,7 +1758,7 @@ main (argc, argv)
         if (!*ptr_char)
           ptr_char = (char *)NULL;
     }
-#      endif
+#   endif
    if (ptr_char == (char *)NULL)
     {
       /*
@@ -1811,7 +1811,7 @@ main (argc, argv)
      /*
         No environment variable defined.
      */
-#    endif /* !AMIGA || __GNUC__ */
+#  endif /* !AMIGA || __GNUC__ */
      /*
         We use English texts and U.S.A. territory specifics by default!
      */
@@ -1835,7 +1835,7 @@ main (argc, argv)
          Set the date format to U.S.A. style (table index 1 !!)
       */
       date_format++;
-#    if !defined(AMIGA) || defined(__GNUC__)
+#  if !defined(AMIGA) || defined(__GNUC__)
       /*
          Now check whether if we have to use the British date format.
       */
@@ -1862,7 +1862,7 @@ main (argc, argv)
                 date_format++;
             }
          }
-#    endif /* !AMIGA || __GNUC__ */
+#  endif /* !AMIGA || __GNUC__ */
     }
    else
     {
@@ -1874,7 +1874,7 @@ main (argc, argv)
       iso_week_number = TRUE;
       out_rows = S_OUT_ROWS;
     }
-#  else /* !GCAL_NLS */
+# else /* !GCAL_NLS */
    /*
       !USE_DE means English texts and U.S.A. territory specifics by default.
    */
@@ -1889,7 +1889,7 @@ main (argc, argv)
       Set the date format to U.S.A. style (table index 1 !!)
    */
    date_format++;
-#  endif /* !GCAL_NLS */
+# endif /* !GCAL_NLS */
 #endif /* !USE_DE */
    /*
       Test if the default date format is valid.
@@ -1909,7 +1909,7 @@ main (argc, argv)
    is_tty2 = isatty(2);
    is_tty = (   is_tty1
              && is_tty2);
-#  ifdef GCAL_EPAGER
+# ifdef GCAL_EPAGER
    if (is_tty)
     {
       /*
@@ -1918,7 +1918,7 @@ main (argc, argv)
       dup2(0, sys_fd[0]);
       dup2(1, sys_fd[1]);
     }
-#  endif
+# endif
 #else /* !USE_PAGER */
    is_tty = (int)TRUE;
 #endif /* !USE_PAGER */
@@ -1980,18 +1980,18 @@ main (argc, argv)
       Now let's modify the signal handling a bit to make sure that
         temporary files are always deleted if such signals are raised.
    */
-#  ifdef SIGINT
+# ifdef SIGINT
    if (signal(SIGINT, SIG_IGN) != SIG_IGN)
      (void)signal(SIGINT, (Sig_type)handle_signal);
-#  endif
-#  ifdef SIGTERM
+# endif
+# ifdef SIGTERM
    if (signal(SIGTERM, SIG_IGN) != SIG_IGN)
      (void)signal(SIGTERM, (Sig_type)handle_signal);
-#  endif
-#  ifdef SIGHUP
+# endif
+# ifdef SIGHUP
    if (signal(SIGHUP, SIG_IGN) != SIG_IGN)
      (void)signal(SIGHUP, (Sig_type)handle_signal);
-#  endif
+# endif
 #endif /* HAVE_SIGNAL */
    /*
       Assign the character which is used for separating the time HH:MM.
@@ -2128,11 +2128,11 @@ main (argc, argv)
    /*
       Initial memory allocation for the fixed date list title text.
    */
-#  if USE_DE
+# if USE_DE
    ptr_char = RC_LIST_TITLE;
-#  else /* !USE_DE */
+# else /* !USE_DE */
    ptr_char = _("Fixed date list:");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
    rc_heading_text = (char *)my_malloc (strlen(ptr_char)+1+2,
                                         ERR_NO_MEMORY_AVAILABLE,
                                         __FILE__, ((long)__LINE__)-2L,
@@ -2148,11 +2148,11 @@ main (argc, argv)
    if (ptr_char != (char *)NULL)
      if (*ptr_char)
       {
-#  if USE_DE
+# if USE_DE
         users_date_format.df_info = "Umgebungsvariable";
-#  else /* !USE_DE */
+# else /* !USE_DE */
         users_date_format.df_info = _("environment variable");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
         users_date_format.df_format = (char *)my_malloc (strlen(ptr_char)+1,
                                                          ERR_NO_MEMORY_AVAILABLE,
                                                          __FILE__, ((long)__LINE__)-2L,
@@ -2164,11 +2164,11 @@ main (argc, argv)
         */
         if (!is_correct_date_format (date_format->df_format, &use_day_suffix, &use_short3_day_name,
                                      &use_day_zeroleaded, &use_year_zeroleaded))
-#  if USE_DE
+# if USE_DE
           errtxt_dformat = "Umgebungsvariable";
-#  else /* !USE_DE */
+# else /* !USE_DE */
           errtxt_dformat = _("environment variable");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
         else
           errtxt_dformat = (char *)NULL;
       }
@@ -2207,9 +2207,9 @@ main (argc, argv)
                s1[i] = '\0';
                if (   *s1 == *SWITCH
                    || *s1 == *SWITCH2
-#  if USE_RC
+# if USE_RC
                    || *s1 == RC_ADATE_CHAR
-#  endif
+# endif
                    || *s1 == RSP_CHAR)
                 {
                   /*
@@ -2218,9 +2218,9 @@ main (argc, argv)
                   if (   i == 1
                       || (   (i == 2)
                           && (   s1[1] == *SWITCH
-#  if USE_RC
+# if USE_RC
                               || s1[1] == RC_ADATE_CHAR
-#  endif
+# endif
                               || s1[1] == *SWITCH2)))
                     ;   /* Void, don't allocate memory */
                   else
@@ -2316,13 +2316,13 @@ main (argc, argv)
                     /*
                        Error, argument is a command.
                     */
-#  if USE_DE
+# if USE_DE
                     fprintf(stderr, "%s: Kommando in Umgebungsvariable `%s' angegeben -- %s\n%s\n%s\n",
                             prgr_name, ENV_VAR_GCAL, s1, usage_msg (), lopt_msg ());
-#  else /* !USE_DE */
+# else /* !USE_DE */
                     fprintf(stderr, _("%s: command in environment variable `%s' found -- %s\n%s\n%s\n"),
                             prgr_name, ENV_VAR_GCAL, s1, usage_msg (), lopt_msg ());
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                     exit(ERR_INVALID_OPTION);
                   }
              }
@@ -2503,11 +2503,11 @@ main (argc, argv)
                        }
                       s1[j] = '\0';
                       pseudo_blank_conversion (&s1);
-#  if USE_DE
+# if USE_DE
                       set_tvar (s1, INTERNAL_TXT, 0L, GLobal);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                       set_tvar (s1, _("Internal"), 0L, GLobal);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                       if (*ptr_char)
                         ptr_char++;
                     }
@@ -2536,11 +2536,11 @@ main (argc, argv)
                            s1[j++] = *ptr_char++;
                          }
                         s1[j] = '\0';
-#  if USE_DE
+# if USE_DE
                         set_dvar (s1, lineptrs, INTERNAL_TXT, 0L, GLobal);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                         set_dvar (s1, lineptrs, _("Internal"), 0L, GLobal);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                         if (*ptr_char)
                           ptr_char++;
                       }
@@ -2626,7 +2626,7 @@ main (argc, argv)
                /*
                   Absolute pager name given, try to get this executable directly.
                */
-#  if HAVE_SYS_STAT_H && defined(S_IFMT) && defined(S_IFREG)
+# if HAVE_SYS_STAT_H && defined(S_IFMT) && defined(S_IFREG)
                auto struct stat  statbuf;
 
 
@@ -2636,9 +2636,9 @@ main (argc, argv)
                if (!stat(ext_pager, &statbuf))
                  if ((statbuf.st_mode & S_IFMT) == S_IFREG)
                    fp = fopen(ext_pager, "r");
-#  else  /* !HAVE_SYS_STAT_H || !S_IFMT || !S_IFREG */
+# else  /* !HAVE_SYS_STAT_H || !S_IFMT || !S_IFREG */
                fp = fopen(ext_pager, "r");
-#  endif  /* !HAVE_SYS_STAT_H || !S_IFMT || !S_IFREG */
+# endif  /* !HAVE_SYS_STAT_H || !S_IFMT || !S_IFREG */
              }
             else
               /*
@@ -2783,12 +2783,12 @@ main (argc, argv)
               Error, `pipe()' function failed.
            */
            my_error (ERR_INTERNAL_C_FUNC_FAILURE, __FILE__, ((long)__LINE__)-4L, "pipe()<", 0);
-#  if HAVE_SIGNAL && defined(SIGPIPE)
+# if HAVE_SIGNAL && defined(SIGPIPE)
          /*
             Ignore the SIGPIPE signal.
          */
          (void)signal(SIGPIPE, SIG_IGN);
-#  endif
+# endif
        }
     }
 #endif /* GCAL_EPAGER */
@@ -2887,9 +2887,9 @@ main (argc, argv)
    */
    if (   is_tty1
        && is_tty2
-#  ifdef GCAL_EPAGER
+# ifdef GCAL_EPAGER
        && (ext_pager == (char *)NULL)
-#  endif
+# endif
        && pager_flag)
     {
       setbuf(stdout, (char *)NULL);
@@ -2924,11 +2924,11 @@ main (argc, argv)
         i.e. check whether a shell script must be written
    */
    if (shl_filename != (char *)NULL)
-#  if USE_DE
+# if USE_DE
      write_log_file (shl_filename, SCript, SCRIPT_TXT, CREATED_TXT, my_argc, my_argv);
-#  else /* !USE_DE */
+# else /* !USE_DE */
      write_log_file (shl_filename, SCript, _("shell script"), _("Created"), my_argc, my_argv);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
 #endif /* GCAL_SHELL */
 #ifdef GCAL_EPAGER
    if (   is_tty1
@@ -3090,12 +3090,12 @@ main (argc, argv)
       */
       while (wait((int *)NULL) != child_pid)
         ;
-#  if HAVE_SIGNAL && defined(SIGPIPE)
+# if HAVE_SIGNAL && defined(SIGPIPE)
       /*
          Reset the SIGPIPE signal.
       */
       (void)signal(SIGPIPE, SIG_DFL);
-#  endif
+# endif
     }
 #endif /* GCAL_EPAGER */
 #ifdef GCAL_EMAIL
@@ -3112,7 +3112,7 @@ main (argc, argv)
          /*
             Check whether the temporary file is "empty" (zero contents).
          */
-#  if HAVE_SYS_STAT_H
+# if HAVE_SYS_STAT_H
          auto struct stat  statbuf;
 
 
@@ -3125,7 +3125,7 @@ main (argc, argv)
            i = (statbuf.st_size > 0);
          else
            my_error (ERR_READ_FILE, __FILE__, ((long)__LINE__)-3L, tfn, 0);
-#  else  /* !HAVE_SYS_STAT_H */
+# else  /* !HAVE_SYS_STAT_H */
          i = 0;
          tfp = fopen(tfn, "r");
          if (tfp == (FILE *)NULL)
@@ -3135,26 +3135,26 @@ main (argc, argv)
            my_error (ERR_READ_FILE, __FILE__, ((long)__LINE__)-1L, tfn, 0);
          tfp = (FILE *)NULL;
          i = (i != EOF);
-#  endif  /* !HAVE_SYS_STAT_H */
+# endif  /* !HAVE_SYS_STAT_H */
        }
       if (i)
        {
-#  if USE_DE
+# if USE_DE
          sprintf(s2, "Post von \\`%s' (%02d-%s-%04d %02d%s%02d%s%02d",
                  prgr_name, true_day, short_month_name (true_month), true_year,
                  act_hour, time_sep, act_min, time_sep, act_sec);
-#  else /* !USE_DE */
+# else /* !USE_DE */
          sprintf(s2, _("Mail from \\`%s' (%02d-%s-%04d %02d%s%02d%s%02d"),
                  prgr_name, true_day, short_month_name (true_month), true_year,
                  act_hour, time_sep, act_min, time_sep, act_sec);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
          if (tz != (char *)NULL)
           {
             sprintf(s1, " %s", tz);
             strcat(s2, s1);
           }
          strcat(s2, ")");
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
          /*
             Detect whether a $MAILPROG environment variable is set.
          */
@@ -3165,7 +3165,7 @@ main (argc, argv)
               ptr_char = MAIL_PRGR;
           }
          else
-#  endif /* !AMIGA || __GNUC__ */
+# endif /* !AMIGA || __GNUC__ */
            ptr_char = MAIL_PRGR;
          i = (int)strlen(ptr_char) + strlen(s2) + strlen(email_adr) + strlen(REDIRECT_IN) + 9;
          if ((Uint)i >= maxlen_max)
@@ -3191,13 +3191,13 @@ main (argc, argv)
           }
        }
       else
-#  if USE_DE
+# if USE_DE
         fprintf(stderr, "%s: Warnung, eMail mit leerem Textk%srper nicht an <%s> versandt.\n",
                 prgr_name, OE, email_adr);
-#  else /* !USE_DE */
+# else /* !USE_DE */
         fprintf(stderr, _("%s: warning, eMail with empty message body not sent to <%s>.\n"),
                 prgr_name, email_adr);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       i = unlink(tfn);
       if (i)
         /*
@@ -4120,7 +4120,7 @@ check_command_line (argc, argv)
                           option = strchr(s2, *LARG_SEP);
                           if (option == (char *)NULL)
                            {
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
                              /*
                                 Detect whether a $MAILTO environment variable is set.
                              */
@@ -4148,9 +4148,9 @@ check_command_line (argc, argv)
                                        option = ptr_char;
                                  }
                               }
-#  else  /* AMIGA && !__GNUC__ */
+# else  /* AMIGA && !__GNUC__ */
                              ;   /* Void, nothing to do now. */
-#  endif /* AMIGA && !__GNUC__ */
+# endif /* AMIGA && !__GNUC__ */
                            }
                           else
                             option++;
@@ -4804,7 +4804,7 @@ LABEL_short_option:
                    if (!year_flag)
                      out_rows = J_OUT_ROWS;
 #else /* !USE_DE */
-#  ifdef GCAL_NLS
+# ifdef GCAL_NLS
                    if (is_en)
                     {
                       special_calsheet_flag = FALSE;
@@ -4817,11 +4817,11 @@ LABEL_short_option:
                       if (!year_flag)
                         out_rows = J_OUT_ROWS;
                     }
-#  else /* !GCAL_NLS */
+# else /* !GCAL_NLS */
                    special_calsheet_flag = FALSE;
                    if (!year_flag)
                      out_rows = S_OUT_ROWS;
-#  endif /* !GCAL_NLS */
+# endif /* !GCAL_NLS */
 #endif /* !USE_DE */
                    if (*option)
                     {
@@ -6014,13 +6014,13 @@ LABEL_option_error:
       /*
          Error, invalid actual date modifier %DATE given.
       */
-#  if USE_DE
+# if USE_DE
       fprintf(stderr, "%s: ung%sltiges Datum angegeben -- %c%s\n%s\n%s\n",
               prgr_name, UE, RC_ADATE_CHAR, rc_adate, usage_msg (), lopt_msg ());
-#  else /* !USE_DE */
+# else /* !USE_DE */
       fprintf(stderr, _("%s: invalid date given -- %c%s\n%s\n%s\n"),
               prgr_name, RC_ADATE_CHAR, rc_adate, usage_msg (), lopt_msg ());
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       my_exit (ERR_INVALID_OPTION);
     }
 #else /* !USE_RC */
@@ -6048,11 +6048,11 @@ LABEL_option_error:
 #if USE_DE
         start_day = DAY_MIN;
 #else /* !USE_DE */
-#  ifdef GCAL_NLS
+# ifdef GCAL_NLS
         start_day = (nl_langinfo (_NL_TIME_FIRST_WEEKDAY)[0] + 5) % 7 + 1;
-#  else /* !GCAL_NLS */
+# else /* !GCAL_NLS */
         start_day = DAY_MAX;
-#  endif /* !GCAL_NLS */
+# endif /* !GCAL_NLS */
 #endif /* !USE_DE */
       }
    /*
@@ -6251,13 +6251,13 @@ LABEL_option_error:
                      The `rc_get_date()' arguments `wmax', `hc' and `i' are
                        only dummys and must be given.  They are not respected!
                   */
-#  if USE_DE
+# if USE_DE
                   (void)rc_get_date (s2, lineptrs, FALSE, &is_weekday_mode, &day, &month,
                                      &y, &n, &wmax, &hc, &i, &i, INTERNAL_TXT, -1L, s2, FALSE);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                   (void)rc_get_date (s2, lineptrs, FALSE, &is_weekday_mode, &day, &month,
                                      &y, &n, &wmax, &hc, &i, &i, _("Internal"), -1L, s2, FALSE);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                   if (y != SPECIAL_VALUE)
                    {
                      if (!dvar)
@@ -6425,9 +6425,9 @@ LABEL_option_error:
            then get actual settings of the tty (needed if paging is wanted).
       */
       if (   is_tty1
-#  ifdef GCAL_EPAGER
+# ifdef GCAL_EPAGER
           && (ext_pager == (char *)NULL)
-#  endif
+# endif
           && is_tty2)
        {
          setbuf(stdout, (char *)NULL);
@@ -6584,12 +6584,12 @@ LABEL_option_error:
          */
          while (wait((int *)NULL) != child_pid)
            ;
-#  if HAVE_SIGNAL && defined(SIGPIPE)
+# if HAVE_SIGNAL && defined(SIGPIPE)
          /*
             Reset the SIGPIPE signal.
          */
          (void)signal(SIGPIPE, SIG_DFL);
-#  endif
+# endif
        }
 #endif /* GCAL_EPAGER */
       my_exit (exit_stat_help);

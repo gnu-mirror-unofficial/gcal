@@ -33,37 +33,37 @@
 
 
 #if USE_RC
-#  ifdef RCSID
+# ifdef RCSID
 static char rcsid[]="$Id: rc-use.c 3.01 2000/06/21 03:00:01 tom Exp $";
-#  endif
+# endif
 
 
 
 /*
 *  Include header files.
 */
-#  if HAVE_ASSERT_H
-#    include <assert.h>
-#  endif
-#  if HAVE_CTYPE_H
-#    include <ctype.h>
-#  endif
-#  if HAVE_LIMITS_H
-#    include <limits.h>
-#  endif
-#  include "common.h"
-#  include "rc-defs.h"
-#  include "globals.h"
-#  include "file-io.h"
-#  include "hd-defs.h"
-#  include "hd-use.h"
-#  include "rc-astro.h"
-#  include "rc-check.h"
-#  include "rc-insert.h"
-#  include "rc-utils.h"
-#  include "tty.h"
-#  include "utils.h"
-#  include "rc-use.h"
+# if HAVE_ASSERT_H
+#  include <assert.h>
+# endif
+# if HAVE_CTYPE_H
+#  include <ctype.h>
+# endif
+# if HAVE_LIMITS_H
+#  include <limits.h>
+# endif
+# include "common.h"
+# include "rc-defs.h"
+# include "globals.h"
+# include "file-io.h"
+# include "hd-defs.h"
+# include "hd-use.h"
+# include "rc-astro.h"
+# include "rc-check.h"
+# include "rc-insert.h"
+# include "rc-utils.h"
+# include "tty.h"
+# include "utils.h"
+# include "rc-use.h"
 
 
 
@@ -424,27 +424,27 @@ __END_DECLARATIONS
 /*
 *  The REGEX stuff; global variables that represent the "remembered" search PATTERN.
 */
-#  if HAVE_GNU_RE_COMPILE_PATTERN
+# if HAVE_GNU_RE_COMPILE_PATTERN
  struct re_pattern_buffer  regpattern;
  char  *gnu_fastmap_table=(char *)NULL;
  char  *gnu_translate_table=(char *)NULL;
-#  endif
+# endif
 
-#  if HAVE_POSIX_REGCOMP
+# if HAVE_POSIX_REGCOMP
  regex_t  regpattern;
-#  endif
+# endif
 
-#  if HAVE_RE_COMP
+# if HAVE_RE_COMP
  int  re_pattern=0;
-#  endif
+# endif
 
-#  if HAVE_REGCMP
+# if HAVE_REGCMP
  char  *cpattern=(char *)NULL;
-#  endif
+# endif
 
-#  if HAVE_V8_REGCOMP
+# if HAVE_V8_REGCOMP
  struct regexp  *regpattern=(struct regexp *)NULL;
-#  endif
+# endif
 
 
 
@@ -499,9 +499,9 @@ rc_use ()
    register int    tmp_ay=act_year;
    register int    tindex=0;
    auto     char  *ptr_char;
-#  if HAVE_ASSERT_H
+# if HAVE_ASSERT_H
    static   Bool   is_table_range_checked=FALSE;
-#  endif
+# endif
    static   Bool   tables_initialized=FALSE;
 
 
@@ -510,7 +510,7 @@ rc_use ()
    */
    len_fil_wt=rc_elems=rc_files = 0;
    len_the_text = (int)maxlen_max;
-#  if HAVE_ASSERT_H
+# if HAVE_ASSERT_H
    /*
       Check if the value for the maximum number of table entries
         fits to the positive range of a signed int (INT_MAX/SHRT_MAX)!
@@ -525,17 +525,17 @@ rc_use ()
       assert(len_the_text<=testval);
       is_table_range_checked = TRUE;
     }
-#  endif
+# endif
    if (!tables_initialized)
     {
       /*
          Initialize the biorhythms phase texts consisting of 3 characters each.
       */
-#  if USE_DE
+# if USE_DE
       rc_bio_emo_lit = "Emo";
       rc_bio_int_lit = "Gei";
       rc_bio_phy_lit = "Phy";
-#  else /* !USE_DE */
+# else /* !USE_DE */
       /*
          *** Translators, please translate this as a fixed 3-character text.
          *** This text should be a proper abbreviation of "Emotional".
@@ -551,7 +551,7 @@ rc_use ()
          *** This text should be a proper abbreviation of "Physical".
       */
       rc_bio_phy_lit = _("Phy");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       /*
          Initial memory allocation for an element of the `Line_struct' record
            which is needed if we have to parse and evaluate a line.
@@ -596,7 +596,7 @@ rc_use ()
          /*
             Compile `rc_filter_text' PATTERN.
          */
-#  if !HAVE_GNU_RE_COMPILE_PATTERN
+# if !HAVE_GNU_RE_COMPILE_PATTERN
          if (rc_ignore_case_flag)
           {
             /*
@@ -607,19 +607,19 @@ rc_use ()
             for ( ; *ptr_char ; ptr_char++)
               *ptr_char = (char)tolower(*ptr_char);
           }
-#  else /* HAVE_GNU_RE_COMPILE_PATTERN */
+# else /* HAVE_GNU_RE_COMPILE_PATTERN */
          /*
             Compute the GNU Regex table size.
          */
-#    ifndef CHAR_BIT
+#  ifndef CHAR_BIT
          auto Uchar  bit;
 
 
          for (i=0,bit=2 ; bit ; bit<<=1,i++)
            ;  /* Void, nothing to do here! */
-#    else /* CHAR_BIT */
+#  else /* CHAR_BIT */
          i = CHAR_BIT - 1;
-#    endif /* CHAR_BIT */
+#  endif /* CHAR_BIT */
          j = ((1 << i) - 1) + (1 << i);
          /*
             Initial memory allocation of GNU Regex fastmap table.
@@ -649,27 +649,27 @@ rc_use ()
          regpattern.translate = gnu_translate_table;
          if (re_compile_pattern(rc_filter_text, (int)strlen(rc_filter_text), &regpattern) != (char *)NULL)
            my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
-#  endif /* HAVE_GNU_RE_COMPILE_PATTERN */
-#  if HAVE_POSIX_REGCOMP
+# endif /* HAVE_GNU_RE_COMPILE_PATTERN */
+# if HAVE_POSIX_REGCOMP
          if (regcomp(&regpattern, rc_filter_text, REGCOMP_FLAG))
            my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
-#  endif
-#  if HAVE_RE_COMP
+# endif
+# if HAVE_RE_COMP
          if (re_comp(rc_filter_text) != (char *)NULL)
            my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
          re_pattern = 1;
-#  endif
-#  if HAVE_REGCMP
+# endif
+# if HAVE_REGCMP
          cpattern = regcmp(rc_filter_text, 0);
          if (cpattern == (char *)NULL)
            my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
-#  endif
-#  if HAVE_V8_REGCOMP
+# endif
+# if HAVE_V8_REGCOMP
          regpattern = regcomp(rc_filter_text);
-#  endif
-#  if NO_REGEX
+# endif
+# if NO_REGEX
          ;   /* Void, nothing to do! */
-#  endif
+# endif
          /*
             Is it necessary to remove highlighting sequences
               in each text before searching the PATTERN?
@@ -1111,13 +1111,13 @@ rc_use ()
                       && isspace(line_buffer[i]))
                  line_buffer[i--] = '\0';
                if (i > len_year_max+4)
-#  if USE_DE
+# if USE_DE
                  rc_check (line_buffer, "`"HD_LIST_TITLE"'",
                            (long)tindex, i, &rc_elems, day, ed, wd);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                  rc_check (line_buffer, _("`Eternal holiday list'"),
                            (long)tindex, i, &rc_elems, day, ed, wd);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
              }
             if (!holiday_flag)
              {
@@ -1210,13 +1210,13 @@ rc_use ()
                          && isspace(line_buffer[i]))
                     line_buffer[i--] = '\0';
                   if (i > len_year_max+4)
-#  if USE_DE
+# if USE_DE
                     rc_check (line_buffer, "`"HD_LIST_TITLE"'",
                               (long)tindex, i, &rc_elems, day, ed, wd);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                     rc_check (line_buffer, _("`Eternal holiday list'"),
                               (long)tindex, i, &rc_elems, day, ed, wd);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                 }
                free(hd_table[tindex]);
                hd_table[tindex] = (char *)NULL;
@@ -1260,16 +1260,16 @@ rc_use ()
             Use the standard resource file.
          */
          i = (int)strlen(PRGR_NAME) + strlen(RC_SUFFIX);
-#  ifdef GCAL_SHELL
+# ifdef GCAL_SHELL
          i++;
-#  endif
+# endif
          if ((Uint)i >= maxlen_max)
            resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
-#  ifdef GCAL_SHELL
+# ifdef GCAL_SHELL
          strcpy(s3, ".");
-#  else /* !GCAL_SHELL */
+# else /* !GCAL_SHELL */
          *s3 = '\0';
-#  endif /* !GCAL_SHELL */
+# endif /* !GCAL_SHELL */
          strcat(s3, PRGR_NAME);
          strcat(s3, RC_SUFFIX);
        }
@@ -1841,15 +1841,15 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
           && !is_presorted (rc_elems_table, rc_elems))
         qsort((VOID_PTR)rc_elems_table, rc_elems, sizeof *rc_elems_table, (Cmp_func)asc_sort);
       if (rc_elems)
-#  if USE_DE
+# if USE_DE
         (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                            &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                            INTERNAL_TXT, (long)j, rc_elems_table[j], TRUE);
-#  else /* !USE_DE */
+# else /* !USE_DE */
         (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                            &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                            _("Internal"), (long)j, rc_elems_table[j], TRUE);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       /*
          Correction for the respected period if we are in fiscal year mode.
       */
@@ -1901,13 +1901,13 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                  && (yy <= ly)))
           {
             sprintf(line_buffer, "%0*d%02d%02d ", len_year_max, yy, mm, dd);
-#  if USE_DE
+# if USE_DE
             rc_check (line_buffer, "`"INTERNAL_TXT"'", (long)tindex,
                       strlen(line_buffer), &rc_elems, day, ed, wd);
-#  else /* !USE_DE */
+# else /* !USE_DE */
             rc_check (line_buffer, _("`Internal'"), (long)tindex,
                       strlen(line_buffer), &rc_elems, day, ed, wd);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
           }
          else
            while (   (dd == ld)
@@ -1916,15 +1916,15 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
              if (j+1 < rc_e)
               {
                 j++;
-#  if USE_DE
+# if USE_DE
                 (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                                    &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                    INTERNAL_TXT, (long)j, rc_elems_table[j], TRUE);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                 (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                                    &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                    _("Internal"), (long)j, rc_elems_table[j], TRUE);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
               }
              else
               {
@@ -1965,13 +1965,13 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                     && (yy <= ly)))
              {
                sprintf(line_buffer, "%0*d%02d%02d ", len_year_max, yy, mm, dd);
-#  if USE_DE
+# if USE_DE
                rc_check (line_buffer, "`"INTERNAL_TXT"'", (long)tindex,
                          strlen(line_buffer), &rc_elems, day, ed, wd);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                rc_check (line_buffer, _("`Internal'"), (long)tindex,
                          strlen(line_buffer), &rc_elems, day, ed, wd);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
              }
             else
               while (   (dd == ld)
@@ -1980,15 +1980,15 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                 if (j+1 < rc_e)
                  {
                    j++;
-#  if USE_DE
+# if USE_DE
                    (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                                       &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                       INTERNAL_TXT, (long)j, rc_elems_table[j], TRUE);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                    (void)rc_get_date (rc_elems_table[j], lineptrs, FALSE, &b_dummy, &ld, &lm, &ly,
                                       &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                       _("Internal"), (long)j, rc_elems_table[j], TRUE);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                  }
                 else
                  {
@@ -2066,13 +2066,13 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
 
          year = act_year;
          incr_year=decr_year = 0;
-#  if USE_DE
+# if USE_DE
          insert_line_into_table (rc_grp_sep, "`"INTERNAL_TXT"'",
                                  (long)SPECIAL_VALUE, &rc_elems, 1, 1);
-#  else /* !USE_DE */
+# else /* !USE_DE */
          insert_line_into_table (rc_grp_sep, _("`Internal'"),
                                  (long)SPECIAL_VALUE, &rc_elems, 1, 1);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
          decr_year = x3;
          incr_year = x2;
          year = x1;
@@ -2163,13 +2163,13 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
 
          year = act_year;
          incr_year=decr_year = 0;
-#  if USE_DE
+# if USE_DE
          insert_line_into_table (rc_heading_text, "`"INTERNAL_TXT"'",
                                  (long)SPECIAL_VALUE, &rc_elems, 1, 1);
-#  else /* !USE_DE */
+# else /* !USE_DE */
          insert_line_into_table (rc_heading_text, _("`Internal'"),
                                  (long)SPECIAL_VALUE, &rc_elems, 1, 1);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
          decr_year = x3;
          incr_year = x2;
          year = x1;
@@ -2265,15 +2265,15 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
       */
       LOOP
        {
-#if USE_DE
+# if USE_DE
          lineptrs = rc_get_date (rc_elems_table[tindex], lineptrs, FALSE, &b_dummy, &day, &lm, &ly,
                                  &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                  INTERNAL_TXT, (long)tindex, rc_elems_table[tindex], TRUE);
-#  else /* !USE_DE */
+# else /* !USE_DE */
          lineptrs = rc_get_date (rc_elems_table[tindex], lineptrs, FALSE, &b_dummy, &day, &lm, &ly,
                                  &i_dummy, &i_dummy, &c_dummy, &i_dummy, &i_dummy,
                                  _("Internal"), (long)tindex, rc_elems_table[tindex], TRUE);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
          if (   (tindex == tstart)
              && (   rc_omit_date_flag
                  || rc_alternative_format_flag
@@ -2407,11 +2407,11 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                if (   rc_alternative_format_flag
                    && rc_week_number_flag)
                 {
-#  if USE_DE
+# if USE_DE
                   sprintf(s2, " ; Woche %s", s7);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                   sprintf(s2, _(" ; Week %s"), s7);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                 }
                else
                  *s2 = '\0';
@@ -2421,11 +2421,11 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
                if (   rc_alternative_format_flag
                    && rc_week_number_flag)
                 {
-#  if USE_DE
+# if USE_DE
                   sprintf(s2, "Woche %s", s7);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                   sprintf(s2, _("Week %s"), s7);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                 }
                else
                  *s2 = '\0';

@@ -1,5 +1,5 @@
 #ifndef __HD_USE_H
-#  define __HD_USE_H
+# define __HD_USE_H
 /*
 *  hd-use.h:  Manage the eternal holiday list header file.
 *

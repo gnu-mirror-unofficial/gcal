@@ -1,5 +1,5 @@
 #ifndef __RC_INSERT_H
-#  define __RC_INSERT_H
+# define __RC_INSERT_H
 /*
 *  rc-insert.h:  Inserts a line (of a resource file) into `rc_elems_table[]' header file.
 *
@@ -38,12 +38,12 @@ __BEGIN_DECLARATIONS
 /*
 *  The REGEX stuff.
 */
-#  if HAVE_RE_COMP
+# if HAVE_RE_COMP
 extern int re_exec();
-#  endif
-#  if HAVE_REGCMP
+# endif
+# if HAVE_REGCMP
 extern char *regex();
-#  endif
+# endif
 /*
 ************************************************** Defined in `rc-insert.c'.
 */

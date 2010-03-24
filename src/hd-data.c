@@ -39,10 +39,10 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
 #include "hd-defs.h"
 #include "hd-data1.h"
 #if !HD_TOP20CC
-#include "hd-data2.h"
-#include "hd-data3.h"
-#include "hd-data4.h"
-#include "hd-data5.h"
+# include "hd-data2.h"
+# include "hd-data3.h"
+# include "hd-data4.h"
+# include "hd-data5.h"
 #endif
 #include "hd-use.h"
 #include "tty.h"
@@ -67,7 +67,7 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
   { char *cc_id, char *cc_info, void (*Cc_hdy_handler)() },
 */
 #if HD_TOP20CC
-#  if USE_DE
+# if USE_DE
   { "AU",  "Australien",                au_hdy },
   { "BE",  "Belgien",                   be_hdy },
   { "BR",  "Brasilien",                 br_hdy },
@@ -88,7 +88,7 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
   { "PT",  "Portugal",                  pt_hdy },
   { "RU",  "Russische F"OE"deration",   ru_hdy },
   { CC_US, "Vereinigte Staaten",        us_hdy },
-#  else /* !USE_DE */
+# else /* !USE_DE */
   { "AU",  N_("Australia"),          au_hdy },
   { "BE",  N_("Belgium"),            be_hdy },
   { "BR",  N_("Brazil"),             br_hdy },
@@ -109,9 +109,9 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
   { "PT",  N_("Portugal"),           pt_hdy },
   { "RU",  N_("Russian Federation"), ru_hdy },
   { CC_US, N_("United States"),      us_hdy },
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
 #else /* !HD_TOP20CC */
-#  if USE_DE
+# if USE_DE
   { "AD",    "Andorra",                                         ad_hdy },
   { "AE",    "Vereinigte Arabische Emirate",                    ae_hdy },
   { "AF",    "Afghanistan",                                     af_hdy },
@@ -456,7 +456,7 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
   { "ZA",    "S"UE"dafrika",                                    za_hdy },
   { "ZM",    "Sambia",                                          zm_hdy },
   { "ZW",    "Simbabwe",                                        zw_hdy },
-#  else /* !USE_DE */
+# else /* !USE_DE */
   { "AD",    N_("Andorra"),                                     ad_hdy },
   { "AE",    N_("United Arab Emirates"),                        ae_hdy },
   { "AF",    N_("Afghanistan"),                                 af_hdy },
@@ -801,7 +801,7 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
   { "ZA",    N_("South Africa"),                                za_hdy },
   { "ZM",    N_("Zambia"),                                      zm_hdy },
   { "ZW",    N_("Zimbabwe"),                                    zw_hdy },
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
 #endif /* !HD_TOP20CC */
   { NULL, NULL, NULL }
 };
@@ -1108,7 +1108,7 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
   { HD_WOMENS_SHROVE_DAY,                 "Weiberfastnacht" },
   { HD_WORLD_ANIMAL_DAY,                  "Welt-Tierschutztag" },
   { HD_YOUTH_DAY,                         "Tag der Jugend" }
-#  if !HD_TOP20CC
+# if !HD_TOP20CC
   /*
      This COMMA is necessary here!
   */
@@ -1382,7 +1382,7 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
   { HD_W_TUBMANS_BIRTHDAY,                "W. Tubmans Geburtstag" },
   { HD_YAP_DAY,                           "Yap-Tag" },
   { HD_DAY_OF_CZECH_STATEHOOD,            "Tag der Tschechische Staatlichkeit" }
-#  endif /* !HD_TOP20CC */
+# endif /* !HD_TOP20CC */
 #else /* !USE_DE */
   /*
      *** Translators, please keep in mind to translate all trailing
@@ -1675,7 +1675,7 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
   { HD_WOMENS_SHROVE_DAY,                 N_("Women's Shrove Day") },
   { HD_WORLD_ANIMAL_DAY,                  N_("World Animal Day") },
   { HD_YOUTH_DAY,                         N_("Youth Day") }
-#  if !HD_TOP20CC
+# if !HD_TOP20CC
   /*
      This COMMA is necessary here!
   */
@@ -1949,7 +1949,7 @@ static char rcsid[]="$Id: hd-data.c 3.01 2000/06/24 03:00:01 tom Exp $";
   { HD_W_TUBMANS_BIRTHDAY,                N_("W. Tubman's Birthday") },
   { HD_YAP_DAY,                           N_("Yap Day") },
   { HD_DAY_OF_CZECH_STATEHOOD,            N_("Day of Czech Statehood") }
-#  endif /* !HD_TOP20CC */
+# endif /* !HD_TOP20CC */
 #endif /* !USE_DE */
 };
 

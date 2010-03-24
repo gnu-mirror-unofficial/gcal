@@ -34,29 +34,29 @@ static char rcsid[]="$Id: file-io.c 3.01 2000/06/30 03:00:01 tom Exp $";
 */
 #include "tailor.h"
 #if HAVE_CTYPE_H
-#  include <ctype.h>
+# include <ctype.h>
 #endif
 #ifdef GCAL_SHELL
-#  if HAVE_UNISTD_H
-#    include <unistd.h>
-#  endif
+# if HAVE_UNISTD_H
+#  include <unistd.h>
+# endif
 #endif
 #if HAVE_SYS_STAT_H
-#  if HAVE_SYS_TYPES_H
-#    include <sys/types.h>
-#  endif
-#  include <sys/stat.h>
+# if HAVE_SYS_TYPES_H
+#  include <sys/types.h>
+# endif
+# include <sys/stat.h>
 #endif
 #include "common.h"
 #if USE_RC
-#  include "rc-defs.h"
+# include "rc-defs.h"
 #endif /* !USE_RC */
 #include "globals.h"
 #include "gcal.h"
 #include "hd-defs.h"
 #include "hd-use.h"
 #if USE_RC
-#  include "rc-utils.h"
+# include "rc-utils.h"
 #endif
 #include "tty.h"
 #include "utils.h"
@@ -158,7 +158,7 @@ file_open (filename, level, mode, bad_sys_include)
      resize_all_strings (len+1, FALSE, __FILE__, (long)__LINE__);
    strcpy(s1, *filename);
    ptr_char = *filename;
-#  ifdef DISK_SEP
+#ifdef DISK_SEP
    ptr_char = strchr(*filename, *DISK_SEP);
    if (ptr_char != (char *)NULL)
     {
@@ -166,14 +166,14 @@ file_open (filename, level, mode, bad_sys_include)
          If a disk/drive is specified, this is like an absolute file name!
       */
       is_absolute_filename = TRUE;
-#    if USE_RC
+# if USE_RC
       is_disk_given = TRUE;
-#    endif
+# endif
       ptr_char++;
     }
    else
      ptr_char = *filename;
-#  endif /* DISK_SEP */
+#endif /* DISK_SEP */
 #if USE_RC
    /*
       Check if an absolute file name is given.
@@ -297,10 +297,10 @@ file_open (filename, level, mode, bad_sys_include)
                    if (s1[len-1] != *DIR_SEP)
                      strcat(s1, DIR_SEP);
                  strcat(s1, *filename);
-#  ifdef SUFFIX_SEP
+# ifdef SUFFIX_SEP
                  if ((ptr_char=strchr(s1, *SUFFIX_SEP)) != (char *)NULL)
                    *ptr_char = '\0';
-#  endif
+# endif
                  if (*s1)
                    fp = get_file_ptr (fp, s1, level, mode, &is_first);
                  if (ok)
@@ -346,7 +346,7 @@ file_open (filename, level, mode, bad_sys_include)
    */
    if (mode == COmmon)
      return(fp);
-#  if USE_RC
+# if USE_RC
    if (fp == (FILE *)NULL)
     {
       /*
@@ -419,7 +419,7 @@ file_open (filename, level, mode, bad_sys_include)
          fp = get_file_ptr (fp, s1, level, mode, &is_first);
        }
     }
-#  endif /* USE_RC */
+# endif /* USE_RC */
 #else /* AMIGA && !__GNUC__ */
       /*
          It's not necessary to perform further searches for COmmon files,
@@ -427,7 +427,7 @@ file_open (filename, level, mode, bad_sys_include)
       */
       if (mode == COmmon)
         return(fp);
-#  if USE_RC
+# if USE_RC
       /*
          This part is for compilers/systems
            which do not support the `getenv()' function.
@@ -453,7 +453,7 @@ file_open (filename, level, mode, bad_sys_include)
          make_absolute_filename (&s1, GCAL_SYS_DATADIR, *filename);
          fp = get_file_ptr (fp, s1, level, mode, &is_first);
        }
-#  endif /* USE_RC */
+# endif /* USE_RC */
 #endif /* AMIGA && !__GNUC__ */
    /*
       If the file is found:
@@ -1438,31 +1438,31 @@ write_log_file (filename, mode, mode_txt, created_txt, argc, argv)
            break;
 #ifdef GCAL_SHELL
          case SCript:
-#  if HAVE_SYS_INTERPRETER
-#    if USE_DE
+# if HAVE_SYS_INTERPRETER
+#  if USE_DE
            len = fprintf(fp, "%c%s\n%c\n%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
                          *SHL_REM, SHELL, *SHL_REM, *SHL_REM, prgr_name, mode_txt, filename, created_txt,
                          true_day, short_month_name (true_month), true_year,
                          act_hour, time_sep, act_min, time_sep, act_sec);
-#    else /* !USE_DE */
+#  else /* !USE_DE */
            len = fprintf(fp, "%c%s\n%c\n%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
                          *SHL_REM, SHELL, *SHL_REM, *SHL_REM, prgr_name, mode_txt, filename, created_txt,
                          true_day, short_month_name (true_month), true_year,
                          act_hour, time_sep, act_min, time_sep, act_sec);
-#    endif /* !USE_DE */
-#  else /* !HAVE_SYS_INTERPRETER */
-#    if USE_DE
+#  endif /* !USE_DE */
+# else /* !HAVE_SYS_INTERPRETER */
+#  if USE_DE
            len = fprintf(fp, "%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
                          *SHL_REM, prgr_name, mode_txt, filename, created_txt,
                          true_day, short_month_name (true_month), true_year,
                          act_hour, time_sep, act_min, time_sep, act_sec);
-#    else /* !USE_DE */
+#  else /* !USE_DE */
            len = fprintf(fp, "%c `%s' %s `%s' --- %s %02d-%s-%04 %02d%s%02d%s%02d",
                          *SHL_REM, prgr_name, mode_txt, filename, created_txt,
                          true_day, short_month_name (true_month), true_year,
                          act_hour, time_sep, act_min, time_sep, act_sec);
-#    endif /* !USE_DE */
-#  endif /* !HAVE_SYS_INTERPRETER */
+#  endif /* !USE_DE */
+# endif /* !HAVE_SYS_INTERPRETER */
            if (tz != (char *)NULL)
              len = fprintf(fp, " %s", tz);
            len = fprintf(fp, "\n%c\n%s %c\n", *SHL_REM, prgr_name, *SHL_ESC);
@@ -1636,7 +1636,7 @@ get_file_ptr (fp, filename, level, mode, is_first)
      valid file pointer of that file, or NULL if this fails.
 */
 {
-#  if HAVE_SYS_STAT_H && defined(S_IFMT) && defined(S_IFREG)
+#if HAVE_SYS_STAT_H && defined(S_IFMT) && defined(S_IFREG)
    auto struct stat  statbuf;
 
 
@@ -1654,13 +1654,13 @@ get_file_ptr (fp, filename, level, mode, is_first)
      if (!stat(filename, &statbuf))
        if ((statbuf.st_mode & S_IFMT) == S_IFREG)
          fp = fopen(filename, "r");
-#  else  /* !HAVE_SYS_STAT_H || !S_IFMT || !S_IFREG */
+#else  /* !HAVE_SYS_STAT_H || !S_IFMT || !S_IFREG */
    if (   (*filename == '-')
        && (strlen(filename) == 1))
      fp = stdin;
    else
      fp = fopen(filename, "r");
-#  endif  /* !HAVE_SYS_STAT_H || !S_IFMT || !S_IFREG */
+#endif  /* !HAVE_SYS_STAT_H || !S_IFMT || !S_IFREG */
    if (   (warning_level >= 0)
        && (mode != REsponse)
        && (mode != COmmon))
@@ -1692,33 +1692,33 @@ get_file_ptr (fp, filename, level, mode, is_first)
            resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
          if (   mode == REsource
              || mode == HEre)
-#  if USE_DE
+# if USE_DE
            sprintf(s4, "Versuche%sRessourcendatei `%s' zu %sffnen... %s%s%s",
                    (mode == REsource) ? " " : " `HIER' ", filename, OE,
                    (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
                    (fp == (FILE *)NULL) ? "Versagt" : "Erfolg",
                    (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
-#  else /* !USE_DE */
+# else /* !USE_DE */
            sprintf(s4, _("Try to open%sresource file `%s'... %s%s%s"),
                    (mode == REsource) ? " " : _(" `HERE' "), filename,
                    (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
                    (fp == (FILE *)NULL) ? _("failed") : _("success"),
                    (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
          else
-#  if USE_DE
+# if USE_DE
            sprintf(s4, "Versuche (Ebene: %02d) Einf%sgedatei `%s' zu %sffnen... %s%s%s",
                    level, UE, filename, OE,
                    (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
                    (fp == (FILE *)NULL) ? "Versagt" : "Erfolg",
                    (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
-#  else /* !USE_DE */
+# else /* !USE_DE */
            sprintf(s4, _("Try to open (level: %02d) include file `%s'... %s%s%s"),
                    level, filename,
                    (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2s.seq : ehls1s.seq) : "",
                    (fp == (FILE *)NULL) ? _("failed") : _("success"),
                    (ehls1s.len != 1) ? ((fp == (FILE *)NULL) ? ehls2e.seq : ehls1e.seq) : "");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
          print_text (stderr, s4);
        }
     }

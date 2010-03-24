@@ -42,18 +42,18 @@
 
 
 #if USE_RC
-#  include "common.h"
-#  include "rc-defs.h"
-#  include "regexp.h"
-#  if !HAVE_STRCSPN
+# include "common.h"
+# include "rc-defs.h"
+# include "regexp.h"
+# if !HAVE_STRCSPN
 extern char *my_strcspn __P_((const char *s1, const char *s2));
-#  endif /* !HAVE_STRCSPN */
+# endif /* !HAVE_STRCSPN */
 
-#if 0
+# if 0
 #  include <stdio.h>
 #  include "regexp.h"
 char *strchr();
-#endif
+# endif
 
 /*
  * The "internal use only" fields in regexp.h are present to pass info from
@@ -92,22 +92,22 @@ char *strchr();
  */
 
 /* definition	number	opnd?	meaning */
-#undef EOL
-#define	END	0	/* no	End of program. */
-#define	BOL	1	/* no	Match "" at beginning of line. */
-#define	EOL	2	/* no	Match "" at end of line. */
-#define	ANY	3	/* no	Match any one character. */
-#define	ANYOF	4	/* str	Match any character in this string. */
-#define	ANYBUT	5	/* str	Match any character not in this string. */
-#define	BRANCH	6	/* node	Match this alternative, or the next... */
-#define	BACK	7	/* no	Match "", "next" ptr points backward. */
-#define	EXACTLY	8	/* str	Match this string. */
-#define	NOTHING	9	/* no	Match empty string. */
-#define	STAR	10	/* node	Match this (simple) thing 0 or more times. */
-#define	PLUS	11	/* node	Match this (simple) thing 1 or more times. */
-#define	OPEN	20	/* no	Mark this point in input as start of #n. */
+# undef EOL
+# define END	0	/* no	End of program. */
+# define BOL	1	/* no	Match "" at beginning of line. */
+# define EOL	2	/* no	Match "" at end of line. */
+# define ANY	3	/* no	Match any one character. */
+# define ANYOF	4	/* str	Match any character in this string. */
+# define ANYBUT	5	/* str	Match any character not in this string. */
+# define BRANCH	6	/* node	Match this alternative, or the next... */
+# define BACK	7	/* no	Match "", "next" ptr points backward. */
+# define EXACTLY	8	/* str	Match this string. */
+# define NOTHING	9	/* no	Match empty string. */
+# define STAR	10	/* node	Match this (simple) thing 0 or more times. */
+# define PLUS	11	/* node	Match this (simple) thing 1 or more times. */
+# define OPEN	20	/* no	Mark this point in input as start of #n. */
 			/*	OPEN+1 is number 1, etc. */
-#define	CLOSE	30	/* no	Analogous to OPEN. */
+# define CLOSE	30	/* no	Analogous to OPEN. */
 
 /*
  * Opcode notes:
@@ -141,9 +141,9 @@ char *strchr();
  * Using two bytes for the "next" pointer is vast overkill for most things,
  * but allows patterns to get big without disasters.
  */
-#define	OP(p)	(*(p))
-#define	NEXT(p)	(((*((p)+1)&0377)<<8) + (*((p)+2)&0377))
-#define	OPERAND(p)	((p) + 3)
+# define OP(p)	(*(p))
+# define NEXT(p)	(((*((p)+1)&0377)<<8) + (*((p)+2)&0377))
+# define OPERAND(p)	((p) + 3)
 
 /*
  * See regmagic.h for one further detail of program structure.
@@ -153,23 +153,23 @@ char *strchr();
 /*
  * Utility definitions.
  */
-#ifndef CHARBITS
-#define	UCHARAT(p)	((int)*(unsigned char *)(p))
-#else
-#define	UCHARAT(p)	((int)*(p)&CHARBITS)
-#endif
+# ifndef CHARBITS
+#  define UCHARAT(p)	((int)*(unsigned char *)(p))
+# else
+#  define UCHARAT(p)	((int)*(p)&CHARBITS)
+# endif
 
-#define	FAIL(m)	{ regerror(m); return(NULL); }
-#define	ISMULT(c)	((c) == '*' || (c) == '+' || (c) == '?')
-#define	META	"^$.[()|?+*\\"
+# define FAIL(m)	{ regerror(m); return(NULL); }
+# define ISMULT(c)	((c) == '*' || (c) == '+' || (c) == '?')
+# define META	"^$.[()|?+*\\"
 
 /*
  * Flags to be passed up and down.
  */
-#define	HASWIDTH	01	/* Known never to match null string. */
-#define	SIMPLE		02	/* Simple enough to be STAR/PLUS operand. */
-#define	SPSTART		04	/* Starts with * or +. */
-#define	WORST		0	/* Worst case. */
+# define HASWIDTH	01	/* Known never to match null string. */
+# define SIMPLE		02	/* Simple enough to be STAR/PLUS operand. */
+# define SPSTART		04	/* Starts with * or +. */
+# define WORST		0	/* Worst case. */
 
 /*
  * Global work variables for regcomp().
@@ -184,15 +184,15 @@ static long regsize;		/* Code size. */
  * The first byte of the regexp internal "program" is actually this magic
  * number; the start node begins in the second byte.
  */
-#define	MAGIC	0234
+# define MAGIC	0234
 
 
 /*
  * Forward declarations for regcomp()'s friends.
  */
-#ifndef STATIC
-#define	STATIC	static
-#endif
+# ifndef STATIC
+#  define STATIC	static
+# endif
 STATIC char *reg();
 STATIC char *regbranch();
 STATIC char *regpiece();
@@ -203,9 +203,9 @@ STATIC void regc();
 STATIC void reginsert();
 STATIC void regtail();
 STATIC void regoptail();
-#ifdef STRCSPN
+# ifdef STRCSPN
 STATIC int strcspn();
-#endif
+# endif
 
 /*
  - regcomp - compile a regular expression into internal code
@@ -233,11 +233,11 @@ char *exp;
 	int flags;
 
 	if (exp == NULL)
-#if USE_DE
+# if USE_DE
 		FAIL("NULL-Argument");
-#else /* !USE_DE */
+# else /* !USE_DE */
 		FAIL(_("NULL argument"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 
 	/* First pass: determine size, legality. */
 	regparse = exp;
@@ -250,20 +250,20 @@ char *exp;
 
 	/* Small enough for pointer-storage convention? */
 	if (regsize >= 32767L)		/* Probably could be 65535L. */
-#if USE_DE
+# if USE_DE
 		FAIL("regul"AE"rer Ausdruck zu gro"SZ);
-#else /* !USE_DE */
+# else /* !USE_DE */
 		FAIL(_("regexp too big"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 
 	/* Allocate space. */
 	r = (regexp *)malloc(sizeof(regexp) + (unsigned)regsize);
 	if (r == NULL)
-#if USE_DE
+# if USE_DE
 		FAIL("kein Speicherplatz");
-#else /* !USE_DE */
+# else /* !USE_DE */
 		FAIL(_("out of space"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 
 	/* Second pass: emit code. */
 	regparse = exp;
@@ -337,11 +337,11 @@ int *flagp;
 	/* Make an OPEN node, if parenthesized. */
 	if (paren) {
 		if (regnpar >= NSUBEXP)
-#if USE_DE
+# if USE_DE
 			FAIL("zu viele ()");
-#else /* !USE_DE */
+# else /* !USE_DE */
 			FAIL(_("too many ()"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 		parno = regnpar;
 		regnpar++;
 		ret = regnode(OPEN+parno);
@@ -380,24 +380,24 @@ int *flagp;
 
 	/* Check for proper termination. */
 	if (paren && *regparse++ != ')') {
-#if USE_DE
+# if USE_DE
 		FAIL("unpassende ()");
-#else /* !USE_DE */
+# else /* !USE_DE */
 		FAIL(_("unmatched ()"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 	} else if (!paren && *regparse != '\0') {
 		if (*regparse == ')') {
-#if USE_DE
+# if USE_DE
 			FAIL("unpassende ()");
-#else /* !USE_DE */
+# else /* !USE_DE */
 			FAIL(_("unmatched ()"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 		} else
-#if USE_DE
+# if USE_DE
 		FAIL("Plunder am Ende");  /* "Can't happen". */
-#else /* !USE_DE */
+# else /* !USE_DE */
 		FAIL(_("junk on end"));  /* "Can't happen". */
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 		/* NOTREACHED */
 	}
 
@@ -468,11 +468,11 @@ int *flagp;
 	}
 
 	if (!(flags&HASWIDTH) && op != '?')
-#if USE_DE
+# if USE_DE
 		FAIL("*+ Operand k"OE"nnte leer sein");
-#else /* !USE_DE */
+# else /* !USE_DE */
 		FAIL(_("*+ operand could be empty"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 	*flagp = (op != '+') ? (WORST|SPSTART) : (WORST|HASWIDTH);
 
 	if (op == '*' && (flags&SIMPLE))
@@ -503,11 +503,11 @@ int *flagp;
 	}
 	regparse++;
 	if (ISMULT(*regparse))
-#if USE_DE
+# if USE_DE
 		FAIL("geschachtelte *?+");
-#else /* !USE_DE */
+# else /* !USE_DE */
 		FAIL(_("nested *?+"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 
 	return(ret);
 }
@@ -560,11 +560,11 @@ int *flagp;
 						clss = UCHARAT(regparse-2)+1;
 						classend = UCHARAT(regparse);
 						if (clss > classend+1)
-#if USE_DE
+# if USE_DE
 							FAIL("ung"UE"ltiger [] Bereich");
-#else /* !USE_DE */
+# else /* !USE_DE */
 							FAIL(_("invalid [] range"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
             for (; clss <= classend; clss++)
 							regc(clss);
 						regparse++;
@@ -574,11 +574,11 @@ int *flagp;
 			}
 			regc('\0');
 			if (*regparse != ']')
-#if USE_DE
+# if USE_DE
 				FAIL("unpassende []");
-#else /* !USE_DE */
+# else /* !USE_DE */
 				FAIL(_("unmatched []"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 			regparse++;
 			*flagp |= HASWIDTH|SIMPLE;
 		}
@@ -592,30 +592,30 @@ int *flagp;
 	case '\0':
 	case '|':
 	case ')':
-#if USE_DE
+# if USE_DE
 		FAIL("internes Problem"); /* Supposed to be caught earlier. */
-#else /* !USE_DE */
+# else /* !USE_DE */
 		FAIL(_("internal urp")); /* Supposed to be caught earlier. */
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 		/* NOTREACHED */
 		break;
 	case '?':
 	case '+':
 	case '*':
-#if USE_DE
+# if USE_DE
 		FAIL("?+* wird von nichts gefolgt");
-#else /* !USE_DE */
+# else /* !USE_DE */
 		FAIL(_("?+* follows nothing"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 		/* NOTREACHED */
 		break;
 	case '\\':
 		if (*regparse == '\0')
-#if USE_DE
+# if USE_DE
 			FAIL("nachfolgendes \\");
-#else /* !USE_DE */
+# else /* !USE_DE */
 			FAIL(_("trailing \\"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 		ret = regnode(EXACTLY);
 		regc(*regparse++);
 		regc('\0');
@@ -628,11 +628,11 @@ int *flagp;
 			regparse--;
 			len = strcspn(regparse, META);
 			if (len <= 0)
-#if USE_DE
+# if USE_DE
 				FAIL("interne Katastrophe");
-#else /* !USE_DE */
+# else /* !USE_DE */
 				FAIL(_("internal disaster"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 			ender = *(regparse+len);
 			if (len > 1 && ISMULT(ender))
 				len--;		/* Back off clear of ?+* operand. */
@@ -786,11 +786,11 @@ STATIC int regtry();
 STATIC int regmatch();
 STATIC int regrepeat();
 
-#ifdef DEBUG
+# ifdef DEBUG
 int regnarrate = 0;
 void regdump();
 STATIC char *regprop();
-#endif
+# endif
 
 /*
  - regexec - match a regexp against a string
@@ -804,21 +804,21 @@ register char *string;
 
 	/* Be paranoid... */
 	if (prog == NULL || string == NULL) {
-#if USE_DE
+# if USE_DE
 		regerror("NULL-Parameter");
-#else /* !USE_DE */
+# else /* !USE_DE */
 		regerror(_("NULL parameter"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 		return(0);
 	}
 
 	/* Check validity of program. */
 	if (UCHARAT(prog->program) != MAGIC) {
-#if USE_DE
+# if USE_DE
 		regerror("Programm verdorben");
-#else /* !USE_DE */
+# else /* !USE_DE */
 		regerror(_("corrupted program"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 		return(0);
 	}
 
@@ -909,15 +909,15 @@ char *prog;
 	char *next;		/* Next node. */
 
 	scan = prog;
-#ifdef DEBUG
+# ifdef DEBUG
 	if (scan != NULL && regnarrate)
 		fprintf(stderr, "%s(\n", regprop(scan));
-#endif
+# endif
 	while (scan != NULL) {
-#ifdef DEBUG
+# ifdef DEBUG
 		if (regnarrate)
 			fprintf(stderr, "%s...\n", regprop(scan));
-#endif
+# endif
 		next = regnext(scan);
 
 		switch (OP(scan)) {
@@ -1074,11 +1074,11 @@ char *prog;
 			/* NOTREACHED */
 			break;
 		default:
-#if USE_DE
+# if USE_DE
 			regerror("Speicher verdorben");
-#else /* !USE_DE */
+# else /* !USE_DE */
 			regerror(_("memory corruption"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
       return(0);
 			/* NOTREACHED */
 			break;
@@ -1091,11 +1091,11 @@ char *prog;
 	 * We get here only if there's trouble -- normally "case END" is
 	 * the terminating point.
 	 */
-#if USE_DE
+# if USE_DE
 	regerror("Programmzeiger verdorben");
-#else /* !USE_DE */
+# else /* !USE_DE */
 	regerror(_("corrupted pointers"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 	return(0);
 }
 
@@ -1136,11 +1136,11 @@ char *p;
 		}
 		break;
 	default:		/* Oh dear.  Called inappropriately. */
-#if USE_DE
+# if USE_DE
 		regerror("interne Kollision");
-#else /* !USE_DE */
+# else /* !USE_DE */
 		regerror(_("internal foulup"));
-#endif /* !USE_DE */
+# endif /* !USE_DE */
 		count = 0;	/* Best compromise. */
 		break;
 	}
@@ -1171,7 +1171,7 @@ register char *p;
 		return(p+offset);
 }
 
-#ifdef DEBUG
+# ifdef DEBUG
 
 STATIC char *regprop();
 
@@ -1210,23 +1210,23 @@ regexp *r;
 
 	/* Header fields of interest. */
 	if (r->regstart != '\0')
-#if USE_DE
+#  if USE_DE
 		printf("Start `%c' ", r->regstart);
-#else /* !USE_DE */
+#  else /* !USE_DE */
 		printf(_("start `%c' "), r->regstart);
-#endif /* !USE_DE */
+#  endif /* !USE_DE */
 	if (r->reganch)
-#if USE_DE
+#  if USE_DE
 		printf("verankert ");
-#else /* !USE_DE */
+#  else /* !USE_DE */
 		printf(_("anchored "));
-#endif /* !USE_DE */
+#  endif /* !USE_DE */
 	if (r->regmust != NULL)
-#if USE_DE
+#  if USE_DE
 		printf("mu%s haben \"%s\"", SZ, r->regmust);
-#else /* !USE_DE */
+#  else /* !USE_DE */
 		printf(_("must have \"%s\""), r->regmust);
-#endif /* !USE_DE */
+#  endif /* !USE_DE */
 	printf("\n");
 }
 
@@ -1304,16 +1304,16 @@ char *op;
 		p = "PLUS";
 		break;
 	default:
-#if USE_DE
+#  if USE_DE
 		regerror("Operationskode verdorben");
-#else /* !USE_DE */
+#  else /* !USE_DE */
 		regerror(_("corrupted opcode"));
-#endif /* !USE_DE */
+#  endif /* !USE_DE */
 		break;
 	}
 	if (p != NULL)
 		(void) strcat(buf, p);
 	return(buf);
 }
-#endif
+# endif
 #endif /* USE_RC */

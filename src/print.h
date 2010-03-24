@@ -1,5 +1,5 @@
 #ifndef __PRINT_H
-#  define __PRINT_H
+# define __PRINT_H
 /*
 *  print.h:  Create, construct and print the calendar sheet(s) header file.
 *

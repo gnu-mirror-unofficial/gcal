@@ -32,38 +32,38 @@
 
 
 #if USE_RC
-#  ifdef RCSID
+# ifdef RCSID
 static char rcsid[]="$Id: rc-insert.c 3.01 2000/06/20 03:00:01 tom Exp $";
-#  endif
+# endif
 
 
 
 /*
 *  Include header files.
 */
-#  if HAVE_CTYPE_H
-#    include <ctype.h>
-#  endif
-#  if TIME_WITH_SYS_TIME
-#    include <sys/time.h>
-#    include <time.h>
-#  else /* !TIME_WITH_SYS_TIME */
-#    if HAVE_SYS_TIME_H
-#      include <sys/time.h>
-#    else /* !HAVE_SYS_TIME_H */
-#      include <time.h>
-#    endif /* !HAVE_SYS_TIME_H */
-#  endif /* !TIME_WITH_SYS_TIME */
-#  include "common.h"
-#  include "rc-defs.h"
-#  include "globals.h"
-#  include "hd-astro.h"
-#  include "hd-use.h"
-#  include "rc-astro.h"
-#  include "rc-utils.h"
-#  include "tty.h"
-#  include "utils.h"
-#  include "rc-insert.h"
+# if HAVE_CTYPE_H
+#  include <ctype.h>
+# endif
+# if TIME_WITH_SYS_TIME
+#  include <sys/time.h>
+#  include <time.h>
+# else /* !TIME_WITH_SYS_TIME */
+#  if HAVE_SYS_TIME_H
+#   include <sys/time.h>
+#  else /* !HAVE_SYS_TIME_H */
+#   include <time.h>
+#  endif /* !HAVE_SYS_TIME_H */
+# endif /* !TIME_WITH_SYS_TIME */
+# include "common.h"
+# include "rc-defs.h"
+# include "globals.h"
+# include "hd-astro.h"
+# include "hd-use.h"
+# include "rc-astro.h"
+# include "rc-utils.h"
+# include "tty.h"
+# include "utils.h"
+# include "rc-insert.h"
 
 
 
@@ -1584,28 +1584,28 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems, len_date, 
                               */
                               if (the_time >= HOURS_PER_HALF_DAY)
                                {
-#  if USE_DE
+# if USE_DE
                                  time_suffix = RC_PM_TXT;
-#  else /* !USE_DE */
+# else /* !USE_DE */
                                  /*
                                     *** Translators, please translate this as a fixed 2-character text.
                                     *** This text should be a proper abbreviation of "post meridiem".
                                  */
                                  time_suffix = _("pm");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                                  if (!is_am_pm)
                                    the_time -= HOURS_PER_HALF_DAY;
                                }
                               else
-#  if USE_DE
+# if USE_DE
                                 time_suffix = RC_AM_TXT;
-#  else /* !USE_DE */
+# else /* !USE_DE */
                                 /*
                                    *** Translators, please translate this as a fixed 2-character text.
                                    *** This text should be a proper abbreviation of "ante meridiem".
                                 */
                                 time_suffix =  _("am");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                             }
                            if (transform_year)
                             {
@@ -1867,39 +1867,39 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems, len_date, 
                                }
                         }
                        if (astronomical_object == AOBJ_NONE)
-#  if USE_DE
+# if USE_DE
                          sep = DEGREEVAL_SEP;
-#  else /* !USE_DE */
+# else /* !USE_DE */
                          /*
                             *** Translators, please translate this as a fixed 2-character text.
                             *** This text should contain the proper abbreviations for "degrees" and "minutes".
                          */
                          sep = _("d'\"");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                        else
                          if (   is_rise_set
                              && (aobj_oformat[aobj_mode][astronomical_object].error_format == ERR_DDD))
-#  if USE_DE
+# if USE_DE
                            sep = DEGREEVAL_SEP;
-#  else /* !USE_DE */
+# else /* !USE_DE */
                            /*
                               *** Translators, please translate this as a fixed 3-character text.
                               *** This text should contain the proper abbreviations for "degrees", "minutes" and "seconds".
                            */
                            sep = _("d'\"");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                          else
                            if (   !is_rise_set
                                || aobj_oformat[aobj_mode][astronomical_object].error_format == ERR_TTT)
-#  if USE_DE
+# if USE_DE
                              sep = TIMEVAL_SEP;
-#  else /* !USE_DE */
+# else /* !USE_DE */
                              /*
                                 *** Translators, please translate this as a fixed 3-character text.
                                 *** This text should contain the proper abbreviations for "hours", "minutes" and "seconds".
                              */
                              sep = _("h'\"");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                            else
                              sep = time_sep;
 LABEL_get_second_coordinate:
@@ -2601,27 +2601,27 @@ LABEL_get_second_coordinate:
                                          */
                                          if (the_time >= HOURS_PER_HALF_DAY)
                                           {
-#  if USE_DE
+# if USE_DE
                                             time_suffix = RC_PM_TXT;
-#  else /* !USE_DE */
+# else /* !USE_DE */
                                             /*
                                                *** Translators, please translate this as a fixed 2-character text.
                                                *** This text should be a proper abbreviation of "post meridiem".
                                             */
                                             time_suffix = _("pm");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                                             the_time -= HOURS_PER_HALF_DAY;
                                           }
                                          else
-#  if USE_DE
+# if USE_DE
                                            time_suffix = RC_AM_TXT;
-#  else /* !USE_DE */
+# else /* !USE_DE */
                                            /*
                                               *** Translators, please translate this as a fixed 2-character text.
                                               *** This text should be a proper abbreviation of "ante meridiem".
                                            */
                                            time_suffix = _("am");
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                                          state = strlen(time_suffix);
                                        }
                                       else
@@ -3018,9 +3018,9 @@ LABEL_get_second_coordinate:
                           }
                          s2[i] = '\0';
                          j--;
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
                          ptr_env = getenv(s2);
-#  endif /* !AMIGA || __GNUC__ */
+# endif /* !AMIGA || __GNUC__ */
                          /*
                             Insert the contents of environment variable into text.
                          */
@@ -3391,12 +3391,12 @@ LABEL_get_second_coordinate:
              && (rc_filter_text != (char *)NULL)
              && (line_number != SPECIAL_VALUE))
           {
-#  if HAVE_GNU_RE_COMPILE_PATTERN
+# if HAVE_GNU_RE_COMPILE_PATTERN
             print_line = (Bool)(re_search(&regpattern, s6, kk, 0, kk, (struct re_registers *)NULL) >= 0);
-#  else /* !HAVE_GNU_RE_COMPILE_PATTERN */
-#    if HAVE_POSIX_REGCOMP
+# else /* !HAVE_GNU_RE_COMPILE_PATTERN */
+#  if HAVE_POSIX_REGCOMP
             static regmatch_t  rm_dummy;
-#    endif
+#  endif
 
 
             if (rc_ignore_case_flag)
@@ -3408,22 +3408,22 @@ LABEL_get_second_coordinate:
                for ( ; *ptr_char ; ptr_char++)
                  *ptr_char = (char)tolower(*ptr_char);
              }
-#    if HAVE_POSIX_REGCOMP
+#  if HAVE_POSIX_REGCOMP
             print_line = (Bool)!regexec(&regpattern, s6, 1, &rm_dummy, 0);
-#    endif
-#    if HAVE_RE_COMP
+#  endif
+#  if HAVE_RE_COMP
             print_line = (Bool)(re_exec(s6) == 1);
-#    endif
-#    if HAVE_REGCMP
+#  endif
+#  if HAVE_REGCMP
             print_line = (Bool)(regex(cpattern, s6) != (char *)NULL);
-#    endif
-#    if HAVE_V8_REGCOMP
+#  endif
+#  if HAVE_V8_REGCOMP
             print_line = (Bool)regexec(regpattern, s6);
-#    endif
-#    if NO_REGEX
+#  endif
+#  if NO_REGEX
             print_line = (Bool)(strstr(s6, rc_filter_text) != (char *)NULL);
-#    endif
-#  endif /* !HAVE_GNU_RE_COMPILE_PATTERN */
+#  endif
+# endif /* !HAVE_GNU_RE_COMPILE_PATTERN */
             if (rc_revert_match_flag)
               print_line = !print_line;
           }
@@ -3449,13 +3449,13 @@ LABEL_get_second_coordinate:
                   /*
                      Error, `system()' function failed.
                   */
-#  if USE_DE
+# if USE_DE
                   sprintf(s2, "Kommando kann nicht ausf%shrt werden in Datei `%s'\nZeile %ld: %s",
                           UE, filename, line_number, the_text+kpos+j_diff+2);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                   sprintf(s2, _("Cannot execute command in file `%s'\nLine: %ld %s"),
                           filename, line_number, the_text+kpos+j_diff+2);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                   print_text (stderr, s2);
                   if (warning_level >= WARN_LVL_MAX)
                    {
@@ -3471,13 +3471,13 @@ LABEL_get_second_coordinate:
                   /*
                      Report the exit code of command executed by the `system()' function.
                   */
-#  if USE_DE
+# if USE_DE
                   sprintf(s2, "Kommando ausgef%shrt (Status=%d) in Datei `%s'\nZeile %ld: %s",
                           UE, i, filename, line_number, s1+kpos+j_diff+2);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                   sprintf(s2, _("Command executed (exit code=%d) in file `%s'\nLine %ld: %s"),
                           i, filename, line_number, s1+kpos+j_diff+2);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                   print_text (stderr, s2);
                   /*
                      The command executed by the `system()' function returned

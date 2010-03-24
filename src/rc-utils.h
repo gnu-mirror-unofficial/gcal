@@ -1,5 +1,5 @@
 #ifndef __RC_UTILS_H
-#  define __RC_UTILS_H
+# define __RC_UTILS_H
 /*
 *  rc-utils.h:  Pool of special functions necessary for managing the fixed dates header file.
 *
@@ -38,7 +38,7 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `rc-utils.c'.
 */
-#  if HAVE_V8_REGCOMP
+# if HAVE_V8_REGCOMP
 extern void
 regerror __P_((char *msg));
 # endif

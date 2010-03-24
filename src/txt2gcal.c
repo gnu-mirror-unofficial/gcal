@@ -28,28 +28,28 @@ static char rcsid[]="$Id: txt2gcal.c 3.06 2000/06/14 03:00:06 tom Exp $";
 
 #include "tailor.h"
 #if HAVE_ASSERT_H
-#  include <assert.h>
+# include <assert.h>
 #endif
 #if HAVE_CTYPE_H
-#  include <ctype.h>
+# include <ctype.h>
 #endif
 #if HAVE_ERRNO_H
-#  include <errno.h>
+# include <errno.h>
 #endif
 #if (!HAVE_SIGNAL_H || !HAVE_SIGNAL) && HAVE_SYS_TYPES_H
 /* Otherwise "gcal.h" includes <sys/types.h>. */
-#  include <sys/types.h>
+# include <sys/types.h>
 #endif
 #if HAVE_SYS_STAT_H
-#  include <sys/stat.h>
+# include <sys/stat.h>
 #endif
 #ifndef USE_RC
-#  define  USE_RC  1
+# define USE_RC  1
 #else
-#  if !USE_RC
-#    undef  USE_RC
-#    define  USE_RC  1
-#  endif
+# if !USE_RC
+#  undef  USE_RC
+#  define USE_RC  1
+# endif
 #endif
 #include "common.h"
 #include "rc-defs.h"
@@ -349,11 +349,11 @@ handle_signal (the_signal)
 */
 {
    fflush(stdout);
-#if USE_DE
+# if USE_DE
    fprintf(stderr, "\n%s: Programmabbruch durch Signal %d\n", prgr_name, the_signal);
-#else /* !USE_DE */
+# else /* !USE_DE */
    fprintf(stderr, _("\n%s: program aborted by signal %d\n"), prgr_name, the_signal);
-#endif /* !USE_DE */
+# endif /* !USE_DE */
    exit(ERR_TERMINATION_BY_SIGNAL);
 }
 #endif /* HAVE_SIGNAL && (SIGINT || SIGTERM || SIGHUP) */
@@ -639,12 +639,12 @@ main (argc, argv)
    /*
       Now initialize the NLS functions.
    */
-#  if HAVE_SETstaticE
+# if HAVE_SETstaticE
    setlocale(LC_ALL, "");
-#  endif
-#  ifndef staticEDIR
-#    define staticEDIR  NULL
-#  endif
+# endif
+# ifndef staticEDIR
+#  define staticEDIR  NULL
+# endif
    bindtextdomain(PACKAGE, staticEDIR);
    textdomain(PACKAGE);
 #endif
@@ -654,19 +654,19 @@ main (argc, argv)
         based on "two complements".
    */
 #ifdef DJG
-#  ifdef SHRT_MAX
+# ifdef SHRT_MAX
    testval = SHRT_MAX;
-#  else /* !SHRT_MAX */
+# else /* !SHRT_MAX */
    testval = ~0;
    testval >>= 1;
-#  endif /* !SHRT_MAX */
+# endif /* !SHRT_MAX */
 #else /* !DJG */
-#  ifdef INT_MAX
+# ifdef INT_MAX
    testval = INT_MAX;
-#  else /* !INT_MAX */
+# else /* !INT_MAX */
    testval = ~0;
    testval >>= 1;
-#  endif /* !INT_MAX */
+# endif /* !INT_MAX */
 #endif /* !DJG */
 #if HAVE_ASSERT_H
    /*
@@ -747,18 +747,18 @@ main (argc, argv)
       Now let's modify the signal handling a bit to make sure that
         temporary files are always deleted if such signals are raised.
    */
-#  ifdef SIGINT
+# ifdef SIGINT
    if (signal(SIGINT, SIG_IGN) != SIG_IGN)
      (void)signal(SIGINT, (Sig_type)handle_signal);
-#  endif
-#  ifdef SIGTERM
+# endif
+# ifdef SIGTERM
    if (signal(SIGTERM, SIG_IGN) != SIG_IGN)
      (void)signal(SIGTERM, (Sig_type)handle_signal);
-#  endif
-#  ifdef SIGHUP
+# endif
+# ifdef SIGHUP
    if (signal(SIGHUP, SIG_IGN) != SIG_IGN)
      (void)signal(SIGHUP, (Sig_type)handle_signal);
-#  endif
+# endif
 #endif /* HAVE_SIGNAL */
    if (argc > 1)
     {
@@ -827,20 +827,20 @@ main (argc, argv)
       sprintf(s1, "%s: `%s' ", prgr_name, argv[1]);
 #if HAVE_ERRNO_H
       if (!is_regular_file)
-#  if USE_DE
+# if USE_DE
         fprintf(stderr, "%s: keine regul%sre Datei\n", s1, AE);
-#  else /* !USE_DE */
+# else /* !USE_DE */
         fprintf(stderr, _("%s: no regular file\n"), s1);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       else
         perror(s1);
       exit(EXIT_FAILURE);
 #else /* !HAVE_ERRNO_H */
-#  if USE_DE
+# if USE_DE
       fprintf(stderr, "%s: Datei nicht gefunden\n", s1);
-#  else /* !USE_DE */
+# else /* !USE_DE */
       fprintf(stderr, _("%s: file not found\n"), s1);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       exit(ERR_FILE_NOT_FOUND);
 #endif /* !HAVE_ERRNO_H */
     }

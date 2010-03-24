@@ -1,5 +1,5 @@
 #ifndef __FILE_IO_H
-#  define __FILE_IO_H
+# define __FILE_IO_H
 /*
 *  file-io.h:  Managing and accessing resource, include and response files header file.
 *

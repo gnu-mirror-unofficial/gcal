@@ -1,5 +1,5 @@
 #ifndef __GLOBALS_H
-#  define __GLOBALS_H
+# define __GLOBALS_H
 /*
 *  globals.h:  Declarations of all GLOBAL common variables used
 *              (except all common variables that depend to the RC section).
@@ -388,17 +388,17 @@ extern Bool  use_year_zeroleaded;
 
 
 
-#  ifdef DJG
+# ifdef DJG
 /* Set to SHRT_MAX for checking the maximum table range. */
 extern Usint  testval;
-#  else /* !DJG */
+# else /* !DJG */
 /* Set to INT_MAX for checking the maximum table range. */
 extern Uint  testval;
-#  endif /* !DJG */
+# endif /* !DJG */
 
 
 
-#  ifdef GCAL_EMAIL
+# ifdef GCAL_EMAIL
 /* Temporary file which is send by the mailer. */
 extern FILE  *tfp;
 
@@ -407,25 +407,25 @@ extern char  *tfn;
 
 /* Email address Gcal's output is send to. */
 extern char  *email_adr;
-#  endif /* GCAL_EMAIL */
+# endif /* GCAL_EMAIL */
 
 
 
-#  ifdef GCAL_EPAGER
+# ifdef GCAL_EPAGER
 /* Name of external pager program. */
 extern char  *ext_pager;
-#  endif /* GCAL_EPAGER */
+# endif /* GCAL_EPAGER */
 
 
 
-#  ifdef GCAL_NLS
+# ifdef GCAL_NLS
 /* Support of English language? */
 extern Bool  is_en;
-#  endif /* GCAL_NLS */
+# endif /* GCAL_NLS */
 
 
 
-#  if USE_PAGER
+# if USE_PAGER
 /* Number of tty columns. */
 extern int  tty_cols;
 
@@ -434,12 +434,12 @@ extern int  tty_rows;
 
 /* `-p'. */
 extern Bool  pager_flag;
-#  endif /* USE_PAGER */
+# endif /* USE_PAGER */
 
 
 
-#  if (USE_PAGER || USE_HLS) && defined(GCAL_TCAP)
-#    if MUST_DCL_OSPEED && USE_HLS
+# if (USE_PAGER || USE_HLS) && defined(GCAL_TCAP)
+#  if MUST_DCL_OSPEED && USE_HLS
 /* Terminal output baud rate. */
 extern short  ospeed;
 
@@ -447,12 +447,12 @@ extern short  ospeed;
    On Solaris2, sys/types.h #includes sys/reg.h, which #defines PC.
    Unfortunately, PC is a global variable used by the Termcap library.
 */
-#      ifdef PC
-#        undef PC
-#      endif
+#   ifdef PC
+#    undef PC
+#   endif
 
 /* Padding character. */
 extern char  PC;
-#    endif /* MUST_DCL_OSPEED && USE_HLS */
-#  endif /* (USE_PAGER || USE_HLS) && GCAL_TCAP */
+#  endif /* MUST_DCL_OSPEED && USE_HLS */
+# endif /* (USE_PAGER || USE_HLS) && GCAL_TCAP */
 #endif /* __GLOBALS_H */

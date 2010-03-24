@@ -1,5 +1,5 @@
 #ifndef __HD_DATA3_H
-#  define __HD_DATA3_H
+# define __HD_DATA3_H
 /*
 *  hd-data3.h:  All other D-L countries data which is composed into the
 *               eternal holiday list header file.

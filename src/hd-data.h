@@ -1,5 +1,5 @@
 #ifndef __HD_DATA_H
-#  define __HD_DATA_H
+# define __HD_DATA_H
 /*
 *  hd-data.h:  All data which is composed into the eternal holiday list header file.
 *

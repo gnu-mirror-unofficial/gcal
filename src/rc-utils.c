@@ -33,35 +33,35 @@
 
 
 #if USE_RC
-#  ifdef RCSID
+# ifdef RCSID
 static char rcsid[]="$Id: rc-utils.c 3.01 2000/06/14 03:00:01 tom Exp $";
-#  endif
+# endif
 
 
 
 /*
 *  Include header files.
 */
-#  if HAVE_CTYPE_H
-#    include <ctype.h>
-#  endif
-#  if HAVE_UNISTD_H
-#    include <unistd.h>
-#  endif
-#  if HAVE_MATH_H && HAVE_LIBM
-#    include <math.h>
-#  endif
-#  include "common.h"
-#  include "rc-defs.h"
-#  include "globals.h"
-#  include "file-io.h"
-#  include "hd-astro.h"
-#  include "hd-use.h"
-#  include "help.h"
-#  include "rc-astro.h"
-#  include "tty.h"
-#  include "utils.h"
-#  include "rc-utils.h"
+# if HAVE_CTYPE_H
+#  include <ctype.h>
+# endif
+# if HAVE_UNISTD_H
+#  include <unistd.h>
+# endif
+# if HAVE_MATH_H && HAVE_LIBM
+#  include <math.h>
+# endif
+# include "common.h"
+# include "rc-defs.h"
+# include "globals.h"
+# include "file-io.h"
+# include "hd-astro.h"
+# include "hd-use.h"
+# include "help.h"
+# include "rc-astro.h"
+# include "tty.h"
+# include "utils.h"
+# include "rc-utils.h"
 
 
 
@@ -85,7 +85,7 @@ __END_DECLARATIONS
 /*
 *  Function implementations.
 */
-#  if HAVE_V8_REGCOMP
+# if HAVE_V8_REGCOMP
     void
 regerror (msg)
    char *msg;
@@ -95,7 +95,7 @@ regerror (msg)
 {
    my_error (ERR_INVALID_REGEX_PATTERN, msg, 0L, rc_filter_text, 0);
 }
-#  endif /* HAVE_V8_REGCOMP */
+# endif /* HAVE_V8_REGCOMP */
 
 
 
@@ -414,25 +414,25 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
         is_range = TRUE;
       ch = *ptr_date_text;
       *ptr_date_text = '\0';
-#  if USE_DE
+# if USE_DE
       (void)rc_get_date (ptr_char, lptrs3, FALSE, &is_weekday_mode, &dd, &mm, &yy, &nn,
                          &len, &hhc, &hhn, &hhwd, INTERNAL_TXT, -1L, date_text, FALSE);
-#  else /* !USE_DE */
+# else /* !USE_DE */
       (void)rc_get_date (ptr_char, lptrs3, FALSE, &is_weekday_mode, &dd, &mm, &yy, &nn,
                          &len, &hhc, &hhn, &hhwd, _("Internal"), -1L, date_text, FALSE);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       /*
          Error, invalid date encoded.
       */
       if (yy == SPECIAL_VALUE)
        {
-#  if USE_DE
+# if USE_DE
          fprintf(stderr, "%s: ung%sltiges Datum angegeben -- %s\n%s\n%s\n",
                  prgr_name, UE, date_text, usage_msg (), lopt_msg ());
-#  else /* !USE_DE */
+# else /* !USE_DE */
          fprintf(stderr, _("%s: invalid date given -- %s\n%s\n%s\n"),
                  prgr_name, date_text, usage_msg (), lopt_msg ());
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
          my_exit (ERR_INVALID_OPTION);
        }
       *ptr_date_text = ch;
@@ -444,22 +444,22 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
            ptr_date_text++;
          ch = *ptr_date_text;
          *ptr_date_text = '\0';
-#  if USE_DE
+# if USE_DE
          (void)rc_get_date (ptr_char, lptrs3, FALSE, &ris_weekday_mode, &rdd, &rmm, &ryy, &rnn,
                             &rlen, &rhc, &rhn, &rhwd, INTERNAL_TXT, -1L, date_text, FALSE);
-#  else /* !USE_DE */
+# else /* !USE_DE */
          (void)rc_get_date (ptr_char, lptrs3, FALSE, &ris_weekday_mode, &rdd, &rmm, &ryy, &rnn,
                             &rlen, &rhc, &rhn, &rhwd, _("Internal"), -1L, date_text, FALSE);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
          if (ryy == SPECIAL_VALUE)
           {
-#  if USE_DE
+# if USE_DE
             fprintf(stderr, "%s: ung%sltiges Datum angegeben -- %s\n%s\n%s\n",
                     prgr_name, UE, date_text, usage_msg (), lopt_msg ());
-#  else /* !USE_DE */
+# else /* !USE_DE */
             fprintf(stderr, _("%s: invalid date given -- %s\n%s\n%s\n"),
                     prgr_name, date_text, usage_msg (), lopt_msg ());
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
             my_exit (ERR_INVALID_OPTION);
           }
          *ptr_date_text = ch;
@@ -930,16 +930,16 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len, h
      */
      if (   isalpha(*the_line)
          && (   isupper(str7[i-1])
-#  if USE_EASC
+# if USE_EASC
              || str7[i-1] == *AE
              || str7[i-1] == *OE
              || str7[i-1] == *UE
              || str7[i-1] == *AAE
              || str7[i-1] == *OOE
              || str7[i-1] == *UUE
-#  else /* !USE_EASC */
+# else /* !USE_EASC */
              || str7[i-1] == '"'
-#  endif /* !USE_EASC */
+# endif /* !USE_EASC */
              || islower(str7[i-1])))
        str7[i++] = *the_line++;
    str7[i] = '\0';
@@ -2631,7 +2631,7 @@ set_tvar (line_buffer, filename, line_number, mode)
                         /*
                            Detect the name of the Txt2gcal executable.
                         */
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
                         txt2gcal_prgr = getenv(ENV_VAR_TXT2GCALPROG);
                         if (txt2gcal_prgr != (char *)NULL)
                          {
@@ -2639,7 +2639,7 @@ set_tvar (line_buffer, filename, line_number, mode)
                              txt2gcal_prgr = TXT2GCAL_PRGR;
                          }
                         else
-#  endif /* !AMIGA || __GNUC__ */
+# endif /* !AMIGA || __GNUC__ */
                           txt2gcal_prgr = TXT2GCAL_PRGR;
                       }
                      i += (  strlen(PIPELINE) + strlen(txt2gcal_prgr)
@@ -2668,13 +2668,13 @@ set_tvar (line_buffer, filename, line_number, mode)
                         /*
                            Error, `system()' function failed.
                         */
-#  if USE_DE
+# if USE_DE
                         sprintf(s5, "Kommando kann nicht ausf%shrt werden in Datei `%s'\nZeile %ld: %s",
                                 UE, filename, line_number, the_command);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                         sprintf(s5, _("Cannot execute command in file `%s'\nLine: %ld %s"),
                                 filename, line_number, the_command);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                         print_text (stderr, s5);
                         if (warning_level >= WARN_LVL_MAX)
                          {
@@ -2691,13 +2691,13 @@ set_tvar (line_buffer, filename, line_number, mode)
                         /*
                            Report the exit code of command executed by the `system()' function.
                         */
-#  if USE_DE
+# if USE_DE
                         sprintf(s5, "Kommando ausgef%shrt (Status=%d) in Datei `%s'\nZeile %ld: %s",
                                 UE, i, filename, line_number, the_command);
-#  else /* !USE_DE */
+# else /* !USE_DE */
                         sprintf(s5, _("Command executed (exit code=%d) in file `%s'\nLine %ld: %s"),
                                 i, filename, line_number, the_command);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
                         print_text (stderr, s5);
                         /*
                            The command executed by the `system()' function returned
@@ -3340,19 +3340,19 @@ manage_leap_day (day, month, year, line_buffer, filename, line_number)
          action = (int)strlen(filename) + LEN_SINGLE_LINE;
          if ((Uint)action >= maxlen_max)
            resize_all_strings (action+1, FALSE, __FILE__, (long)__LINE__);
-#  if USE_DE
+# if USE_DE
          sprintf(s5, "Schalttag auf `%02d-%s' gesetzt in Datei `%s'.",
                  *day, month_name (*month), filename);
-#  else /* !USE_DE */
+# else /* !USE_DE */
          sprintf(s5, _("Leap-day set to `%02d-%s' in file `%s'."),
                  *day, month_name (*month), filename);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
          print_text (stderr, s5);
-#  if USE_DE
+# if USE_DE
          sprintf(s5, "Zeile %ld: %s", line_number, line_buffer);
-#  else /* !USE_DE */
+# else /* !USE_DE */
          sprintf(s5, _("Line %ld: %s"), line_number, line_buffer);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
          print_text (stderr, s5);
        }
     }
@@ -3411,7 +3411,7 @@ biorhythm (create_bar, axis_len, string,
       auto char  *ptr_string;
 
 
-#if 0
+# if 0
       /*
          Decrease `axis_len' by 1 until it divides 100 without a remainder.
       */
@@ -3422,7 +3422,7 @@ biorhythm (create_bar, axis_len, string,
       else
         while (100 % axis_len)
           axis_len--;
-#endif /* 0 */
+# endif /* 0 */
       /*
          Initialize the biorhythm text graphics bar.
       */
@@ -3730,11 +3730,11 @@ var_warning (exit_status, var_name, line_buffer, filename, line_number)
       print_text (stderr, s5);
     }
    if (warning_level >= WARN_LVL_MAX)
-#  if USE_DE
+# if USE_DE
      fprintf(stderr, "%s: Abbruch, ", prgr_name);
-#  else /* !USE_DE */
+# else /* !USE_DE */
      fprintf(stderr, _("%s: abort, "), prgr_name);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
    i = (int)strlen(filename) + LEN_SINGLE_LINE;
    if ((Uint)i >= maxlen_max)
      resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
@@ -3742,53 +3742,53 @@ var_warning (exit_status, var_name, line_buffer, filename, line_number)
     {
       case ERR_ILLEGAL_VAR_DEFINITION:
         if (line_number)
-#  if USE_DE
+# if USE_DE
           sprintf(s5, "illegale Variablen-Definition in Datei `%s'", filename);
-#  else /* !USE_DE */
+# else /* !USE_DE */
           sprintf(s5, _("illegal variable definition in file `%s'"), filename);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
         else
-#  if USE_DE
+# if USE_DE
           sprintf(s5, "illegale Definition der Variable `%c'", (char)var_name);
-#  else /* !USE_DE */
+# else /* !USE_DE */
           sprintf(s5, _("illegal definition of variable `%c'"), (char)var_name);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
         if (!line_number)
           with_usage = TRUE;
         break;
       case ERR_ILLEGAL_VAR_OPERATION:
         if (line_number)
-#  if USE_DE
+# if USE_DE
           sprintf(s5, "illegale Variablen-Operation in Datei `%s'", filename);
-#  else /* !USE_DE */
+# else /* !USE_DE */
           sprintf(s5, _("illegal variable operation in file `%s'"), filename);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
         else
-#  if USE_DE
+# if USE_DE
           sprintf(s5, "illegale Operation auf Variable `%c'", (char)var_name);
-#  else /* !USE_DE */
+# else /* !USE_DE */
           sprintf(s5, _("illegal operation on variable `%c'"), (char)var_name);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
         if (!line_number)
           with_usage = TRUE;
         break;
       case ERR_INVALID_VAR_REFERENCE:
-#  if USE_DE
+# if USE_DE
         sprintf(s5, "Variable `%c' undefiniert in Datei `%s'",
                 (char)var_name, filename);
-#  else /* !USE_DE */
+# else /* !USE_DE */
         sprintf(s5, _("variable `%c' undefined in file `%s'"),
                 (char)var_name, filename);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
         break;
       case ERR_INVALID_VAR_ASSIGNMENT:
-#  if USE_DE
+# if USE_DE
         sprintf(s5, "ung%sltiger Wert an Variable `%c' zugewiesen in Datei `%s'",
                 UE, (char)var_name, filename);
-#  else /* !USE_DE */
+# else /* !USE_DE */
         sprintf(s5, _("invalid value assigned to variable `%c' in file `%s'"),
                 (char)var_name, filename);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
         break;
       default:
         /*
@@ -3808,19 +3808,19 @@ var_warning (exit_status, var_name, line_buffer, filename, line_number)
    if (warning_level >= WARN_LVL_MAX)
     {
       if (!line_number)
-#  if USE_DE
+# if USE_DE
         fprintf(stderr, "Ung%sltiges Argument in Kommandozeile angegeben -- %s",
                 UE, line_buffer);
-#  else /* !USE_DE */
+# else /* !USE_DE */
         fprintf(stderr, _("Invalid argument in command line given -- %s"),
                 line_buffer);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       else
-#  if USE_DE
+# if USE_DE
         fprintf(stderr, "Zeile %ld: %s", line_number, line_buffer);
-#  else /* !USE_DE */
+# else /* !USE_DE */
         fprintf(stderr, _("Line %ld: %s"), line_number, line_buffer);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       S_NEWLINE(stderr);
     }
    else
@@ -3829,17 +3829,17 @@ var_warning (exit_status, var_name, line_buffer, filename, line_number)
       if ((Uint)i >= maxlen_max)
         resize_all_strings (i+1, FALSE, __FILE__, (long)__LINE__);
       if (!line_number)
-#  if USE_DE
+# if USE_DE
         sprintf(s5, "Argument `%s' in Kommandozeile ignoriert.", line_buffer);
-#  else /* !USE_DE */
+# else /* !USE_DE */
         sprintf(s5, _("Argument `%s' of command line ignored."), line_buffer);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       else
-#  if USE_DE
+# if USE_DE
         sprintf(s5, "Zeile %ld ignoriert: %s", line_number, line_buffer);
-#  else /* !USE_DE */
+# else /* !USE_DE */
         sprintf(s5, _("Line %ld ignored: %s"), line_number, line_buffer);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
       if (!line_number)
         fprintf(stderr, "%s\n", s5);
       else

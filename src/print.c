@@ -35,13 +35,13 @@ static char rcsid[]="$Id: print.c 3.01 2000/06/14 03:00:01 tom Exp $";
 #include "tailor.h"
 #include "common.h"
 #if USE_RC
-#  include "rc-defs.h"
+# include "rc-defs.h"
 #endif /* USE_RC */
 #include "globals.h"
 #include "hd-defs.h"
 #include "hd-use.h"
 #if USE_RC
-#  include "rc-use.h"
+# include "rc-use.h"
 #endif /* USE_RC */
 #include "tty.h"
 #include "utils.h"

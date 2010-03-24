@@ -32,25 +32,25 @@
 
 
 #if USE_RC
-#  ifdef RCSID
+# ifdef RCSID
 static char rcsid[]="$Id: rc-astro.c 3.01 2000/06/14 03:00:01 tom Exp $";
-#  endif
+# endif
 
 
 
 /*
 *  Include header files.
 */
-#  if HAVE_MATH_H && HAVE_LIBM
-#    include <math.h>
-#  endif
-#  include "common.h"
-#  include "rc-defs.h"
-#  include "globals.h"
-#  include "hd-astro.h"
-#  include "rc-astro.h"
-#  include "utils.h"
-#  include "rc-utils.h"
+# if HAVE_MATH_H && HAVE_LIBM
+#  include <math.h>
+# endif
+# include "common.h"
+# include "rc-defs.h"
+# include "globals.h"
+# include "hd-astro.h"
+# include "rc-astro.h"
+# include "utils.h"
+# include "rc-utils.h"
 
 
 
@@ -2408,7 +2408,7 @@ LABEL_moon_iter_mt:
            + 0.000233 * x1
            + x2
            + 0.001964 * x3);
-#if 0
+# if 0
          /*
             That's Meeus' original term, but here we use the
               above computed one for speed-up purposes because
@@ -2417,7 +2417,7 @@ LABEL_moon_iter_mt:
          sma_sun_mean_anomaly = TORAD(FIXANGLE(358.475833
            + (35999.0498 - (0.00015 + 0.0000033 * jc) * jc) * jc
            - 0.001778 * x1));
-#endif
+# endif
          mma_moon_mean_anomaly = TORAD(FIXANGLE(296.104608
            + (477198.8491 + (0.009192 + 0.0000144 * jc) * jc) * jc
            + 0.000817 * x1

@@ -34,11 +34,11 @@ static char rcsid[]="$Id: help.c 3.01 2000/06/20 03:00:01 tom Exp $";
 */
 #include "tailor.h"
 #if HAVE_CTYPE_H
-#  include <ctype.h>
+# include <ctype.h>
 #endif
 #include "common.h"
 #if USE_RC
-#  include "rc-defs.h"
+# include "rc-defs.h"
 #endif /* USE_RC */
 #include "globals.h"
 #include "hd-defs.h"
@@ -183,7 +183,7 @@ static const Ed_struct  info_exclusive_day[]=
 /*
   { char ed_id, char *ed_info },
 */
-#  if USE_DE
+# if USE_DE
   { RC_EX_LHDY_CHAR,      "gesetzlichen Feiertage" },
   { RC_EX_AHDY_CHAR,      "Feiertage" },
   { RC_EX_MON_CHAR,       "Montage" },
@@ -195,7 +195,7 @@ static const Ed_struct  info_exclusive_day[]=
   { RC_EX_SUN_CHAR,       "Sonntage" },
   { RC_EX_MON_2_THU_CHAR, "Montage...Donnerstage" },
   { RC_EX_MON_2_FRI_CHAR, "Montage...Freitage" },
-#  else /* !USE_DE */
+# else /* !USE_DE */
   { RC_EX_LHDY_CHAR,      N_("legal holidays") },
   { RC_EX_AHDY_CHAR,      N_("holidays") },
   { RC_EX_MON_CHAR,       N_("Mondays") },
@@ -207,7 +207,7 @@ static const Ed_struct  info_exclusive_day[]=
   { RC_EX_SUN_CHAR,       N_("Sundays") },
   { RC_EX_MON_2_THU_CHAR, N_("Mondays...Thursdays") },
   { RC_EX_MON_2_FRI_CHAR, N_("Mondays...Fridays") },
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
   { '\0', NULL }
 };
 #endif
@@ -389,7 +389,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  ifdef GCAL_SHELL
+# ifdef GCAL_SHELL
       case SYM_SCRIPT_FILE:
         sprintf(s1, "%sS %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_SCRIPT_FILE, TRUE));
         print_text (fp, s1);
@@ -401,8 +401,8 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  endif
-#  if USE_RC
+# endif
+# if USE_RC
       case SYM_DATE_VARIABLE:
         sprintf(s1, "%sv %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_DATE_VARIABLE, TRUE));
         print_text (fp, s1);
@@ -498,13 +498,13 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         sprintf(s1, "          Nur die Termine ausgeben, in denen %s im Text enthalten ist", larg_lit);
         print_text (fp, s1);
-#    if NO_REGEX
+#  if NO_REGEX
         sprintf(s1, "   %-3s    = Jeder beliebige Text, Metazeichen werden nicht ber%scksichtigt",
                 larg_lit, UE);
-#    else /* !NO_REGEX */
+#  else /* !NO_REGEX */
         sprintf(s1, "   %-3s    = Jeder beliebige Text bzw. \"regul%sre Ausdruck\"",
                 larg_lit, AE);
-#    endif /* !NO_REGEX */
+#  endif /* !NO_REGEX */
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
@@ -532,7 +532,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  endif /* USE_RC */
+# endif /* USE_RC */
       case SYM_DEBUG:
         sprintf(s1, "          %s", get_longopt_description (SYM_DEBUG, TRUE));
         print_text (fp, s1);
@@ -604,25 +604,25 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  if USE_PAGER
+# if USE_PAGER
       case SYM_PAGER:
         sprintf(s1, "%sp        %s", SWITCH, get_longopt_description (SYM_PAGER, TRUE));
         print_text (fp, s1);
-#    ifdef GCAL_EPAGER
+#  ifdef GCAL_EPAGER
         if (ext_pager != (char *)NULL)
           sprintf(s1, "          Ausgabe durch externen `%s' Paginierer lenken",
                   (*ext_pager == *DIR_SEP) ? strrchr(ext_pager, *DIR_SEP)+1 : ext_pager);
         else
           strcpy(s1, "          Ausgabe durch einfachen internen Paginierer lenken");
-#    else /* !GCAL_EPAGER */
+#  else /* !GCAL_EPAGER */
         strcpy(s1, "          Ausgabe durch einfachen internen Paginierer lenken");
-#    endif /* !GCAL_EPAGER */
+#  endif /* !GCAL_EPAGER */
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  endif /* USE_PAGER */
+# endif /* USE_PAGER */
       case SYM_DISABLE_HIGHLIGHTING:
         sprintf(s1, "%sH no     %s", SWITCH, get_longopt_description (SYM_DISABLE_HIGHLIGHTING, TRUE));
         print_text (fp, s1);
@@ -697,7 +697,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#if USE_RC
+# if USE_RC
       case SYM_FIXED_DATES:
         sprintf(s1, "%sjc[MOD]  %s", SWITCH, get_longopt_description (SYM_FIXED_DATES, TRUE));
         print_text (fp, s1);
@@ -709,7 +709,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#endif
+# endif
       case SYM_STARTING_DAY:
         sprintf(s1, "%ss %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_STARTING_DAY, TRUE));
         print_text (fp, s1);
@@ -731,11 +731,11 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  ifdef GCAL_EMAIL
+# ifdef GCAL_EMAIL
       case SYM_MAIL:
         sprintf(s1, "          %s", get_longopt_description (SYM_MAIL, TRUE));
         print_text (fp, s1);
-#    if !defined(AMIGA) || defined(__GNUC__)
+#  if !defined(AMIGA) || defined(__GNUC__)
         ptr_env = getenv(ENV_VAR_MAILPROG);
         if (ptr_env != (char *)NULL)
          {
@@ -743,13 +743,13 @@ my_extended_help (fp, longopt_symbolic)
              ptr_env = MAIL_PRGR;
          }
         else
-#    endif /* AMIGA && !__GNUC__ */
+#  endif /* AMIGA && !__GNUC__ */
           ptr_env = MAIL_PRGR;
         sprintf(s1, "          Versenden der Ausgabe via `%s' Programm an Benutzer", ptr_env);
         print_text (fp, s1);
         if (email_adr != (char *)NULL)
           ptr_env = email_adr;
-#    if !defined(AMIGA) || defined(__GNUC__)
+#  if !defined(AMIGA) || defined(__GNUC__)
         else
           ptr_env = getenv(ENV_VAR_MAILTO);
         if (ptr_env != (char *)NULL)
@@ -771,7 +771,7 @@ my_extended_help (fp, longopt_symbolic)
            if (!*ptr_env)
              ptr_env = (char *)NULL;
          }
-#    endif /* AMIGA && !__GNUC__ */
+#  endif /* AMIGA && !__GNUC__ */
         if (ptr_env == (char *)NULL)
           ptr_env = "UNBEKANNT";
         sprintf(s1, "  [%-3s]   = eMail Adresse, sonst eMail-Versand an Benutzer `%s'",
@@ -781,7 +781,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  endif /* GCAL_EMAIL */
+# endif /* GCAL_EMAIL */
       case SYM_HOLIDAY_LIST:
       case SYM_DESC_HOLIDAY_LIST:
         sprintf(s1, "%sn|N[MOD] %s", SWITCH, get_longopt_description (SYM_HOLIDAY_LIST, TRUE));
@@ -1094,11 +1094,11 @@ my_extended_help (fp, longopt_symbolic)
         do
          {
            sprintf(s1, "            %-*s = Feiertage in %s",
-#  if HD_TOP20CC
+# if HD_TOP20CC
                    2,
-#  else /* !HD_TOP20CC */
+# else /* !HD_TOP20CC */
                    5,
-#  endif /* !HD_TOP20CC */
+# endif /* !HD_TOP20CC */
                    ptr_cc_holidays->cc_id, ptr_cc_holidays->cc_info);
            print_text (fp, s1);
          } while ((++ptr_cc_holidays)->cc_info != (char *)NULL);
@@ -1106,7 +1106,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  if USE_RC
+# if USE_RC
       case SYM_ADJUST_VALUE:
         sprintf(s1, "          %s", get_longopt_description (SYM_ADJUST_VALUE, TRUE));
         print_text (fp, s1);
@@ -1167,37 +1167,37 @@ my_extended_help (fp, longopt_symbolic)
         if (longopt_symbolic != SYM_NIL)
           break;
         print_text (fp, s1);
-#  endif
+# endif
       case SYM_TIME_OFFSET:
         sprintf(s1, "          %s", get_longopt_description (SYM_TIME_OFFSET, TRUE));
         print_text (fp, s1);
         sprintf(s1, "          Basiszeit der astronomischen Funktionen %sndern" , AE);
         print_text (fp, s1);
-#if USE_RC
+# if USE_RC
         sprintf(s1, "          beziehungsweise Zyklus-Startzeit %sndern" , AE);
         print_text (fp, s1);
-#endif
+# endif
         if (time_hour_offset)
           sprintf(s2, "%+d", gmt_timezone_value (time_hour_offset));
         else
           *s2 = '\0';
-#  if USE_RC
+# if USE_RC
         sprintf(s1, "   %-3s    = %c|%c|[%c|%c][%s|%s]MMMM|HH%s[MM]   Zeitversatzwert (aktuell:  %s%02d%s%02d == GMT%s)",
                 larg_lit, RC_TIME_CHAR, RC_GMTIME_CHAR, RC_TIME_CHAR, RC_GMTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
                 (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
                 abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
-#  else /* !USE_RC */
+# else /* !USE_RC */
         sprintf(s1, "   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Zeitversatzwert (aktuell:  %s%02d%s%02d == GMT%s)",
                 larg_lit, staticTIME_CHAR, staticTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
                 (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
                 abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
-#  endif /* !USE_RC */
+# endif /* !USE_RC */
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#if USE_RC
+# if USE_RC
       case SYM_CYCLE_END:
         sprintf(s1, "          %s", get_longopt_description (SYM_CYCLE_END, TRUE));
         print_text (fp, s1);
@@ -1224,7 +1224,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#endif
+# endif
       case SYM_TRANSFORM_YEAR:
         sprintf(s1, "          %s", get_longopt_description (SYM_TRANSFORM_YEAR, TRUE));
         print_text (fp, s1);
@@ -1324,7 +1324,7 @@ my_extended_help (fp, longopt_symbolic)
       default:
         ;   /* Void */
     }
-#  if USE_RC
+# if USE_RC
    if (longopt_symbolic == SYM_NIL)
     {
       print_text (fp, s1);
@@ -1344,13 +1344,13 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         sprintf(s1, "          %s", get_longopt_description (SYM_TODAY, TRUE));
         print_text (fp, s1);
-#    ifdef GCAL_SHELL
+#  ifdef GCAL_SHELL
         sprintf(s1, "          Benutze Standard-Ressourcendatei `.%s%s' f%sr Terminliste",
                 PRGR_NAME, RC_SUFFIX, UE);
-#    else /* !GCAL_SHELL */
+#  else /* !GCAL_SHELL */
         sprintf(s1, "          Benutze Standard-Ressourcendatei `%s%s' f%sr Terminliste",
                 PRGR_NAME, RC_SUFFIX, UE);
-#    endif /* !GCAL_SHELL */
+#  endif /* !GCAL_SHELL */
         print_text (fp, s1);
         strcpy(s1, "          Impliziert Zeitraum:  Heute");
         print_text (fp, s1);
@@ -1783,7 +1783,7 @@ my_extended_help (fp, longopt_symbolic)
               yyyy_lit, RC_NWD_CHAR, www_lit, dd_lit, dd_lit);
       print_text (fp, s1);
     }
-#  endif /* USE_RC */
+# endif /* USE_RC */
    if (longopt_symbolic == SYM_NIL)
     {
       print_text (fp, s1);
@@ -1896,7 +1896,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  ifdef GCAL_SHELL
+# ifdef GCAL_SHELL
       case SYM_SCRIPT_FILE:
         sprintf(s1, "%sS %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_SCRIPT_FILE, TRUE));
         print_text (fp, s1);
@@ -1908,8 +1908,8 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  endif
-#  if USE_RC
+# endif
+# if USE_RC
       case SYM_DATE_VARIABLE:
         sprintf(s1, "%sv %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_DATE_VARIABLE, TRUE));
         print_text (fp, s1);
@@ -2006,11 +2006,11 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         sprintf(s1, _("          Display only those fixed dates, whose text is matched by %s"), larg_lit);
         print_text (fp, s1);
-#    if NO_REGEX
+#  if NO_REGEX
         sprintf(s1, _("   %-3s    = Any text you like, metacharacters are not respected"), larg_lit);
-#    else /* !NO_REGEX */
+#  else /* !NO_REGEX */
         sprintf(s1, _("   %-3s    = Any text respectively \"regular expression\" you like"), larg_lit);
-#    endif /* !NO_REGEX */
+#  endif /* !NO_REGEX */
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
@@ -2036,7 +2036,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  endif /* USE_RC */
+# endif /* USE_RC */
       case SYM_DEBUG:
         sprintf(s1, "          %s", get_longopt_description (SYM_DEBUG, TRUE));
         print_text (fp, s1);
@@ -2137,25 +2137,25 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  if USE_PAGER
+# if USE_PAGER
       case SYM_PAGER:
         sprintf(s1, "%sp        %s", SWITCH, get_longopt_description (SYM_PAGER, TRUE));
         print_text (fp, s1);
-#    ifdef GCAL_EPAGER
+#  ifdef GCAL_EPAGER
         if (ext_pager != (char *)NULL)
           sprintf(s1, _("          Direct output through external `%s' pager"),
                   (*ext_pager == *DIR_SEP) ? strrchr(ext_pager, *DIR_SEP)+1 : ext_pager);
         else
           strcpy(s1, _("          Direct output through simple internal pager"));
-#    else /* !GCAL_EPAGER */
+#  else /* !GCAL_EPAGER */
         strcpy(s1, _("          Direct output through simple internal pager"));
-#    endif /* !GCAL_EPAGER */
+#  endif /* !GCAL_EPAGER */
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  endif /* USE_PAGER */
+# endif /* USE_PAGER */
       case SYM_DISABLE_HIGHLIGHTING:
         sprintf(s1, "%sH no     %s", SWITCH, get_longopt_description (SYM_DISABLE_HIGHLIGHTING, TRUE));
         print_text (fp, s1);
@@ -2230,7 +2230,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#if USE_RC
+# if USE_RC
       case SYM_FIXED_DATES:
         sprintf(s1, "%sjc[MOD]  %s", SWITCH, get_longopt_description (SYM_FIXED_DATES, TRUE));
         print_text (fp, s1);
@@ -2242,7 +2242,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#endif
+# endif
       case SYM_STARTING_DAY:
         sprintf(s1, "%ss %-3s    %s", SWITCH, larg_lit, get_longopt_description (SYM_STARTING_DAY, TRUE));
         print_text (fp, s1);
@@ -2264,11 +2264,11 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  ifdef GCAL_EMAIL
+# ifdef GCAL_EMAIL
       case SYM_MAIL:
         sprintf(s1, "          %s", get_longopt_description (SYM_MAIL, TRUE));
         print_text (fp, s1);
-#    if !defined(AMIGA) || defined(__GNUC__)
+#  if !defined(AMIGA) || defined(__GNUC__)
         ptr_env = getenv(ENV_VAR_MAILPROG);
         if (ptr_env != (char *)NULL)
          {
@@ -2276,13 +2276,13 @@ my_extended_help (fp, longopt_symbolic)
              ptr_env = MAIL_PRGR;
          }
         else
-#    endif /* AMIGA && !__GNUC__ */
+#  endif /* AMIGA && !__GNUC__ */
           ptr_env = MAIL_PRGR;
         sprintf(s1, _("          Send output via `%s' program to user"), ptr_env);
         print_text (fp, s1);
         if (email_adr != (char *)NULL)
           ptr_env = email_adr;
-#    if !defined(AMIGA) || defined(__GNUC__)
+#  if !defined(AMIGA) || defined(__GNUC__)
         else
           ptr_env = getenv(ENV_VAR_MAILTO);
         if (ptr_env != (char *)NULL)
@@ -2304,7 +2304,7 @@ my_extended_help (fp, longopt_symbolic)
            if (!*ptr_env)
              ptr_env = (char *)NULL;
          }
-#    endif /* AMIGA && !__GNUC__ */
+#  endif /* AMIGA && !__GNUC__ */
         if (ptr_env == (char *)NULL)
           ptr_env = _("UNKNOWN");
         sprintf(s1, _("  [%-3s]   = Email address, otherwise eMail is send to user `%s'"),
@@ -2314,7 +2314,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  endif /* GCAL_EMAIL */
+# endif /* GCAL_EMAIL */
       case SYM_HOLIDAY_LIST:
       case SYM_DESC_HOLIDAY_LIST:
         sprintf(s1, "%sn|N[MOD] %s", SWITCH, get_longopt_description (SYM_HOLIDAY_LIST, TRUE));
@@ -2627,11 +2627,11 @@ my_extended_help (fp, longopt_symbolic)
         do
          {
            sprintf(s1, _("            %-*s = Holidays in %s"),
-#  if HD_TOP20CC
+# if HD_TOP20CC
                    2,
-#  else /* !HD_TOP20CC */
+# else /* !HD_TOP20CC */
                    5,
-#  endif /* !HD_TOP20CC */
+# endif /* !HD_TOP20CC */
                    ptr_cc_holidays->cc_id, _(ptr_cc_holidays->cc_info));
            print_text (fp, s1);
          } while ((++ptr_cc_holidays)->cc_info != (char *)NULL);
@@ -2639,7 +2639,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  if USE_RC
+# if USE_RC
       case SYM_ADJUST_VALUE:
         sprintf(s1, "          %s", get_longopt_description (SYM_ADJUST_VALUE, TRUE));
         print_text (fp, s1);
@@ -2700,37 +2700,37 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#  endif
+# endif
       case SYM_TIME_OFFSET:
         sprintf(s1, "          %s", get_longopt_description (SYM_TIME_OFFSET, TRUE));
         print_text (fp, s1);
         strcpy(s1, _("          Change base time of astronomical functions"));
         print_text (fp, s1);
-#if USE_RC
+# if USE_RC
         strcpy(s1, _("          respectively, change cycle-starting time"));
         print_text (fp, s1);
-#endif
+# endif
         if (time_hour_offset)
           sprintf(s2, "%+d", gmt_timezone_value (time_hour_offset));
         else
           *s2 = '\0';
-#  if USE_RC
+# if USE_RC
         sprintf(s1, _("   %-3s    = %c|%c|[%c|%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  %s%02d%s%02d == GMT%s)"),
                 larg_lit, RC_TIME_CHAR, RC_GMTIME_CHAR, RC_TIME_CHAR, RC_GMTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
                 (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
                 abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
-#  else /* !USE_RC */
+# else /* !USE_RC */
         sprintf(s1, _("   %-3s    = %c|[%c][%s|%s]MMMM|HH%s[MM]   Time offset value (actual:  %s%02d%s%02d == GMT%s)"),
                 larg_lit, staticTIME_CHAR, staticTIME_CHAR, ASC_LIT, DES_LIT, time_sep,
                 (time_hour_offset+time_min_offset < 0) ? DES_LIT : ASC_LIT,
                 abs(time_hour_offset), time_sep, abs(time_min_offset), s2);
-#  endif /* !USE_RC */
+# endif /* !USE_RC */
         print_text (fp, s1);
         if (longopt_symbolic != SYM_NIL)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#if USE_RC
+# if USE_RC
       case SYM_CYCLE_END:
         sprintf(s1, "          %s", get_longopt_description (SYM_CYCLE_END, TRUE));
         print_text (fp, s1);
@@ -2757,7 +2757,7 @@ my_extended_help (fp, longopt_symbolic)
           break;
         /* Fallthrough. */
         print_text (fp, s1);
-#endif
+# endif
       case SYM_TRANSFORM_YEAR:
         sprintf(s1, "          %s", get_longopt_description (SYM_TRANSFORM_YEAR, TRUE));
         print_text (fp, s1);
@@ -2857,7 +2857,7 @@ my_extended_help (fp, longopt_symbolic)
       default:
         ;   /* Void */
     }
-#  if USE_RC
+# if USE_RC
    if (longopt_symbolic == SYM_NIL)
     {
       print_text (fp, s1);
@@ -2877,13 +2877,13 @@ my_extended_help (fp, longopt_symbolic)
         print_text (fp, s1);
         sprintf(s1, "          %s", get_longopt_description (SYM_TODAY, TRUE));
         print_text (fp, s1);
-#    ifdef GCAL_SHELL
+#  ifdef GCAL_SHELL
         sprintf(s1, _("          Use standard resource file `.%s%s' for fixed date list"),
                 PRGR_NAME, RC_SUFFIX);
-#    else /* !GCAL_SHELL */
+#  else /* !GCAL_SHELL */
         sprintf(s1, _("          Use standard resource file `%s%s' for fixed date list"),
                 PRGR_NAME, RC_SUFFIX);
-#    endif /* !GCAL_SHELL */
+#  endif /* !GCAL_SHELL */
         print_text (fp, s1);
         strcpy(s1, _("          Implies period:  Today"));
         print_text (fp, s1);
@@ -3323,7 +3323,7 @@ my_extended_help (fp, longopt_symbolic)
               yyyy_lit, RC_NWD_CHAR, www_lit, dd_lit, dd_lit);
       print_text (fp, s1);
     }
-#  endif /* USE_RC */
+# endif /* USE_RC */
    if (longopt_symbolic == SYM_NIL)
     {
       print_text (fp, s1);
@@ -3396,8 +3396,8 @@ my_basic_help (fp)
    sprintf(s1, "  %sV,  %s       Versionsinformation ausgeben und Programm beenden",
            SWITCH, get_longopt_description (SYM_VERSION, TRUE));
    print_text (fp, s1);
-#  if USE_PAGER
-#    ifdef GCAL_EPAGER
+# if USE_PAGER
+#  ifdef GCAL_EPAGER
    if (ext_pager != (char *)NULL)
      sprintf(s1, "  %sp,  %s         Ausgabe durch externen `%s' Paginierer lenken",
              SWITCH, get_longopt_description (SYM_PAGER, TRUE),
@@ -3405,11 +3405,11 @@ my_basic_help (fp)
    else
      sprintf(s1, "  %sp,  %s         Ausgabe durch einfachen internen Paginierer lenken",
              SWITCH, get_longopt_description (SYM_PAGER, TRUE));
-#    else /* !GCAL_EPAGER */
+#  else /* !GCAL_EPAGER */
    sprintf(s1, "  %sp,  %s         Ausgabe durch einfachen internen Paginierer lenken",
            SWITCH, get_longopt_description (SYM_PAGER, TRUE));
-#    endif /* !GCAL_EPAGER */
-#  endif /* USE_PAGER */
+#  endif /* !GCAL_EPAGER */
+# endif /* USE_PAGER */
 #else /* !USE_DE */
    sprintf(s1, _("  %sh,  %s          Display this help text and quit program"),
            SWITCH, get_longopt_description (SYM_HELP, TRUE));
@@ -3423,8 +3423,8 @@ my_basic_help (fp)
    sprintf(s1, _("  %sV,  %s       Display version information and quit program"),
            SWITCH, get_longopt_description (SYM_VERSION, TRUE));
    print_text (fp, s1);
-#  if USE_PAGER
-#    ifdef GCAL_EPAGER
+# if USE_PAGER
+#  ifdef GCAL_EPAGER
    if (ext_pager != (char *)NULL)
      sprintf(s1, _("  %sp,  %s         Direct output through external `%s' pager"),
              SWITCH, get_longopt_description (SYM_PAGER, TRUE),
@@ -3432,11 +3432,11 @@ my_basic_help (fp)
    else
      sprintf(s1, _("  %sp,  %s         Direct output through simple internal pager"),
              SWITCH, get_longopt_description (SYM_PAGER, TRUE));
-#    else /* !GCAL_EPAGER */
+#  else /* !GCAL_EPAGER */
    sprintf(s1, _("  %sp,  %s         Direct output through simple internal pager"),
            SWITCH, get_longopt_description (SYM_PAGER, TRUE));
-#    endif /* !GCAL_EPAGER */
-#  endif /* USE_PAGER */
+#  endif /* !GCAL_EPAGER */
+# endif /* USE_PAGER */
 #endif /* !USE_DE */
    print_text (fp, s1);
    print_text (fp, s1);
@@ -3529,9 +3529,9 @@ my_version (fp)
    register       int         i=0;
 #if USE_RC
    auto           char       *ptr_env;
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
    auto           char       *ptr_home;
-#  endif
+# endif
 #endif
 
 
@@ -3570,36 +3570,36 @@ my_version (fp)
 #if USE_RC
    strcat(s1, " USE_RC");
    i++;
-#  if HAVE_GNU_RE_COMPILE_PATTERN
+# if HAVE_GNU_RE_COMPILE_PATTERN
    strcat(s1, " GNU-REGEX");
    i++;
-#  endif
-#  if HAVE_POSIX_REGCOMP
+# endif
+# if HAVE_POSIX_REGCOMP
    strcat(s1, " POSIX-REGEX");
    i++;
-#  endif
-#  if HAVE_RE_COMP
+# endif
+# if HAVE_RE_COMP
    strcat(s1, " BSD-REGEX");
    i++;
-#  endif
-#  if HAVE_REGCMP
+# endif
+# if HAVE_REGCMP
    strcat(s1, " SysV-REGEX");
    i++;
-#  endif
-#  if HAVE_V8_REGCOMP
+# endif
+# if HAVE_V8_REGCOMP
    strcat(s1, " V8-REGEX");
    i++;
-#  endif
-#  if NO_REGEX
+# endif
+# if NO_REGEX
    strcat(s1, " NO-REGEX");
    i++;
-#  endif
+# endif
 #endif /* USE_RC */
    if (i)
      print_text (fp, s1);
    print_text (fp, s1);
 #if USE_RC
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
    ptr_env = getenv(ENV_VAR_SYS_DATADIR);
    if (ptr_env != (char *)NULL)
     {
@@ -3607,11 +3607,11 @@ my_version (fp)
         ptr_env = GCAL_SYS_DATADIR;
     }
    else
-#  endif /* !AMIGA || __GNUC__ */
+# endif /* !AMIGA || __GNUC__ */
      ptr_env = GCAL_SYS_DATADIR;
    sprintf(s1, "GCAL_SYS_DATADIR=%s", ptr_env);
    print_text (fp, s1);
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
    ptr_env = getenv(ENV_VAR_USR_DATADIR);
    if (ptr_env == (char *)NULL)
      ptr_env = GCAL_USR_DATADIR;
@@ -3634,9 +3634,9 @@ my_version (fp)
     }
    else
      sprintf(s1, "GCAL_USR_DATADIR=$%s%s%s", ENV_VAR_HOME, DIR_SEP, ptr_env);
-#  else /* AMIGA && !__GNUC__ */
+# else /* AMIGA && !__GNUC__ */
    sprintf(s1, "GCAL_USR_DATADIR=%s", GCAL_USR_DATADIR);
-#  endif /* AMIGA && !__GNUC__ */
+# endif /* AMIGA && !__GNUC__ */
    print_text (fp, s1);
    print_text (fp, s1);
 #endif /* USE_RC */
@@ -3954,19 +3954,19 @@ my_help_head_text (fp)
    print_text (fp, s1);
    print_text (fp, s1);
 #if USE_RC
-#  if USE_DE
+# if USE_DE
    sprintf(s1, "Aufruf: %s [[OPTION...] [%cDATUM] [%cDATEI...]] [KOMMANDO]",
            prgr_name, RC_ADATE_CHAR, RSP_CHAR);
-#  else /* !USE_DE */
+# else /* !USE_DE */
    sprintf(s1, _("Usage:  %s [[OPTION...] [%cDATE] [%cFILE...]] [COMMAND]"),
            prgr_name, RC_ADATE_CHAR, RSP_CHAR);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
 #else /* !USE_RC */
-#  if USE_DE
+# if USE_DE
    sprintf(s1, "Aufruf: %s [[OPTION...] [%cDATEI...]] [KOMMANDO]", prgr_name, RSP_CHAR);
-#  else /* !USE_DE */
+# else /* !USE_DE */
    sprintf(s1, _("Usage:  %s [[OPTION...] [%cFILE...]] [COMMAND]"), prgr_name, RSP_CHAR);
-#  endif /* !USE_DE */
+# endif /* !USE_DE */
 #endif /* !USE_RC */
    print_text (fp, s1);
    print_text (fp, s1);
@@ -4028,492 +4028,492 @@ my_help_tail_text (fp)
 print_compiler_info (fp)
    FILE *fp;
 {
-#if defined(__DJGPP__) || defined(__WATCOMC__) || (defined(_MSC_VER) && (_MSC_VER != 800))
+# if defined(__DJGPP__) || defined(__WATCOMC__) || (defined(_MSC_VER) && (_MSC_VER != 800))
    char buf[80];
-#endif
+# endif
 
 
    sprintf(s1, _(*compiler_info),
 
-#ifdef __GNUC__
+# ifdef __GNUC__
 #  ifdef __DJGPP__
    (sprintf(buf, "djgpp v%d / gcc ", __DJGPP__), buf),
 #  else
-#    ifdef __GO32__           /* __GO32__ is defined as "1" only (sigh) */
+#   ifdef __GO32__           /* __GO32__ is defined as "1" only (sigh) */
    "djgpp v1.x / gcc ",
-#    else
-#      ifdef __EMX__            /* ...so is __EMX__ (double sigh) */
+#   else
+#    ifdef __EMX__            /* ...so is __EMX__ (double sigh) */
    "emx+gcc ",
-#      else
+#    else
    "gcc ",
-#      endif
 #    endif
+#   endif
 #  endif
    __VERSION__,
-#else
+# else
 #  ifdef __WATCOMC__
-#    if (__WATCOMC__ % 10 > 0)
+#   if (__WATCOMC__ % 10 > 0)
 /* We do this silly test because __WATCOMC__ gives two digits for the  */
 /* minor version, but Watcom packaging prefers to show only one digit. */
    (sprintf(buf, "Watcom C/C++ %d.%02d", __WATCOMC__ / 100,
             __WATCOMC__ % 100), buf), "",
-#    else
+#   else
    (sprintf(buf, "Watcom C/C++ %d.%d", __WATCOMC__ / 100,
             (__WATCOMC__ % 100) / 10), buf), "",
-#    endif
+#   endif
 #  else
-#    ifdef __TURBOC__
-#      ifdef __BORLANDC__
+#   ifdef __TURBOC__
+#    ifdef __BORLANDC__
    "Borland C++",
-#        if (__BORLANDC__ < 0x0200)
+#     if (__BORLANDC__ < 0x0200)
    " 1.0",
-#        else
-#          if (__BORLANDC__ == 0x0200)   /* James:  __TURBOC__ = 0x0297 */
+#     else
+#      if (__BORLANDC__ == 0x0200)   /* James:  __TURBOC__ = 0x0297 */
    " 2.0",
-#          else
-#            if (__BORLANDC__ == 0x0400)
+#      else
+#       if (__BORLANDC__ == 0x0400)
    " 3.0",
-#            else
-#              if (__BORLANDC__ == 0x0410)   /* __BCPLUSPLUS__ = 0x0310 */
+#       else
+#        if (__BORLANDC__ == 0x0410)   /* __BCPLUSPLUS__ = 0x0310 */
    " 3.1",
-#              else
-#                if (__BORLANDC__ == 0x0452)   /* __BCPLUSPLUS__ = 0x0320 */
-#                  if USE_DE
+#        else
+#         if (__BORLANDC__ == 0x0452)   /* __BCPLUSPLUS__ = 0x0320 */
+#          if USE_DE
    " 4.0 oder 4.02",
-#                  else /* !USE_DE */
+#          else /* !USE_DE */
    _(" 4.0 or 4.02"),
-#                  endif /* !USE_DE */
-#                else
-#                  if (__BORLANDC__ == 0x0460)   /* __BCPLUSPLUS__ = 0x0340 */
+#          endif /* !USE_DE */
+#         else
+#          if (__BORLANDC__ == 0x0460)   /* __BCPLUSPLUS__ = 0x0340 */
    " 4.5",
-#                  else
-#                    if (__BORLANDC__ == 0x0500)   /* __TURBOC__ = 0x0500 */
+#          else
+#           if (__BORLANDC__ == 0x0500)   /* __TURBOC__ = 0x0500 */
    " 5.0",
-#                    else
-#                      if USE_DE
+#           else
+#            if USE_DE
    " neuer als 5.0",
-#                      else /* !USE_DE */
+#            else /* !USE_DE */
    _(" later than 5.0"),
-#                      endif /* !USE_DE */
-#                    endif
-#                  endif
-#                endif
-#              endif
-#            endif
+#            endif /* !USE_DE */
+#           endif
 #          endif
+#         endif
 #        endif
-#      else
-   "Turbo C",
-#        if (__TURBOC__ >= 0x0400)     /* Kevin:  3.0 -> 0x0401 */
-#          if USE_DE
-   "++ 3.0 oder neuer",
-#          else /* !USE_DE */
-   _("++ 3.0 or later"),
-#          endif /* !USE_DE */
-#        else
-#          if (__TURBOC__ == 0x0295)     /* [661] vfy'd by Kevin */
-   "++ 1.0",
-#          else
-#            if ((__TURBOC__ >= 0x018d) && (__TURBOC__ <= 0x0200))  /* James: 0x0200 */
-   " 2.0",
-#            else
-#              if (__TURBOC__ > 0x0100)
-   " 1.5",                    /* James:  0x0105? */
-#              else
-   " 1.0",                    /* James:  0x0100 */
-#              endif
-#            endif
-#          endif
-#        endif
+#       endif
 #      endif
+#     endif
 #    else
-#      ifdef MSC
-   "Microsoft C ",
-#        ifdef _MSC_VER
-#          if (_MSC_VER == 800)
-   "8.0/8.0c (Visual C++ 1.0/1.5)",
-#          else
-   (sprintf(buf, "%d.%02d", _MSC_VER/100, _MSC_VER%100), buf),
-#          endif
-#        else
-#          if USE_DE
-   "5.1 oder aelter",
-#          else /* !USE_DE */
-   _("5.1 or earlier"),
-#          endif /* !USE_DE */
-#        endif
+   "Turbo C",
+#     if (__TURBOC__ >= 0x0400)     /* Kevin:  3.0 -> 0x0401 */
+#      if USE_DE
+   "++ 3.0 oder neuer",
+#      else /* !USE_DE */
+   _("++ 3.0 or later"),
+#      endif /* !USE_DE */
+#     else
+#      if (__TURBOC__ == 0x0295)     /* [661] vfy'd by Kevin */
+   "++ 1.0",
 #      else
-#        if USE_DE
+#       if ((__TURBOC__ >= 0x018d) && (__TURBOC__ <= 0x0200))  /* James: 0x0200 */
+   " 2.0",
+#       else
+#        if (__TURBOC__ > 0x0100)
+   " 1.5",                    /* James:  0x0105? */
+#        else
+   " 1.0",                    /* James:  0x0100 */
+#        endif
+#       endif
+#      endif
+#     endif
+#    endif
+#   else
+#    ifdef MSC
+   "Microsoft C ",
+#     ifdef _MSC_VER
+#      if (_MSC_VER == 800)
+   "8.0/8.0c (Visual C++ 1.0/1.5)",
+#      else
+   (sprintf(buf, "%d.%02d", _MSC_VER/100, _MSC_VER%100), buf),
+#      endif
+#     else
+#      if USE_DE
+   "5.1 oder aelter",
+#      else /* !USE_DE */
+   _("5.1 or earlier"),
+#      endif /* !USE_DE */
+#     endif
+#    else
+#     if USE_DE
    "unbekannter Kompilierer", "",
-#        else /* !USE_DE */
+#     else /* !USE_DE */
    _("unknown compiler"), "",
-#        endif /* !USE_DE */
-#      endif /* MSC */
-#    endif /* __TURBOC__ */
+#     endif /* !USE_DE */
+#    endif /* MSC */
+#   endif /* __TURBOC__ */
 #  endif /* __WATCOMC__ */
-#endif /* __GNUC__ */
+# endif /* __GNUC__ */
 
-#if USE_DE
+# if USE_DE
    UE,
-#endif
+# endif
    "MS-DOS",
 
-#if (defined(__GNUC__) || (defined(__WATCOMC__) && defined(__386__)))
+# if (defined(__GNUC__) || (defined(__WATCOMC__) && defined(__386__)))
    " (32-bit)",
-#else
+# else
 #  if defined(M_I86HM) || defined(__HUGE__)
    " (16-bit, huge)",
 #  else
-#    if defined(M_I86LM) || defined(__LARGE__)
+#   if defined(M_I86LM) || defined(__LARGE__)
    " (16-bit, large)",
-#    else
-#      if defined(M_I86MM) || defined(__MEDIUM__)
+#   else
+#    if defined(M_I86MM) || defined(__MEDIUM__)
    " (16-bit, medium)",
-#      else
-#        if defined(M_I86CM) || defined(__COMPACT__)
+#    else
+#     if defined(M_I86CM) || defined(__COMPACT__)
    " (16-bit, compact)",
-#        else
-#          if defined(M_I86SM) || defined(__SMALL__)
+#     else
+#      if defined(M_I86SM) || defined(__SMALL__)
    " (16-bit, small)",
-#          else
-#            if defined(M_I86TM) || defined(__TINY__)
+#      else
+#       if defined(M_I86TM) || defined(__TINY__)
    " (16-bit, tiny)",
-#            else
+#       else
    " (16-bit)",
-#            endif
-#          endif
-#        endif
+#       endif
 #      endif
+#     endif
 #    endif
+#   endif
 #  endif
-#endif
+# endif
 
-#if USE_DE
+# if USE_DE
    " am ", __DATE__
-#else /* !USE_DE */
+# else /* !USE_DE */
    _(" on "), __DATE__
-#endif /* !USE_DE */
+# endif /* !USE_DE */
    );
 
    print_text (fp, s1);
 }
 #else /* !MSDOS */
-#  if defined(WIN32)
+# if defined(WIN32)
    static void
 print_compiler_info (fp)
    FILE *fp;
 {
-#if (defined(_MSC_VER) || defined(__WATCOMC__))
+#  if (defined(_MSC_VER) || defined(__WATCOMC__))
    char buf[80];
-#endif
+#  endif
 
 
    sprintf(s1, _(*compiler_info),
 
-#ifdef _MSC_VER  /* MSC == MSVC++, including the SDK compiler */
+#  ifdef _MSC_VER  /* MSC == MSVC++, including the SDK compiler */
    (sprintf(buf, "Microsoft C %d.%02d ", _MSC_VER/100, _MSC_VER%100), buf),
-#  if (_MSC_VER == 800)
+#   if (_MSC_VER == 800)
    "(Visual C++ v1.1)",
-#  else
+#   else
 #    if (_MSC_VER == 850)
    "(Windows NT v3.5 SDK)",
 #    else
-#      if (_MSC_VER == 900)
+#     if (_MSC_VER == 900)
    "(Visual C++ v2.0/v2.1)",
-#      else
-#        if (_MSC_VER == 1000)
+#     else
+#      if (_MSC_VER == 1000)
    "(Visual C++ v4.0)",
-#        else
-#          if (_MSC_VER == 1010)
+#      else
+#       if (_MSC_VER == 1010)
    "(Visual C++ v4.1)",
-#          else
-#            if (_MSC_VER > 800)
+#       else
+#        if (_MSC_VER > 800)
    "(Visual C++)",
-#            else
-#              if USE_DE
+#        else
+#         if USE_DE
    "(fehlerhafte Version)",
-#              else /* !USE_DE */
+#         else /* !USE_DE */
    _("(bad version)"),
-#              endif /* !USE_DE */
-#            endif
-#          endif
+#         endif /* !USE_DE */
 #        endif
+#       endif
 #      endif
+#     endif
 #    endif
-#  endif
-#endif /* _MSC_VER */
+#   endif
+#  endif /* _MSC_VER */
 
-#ifdef __WATCOMC__
-#  if (__WATCOMC__ % 10 > 0)
+#  ifdef __WATCOMC__
+#   if (__WATCOMC__ % 10 > 0)
 /* We do this silly test because __WATCOMC__ gives two digits for the  */
 /* minor version, but Watcom packaging prefers to show only one digit. */
    (sprintf(buf, "Watcom C/C++ %d.%02d", __WATCOMC__ / 100,
             __WATCOMC__ % 100), buf), "",
-#  else
+#   else
    (sprintf(buf, "Watcom C/C++ %d.%d", __WATCOMC__ / 100,
             (__WATCOMC__ % 100) / 10), buf), "",
-#  endif /* __WATCOMC__ % 10 > 0 */
-#endif /* __WATCOMC__ */
+#   endif /* __WATCOMC__ % 10 > 0 */
+#  endif /* __WATCOMC__ */
 
-#ifdef __TURBOC__
-#  ifdef __BORLANDC__
+#  ifdef __TURBOC__
+#   ifdef __BORLANDC__
    "Borland C++",
 #    if (__BORLANDC__ == 0x0452)   /* __BCPLUSPLUS__ = 0x0320 */
-#      if USE_DE
+#     if USE_DE
    " 4.0 oder 4.02",
-#      else /* !USE_DE */
+#     else /* !USE_DE */
    _(" 4.0 or 4.02"),
-#      endif /* !USE_DE */
+#     endif /* !USE_DE */
 #    else
-#      if (__BORLANDC__ == 0x0460)   /* __BCPLUSPLUS__ = 0x0340 */
+#     if (__BORLANDC__ == 0x0460)   /* __BCPLUSPLUS__ = 0x0340 */
    " 4.5",
-#      else
-#        if (__BORLANDC__ == 0x0500)   /* __TURBOC__ = 0x0500 */
+#     else
+#      if (__BORLANDC__ == 0x0500)   /* __TURBOC__ = 0x0500 */
    " 5.0",
-#        else
-#          if USE_DE
+#      else
+#       if USE_DE
    " neuer als 5.0",
-#          else /* !USE_DE */
+#       else /* !USE_DE */
    _(" later than 5.0"),
-#          endif /* !USE_DE */
-#        endif
+#       endif /* !USE_DE */
 #      endif
+#     endif
 #    endif
-#  else /* !__BORLANDC__ */
+#   else /* !__BORLANDC__ */
    "Turbo C",
 #    if (__TURBOC__ >= 0x0400)     /* Kevin:  3.0 -> 0x0401 */
-#      if USE_DE
+#     if USE_DE
    "++ 3.0 oder neuer",
-#      else /* !USE_DE */
+#     else /* !USE_DE */
    _("++ 3.0 or later"),
-#      endif /* !USE_DE */
+#     endif /* !USE_DE */
 #    else
-#      if (__TURBOC__ == 0x0295)     /* [661] vfy'd by Kevin */
+#     if (__TURBOC__ == 0x0295)     /* [661] vfy'd by Kevin */
    "++ 1.0",
-#      endif
+#     endif
 #    endif
-#  endif /* __BORLANDC__ */
-#endif /* __TURBOC__ */
+#   endif /* __BORLANDC__ */
+#  endif /* __TURBOC__ */
 
-#if !defined(__TURBOC__) && !defined(__WATCOMC__) && !defined(_MSC_VER)
-#  if USE_DE
+#  if !defined(__TURBOC__) && !defined(__WATCOMC__) && !defined(_MSC_VER)
+#   if USE_DE
    "unbekannter Kompilierer (SDK?)", "",
-#  else /* !USE_DE */
+#   else /* !USE_DE */
    _("unknown compiler (SDK?)"), "",
-#  endif /* !USE_DE */
-#endif
+#   endif /* !USE_DE */
+#  endif
 
-#if USE_DE
+#  if USE_DE
    UE,
-#endif
+#  endif
    "\n\tWindows 95 / Windows NT", " (32-bit)",
 
-#if USE_DE
+#  if USE_DE
    " am ", __DATE__
-#else /* !USE_DE */
+#  else /* !USE_DE */
    _(" on "), __DATE__
-#endif /* !USE_DE */
+#  endif /* !USE_DE */
    );
 
    print_text (fp, s1);
 }
-#  else /* !WIN32 */
-#    if defined(OS2)
+# else /* !WIN32 */
+#  if defined(OS2)
    static void
 print_compiler_info (fp)
    FILE *fp;
 {
-#if defined(__IBMC__) || defined(__WATCOMC__) || defined(_MSC_VER)
+#   if defined(__IBMC__) || defined(__WATCOMC__) || defined(_MSC_VER)
    char buf[80];
-#endif
+#   endif
 
 
    sprintf(s1, _(*compiler_info),
 
-#ifdef __GNUC__
-#  ifdef __EMX__  /* __EMX__ is defined as "1" only (sigh) */
+#   ifdef __GNUC__
+#    ifdef __EMX__  /* __EMX__ is defined as "1" only (sigh) */
    "emx+gcc ", __VERSION__,
-#  else
-   "gcc/2 ", __VERSION__,
-#  endif
-#else
-#  ifdef __IBMC__
-   "IBM ",
-#    if (__IBMC__ < 200)
-   (sprintf(buf, "C Set/2 %d.%02d", __IBMC__/100,__IBMC__%100), buf),
 #    else
+   "gcc/2 ", __VERSION__,
+#    endif
+#   else
+#    ifdef __IBMC__
+   "IBM ",
+#     if (__IBMC__ < 200)
+   (sprintf(buf, "C Set/2 %d.%02d", __IBMC__/100,__IBMC__%100), buf),
+#     else
 #      if (__IBMC__ < 300)
    (sprintf(buf, "C Set++ %d.%02d", __IBMC__/100,__IBMC__%100), buf),
 #      else
    (sprintf(buf, "Visual Age C++ %d.%02d", __IBMC__/100,__IBMC__%100), buf),
 #      endif
-#    endif
-#  else
-#    ifdef __WATCOMC__
-   "Watcom C", (sprintf(buf, " (__WATCOMC__ = %d)", __WATCOMC__), buf),
+#     endif
 #    else
+#     ifdef __WATCOMC__
+   "Watcom C", (sprintf(buf, " (__WATCOMC__ = %d)", __WATCOMC__), buf),
+#     else
 #      ifdef __TURBOC__
-#        ifdef __BORLANDC__
+#       ifdef __BORLANDC__
    "Borland C++",
-#          if (__BORLANDC__ < 0x0200)
+#        if (__BORLANDC__ < 0x0200)
    " 1.0",
-#          else
-#            if (__BORLANDC__ == 0x0200)
+#        else
+#         if (__BORLANDC__ == 0x0200)
    " 2.0",
-#            else
-#              if (__BORLANDC__ == 0x0400)
+#         else
+#          if (__BORLANDC__ == 0x0400)
    " 3.0",
-#              else
-#                if (__BORLANDC__ == 0x0410)
+#          else
+#           if (__BORLANDC__ == 0x0410)
    " 3.1",
-#                else
-#                  if (__BORLANDC__ == 0x0452)
+#           else
+#            if (__BORLANDC__ == 0x0452)
    " 4.0",
-#                  else                    /* these two are guesses based on DOS version */
-#                    if (__BORLANDC__ == 0x0460)
+#            else                    /* these two are guesses based on DOS version */
+#             if (__BORLANDC__ == 0x0460)
    " 4.5",
-#                    else
-#                      if USE_DE
+#             else
+#              if USE_DE
    " neuer als 4.5",
-#                      else /* !USE_DE */
+#              else /* !USE_DE */
    _(" later than 4.5"),
-#                      endif /* !USE_DE */
-#                    endif
-#                  endif
-#                endif
-#              endif
+#              endif /* !USE_DE */
+#             endif
 #            endif
+#           endif
 #          endif
-#        else
-   "Turbo C",
-#          if (__TURBOC__ >= 661)
-#            if USE_DE
-   "++ 1.0 oder neuer",
-#            else /* USE_DE */
-   _("++ 1.0 or later"),
-#            endif /* USE_DE */
-#          else
-#            if (__TURBOC__ == 661)
-   " 3.0?",
-#            else
-#              if (__TURBOC__ == 397)
-   " 2.0",
-#              else
-#                if USE_DE
-   " 1.0 oder 1.5?",
-#                else /* !USE_DE */
-   _(" 1.0 or 1.5?"),
-#                endif /* !USE_DE */
-#              endif
-#            endif
-#          endif
+#         endif
 #        endif
-#      else
-#        ifdef MSC
-   "Microsoft C ",
-#          ifdef _MSC_VER
-   (sprintf(buf, "%d.%02d", _MSC_VER/100, _MSC_VER%100), buf),
-#          else
-#            if USE_DE
-   "5.1 oder aelter",
-#            else /* !USE_DE */
-   _("5.1 or earlier"),
-#            endif /* !USE_DE */
-#          endif
+#       else
+   "Turbo C",
+#        if (__TURBOC__ >= 661)
+#         if USE_DE
+   "++ 1.0 oder neuer",
+#         else /* USE_DE */
+   _("++ 1.0 or later"),
+#         endif /* USE_DE */
 #        else
-#          if USE_DE
+#         if (__TURBOC__ == 661)
+   " 3.0?",
+#         else
+#          if (__TURBOC__ == 397)
+   " 2.0",
+#          else
+#           if USE_DE
+   " 1.0 oder 1.5?",
+#           else /* !USE_DE */
+   _(" 1.0 or 1.5?"),
+#           endif /* !USE_DE */
+#          endif
+#         endif
+#        endif
+#       endif
+#      else
+#       ifdef MSC
+   "Microsoft C ",
+#        ifdef _MSC_VER
+   (sprintf(buf, "%d.%02d", _MSC_VER/100, _MSC_VER%100), buf),
+#        else
+#         if USE_DE
+   "5.1 oder aelter",
+#         else /* !USE_DE */
+   _("5.1 or earlier"),
+#         endif /* !USE_DE */
+#        endif
+#       else
+#        if USE_DE
    "unbekannter Kompilierer", "",
-#          else /* !USE_DE */
+#        else /* !USE_DE */
    _("unknown compiler"), "",
-#          endif /* !USE_DE */
-#        endif /* MSC */
+#        endif /* !USE_DE */
+#       endif /* MSC */
 #      endif /* __TURBOC__ */
-#    endif /* __WATCOMC__ */
-#  endif /* __IBMC__ */
-#endif /* __GNUC__ */
+#     endif /* __WATCOMC__ */
+#    endif /* __IBMC__ */
+#   endif /* __GNUC__ */
 
-#if USE_DE
+#   if USE_DE
    UE,
-#endif
+#   endif
    "OS/2",
 
 /* GRR:  does IBM C/2 identify itself as IBM rather than Microsoft? */
-#if (defined(MSC) || (defined(__WATCOMC__) && !defined(__386__)))
-#  if defined(M_I86HM) || defined(__HUGE__)
+#   if (defined(MSC) || (defined(__WATCOMC__) && !defined(__386__)))
+#    if defined(M_I86HM) || defined(__HUGE__)
    " (16-bit, huge)",
-#  else
-#    if defined(M_I86LM) || defined(__LARGE__)
-   " (16-bit, large)",
 #    else
+#     if defined(M_I86LM) || defined(__LARGE__)
+   " (16-bit, large)",
+#     else
 #      if defined(M_I86MM) || defined(__MEDIUM__)
    " (16-bit, medium)",
 #      else
-#        if defined(M_I86CM) || defined(__COMPACT__)
+#       if defined(M_I86CM) || defined(__COMPACT__)
    " (16-bit, compact)",
-#        else
-#          if defined(M_I86SM) || defined(__SMALL__)
+#       else
+#        if defined(M_I86SM) || defined(__SMALL__)
    " (16-bit, small)",
-#          else
-#            if defined(M_I86TM) || defined(__TINY__)
+#        else
+#         if defined(M_I86TM) || defined(__TINY__)
    " (16-bit, tiny)",
-#            else
+#         else
    " (16-bit)",
-#            endif
-#          endif
+#         endif
 #        endif
+#       endif
 #      endif
+#     endif
 #    endif
-#  endif
-#else
+#   else
    " 2.x (32-bit)",
-#endif
+#   endif
 
-#if USE_DE
+#   if USE_DE
    " am ", __DATE__
-#else /* !USE_DE */
+#   else /* !USE_DE */
    _(" on "), __DATE__
-#endif /* !USE_DE */
+#   endif /* !USE_DE */
    );
 
    print_text (fp, s1);
 }
-#    else /* !OS2 */
-#      if defined(ACORN)
+#  else /* !OS2 */
+#   if defined(ACORN)
    static void
 print_compiler_info (fp)
    FILE *fp;
 {
    sprintf(s1, _(*compiler_info),
 
-#ifdef __GNUC__
+#    ifdef __GNUC__
    "gcc ", __VERSION__,
-#else
-#  ifdef __CC_NORCROFT
+#    else
+#     ifdef __CC_NORCROFT
    "Norcroft ", "cc",
-#  else
+#     else
    "cc", "",
-#  endif
-#endif
+#     endif
+#    endif
 
-#if USE_DE
+#    if USE_DE
    UE,
-#endif
+#    endif
 
    "RISC OS",
 
    " (Acorn Computers Ltd)",
 
-#if USE_DE
+#    if USE_DE
    " am ", __DATE__
-#else /* !USE_DE */
+#    else /* !USE_DE */
    _(" on "), __DATE__
-#endif /* !USE_DE */
+#    endif /* !USE_DE */
    );
 
    print_text (fp, s1);
 }
-#      else /* !ACORN */
-#        if defined(AMIGA)
+#   else /* !ACORN */
+#    if defined(AMIGA)
 
 /* NOTE:  the following include depends upon the environment
  *        variable $Workbench to be set correctly.  (Set by
@@ -4538,54 +4538,54 @@ print_compiler_info (fp)
 
 /* format "with" name strings */
 
-#ifdef __SASC
+#     ifdef __SASC
    strcpy(buf1, "SAS/C ");
-#else
-#  ifdef LATTICE
+#     else
+#      ifdef LATTICE
    strcpy(buf1, "Lattice C ");
-#  else
-#    ifdef AZTEC_C
-   strcpy(buf1, "Manx Aztec C ");
-#    else
-#      ifdef __GNUC__
-   strcpy(buf1, "gcc ");
 #      else
-#        if USE_DE
+#       ifdef AZTEC_C
+   strcpy(buf1, "Manx Aztec C ");
+#       else
+#        ifdef __GNUC__
+   strcpy(buf1, "gcc ");
+#        else
+#         if USE_DE
    strcpy(buf1, "unbekannt ");
-#        else /* !USE_DE */
+#         else /* !USE_DE */
    strcpy(buf1, _("unknown "));
-#        endif /* !USE_DE */
+#         endif /* !USE_DE */
+#        endif
+#       endif
 #      endif
-#    endif
-#  endif
-#endif
+#     endif
 
 /* Define revision, date, and time strings.
  * NOTE:  Do not calculate run time, be sure to use time compiled.
  * Pass these strings via your makefile if undefined.
  */
 
-#if defined(__VERSION__) && defined(__REVISION__)
-#  if USE_DE
+#     if defined(__VERSION__) && defined(__REVISION__)
+#      if USE_DE
    sprintf(buf2, "Version %d.%d", __VERSION__, __REVISION__);
-#  else /* !USE_DE */
+#      else /* !USE_DE */
    sprintf(buf2, _("version %d.%d"), __VERSION__, __REVISION__);
-#  endif /* !USE_DE */
-#else
-#  ifdef __VERSION__
-#    if USE_DE
+#      endif /* !USE_DE */
+#     else
+#      ifdef __VERSION__
+#       if USE_DE
    sprintf(buf2, "Version %d", __VERSION__);
-#    else /* !USE_DE */
+#       else /* !USE_DE */
    sprintf(buf2, _("version %d"), __VERSION__);
-#    endif /* !USE_DE */
-#  else
-#    if USE_DE
+#       endif /* !USE_DE */
+#      else
+#       if USE_DE
    sprintf(buf2, "unbekannte Version");
-#    else /* !USE_DE */
+#       else /* !USE_DE */
    sprintf(buf2, _("unknown version"));
-#    endif /* !USE_DE */
-#  endif
-#endif
+#       endif /* !USE_DE */
+#      endif
+#     endif
 
 /* "under" */
 /*
@@ -4593,422 +4593,422 @@ print_compiler_info (fp)
 */
    sprintf(buf3, "v%d", WBversion);
 
-#if USE_DE
+#     if USE_DE
    sprintf(s1, _(*compiler_info), buf1, buf2, UE, "AmigaDOS", buf3, " am ", __DATE__);
-#else /* !USE_DE */
+#     else /* !USE_DE */
    sprintf(s1, _(*compiler_info), buf1, buf2, "AmigaDOS", buf3, _(" on "), __DATE__);
-#endif /* !USE_DE */
+#     endif /* !USE_DE */
 
    print_text (fp, s1);
 }
-#        else /* !AMIGA */
-#          if defined(ATARI)
+#    else /* !AMIGA */
+#     if defined(ATARI)
    static void
 print_compiler_info (fp)
    FILE *fp;
 {
-#ifdef __TURBOC__
+#      ifdef __TURBOC__
    char buf[40];
-#endif
+#      endif
 
 
    sprintf(s1, _(*compiler_info),
 
-#ifdef __GNUC__
+#      ifdef __GNUC__
    "gcc ", __VERSION__,
-#else
-#  ifdef __any_other_unix_like_compiler__   /* !!! FIXME */
-#    if USE_DE
+#      else
+#       ifdef __any_other_unix_like_compiler__   /* !!! FIXME */
+#        if USE_DE
    "cc ", (sprintf(buf, "Version %d", _RELEASE), buf),
-#    else /* !USE_DE */
+#        else /* !USE_DE */
    "cc ", (sprintf(buf, _("version %d"), _RELEASE), buf),
-#    endif /* !USE_DE */
-#  else
-#    ifdef __TURBOC__
+#        endif /* !USE_DE */
+#       else
+#        ifdef __TURBOC__
    "Turbo C", (sprintf(buf, " (0x%04x = %d)", __TURBOC__, __TURBOC__), buf),
-#    else
-#      if USE_DE
+#        else
+#         if USE_DE
    "unbekannter Kompilierer", "",
-#      else /* !USE_DE */
+#         else /* !USE_DE */
    _("unknown compiler"), "",
-#      endif /* !USE_DE */
-#    endif
-#  endif
-#endif
+#         endif /* !USE_DE */
+#        endif
+#       endif
+#      endif
 
-#if USE_DE
+#      if USE_DE
    UE,
-#endif
+#      endif
 
-#ifdef __MINT__
+#      ifdef __MINT__
    "Atari TOS/MiNT",
-#else
+#      else
    "Atari TOS",
-#endif
+#      endif
 
    " (Atari ST/TT/Falcon030)",
 
-#if USE_DE
+#      if USE_DE
    " am ", __DATE__
-#else /* !USE_DE */
+#      else /* !USE_DE */
    _(" on "), __DATE__
-#endif /* !USE_DE */
+#      endif /* !USE_DE */
    );
 
    print_text (fp, s1);
 }
-#          else /* !ATARI */
-#            if defined(__50SERIES)   /* Prime/PRIMOS */
+#     else /* !ATARI */
+#      if defined(__50SERIES)   /* Prime/PRIMOS */
    static void
 print_compiler_info (fp)
    FILE *fp;
 {
    sprintf(s1, _(*compiler_info),
 
-#ifdef __GNUC__
+#       ifdef __GNUC__
    "gcc ", __VERSION__,
-#else
+#       else
    "cc", "",
-#endif
+#       endif
 
-#if USE_DE
+#       if USE_DE
    UE,
-#endif
+#       endif
 
    "PRIMOS",
 
    " (Prime Computer Inc)",
 
-#if USE_DE
+#       if USE_DE
    " am ", __DATE__
-#else /* !USE_DE */
+#       else /* !USE_DE */
    _(" on "), __DATE__
-#endif /* !USE_DE */
+#       endif /* !USE_DE */
    );
 
    print_text (fp, s1);
 }
-#            else /* !__50SERIES */
-#              if defined(VAXC) || defined(VMS)   /* DEC Vax */
+#      else /* !__50SERIES */
+#       if defined(VAXC) || defined(VMS)   /* DEC Vax */
    static void
 print_compiler_info (fp)
    FILE *fp;
 {
-#ifdef VMS_VERSION
+#        ifdef VMS_VERSION
    char buf[40];
-#endif
-#ifdef __DECC_VER
+#        endif
+#        ifdef __DECC_VER
    char buf2[40];
    int  vtyp;
-#endif
+#        endif
 
 /*  DEC C in ANSI mode does not like "#ifdef MACRO" inside another
     macro when MACRO is equated to a value (by "#define MACRO 1").   */
 
    sprintf(s1, _(*compiler_info),
 
-#ifdef __GNUC__
+#        ifdef __GNUC__
    "gcc ", __VERSION__,
-#else
-#  if defined(DECC) || defined(__DECC) || defined (__DECC__)
+#        else
+#         if defined(DECC) || defined(__DECC) || defined (__DECC__)
    "DEC C",
-#    ifdef __DECC_VER
+#          ifdef __DECC_VER
    (sprintf(buf2, " %c%d.%d-%03d",
             ((vtyp = (__DECC_VER / 10000) % 10) == 6 ? 'T' :
              (vtyp == 8 ? 'S' : 'V')),
             __DECC_VER / 10000000,
             (__DECC_VER % 10000000) / 100000, __DECC_VER % 1000), buf2),
-#    else
+#          else
    "",
-#    endif
-#  else
-#    ifdef VAXC
+#          endif
+#         else
+#          ifdef VAXC
    "VAX C", "",
-#    else
-#      if USE_DE
+#          else
+#           if USE_DE
    "unbekannter Kompilierer", "",
-#      else /* !USE_DE */
+#           else /* !USE_DE */
    _("unknown compiler"), "",
-#      endif /* !USE_DE */
-#    endif
-#  endif
-#endif
+#           endif /* !USE_DE */
+#          endif
+#         endif
+#        endif
 
-#if USE_DE
+#        if USE_DE
    UE,
-#endif
+#        endif
 
-#ifdef VMS_VERSION
-#  if defined(__alpha)
+#        ifdef VMS_VERSION
+#         if defined(__alpha)
    "OpenVMS",   /* version has trailing spaces ("V6.1   "), so truncate: */
-#    if USE_DE
+#          if USE_DE
    (sprintf(buf, " (%.4s f%sr Alpha)", VMS_VERSION), buf, UE),
-#    else /* !USE_DE */
+#          else /* !USE_DE */
    (sprintf(buf, _(" (%.4s for Alpha)"), VMS_VERSION), buf),
-#    endif /* !USE_DE */
-#  else /* VAX */
+#          endif /* !USE_DE */
+#         else /* VAX */
    (VMS_VERSION[1] >= '6') ? "OpenVMS" : "VMS",
-#    if USE_DE
+#          if USE_DE
    (sprintf(buf, " (%.4s f%sr VAX)", VMS_VERSION), buf, UE),
-#    else /* !USE_DE */
+#          else /* !USE_DE */
    (sprintf(buf, _(" (%.4s for VAX)"), VMS_VERSION), buf),
-#    endif /* !USE_DE */
-#  endif
-#else
+#          endif /* !USE_DE */
+#         endif
+#        else
    "VMS", "",
-#endif /* ?VMS_VERSION */
+#        endif /* ?VMS_VERSION */
 
-#if USE_DE
+#        if USE_DE
    " am ", __DATE__
-#else /* !USE_DE */
+#        else /* !USE_DE */
    _(" on "), __DATE__
-#endif /* !USE_DE */
+#        endif /* !USE_DE */
    );
 
    print_text (fp, s1);
 }
-#              else /* default: UNIX */
-#if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__386BSD__) || defined(__bsdi__)
-#include <sys/param.h> /* for the BSD4_4 define */
-#endif
+#       else /* default: UNIX */
+#        if defined(__NetBSD__) || defined(__FreeBSD__) || defined(__386BSD__) || defined(__bsdi__)
+#         include <sys/param.h> /* for the BSD4_4 define */
+#        endif
 
    static void
 print_compiler_info (fp)
    FILE *fp;
 {
-#if defined(CRAY) || defined(NX_CURRENT_COMPILER_RELEASE) || defined(NetBSD)
+#        if defined(CRAY) || defined(NX_CURRENT_COMPILER_RELEASE) || defined(NetBSD)
    char buf1[40];
-#  if defined(CRAY) || defined(NX_CURRENT_COMPILER_RELEASE)
+#         if defined(CRAY) || defined(NX_CURRENT_COMPILER_RELEASE)
    char buf2[40];
-#  endif
-#endif
+#         endif
+#        endif
 
     /* Pyramid, NeXT have problems with huge macro expansion, too:  no Info() */
     sprintf(s1, _(*compiler_info),
 
-#ifdef __GNUC__
-#  ifdef NX_CURRENT_COMPILER_RELEASE
+#        ifdef __GNUC__
+#         ifdef NX_CURRENT_COMPILER_RELEASE
    (sprintf(buf1, "NeXT DevKit %d.%02d ", NX_CURRENT_COMPILER_RELEASE/100,
     NX_CURRENT_COMPILER_RELEASE%100), buf1),
     (strlen(__VERSION__) > 8) ? "(gcc)" :
      (sprintf(buf2, "(gcc %s)", __VERSION__), buf2),
-#  else
+#         else
    "gcc ", __VERSION__,
-#  endif
-#else
-#  if defined(CRAY) && defined(_RELEASE)
-#    if USE_DE
+#         endif
+#        else
+#         if defined(CRAY) && defined(_RELEASE)
+#          if USE_DE
    "cc ", (sprintf(buf1, "Version %d", _RELEASE), buf1),
-#    else /* !USE_DE */
+#          else /* !USE_DE */
    "cc ", (sprintf(buf1, _("version %d"), _RELEASE), buf1),
-#    endif /* !USE_DE */
-#  else
-#    ifdef __VERSION__
+#          endif /* !USE_DE */
+#         else
+#          ifdef __VERSION__
    "cc ", __VERSION__,
-#    else
+#          else
    "cc", "",
-#    endif
-#  endif
-#endif
+#          endif
+#         endif
+#        endif
 
-#if USE_DE
+#        if USE_DE
    UE,
-#endif
+#        endif
 
    "Unix",
 
-#if defined(sgi) || defined(__sgi)
+#        if defined(sgi) || defined(__sgi)
    " (Silicon Graphics IRIX)",
-#else
-#  ifdef sun
-#    ifdef sparc
-#      ifdef __SVR4
-   " (Sun Sparc/Solaris)",
-#      else /* may or may not be SunOS */
-   " (Sun Sparc)",
-#      endif
-#    else
-#      if defined(sun386) || defined(i386)
-   " (Sun 386i)",
-#      else
-#        if defined(mc68020) || defined(__mc68020__)
-   " (Sun 3)",
-#        else /* mc68010 or mc68000:  Sun 2 or earlier */
-   " (Sun 2)",
-#        endif
-#      endif
-#    endif
-#  else
-#    ifdef __hpux
-   " (HP/UX)",
-#    else
-#      ifdef __osf__
-   " (DEC OSF/1)",
-#      else
-#        ifdef _AIX
-   " (IBM AIX)",
 #        else
-#          ifdef aiws
-   " (IBM RT/AIX)",
+#         ifdef sun
+#          ifdef sparc
+#           ifdef __SVR4
+   " (Sun Sparc/Solaris)",
+#           else /* may or may not be SunOS */
+   " (Sun Sparc)",
+#           endif
 #          else
-#            if defined(CRAY) || defined(cray)
-#              ifdef _UNICOS
-   (sprintf(buf2, " (Cray UNICOS release %d)", _UNICOS), buf2),
-#              else
-   " (Cray UNICOS)",
-#              endif
+#           if defined(sun386) || defined(i386)
+   " (Sun 386i)",
+#           else
+#            if defined(mc68020) || defined(__mc68020__)
+   " (Sun 3)",
+#            else /* mc68010 or mc68000:  Sun 2 or earlier */
+   " (Sun 2)",
+#            endif
+#           endif
+#          endif
+#         else
+#          ifdef __hpux
+   " (HP/UX)",
+#          else
+#           ifdef __osf__
+   " (DEC OSF/1)",
+#           else
+#            ifdef _AIX
+   " (IBM AIX)",
 #            else
-#              if defined(uts) || defined(UTS)
-   " (Amdahl UTS)",
+#             ifdef aiws
+   " (IBM RT/AIX)",
+#             else
+#              if defined(CRAY) || defined(cray)
+#               ifdef _UNICOS
+   (sprintf(buf2, " (Cray UNICOS release %d)", _UNICOS), buf2),
+#               else
+   " (Cray UNICOS)",
+#               endif
 #              else
+#               if defined(uts) || defined(UTS)
+   " (Amdahl UTS)",
+#               else
 #                ifdef NeXT
-#                  ifdef mc68000
+#                 ifdef mc68000
    " (NeXTStep/black)",
-#                  else
+#                 else
    " (NeXTStep for Intel)",
-#                  endif
+#                 endif
 #                else              /* the next dozen or so are somewhat order-dependent */
-#                  if defined(linux) || defined(__linux__)
-#                    ifdef __ELF__
+#                 if defined(linux) || defined(__linux__)
+#                  ifdef __ELF__
    " (Linux ELF)",
-#                    else
-   " (Linux a.out)",
-#                    endif
 #                  else
-#                    ifdef MINIX
+   " (Linux a.out)",
+#                  endif
+#                 else
+#                  ifdef MINIX
    " (Minix)",
-#                    else
-#                      ifdef M_UNIX
+#                  else
+#                   ifdef M_UNIX
    " (SCO Unix)",
-#                      else
-#                        ifdef M_XENIX
+#                   else
+#                    ifdef M_XENIX
    " (SCO Xenix)",
-#                        else
-#                          ifdef __NetBSD__
-#                            ifdef NetBSD0_8
-#                              if NetBSD0_8 == 1
+#                    else
+#                     ifdef __NetBSD__
+#                      ifdef NetBSD0_8
+#                       if NetBSD0_8 == 1
    " (NetBSD 0.8)",
-#                              else
+#                       else
    (sprintf(buf1, " (NetBSD 0.8%c)", (char) (NetBSD0_8 + '@')), buf1),
-#                              endif
-#                            else
-#                              ifdef NetBSD0_9
-#                                if NetBSD0_9 == 1
+#                       endif
+#                      else
+#                       ifdef NetBSD0_9
+#                        if NetBSD0_9 == 1
    " (NetBSD 0.9)",
-#                                else
+#                        else
    (sprintf(buf1, " (NetBSD 0.9%c)", (char)(NetBSD0_9 + 'A' - 2)), buf1),
-#                                endif
-#                              else
-#                                ifdef NetBSD1_0
-#                                  if NetBSD1_0 == 1
+#                        endif
+#                       else
+#                        ifdef NetBSD1_0
+#                         if NetBSD1_0 == 1
    " (NetBSD 1.0)",
-#                                  else
+#                         else
    (sprintf(buf1, " (NetBSD 1.0%c)", (char)(NetBSD1_0 + 'A' - 2)), buf1),
-#                                  endif
-#                                else
-#                                  ifdef NetBSD1_1
-#                                    if NetBSD1_1 == 1
+#                         endif
+#                        else
+#                         ifdef NetBSD1_1
+#                          if NetBSD1_1 == 1
    " (NetBSD 1.1)",
-#                                    else
-   (sprintf(buf1, " (NetBSD 1.1%c)", (char)(NetBSD1_1 + 'A' - 2)), buf1),
-#                                    endif
-#                                  else
-#                                    if USE_DE
-   (BSD4_4 == 0.5) ? " (NetBSD vor 0.9)" : " (NetBSD 1.2 oder neuer)",
-#                                    else /* !USE_DE */
-   (BSD4_4 == 0.5) ? _(" (NetBSD before 0.9)") : _(" (NetBSD 1.2 or later)"),
-#                                    endif /* !USE_DE */
-#                                  endif
-#                                endif
-#                              endif
-#                            endif
 #                          else
-#                            ifdef __FreeBSD__
-#                              if USE_DE
+   (sprintf(buf1, " (NetBSD 1.1%c)", (char)(NetBSD1_1 + 'A' - 2)), buf1),
+#                          endif
+#                         else
+#                          if USE_DE
+   (BSD4_4 == 0.5) ? " (NetBSD vor 0.9)" : " (NetBSD 1.2 oder neuer)",
+#                          else /* !USE_DE */
+   (BSD4_4 == 0.5) ? _(" (NetBSD before 0.9)") : _(" (NetBSD 1.2 or later)"),
+#                          endif /* !USE_DE */
+#                         endif
+#                        endif
+#                       endif
+#                      endif
+#                     else
+#                      ifdef __FreeBSD__
+#                       if USE_DE
    (BSD4_4 == 0.5) ? " (FreeBSD 1.x)" : " (FreeBSD 2.0 oder neuer)",
-#                              else /* !USE_DE */
+#                       else /* !USE_DE */
    (BSD4_4 == 0.5) ? " (FreeBSD 1.x)" : _(" (FreeBSD 2.0 or later)"),
-#                              endif /* !USE_DE */
-#                            else
-#                              ifdef __bsdi__
-#                                if USE_DE
+#                       endif /* !USE_DE */
+#                      else
+#                       ifdef __bsdi__
+#                        if USE_DE
    (BSD4_4 == 0.5) ? " (BSD/386 1.0)" : " (BSD/386 1.1 oder neuer)",
-#                                else /* !USE_DE */
+#                        else /* !USE_DE */
    (BSD4_4 == 0.5) ? " (BSD/386 1.0)" : _(" (BSD/386 1.1 or later)"),
-#                                endif /* !USE_DE */
-#                              else
-#                                ifdef __386BSD__
+#                        endif /* !USE_DE */
+#                       else
+#                        ifdef __386BSD__
    (BSD4_4 == 1) ? " (386BSD, post-4.4 release)" : " (386BSD)",
-#                                else
-#                                  if defined(i486) || defined(__i486) || defined(__i486__)
+#                        else
+#                         if defined(i486) || defined(__i486) || defined(__i486__)
    " (Intel 486)",
-#                                  else
-#                                    if defined(i386) || defined(__i386) || defined(__i386__)
+#                         else
+#                          if defined(i386) || defined(__i386) || defined(__i386__)
    " (Intel 386)",
-#                                    else
-#                                      ifdef pyr
+#                          else
+#                           ifdef pyr
    " (Pyramid)",
-#                                      else
-#                                        if defined(ultrix) || defined(__ultrix)
-#                                          if defined(mips) || defined(__mips)
+#                           else
+#                            if defined(ultrix) || defined(__ultrix)
+#                             if defined(mips) || defined(__mips)
    " (DEC/MIPS)",
-#                                          else
-#                                            if defined(vax) || defined(__vax)
+#                             else
+#                              if defined(vax) || defined(__vax)
    " (DEC/VAX)",
-#                                            else /* __alpha? */
+#                              else /* __alpha? */
    " (DEC/Alpha)",
-#                                            endif
-#                                          endif
-#                                        else
-#                                          ifdef gould
+#                              endif
+#                             endif
+#                            else
+#                             ifdef gould
    " (Gould)",
-#                                          else
-#                                            ifdef MTS
+#                             else
+#                              ifdef MTS
    " (MTS)",
-#                                            else
-#                                              ifdef __convexc__
+#                              else
+#                               ifdef __convexc__
    " (Convex)",
-#                                              else
+#                               else
    "",
-#                                              endif /* Convex */
-#                                            endif /* MTS */
-#                                          endif /* Gould */
-#                                        endif /* DEC */
-#                                      endif /* Pyramid */
-#                                    endif /* 386 */
-#                                  endif /* 486 */
-#                                endif /* 386BSD */
-#                              endif /* BSDI BSD/386 */
-#                            endif /* NetBSD */
-#                          endif /* FreeBSD */
-#                        endif /* SCO Xenix */
-#                      endif /* SCO Unix */
-#                    endif /* Minix */
-#                  endif /* Linux */
+#                               endif /* Convex */
+#                              endif /* MTS */
+#                             endif /* Gould */
+#                            endif /* DEC */
+#                           endif /* Pyramid */
+#                          endif /* 386 */
+#                         endif /* 486 */
+#                        endif /* 386BSD */
+#                       endif /* BSDI BSD/386 */
+#                      endif /* NetBSD */
+#                     endif /* FreeBSD */
+#                    endif /* SCO Xenix */
+#                   endif /* SCO Unix */
+#                  endif /* Minix */
+#                 endif /* Linux */
 #                endif /* NeXT */
-#              endif /* Amdahl */
-#            endif /* Cray */
-#          endif /* RT/AIX */
-#        endif /* AIX */
-#      endif /* OSF/1 */
-#    endif /* HP/UX */
-#  endif /* Sun */
-#endif /* SGI */
+#               endif /* Amdahl */
+#              endif /* Cray */
+#             endif /* RT/AIX */
+#            endif /* AIX */
+#           endif /* OSF/1 */
+#          endif /* HP/UX */
+#         endif /* Sun */
+#        endif /* SGI */
 
-#if USE_DE
+#        if USE_DE
    " am ", __DATE__
-#else /* !USE_DE */
+#        else /* !USE_DE */
    _(" on "), __DATE__
-#endif /* !USE_DE */
+#        endif /* !USE_DE */
    );
 
    print_text (fp, s1);
 }
-#              endif /* default: UNIX */
-#            endif /* !__50SERIES */
-#          endif /* !ATARI */
-#        endif /* !AMIGA */
-#      endif /* !ACORN */
-#    endif /* !OS2 */
-#  endif /* !WIN32 */
+#       endif /* default: UNIX */
+#      endif /* !__50SERIES */
+#     endif /* !ATARI */
+#    endif /* !AMIGA */
+#   endif /* !ACORN */
+#  endif /* !OS2 */
+# endif /* !WIN32 */
 #endif /* !MSDOS */

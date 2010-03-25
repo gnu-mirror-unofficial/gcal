@@ -16,12 +16,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 DEFS = -DLOCALEDIR=\"$(localedir)\" @DEFS@
-INTL_LIBS = @INTLLIBS@
 MISC_LIBS = @LIBM@ @LIBS@
-LIBS = $(INTL_LIBS) $(MISC_LIBS)
+LIBS = $(MISC_LIBS)
 
-AM_CFLAGS = -I$(srcdir) -I.. -I../intl -I$(top_srcdir)/intl -I$(top_builddir)/intl @CPPFLAGS@
-AM_LDFLAGS = @LDFLAGS@
+AM_CFLAGS = -I$(srcdir)/lib -I$(srcdir) -I.. @CPPFLAGS@
+AM_LDFLAGS = ../lib/libgnu.a @LDFLAGS@
 
 SRCS = \
   file-io.c \

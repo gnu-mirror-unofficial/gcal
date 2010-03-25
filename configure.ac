@@ -26,8 +26,9 @@ dnl Starting operations.
 dnl
 AC_INIT([gcal], [3.01], [bug-gcal@gnu.org])
 AC_PREREQ(2.65)
-AM_INIT_AUTOMAKE([gnu])
 
+AC_CONFIG_AUX_DIR([build-aux])
+AM_INIT_AUTOMAKE([gnu])
 
 AM_CONFIG_HEADER(config.h:config.hin)dnl
 AC_REVISION($Id: configure.in 2.30 2000/06/14 02:03:00 tom Exp $)dnl
@@ -42,6 +43,23 @@ AC_MSG_RESULT(this is the automatical configuration step of $PACKAGE-$VERSION)
 AC_MSG_RESULT()
 AC_MSG_RESULT(please wait...)
 AC_MSG_RESULT()
+
+
+dnl
+dnl Checks for C compiler.
+dnl
+if test -z "$CFLAGS"; then
+  gcal_possibly_adjust_cflags=yes
+fi
+AC_MSG_RESULT()
+AC_CHECKING(for C compiler)
+dnl
+AC_PROG_CC
+
+gl_EARLY
+
+gl_INIT
+
 
 dnl
 dnl Support transforming of program names.
@@ -479,16 +497,7 @@ dnl Checks whether `ln -s' works.
 dnl
 AC_PROG_LN_S
 
-dnl
-dnl Checks for C compiler.
-dnl
-if test -z "$CFLAGS"; then
-  gcal_possibly_adjust_cflags=yes
-fi
-AC_MSG_RESULT()
-AC_CHECKING(for C compiler)
-dnl
-AC_PROG_CC
+
 dnl
 AC_PROG_GCC_TRADITIONAL
 dnl
@@ -969,27 +978,7 @@ if test "$ac_cv_sys_interpreter" = yes; then
   AC_DEFINE(HAVE_SYS_INTERPRETER, [1], [Shell can interpret `#!' in first line of a shell script.])
 fi
 
-dnl
-dnl Checks for internationalization support
-dnl
-AC_MSG_RESULT()
-AC_CHECKING(for internationalization support)
-dnl
-dnl Actually supported native languages.
-dnl
-ALL_LINGUAS="de fr nl pl ru sv"
-dnl
-AM_GNU_GETTEXT
-
-dnl
-dnl Check whether regcmp function is stored in -lintl, if so, re-add '-lintl'
-dnl to $LIBS because previous AM_GNU_GETTEXT macro possibly has removed it.
-dnl
-if test "$need_sys_lintl_for_regcmp" = yes; then
-  if test -z "`echo $LIBS | grep '\-lintl'`"; then
-    LIBS="$LIBS -lintl"
-  fi
-fi
+AM_GNU_GETTEXT([external])
 
 dnl
 dnl Ending operations.
@@ -1019,7 +1008,7 @@ AC_OUTPUT([Makefile \
            doc/en/examples/Makefile \
            doc/en/texi/Makefile \
            doc/mksamp \
-           intl/Makefile \
+           lib/Makefile \
            misc/Makefile \
            misc/daily/daily \
            misc/ddiff/ddiff \

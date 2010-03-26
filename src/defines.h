@@ -91,7 +91,7 @@
 #  define USE_HLS    1
 #  define USE_PAGER  1
 #  define USE_RC     1
-# endif /* 0 */
+# endif	/* 0 */
 
 
 /*

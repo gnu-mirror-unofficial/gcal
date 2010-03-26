@@ -38,179 +38,141 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `hd_data.c'.
 */
-extern const Cc_struct *
-binsearch_cc_id __P_((char *id));
+extern const Cc_struct *binsearch_cc_id __P_ ((char *id));
 extern void
-base_christian_hdy __P_((      Bool *init_data,
-                         const Bool  detected,
-                               int   easter,
-                         const int   year,
-                               int  *hd_elems,
-                         const int   fday,
-                         const int   count));
+  base_christian_hdy __P_ ((Bool * init_data,
+			    const Bool detected,
+			    int easter,
+			    const int year,
+			    int *hd_elems, const int fday, const int count));
 extern void
-astronomical_hdy __P_((      Bool *init_data,
-                       const Bool  detected,
-                       const int   year,
-                             int  *hd_elems,
-                       const int   fday,
-                       const int   count));
+  astronomical_hdy __P_ ((Bool * init_data,
+			  const Bool detected,
+			  const int year,
+			  int *hd_elems, const int fday, const int count));
 extern void
-bahai_hdy __P_((      Bool *init_data,
-                const Bool  detected,
-                const int   year,
-                      int  *hd_elems,
-                const int   fday,
-                const int   count,
-                const char *cc));
+  bahai_hdy __P_ ((Bool * init_data,
+		   const Bool detected,
+		   const int year,
+		   int *hd_elems,
+		   const int fday, const int count, const char *cc));
 extern void
-bahai_mth __P_((      Bool *init_data,
-                const Bool  detected,
-                const int   year,
-                      int  *hd_elems,
-                const int   fday,
-                const int   count));
+  bahai_mth __P_ ((Bool * init_data,
+		   const Bool detected,
+		   const int year,
+		   int *hd_elems, const int fday, const int count));
 extern void
-celtic_hdy __P_((      Bool *init_data,
-                 const Bool  detected,
-                 const int   year,
-                       int  *hd_elems,
-                 const int   fday,
-                 const int   count,
-                 const char *cc));
+  celtic_hdy __P_ ((Bool * init_data,
+		    const Bool detected,
+		    const int year,
+		    int *hd_elems,
+		    const int fday, const int count, const char *cc));
 extern void
-chinese_hdy __P_((      Bool *init_data,
-                  const Bool  detected,
-                  const int   year,
-                        int  *hd_elems,
-                  const int   fday,
-                  const int   count,
-                  const char *cc,
-                  const Bool  is_any_meridian));
+  chinese_hdy __P_ ((Bool * init_data,
+		     const Bool detected,
+		     const int year,
+		     int *hd_elems,
+		     const int fday,
+		     const int count,
+		     const char *cc, const Bool is_any_meridian));
 extern void
-chinese_mth __P_((      Bool *init_data,
-                  const Bool  detected,
-                  const int   year,
-                        int  *hd_elems,
-                  const int   fday,
-                  const int   count,
-                  const Bool  is_any_meridian,
-                  const Bool  do_chinese));
+  chinese_mth __P_ ((Bool * init_data,
+		     const Bool detected,
+		     const int year,
+		     int *hd_elems,
+		     const int fday,
+		     const int count,
+		     const Bool is_any_meridian, const Bool do_chinese));
 extern void
-christian_hdy __P_((      Bool *init_data,
-                    const Bool  detected,
-                          int   easter,
-                    const int   year,
-                          int  *hd_elems,
-                    const int   fday,
-                    const int   count));
+  christian_hdy __P_ ((Bool * init_data,
+		       const Bool detected,
+		       int easter,
+		       const int year,
+		       int *hd_elems, const int fday, const int count));
 extern void
-coptic_mth __P_((      Bool *init_data,
-                 const Bool  detected,
-                 const int   year,
-                       int  *hd_elems,
-                 const int   fday,
-                 const int   count,
-                 const Bool  do_coptic));
+  coptic_mth __P_ ((Bool * init_data,
+		    const Bool detected,
+		    const int year,
+		    int *hd_elems,
+		    const int fday, const int count, const Bool do_coptic));
 extern void
-french_revolutionary_mth __P_((      Bool *init_data,
-                               const Bool  detected,
-                               const int   year,
-                                     int  *hd_elems,
-                               const int   fday,
-                               const int   count));
+  french_revolutionary_mth __P_ ((Bool * init_data,
+				  const Bool detected,
+				  const int year,
+				  int *hd_elems,
+				  const int fday, const int count));
 extern void
-indian_civil_mth __P_((      Bool *init_data,
-                       const Bool  detected,
-                       const int   year,
-                             int  *hd_elems,
-                       const int   fday,
-                       const int   count));
+  indian_civil_mth __P_ ((Bool * init_data,
+			  const Bool detected,
+			  const int year,
+			  int *hd_elems, const int fday, const int count));
 extern void
-hebrew_hdy __P_((      Bool *init_data,
-                 const Bool  detected,
-                 const int   year,
-                       int  *hd_elems,
-                 const int   fday,
-                 const int   count,
-                 const char *cc));
+  hebrew_hdy __P_ ((Bool * init_data,
+		    const Bool detected,
+		    const int year,
+		    int *hd_elems,
+		    const int fday, const int count, const char *cc));
 extern void
-hebrew_mth __P_((      Bool *init_data,
-                 const Bool  detected,
-                 const int   year,
-                       int  *hd_elems,
-                 const int   fday,
-                 const int   count));
+  hebrew_mth __P_ ((Bool * init_data,
+		    const Bool detected,
+		    const int year,
+		    int *hd_elems, const int fday, const int count));
 extern void
-islamic_hdy __P_((      Bool *init_data,
-                  const Bool  detected,
-                  const int   year,
-                        int  *hd_elems,
-                  const int   fday,
-                  const int   count,
-                  const char *cc));
+  islamic_hdy __P_ ((Bool * init_data,
+		     const Bool detected,
+		     const int year,
+		     int *hd_elems,
+		     const int fday, const int count, const char *cc));
 extern void
-islamic_mth __P_((      Bool *init_data,
-                  const Bool  detected,
-                  const int   year,
-                        int  *hd_elems,
-                  const int   fday,
-                  const int   count));
+  islamic_mth __P_ ((Bool * init_data,
+		     const Bool detected,
+		     const int year,
+		     int *hd_elems, const int fday, const int count));
 extern void
-japanese_hdy __P_((      Bool *init_data,
-                   const Bool  detected,
-                   const int   year,
-                         int  *hd_elems,
-                   const int   fday,
-                   const int   count,
-                   const char *cc,
-                   const Bool  is_any_meridian));
+  japanese_hdy __P_ ((Bool * init_data,
+		      const Bool detected,
+		      const int year,
+		      int *hd_elems,
+		      const int fday,
+		      const int count,
+		      const char *cc, const Bool is_any_meridian));
 extern void
-multicultural_new_year_hdy __P_((      Bool *init_data,
-                                 const Bool  detected,
-                                 const int   year,
-                                       int  *hd_elems,
-                                 const int   fday,
-                                 const int   count));
+  multicultural_new_year_hdy __P_ ((Bool * init_data,
+				    const Bool detected,
+				    const int year,
+				    int *hd_elems,
+				    const int fday, const int count));
 extern void
-old_egyptic_mth __P_((      Bool *init_data,
-                      const Bool  detected,
-                      const int   year,
-                            int  *hd_elems,
-                      const int   fday,
-                      const int   count,
-                      const Bool  do_old_egyptic));
+  old_egyptic_mth __P_ ((Bool * init_data,
+			 const Bool detected,
+			 const int year,
+			 int *hd_elems,
+			 const int fday,
+			 const int count, const Bool do_old_egyptic));
 extern void
-orthodox_hdy __P_((      Bool *init_data,
-                   const Bool  detected,
-                         int   easter,
-                   const int   year,
-                         int  *hd_elems,
-                   const int   fday,
-                   const int   count,
-                   const char *cc,
-                   const Bool  is_new_calendar));
+  orthodox_hdy __P_ ((Bool * init_data,
+		      const Bool detected,
+		      int easter,
+		      const int year,
+		      int *hd_elems,
+		      const int fday,
+		      const int count,
+		      const char *cc, const Bool is_new_calendar));
 extern void
-persian_hdy __P_((      Bool *init_data,
-                 const Bool  detected,
-                 const int   year,
-                       int  *hd_elems,
-                 const int   fday,
-                 const int   count,
-                 const char *cc));
+  persian_hdy __P_ ((Bool * init_data,
+		     const Bool detected,
+		     const int year,
+		     int *hd_elems,
+		     const int fday, const int count, const char *cc));
 extern void
-persian_mth __P_((      Bool *init_data,
-                 const Bool  detected,
-                 const int   year,
-                       int  *hd_elems,
-                 const int   fday,
-                 const int   count));
+  persian_mth __P_ ((Bool * init_data,
+		     const Bool detected,
+		     const int year,
+		     int *hd_elems, const int fday, const int count));
 extern void
-zodiacal_marker_hdy __P_((      Bool *init_data,
-                          const Bool  detected,
-                          const int   year,
-                                int  *hd_elems,
-                          const int   fday,
-                          const int   count));
+  zodiacal_marker_hdy __P_ ((Bool * init_data,
+			     const Bool detected,
+			     const int year,
+			     int *hd_elems, const int fday, const int count));
 __END_DECLARATIONS
 #endif /* __HD_DATA_H */

@@ -149,7 +149,7 @@
 
 /* Used heading for the fixed date list. */
 #  define RC_LIST_TITLE         "Terminliste:"
-# endif /* USE_DE */
+# endif	/* USE_DE */
 
 
 
@@ -825,7 +825,7 @@
 #  define weekday_of_date                     F_wod
 #  define weekday_map                         V_wm
 #  define weekday_name_group                  V_wng
-# endif /* CUT_LONGNAMES */
+# endif	/* CUT_LONGNAMES */
 
 
 
@@ -835,151 +835,141 @@
 /*
 *  The date variable records.
 */
-typedef
-  struct dvar_base_type
-   {
-     char  dvar_month;
-     char  dvar_day;
-   }
-  Dvar_base_struct;
+typedef struct dvar_base_type
+{
+  char dvar_month;
+  char dvar_day;
+}
+Dvar_base_struct;
 
-typedef
-  struct dvar_type
-   {
-     /* Global date variables. */
-     Dvar_base_struct  dvar_global;
+typedef struct dvar_type
+{
+  /* Global date variables. */
+  Dvar_base_struct dvar_global;
 
-     /* Local date variables. */
-     Dvar_base_struct  dvar_local;
-   }
-  Dvar_struct;
+  /* Local date variables. */
+  Dvar_base_struct dvar_local;
+}
+Dvar_struct;
 
 /*
 *  The text variable records.
 */
-typedef
-  struct tvar_base_type
-   {
-     char  *tvar_text;
-   }
-  Tvar_base_struct;
+typedef struct tvar_base_type
+{
+  char *tvar_text;
+}
+Tvar_base_struct;
 
-typedef
-  struct tvar_type
-   {
-     /* Global text variables. */
-     Tvar_base_struct  tvar_global;
+typedef struct tvar_type
+{
+  /* Global text variables. */
+  Tvar_base_struct tvar_global;
 
-     /* Local text variables. */
-     Tvar_base_struct  tvar_local;
-   }
-  Tvar_struct;
+  /* Local text variables. */
+  Tvar_base_struct tvar_local;
+}
+Tvar_struct;
 
 /*
 *  The line part record.
 */
-typedef
-  struct line_type
-   {
-     /* List of days given? */
-     Bool   day_list;
+typedef struct line_type
+{
+  /* List of days given? */
+  Bool day_list;
 
-     /* Range of days given? */
-     Bool   day_range;
+  /* Range of days given? */
+  Bool day_range;
 
-     /* Points to the list/range of days of a line, otherwise NULL. */
-     char  *day_part;
+  /* Points to the list/range of days of a line, otherwise NULL. */
+  char *day_part;
 
-     /* Points to the "repeat for N days since..." field of a line, otherwise NULL. */
-     char  *repeat_part;
+  /* Points to the "repeat for N days since..." field of a line, otherwise NULL. */
+  char *repeat_part;
 
-     /* Points to the "appears each N'th day since..." field of a line, otherwise NULL. */
-     char  *appears_part;
+  /* Points to the "appears each N'th day since..." field of a line, otherwise NULL. */
+  char *appears_part;
 
-     /* Points to the text part of a line (always). */
-     char  *text_part;
-   }
-  Line_struct;
+  /* Points to the text part of a line (always). */
+  char *text_part;
+}
+Line_struct;
 
 /*
 *  The file type record.
 */
-typedef
-  struct file_type
-   {
-     /* Actual file pointer. */
-     FILE              *fp;
+typedef struct file_type
+{
+  /* Actual file pointer. */
+  FILE *fp;
 
-     /* Name of actual resource/include file. */
-     char              *filename;
+  /* Name of actual resource/include file. */
+  char *filename;
 
-     /* Actual line number of actual resource/include file. */
-     long               line_number;
+  /* Actual line number of actual resource/include file. */
+  long line_number;
 
-     /* Number of bytes still unhandled in self-managed buffer. */
-     int                in_pool;
+  /* Number of bytes still unhandled in self-managed buffer. */
+  int in_pool;
 
-     /* Memory region of self-managed buffer. */
-     char              *pool;
+  /* Memory region of self-managed buffer. */
+  char *pool;
 
-     /* Pointer to next unmanaged character in self-managed buffer. */
-     char              *ptr_pool;
+  /* Pointer to next unmanaged character in self-managed buffer. */
+  char *ptr_pool;
 
-     /* Buffered local date variables of a "previous" file. */
-     Dvar_base_struct   local_dvars[RC_DVAR_MAX];
+  /* Buffered local date variables of a "previous" file. */
+  Dvar_base_struct local_dvars[RC_DVAR_MAX];
 
-     /* Buffered local text variables of a "previous" file. */
-     Tvar_base_struct   local_tvars[RC_TVAR_MAX];
-   }
-  File_struct;
+  /* Buffered local text variables of a "previous" file. */
+  Tvar_base_struct local_tvars[RC_TVAR_MAX];
+}
+File_struct;
 
 /*
 *  The local coordinates record used by the %distance, %sun* and %moon* special texts.
 */
-typedef
-  struct coor_type
-   {
-     int  lon_deg;
-     int  lon_min;
-     int  lon_sec;
-     int  lat_deg;
-     int  lat_min;
-     int  lat_sec;
-     int  the_mode;
-     int  meters_above_sea_level;
-     int  time_zone_in_mins;
-   }
-  Coor_struct;
+typedef struct coor_type
+{
+  int lon_deg;
+  int lon_min;
+  int lon_sec;
+  int lat_deg;
+  int lat_min;
+  int lat_sec;
+  int the_mode;
+  int meters_above_sea_level;
+  int time_zone_in_mins;
+}
+Coor_struct;
 
 /*
 *  The output format of an astronomical object record.
 */
-typedef
-  struct astronomical_object_output_format_type
-   {
-     char  data_format;
-     char  error_format;
-   }
-  Aobj_oformat_struct;
+typedef struct astronomical_object_output_format_type
+{
+  char data_format;
+  char error_format;
+}
+Aobj_oformat_struct;
 
 /*
 *  General purpose enumerations.
 */
-typedef
-  enum var_mode
-   {
-     GLobal=1,
-     LOcal
-   }
-  Var_enum;
+typedef enum var_mode
+{
+  GLobal = 1,
+  LOcal
+}
+Var_enum;
 
-typedef
-  enum astronomical_event
-   {
-     RIse=1,
-     SEt
-   }
-  Aevent_enum;
+typedef enum astronomical_event
+{
+  RIse = 1,
+  SEt
+}
+Aevent_enum;
 
 
 
@@ -1015,344 +1005,344 @@ typedef
 *  GLOBAL variables declarations.
 */
 /* Points to the local coordinates 1. */
-extern Coor_struct  *coor1;
+extern Coor_struct *coor1;
 
 /* Points to the local coordinates 2. */
-extern Coor_struct  *coor2;
+extern Coor_struct *coor2;
 
 /* Date variables a[=MMDD]...z[] (YYYY@{a|b|...|z}[[-]N]). */
-extern Dvar_struct  rc_dvar[];
+extern Dvar_struct rc_dvar[];
 
 /* Temporary file used when a command is assigned to a TVAR. */
-extern FILE  *rc_tvar_tfp;
+extern FILE *rc_tvar_tfp;
 
 /* Temporary file used for managing `--here=ARG' options. */
-extern FILE  *rc_here_fp;
+extern FILE *rc_here_fp;
 
 /* Pointers to different parts of a (resource file) line. */
-extern Line_struct  *lineptrs;
+extern Line_struct *lineptrs;
 
 /* Pointers to different parts of a (resource file) line. */
-extern Line_struct  *lptrs2;
+extern Line_struct *lptrs2;
 
 /* Pointers to different parts of a (resource file) line. */
-extern Line_struct  *lptrs3;
+extern Line_struct *lptrs3;
 
 /* Pointers to different parts of a (resource file) line. */
-extern Line_struct  *lptrs;
+extern Line_struct *lptrs;
 
 /* Text variables $a[=TEXT]...$z[]. */
-extern Tvar_struct  rc_tvar[];
+extern Tvar_struct rc_tvar[];
 
 /* Time displacement value in days used by %sun* and %moon*
    (also used as cycle-starting time value for %sun* and %moon* special texts). */
-extern double  time_offset;
+extern double time_offset;
 
 /* Atmospheric pressure in millibar (`--atmosphere=PRESSURE,TEMPERATURE'). */
-extern double  atm_pressure;
+extern double atm_pressure;
 
 /* Atmospheric temperature in degrees Celsius (`--atmosphere=PRESSURE,TEMPERATURE'). */
-extern double  atm_temperature;
+extern double atm_temperature;
 
 /* Adjust rise/set-based reference altitude resp. shadow length factor (`--adjust-value=NUMBER'). */
-extern double  adjust_value;
+extern double adjust_value;
 
 /* Actual size of `rc_elems_table[]'. */
-extern Uint  rc_elems_max;
+extern Uint rc_elems_max;
 
 /* Cycle-ending time value in minutes for %sun* and %moon* special texts. */
-extern int  loop_end;
+extern int loop_end;
 
 /* Cycle-timestep value in minutes for %sun* and %moon* special texts. */
-extern int  loop_step;
+extern int loop_step;
 
 /* Buffer of actual GMT day. */
-extern int  buf_gd;
+extern int buf_gd;
 
 /* Buffer of actual GMT month. */
-extern int  buf_gm;
+extern int buf_gm;
 
 /* Buffer of actual GMT year. */
-extern int  buf_gy;
+extern int buf_gy;
 
 /* Day of event found in line. */
-extern int  d;
+extern int d;
 
 /* Buffered day of event. */
-extern int  d_buf;
+extern int d_buf;
 
 /* Indicates whether event also appears in previous year. */
-extern int  decr_year;
+extern int decr_year;
 
 /* Actual GMT hour. */
-extern int  gmt_hour;
+extern int gmt_hour;
 
 /* Day difference of GMT and local date. */
-extern int  gmt_loc_diff;
+extern int gmt_loc_diff;
 
 /* Actual GMT minute. */
-extern int  gmt_min;
+extern int gmt_min;
 
 /* The `N'th weekday of month' displacement value. */
-extern int  hn;
+extern int hn;
 
 /* The weekday number of `N'th weekday of month'*/
-extern int  hwd;
+extern int hwd;
 
 /* Indicates whether event also appears in next year. */
-extern int  incr_year;
+extern int incr_year;
 
 /* Filler length of week number text. */
-extern int  len_fil_wt;
+extern int len_fil_wt;
 
 /* Actual size of text buffer of "text"-part of a line. */
-extern int  len_the_text;
+extern int len_the_text;
 
 /* Month of event found in line. */
-extern int  m;
+extern int m;
 
 /* Buffered month of event. */
-extern int  m_buf;
+extern int m_buf;
 
 /* Length of a single axis of a biorhythm text graphics bar. */
-extern int  rc_bio_axis_len;
+extern int rc_bio_axis_len;
 
 /* Amount of resource file entries. */
-extern int  rc_elems;
+extern int rc_elems;
 
 /* `-cd'. */
-extern int  rc_have_today_in_list;
+extern int rc_have_today_in_list;
 
 /* Number of lines of a Moon phase text graphics image. */
-extern int  rc_moonimage_lines;
+extern int rc_moonimage_lines;
 
 /* Amount of period of fixed dates. */
-extern int  rc_period;
+extern int rc_period;
 
 /* Starting index of dummy resource file entries in table. */
-extern int  rc_zero_pos;
+extern int rc_zero_pos;
 
 /* Year of event found in line. */
-extern int  y;
+extern int y;
 
 /* The mode specifying character. */
-extern char  hc;
+extern char hc;
 
 /* Vector of holiday dates (memorial days). */
-extern char  hd_mdays[];
+extern char hd_mdays[];
 
 /* Stores the eternal holiday list texts. */
-extern char  *hd_table[];
+extern char *hd_table[];
 
 /* Text buffer of a line read from a resource file. */
-extern char  *line_buffer;
+extern char *line_buffer;
 
 /* Text containing modified actual date %DATE. */
-extern char  *rc_adate;
+extern char *rc_adate;
 
 /* The biorhythm's "Emo" text. */
-extern char  *rc_bio_emo_lit;
+extern char *rc_bio_emo_lit;
 
 /* The biorhythm's "Int" text. */
-extern char  *rc_bio_int_lit;
+extern char *rc_bio_int_lit;
 
 /* The biorhythm's "Phy" text. */
-extern char  *rc_bio_phy_lit;
+extern char *rc_bio_phy_lit;
 
 /* Name of alternative resource file(s) `-f|F<NAME[+...]>'. */
-extern char  *rc_filename;
+extern char *rc_filename;
 
 /* Argument used for filtering fixed date days. */
-extern char  *rc_filter_day;
+extern char *rc_filter_day;
 
 /* Argument used for filtering fixed date periods. */
-extern char  *rc_filter_period;
+extern char *rc_filter_period;
 
 /* REGEX used for filtering fixed date. */
-extern char  *rc_filter_text;
+extern char *rc_filter_text;
 
 /* Fixed date list grouping separator `-cg[TEXT]'. */
-extern char  *rc_grp_sep;
+extern char *rc_grp_sep;
 
 /* Fixed date list heading text `--heading-text=TEXT'. */
-extern char  *rc_heading_text;
+extern char *rc_heading_text;
 
 /* Name of tempfile used when a command is assigned to a TVAR. */
-extern char  *rc_tvar_tfn;
+extern char *rc_tvar_tfn;
 
 /* Name of tempfile used for managing `--here=ARG' options. */
-extern char  *rc_here_fn;
+extern char *rc_here_fn;
 
 /* General purpose text buffer 5. */
-extern char  *s5;
+extern char *s5;
 
 /* General purpose text buffer 6. */
-extern char  *s6;
+extern char *s6;
 
 /* General purpose text buffer 7. */
-extern char  *s7;
+extern char *s7;
 
 /* Text buffer of "text"-part of a line. */
-extern char  *the_text;
+extern char *the_text;
 
 /* Stores the valid fixed date texts. */
-extern char  **rc_elems_table;
+extern char **rc_elems_table;
 
 /* `-cNw' and actual date modified. */
-extern Bool  adate_set;
+extern Bool adate_set;
 
 /* Does the command enables a year implicitly? */
-extern Bool  date_enables_year;
+extern Bool date_enables_year;
 
 /* `-cNw' and complete week is in month. */
-extern Bool  is_1month_mode;
+extern Bool is_1month_mode;
 
 /* `-cNw' and only part of week is in month. */
-extern Bool  is_2month_mode;
+extern Bool is_2month_mode;
 
 /* Reference to a date variable found in line. */
-extern Bool  is_2dvar;
+extern Bool is_2dvar;
 
 /* Reference to Easter Sundays date found in line. */
-extern Bool  is_2easter;
+extern Bool is_2easter;
 
 /* Is a command (explicit date) given in the command line? */
-extern Bool  is_date_given;
+extern Bool is_date_given;
 
 /* `-C[]' or `-C[][T|W|M|Y]' or `-c[][T|W|M|Y]' or `-F<>'. */
-extern Bool  rc_all_dates_flag;
+extern Bool rc_all_dates_flag;
 
 /* `-cA'. */
-extern Bool  rc_alternative_format_flag;
+extern Bool rc_alternative_format_flag;
 
 /* `-c<N|w|m|y>'-. */
-extern Bool  rc_backwards_flag;
+extern Bool rc_backwards_flag;
 
 /* `-jcb'. */
-extern Bool  rc_both_dates_flag;
+extern Bool rc_both_dates_flag;
 
 /* Buffers the state of `rc_backwards_flag'. */
-extern Bool  rc_bwdf_buffer;
+extern Bool rc_bwdf_buffer;
 
 /* `-cz'. */
-extern Bool  rc_count_flag;
+extern Bool rc_count_flag;
 
 /* `-ca'. */
-extern Bool  rc_enable_fn_flag;
+extern Bool rc_enable_fn_flag;
 
 /* `-ce'. */
-extern Bool  rc_enable_hda_flag;
+extern Bool rc_enable_hda_flag;
 
 /* `-cE'. */
-extern Bool  rc_enable_hdl_flag;
+extern Bool rc_enable_hdl_flag;
 
 /* `--execute-command'. */
-extern Bool  rc_execute_command;
+extern Bool rc_execute_command;
 
 /* `--export-date-variables'. */
-extern Bool  rc_export_ldvar_flag;
+extern Bool rc_export_ldvar_flag;
 
 /* `--export-text-variables'. */
-extern Bool  rc_export_ltvar_flag;
+extern Bool rc_export_ltvar_flag;
 
 /* `--leap-day=february'. */
-extern Bool  rc_feb_29_to_feb_28;
+extern Bool rc_feb_29_to_feb_28;
 
 /* `--leap-day=march'. */
-extern Bool  rc_feb_29_to_mar_01;
+extern Bool rc_feb_29_to_mar_01;
 
 /* `--precise' to display precise, non-rounded, times and data. */
-extern Bool  rc_precise;
+extern Bool rc_precise;
 
 /* `-c<N|w|m|y>+'. */
-extern Bool  rc_forwards_flag;
+extern Bool rc_forwards_flag;
 
 /* Buffers the state of `rc_forwards_flag'. */
-extern Bool  rc_fwdf_buffer;
+extern Bool rc_fwdf_buffer;
 
 /* `--ignore-case' to ignore case distinctions in PATTERN. */
-extern Bool  rc_ignore_case_flag;
+extern Bool rc_ignore_case_flag;
 
 /* `--limit' to calculate rise/set time limited to the current day only. */
-extern Bool  rc_limit;
+extern Bool rc_limit;
 
 /* `-cm'. */
-extern Bool  rc_month_flag;
+extern Bool rc_month_flag;
 
 /* `-co'. */
-extern Bool  rc_omit_date_flag;
+extern Bool rc_omit_date_flag;
 
 /* `-cN[d|w|+|-]|MMDD|MMWW[W]N'. */
-extern Bool  rc_period_flag;
+extern Bool rc_period_flag;
 
 /* `-cl'. */
-extern Bool  rc_period_list;
+extern Bool rc_period_list;
 
 /* `--revert-match' to select non-matching PATTERN lines. */
-extern Bool  rc_revert_match_flag;
+extern Bool rc_revert_match_flag;
 
 /* `-c-'. */
-extern Bool  rc_sort_des_flag;
+extern Bool rc_sort_des_flag;
 
 /* `-jc'. */
-extern Bool  rc_special_flag;
+extern Bool rc_special_flag;
 
 /* `-cU'. */
-extern Bool  rc_suppr_date_part_flag;
+extern Bool rc_suppr_date_part_flag;
 
 /* `-cQ'. */
-extern Bool  rc_suppr_list_sep_flag;
+extern Bool rc_suppr_list_sep_flag;
 
 /* `-cJ'. */
-extern Bool  rc_suppr_text_part_flag;
+extern Bool rc_suppr_text_part_flag;
 
 /* `-cx'. */
-extern Bool  rc_title_flag;
+extern Bool rc_title_flag;
 
 /* `-ct'. */
-extern Bool  rc_tomorrow_flag;
+extern Bool rc_tomorrow_flag;
 
 /* `-c'. */
-extern Bool  rc_use_flag;
+extern Bool rc_use_flag;
 
 /* `-cw'. */
-extern Bool  rc_week_flag;
+extern Bool rc_week_flag;
 
 /* `-ck'. */
-extern Bool  rc_week_number_flag;
+extern Bool rc_week_number_flag;
 
 /* `-cNw'. */
-extern Bool  rc_week_year_flag;
+extern Bool rc_week_year_flag;
 
 /* `-cy'. */
-extern Bool  rc_year_flag;
+extern Bool rc_year_flag;
 
 /* `-cZ'. */
-extern Bool  rc_zero_dates_flag;
+extern Bool rc_zero_dates_flag;
 
 /* Remove highlighting sequences before searching PATTERN? */
-extern Bool  remove_hls_in_regex;
+extern Bool remove_hls_in_regex;
 
 /* Stores whether a %shell escape special text is run. */
-extern Bool  shell_escape_done;
+extern Bool shell_escape_done;
 
 # if HAVE_GNU_RE_COMPILE_PATTERN
-extern struct re_pattern_buffer  regpattern;
+extern struct re_pattern_buffer regpattern;
 # endif
 
 # if HAVE_POSIX_REGCOMP
-extern regex_t  regpattern;
+extern regex_t regpattern;
 # endif
 
 # if HAVE_RE_COMP
-extern int  re_pattern;
+extern int re_pattern;
 # endif
 
 # if HAVE_REGCMP
-extern char  *cpattern;
+extern char *cpattern;
 # endif
 
 # if HAVE_V8_REGCOMP
-extern struct regexp  *regpattern;
+extern struct regexp *regpattern;
 # endif
 #endif /* __RC_DEFS_H */

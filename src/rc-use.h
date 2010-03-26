@@ -52,15 +52,14 @@ __BEGIN_DECLARATIONS
 *  The REGEX stuff.
 */
 # if HAVE_RE_COMP
-extern char *re_comp();
+extern char *re_comp ();
 # endif
 # if HAVE_REGCMP
-extern char *regcmp();
+extern char *regcmp ();
 # endif
 /*
 ************************************************** Defined in `rc-use.c'.
 */
-extern void
-rc_use __P_((void));
+extern void rc_use __P_ ((void));
 __END_DECLARATIONS
 #endif /* __RC_USE_H */

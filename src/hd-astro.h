@@ -73,89 +73,51 @@ __BEGIN_DECLARATIONS
 ************************************************** Defined in `hd_astro.c'.
 */
 extern double
-equinox_solstice __P_((const double  longitude,
-                             int    *day,
-                             int    *month,
-                             int    *year,
-                             int     hour,
-                             int     min));
+  equinox_solstice __P_ ((const double longitude,
+			  int *day,
+			  int *month, int *year, int hour, int min));
 extern double
-delta_t __P_((const int day,
-              const int month,
-              const int year,
-              const int hour,
-              const int min));
+  delta_t __P_ ((const int day,
+		 const int month,
+		 const int year, const int hour, const int min));
 extern double
-moonphase __P_((const double  phase_selector,
-                const Bool    find_eclipse,
-                      double *eclipse_type,
-                      Ulint  *lunation,
-                      int    *day,
-                      int    *month,
-                      int    *year,
-                      int     hour,
-                      int     min));
+  moonphase __P_ ((const double phase_selector,
+		   const Bool find_eclipse,
+		   double *eclipse_type,
+		   Ulint * lunation,
+		   int *day, int *month, int *year, int hour, int min));
 extern double
-next_sun_longitude __P_((      double *longitude,
-                         const double  step,
-                         const double  mjd,
-                               int    *day,
-                               int    *month,
-                               int    *year,
-                         const int     hour,
-                         const int     min));
+  next_sun_longitude __P_ ((double *longitude,
+			    const double step,
+			    const double mjd,
+			    int *day,
+			    int *month,
+			    int *year, const int hour, const int min));
 extern double
-sun_longitude __P_((const double  longitude,
-                          int    *day,
-                          int    *month,
-                          int    *year,
-                          int     hour,
-                          int     min,
-                    const Bool    next_mode));
+  sun_longitude __P_ ((const double longitude,
+		       int *day,
+		       int *month,
+		       int *year, int hour, int min, const Bool next_mode));
+extern void val2hours __P_ ((double val, int *hour, int *min, double *sec));
 extern void
-val2hours __P_((double  val,
-                int    *hour,
-                int    *min,
-                double *sec));
-extern void
-val2degrees __P_((double  val,
-                  int    *degree,
-                  int    *min,
-                  double *sec));
-extern double
-my_cot __P_((double x));
-extern double
-my_acot __P_((double x));
-extern double
-my_atan2 __P_((double y,
-               double x));
+  val2degrees __P_ ((double val, int *degree, int *min, double *sec));
+extern double my_cot __P_ ((double x));
+extern double my_acot __P_ ((double x));
+extern double my_atan2 __P_ ((double y, double x));
 # if !HAVE_LIBM
-extern double
-my_floor __P_((double x));
-extern double
-my_ceil __P_((double x));
-extern double
-my_sqrt __P_((double x));
-extern double
-my_log __P_((double x));
-extern double
-my_log10 __P_((double x));
-extern double
-my_sin __P_((double x));
-extern double
-my_cos __P_((double x));
-extern double
-my_tan __P_((double x));
-extern double
-my_cot __P_((double x));
-extern double
-my_asin __P_((double x));
-extern double
-my_acos __P_((double x));
-extern double
-my_atan __P_((double x));
-extern double
-my_acot __P_((double x));
-# endif /* !HAVE_LIBM */
+extern double my_floor __P_ ((double x));
+extern double my_ceil __P_ ((double x));
+extern double my_sqrt __P_ ((double x));
+extern double my_log __P_ ((double x));
+extern double my_log10 __P_ ((double x));
+extern double my_sin __P_ ((double x));
+extern double my_cos __P_ ((double x));
+extern double my_tan __P_ ((double x));
+extern double my_cot __P_ ((double x));
+extern double my_asin __P_ ((double x));
+extern double my_acos __P_ ((double x));
+extern double my_atan __P_ ((double x));
+extern double my_acot __P_ ((double x));
+# endif	/* !HAVE_LIBM */
 __END_DECLARATIONS
 #endif /* __HD_ASTRO_H */

@@ -40,164 +40,124 @@ __BEGIN_DECLARATIONS
 ************************************************** Defined in `hd_data1.c'.
 */
 extern void
-au_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  au_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-be_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  be_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-br_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  br_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-ca_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  ca_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-ch_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  ch_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-cn_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  cn_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-de_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  de_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-es_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  es_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-fr_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  fr_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-gb_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  gb_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-il_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  il_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-it_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  it_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-jp_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  jp_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-kr_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  kr_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-mx_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  mx_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-nl_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  nl_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-nz_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  nz_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-pt_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  pt_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-ru_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  ru_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 extern void
-us_hdy __P_((      Bool *init_data,
-             const Bool  detected,
-                   int   easter,
-             const int   year,
-                   int  *hd_elems,
-             const int   fday,
-             const int   count));
+  us_hdy __P_ ((Bool * init_data,
+		const Bool detected,
+		int easter,
+		const int year,
+		int *hd_elems, const int fday, const int count));
 __END_DECLARATIONS
 #endif /* __HD_DATA1_H */

@@ -44,9 +44,6 @@
 /*
 *  GLOBAL functions prototypes.
 */
-__BEGIN_DECLARATIONS
-extern int
-main __P_((int   argc,
-           char *argv[]));
+__BEGIN_DECLARATIONS extern int main __P_ ((int argc, char *argv[]));
 __END_DECLARATIONS
 #endif /* __TCAL_H */

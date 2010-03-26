@@ -39,11 +39,7 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `gcal.c'.
 */
-extern int
-main __P_((int   argc,
-           char *argv[]));
-extern int
-eval_longopt __P_((char *longopt,
-                   int  *longopt_symbolic));
+extern int main __P_ ((int argc, char *argv[]));
+extern int eval_longopt __P_ ((char *longopt, int *longopt_symbolic));
 __END_DECLARATIONS
 #endif /* __GCAL_H */

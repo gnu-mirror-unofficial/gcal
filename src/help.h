@@ -37,35 +37,33 @@
 /*
 *  The supported date format information record.
 */
-typedef
-  struct date_format_information_type
-   {
-     /* Information text of the format. */
-     char  *di_info;
+typedef struct date_format_information_type
+{
+  /* Information text of the format. */
+  char *di_info;
 
-     /* First character of the format. */
-     char   di_1format;
+  /* First character of the format. */
+  char di_1format;
 
-     /* Second character of the format. */
-     char   di_2format;
-   }
-  Di_struct;
+  /* Second character of the format. */
+  char di_2format;
+}
+Di_struct;
 
 # if USE_RC
 /*
 *  The exclusion date information record.
 */
-typedef
-  struct exclusion_date_type
-   {
-     /* The character used in the %? inclusive/exclusive day special text. */
-     char   ed_id;
+typedef struct exclusion_date_type
+{
+  /* The character used in the %? inclusive/exclusive day special text. */
+  char ed_id;
 
-     /* Description text of the %? inclusive/exclusive day special text. */
-     char  *ed_info;
-   }
-  Ed_struct;
-# endif /* USE_RC */
+  /* Description text of the %? inclusive/exclusive day special text. */
+  char *ed_info;
+}
+Ed_struct;
+# endif	/* USE_RC */
 
 
 
@@ -77,22 +75,14 @@ __BEGIN_DECLARATIONS
 ************************************************** Defined in `help.c'.
 */
 extern void
-my_help_on_help __P_((      FILE *fp,
-                      const char *longopt,
-                      const Bool  lopt_ambig,
-                      const int   cols));
-extern void
-my_extended_help __P_((      FILE *fp,
-                       const int   longopt_symbolic));
-extern void
-my_basic_help __P_((FILE *fp));
-extern void
-my_license __P_((FILE *fp));
-extern void
-my_version __P_((FILE *fp));
-extern char *
-usage_msg __P_((void));
-extern char *
-lopt_msg __P_((void));
+  my_help_on_help __P_ ((FILE * fp,
+			 const char *longopt,
+			 const Bool lopt_ambig, const int cols));
+extern void my_extended_help __P_ ((FILE * fp, const int longopt_symbolic));
+extern void my_basic_help __P_ ((FILE * fp));
+extern void my_license __P_ ((FILE * fp));
+extern void my_version __P_ ((FILE * fp));
+extern char *usage_msg __P_ ((void));
+extern char *lopt_msg __P_ ((void));
 __END_DECLARATIONS
 #endif /* __HELP_H */

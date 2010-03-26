@@ -36,7 +36,7 @@
 */
 # if (USE_PAGER || USE_HLS) && defined(GCAL_TCAP)
 #  define TC_BUFLEN  4096
-# endif /* (USE_PAGER || USE_HLS) && GCAL_TCAP */
+# endif	/* (USE_PAGER || USE_HLS) && GCAL_TCAP */
 
 
 
@@ -46,29 +46,24 @@
 __BEGIN_DECLARATIONS
 # if (USE_PAGER || USE_HLS) && defined(GCAL_TCAP)
 #  if !HAVE_TERMCAP_H
-extern int   tgetent __P_((char *buffer, char *termtype));
-extern int   tgetnum __P_((char *name));
+extern int tgetent __P_ ((char *buffer, char *termtype));
+extern int tgetnum __P_ ((char *name));
 #   if USE_HLS
-extern char *tgetstr __P_((char *name, char **area));
-extern char *tputs __P_((char *string, int nlines, int (*outfunc)()));
+extern char *tgetstr __P_ ((char *name, char **area));
+extern char *tputs __P_ ((char *string, int nlines, int (*outfunc) ()));
 #   endif /* USE_HLS */
 #   if USE_PAGER
-extern int   tgetflag __P_((char *name));
+extern int tgetflag __P_ ((char *name));
 #   endif /* USE_PAGER */
 #  endif /* !HAVE_TERMCAP_H */
-# endif /* (USE_PAGER || USE_HLS) && GCAL_TCAP */
+# endif	/* (USE_PAGER || USE_HLS) && GCAL_TCAP */
 /*
 ************************************************** Defined in `tty.c'.
 */
-extern void
-print_text __P_((FILE *fp,
-                 char *text_line));
-extern void
-get_tty_hls __P_((const char *sequence_str));
+extern void print_text __P_ ((FILE * fp, char *text_line));
+extern void get_tty_hls __P_ ((const char *sequence_str));
 # if USE_PAGER
-extern void
-get_tty_scr_size __P_((int *rows,
-                       int *cols));
+extern void get_tty_scr_size __P_ ((int *rows, int *cols));
 # endif
 __END_DECLARATIONS
 #endif /* __TTY_H */

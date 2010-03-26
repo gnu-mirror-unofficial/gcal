@@ -121,22 +121,22 @@
 # ifdef MSDOS
 #  ifdef UNIX
 #   if (defined(__GNUC__) || defined(__GO32__)) && !defined(M_UNIX)
-         /* Now let's define the symbol DJG (DJ-GCC under MSDOS) for these machines. */
+	 /* Now let's define the symbol DJG (DJ-GCC under MSDOS) for these machines. */
 #    ifndef DJG
 #     define DJG
 #    endif
 #   endif
 #   undef MSDOS
-#  else /* !UNIX */
+#  else	/* !UNIX */
 #   if defined(__i386) || defined(i386)
-         /* Now let's define the symbol SCO for these machines, too. */
+	 /* Now let's define the symbol SCO for these machines, too. */
 #    ifndef SCO
 #     define SCO
 #    endif
 #    undef MSDOS
 #   endif
 #  endif /* !UNIX */
-# endif /* !MSDOS */
+# endif	/* !MSDOS */
 
 
 
@@ -169,27 +169,27 @@
 #   define HAVE_UNISTD_H 1
 #   define HAVE_MATH_H 1
 #   define HAVE_LIBM 1
-                   /* Directory/folder separator. */
+		   /* Directory/folder separator. */
 #   define DIR2_SEP      "/"
 #   if 0
 #    define HAVE_REGEX_H 1
 #    define HAVE_GNU_RE_COMPILE_PATTERN 1
 #   endif /* 0 */
 #   define HAVE_V8_REGCOMP 1
-#  else /* !DJG */
+#  else	/* !DJG */
 #   include <io.h>
 #   define HAVE_V8_REGCOMP 1
 #   define HD_TOP20CC 1
 #  endif /* !DJG */
 #  if USE_PAGER
-                   /* Default number of terminal rows. */
+		   /* Default number of terminal rows. */
 #   define SCREEN_ROWS   25
 #  endif
-                 /* Disk/Drive separator. */
+		 /* Disk/Drive separator. */
 #  define DISK_SEP      ":"
-                 /* Directory/folder separator. */
+		 /* Directory/folder separator. */
 #  define DIR_SEP       "\\"
-                 /* Path separator. */
+		 /* Path separator. */
 #  define PATH_SEP      ";"
 # else /* !MSDOS && !DJG && !WIN32 */
 #  if defined(OS2)
@@ -239,24 +239,24 @@
 #   endif /* 0 */
 #   include <io.h>
 #   if USE_PAGER
-                   /* Default number of terminal rows. */
+		   /* Default number of terminal rows. */
 #    define SCREEN_ROWS   25
 #   endif
-                 /* Disk/Drive separator. */
+		 /* Disk/Drive separator. */
 #   define DISK_SEP      ":"
-                 /* Directory/folder separator. */
+		 /* Directory/folder separator. */
 #   define DIR_SEP       "\\"
-                 /* Path separator. */
+		 /* Path separator. */
 #   define PATH_SEP      ";"
 #   ifdef __GNUC__
-                   /* Environment variable holding path to termcap data base file. */
+		   /* Environment variable holding path to termcap data base file. */
 #    define ENV_VAR_TCAP  "TERMCAP"
-                   /* Name of termcap database file. */
+		   /* Name of termcap database file. */
 #    define FNAME_TCAP    "termcap.dat"
-                   /* Name of default terminal type. */
+		   /* Name of default terminal type. */
 #    define DFLT_TERM     "ansi"
 #   endif
-#  else /* !OS2 */
+#  else	/* !OS2 */
 #   if defined(ACORN)
 #    define USE_PROTOTYPES 1
 #    define STDC_HEADERS 1
@@ -278,13 +278,13 @@
 #    define HAVE_STRCSPN 1
 #    define HAVE_TIME_T 1
 #    define HAVE_VOID 1
-                 /* Disk/Drive separator. */
+		 /* Disk/Drive separator. */
 #    define DISK_SEP      "$"
-                 /* Directory/Folder separator. */
+		 /* Directory/Folder separator. */
 #    define DIR_SEP       "."
-                 /* Path separator. */
+		 /* Path separator. */
 #    define PATH_SEP      ","
-                 /* Name of program search path environment variable. */
+		 /* Name of program search path environment variable. */
 #    define ENV_VAR_PATH  "Run$Path"
 #    ifdef __GNUC__
 #     define HAVE_UNISTD_H 1
@@ -362,13 +362,13 @@
 #      define HAVE_STRCSPN 1
 #      define HAVE_TIME_T 1
 #      define HAVE_VOID 1
-                 /* Directory/folder separator. */
+		 /* Directory/folder separator. */
 #      define DIR_SEP       "\\"
-                 /* Path separator. */
+		 /* Path separator. */
 #      define PATH_SEP      ","
 #     else /* !ATARI */
 #      if defined(__50SERIES) || defined(PRIMOS)
-                 /* Prime/PRIMOS. */
+		 /* Prime/PRIMOS. */
 #       define USE_PROTOTYPES 1
 #       define HAVE_V8_REGCOMP 1
 #       define STDC_HEADERS 1
@@ -390,12 +390,12 @@
 #       define HAVE_STRCSPN 1
 #       define HAVE_TIME_T 1
 #       define HAVE_VOID 1
-                 /* Directory/folder separator. */
+		 /* Directory/folder separator. */
 #       define DIR_SEP       ">"
 #      else /* !__50SERIES */
 #       if defined(VAXC) || defined(VMS)
-                 /* DEC Vax. */
-                 /* Now let's define the symbol UNIX as default. */
+		 /* DEC Vax. */
+		 /* Now let's define the symbol UNIX as default. */
 #        ifndef UNIX
 #         define UNIX
 #        endif
@@ -429,22 +429,22 @@
 #        ifdef VAXC
 #         include <unixio.h>
 #        endif
-                 /* Disk/Drive separator. */
+		 /* Disk/Drive separator. */
 #        define DISK_SEP       ":"
-                 /* Directory/folder separator. */
+		 /* Directory/folder separator. */
 #        define DIR_SEP        "]"
-                 /* Suffix (version number) separator. */
+		 /* Suffix (version number) separator. */
 #        define SUFFIX_SEP     ";"
-                 /* Name of programs default options variable. */
+		 /* Name of programs default options variable. */
 #        define ENV_VAR_GCAL   "GCAL_OPT"
 #        ifndef unlink
 #         define unlink(file)  delete((file))
 #        endif
 #       else
-                 /*
-                    default: UNIX.  Let `configure' detect what's in store .)
-                    Now let's define the symbol UNIX (NOT GNU or RMS, hehe) as default.
-                 */
+		 /*
+		    default: UNIX.  Let `configure' detect what's in store .)
+		    Now let's define the symbol UNIX (NOT GNU or RMS, hehe) as default.
+		  */
 #        ifndef UNIX
 #         define UNIX
 #        endif
@@ -454,7 +454,7 @@
 #    endif /* !AMIGA */
 #   endif /* !ACORN */
 #  endif /* !OS2 */
-# endif /* !MSDOS && !DJG && !WIN32 */
+# endif	/* !MSDOS && !DJG && !WIN32 */
 
 /*
 *  Compiler specific macro for prototyping.
@@ -462,7 +462,7 @@
 # ifndef __P_
 #  if (defined(__STDC__) && __STDC__) || defined(__cplusplus) || USE_PROTOTYPES
 #   define __P_(gc_proto)  gc_proto
-#  else /* !__STDC__ && !__cplusplus && !USE_PROTOTYPES */
+#  else	/* !__STDC__ && !__cplusplus && !USE_PROTOTYPES */
 #   define __P_(gc_proto)  ()
 #  endif /* !__STDC__ && !__cplusplus && !USE_PROTOTYPES */
 # endif
@@ -486,7 +486,7 @@
 #  ifndef __END_DECLARATIONS
 #   define __END_DECLARATIONS
 #  endif
-# endif /* !__cplusplus */
+# endif	/* !__cplusplus */
 
 
 
@@ -588,7 +588,7 @@
 #  ifndef MAIL_PRGR
 #   define MAIL_PRGR         "mail"
 #  endif
-# endif /* GCAL_EMAIL */
+# endif	/* GCAL_EMAIL */
 
 
 
@@ -596,10 +596,10 @@
 /* The proper function for a temporary file name according to used target system. */
 #  ifdef MSDOS
 #   define TMPFILENAME  tempnam(NULL, NULL)
-#  else /* !MSDOS */
+#  else	/* !MSDOS */
 #   define TMPFILENAME  tmpnam(NULL)
 #  endif /* !MSDOS */
-# endif /* GCAL_EMAIL || USE_RC */
+# endif	/* GCAL_EMAIL || USE_RC */
 
 
 
@@ -635,7 +635,7 @@
 #    define PAGER3_PROG    "pg"
 #   endif
 #  endif /* GCAL_EPAGER */
-# endif /* USE_PAGER */
+# endif	/* USE_PAGER */
 
 
 
@@ -710,7 +710,7 @@
 */
 # if USE_EASC
 #  if defined(NeXT)
-           /* NeXTstep character set. */
+	   /* NeXTstep character set. */
 #   define AE          "\303"
 #   define OE          "\324"
 #   define UE          "\300"
@@ -725,17 +725,17 @@
 #   define EDG         "\310"
 #   define ODG         "\323"
 #   define CD          "\200"
-           /* Marking character 1 start (current day). */
+	   /* Marking character 1 start (current day). */
 #   define BUF_HLS1S   "<"
-           /* Marking character 1 end (current day). */
+	   /* Marking character 1 end (current day). */
 #   define BUF_HLS1E   ">"
-           /* Marking character 2 start (holiday). */
+	   /* Marking character 2 start (holiday). */
 #   define BUF_HLS2S   ":"
-           /* Marking character 2 end (holiday). */
+	   /* Marking character 2 end (holiday). */
 #   define BUF_HLS2E   ":"
 #  else
 #   if defined(ATARI)
-           /* Atari character set. */
+	   /* Atari character set. */
 #    define AE          "\204"
 #    define OE          "\224"
 #    define UE          "\201"
@@ -750,17 +750,17 @@
 #    define EDG         "\210"
 #    define ODG         "\223"
 #    define CD          "\207"
-           /* Marking character 1 start (current day). */
+	   /* Marking character 1 start (current day). */
 #    define BUF_HLS1S   "<"
-           /* Marking character 1 end (current day). */
+	   /* Marking character 1 end (current day). */
 #    define BUF_HLS1E   ">"
-           /* Marking character 2 start (holiday). */
+	   /* Marking character 2 start (holiday). */
 #    define BUF_HLS2S   ":"
-           /* Marking character 2 end (holiday). */
+	   /* Marking character 2 end (holiday). */
 #    define BUF_HLS2E   ":"
 #   else
 #    if defined(MSDOS) || defined(OS2) || defined(WIN32) || defined(SCO) || defined(COHERENT)
-           /* IBM PC character set. */
+	   /* IBM PC character set. */
 #     define AE          "\204"
 #     define OE          "\224"
 #     define UE          "\201"
@@ -775,17 +775,17 @@
 #     define EDG         "\210"
 #     define ODG         "\223"
 #     define CD          "\207"
-           /* Marking character 1 start (current day). */
+	   /* Marking character 1 start (current day). */
 #     define BUF_HLS1S   "\021"
-           /* Marking character 1 end (current day). */
+	   /* Marking character 1 end (current day). */
 #     define BUF_HLS1E   "\020"
-           /* Marking character 2 start (holiday). */
+	   /* Marking character 2 start (holiday). */
 #     define BUF_HLS2S   "\256"
-           /* Marking character 2 end (holiday). */
+	   /* Marking character 2 end (holiday). */
 #     define BUF_HLS2E   "\257"
 #    else /* !IBM PC character set. */
-           /* (defined(UNIX) && !defined(SCO) && !defined(COHERENT) && !defined(NeXT)) || defined(AMIGA) || ... */
-           /* ISO Latin-1 character set. */
+	   /* (defined(UNIX) && !defined(SCO) && !defined(COHERENT) && !defined(NeXT)) || defined(AMIGA) || ... */
+	   /* ISO Latin-1 character set. */
 #     define AE          "\344"
 #     define OE          "\366"
 #     define UE          "\374"
@@ -800,13 +800,13 @@
 #     define EDG         "\352"
 #     define ODG         "\364"
 #     define CD          "\347"
-           /* Marking character 1 start (current day). */
+	   /* Marking character 1 start (current day). */
 #     define BUF_HLS1S   "<"
-           /* Marking character 1 end (current day). */
+	   /* Marking character 1 end (current day). */
 #     define BUF_HLS1E   ">"
-           /* Marking character 2 start (holiday). */
+	   /* Marking character 2 start (holiday). */
 #     define BUF_HLS2S   ":"
-           /* Marking character 2 end (holiday). */
+	   /* Marking character 2 end (holiday). */
 #     define BUF_HLS2E   ":"
 #    endif /* !IBM PC character set. */
 #   endif /* Atari character set. */
@@ -834,7 +834,7 @@
 #  define BUF_HLS2S    ":"
      /* Marking character 2 end (holiday). */
 #  define BUF_HLS2E    ":"
-# endif /* !USE_EASC */
+# endif	/* !USE_EASC */
 
 
 
@@ -847,7 +847,7 @@
 #   define HLS1S  "\033[1m"
        /* Highlighting sequence 2 start (holiday). */
 #   define HLS2S  "\033[36m"
-#  else /* !MSDOS && !OS2 && !LINUX && !DJG */
+#  else	/* !MSDOS && !OS2 && !LINUX && !DJG */
        /* Highlighting sequence 1 start (current day). */
 #   define HLS1S  "\033[7m"
        /* Highlighting sequence 2 start (holiday). */
@@ -874,7 +874,7 @@
 #  define HLS2S       BUF_HLS2S
      /* Highlighting sequence 2 end (holiday). */
 #  define HLS2E       BUF_HLS2E
-# endif /* !USE_HLS */
+# endif	/* !USE_HLS */
 /* Maximum number of termcap mode chars/single HL sequences used. */
 # define TC_MC_MAX  4
 /* Print blank character if highlighting is disabled. */

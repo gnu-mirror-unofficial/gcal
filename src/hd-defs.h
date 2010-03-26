@@ -42,7 +42,7 @@
 #  define HD_ELEMS_MAX     1280
 # else /* !HD_TOP20CC */
 #  define HD_ELEMS_MAX     8192
-# endif /* !HD_TOP20CC */
+# endif	/* !HD_TOP20CC */
 
 /* Maximum length of a holiday name inclusive `\0' ==> 31 characters effective textlength maximum. */
 # define LEN_HD_NAME      40
@@ -55,7 +55,7 @@
 */
 # if USE_DE
 #  define HD_LIST_TITLE  "Ewige Feiertagsliste"
-# endif /* USE_DE */
+# endif	/* USE_DE */
 
 
 
@@ -661,7 +661,7 @@
 #  define HD_W_TUBMANS_BIRTHDAY                 549
 #  define HD_YAP_DAY                            550
 #  define HD_DAY_OF_CZECH_STATEHOOD             551
-# endif /* !HD_TOP20CC */
+# endif	/* !HD_TOP20CC */
 
 
 
@@ -671,43 +671,42 @@
 /*
 *  The country code record.
 */
-typedef
-  struct country_code_type
-   {
-     /*
-        The ISO-3166 2-characters country code identifer,
-          plus an optionally trailing territory text `_TT'.
-     */
-     char  *cc_id;
+typedef struct country_code_type
+{
+  /*
+     The ISO-3166 2-characters country code identifer,
+     plus an optionally trailing territory text `_TT'.
+   */
+  char *cc_id;
 
-     /* Description text of the country code; the country name. */
-     char  *cc_info;
+  /* Description text of the country code; the country name. */
+  char *cc_info;
 
-     /* The country code specific holiday handling function. */
-     void  (*Cc_hdy_handler)();
-   }
-  Cc_struct;
+  /* The country code specific holiday handling function. */
+  void (*Cc_hdy_handler) ();
+}
+Cc_struct;
 
 /*
 *  The country specific holiday text record.
 */
-typedef
-  struct holiday_text_type
-   {
-     /* The index of the country specific holiday text. */
-     int    ht_id;
+typedef struct holiday_text_type
+{
+  /* The index of the country specific holiday text. */
+  int ht_id;
 
-     /* The country specific holiday text itself. */
-     char  *ht_text;
-   }
-  Ht_struct;
+  /* The country specific holiday text itself. */
+  char *ht_text;
+}
+Ht_struct;
 
 /*
 *  The country code specific holiday handling function type.
 */
 typedef
   void
-  (*Cc_hdy_handler)__P_((Bool *, const Bool, int, const int, int *, const int, const int));
+  (*Cc_hdy_handler)
+__P_ ((Bool *, const Bool, int, const int, int *, const int, const int));
 
 
 
@@ -715,17 +714,17 @@ typedef
 *  GLOBAL variables declarations.
 */
 /* The table of country specific holidays. */
-extern const Cc_struct  cc_holidays[];
+extern const Cc_struct cc_holidays[];
 
 /* The table which contains all the holiday texts. */
-extern const Ht_struct  hd_text[];
+extern const Ht_struct hd_text[];
 
 /* U.S. holidays observance mode. */
-extern int  observe_us_hdy;
+extern int observe_us_hdy;
 
 /* The ISO-3166 character code used in the country specific `hdy_*()' functions. */
-extern char  *ptr_cc_id;
+extern char *ptr_cc_id;
 
 /* Toggle which indicates to use a different CC in output. */
-extern Bool  use_other_cc;
+extern Bool use_other_cc;
 #endif /* __HD_DEFS_H */

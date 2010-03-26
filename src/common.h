@@ -47,16 +47,16 @@
 #  if !HAVE_STRCHR
 #   ifndef strchr
 #    define strchr       index
-extern char *strchr __P_((const char *s, int c));
+extern char *strchr __P_ ((const char *s, int c));
 #   endif
 #  endif /* !HAVE_STRCHR */
 #  if !HAVE_STRRCHR
 #   ifndef strrchr
 #    define strrchr      rindex
-extern char *strrchr __P_((const char *s, int c));
+extern char *strrchr __P_ ((const char *s, int c));
 #   endif
 #  endif /* !HAVE_STRRCHR */
-# endif /* !HAVE_STRING_H && !STDC_HEADERS */
+# endif	/* !HAVE_STRING_H && !STDC_HEADERS */
 
 # if HAVE_SIGNAL_H && HAVE_SIGNAL
 #  if HAVE_SYS_TYPES_H
@@ -65,10 +65,10 @@ extern char *strrchr __P_((const char *s, int c));
 #  include <signal.h>
 # endif
 # if defined(AMIGA) && !defined(__GNUC__)
-extern long atol __P_((const char *string));
+extern long atol __P_ ((const char *string));
 # endif
 # ifdef __50SERIES
-extern char *getenv __P_((const char *env_var));
+extern char *getenv __P_ ((const char *env_var));
 #  if HAVE_SIGNAL && defined(SIGTERM)
 /* We don't want a signal handler for SIGTERM */
 #   undef  SIGTERM
@@ -111,14 +111,14 @@ extern char *getenv __P_((const char *env_var));
 # else /* !HAVE_VOID */
 #  define VOID_PTR        char *
 #  define void            int
-# endif /* !HAVE_VOID */
+# endif	/* !HAVE_VOID */
 # ifndef RETSIGTYPE
 #  define RETSIGTYPE      void
 # endif
 # ifndef NULL
 #  if !defined(__cplusplus) || defined(__GNUC__)
 #   define NULL            ((VOID_PTR)0)
-#  else /* __cplusplus && !__GNUC__ */
+#  else	/* __cplusplus && !__GNUC__ */
 #   define NULL            (0)
 #  endif /* __cplusplus && !__GNUC__ */
 # endif
@@ -146,7 +146,7 @@ extern char *getenv __P_((const char *env_var));
 #  define MY_TIME_T       time_t
 # else /* !HAVE_TIME_T */
 #  define MY_TIME_T       long
-# endif /* !HAVE_TIME_T */
+# endif	/* !HAVE_TIME_T */
 # if !HAVE_UPPER_LOWER
 #  ifndef islower
 #   define islower(gc_c) (((gc_c) >= 'a') && ((gc_c) <= 'z'))
@@ -231,7 +231,7 @@ extern char *getenv __P_((const char *env_var));
 #   undef  atan
 #  endif
 #  define atan   my_atan
-# endif /* !HAVE_LIBM */
+# endif	/* !HAVE_LIBM */
 
 
 
@@ -526,7 +526,7 @@ extern char *getenv __P_((const char *env_var));
 /* Identifier for actual local time based time offsets used in the `--time_offset=ARG' option. */
 # if !USE_RC
 #  define staticTIME_CHAR    't'
-# endif /* USE_RC */
+# endif	/* USE_RC */
 
 /* Default time separator for scanning HH:MM time expressions. */
 # define DEFAULT_TIME_SEP  ":"
@@ -706,7 +706,7 @@ extern char *getenv __P_((const char *env_var));
 #  ifdef GCAL_SHELL
 #   define SCRIPT_TXT     "shell script"
 #  endif
-# endif /* USE_DE */
+# endif	/* USE_DE */
 
 
 
@@ -768,7 +768,7 @@ extern char *getenv __P_((const char *env_var));
 #  define USAGE_RC2  ""
 #  define USAGE_RC3  ""
 #  define USAGE_RC4  ""
-# endif /* !USE_RC */
+# endif	/* !USE_RC */
 
 # if USE_PAGER
 /* Quits the internal pager. */
@@ -777,14 +777,14 @@ extern char *getenv __P_((const char *env_var));
 #  define USAGE_PAGER  "p"
 # else /* !USE_PAGER */
 #  define USAGE_PAGER  ""
-# endif /* !USE_PAGER */
+# endif	/* !USE_PAGER */
 
 # ifdef GCAL_SHELL
 /* Additional usage text. */
 #  define USAGE_SHELL   "S"
 # else /* !GCAL_SHELL */
 #  define USAGE_SHELL   ""
-# endif /* !GCAL_SHELL */
+# endif	/* !GCAL_SHELL */
 
 
 
@@ -912,10 +912,10 @@ extern char *getenv __P_((const char *env_var));
 /*
 *  Some degree values.
 */
-# define DEGS_PER_HOUR        15.0   /* 2 Pi in degrees / 24.0 hours. */
-# define DEGS_PER_06_HOURS    90.0   /* Pi / 2 in degrees. */
-# define DEGS_PER_12_HOURS   180.0   /* Pi in degrees. */
-# define DEGS_PER_24_HOURS   360.0   /* 2 Pi in degrees. */
+# define DEGS_PER_HOUR        15.0	/* 2 Pi in degrees / 24.0 hours. */
+# define DEGS_PER_06_HOURS    90.0	/* Pi / 2 in degrees. */
+# define DEGS_PER_12_HOURS   180.0	/* Pi in degrees. */
+# define DEGS_PER_24_HOURS   360.0	/* 2 Pi in degrees. */
 
 
 /*
@@ -1137,173 +1137,156 @@ extern char *getenv __P_((const char *env_var));
 #  define users_greg                          V_ug
 #  define use_day_suffix                      V_uds
 #  define use_day_zeroleaded                  V_udz
-# endif /* CUT_LONGNAMES */
+# endif	/* CUT_LONGNAMES */
 
 
 
 /*
 *  Type definitions.
 */
-typedef
-  unsigned char
-  Uchar;
+typedef unsigned char Uchar;
 
-typedef
-  unsigned int
-  Uint;
+typedef unsigned int Uint;
 
 # ifdef DJG
 typedef
 #  if defined(__STDC__) && __STDC__
   unsigned short int
-#  else /* !__STDC__ */
+#  else				/* !__STDC__ */
   unsigned short
-#  endif /* !__STDC__ */
+#  endif			/* !__STDC__ */
   Usint;
-# endif /* DJG */
+# endif	/* DJG */
 
 typedef
 # if defined(__STDC__) && __STDC__
   signed long int
-# else /* !__STDC__ */
+# else				/* !__STDC__ */
   long
-# endif /* !__STDC__ */
+# endif				/* !__STDC__ */
   Slint;
 
 typedef
 # if defined(__STDC__) && __STDC__
   unsigned long int
-# else /* !__STDC__ */
+# else				/* !__STDC__ */
   unsigned long
-# endif /* !__STDC__ */
+# endif				/* !__STDC__ */
   Ulint;
 
-typedef
-  int
-  Bool;
+typedef int Bool;
 
 /*
 *  The quicksort (`qsort()') compare function type.
 */
-typedef
-  int
-  (*Cmp_func)__P_((const VOID_PTR, const VOID_PTR));
+typedef int (*Cmp_func) __P_ ((const VOID_PTR, const VOID_PTR));
 
 # if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
 /*
 *  The signal (`signal()') handler function return type.
 */
-typedef
-  RETSIGTYPE
-  (*Sig_type)__P_((int));
+typedef RETSIGTYPE (*Sig_type) __P_ ((int));
 # endif
 
 /*
 *  The long option record, see file `gcal.c' for a detailed description of it!
 */
-typedef
-  struct long_option_type
-   {
-     int    symbolic_name;
-     char  *long_name;
-     char  *short_name[LARG_MAX];
-     int    larg_mode;
-     char  *largs[LARG_MAX];
-   }
-  Lopt_struct;
+typedef struct long_option_type
+{
+  int symbolic_name;
+  char *long_name;
+  char *short_name[LARG_MAX];
+  int larg_mode;
+  char *largs[LARG_MAX];
+}
+Lopt_struct;
 
 /*
 *  The highlighting sequence record.
 */
-typedef
-  struct hls_type
-   {
-     const char  *seq;
-           int    len;
-   }
-  Hls_struct;
+typedef struct hls_type
+{
+  const char *seq;
+  int len;
+}
+Hls_struct;
 
 /*
 *  The list/range of months/years record.
 */
-typedef
-  struct ml_type
-   {
-     int  ml_month;
-     int  ml_year;
-   }
-  Ml_struct;
+typedef struct ml_type
+{
+  int ml_month;
+  int ml_year;
+}
+Ml_struct;
 
 /*
 *  The supported date format record.
 */
-typedef
-  struct date_format_type
-   {
-     /* Identifying text of the format. */
-     char  *df_id;
+typedef struct date_format_type
+{
+  /* Identifying text of the format. */
+  char *df_id;
 
-     /* Description text of the format. */
-     char  *df_info;
+  /* Description text of the format. */
+  char *df_info;
 
-     /* The format text itself. */
-     char  *df_format;
-   }
-  Df_struct;
+  /* The format text itself. */
+  char *df_format;
+}
+Df_struct;
 
 
 /*
 *  The Gregorian Reformation date record.
 */
-typedef
-  struct greg_type
-   {
-     /* Year of Gregorian Reformation. */
-     int  year;
+typedef struct greg_type
+{
+  /* Year of Gregorian Reformation. */
+  int year;
 
-     /* Month of Gregorian Reformation. */
-     int  month;
+  /* Month of Gregorian Reformation. */
+  int month;
 
-     /* First missing day of Reformation period. */
-     int  first_day;
+  /* First missing day of Reformation period. */
+  int first_day;
 
-     /* Last missing day of Reformation period. */
-     int  last_day;
-   }
-  Greg_struct;
+  /* Last missing day of Reformation period. */
+  int last_day;
+}
+Greg_struct;
 
 /*
 *  General purpose enumerations.
 */
-typedef
-  enum compare_mode
-   {
-     DAy=1,
+typedef enum compare_mode
+{
+  DAy = 1,
 # if USE_RC
-     DVar,
-     TVar,
-     EAster,
-     TOday,
-     WEek,
+  DVar,
+  TVar,
+  EAster,
+  TOday,
+  WEek,
 # endif
-     MOnth
-   }
-  Cmode_enum;
+  MOnth
+}
+Cmode_enum;
 
-typedef
-  enum file_mode
-   {
-     REsponse=1,
+typedef enum file_mode
+{
+  REsponse = 1,
 # if USE_RC
-     USr_include,
-     SYs_include,
-     REsource,
-     HEre,
+  USr_include,
+  SYs_include,
+  REsource,
+  HEre,
 # endif
 # ifdef GCAL_SHELL
-     SCript,
+  SCript,
 # endif
-     COmmon
-   }
-  Fmode_enum;
+  COmmon
+}
+Fmode_enum;
 #endif /* __COMMON_H */

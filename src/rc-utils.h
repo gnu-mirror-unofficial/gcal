@@ -39,122 +39,96 @@ __BEGIN_DECLARATIONS
 ************************************************** Defined in `rc-utils.c'.
 */
 # if HAVE_V8_REGCOMP
-extern void
-regerror __P_((char *msg));
+extern void regerror __P_ ((char *msg));
 # endif
 extern Bool
-rc_valid_day __P_((const char *date_text,
-                   const int   day,
-                   const int   month,
-                   const int   year));
+  rc_valid_day __P_ ((const char *date_text,
+		      const int day, const int month, const int year));
 extern Bool
-rc_valid_period __P_((      char *date_text,
-                      const int   d,
-                      const int   m,
-                      const int   y,
-                      const int   incr_year,
-                      const int   decr_year));
-extern void
-rc_clean_flags __P_((void));
-extern Line_struct *
-rc_get_date __P_((      char        *the_line,
-                        Line_struct *lineptrs,
-                  const Bool         is_rc_file,
-                        Bool        *is_weekday_mode,
-                        int         *d,
-                        int         *m,
-                        int         *y,
-                        int         *n,
-                        int         *len,
-                        char        *hc,
-                        int         *hn,
-                        int         *hwd,
-                  const char        *filename,
-                  const long         line_number,
-                  const char        *line_buffer,
-                  const Bool         on_error_exit));
+  rc_valid_period __P_ ((char *date_text,
+			 const int d,
+			 const int m,
+			 const int y,
+			 const int incr_year, const int decr_year));
+extern void rc_clean_flags __P_ ((void));
+extern Line_struct *rc_get_date __P_ ((char *the_line,
+				       Line_struct * lineptrs,
+				       const Bool is_rc_file,
+				       Bool * is_weekday_mode,
+				       int *d,
+				       int *m,
+				       int *y,
+				       int *n,
+				       int *len,
+				       char *hc,
+				       int *hn,
+				       int *hwd,
+				       const char *filename,
+				       const long line_number,
+				       const char *line_buffer,
+				       const Bool on_error_exit));
 extern Bool
-precomp_nth_wd __P_((      int         diff,
-                     const int         wd,
-                           int        *n,
-                           int        *day,
-                           int        *month,
-                           int        *year,
-                     const Cmode_enum  mode));
+  precomp_nth_wd __P_ ((int diff,
+			const int wd,
+			int *n,
+			int *day,
+			int *month, int *year, const Cmode_enum mode));
 extern Bool
-precomp_date __P_((      int         diff,
-                   const int         wd,
-                         int        *day,
-                         int        *month,
-                   const int         year,
-                   const Cmode_enum  mode));
+  precomp_date __P_ ((int diff,
+		      const int wd,
+		      int *day,
+		      int *month, const int year, const Cmode_enum mode));
 extern void
-set_dvar __P_((const char        *line_buffer,
-                     Line_struct *lineptrs,
-               const char        *filename,
-               const long         line_number,
-               const Var_enum     mode));
+  set_dvar __P_ ((const char *line_buffer,
+		  Line_struct * lineptrs,
+		  const char *filename,
+		  const long line_number, const Var_enum mode));
 extern void
-set_tvar __P_((const char     *line_buffer,
-               const char     *filename,
-               const long      line_number,
-               const Var_enum  mode));
+  set_tvar __P_ ((const char *line_buffer,
+		  const char *filename,
+		  const long line_number, const Var_enum mode));
 extern void
-nth_weekday_of_month __P_((      int  *d,
-                                 int  *m,
-                                 int  *y,
-                           const int  *n,
-                                 Bool *is_weekday_mode));
+  nth_weekday_of_month __P_ ((int *d,
+			      int *m,
+			      int *y, const int *n, Bool * is_weekday_mode));
 extern Slint
-d_between __P_((const int d1,
-                const int m1,
-                const int y1,
-                const int d2,
-                const int m2,
-                const int y2));
+  d_between __P_ ((const int d1,
+		   const int m1,
+		   const int y1, const int d2, const int m2, const int y2));
 extern Slint
-w_between __P_((const int d1,
-                const int m1,
-                const int y1,
-                const int d2,
-                const int m2,
-                const int y2));
+  w_between __P_ ((const int d1,
+		   const int m1,
+		   const int y1, const int d2, const int m2, const int y2));
 extern Slint
-m_between __P_((const int m1,
-                const int y1,
-                const int m2,
-                const int y2));
+  m_between __P_ ((const int m1, const int y1, const int m2, const int y2));
 extern void
-manage_leap_day __P_((      int  *day,
-                            int  *month,
-                            int   year,
-                      const char *line_buffer,
-                      const char *filename,
-                      const long  line_number));
-extern char *
-biorhythm __P_((const Bool  create_bar,
-                      int   axis_len,
-                      char *string,
-                const int   day,
-                const int   month,
-                const int   year,
-                const int   birth_day,
-                const int   birth_month,
-                const int   birth_year,
-                const char *emo_text,
-                      int  *emo_phase,
-                      int  *emo_waxes,
-                const char *int_text,
-                      int  *int_phase,
-                      int  *int_waxes,
-                const char *phy_text,
-                      int  *phy_phase,
-                      int  *phy_waxes,
-                      int  *critical_day,
-                      int  *positive_day,
-                      int  *negative_day));
+  manage_leap_day __P_ ((int *day,
+			 int *month,
+			 int year,
+			 const char *line_buffer,
+			 const char *filename, const long line_number));
+extern char *biorhythm __P_ ((const Bool create_bar,
+			      int axis_len,
+			      char *string,
+			      const int day,
+			      const int month,
+			      const int year,
+			      const int birth_day,
+			      const int birth_month,
+			      const int birth_year,
+			      const char *emo_text,
+			      int *emo_phase,
+			      int *emo_waxes,
+			      const char *int_text,
+			      int *int_phase,
+			      int *int_waxes,
+			      const char *phy_text,
+			      int *phy_phase,
+			      int *phy_waxes,
+			      int *critical_day,
+			      int *positive_day, int *negative_day));
 extern double
-compute_distance __P_((const Coor_struct *coor1,
-                       const Coor_struct *coor2));
+  compute_distance __P_ ((const Coor_struct * coor1,
+			  const Coor_struct * coor2));
 __END_DECLARATIONS
 #endif /* __RC_UTILS_H */

@@ -39,13 +39,10 @@ __BEGIN_DECLARATIONS
 ************************************************** Defined in `rc-check.c'.
 */
 extern void
-rc_check __P_((      char *line_buffer,
-               const char *filename,
-               const long  line_number,
-               const int   line_length,
-                     int  *rc_elems,
-               const int   day,
-               const int   ed,
-               const int   wd));
+  rc_check __P_ ((char *line_buffer,
+		  const char *filename,
+		  const long line_number,
+		  const int line_length,
+		  int *rc_elems, const int day, const int ed, const int wd));
 __END_DECLARATIONS
 #endif /* __RC_CHECK_H */

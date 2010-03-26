@@ -73,32 +73,22 @@ __BEGIN_DECLARATIONS
 ************************************************** Defined in `rc-astro.c'.
 */
 extern double
-gd_latitude2gc_latitude __P_((const double  gd_latitude,
-                              const int     meters_above_sea_level,
-                                    double *gc_latitude));
+  gd_latitude2gc_latitude __P_ ((const double gd_latitude,
+				 const int meters_above_sea_level,
+				 double *gc_latitude));
 extern double
-sun_rise_set __P_((const Aevent_enum  event,
-                   const Bool         is_limited,
-                         int          day,
-                         int          month,
-                         int          year,
-                         Coor_struct *coordinates));
+  sun_rise_set __P_ ((const Aevent_enum event,
+		      const Bool is_limited,
+		      int day,
+		      int month, int year, Coor_struct * coordinates));
 extern double
-moon_rise_set __P_((const Aevent_enum  event,
-                          int          day,
-                          int          month,
-                          int          year,
-                          Coor_struct *coordinates));
+  moon_rise_set __P_ ((const Aevent_enum event,
+		       int day,
+		       int month, int year, Coor_struct * coordinates));
 extern int
-moondisk __P_((      Bool *is_full_new,
-                     int   day,
-                     int   month,
-                     int   year,
-               const int   hour,
-               const int   min));
-extern void
-draw_moon __P_((const int    age,
-                const int    lines,
-                      char **string));
+  moondisk __P_ ((Bool * is_full_new,
+		  int day,
+		  int month, int year, const int hour, const int min));
+extern void draw_moon __P_ ((const int age, const int lines, char **string));
 __END_DECLARATIONS
 #endif /* __RC_ASTRO_H */

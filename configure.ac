@@ -30,8 +30,9 @@ AC_PREREQ(2.65)
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([gnu])
 
-AM_CONFIG_HEADER(config.h:config.hin)dnl
-AC_REVISION($Id: configure.in 2.30 2000/06/14 02:03:00 tom Exp $)dnl
+AM_CONFIG_HEADER(config.h)
+
+AC_USE_SYSTEM_EXTENSIONS
 
 dnl
 dnl Emit some text.  (I know that some people dislike a talkative `configure'
@@ -55,11 +56,14 @@ AC_MSG_RESULT()
 AC_CHECKING(for C compiler)
 dnl
 AC_PROG_CC
+AM_PROG_CC_C_O
+AC_PROG_RANLIB
 
 gl_EARLY
 
 gl_INIT
 
+AC_FUNC_ALLOCA
 
 dnl
 dnl Support transforming of program names.

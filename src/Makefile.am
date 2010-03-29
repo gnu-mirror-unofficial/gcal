@@ -20,7 +20,8 @@ MISC_LIBS = @LIBM@ @LIBS@
 LIBS = $(MISC_LIBS)
 
 AM_CFLAGS = -I$(srcdir)/lib -I$(srcdir) -I.. @CPPFLAGS@
-AM_LDFLAGS = ../lib/libgnu.a @LDFLAGS@
+#AM_LDFLAGS = @LDFLAGS@
+LDADD = ../lib/libgnu.a
 
 SRCS = \
   file-io.c \

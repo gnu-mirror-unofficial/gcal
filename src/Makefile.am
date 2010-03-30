@@ -20,7 +20,7 @@ MISC_LIBS = @LIBM@ @LIBS@
 LIBS = $(MISC_LIBS)
 
 AM_CFLAGS = -I$(srcdir)/lib -I$(srcdir) -I.. @CPPFLAGS@
-#AM_LDFLAGS = @LDFLAGS@
+AM_LDFLAGS = $(LIBINTL)
 LDADD = ../lib/libgnu.a
 
 SRCS = \

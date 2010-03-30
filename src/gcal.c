@@ -1703,11 +1703,11 @@ main (argc, argv)
   /*
      Now initialize the NLS functions.
    */
-#  if HAVE_SETstaticE
+#  if HAVE_SETLOCALE
   setlocale (LC_ALL, "");
 #  endif
-#  ifndef staticEDIR
-#   define staticEDIR  NULL
+#  ifndef LOCALEEDIR
+#   define LOCALEEDIR  NULL
 #  endif
   bindtextdomain (PACKAGE, staticEDIR);
   textdomain (PACKAGE);
@@ -6169,7 +6169,7 @@ check_command_line (argc, argv)
 #if USE_DE
       start_day = DAY_MIN;
 #else /* !USE_DE */
-# ifdef GCAL_NLS
+# if defined GCAL_NLS && defined _NL_TIME_FIRST_WEEKDAY
       start_day = (nl_langinfo (_NL_TIME_FIRST_WEEKDAY)[0] + 5) % 7 + 1;
 # else /* !GCAL_NLS */
       start_day = DAY_MAX;

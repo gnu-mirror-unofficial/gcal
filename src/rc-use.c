@@ -647,9 +647,6 @@ rc_use ()
 	    my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
 	  re_pattern = 1;
 # endif
-# if NO_REGEX
-	  ;			/* Void, nothing to do! */
-# endif
 	  /*
 	     Is it necessary to remove highlighting sequences
 	     in each text before searching the PATTERN?

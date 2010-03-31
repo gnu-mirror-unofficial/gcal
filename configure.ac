@@ -815,10 +815,6 @@ if test "$gcal_cv_use_included_regexps" = no; then
         AC_DEFINE(HAVE_RE_COMP, [1], [BSD re_comp()])
         have_regexp=yes)
     fi
-    if test "$have_regexp" = no; then
-      AC_MSG_RESULT(cannot find any regular expression library)
-      AC_DEFINE(NO_REGEX, [1], [pattern matching is supported, but without metacharacters.])
-    fi
   fi
 fi
 dnl

@@ -3731,10 +3731,6 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems,
 #  if HAVE_RE_COMP
 	      print_line = (Bool) (re_exec (s6) == 1);
 #  endif
-#  if NO_REGEX
-	      print_line =
-		(Bool) (strstr (s6, rc_filter_text) != (char *) NULL);
-#  endif
 # endif	/* !HAVE_GNU_RE_COMPILE_PATTERN */
 	      if (rc_revert_match_flag)
 		print_line = !print_line;

@@ -563,15 +563,9 @@ my_extended_help (fp, longopt_symbolic)
 	       "          Nur die Termine ausgeben, in denen %s im Text enthalten ist",
 	       larg_lit);
       print_text (fp, s1);
-#  if NO_REGEX
-      sprintf (s1,
-	       "   %-3s    = Jeder beliebige Text, Metazeichen werden nicht ber%scksichtigt",
-	       larg_lit, UE);
-#  else	/* !NO_REGEX */
       sprintf (s1,
 	       "   %-3s    = Jeder beliebige Text bzw. \"regul%sre Ausdruck\"",
 	       larg_lit, AE);
-#  endif /* !NO_REGEX */
       print_text (fp, s1);
       if (longopt_symbolic != SYM_NIL)
 	break;
@@ -2458,17 +2452,10 @@ my_extended_help (fp, longopt_symbolic)
 	       ("          Display only those fixed dates, whose text is matched by %s"),
 	       larg_lit);
       print_text (fp, s1);
-#  if NO_REGEX
-      sprintf (s1,
-	       _
-	       ("   %-3s    = Any text you like, metacharacters are not respected"),
-	       larg_lit);
-#  else	/* !NO_REGEX */
       sprintf (s1,
 	       _
 	       ("   %-3s    = Any text respectively \"regular expression\" you like"),
 	       larg_lit);
-#  endif /* !NO_REGEX */
       print_text (fp, s1);
       if (longopt_symbolic != SYM_NIL)
 	break;
@@ -4500,10 +4487,6 @@ my_version (fp)
 # endif
 # if HAVE_RE_COMP
   strcat (s1, " BSD-REGEX");
-  i++;
-# endif
-# if NO_REGEX
-  strcat (s1, " NO-REGEX");
   i++;
 # endif
 #endif /* USE_RC */

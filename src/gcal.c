@@ -1709,7 +1709,7 @@ main (argc, argv)
 #  ifndef LOCALEEDIR
 #   define LOCALEEDIR  NULL
 #  endif
-  bindtextdomain (PACKAGE, staticEDIR);
+  bindtextdomain (PACKAGE, LOCALEDIR);
   textdomain (PACKAGE);
   /*
      Now check whether we use a native language message catalog

@@ -645,10 +645,10 @@ main (argc, argv)
 # if HAVE_SETstaticE
   setlocale (LC_ALL, "");
 # endif
-# ifndef staticEDIR
-#  define staticEDIR  NULL
+# ifndef LOCALEDIR
+#  define LOCALEDIR  NULL
 # endif
-  bindtextdomain (PACKAGE, staticEDIR);
+  bindtextdomain (PACKAGE, LOCALEDIR);
   textdomain (PACKAGE);
 #endif
   /*

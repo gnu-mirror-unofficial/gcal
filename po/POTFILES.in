@@ -14,7 +14,6 @@ src/rc-check.c
 src/rc-insert.c
 src/rc-use.c
 src/rc-utils.c
-src/regexp.c
 src/tty.c
 src/utils.c
 src/tcal.c

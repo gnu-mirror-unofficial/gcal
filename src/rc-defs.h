@@ -1334,8 +1334,4 @@ extern regex_t regpattern;
 extern int re_pattern;
 # endif
 
-# if HAVE_REGCMP
-extern char *cpattern;
-# endif
-
 #endif /* __RC_DEFS_H */

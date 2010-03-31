@@ -54,9 +54,6 @@ __BEGIN_DECLARATIONS
 # if HAVE_RE_COMP
 extern char *re_comp ();
 # endif
-# if HAVE_REGCMP
-extern char *regcmp ();
-# endif
 /*
 ************************************************** Defined in `rc-use.c'.
 */

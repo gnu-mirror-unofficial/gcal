@@ -3731,9 +3731,6 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems,
 #  if HAVE_RE_COMP
 	      print_line = (Bool) (re_exec (s6) == 1);
 #  endif
-#  if HAVE_REGCMP
-	      print_line = (Bool) (regex (cpattern, s6) != (char *) NULL);
-#  endif
 #  if NO_REGEX
 	      print_line =
 		(Bool) (strstr (s6, rc_filter_text) != (char *) NULL);

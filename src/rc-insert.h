@@ -41,9 +41,6 @@ __BEGIN_DECLARATIONS
 # if HAVE_RE_COMP
 extern int re_exec ();
 # endif
-# if HAVE_REGCMP
-extern char *regex ();
-# endif
 /*
 ************************************************** Defined in `rc-insert.c'.
 */

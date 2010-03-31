@@ -816,12 +816,6 @@ if test "$gcal_cv_use_included_regexps" = no; then
         have_regexp=yes)
     fi
     if test "$have_regexp" = no; then
-      AC_CHECK_FUNC(regcmp,
-        AC_MSG_RESULT(using SysV regcmp)
-        AC_DEFINE(HAVE_REGCMP, [1], [System V regcmp()])
-        have_regexp=yes)
-    fi
-    if test "$have_regexp" = no; then
       AC_MSG_RESULT(cannot find any regular expression library)
       AC_DEFINE(NO_REGEX, [1], [pattern matching is supported, but without metacharacters.])
     fi

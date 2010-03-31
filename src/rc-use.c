@@ -426,10 +426,6 @@ regex_t regpattern;
 int re_pattern = 0;
 # endif
 
-# if HAVE_REGCMP
-char *cpattern = (char *) NULL;
-# endif
-
 
 /*
 *  static variables definitions.
@@ -650,11 +646,6 @@ rc_use ()
 	  if (re_comp (rc_filter_text) != (char *) NULL)
 	    my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
 	  re_pattern = 1;
-# endif
-# if HAVE_REGCMP
-	  cpattern = regcmp (rc_filter_text, 0);
-	  if (cpattern == (char *) NULL)
-	    my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
 # endif
 # if NO_REGEX
 	  ;			/* Void, nothing to do! */

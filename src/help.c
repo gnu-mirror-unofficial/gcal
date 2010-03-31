@@ -4502,10 +4502,6 @@ my_version (fp)
   strcat (s1, " BSD-REGEX");
   i++;
 # endif
-# if HAVE_REGCMP
-  strcat (s1, " SysV-REGEX");
-  i++;
-# endif
 # if NO_REGEX
   strcat (s1, " NO-REGEX");
   i++;

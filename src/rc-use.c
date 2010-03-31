@@ -430,11 +430,6 @@ int re_pattern = 0;
 char *cpattern = (char *) NULL;
 # endif
 
-# if HAVE_V8_REGCOMP
-struct regexp *regpattern = (struct regexp *) NULL;
-# endif
-
-
 
 /*
 *  static variables definitions.
@@ -660,9 +655,6 @@ rc_use ()
 	  cpattern = regcmp (rc_filter_text, 0);
 	  if (cpattern == (char *) NULL)
 	    my_error (ERR_INVALID_REGEX_PATTERN, "", 0L, rc_filter_text, 0);
-# endif
-# if HAVE_V8_REGCOMP
-	  regpattern = regcomp (rc_filter_text);
 # endif
 # if NO_REGEX
 	  ;			/* Void, nothing to do! */

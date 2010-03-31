@@ -152,25 +152,6 @@ AC_ARG_ENABLE(term,
   gcal_cv_use_term=$enableval,
   gcal_cv_use_term=yes)
 AC_MSG_RESULT($gcal_cv_use_term)
-dnl
-AC_MSG_CHECKING(whether included V8 regexps are requested)
-AC_ARG_WITH(included-regexps,
-  [  --with-included-regexps use the V8 regexps included here],
-  gcal_cv_use_included_regexps=$withval,
-  gcal_cv_use_included_regexps=no)
-AC_MSG_RESULT($gcal_cv_use_included_regexps)
-if test "$gcal_cv_use_included_regexps" = yes; then
-  if test -f "${srcdir}/src/regexp.c"; then
-    AC_DEFINE(HAVE_V8_REGCOMP)
-    REGEX_O='regexp$(O)'
-    AC_SUBST(REGEX_O)
-  else
-    gcal_cv_use_included_regexps=no
-    AC_MSG_RESULT()
-    AC_MSG_WARN(cannot find the included V8 regexps as requested!)
-    AC_MSG_RESULT()
-  fi
-fi
 
 dnl
 dnl Checks for programs.
@@ -839,13 +820,6 @@ if test "$gcal_cv_use_included_regexps" = no; then
         AC_MSG_RESULT(using SysV regcmp)
         AC_DEFINE(HAVE_REGCMP, [1], [System V regcmp()])
         have_regexp=yes)
-    fi
-    if test "$have_regexp" = no && test -f "${srcdir}/src/regexp.c"; then
-      AC_MSG_RESULT(using V8 regcomp)
-      AC_DEFINE(HAVE_V8_REGCOMP, [1], [Henry Spencer V8 regcomp() and regexp.h])
-      REGEX_O='regexp$(O)'
-      AC_SUBST(REGEX_O)
-      have_regexp=yes
     fi
     if test "$have_regexp" = no; then
       AC_MSG_RESULT(cannot find any regular expression library)

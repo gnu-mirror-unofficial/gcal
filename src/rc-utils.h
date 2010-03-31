@@ -38,9 +38,6 @@ __BEGIN_DECLARATIONS
 /*
 ************************************************** Defined in `rc-utils.c'.
 */
-# if HAVE_V8_REGCOMP
-extern void regerror __P_ ((char *msg));
-# endif
 extern Bool
   rc_valid_day __P_ ((const char *date_text,
 		      const int day, const int month, const int year));

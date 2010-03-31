@@ -41,7 +41,6 @@ SRCS = \
   rc-insert.c \
   rc-use.c \
   rc-utils.c \
-  regexp.c \
   tty.c \
   utils.c \
   tcal.c \
@@ -64,7 +63,6 @@ GCAL_BASE_HDRS = \
   hd-use.h \
   help.h \
   print.h \
-  regexp.h \
   tty.h \
   utils.h
 
@@ -171,5 +169,4 @@ EXTRA_DIST = common.h \
 	hd-data4.h \
 	help.h \
 	rc-defs.h \
-	regexp.h \
 	txt2gcal.h

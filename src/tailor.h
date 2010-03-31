@@ -175,10 +175,8 @@
 #    define HAVE_REGEX_H 1
 #    define HAVE_GNU_RE_COMPILE_PATTERN 1
 #   endif /* 0 */
-#   define HAVE_V8_REGCOMP 1
 #  else	/* !DJG */
 #   include <io.h>
-#   define HAVE_V8_REGCOMP 1
 #   define HD_TOP20CC 1
 #  endif /* !DJG */
 #  if USE_PAGER
@@ -215,7 +213,6 @@
 #    define HAVE_SYSTEM 1
 #    define HAVE_TIME_T 1
 #    define HAVE_VOID 1
-#    define HAVE_V8_REGCOMP 1
 #   endif /* !__GCC__ && !__EMX__ */
 #   if 0
 #    define HAVE_REGEX_H 1
@@ -292,9 +289,6 @@
 #      define HAVE_REGEX_H 1
 #      define HAVE_GNU_RE_COMPILE_PATTERN 1
 #     endif /* 0 */
-#     define HAVE_V8_REGCOMP 1
-#    else /* !__GNUC__ */
-#     define HAVE_V8_REGCOMP 1
 #    endif /* !__GNUC__ */
 #   else /* !ACORN */
 #    if defined(AMIGA)
@@ -323,9 +317,6 @@
 #       define HAVE_REGEX_H 1
 #       define HAVE_GNU_RE_COMPILE_PATTERN 1
 #      endif /* 0 */
-#      define HAVE_V8_REGCOMP 1
-#     else /* !__GNUC__ */
-#      define HAVE_V8_REGCOMP 1
 #     endif /* !__GNUC__ */
 #    else /* !AMIGA */
 #     if defined(ATARI)
@@ -339,10 +330,8 @@
 #        define HAVE_REGEX_H 1
 #        define HAVE_GNU_RE_COMPILE_PATTERN 1
 #       endif /* 0 */
-#       define HAVE_V8_REGCOMP 1
 #      else /* !__GNUC__ */
 #       define STDC_HEADERS 1
-#       define HAVE_V8_REGCOMP 1
 #      endif /* !__GNUC__ */
 #      define HAVE_ASSERT_H 1
 #      define HAVE_CTYPE_H 1
@@ -370,7 +359,6 @@
 #      if defined(__50SERIES) || defined(PRIMOS)
 		 /* Prime/PRIMOS. */
 #       define USE_PROTOTYPES 1
-#       define HAVE_V8_REGCOMP 1
 #       define STDC_HEADERS 1
 #       define HAVE_ASSERT_H 1
 #       define HAVE_CTYPE_H 1
@@ -404,7 +392,6 @@
 #         define HAVE_REGEX_H 1
 #         define HAVE_GNU_RE_COMPILE_PATTERN 1
 #        else /* !__GNUC__ */
-#         define HAVE_V8_REGCOMP 1
 #        endif /* !__GNUC__ */
 #        define STDC_HEADERS 1
 #        define HAVE_ASSERT_H 1

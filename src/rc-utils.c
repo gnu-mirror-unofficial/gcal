@@ -81,18 +81,6 @@ __END_DECLARATIONS
 /*
 *  Function implementations.
 */
-# if HAVE_V8_REGCOMP
-  void
-regerror (msg)
-     char *msg;
-/*
-   Enables terminating error message in case an illegal V8-REGEX pattern is specified.
-*/
-{
-  my_error (ERR_INVALID_REGEX_PATTERN, msg, 0L, rc_filter_text, 0);
-}
-# endif	/* HAVE_V8_REGCOMP */
-
 
 
 Bool

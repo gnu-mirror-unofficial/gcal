@@ -995,10 +995,6 @@ Aevent_enum;
 #   include <regex.h>
 #  endif
 # endif
-# if HAVE_V8_REGCOMP
-#  include "regexp.h"
-# endif
-
 
 
 /*
@@ -1342,7 +1338,4 @@ extern int re_pattern;
 extern char *cpattern;
 # endif
 
-# if HAVE_V8_REGCOMP
-extern struct regexp *regpattern;
-# endif
 #endif /* __RC_DEFS_H */

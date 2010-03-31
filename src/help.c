@@ -4506,10 +4506,6 @@ my_version (fp)
   strcat (s1, " SysV-REGEX");
   i++;
 # endif
-# if HAVE_V8_REGCOMP
-  strcat (s1, " V8-REGEX");
-  i++;
-# endif
 # if NO_REGEX
   strcat (s1, " NO-REGEX");
   i++;

@@ -24,7 +24,8 @@ dnl
 dnl
 dnl Starting operations.
 dnl
-AC_INIT([gcal], [3.01], [bug-gcal@gnu.org])
+
+AC_INIT([gcal], [3.5], [bug-gcal@gnu.org])
 AC_PREREQ(2.65)
 
 AC_CONFIG_AUX_DIR([build-aux])

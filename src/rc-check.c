@@ -33,10 +33,6 @@
 
 
 #if USE_RC
-# ifdef RCSID
-static char rcsid[] = "$Id: rc-check.c 3.01 2000/06/14 03:00:01 tom Exp $";
-# endif
-
 
 
 /*

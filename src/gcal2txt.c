@@ -21,11 +21,6 @@
 */
 
 
-
-static char rcsid[] = "$Id: gcal2txt.c 2.06 2000/06/14 02:00:06 tom Exp $";
-
-
-
 #include "tailor.h"
 #if HAVE_ASSERT_H
 # include <assert.h>
@@ -170,11 +165,7 @@ version_msg (fp, prgr_name, exit_status)
      terminates the program with `exit_status'.
 */
 {
-  auto char *ptr_rcsid = rcsid + 16;
-
-
-  *(ptr_rcsid + 4) = '\0';
-  fprintf (fp, "%s (GNU cal %s) %s\n", prgr_name, VERSION_NO, ptr_rcsid);
+  fprintf (fp, "%s (GNU cal %s)\n", prgr_name, VERSION_NO);
   fprintf (fp, "Copyright (c) 1996, 1997, 2000 Thomas Esken\n");
 #if USE_DE
   fprintf (fp,
@@ -291,11 +282,6 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
      and terminates the program with status `exit_status'.
 */
 {
-  if (prgr_name == (char *) NULL)
-    {
-      prgr_name = rcsid + 5;
-      *(prgr_name + 8) = '\0';
-    }
 #if USE_DE
   fprintf (stderr, "\n%s: Abbruch, ", prgr_name);
 #else /* !USE_DE */
@@ -693,13 +679,7 @@ main (argc, argv)
     s1 = my_realloc ((VOID_PTR) s1,
 		     i + 1, ERR_NO_MEMORY_AVAILABLE,
 		     __FILE__, ((long) __LINE__) - 2L, "s1", i + 1);
-  if (!i)
-    {
-      strcpy (s1, rcsid + 5);
-      s1[9] = '\0';
-    }
-  else
-    strcpy (s1, *argv);
+  strcpy (s1, *argv);
 #ifdef SUFFIX_SEP
   /*
      Eliminate version suffix under VMS.

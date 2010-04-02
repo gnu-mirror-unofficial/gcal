@@ -22,13 +22,6 @@
 */
 
 
-
-#ifdef RCSID
-static char rcsid[] = "$Id: help.c 3.01 2000/06/20 03:00:01 tom Exp $";
-#endif
-
-
-
 /*
 *  Include header files.
 */

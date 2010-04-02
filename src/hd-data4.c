@@ -33,11 +33,6 @@
 
 
 #if !HD_TOP20CC
-# ifdef RCSID
-static char rcsid[] = "$Id: hd-data4.c 3.01 2000/06/14 03:00:01 tom Exp $";
-# endif
-
-
 
 /*
 *  Include header files.

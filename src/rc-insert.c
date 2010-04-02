@@ -32,11 +32,6 @@
 
 
 #if USE_RC
-# ifdef RCSID
-static char rcsid[] = "$Id: rc-insert.c 3.01 2000/06/20 03:00:01 tom Exp $";
-# endif
-
-
 
 /*
 *  Include header files.

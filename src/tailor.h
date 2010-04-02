@@ -46,7 +46,7 @@
 /* FIXME: this is just a quick hack. Avoid the redefinition of ERA.  */
 # undef ERA
 
-# include <libintl.h>
+# include <gettext.h>
 
 # define _(Str) gettext(Str)
 # define N_(Str) (Str)

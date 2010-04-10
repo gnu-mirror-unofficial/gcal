@@ -173,12 +173,12 @@
 */
 /* Access file relative to $HOME directory. */
 # ifndef GCAL_USR_DATADIR
-#  define GCAL_USR_DATADIR  "share"DIR_SEP""PRGR_NAME
+#  define GCAL_USR_DATADIR  "share"DIR_SEP""PACKAGE_NAME
 # endif
 
 /* Access file absolute to root directory. */
 # ifndef GCAL_SYS_DATADIR
-#  define GCAL_SYS_DATADIR  DIR_SEP"usr"DIR_SEP"local"DIR_SEP"share"DIR_SEP""PRGR_NAME
+#  define GCAL_SYS_DATADIR  DIR_SEP"usr"DIR_SEP"local"DIR_SEP"share"DIR_SEP""PACKAGE_NAME
 # endif
 
 

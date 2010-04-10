@@ -1233,7 +1233,7 @@ rc_use ()
 	  /*
 	     Use the standard resource file.
 	   */
-	  i = (int) strlen (PRGR_NAME) + strlen (RC_SUFFIX);
+	  i = (int) strlen (PACKAGE_NAME) + strlen (RC_SUFFIX);
 # ifdef GCAL_SHELL
 	  i++;
 # endif
@@ -1244,7 +1244,7 @@ rc_use ()
 # else /* !GCAL_SHELL */
 	  *s3 = '\0';
 # endif	/* !GCAL_SHELL */
-	  strcat (s3, PRGR_NAME);
+	  strcat (s3, PACKAGE_NAME);
 	  strcat (s3, RC_SUFFIX);
 	}
       else

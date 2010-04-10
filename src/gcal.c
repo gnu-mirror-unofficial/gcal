@@ -1683,8 +1683,8 @@ main (argc, argv)
    */
   assert (BUF_LEN >= 1);
   assert ((Uint) BUF_LEN < testval);
-  assert (strlen (PRGR_NAME) > 0);
-  assert (strlen (VERSION_NO) > 0);
+  assert (strlen (PACKAGE_NAME) > 0);
+  assert (strlen (PACKAGE_VERSION) > 0);
   assert (MY_ARGC_MAX > 1);
   assert ((Uint) MY_ARGC_MAX <= testval);
   assert (HD_ELEMS_MAX > 0);
@@ -1913,7 +1913,7 @@ main (argc, argv)
   if ((Uint) i >= maxlen_max)
     resize_all_strings (i + 1, FALSE, __FILE__, (long) __LINE__);
   if (!i)
-    strcpy (s3, PRGR_NAME);
+    strcpy (s3, PACKAGE_NAME);
   else
     strcpy (s3, *argv);
 #ifdef SUFFIX_SEP

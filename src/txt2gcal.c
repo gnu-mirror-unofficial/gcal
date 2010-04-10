@@ -134,9 +134,6 @@ usage_msg (fp, prgr_name, exit_status)
       S_NEWLINE (fp);
       fprintf (fp, "Fehlerberichte via eMail an <%s>", BUG_REPORT_ADR1);
       S_NEWLINE (fp);
-      fprintf (fp, "oder (falls das fehlschl%sgt) an <%s>.", AE,
-	       BUG_REPORT_ADR2);
-      S_NEWLINE (fp);
     }
 #else /* !USE_DE */
   fprintf (fp, _("Usage:  %s  [--%s | --%s] | [TEXT-FILE | -] [DATE-PART]\n"),
@@ -145,8 +142,6 @@ usage_msg (fp, prgr_name, exit_status)
     {
       S_NEWLINE (fp);
       fprintf (fp, _("Email bug reports to <%s>"), BUG_REPORT_ADR1);
-      S_NEWLINE (fp);
-      fprintf (fp, _("or (if this fails) to <%s>."), BUG_REPORT_ADR2);
       S_NEWLINE (fp);
     }
 #endif /* !USE_DE */
@@ -165,8 +160,8 @@ version_msg (fp, prgr_name, exit_status)
      terminates the program with `exit_status'.
 */
 {
-  fprintf (fp, "%s (GNU cal %s)\n", prgr_name, VERSION_NO);
-  fprintf (fp, "Copyright (c) 1996, 1997, 2000 Thomas Esken\n");
+  fprintf (fp, "%s (GNU cal %s)\n", prgr_name, PACKAGE_VERSION);
+  fprintf (fp, "%s\n", COPYRIGHT_TXT);
 #if USE_DE
   fprintf (fp,
 	   "Dies ist freie Software; in den Quellen befindet sich die Lizenz-");
@@ -665,7 +660,7 @@ main (argc, argv)
    */
   assert (MAXLEN_MAX >= 1024);
   assert ((Uint) MAXLEN_MAX <= testval);
-  assert (strlen (VERSION_NO) > 0);
+  assert (strlen (PACKAGE_VERSION) > 0);
 #endif /* HAVE_ASSERT_H */
   /*
      Initial memory allocation for the `s1' string.

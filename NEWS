@@ -2,7 +2,12 @@ NEWS file for `gcal'.
 
 User-visible changes.
 
+Major changes in release 3.5.1
+*  Update NEWS
+*  --version reports the right version
 
+
+
 Major changes in release 3.5
 
 *  Change source license to GPLv3+

@@ -1604,11 +1604,11 @@ my_extended_help (fp, longopt_symbolic)
 #  ifdef GCAL_SHELL
       sprintf (s1,
 	       "          Benutze Standard-Ressourcendatei `.%s%s' f%sr Terminliste",
-	       PRGR_NAME, RC_SUFFIX, UE);
+	       PACKAGE_NAME, RC_SUFFIX, UE);
 #  else	/* !GCAL_SHELL */
       sprintf (s1,
 	       "          Benutze Standard-Ressourcendatei `%s%s' f%sr Terminliste",
-	       PRGR_NAME, RC_SUFFIX, UE);
+	       PACKAGE_NAME, RC_SUFFIX, UE);
 #  endif /* !GCAL_SHELL */
       print_text (fp, s1);
       strcpy (s1, "          Impliziert Zeitraum:  Heute");
@@ -3565,12 +3565,12 @@ my_extended_help (fp, longopt_symbolic)
       sprintf (s1,
 	       _
 	       ("          Use standard resource file `.%s%s' for fixed date list"),
-	       PRGR_NAME, RC_SUFFIX);
+	       PACKAGE_NAME, RC_SUFFIX);
 #  else	/* !GCAL_SHELL */
       sprintf (s1,
 	       _
 	       ("          Use standard resource file `%s%s' for fixed date list"),
-	       PRGR_NAME, RC_SUFFIX);
+	       PACKAGE_NAME, RC_SUFFIX);
 #  endif /* !GCAL_SHELL */
       print_text (fp, s1);
       strcpy (s1, _("          Implies period:  Today"));
@@ -4309,7 +4309,6 @@ my_basic_help (fp)
 # endif	/* USE_PAGER */
 #endif /* !USE_DE */
   print_text (fp, s1);
-  print_text (fp, s1);
   strcpy (s1, lopt_msg ());
   print_text (fp, s1);
   my_bug_report_address (fp);
@@ -4434,169 +4433,7 @@ my_version (fp)
 # endif
 #endif
 
-
   my_copyright (fp, TRUE);
-  print_compiler_info (fp);
-  print_text (fp, s1);
-#if USE_DE
-  strcpy (s1, "Kompilations-Optionen:");
-#else /* !USE_DE */
-  strcpy (s1, _("Compilation options:"));
-#endif /* !USE_DE */
-#ifdef GCAL_NLS
-  strcat (s1, " NLS");
-  i++;
-#endif
-#if !HAVE_LIBM
-  strcat (s1, " LIBM_EMU");
-  i++;
-#endif
-#if USE_EASC
-  strcat (s1, " USE_EASC");
-  i++;
-#endif
-#if USE_DE
-  strcat (s1, " USE_DE");
-  i++;
-#endif
-#if USE_HLS
-  strcat (s1, " USE_HLS");
-  i++;
-#endif
-#if USE_PAGER
-  strcat (s1, " USE_PAGER");
-  i++;
-#endif
-#if USE_RC
-  strcat (s1, " USE_RC");
-  i++;
-# if HAVE_GNU_RE_COMPILE_PATTERN
-  strcat (s1, " GNU-REGEX");
-  i++;
-# endif
-# if HAVE_POSIX_REGCOMP
-  strcat (s1, " POSIX-REGEX");
-  i++;
-# endif
-# if HAVE_RE_COMP
-  strcat (s1, " BSD-REGEX");
-  i++;
-# endif
-#endif /* USE_RC */
-  if (i)
-    print_text (fp, s1);
-  print_text (fp, s1);
-#if USE_RC
-# if !defined(AMIGA) || defined(__GNUC__)
-  ptr_env = getenv (ENV_VAR_SYS_DATADIR);
-  if (ptr_env != (char *) NULL)
-    {
-      if (!*ptr_env)
-	ptr_env = GCAL_SYS_DATADIR;
-    }
-  else
-# endif	/* !AMIGA || __GNUC__ */
-    ptr_env = GCAL_SYS_DATADIR;
-  sprintf (s1, "GCAL_SYS_DATADIR=%s", ptr_env);
-  print_text (fp, s1);
-# if !defined(AMIGA) || defined(__GNUC__)
-  ptr_env = getenv (ENV_VAR_USR_DATADIR);
-  if (ptr_env == (char *) NULL)
-    ptr_env = GCAL_USR_DATADIR;
-  else if (!*ptr_env)
-    ptr_env = GCAL_USR_DATADIR;
-  i = 1;
-  ptr_home = getenv (ENV_VAR_HOME);
-  if (ptr_home == (char *) NULL)
-    i--;
-  else if (!*ptr_home)
-    i--;
-  if (i)
-    {
-      if (*(ptr_home + (strlen (ptr_home) - 1)) == *DIR_SEP)
-	sprintf (s1, "GCAL_USR_DATADIR=%s%s", ptr_home, ptr_env);
-      else
-	sprintf (s1, "GCAL_USR_DATADIR=%s%s%s", ptr_home, DIR_SEP, ptr_env);
-    }
-  else
-    sprintf (s1, "GCAL_USR_DATADIR=$%s%s%s", ENV_VAR_HOME, DIR_SEP, ptr_env);
-# else /* AMIGA && !__GNUC__ */
-  sprintf (s1, "GCAL_USR_DATADIR=%s", GCAL_USR_DATADIR);
-# endif	/* AMIGA && !__GNUC__ */
-  print_text (fp, s1);
-  print_text (fp, s1);
-#endif /* USE_RC */
-#if USE_DE
-  sprintf (s1, "Starttag der Woche: %s", day_name (start_day));
-#else /* !USE_DE */
-  sprintf (s1, _("Starting day of week: %s"), day_name (start_day));
-#endif /* USE_DE */
-  print_text (fp, s1);
-#if USE_DE
-  sprintf (s1, "Art der Wochennummern: %s",
-	   (iso_week_number) ? "ISO-8601:1988" : "Standard");
-#else /* !USE_DE */
-  sprintf (s1, _("Type of week numbers: %s"),
-	   (iso_week_number) ? "ISO-8601:1988" : _("Standard"));
-#endif /* USE_DE */
-  print_text (fp, s1);
-#if USE_DE
-  sprintf (s1, "Basisjahr des Kalenders: %d",
-	   (transform_year) ? transform_year : YEAR_MIN);
-#else /* !USE_DE */
-  sprintf (s1, _("Base year of calendar: %d"),
-	   (transform_year) ? transform_year : YEAR_MIN);
-#endif /* USE_DE */
-  print_text (fp, s1);
-#if USE_DE
-  sprintf (s1, "Gregorianische Reformation: %02d-%02d %s %0*d",
-	   greg->first_day, greg->last_day, short_month_name (greg->month),
-	   len_year_max, greg->year);
-#else /* !USE_DE */
-  sprintf (s1, _("Gregorian Reformation: %02d-%02d %s %0*d"), greg->first_day,
-	   greg->last_day, short_month_name (greg->month), len_year_max,
-	   greg->year);
-#endif /* !USE_DE */
-  print_text (fp, s1);
-#if USE_DE
-  sprintf (s1, "Datumformat: (%s) `%s' (%s)",
-	   (date_format->df_id ==
-	    (char *) NULL) ? "Selbstdefiniert" : date_format->df_id,
-	   date_format->df_format, date_format->df_info);
-#else /* !USE_DE */
-  sprintf (s1, _("Date format: (%s) `%s' (%s)"),
-	   (date_format->df_id ==
-	    (char *) NULL) ? _("self-defined") : date_format->df_id,
-	   date_format->df_format, _(date_format->df_info));
-#endif /* !USE_DE */
-  print_text (fp, s1);
-  i = 1;
-  while ((++ptr_cc_holidays)->cc_info != (char *) NULL)
-    i++;
-#if USE_DE
-  sprintf (s1, "Ber%scksichtigte L%snder/Territorien: %d", UE, AE, i);
-#else /* !USE_DE */
-  sprintf (s1, _("Respected countries/territories: %d"), i);
-#endif /* !USE_DE */
-  print_text (fp, s1);
-  if (time_hour_offset)
-    sprintf (s2, "%+d", gmt_timezone_value (time_hour_offset));
-  else
-    *s2 = '\0';
-#if USE_DE
-  sprintf (s1,
-	   "Zeitversatzwert der astronomischen Funktionen: %s%02d%s%02d == GMT%s",
-	   (time_hour_offset + time_min_offset < 0) ? DES_LIT : ASC_LIT,
-	   abs (time_hour_offset), time_sep, abs (time_min_offset), s2);
-#else /* !USE_DE */
-  sprintf (s1,
-	   _
-	   ("Time offset value of astronomical functions: %s%02d%s%02d == GMT%s"),
-	   (time_hour_offset + time_min_offset < 0) ? DES_LIT : ASC_LIT,
-	   abs (time_hour_offset), time_sep, abs (time_min_offset), s2);
-#endif /* !USE_DE */
-  print_text (fp, s1);
-  my_bug_report_address (fp);
 }
 
 
@@ -4779,12 +4616,8 @@ my_bug_report_address (fp)
   print_text (fp, s1);
 #if USE_DE
   sprintf (s1, "Fehlerberichte via eMail an <%s>", BUG_REPORT_ADR1);
-  print_text (fp, s1);
-  sprintf (s1, "oder (falls das fehlschl%sgt) an <%s>.", AE, BUG_REPORT_ADR2);
 #else /* !USE_DE */
   sprintf (s1, _("Email bug reports to <%s>"), BUG_REPORT_ADR1);
-  print_text (fp, s1);
-  sprintf (s1, _("or (if this fails) to <%s>."), BUG_REPORT_ADR2);
 #endif /* !USE_DE */
   print_text (fp, s1);
 }
@@ -4801,7 +4634,7 @@ my_copyright (fp, with_short_license)
      text buffer `s1' internally.
 */
 {
-  sprintf (s1, "%s (GNU cal) %s", prgr_name, VERSION_NO);
+  sprintf (s1, "%s (GNU cal) %s", prgr_name, PACKAGE_VERSION);
   print_text (fp, s1);
   if (!with_short_license)
     print_text (fp, s1);
@@ -4832,7 +4665,6 @@ my_copyright (fp, with_short_license)
 #endif /* !USE_DE */
       print_text (fp, s1);
     }
-  print_text (fp, s1);
 }
 
 
@@ -4848,10 +4680,10 @@ my_help_head_text (fp)
 {
 #if USE_DE
   sprintf (s1, "%s: Das Gregorianische Kalenderprogramm (GNU cal) %s",
-	   prgr_name, VERSION_NO);
+	   prgr_name, PACKAGE_VERSION);
 #else /* !USE_DE */
   sprintf (s1, _("%s: The Gregorian calendar program (GNU cal) %s"),
-	   prgr_name, VERSION_NO);
+	   prgr_name, PACKAGE_VERSION);
 #endif /* !USE_DE */
   print_text (fp, s1);
   print_text (fp, s1);

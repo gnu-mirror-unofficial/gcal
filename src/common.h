@@ -791,9 +791,9 @@ extern char *getenv __P_ ((const char *env_var));
 /*
 *  And last but not least...
 */
-# define COPYRIGHT_TXT    "Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken"
-# define BUG_REPORT_ADR1  "esken@gmx.net"
-# define BUG_REPORT_ADR2  "bug-gcal@gnu.org"
+# define COPYRIGHT_TXT    "Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken\n" \
+"Copyright (c) 2010 Free Software Foundation, Inc."
+# define BUG_REPORT_ADR1  "bug-gcal@gnu.org"
 
 
 

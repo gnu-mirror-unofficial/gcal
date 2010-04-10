@@ -194,9 +194,6 @@ usage_msg (fp, prgr_name, exit_status)
       S_NEWLINE (fp);
       fprintf (fp, "Fehlerberichte via eMail an <%s>", BUG_REPORT_ADR1);
       S_NEWLINE (fp);
-      fprintf (fp, "oder (falls das fehlschl%sgt) an <%s>.", AE,
-	       BUG_REPORT_ADR2);
-      S_NEWLINE (fp);
     }
 #else /* !USE_DE */
   fprintf (fp,
@@ -208,8 +205,6 @@ usage_msg (fp, prgr_name, exit_status)
     {
       S_NEWLINE (fp);
       fprintf (fp, _("Email bug reports to <%s>"), BUG_REPORT_ADR1);
-      S_NEWLINE (fp);
-      fprintf (fp, _("or (if this fails) to <%s>."), BUG_REPORT_ADR2);
       S_NEWLINE (fp);
     }
 #endif /* !USE_DE */
@@ -228,8 +223,8 @@ version_msg (fp, prgr_name, exit_status)
      terminates the program with `exit_status'.
 */
 {
-  fprintf (fp, "%s (GNU cal %s)\n", prgr_name, VERSION_NO);
-  fprintf (fp, "Copyright (c) 1995, 96, 1997, 2000 Thomas Esken\n");
+  fprintf (fp, "%s (GNU cal %s)\n", prgr_name, PACKAGE_VERSION);
+  fprintf (fp, "%s\n", COPYRIGHT_TXT);
 #if USE_DE
   fprintf (fp,
 	   "Dies ist freie Software; in den Quellen befindet sich die Lizenz-");
@@ -734,8 +729,8 @@ main (argc, argv)
   assert (YEAR_MAX >= YEAR_MIN);
   assert (MONTH_MAX == 12);
   assert (CENTURY == 1900);
-  assert (strlen (PRGR_NAME) > 0);
-  assert (strlen (VERSION_NO) > 0);
+  assert (strlen (PACKAGE_NAME) > 0);
+  assert (strlen (PACKAGE_VERSION) > 0);
   assert (MY_ARGC_MAX > 1);
   assert ((Uint) MY_ARGC_MAX <= testval);
 #endif /* HAVE_ASSERT_H */
@@ -1031,11 +1026,11 @@ main (argc, argv)
   if (gcal_prgr != (char *) NULL)
     {
       if (!*gcal_prgr)
-	gcal_prgr = PRGR_NAME;
+	gcal_prgr = PACKAGE_NAME;
     }
   else
 #endif /* !AMIGA || __GNUC__ */
-    gcal_prgr = PRGR_NAME;
+    gcal_prgr = PACKAGE_NAME;
   /*
      Get the actual date.
    */

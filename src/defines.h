@@ -24,24 +24,6 @@
 */
 
 
-
-/*
-*  $Id: defines.h 3.01 2000/06/14 03:00:01 tom Exp $
-*/
-
-
-
-/*
-*  Define the program name and version.
-*/
-/* Actual program name. */
-# define PRGR_NAME   "gcal"
-
-/* Actual version number. */
-# define VERSION_NO  "3.01"
-
-
-
 /*
 *
 *  BEGIN: General program modification symbols,

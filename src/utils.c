@@ -270,7 +270,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 {
   S_NEWLINE (stderr);
   if (prgr_name == (char *) NULL)
-    prgr_name = PRGR_NAME;
+    prgr_name = PACKAGE_NAME;
 #if USE_DE
   fprintf (stderr, "%s: Abbruch, ", prgr_name);
 #else /* !USE_DE */

@@ -2,11 +2,32 @@ NEWS file for `gcal'.
 
 User-visible changes.
 
-Current Version: 3.01
-See the HISTORY file for the details of all changes.
 
+Major changes in release 3.5
 
-Major changes in release *.**
+*  Change source license to GPLv3+
+*  Do not include Henry Spencer V8 regex library
+*  Change documentation license to FDL 1.3+
+*  Use automake
+*  Use the start of the week day specified by the locale
+*  Typo fixed in data/dates/lotr: Sm8 = Smaug
+*  Typo fixed in src/help.c and *.po: assigments -> assignments
+*  Hyphens corrected in gcal.1
+*  Date of Nikolaustag changed in data/dates/world
+		 Bug report and patch by Wolfram Kleff
+*  Spell check in doc/en/texi/gcal.texi
+     Patch by James Troup
+*  Do not install files in $(HOME)
+		 Patch by Edward Betts
+*  Add --from-code=iso-8859-1 to po/Makefile.in.in
+	   Patch by Sandro Tosi
+*  Fix German translation
+	   Patch by Jens Seidel
+*  Changes to src/{hd-data2.c,hd-data3.c,hd-defs.h,hd-data.c}
+     -fixed Czech holidays; bug report and patch by Martin Mares
+     -removed non ASCII char
+     -All Saints Day on some states; patch by Marc-Jano Knopp
+     -All Souls day is no holiday; patch by Thorsten Alteholz
 
 
 

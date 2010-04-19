@@ -21,3 +21,5 @@ SUBDIRS = lib \
 	misc \
 	data \
 	doc
+
+EXTRA_DIST = BUGS LIMITATIONS

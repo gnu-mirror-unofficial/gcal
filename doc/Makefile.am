@@ -16,3 +16,4 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 SUBDIRS = en
+EXTRA_DIST = GREG-REFORM

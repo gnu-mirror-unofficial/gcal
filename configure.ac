@@ -1,6 +1,6 @@
 dnl Template file for GNU Autoconf
 dnl
-dnl Copyright (c) 1995, 96, 97, 2000 Thomas Esken
+dnl Copyright (c) 1995, 96, 97, 2000, 2010 Thomas Esken
 dnl Copyright (c) 2010 Free Software Foundation, Inc.
 dnl
 dnl This software doesn't claim completeness, correctness or usability.
@@ -950,6 +950,7 @@ if test "$ac_cv_sys_interpreter" = yes; then
 fi
 
 AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.16])
 
 dnl
 dnl Ending operations.

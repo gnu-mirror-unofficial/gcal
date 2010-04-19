@@ -2,11 +2,14 @@ NEWS file for `gcal'.
 
 User-visible changes.
 
+Major changes in release X.Y.Z
+
+*  Distribute .po files
+
 Major changes in release 3.5.1
+
 *  Update NEWS
 *  --version reports the right version
-
-
 
 Major changes in release 3.5
 

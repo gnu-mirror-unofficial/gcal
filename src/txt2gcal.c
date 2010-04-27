@@ -624,7 +624,7 @@ main (argc, argv)
   /*
      Now initialize the NLS functions.
    */
-# if HAVE_SETstaticE
+# if HAVE_SETLOCALE
   setlocale (LC_ALL, "");
 # endif
 # ifndef LOCALEDIR

@@ -721,7 +721,7 @@ dnl
 if test "$gcal_cv_use_pager" = yes; then
   AC_CHECK_FUNCS([dup dup2])
 fi
-AC_CHECK_FUNCS([signal strtol strstr strchr strrchr strcspn strcasecmp strncasecmp])
+AC_CHECK_FUNCS([signal strtol strstr strchr strrchr strcspn strcasecmp strncasecmp setlocale])
 dnl
 dnl Some systems have termios.h but not the corresponding functions.
 dnl

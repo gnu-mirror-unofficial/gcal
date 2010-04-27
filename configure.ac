@@ -1,7 +1,7 @@
 dnl Template file for GNU Autoconf
 dnl
-dnl Copyright (c) 1995, 96, 97, 2000, 2010 Thomas Esken
 dnl Copyright (c) 2010 Free Software Foundation, Inc.
+dnl Copyright (c) 1995, 96, 97, 2000 Thomas Esken
 dnl
 dnl This software doesn't claim completeness, correctness or usability.
 dnl On principle I will not be liable for ANY damages or losses (implicit
@@ -25,7 +25,9 @@ dnl
 dnl Starting operations.
 dnl
 
-AC_INIT([gcal], [3.5.1], [bug-gcal@gnu.org])
+AC_INIT([gcal],
+        m4_esyscmd([build-aux/git-version-gen .tarball-version]),
+        [bug-gcal@gnu.org])
 AC_PREREQ(2.65)
 
 AC_CONFIG_AUX_DIR([build-aux])

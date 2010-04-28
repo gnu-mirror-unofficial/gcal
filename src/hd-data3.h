@@ -40,7 +40,7 @@ __BEGIN_DECLARATIONS
 ************************************************** Defined in `hd-data3.c'.
 */
 extern void
-  de_ba_hdy __P_ ((Bool * init_data,
+  de_by_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -52,13 +52,13 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  de_bl_hdy __P_ ((Bool * init_data,
+  de_be_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  de_br_hdy __P_ ((Bool * init_data,
+  de_hb_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -70,13 +70,13 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  de_ha_hdy __P_ ((Bool * init_data,
+  de_hh_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  de_hs_hdy __P_ ((Bool * init_data,
+  de_he_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -88,7 +88,7 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  de_ns_hdy __P_ ((Bool * init_data,
+  de_ni_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -106,7 +106,7 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  de_sa_hdy __P_ ((Bool * init_data,
+  de_st_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -130,7 +130,7 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  de_tr_hdy __P_ ((Bool * init_data,
+  de_th_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,

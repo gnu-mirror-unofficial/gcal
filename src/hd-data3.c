@@ -56,7 +56,7 @@
 *  All other D-L countries specific holiday management functions.
 */
 void
-de_ba_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+de_by_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -68,7 +68,7 @@ de_ba_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Germany/Bavaria.
 */
 {
-  ptr_cc_id = "DE_BA";
+  ptr_cc_id = "DE_BY";
   use_other_cc = !use_other_cc;
   de_nw_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
@@ -118,7 +118,7 @@ de_bb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -135,7 +135,7 @@ de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
   if (!use_other_cc)
     {
-      ptr_cc_id = "DE_BL";
+      ptr_cc_id = "DE_BE";
       de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
     }
   day = weekday_of_date (DAY_MIN, 11, year);
@@ -149,7 +149,7 @@ de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-de_br_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+de_hb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -161,9 +161,9 @@ de_br_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Germany/Bremen.
 */
 {
-  ptr_cc_id = "DE_BR";
+  ptr_cc_id = "DE_HB";
   use_other_cc = !use_other_cc;
-  de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
 }
@@ -197,7 +197,7 @@ de_bw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-de_ha_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+de_hh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -209,9 +209,9 @@ de_ha_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Germany/Hamburg.
 */
 {
-  ptr_cc_id = "DE_HA";
+  ptr_cc_id = "DE_HH";
   use_other_cc = !use_other_cc;
-  de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
 }
@@ -219,7 +219,7 @@ de_ha_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-de_hs_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+de_he_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -231,9 +231,9 @@ de_hs_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Germany/Hessen.
 */
 {
-  ptr_cc_id = "DE_HS";
+  ptr_cc_id = "DE_HE";
   use_other_cc = !use_other_cc;
-  de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   holiday (*init_data, detected,
@@ -265,7 +265,7 @@ de_mv_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-de_ns_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+de_ni_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -277,9 +277,9 @@ de_ns_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Germany/Lower Saxony.
 */
 {
-  ptr_cc_id = "DE_NS";
+  ptr_cc_id = "DE_NI";
   use_other_cc = !use_other_cc;
-  de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
 }
@@ -303,7 +303,7 @@ de_nw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
     {
       ptr_cc_id = "DE_NW";
       use_other_cc = !use_other_cc;
-      de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+      de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
       use_other_cc = !use_other_cc;
       de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
     }
@@ -343,7 +343,7 @@ de_rp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-de_sa_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+de_st_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -355,7 +355,7 @@ de_sa_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Germany/Saxony-Anhalt.
 */
 {
-  ptr_cc_id = "DE_SA";
+  ptr_cc_id = "DE_ST";
   use_other_cc = !use_other_cc;
   de_bb_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
@@ -380,7 +380,7 @@ de_sh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 {
   ptr_cc_id = "DE_SH";
   use_other_cc = !use_other_cc;
-  de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
 }
@@ -402,7 +402,7 @@ de_sl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 {
   ptr_cc_id = "DE_SL";
   use_other_cc = !use_other_cc;
-  de_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_ALL_SAINTS_DAY].ht_text),
@@ -455,7 +455,7 @@ de_sn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-de_tr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+de_th_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -467,7 +467,7 @@ de_tr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Germany/Thuringia.
 */
 {
-  ptr_cc_id = "DE_TR";
+  ptr_cc_id = "DE_TH";
   use_other_cc = !use_other_cc;
   de_bb_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;

@@ -2654,7 +2654,7 @@ cg_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_aa_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_ar_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -2666,7 +2666,7 @@ ch_aa_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Switzerland/Appenzell-Ausserrhoden.
 */
 {
-  ptr_cc_id = "CH_AA";
+  ptr_cc_id = "CH_AR";
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_CIVIC_HOLIDAY].ht_text),
 	   ptr_cc_id, "+", 13, MONTH_MIN, year, hd_elems, fday, count);
@@ -2753,7 +2753,7 @@ ch_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_bn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_be_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -2768,7 +2768,7 @@ ch_bn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   register int i;
 
 
-  ptr_cc_id = "CH_BN";
+  ptr_cc_id = "CH_BE";
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   for (i = 3; i; i--)
     holiday (*init_data, detected, _(hd_text[HD_CARNIVAL].ht_text),
@@ -2799,7 +2799,7 @@ ch_bs_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_fb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_fr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -2811,7 +2811,7 @@ ch_fb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Switzerland/Fribourg.
 */
 {
-  ptr_cc_id = "CH_FB";
+  ptr_cc_id = "CH_FR";
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   ch_ai_hdy (init_data, detected, easter, year, hd_elems, fday, count);
@@ -2821,7 +2821,7 @@ ch_fb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_gb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_gr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -2833,7 +2833,7 @@ ch_gb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Switzerland/Graub"unden.
 */
 {
-  ptr_cc_id = "CH_GB";
+  ptr_cc_id = "CH_GR";
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
 }
 
@@ -2869,7 +2869,7 @@ ch_gl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_gv_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_ge_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -2884,7 +2884,7 @@ ch_gv_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   register int day;
 
 
-  ptr_cc_id = "CH_GV";
+  ptr_cc_id = "CH_GE";
   use_other_cc = !use_other_cc;
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
@@ -2906,7 +2906,7 @@ ch_gv_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_jr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_ju_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -2918,7 +2918,7 @@ ch_jr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Switzerland/Jura.
 */
 {
-  ptr_cc_id = "CH_JR";
+  ptr_cc_id = "CH_JU";
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_LABOUR_DAY].ht_text),
 	   ptr_cc_id, "+", DAY_MIN, 5, year, hd_elems, fday, count);
@@ -2936,7 +2936,7 @@ ch_jr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_lz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_lu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -2948,7 +2948,7 @@ ch_lz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Switzerland/Luzern.
 */
 {
-  ptr_cc_id = "CH_LZ";
+  ptr_cc_id = "CH_LU";
   ch_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_ASH_MONDAY].ht_text),
 	   ptr_cc_id, "+", easter - 48, 0, year, hd_elems, fday, count);
@@ -2971,7 +2971,7 @@ ch_lz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_nc_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_ne_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -2986,7 +2986,7 @@ ch_nc_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   register int day;
 
 
-  ptr_cc_id = "CH_NC";
+  ptr_cc_id = "CH_NE";
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   day = eval_holiday (DAY_MIN, 9, year, DAY_MAX, TRUE) + (2 * DAY_MAX) + 1;
   holiday (*init_data, detected, _(hd_text[HD_CIVIC_HOLIDAY].ht_text),
@@ -3074,7 +3074,28 @@ ch_sg_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_st_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_sh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+     Bool *init_data;
+     const Bool detected;
+     int easter;
+     const int year;
+     int *hd_elems;
+     const int fday;
+     const int count;
+/*
+   Manages all specific holidays celebrated in Switzerland/Schaffhausen.
+*/
+{
+  ptr_cc_id = "CH_SH";
+  ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  holiday (*init_data, detected, _(hd_text[HD_LABOUR_DAY].ht_text),
+	   ptr_cc_id, "+", DAY_MIN, 5, year, hd_elems, fday, count);
+}
+
+
+
+void
+ch_so_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -3086,7 +3107,7 @@ ch_st_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Switzerland/Solothurn.
 */
 {
-  ptr_cc_id = "CH_ST";
+  ptr_cc_id = "CH_SO";
   ch_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_ALL_SAINTS_DAY].ht_text),
 	   ptr_cc_id, "+", DAY_MIN, 11, year, hd_elems, fday, count);
@@ -3098,7 +3119,7 @@ ch_st_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_sw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_sz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -3110,7 +3131,7 @@ ch_sw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Switzerland/Schwyz.
 */
 {
-  ptr_cc_id = "CH_SW";
+  ptr_cc_id = "CH_SZ";
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_ALL_SAINTS_DAY].ht_text),
 	   ptr_cc_id, "+", DAY_MIN, 11, year, hd_elems, fday, count);
@@ -3128,7 +3149,7 @@ ch_sw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_tc_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_ti_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -3140,7 +3161,7 @@ ch_tc_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Switzerland/Ticino.
 */
 {
-  ptr_cc_id = "CH_TC";
+  ptr_cc_id = "CH_TI";
   use_other_cc = !use_other_cc;
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   ch_ai_hdy (init_data, detected, easter, year, hd_elems, fday, count);
@@ -3185,7 +3206,7 @@ ch_tg_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_ui_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_ur_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -3197,7 +3218,7 @@ ch_ui_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Switzerland/Uri.
 */
 {
-  ptr_cc_id = "CH_UI";
+  ptr_cc_id = "CH_UR";
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   ch_ai_hdy (init_data, detected, easter, year, hd_elems, fday, count);
@@ -3238,7 +3259,7 @@ ch_vd_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_vl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_vs_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -3250,7 +3271,7 @@ ch_vl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    Manages all specific holidays celebrated in Switzerland/Valais.
 */
 {
-  ptr_cc_id = "CH_VL";
+  ptr_cc_id = "CH_VS";
   use_other_cc = !use_other_cc;
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
@@ -3295,7 +3316,7 @@ ch_zg_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 
 
 void
-ch_zr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+ch_zh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -3311,7 +3332,7 @@ ch_zr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   register int i;
 
 
-  ptr_cc_id = "CH_ZR";
+  ptr_cc_id = "CH_ZH";
   ch_base_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   for (i = 3; i; i--)
     holiday (*init_data, detected, _(hd_text[HD_CARNIVAL].ht_text),

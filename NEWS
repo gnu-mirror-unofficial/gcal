@@ -4,6 +4,7 @@ User-visible changes.
 
 Major changes in release X.Y.Z
 
+*  Use ISO 3166-2 region codes.
 *  Distribute .po files
 *  Distribute BUGS LIMITATIONS doc/GREG-REFORM
 *  Fix NLS support in gcal, gcal2txt, tcal, txt2gcal

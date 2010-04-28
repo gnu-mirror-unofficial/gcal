@@ -394,7 +394,7 @@ extern void
 		const int year,
 		int *hd_elems, const int fday, const int count));
 extern void
-  ch_aa_hdy __P_ ((Bool * init_data,
+  ch_ar_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -418,7 +418,7 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_bn_hdy __P_ ((Bool * init_data,
+  ch_be_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -430,13 +430,13 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_fb_hdy __P_ ((Bool * init_data,
+  ch_fr_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_gb_hdy __P_ ((Bool * init_data,
+  ch_gr_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -448,25 +448,25 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_gv_hdy __P_ ((Bool * init_data,
+  ch_ge_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_jr_hdy __P_ ((Bool * init_data,
+  ch_ju_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_lz_hdy __P_ ((Bool * init_data,
+  ch_lu_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_nc_hdy __P_ ((Bool * init_data,
+  ch_ne_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -490,19 +490,25 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_st_hdy __P_ ((Bool * init_data,
+  ch_sh_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_sw_hdy __P_ ((Bool * init_data,
+  ch_so_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_tc_hdy __P_ ((Bool * init_data,
+  ch_sz_hdy __P_ ((Bool * init_data,
+		   const Bool detected,
+		   int easter,
+		   const int year,
+		   int *hd_elems, const int fday, const int count));
+extern void
+  ch_ti_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -514,7 +520,7 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_ui_hdy __P_ ((Bool * init_data,
+  ch_ur_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -526,7 +532,7 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_vl_hdy __P_ ((Bool * init_data,
+  ch_vs_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,
@@ -538,7 +544,7 @@ extern void
 		   const int year,
 		   int *hd_elems, const int fday, const int count));
 extern void
-  ch_zr_hdy __P_ ((Bool * init_data,
+  ch_zh_hdy __P_ ((Bool * init_data,
 		   const Bool detected,
 		   int easter,
 		   const int year,

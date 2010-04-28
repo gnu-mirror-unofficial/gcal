@@ -1852,43 +1852,43 @@ Central African Republic #
 @item CG
 Republic of Congo #
 
-@item CH_AA
-Switzerland/Appenzell Ausserrhoden
-
 @item CH_AG
 Switzerland/Aargau
 
 @item CH_AI
 Switzerland/Appenzell Innerrhoden
 
+@item CH_AR
+Switzerland/Appenzell Ausserrhoden
+
+@item CH_BE
+Switzerland/Bern
+
 @item CH_BL
 Switzerland/Basel-Land
-
-@item CH_BN
-Switzerland/Bern
 
 @item CH_BS
 Switzerland/Basel-Stadt
 
-@item CH_FB
+@item CH_FR
 Switzerland/Fribourg
 
-@item CH_GB
-Switzerland/Graub@"unden
+@item CH_GE
+Switzerland/Gen@`eve
 
 @item CH_GL
 Switzerland/Glarus
 
-@item CH_GV
-Switzerland/Gen@`eve
+@item CH_GR
+Switzerland/Graub@"unden
 
-@item CH_JR
+@item CH_JU
 Switzerland/Jura
 
-@item CH_LZ
+@item CH_LU
 Switzerland/Luzern
 
-@item CH_NC
+@item CH_NE
 Switzerland/Neuch@^atel
 
 @item CH_NW
@@ -1900,31 +1900,34 @@ Switzerland/Obwalden
 @item CH_SG
 Switzerland/St Gallen
 
-@item CH_ST
+@item CH_SH
+Switzerland/Schaffhausen
+
+@item CH_SO
 Switzerland/Solothurn
 
-@item CH_SW
+@item CH_SZ
 Switzerland/Schwyz
-
-@item CH_TC
-Switzerland/Ticino
 
 @item CH_TG
 Switzerland/Thurgau
 
-@item CH_UI
+@item CH_TI
+Switzerland/Ticino
+
+@item CH_UR
 Switzerland/Uri
 
 @item CH_VD
 Switzerland/Vaud
 
-@item CH_VL
+@item CH_VS
 Switzerland/Valais
 
 @item CH_ZG
 Switzerland/Zug
 
-@item CH_ZR
+@item CH_ZH
 Switzerland/Z@"urich
 
 @item CI
@@ -1963,31 +1966,31 @@ Cyprus
 @item CZ
 Czech Republic
 
-@item DE_BA
-Germany/Bavaria
-
 @item DE_BB
 Germany/Brandenburg
 
-@item DE_BL
+@item DE_BE
 Germany/Berlin
-
-@item DE_BR
-Germany/Bremen
 
 @item DE_BW
 Germany/Baden-W@"urttemberg
 
-@item DE_HA
-Germany/Hamburg
+@item DE_BY
+Germany/Bavaria
 
-@item DE_HS
+@item DE_HB
+Germany/Bremen
+
+@item DE_HE
 Germany/Hesse
+
+@item DE_HH
+Germany/Hamburg
 
 @item DE_MV
 Germany/Mecklenburg-West Pomerania
 
-@item DE_NS
+@item DE_NI
 Germany/Lower Saxony
 
 @item DE_NW
@@ -1995,9 +1998,6 @@ Germany/North Rhine-Westphalia
 
 @item DE_RP
 Germany/Rhineland Palatinate
-
-@item DE_SA
-Germany/Saxony-Anhalt
 
 @item DE_SH
 Germany/Schleswig-Holstein
@@ -2008,7 +2008,10 @@ Germany/Saar
 @item DE_SN
 Germany/Saxony
 
-@item DE_TR
+@item DE_ST
+Germany/Saxony-Anhalt
+
+@item DE_TH
 Germany/Thuringia
 
 @item DJ

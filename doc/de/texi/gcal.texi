@@ -2231,44 +2231,44 @@ Zentralafrikanische Republik #
 @item CG
 Republik Kongo #
 
-@item CH_AA
-Schweiz/Appenzell-Ausserrhoden
-
 @item CH_AG
 Schweiz/Aargau
 
 @item CH_AI
 Schweiz/Appenzell-Innerrhoden
 
+@item CH_AR
+Schweiz/Appenzell-Ausserrhoden
+
+@item CH_BE
+Schweiz/Bern
+
 @item CH_BL
 Schweiz/Basel-Land
-
-@item CH_BN
-Schweiz/Bern
 
 @item CH_BS
 Schweiz/Basel-Stadt
 
-@item CH_FB
+@item CH_FR
 Schweiz/Freiburg
 
-@item CH_GB
-Schweiz/Graub@"unden
+@item CH_GE
+Schweiz/Genf
 
 @item CH_GL
 Schweiz/Glarus
 
-@item CH_GV
-Schweiz/Genf
+@item CH_GR
+Schweiz/Graub@"unden
 
-@item CH_JR
+@item CH_JU
 Schweiz/Jura
 
-@item CH_LZ
+@item CH_LU
 Schweiz/Luzern
 
-@item CH_NC
-Schweiz/Neuch@^atel
+@item CH_NE
+Schweiz/Neuenburg
 
 @item CH_NW
 Schweiz/Nidwalden
@@ -2279,31 +2279,34 @@ Schweiz/Obwalden
 @item CH_SG
 Schweiz/St.@: Gallen
 
-@item CH_ST
+@item CH_SH
+Schweiz/Schaffhausen
+
+@item CH_SO
 Schweiz/Solothurn
 
-@item CH_SW
+@item CH_SZ
 Schweiz/Schwyz
-
-@item CH_TC
-Schweiz/Ticino
 
 @item CH_TG
 Schweiz/Thurgau
 
-@item CH_UI
+@item CH_TI
+Schweiz/Tessin
+
+@item CH_UR
 Schweiz/Uri
 
 @item CH_VD
-Schweiz/Vaud
+Schweiz/Waadt
 
-@item CH_VL
-Schweiz/Valais
+@item CH_VS
+Schweiz/Wallis
 
 @item CH_ZG
 Schweiz/Zug
 
-@item CH_ZR
+@item CH_ZH
 Schweiz/Z@"urich
 
 @item CI
@@ -2342,31 +2345,31 @@ Zypern
 @item CZ
 Tschechien
 
-@item DE_BA
-Deutschland/Bayern
-
 @item DE_BB
 Deutschland/Brandenburg
 
-@item DE_BL
+@item DE_BE
 Deutschland/Berlin
 
-@item DE_BR
+@item DE_BW
+Deutschland/Baden-W@"urttemberg
+
+@item DE_BY
+Deutschland/Bayern
+
+@item DE_HB
 Deutschland/Bremen
 
-@item DE_BW
-Deutschland/Baden-W@"urttenberg
-
-@item DE_HA
-Deutschland/Hamburg
-
-@item DE_HS
+@item DE_HE
 Deutschland/Hessen
+
+@item DE_HH
+Deutschland/Hamburg
 
 @item DE_MV
 Deutschland/Mecklenburg-Vorpommern
 
-@item DE_NS
+@item DE_NI
 Deutschland/Niedersachsen
 
 @item DE_NW
@@ -2374,9 +2377,6 @@ Deutschland/Nordrhein-Westfalen
 
 @item DE_RP
 Deutschland/Rheinland-Pfalz
-
-@item DE_SA
-Deutschland/Sachsen-Anhalt
 
 @item DE_SH
 Deutschland/Schleswig-Holstein
@@ -2387,7 +2387,10 @@ Deutschland/Saarland
 @item DE_SN
 Deutschland/Sachsen
 
-@item DE_TR
+@item DE_ST
+Deutschland/Sachsen-Anhalt
+
+@item DE_TH
 Deutschland/Th@"uringen
 
 @item DJ

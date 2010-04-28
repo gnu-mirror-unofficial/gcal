@@ -1,5 +1,9 @@
-# List of files containing translatable strings.
+# GNU gcal
+#
+# Copyright (C) 2000-2010 Free Software Foundation, Inc.
 # Copyright (c) 1996, 2000 Thomas Esken
+#
+# List of files containing translatable strings.
 
 # Package source files
 src/file-io.c

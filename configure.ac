@@ -982,7 +982,6 @@ AC_OUTPUT([Makefile \
            doc/Makefile \
            doc/en/Makefile \
            doc/en/examples/Makefile \
-           doc/en/texi/Makefile \
            doc/mksamp \
            lib/Makefile \
            misc/Makefile \

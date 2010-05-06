@@ -152,3 +152,19 @@ EXTRA_DIST = \
   $(miscINFOFILES) \
   $(miscSCRIPTFILES) \
   $(miscMISCFILES)
+
+all-local:
+	cp gcalltx/gcalltxp gcalltx/gcalltx.pl
+	chmod u+x gcalltx/gcalltx.pl
+	chmod u+x daily/daily
+	chmod u+x ddiff/ddiff
+	chmod u+x ddiff/ddiffdrv
+	chmod u+x dst/dst
+	chmod u+x gcalltx/gcalltx
+	chmod u+x moon/moon
+	chmod u+x mrms/mrms
+	chmod u+x srss/srss
+	chmod u+x wloc/wlocdrv
+
+clean-generic:
+	rm -f gcalltx/gcalltx.pl

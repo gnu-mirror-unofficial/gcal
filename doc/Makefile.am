@@ -17,3 +17,6 @@
 
 SUBDIRS = en
 EXTRA_DIST = GREG-REFORM
+
+all-data-local:
+	chmod u+x mksamp

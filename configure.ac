@@ -996,45 +996,7 @@ AC_OUTPUT([Makefile \
            misc/srss/srss \
            misc/wloc/wlocdrv \
            po/Makefile.in \
-           src/Makefile],
-          [if test -s install-inf; then
-             mv install-inf install-info
-             chmod u+x install-info
-           fi
-           if test -s doc/mksamp; then
-             chmod u+x doc/mksamp
-           fi
-           if test -s misc/daily/daily; then
-             chmod u+x misc/daily/daily
-           fi
-           if test -s misc/ddiff/ddiff; then
-             chmod u+x misc/ddiff/ddiff
-           fi
-           if test -s misc/ddiff/ddiffdrv; then
-             chmod u+x misc/ddiff/ddiffdrv
-           fi
-           if test -s misc/dst/dst; then
-             chmod u+x misc/dst/dst
-           fi
-           if test -s misc/gcalltx/gcalltx; then
-             chmod u+x misc/gcalltx/gcalltx
-           fi
-           if test -s misc/gcalltx/gcalltxp; then
-             mv misc/gcalltx/gcalltxp misc/gcalltx/gcalltx.pl
-             chmod u+x misc/gcalltx/gcalltx.pl
-           fi
-           if test -s misc/moon/moon; then
-             chmod u+x misc/moon/moon
-           fi
-           if test -s misc/mrms/mrms; then
-             chmod u+x misc/mrms/mrms
-           fi
-           if test -s misc/srss/srss; then
-             chmod u+x misc/srss/srss
-           fi
-           if test -s misc/wloc/wlocdrv; then
-             chmod u+x misc/wloc/wlocdrv
-           fi])dnl
+           src/Makefile])dnl
 
 dnl
 dnl Emit some final text.

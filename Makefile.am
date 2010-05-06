@@ -23,3 +23,10 @@ SUBDIRS = lib \
 	doc
 
 EXTRA_DIST = BUGS LIMITATIONS
+
+all-data-local:
+	cp install-inf install-info
+	chmod u+x install-info
+
+clean-generic:
+	rm -f install-info

@@ -155,18 +155,31 @@ EXTRA_DIST = \
 
 gcalltx/gcalltx.pl:
 	cp gcalltx/gcalltxp gcalltx/gcalltx.pl
-
-dist-hook:
 	chmod u+x gcalltx/gcalltx.pl
-	chmod u+x daily/daily
-	chmod u+x ddiff/ddiff
-	chmod u+x ddiff/ddiffdrv
-	chmod u+x dst/dst
-	chmod u+x gcalltx/gcalltx
-	chmod u+x moon/moon
-	chmod u+x mrms/mrms
-	chmod u+x srss/srss
-	chmod u+x wloc/wlocdrv
 
-clean-generic:
-	rm -f gcalltx/gcalltx.pl
+daily/daily:
+	chmod u+x daily/daily
+
+ddiff/ddiff:
+	chmod u+x ddiff/ddiff
+
+ddiff/ddiffdrv:
+	chmod u+x ddiff/ddiffdrv
+
+dst/dst:
+	chmod u+x dst/dst
+
+gcalltx/gcalltx:
+	chmod u+x gcalltx/gcalltx
+
+moon/moon:
+	chmod u+x moon/moon
+
+mrms/mrms:
+	chmod u+x mrms/mrms
+
+srss/srss:
+	chmod u+x srss/srss
+
+wloc/wlocdrv:
+	chmod u+x wloc/wlocdrv

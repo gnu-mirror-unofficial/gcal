@@ -6,6 +6,7 @@
 *             (advanced  -ct  respectively  --period-of-fixed-dates=t  option).
 *             Works *only* for Gregorian years!
 *
+*  Copyright (c) 2000-2010 Free Software Foundation, Inc.
 *  Copyright (c) 1995, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.

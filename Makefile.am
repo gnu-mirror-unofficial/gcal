@@ -22,7 +22,7 @@ SUBDIRS = lib \
 	data \
 	doc
 
-EXTRA_DIST = BUGS LIMITATIONS
+EXTRA_DIST = BUGS LIMITATIONS .version
 
 BUILT_SOURCES = .version
 

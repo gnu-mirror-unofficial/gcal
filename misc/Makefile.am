@@ -153,8 +153,10 @@ EXTRA_DIST = \
   $(miscSCRIPTFILES) \
   $(miscMISCFILES)
 
-all-local:
+gcalltx/gcalltx.pl:
 	cp gcalltx/gcalltxp gcalltx/gcalltx.pl
+
+dist-hook:
 	chmod u+x gcalltx/gcalltx.pl
 	chmod u+x daily/daily
 	chmod u+x ddiff/ddiff

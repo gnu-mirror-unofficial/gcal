@@ -2145,7 +2145,7 @@ knuth_easter_formula (year)
    `epact' is the age of the calendar Moon at the beginning of the year.
    `extra_days' specifies when Sunday occurs in March.  `epact' specifies
    when Full Moon occurs.  Easter is the first Sunday following the first
-   Full Moon which occus on or after March 21.  (Ref.: De Morgan, A Budget
+   Full Moon which occurs on or after March 21.  (Ref.: De Morgan, A Budget
    of Paradoxes)
    This basic Algorithm was given by Don Knuth in CACM 5(1962), 209-210,
    and is altered accordingly for managing different Gregorian Reformation

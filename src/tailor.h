@@ -4,8 +4,8 @@
 *  tailor.h:  Machine/target dependent definitions.
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010 Free Software Foundation, Inc.
+*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -584,7 +584,25 @@
 #  ifdef MSDOS
 #   define TMPFILENAME  tempnam(NULL, NULL)
 #  else	/* !MSDOS */
-#   define TMPFILENAME  tmpnam(NULL)
+# include <tmpdir.h>
+# include <stdio.h>
+
+static char __buftmpfn[2048];
+static char *_tmpfn ()
+{
+  int fd;
+  if (path_search (__buftmpfn, sizeof (__buftmpfn), NULL, "gcal", false) < 0)
+    return NULL;
+
+  fd = mkostemp (__buftmpfn, 0);
+  if (fd < 0)
+    return NULL;
+
+  close (fd);
+  return __buftmpfn;
+}
+
+#   define TMPFILENAME  _tmpfn ()
 #  endif /* !MSDOS */
 # endif	/* GCAL_EMAIL || USE_RC */
 

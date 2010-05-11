@@ -4,6 +4,7 @@
 *  tcal.h:  Start `gcal' with date set ONE day ahead header file.
 *
 *
+*  Copyright (c) 2000-2010 Free Software Foundation, Inc.
 *  Copyright (c) 1995, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.

@@ -22,7 +22,9 @@ SUBDIRS = lib \
 	data \
 	doc
 
-EXTRA_DIST = BUGS LIMITATIONS
+EXTRA_DIST = BUGS LIMITATIONS .version
+
+BUILT_SOURCES = .version
 
 all-data-local:
 	cp install-inf install-info
@@ -30,3 +32,11 @@ all-data-local:
 
 clean-generic:
 	rm -f install-info
+
+.version:
+	echo $(VERSION) > $@-t && mv $@-t $@
+
+# Arrange so that .tarball-version appears only in the distribution
+# tarball, and never in a checked-out repository.
+dist-hook:
+	$(AM_V_GEN)echo $(VERSION) > $(distdir)/.tarball-version

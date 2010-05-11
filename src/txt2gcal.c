@@ -2,6 +2,7 @@
 *  txt2gcal.c:  Creates a verbatim Gcal resource file from a text file.
 *
 *
+*  Copyright (c) 2000-2010 Free Software Foundation, Inc.
 *  Copyright (c) 1996, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.

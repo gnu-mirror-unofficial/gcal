@@ -2545,7 +2545,7 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems,
 					         indicated the use of a floating point value which
 					         we now have to respect!
 					       */
-					      if (i == SPECIAL_VALUE)
+					      if (i == SPECIAL_VALUE && is_decimal)
 						i = (int) val;
 					      coor1->time_zone_in_mins = i;
 					      if (time_sep_found)

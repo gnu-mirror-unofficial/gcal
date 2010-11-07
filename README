@@ -1,4 +1,4 @@
-This is README for the Gcal distribution, version 3.01.
+This is README for the GNU Gcal package.
 
 The Name of the Game
 ====================
@@ -331,14 +331,6 @@ GNU `gettext' give preference to `LANGUAGE'.  For example, some Swedish
 users would rather read translations in German than English for when
 Swedish is not available.  This is easily accomplished by setting
 `LANGUAGE' to `sv:de' while leaving `LANG' to `sv'.
-
-By the way, if you want to support the author and the rest of the world
-with translations of Gcal message catalogs into your native language,
-please read, fill, print and sign the enclosed disclaimer file
-`DISCLAIM' and snail-mail it to the Free Software Foundation.  Please
-write to <translation@iro.umontreal.ca> to reach the coordinator for all
-translator teams.  See `ABOUT-NLS' and/or the manual of GNU `gettext'
-for more details.
 
 Some Installation Hints
 =======================

@@ -207,8 +207,7 @@ equinox_solstice (longitude, day, month, year, hour, min)
 
 
 
-double delta_t
-__P_ ((day, month, year, hour, min))
+double delta_t (day, month, year, hour, min)
      const int day;
      const int month;
      const int year;

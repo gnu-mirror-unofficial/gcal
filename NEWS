@@ -5,6 +5,7 @@ User-visible changes.
 Major changes in release X.Y.Z
 
 * Include All Saints' day in HU
+* Fix build issue under solaris 10 / studio 12.1
 
 Major changes in release 3.6
 

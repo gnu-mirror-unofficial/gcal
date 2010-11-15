@@ -2,6 +2,10 @@ NEWS file for `gcal'.
 
 User-visible changes.
 
+Major changes in release X.Y.Z
+
+* Include All Saints' day in HU
+
 Major changes in release 3.6
 
 *  Work properly when the -1 timezone is specified

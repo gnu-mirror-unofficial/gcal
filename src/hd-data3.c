@@ -2572,6 +2572,11 @@ hu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 	holiday (*init_data, detected, _(hd_text[HD_LIBERATION_DAY].ht_text),
 		 ptr_cc_id, "+", 4, 4, year, hd_elems, fday, count);
     }
+
+  if (year > 1999)
+	holiday (*init_data, detected, _(hd_text[HD_ALL_SAINTS_DAY].ht_text),
+		 ptr_cc_id, "+", 1, 11, year, hd_elems, fday, count);
+
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
 		      count);
 }

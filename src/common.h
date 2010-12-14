@@ -34,6 +34,14 @@
 /*
 *  Include (sub)header files   ;<
 */
+# if USE_UNICODE
+#  include "unistdio.h"
+#  include "unistr.h"
+#  undef sprintf
+#  define sprintf u8_sprintf
+#  undef strlen
+#  define strlen u8_strlen
+# endif
 # if HAVE_STDIO_H || STDC_HEADERS
 #  include <stdio.h>
 # endif

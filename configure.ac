@@ -88,6 +88,16 @@ dnl
 AC_MSG_RESULT()
 AC_CHECKING(for $PACKAGE specific package options)
 dnl
+AC_MSG_CHECKING(whether unicode support is required)
+AC_ARG_ENABLE(unicode,
+  [  --enable-unicode        use unicode],
+  gcal_cv_use_unicode=$enableval,
+  gcal_cv_use_unicode=no)
+AC_MSG_RESULT($gcal_cv_use_unicode)
+if test "$gcal_cv_use_unicode" = yes; then
+  AC_DEFINE(USE_UNICODE, [1], [Enable unicode.])
+fi
+dnl
 AC_MSG_CHECKING(whether extended ASCII character set is required)
 AC_ARG_ENABLE(easc,
   [  --enable-easc           use extended ASCII character set],

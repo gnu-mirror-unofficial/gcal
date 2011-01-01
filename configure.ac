@@ -1,6 +1,6 @@
 dnl Template file for GNU Autoconf
 dnl
-dnl Copyright (c) 2010 Free Software Foundation, Inc.
+dnl Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 dnl Copyright (c) 1995, 96, 97, 2000 Thomas Esken
 dnl
 dnl This software doesn't claim completeness, correctness or usability.

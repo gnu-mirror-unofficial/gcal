@@ -4,7 +4,7 @@
 *  tailor.h:  Machine/target dependent definitions.
 *
 *
-*  Copyright (c) 2010 Free Software Foundation, Inc.
+*  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.

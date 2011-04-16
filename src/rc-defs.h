@@ -4,7 +4,7 @@
 *  rc-defs.h:  Fixed dates/resource file specific statements, macros, typedefs, global variable declarations...
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -128,30 +128,6 @@
 
 /* Number of default 2-month mode columns both dates. */
 # define B2_OUT_COLS  1
-
-
-
-/*
-*  German language dependent preprocessor statements.
-*/
-# if USE_DE
-/* Trailing text of a %[gm]time* or %sun* or %moon* special text. */
-#  define RC_AM_TXT             "am"
-
-/* Trailing text of a %[gm]time* or %sun* or %moon* special text. */
-#  define RC_PM_TXT             "pm"
-
-/* Used time value separators for displaying HHhMM'[SS.SSS"]. */
-#  define TIMEVAL_SEP           "h'\""
-
-/* Used degree value separators for displaying DDDdMM'[SS.SSS"]. */
-#  define DEGREEVAL_SEP         "g'\""
-
-/* Used heading for the fixed date list. */
-#  define RC_LIST_TITLE         "Terminliste:"
-# endif	/* USE_DE */
-
-
 
 /*
 *  Additional usage texts.

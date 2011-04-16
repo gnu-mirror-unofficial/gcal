@@ -2,7 +2,7 @@
 *  tty.c:  Screen support functions and major output function.
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -421,13 +421,8 @@ print_text (fp, text_line)
 #  else	/* !GCAL_TCAP || !USE_HLS */
 		  fputs (ehls1s.seq, fp);
 #  endif /* !GCAL_TCAP || !USE_HLS */
-#  if USE_DE
-		fprintf (fp, "%s: Weiter mit <Return>, <%s> zum Beenden...",
-			 prgr_name, PAGER_QUIT);
-#  else	/* !USE_DE */
 		fprintf (fp, _("%s: <Return> for more, <%s> to quit..."),
 			 prgr_name, PAGER_QUIT);
-#  endif /* !USE_DE */
 		if (print_hls)
 #  if defined(GCAL_TCAP) && USE_HLS
 		  tputs ((char *) ehls1e.seq, 1, outchar);
@@ -1021,25 +1016,15 @@ open_termcap ()
       if (term == (char *) NULL)
 	{
 	  if (warning_level >= 0)
-#   if USE_DE
-	    sprintf (s1, "Umgebungsvariable `%s' nicht vorhanden",
-		     ENV_VAR_TERM);
-#   else /* !USE_DE */
 	    sprintf (s1, _("environment variable `%s' not found"),
 		     ENV_VAR_TERM);
-#   endif /* !USE_DE */
 	  is_error = TRUE;
 	}
       else if (!*term)
 	{
 	  if (warning_level >= 0)
-#   if USE_DE
-	    sprintf (s1, "Umgebungsvariable `%s' nicht gesetzt",
-		     ENV_VAR_TERM);
-#   else /* !USE_DE */
 	    sprintf (s1, _("environment variable `%s' not set"),
 		     ENV_VAR_TERM);
-#   endif /* !USE_DE */
 	  is_error = TRUE;
 	}
       else
@@ -1078,22 +1063,13 @@ open_termcap ()
 	    {
 	    case -1:
 	      if (warning_level >= 0)
-#  if USE_DE
-		strcpy (s1, "`termcap' Datei nicht vorgefunden");
-#  else	/* !USE_DE */
 		strcpy (s1, _("`termcap' file not found"));
-#  endif /* !USE_DE */
 	      is_error = TRUE;
 	      break;
 	    case 0:
 	      if (warning_level >= 0)
-#  if USE_DE
-		sprintf (s1, "unbekannter Terminaltyp in `%s' eingetragen",
-			 ENV_VAR_TERM);
-#  else	/* !USE_DE */
 		sprintf (s1, _("unknown terminal type defined in `%s'"),
 			 ENV_VAR_TERM);
-#  endif /* !USE_DE */
 	      is_error = TRUE;
 	      break;
 	    default:
@@ -1101,11 +1077,7 @@ open_termcap ()
 	    }
 	}
       if (is_error && (warning_level >= 0))
-#  if USE_DE
-	fprintf (stderr, "\n%s: Warnung, %s.\n\n", prgr_name, s1);
-#  else	/* !USE_DE */
 	fprintf (stderr, _("\n%s: warning, %s.\n\n"), prgr_name, s1);
-#  endif /* !USE_DE */
       return ((Bool) ! is_error);
     }
 

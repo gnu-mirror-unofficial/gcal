@@ -4,7 +4,7 @@
 *  hd-defs.h:  Holiday dates specific statements, macros, typedefs, global variable declarations...
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -49,14 +49,6 @@
 
 /* Identification for the Multicultural New Year's Day holidays. */
 # define HD_MCNY          "MCNY"
-
-/*
-*  German language dependent preprocessor statements.
-*/
-# if USE_DE
-#  define HD_LIST_TITLE  "Ewige Feiertagsliste"
-# endif	/* USE_DE */
-
 
 
 /*

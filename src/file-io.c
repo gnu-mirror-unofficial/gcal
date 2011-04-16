@@ -2,7 +2,7 @@
 *  file-io.c:  Managing and accessing resource, include and response files.
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -1438,21 +1438,12 @@ __END_DECLARATIONS
 	switch (mode)
 	  {
 	  case REsponse:
-#if USE_DE
 	    len =
 	      fprintf (fp,
 		       "%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
 		       REM_CHAR, prgr_name, mode_txt, filename, created_txt,
 		       true_day, short_month_name (true_month), true_year,
 		       act_hour, time_sep, act_min, time_sep, act_sec);
-#else /* !USE_DE */
-	    len =
-	      fprintf (fp,
-		       "%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
-		       REM_CHAR, prgr_name, mode_txt, filename, created_txt,
-		       true_day, short_month_name (true_month), true_year,
-		       act_hour, time_sep, act_min, time_sep, act_sec);
-#endif /* !USE_DE */
 	    if (tz != (char *) NULL)
 	      len = fprintf (fp, " %s", tz);
 	    len = fprintf (fp, "\n%c\n", REM_CHAR);
@@ -1460,7 +1451,6 @@ __END_DECLARATIONS
 #ifdef GCAL_SHELL
 	  case SCript:
 # if HAVE_SYS_INTERPRETER
-#  if USE_DE
 	    len =
 	      fprintf (fp,
 		       "%c%s\n%c\n%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
@@ -1468,31 +1458,13 @@ __END_DECLARATIONS
 		       mode_txt, filename, created_txt, true_day,
 		       short_month_name (true_month), true_year, act_hour,
 		       time_sep, act_min, time_sep, act_sec);
-#  else	/* !USE_DE */
-	    len =
-	      fprintf (fp,
-		       "%c%s\n%c\n%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
-		       *SHL_REM, SHELL, *SHL_REM, *SHL_REM, prgr_name,
-		       mode_txt, filename, created_txt, true_day,
-		       short_month_name (true_month), true_year, act_hour,
-		       time_sep, act_min, time_sep, act_sec);
-#  endif /* !USE_DE */
 # else /* !HAVE_SYS_INTERPRETER */
-#  if USE_DE
-	    len =
-	      fprintf (fp,
-		       "%c `%s' %s `%s' --- %s %02d-%s-%04d %02d%s%02d%s%02d",
-		       *SHL_REM, prgr_name, mode_txt, filename, created_txt,
-		       true_day, short_month_name (true_month), true_year,
-		       act_hour, time_sep, act_min, time_sep, act_sec);
-#  else	/* !USE_DE */
 	    len =
 	      fprintf (fp,
 		       "%c `%s' %s `%s' --- %s %02d-%s-%04 %02d%s%02d%s%02d",
 		       *SHL_REM, prgr_name, mode_txt, filename, created_txt,
 		       true_day, short_month_name (true_month), true_year,
 		       act_hour, time_sep, act_min, time_sep, act_sec);
-#  endif /* !USE_DE */
 # endif	/* !HAVE_SYS_INTERPRETER */
 	    if (tz != (char *) NULL)
 	      len = fprintf (fp, " %s", tz);
@@ -1586,22 +1558,12 @@ __END_DECLARATIONS
 	  + MAX (ehls1e.len, ehls2e.len) + LEN_SINGLE_LINE;
 	if ((Uint) i >= maxlen_max)
 	  resize_all_strings (i + 1, FALSE, __FILE__, (long) __LINE__);
-#if USE_DE
-	sprintf (s4, "Versuche %s `%s' zu schreiben... %s%s%s", mode_txt,
-		 filename,
-		 (ehls1s.len !=
-		  1) ? ((len == EOF) ? ehls2s.seq : ehls1s.seq) : "",
-		 (len == EOF) ? "Versagt" : "Erfolg",
-		 (ehls1s.len !=
-		  1) ? ((len == EOF) ? ehls2e.seq : ehls1e.seq) : "");
-#else /* !USE_DE */
 	sprintf (s4, _("Try to write %s `%s'... %s%s%s"), mode_txt, filename,
 		 (ehls1s.len !=
 		  1) ? ((len == EOF) ? ehls2s.seq : ehls1s.seq) : "",
 		 (len == EOF) ? _("failed") : _("success"),
 		 (ehls1s.len !=
 		  1) ? ((len == EOF) ? ehls2e.seq : ehls1e.seq) : "");
-#endif /* !USE_DE */
 	print_text (stderr, s4);
 	/*
 	   Terminate the program in case the file can't be written!
@@ -1719,19 +1681,6 @@ __END_DECLARATIONS
 	    if ((Uint) i >= maxlen_max)
 	      resize_all_strings (i + 1, FALSE, __FILE__, (long) __LINE__);
 	    if (mode == REsource || mode == HEre)
-# if USE_DE
-	      sprintf (s4,
-		       "Versuche%sRessourcendatei `%s' zu %sffnen... %s%s%s",
-		       (mode == REsource) ? " " : " `HIER' ", filename, OE,
-		       (ehls1s.len !=
-			1) ? ((fp ==
-			       (FILE *) NULL) ? ehls2s.seq : ehls1s.seq) : "",
-		       (fp == (FILE *) NULL) ? "Versagt" : "Erfolg",
-		       (ehls1s.len !=
-			1) ? ((fp ==
-			       (FILE *) NULL) ? ehls2e.seq : ehls1e.
-			      seq) : "");
-# else /* !USE_DE */
 	      sprintf (s4, _("Try to open%sresource file `%s'... %s%s%s"),
 		       (mode == REsource) ? " " : _(" `HERE' "), filename,
 		       (ehls1s.len !=
@@ -1742,21 +1691,7 @@ __END_DECLARATIONS
 			1) ? ((fp ==
 			       (FILE *) NULL) ? ehls2e.seq : ehls1e.
 			      seq) : "");
-# endif	/* !USE_DE */
 	    else
-# if USE_DE
-	      sprintf (s4,
-		       "Versuche (Ebene: %02d) Einf%sgedatei `%s' zu %sffnen... %s%s%s",
-		       level, UE, filename, OE,
-		       (ehls1s.len !=
-			1) ? ((fp ==
-			       (FILE *) NULL) ? ehls2s.seq : ehls1s.seq) : "",
-		       (fp == (FILE *) NULL) ? "Versagt" : "Erfolg",
-		       (ehls1s.len !=
-			1) ? ((fp ==
-			       (FILE *) NULL) ? ehls2e.seq : ehls1e.
-			      seq) : "");
-# else /* !USE_DE */
 	      sprintf (s4,
 		       _
 		       ("Try to open (level: %02d) include file `%s'... %s%s%s"),
@@ -1769,7 +1704,6 @@ __END_DECLARATIONS
 			1) ? ((fp ==
 			       (FILE *) NULL) ? ehls2e.seq : ehls1e.
 			      seq) : "");
-# endif	/* !USE_DE */
 	    print_text (stderr, s4);
 	  }
       }

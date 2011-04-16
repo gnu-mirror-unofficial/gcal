@@ -2,7 +2,7 @@
 *  hd-use.c:  Manage the eternal holiday list.
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -925,11 +925,7 @@ decode_date_format (format_txt, result_txt, day, month, year, doy,
 		    {
 		      if (!d)
 			{
-#if USE_DE
-			  ptr_char = " Tag";
-#else /* !USE_DE */
 			  ptr_char = _(" day");
-#endif /* !USE_DE */
 			  len += (int) strlen (ptr_char);
 			  if ((Uint) len >= maxlen_max)
 			    resize_all_strings (maxlen_max << 1, FALSE,
@@ -1974,17 +1970,6 @@ print_all_holidays (init_data, detected)
 		}
 	      else
 		n = year;
-#if USE_DE
-	      i = (int) strlen (HD_LIST_TITLE);
-	      if (use_year_zeroleaded)
-		sprintf (s1, "%s:%*sDas Jahr %0*d ist %s Schaltjahr",
-			 HD_LIST_TITLE, LEN_HD_NAME - i + 2, "",
-			 lym, n, (is_leap_year) ? "EIN" : "KEIN");
-	      else
-		sprintf (s1, "%s:%*sDas Jahr %d ist %s Schaltjahr",
-			 HD_LIST_TITLE, LEN_HD_NAME - i + 2, "",
-			 lym, n, (is_leap_year) ? "EIN" : "KEIN");
-#else /* !USE_DE */
 	      i = (int) strlen (_("Eternal holiday list"));
 	      if (use_year_zeroleaded)
 		{
@@ -2008,7 +1993,6 @@ print_all_holidays (init_data, detected)
 			     _("Eternal holiday list"), LEN_HD_NAME - i + 2,
 			     "", n);
 		}
-#endif /* !USE_DE */
 	      print_text (stdout, s1);
 	      if (hd_table[0] != (char *) NULL)
 		print_text (stdout, s1);
@@ -2102,11 +2086,7 @@ print_all_holidays (init_data, detected)
 			     explicitly suppressed by a `-X' command line
 			     option given.
 			   */
-#if USE_DE
-			  sprintf (s1, "%s:", HD_LIST_TITLE);
-#else /* !USE_DE */
 			  sprintf (s1, "%s:", _("Eternal holiday list"));
-#endif /* !USE_DE */
 			  print_text (stdout, s1);
 			  print_text (stdout, s1);
 			}
@@ -2258,14 +2238,10 @@ holiday (init_data, detected, holiday_name, country_code, holiday_prefix,
 		}
 	      if (i)
 		{
-#if USE_DE
-		  sprintf (s1, " = %+4d Tag%s", i, (abs (i) == 1) ? "" : "e");
-#else /* !USE_DE */
 		  if (abs (i) == 1)
 		    sprintf (s1, _(" = %+4d day"), i);
 		  else
 		    sprintf (s1, _(" = %+4d days"), i);
-#endif /* !USE_DE */
 		  strcat (s2, s1);
 		}
 	    }
@@ -2292,16 +2268,10 @@ holiday (init_data, detected, holiday_name, country_code, holiday_prefix,
        */
       if ((warning_level >= 0) && (*hd_elems >= HD_ELEMS_MAX))
 	{
-#if USE_DE
-	  sprintf (s1, "%s%s hat nun %d Maximaleintr%sge!%s",
-		   ((ehls1s.len != 1) ? ehls1s.seq : ""), HD_LIST_TITLE,
-		   HD_ELEMS_MAX, AE, ((ehls1s.len != 1) ? ehls1e.seq : ""));
-#else /* !USE_DE */
 	  sprintf (s1, _("%s%s contains %d maximum entries now!%s"),
 		   ((ehls1s.len != 1) ? ehls1s.seq : ""),
 		   _("Eternal holiday list"), HD_ELEMS_MAX,
 		   ((ehls1s.len != 1) ? ehls1e.seq : ""));
-#endif /* !USE_DE */
 	  print_text (stderr, s1);
 	}
       if (init_data)

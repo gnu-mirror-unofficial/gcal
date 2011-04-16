@@ -4,7 +4,7 @@
 *  common.h:  Basic program specific statements, macros and typedefs...
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -436,11 +436,6 @@ extern char *getenv __P_ ((const char *env_var));
 /* Argument separator of a long option, e.g. `--foo=BAR'. */
 # define LARG_SEP        "="
 
-/* 3 chars text of a symbolic long option argument shown in help pages. */
-# if USE_DE
-#  define LARG_TXT        "ARG"
-# endif
-
 
 
 /*
@@ -699,24 +694,6 @@ extern char *getenv __P_ ((const char *env_var));
 
 /* Fixed length field format. */
 # define FFIX_CHAR     '#'
-
-
-
-/*
-*  German language dependent preprocessor statements.
-*/
-# if USE_DE
-/* Time separator used for displaying HH:MM. */
-#  define TIME_SEP       DEFAULT_TIME_SEP
-#  define RESPONSE_TXT   "Antwortdatei"
-#  define CREATED_TXT    "Erzeugt"
-#  define INTERNAL_TXT   "Intern"
-#  ifdef GCAL_SHELL
-#   define SCRIPT_TXT     "shell script"
-#  endif
-# endif	/* USE_DE */
-
-
 
 /*
 *  Important preprocessor symbols for the internal ranges.

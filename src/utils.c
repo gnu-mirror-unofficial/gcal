@@ -2,7 +2,7 @@
 *  utils.c:  Pool of common functions.
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -271,120 +271,9 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
   S_NEWLINE (stderr);
   if (prgr_name == (char *) NULL)
     prgr_name = PACKAGE_NAME;
-#if USE_DE
-  fprintf (stderr, "%s: Abbruch, ", prgr_name);
-#else /* !USE_DE */
   fprintf (stderr, _("%s: abort, "), prgr_name);
-#endif /* !USE_DE */
   switch (exit_status)
     {
-#if USE_DE
-    case ERR_INVALID_EASTER_DATE:
-      fprintf (stderr,
-	       "unzul%sssiges Jahr f%sr Ostertagsberechnung\nJahr mu%s im Bereich (%d...%d) sein",
-	       AE, UE, SZ, EASTER_MIN, EASTER_MAX);
-      break;
-    case ERR_NO_MEMORY_AVAILABLE:
-      fprintf (stderr,
-	       "`%s' Zeile %ld: virtueller Speicher ersch%spft (%s=%d)",
-	       module_name, module_line, OE, var_name, var_contents);
-      break;
-# if USE_RC
-    case ERR_INVALID_DATE_FIELD:
-      fprintf (stderr,
-	       "unzul%sssiger Datumeintrag in Datei `%s'\nZeile %ld: %s", AE,
-	       module_name, module_line, var_name);
-      break;
-    case ERR_INVALID_MONTH_FIELD:
-      fprintf (stderr, "ung%sltiger Monat(%02d) in Datei `%s'\nZeile %ld: %s",
-	       UE, var_contents, module_name, module_line, var_name);
-      break;
-    case ERR_INVALID_DAY_FIELD:
-      fprintf (stderr, "ung%sltiger Tag(%02d) in Datei `%s'\nZeile %ld: %s",
-	       UE, var_contents, module_name, module_line, var_name);
-      break;
-    case ERR_MALFORMED_INCLUDE:
-      fprintf (stderr, "mi%sgebildetes %s in Datei `%s'\nZeile %ld: %s",
-	       SZ, RC_INCL_STMENT, module_name, module_line, var_name);
-      break;
-    case ERR_CYCLIC_INCLUDE:
-      fprintf (stderr,
-	       "rekursives/zyklisches %s unzul%sssig in Datei `%s'\nZeile %ld: %s",
-	       RC_INCL_STMENT, AE, module_name, module_line, var_name);
-      break;
-    case ERR_FILE_NOT_FOUND:
-      fprintf (stderr, "Datei `%s' nicht gefunden", module_name);
-      break;
-    case ERR_INVALID_NWD_FIELD:
-      fprintf (stderr,
-	       "ung%sltiges N'ter Wochentagfeld(%d) in Datei `%s'\nZeile %ld: %s",
-	       UE, var_contents, module_name, module_line, var_name);
-      break;
-    case ERR_NO_SEPARATOR_CHAR:
-      fprintf (stderr,
-	       "fehlendes `whitespace' Trennzeichen nach Datumteil in Datei `%s'\nZeile %ld: %s",
-	       module_name, module_line, var_name);
-      break;
-# endif	/* USE_RC */
-    case ERR_WRITE_FILE:
-      fprintf (stderr,
-	       "kann Datei `%s' nicht schreiben\nSpeichermedium ist voll!",
-	       var_name);
-      break;
-# ifdef GCAL_EMAIL
-    case ERR_EMAIL_SEND_FAILURE:
-      fprintf (stderr, "versenden der eMail an <%s> hat versagt", var_name);
-#  if HAVE_ERRNO_H
-      fprintf (stderr, "\n`%s' Zeile %ld: ", module_name, module_line);
-      perror ("perror");
-#  endif
-      break;
-# endif
-# if defined(GCAL_EPAGER) || defined(GCAL_EMAIL) || USE_RC
-    case ERR_INTERNAL_C_FUNC_FAILURE:
-      fprintf (stderr, "`%s' Zeile %ld: (`%s') `%s%d' hat versagt",
-	       module_name, module_line, INTERNAL_TXT, var_name,
-	       var_contents);
-#  if HAVE_ERRNO_H
-      perror ("\nperror");
-#  endif
-      break;
-# endif
-    case ERR_READ_FILE:
-      fprintf (stderr, "Lesefehler in Datei `%s'", var_name);
-# if HAVE_ERRNO_H
-      fprintf (stderr, "\n`%s' Zeile %ld: ", module_name, module_line);
-      perror ("perror");
-# endif
-      break;
-    case ERR_ILLEGAL_CHAR_IN_FILE:
-      fprintf (stderr,
-	       "illegales Zeichen in Antwortdatei `%s'\nZeile %ld: %s",
-	       module_name, module_line, var_name);
-      break;
-    case ERR_INTERNAL_TABLE_CRASH:
-      fprintf (stderr,
-	       "`%s' Zeile %ld: (`%s') ung%sltiger Wert f%sr Tabellengr%s%se `sizeof %s>%d'",
-	       module_name, module_line, INTERNAL_TXT, UE, UE, OE, SZ,
-	       var_name, var_contents);
-      break;
-    case ERR_INVALID_DATE_FORMAT:
-      fprintf (stderr, "(`%s') Datumformat `%s' ist ung%sltig", module_name,
-	       var_name, UE);
-      break;
-# if USE_RC
-    case ERR_INVALID_REGEX_PATTERN:
-      if (*module_name)
-	fprintf (stderr, "%s im Suchmuster `%s'", module_name, var_name);
-      else
-	fprintf (stderr, "ung%sltiges Suchmuster `%s' angegeben", UE,
-		 var_name);
-      break;
-# endif
-    default:
-      fprintf (stderr, "`%s' Zeile %ld: (`%s') unbehandelter Fehler (%d)",
-	       module_name, module_line, INTERNAL_TXT, exit_status);
-#else /* !USE_DE */
     case ERR_INVALID_EASTER_DATE:
       fprintf (stderr,
 	       _
@@ -395,7 +284,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
       fprintf (stderr, _("`%s' line %ld: virtual memory exhausted (%s=%d)"),
 	       module_name, module_line, var_name, var_contents);
       break;
-# if USE_RC
+#if USE_RC
     case ERR_INVALID_DATE_FIELD:
       fprintf (stderr, _("invalid date part in file `%s'\nLine %ld: %s"),
 	       module_name, module_line, var_name);
@@ -433,36 +322,36 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 	       ("missing `whitespace' character after date part in file `%s'\nLine %ld: %s"),
 	       module_name, module_line, var_name);
       break;
-# endif	/* USE_RC */
+#endif	/* USE_RC */
     case ERR_WRITE_FILE:
       fprintf (stderr, _("file `%s' can't be written\nStorage media full!"),
 	       var_name);
       break;
-# ifdef GCAL_EMAIL
+#ifdef GCAL_EMAIL
     case ERR_EMAIL_SEND_FAILURE:
       fprintf (stderr, _("sending eMail to <%s> failed"), var_name);
-#  if HAVE_ERRNO_H
-      fprintf (stderr, _("\n`%s' line %ld: "), module_name, module_line);
-      perror ("perror");
-#  endif
-      break;
-# endif
-# if defined(GCAL_EPAGER) || defined(GCAL_EMAIL) || USE_RC
-    case ERR_INTERNAL_C_FUNC_FAILURE:
-      fprintf (stderr, _("`%s' line %ld: (`%s') `%s%d' failed"),
-	       module_name, module_line, _("Internal"), var_name,
-	       var_contents);
-#  if HAVE_ERRNO_H
-      perror ("\nperror");
-#  endif
-      break;
-# endif
-    case ERR_READ_FILE:
-      fprintf (stderr, _("read error in file `%s'"), var_name);
 # if HAVE_ERRNO_H
       fprintf (stderr, _("\n`%s' line %ld: "), module_name, module_line);
       perror ("perror");
 # endif
+      break;
+#endif
+#if defined(GCAL_EPAGER) || defined(GCAL_EMAIL) || USE_RC
+    case ERR_INTERNAL_C_FUNC_FAILURE:
+      fprintf (stderr, _("`%s' line %ld: (`%s') `%s%d' failed"),
+	       module_name, module_line, _("Internal"), var_name,
+	       var_contents);
+# if HAVE_ERRNO_H
+      perror ("\nperror");
+# endif
+      break;
+#endif
+    case ERR_READ_FILE:
+      fprintf (stderr, _("read error in file `%s'"), var_name);
+#if HAVE_ERRNO_H
+      fprintf (stderr, _("\n`%s' line %ld: "), module_name, module_line);
+      perror ("perror");
+#endif
       break;
     case ERR_ILLEGAL_CHAR_IN_FILE:
       fprintf (stderr,
@@ -480,7 +369,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
       fprintf (stderr, _("(`%s') date format `%s' is invalid"), module_name,
 	       var_name);
       break;
-# if USE_RC
+#if USE_RC
     case ERR_INVALID_REGEX_PATTERN:
       if (*module_name)
 	fprintf (stderr, _("%s in search pattern `%s'"), module_name,
@@ -489,11 +378,10 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 	fprintf (stderr, _("invalid search pattern `%s' specified"),
 		 var_name);
       break;
-# endif	/* USE_RC */
+#endif	/* USE_RC */
     default:
       fprintf (stderr, _("`%s' line %ld: (`%s') unmanaged error (%d)"),
 	       module_name, module_line, _("Internal"), exit_status);
-#endif /* !USE_DE */
     }
   S_NEWLINE (stderr);
   my_exit (exit_status);
@@ -512,13 +400,8 @@ handle_signal (the_signal)
 */
 {
   fflush (stdout);
-# if USE_DE
-  fprintf (stderr, "\n%s: Programmabbruch durch Signal %d\n", prgr_name,
-	   the_signal);
-# else /* !USE_DE */
   fprintf (stderr, _("\n%s: program aborted by signal %d\n"), prgr_name,
 	   the_signal);
-# endif	/* !USE_DE */
   my_exit (ERR_TERMINATION_BY_SIGNAL);
 }
 #endif /* HAVE_SIGNAL && (SIGINT || SIGTERM || SIGHUP) */
@@ -792,15 +675,9 @@ get_actual_date ()
 		return (FALSE);
 	    }
 	  else
-# if USE_DE
-	    (void) rc_get_date (rc_adate, lptrs3, FALSE, &b_dummy, &d, &m, &y,
-				&n, &i_dummy, &hc, &hn, &hwd, INTERNAL_TXT,
-				-1L, rc_adate, FALSE);
-# else /* !USE_DE */
 	    (void) rc_get_date (rc_adate, lptrs3, FALSE, &b_dummy, &d, &m, &y,
 				&n, &i_dummy, &hc, &hn, &hwd, _("Internal"),
 				-1L, rc_adate, FALSE);
-# endif	/* !USE_DE */
 	}
       else
 	{
@@ -874,17 +751,6 @@ get_actual_date ()
 	       */
 	      c_dummy = rc_adate;
 	      while (isupper (*c_dummy)
-# if USE_DE
-#  if USE_EASC
-		     || *c_dummy == *AE
-		     || *c_dummy == *OE
-		     || *c_dummy == *UE
-		     || *c_dummy == *AAE
-		     || *c_dummy == *OOE || *c_dummy == *UUE
-#  else	/* !USE_EASC */
-		     || *c_dummy == '"'
-#  endif /* !USE_EASC */
-# endif	/* USE_DE */
 		     || islower (*c_dummy))
 		c_dummy++;
 	      if (*c_dummy)
@@ -1060,18 +926,14 @@ compare_d_m_name (string, mode)
   auto const char *ptr_char = string;
 
 
-#if USE_DE
-  checks = 2;
-#else /* !USE_DE */
-# ifdef GCAL_NLS
+#ifdef GCAL_NLS
   if (is_en)
     checks = 1;
   else
     checks = 2;
-# else /* !GCAL_NLS */
+#else /* !GCAL_NLS */
   checks = 1;
-# endif	/* !GCAL_NLS */
-#endif /* !USE_DE */
+#endif	/* !GCAL_NLS */
   if (len >= TXTLEN_DAY)
     {
       while (*(ptr_char + j)
@@ -1094,22 +956,6 @@ compare_d_m_name (string, mode)
 		    (mode == DAy) ? dflt_day_name (i) : dflt_month_name (i);
 		j = 0;
 		while (*(ptr_char + j) && string[j])
-#if USE_DE && USE_EASC
-		  if (((string[j] == *AE
-			|| string[j] == *AAE)
-		       && (*(ptr_char + j) == *AE
-			   || *(ptr_char + j) == *AAE))
-		      || ((string[j] == *OE
-			   || string[j] == *OOE)
-			  && (*(ptr_char + j) == *OE
-			      || *(ptr_char + j) == *OOE))
-		      || ((string[j] == *UE
-			   || string[j] == *UUE)
-			  && (*(ptr_char + j) == *UE
-			      || *(ptr_char + j) == *UUE)))
-		    j++;
-		  else
-#endif
 		  if (tolower (*(ptr_char + j)) == tolower (string[j]))
 		    j++;
 		  else
@@ -1227,9 +1073,6 @@ day_suffix (day)
    Returns the ordinal suffix (st, nd, rd or th) which is added to a single day number.
 */
 {
-#if USE_DE
-  static const char *suffix[] = { "'ter", "'ter", "'ter", "'ter" };
-#else /* !USE_DE */
   static const char *suffix[] = {
     /*
      *** Translators, this text should be a proper abbreviation of "fourth...".
@@ -1248,7 +1091,6 @@ day_suffix (day)
      */
     N_("rd")
   };
-#endif /* !USE_DE */
   register int i = 0;
 
 
@@ -1277,17 +1119,6 @@ short3_day_name (day)
    Returns the short name of the day using the `printf()' format "%-3s".
 */
 {
-#if USE_DE
-  static const char *name[] = {
-# if USE_EASC
-    "ung" UE "ltiger Tag",
-# else /* !USE_EASC */
-    "ungueltiger Tag",
-# endif	/* !USE_EASC */
-    "Mon", "Die", "Mit", "Don",
-    "Fre", "Sam", "Son"
-  };
-#else /* !USE_DE */
   static const char *name[] = {
     N_("invalid day"),
     /*
@@ -1326,7 +1157,6 @@ short3_day_name (day)
      */
     N_("Sun")
   };
-#endif /* !USE_DE */
 
   return (((day < DAY_MIN) || (day > DAY_MAX)) ? _(name[0]) : _(name[day]));
 }
@@ -1340,16 +1170,6 @@ short_day_name (day)
    Returns the short name of the day using the `printf()' format "%-2s".
 */
 {
-#if USE_DE
-  static const char *name[] = {
-# if USE_EASC
-    "ung" UE "ltiger Tag",
-# else /* !USE_EASC */
-    "ungueltiger Tag",
-# endif	/* !USE_EASC */
-    "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"
-  };
-#else /* !USE_DE */
   static const char *name[] = {
     N_("invalid day"),
     /*
@@ -1388,7 +1208,6 @@ short_day_name (day)
      */
     N_("Su")
   };
-#endif /* !USE_DE */
 
   return (((day < DAY_MIN) || (day > DAY_MAX)) ? _(name[0]) : _(name[day]));
 }
@@ -1402,23 +1221,11 @@ day_name (day)
    Returns the complete name of the day.
 */
 {
-#if USE_DE
-  static const char *name[] = {
-# if USE_EASC
-    "ung" UE "ltiger Tag",
-# else /* !USE_EASC */
-    "ungueltiger Tag",
-# endif	/* !USE_EASC */
-    "Montag", "Dienstag", "Mittwoch", "Donnerstag",
-    "Freitag", "Samstag", "Sonntag"
-  };
-#else /* !USE_DE */
   static const char *name[] = {
     N_("invalid day"),
     N_("Monday"), N_("Tuesday"), N_("Wednesday"), N_("Thursday"),
     N_("Friday"), N_("Saturday"), N_("Sunday")
   };
-#endif /* !USE_DE */
 
   return (((day < DAY_MIN) || (day > DAY_MAX)) ? _(name[0]) : _(name[day]));
 }
@@ -1432,23 +1239,6 @@ short_month_name (month)
    Returns the short name of the month using the `printf()' format "%-3s".
 */
 {
-#if USE_DE
-  static const char *name[] = {
-# if USE_EASC
-    "ung" UE "ltiger Monat",
-# else /* !USE_EASC */
-    "ungueltiger Monat",
-# endif	/* !USE_EASC */
-    "Jan", "Feb",
-# if USE_EASC
-    "M" AE "r",
-# else /* !USE_EASC */
-    "Mae",
-# endif	/* !USE_EASC */
-    "Apr", "Mai", "Jun", "Jul", "Aug",
-    "Sep", "Okt", "Nov", "Dez"
-  };
-#else /* !USE_DE */
   static const char *name[] = {
     N_("invalid month"),
     /*
@@ -1512,7 +1302,6 @@ short_month_name (month)
      */
     N_("Dec")
   };
-#endif /* !USE_DE */
 
   return (((month < MONTH_MIN)
 	   || (month > MONTH_MAX)) ? _(name[0]) : _(name[month]));
@@ -1527,24 +1316,6 @@ month_name (month)
    Returns the complete name of the month.
 */
 {
-#if USE_DE
-  static char *name[] = {
-# if USE_EASC
-    "ung" UE "ltiger Monat",
-# else /* !USE_EASC */
-    "ungueltiger Monat",
-# endif	/* !USE_EASC */
-    "Januar", "Februar",
-# if USE_EASC
-    "M" AE "rz",
-# else /* !USE_EASC */
-    "Maerz",
-# endif	/* !USE_EASC */
-    "April", "Mai", "Juni",
-    "Juli", "August", "September",
-    "Oktober", "November", "Dezember"
-  };
-#else /* !USE_DE */
   static char *name[] = {
     N_("invalid month"),
     N_("January"), N_("February"),
@@ -1594,7 +1365,6 @@ month_name (month)
 
       return (mayname);
     }
-#endif /* !USE_DE */
 
   return (((month < MONTH_MIN)
 	   || (month > MONTH_MAX)) ? _(name[0]) : _(name[month]));

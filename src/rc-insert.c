@@ -2,7 +2,7 @@
 *  rc-insert.c:  Inserts a line (of a resource file) into `rc_elems_table[]'.
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -1699,28 +1699,20 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems,
 				       */
 				      if (the_time >= HOURS_PER_HALF_DAY)
 					{
-# if USE_DE
-					  time_suffix = RC_PM_TXT;
-# else /* !USE_DE */
 					  /*
 					   *** Translators, please translate this as a fixed 2-character text.
 					   *** This text should be a proper abbreviation of "post meridiem".
 					   */
 					  time_suffix = _("pm");
-# endif	/* !USE_DE */
 					  if (!is_am_pm)
 					    the_time -= HOURS_PER_HALF_DAY;
 					}
 				      else
-# if USE_DE
-					time_suffix = RC_AM_TXT;
-# else /* !USE_DE */
 					/*
 					 *** Translators, please translate this as a fixed 2-character text.
 					 *** This text should be a proper abbreviation of "ante meridiem".
 					 */
 					time_suffix = _("am");
-# endif	/* !USE_DE */
 				    }
 				  if (transform_year)
 				    {
@@ -2019,43 +2011,31 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems,
 				}
 			    }
 			  if (astronomical_object == AOBJ_NONE)
-# if USE_DE
-			    sep = DEGREEVAL_SEP;
-# else /* !USE_DE */
 			    /*
 			     *** Translators, please translate this as a fixed 2-character text.
 			     *** This text should contain the proper abbreviations for "degrees" and "minutes".
 			     */
 			    sep = _("d'\"");
-# endif	/* !USE_DE */
 			  else
 			    if (is_rise_set
 				&&
 				(aobj_oformat[aobj_mode][astronomical_object].
 				 error_format == ERR_DDD))
-# if USE_DE
-			    sep = DEGREEVAL_SEP;
-# else /* !USE_DE */
 			    /*
 			     *** Translators, please translate this as a fixed 3-character text.
 			     *** This text should contain the proper abbreviations for "degrees", "minutes" and "seconds".
 			     */
 			    sep = _("d'\"");
-# endif	/* !USE_DE */
 			  else
 			    if (!is_rise_set
 				||
 				aobj_oformat[aobj_mode][astronomical_object].
 				error_format == ERR_TTT)
-# if USE_DE
-			    sep = TIMEVAL_SEP;
-# else /* !USE_DE */
 			    /*
 			     *** Translators, please translate this as a fixed 3-character text.
 			     *** This text should contain the proper abbreviations for "hours", "minutes" and "seconds".
 			     */
 			    sep = _("h'\"");
-# endif	/* !USE_DE */
 			  else
 			    sep = time_sep;
 			LABEL_get_second_coordinate:
@@ -2837,28 +2817,20 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems,
 						  if (the_time >=
 						      HOURS_PER_HALF_DAY)
 						    {
-# if USE_DE
-						      time_suffix = RC_PM_TXT;
-# else /* !USE_DE */
 						      /*
 						       *** Translators, please translate this as a fixed 2-character text.
 						       *** This text should be a proper abbreviation of "post meridiem".
 						       */
 						      time_suffix = _("pm");
-# endif	/* !USE_DE */
 						      the_time -=
 							HOURS_PER_HALF_DAY;
 						    }
 						  else
-# if USE_DE
-						    time_suffix = RC_AM_TXT;
-# else /* !USE_DE */
 						    /*
 						     *** Translators, please translate this as a fixed 2-character text.
 						     *** This text should be a proper abbreviation of "ante meridiem".
 						     */
 						    time_suffix = _("am");
-# endif	/* !USE_DE */
 						  state =
 						    strlen (time_suffix);
 						}
@@ -3751,18 +3723,11 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems,
 		      /*
 		         Error, `system()' function failed.
 		       */
-# if USE_DE
-		      sprintf (s2,
-			       "Kommando kann nicht ausf%shrt werden in Datei `%s'\nZeile %ld: %s",
-			       UE, filename, line_number,
-			       the_text + kpos + j_diff + 2);
-# else /* !USE_DE */
 		      sprintf (s2,
 			       _
 			       ("Cannot execute command in file `%s'\nLine: %ld %s"),
 			       filename, line_number,
 			       the_text + kpos + j_diff + 2);
-# endif	/* !USE_DE */
 		      print_text (stderr, s2);
 		      if (warning_level >= WARN_LVL_MAX)
 			{
@@ -3780,18 +3745,11 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems,
 		      /*
 		         Report the exit code of command executed by the `system()' function.
 		       */
-# if USE_DE
-		      sprintf (s2,
-			       "Kommando ausgef%shrt (Status=%d) in Datei `%s'\nZeile %ld: %s",
-			       UE, i, filename, line_number,
-			       s1 + kpos + j_diff + 2);
-# else /* !USE_DE */
 		      sprintf (s2,
 			       _
 			       ("Command executed (exit code=%d) in file `%s'\nLine %ld: %s"),
 			       i, filename, line_number,
 			       s1 + kpos + j_diff + 2);
-# endif	/* !USE_DE */
 		      print_text (stderr, s2);
 		      /*
 		         The command executed by the `system()' function returned

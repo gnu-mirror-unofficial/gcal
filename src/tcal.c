@@ -186,18 +186,6 @@ usage_msg (fp, prgr_name, exit_status)
      terminates the program with `exit_status'.
 */
 {
-#if USE_DE
-  fprintf (fp,
-	   "Aufruf:  %s  [--%s | --%s] | [--%s=[+|-]ZAHL] [ARGUMENT...]\n",
-	   prgr_name, help_option_name, version_option_name,
-	   shift_option_name);
-  if (exit_status == EXIT_SUCCESS)
-    {
-      S_NEWLINE (fp);
-      fprintf (fp, "Fehlerberichte via eMail an <%s>", BUG_REPORT_ADR1);
-      S_NEWLINE (fp);
-    }
-#else /* !USE_DE */
   fprintf (fp,
 	   _
 	   ("Usage:  %s  [--%s | --%s] | [--%s=[+|-]NUMBER] [ARGUMENT...]\n"),
@@ -209,7 +197,6 @@ usage_msg (fp, prgr_name, exit_status)
       fprintf (fp, _("Email bug reports to <%s>"), BUG_REPORT_ADR1);
       S_NEWLINE (fp);
     }
-#endif /* !USE_DE */
   exit (exit_status);
 }
 
@@ -227,17 +214,6 @@ version_msg (fp, prgr_name, exit_status)
 {
   fprintf (fp, "%s (GNU cal %s)\n", prgr_name, PACKAGE_VERSION);
   fprintf (fp, "%s\n", COPYRIGHT_TXT);
-#if USE_DE
-  fprintf (fp,
-	   "Dies ist freie Software; in den Quellen befindet sich die Lizenz-");
-  S_NEWLINE (fp);
-  fprintf (fp,
-	   "und Kopierbedingung.  Es gibt KEINERLEI Garantie, nicht einmal f%sr",
-	   UE);
-  S_NEWLINE (fp);
-  fprintf (fp,
-	   "die TAUGLICHKEIT oder die VERWENDBARKEIT ZU EINEM ANGEGEBENEN ZWECK.");
-#else /* !USE_DE */
   fprintf (fp,
 	   _
 	   ("This is free software; see the source for copying conditions."));
@@ -246,7 +222,6 @@ version_msg (fp, prgr_name, exit_status)
 	   _("There is NO warranty, without even the implied warranty of"));
   S_NEWLINE (fp);
   fprintf (fp, _("MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."));
-#endif /* !USE_DE */
   S_NEWLINE (fp);
   exit (exit_status);
 }
@@ -342,32 +317,9 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
      and terminates the program with status `exit_status'.
 */
 {
-#if USE_DE
-  fprintf (stderr, "\n%s: Abbruch, ", prgr_name);
-#else /* !USE_DE */
   fprintf (stderr, _("\n%s: abort, "), prgr_name);
-#endif /* !USE_DE */
   switch (exit_status)
     {
-#if USE_DE
-    case ERR_NO_MEMORY_AVAILABLE:
-      fprintf (stderr,
-	       "`%s' Zeile %ld: virtueller Speicher ersch%spft (%s=%d)",
-	       module_name, module_line, OE, var_name, var_contents);
-      break;
-    case ERR_INTERNAL_TABLE_CRASH:
-      fprintf (stderr,
-	       "`%s' Zeile %ld: (`%s') ung%sltiger Wert f%sr Tabellengr%s%se `sizeof %s>%d'",
-	       module_name, module_line, INTERNAL_TXT, UE, UE, OE, SZ,
-	       var_name, var_contents);
-      break;
-    case EXIT_FATAL:
-      fprintf (stderr, "Versatzwert `%s' ist ung%sltig", var_name, UE);
-      break;
-    default:
-      fprintf (stderr, "`%s' Zeile %ld: (`%s') unbehandelter Fehler (%d)",
-	       module_name, module_line, INTERNAL_TXT, exit_status);
-#else /* !USE_DE */
     case ERR_NO_MEMORY_AVAILABLE:
       fprintf (stderr, _("`%s' line %ld: virtual memory exhausted (%s=%d)"),
 	       module_name, module_line, var_name, var_contents);
@@ -385,7 +337,6 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
     default:
       fprintf (stderr, _("`%s' line %ld: (`%s') unmanaged error (%d)"),
 	       module_name, module_line, _("Internal"), exit_status);
-#endif /* !USE_DE */
     }
   S_NEWLINE (stderr);
   exit (exit_status);
@@ -404,13 +355,8 @@ handle_signal (the_signal)
 */
 {
   fflush (stdout);
-# if USE_DE
-  fprintf (stderr, "\n%s: Programmabbruch durch Signal %d\n", prgr_name,
-	   the_signal);
-# else /* !USE_DE */
   fprintf (stderr, _("\n%s: program aborted by signal %d\n"), prgr_name,
 	   the_signal);
-# endif	/* !USE_DE */
   exit (ERR_TERMINATION_BY_SIGNAL);
 }
 #endif /* HAVE_SIGNAL && (SIGINT || SIGTERM || SIGHUP) */
@@ -675,7 +621,7 @@ main (argc, argv)
   auto char *ptr_char;
   auto char *buf_ptr_char;
   auto Bool shift_value_set = FALSE;
-#if !USE_DE && defined(GCAL_NLS)
+#if defined(GCAL_NLS)
   auto Bool is_en = FALSE;
 #endif
 
@@ -736,24 +682,23 @@ main (argc, argv)
   assert (MY_ARGC_MAX > 1);
   assert ((Uint) MY_ARGC_MAX <= testval);
 #endif /* HAVE_ASSERT_H */
-#if !USE_DE
-# ifdef GCAL_NLS
+#ifdef GCAL_NLS
   /*
      Now initialize the NLS functions.
    */
-# if HAVE_SETLOCALE
+#if HAVE_SETLOCALE
   setlocale (LC_ALL, "");
-#  endif
-#  ifndef LOCALEDIR
-#   define LOCALEDIR  NULL
-#  endif
+# endif
+# ifndef LOCALEDIR
+#  define LOCALEDIR  NULL
+# endif
   bindtextdomain (PACKAGE, LOCALEDIR);
   textdomain (PACKAGE);
   /*
      Now check whether we have to use the Gregorian Reformation date of 1752
      (table index 1 !!) by default!
    */
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
   /*
      Detect whether the $LANGUAGE environment variable (GNU specific) is set.
    */
@@ -771,7 +716,7 @@ main (argc, argv)
 	if (!*ptr_char)
 	  ptr_char = (char *) NULL;
     }
-#   if HAVE_LC_MESSAGES
+#  if HAVE_LC_MESSAGES
   if (ptr_char == (char *) NULL)
     {
       /*
@@ -782,7 +727,7 @@ main (argc, argv)
 	if (!*ptr_char)
 	  ptr_char = (char *) NULL;
     }
-#   endif
+#  endif
   if (ptr_char == (char *) NULL)
     {
       /*
@@ -827,7 +772,7 @@ main (argc, argv)
     /*
        No environment variable defined.
      */
-#  endif /* !AMIGA || __GNUC__ */
+# endif /* !AMIGA || __GNUC__ */
     /*
        Let's use the Gregorian Reformation date of 1752 (table index 1 !!).
      */
@@ -837,13 +782,12 @@ main (argc, argv)
        Set the date of Gregorian Reformation to 1752 (table index 1 !!)
      */
     greg++;
-# else /* !GCAL_NLS */
+#else /* !GCAL_NLS */
   /*
      Set the date of Gregorian Reformation to 1752 (table index 1 !!)
    */
   greg++;
-# endif	/* !GCAL_NLS */
-#endif /* !USE_DE */
+#endif	/* !GCAL_NLS */
   /*
      Detect the own program name.
    */
@@ -948,13 +892,8 @@ main (argc, argv)
 		  /*
 		     Error, unrecognized option.
 		   */
-#if USE_DE
-		  fprintf (stderr, "%s: unbekannte Option `%s'",
-			   prgr_name, argv[1]);
-#else /* !USE_DE */
 		  fprintf (stderr, _("%s: unrecognized option `%s'"),
 			   prgr_name, argv[1]);
-#endif /* !USE_DE */
 		  S_NEWLINE (stderr);
 		  usage_msg (stderr, prgr_name, ERR_INVALID_OPTION);
 		}
@@ -964,14 +903,9 @@ main (argc, argv)
 		  /*
 		     Error, option requires an argument.
 		   */
-#if USE_DE
-		  fprintf (stderr, "%s: Option `--%s' ben%stigt ein Argument",
-			   prgr_name, shift_option_name, OE);
-#else /* !USE_DE */
 		  fprintf (stderr,
 			   _("%s: option `--%s' requires an argument"),
 			   prgr_name, shift_option_name);
-#endif /* !USE_DE */
 		  S_NEWLINE (stderr);
 		  usage_msg (stderr, prgr_name, ERR_INVALID_OPTION);
 		}
@@ -1003,15 +937,9 @@ main (argc, argv)
 		      /*
 		         Error, invalid argument.
 		       */
-#if USE_DE
-		      fprintf (stderr,
-			       "%s: Option mit unzul%sssigem Argument -- %s",
-			       prgr_name, AE, argv[1]);
-#else /* !USE_DE */
 		      fprintf (stderr,
 			       _("%s: option with invalid argument -- %s"),
 			       prgr_name, argv[1]);
-#endif /* !USE_DE */
 		      S_NEWLINE (stderr);
 		      usage_msg (stderr, prgr_name, ERR_INVALID_OPTION);
 		    }
@@ -1140,13 +1068,8 @@ main (argc, argv)
   status = execvp (gcal_prgr, my_argv);
   if (status == -1)
     {
-#if USE_DE
-      fprintf (stderr, "%s: Fehler bei Programmausf%shrung von `%s'\n",
-	       prgr_name, UE, gcal_prgr);
-#else /* !USE_DE */
       fprintf (stderr, _("%s: error during program execution of `%s'\n"),
 	       prgr_name, gcal_prgr);
-#endif /* !USE_DE */
 #if HAVE_ERRNO_H
       perror (gcal_prgr);
 #endif

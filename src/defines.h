@@ -4,7 +4,7 @@
 *  defines.h:  Program name, release number and modification symbols.
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -40,11 +40,7 @@
 *      - Delete the symbol USE_EASC or write `USE_EASC 0' for using the
 *          ISO-ASCII/EBCDIC character set...
 *
-*  b)  - Define `USE_DE 1' for using German messages and calendar style.
-*      - Delete the symbol USE_DE or write `USE_DE 0' for using
-*          English messages and calendar style...
-*
-*  c)  - Define `USE_HLS 1' to run this program using control sequences
+*  b)  - Define `USE_HLS 1' to run this program using control sequences
 *          for highlighting the current day/holidays/text (MS/PC-DOS will
 *          use the [n]ansi.sys driver for emitting ANSI Escape highlighting
 *          sequences; OS2/Linux/UN*X-like systems will use `termcap' for
@@ -53,13 +49,13 @@
 *      - Delete the symbol USE_HLS or write `USE_HLS 0' to run this program
 *          without highlighting...
 *
-*  d)  - Define `USE_PAGER 1' for using an external pager (availabe only
+*  c)  - Define `USE_PAGER 1' for using an external pager (availabe only
 *          on UN*X-like systems) or for using the simple, internal pager
 *          (if external pager fails).
 *      - Delete the symbol USE_PAGER or write `USE_PAGER 0' if you don't
 *          like this feature...
 *
-*  e)  - Define `USE_RC 1' for using the special month dates functions
+*  d)  - Define `USE_RC 1' for using the special month dates functions
 *          (print daily/weekly/monthly/yearly/eternal/special fixed dates
 *          texts which are stated in the resource file(s)).
 *      - Delete the symbol USE_RC or write `USE_RC 0' if you don't
@@ -69,7 +65,6 @@
 
 # if 0
 #  define USE_EASC   0
-#  define USE_DE     0
 #  define USE_HLS    1
 #  define USE_PAGER  1
 #  define USE_RC     1

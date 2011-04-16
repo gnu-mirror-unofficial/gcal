@@ -2,7 +2,7 @@
 *  print.c:  Create, construct and print the calendar sheet(s).
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -537,15 +537,11 @@ print_calendar ()
 		         of "calendar week", consists of 2 letters and is
 		         separated by one space character of the month calendar.
 		       */
-#if USE_DE
-		      sprintf (s2, " %2s", "KW");
-#else /* !USE_DE */
 		      /*
 		       *** Translators, please translate this as a fixed 2-character text.
 		       *** This text should be a proper abbreviation of "Calendar Week".
 		       */
 		      sprintf (s2, " %2s", _("CW"));
-#endif /* !USE_DE */
 		      strcat (s1, s2);
 		    }
 		}
@@ -565,13 +561,8 @@ print_calendar ()
 		    sprintf (s1, "%s %d", month_name (month), n);
 		  print_text (stdout, s1);
 		  if (cal_with_week_number)
-#if USE_DE
-		    sprintf (s3, "%-*s", len_dayname_max + blanks_between,
-			     "Woche");
-#else /* !USE_DE */
 		    sprintf (s3, "%-*s", len_dayname_max + blanks_between,
 			     _("Week"));
-#endif /* !USE_DE */
 		}
 	      print_text (stdout, s1);
 	      /*
@@ -980,15 +971,11 @@ print_calendar ()
 			         of "calendar week", consists of 2 letters and is
 			         separated by one space character of the month calendar.
 			       */
-#if USE_DE
-			      sprintf (s2, " %2s", "KW");
-#else /* !USE_DE */
 			      /*
 			       *** Translators, please translate this as a fixed 2-character text.
 			       *** This text should be a proper abbreviation of "Calendar Week".
 			       */
 			      sprintf (s2, " %2s", _("CW"));
-#endif /* !USE_DE */
 			      strcat (s1, s2);
 			    }
 			  if (i != out_cols)
@@ -1039,15 +1026,11 @@ print_calendar ()
 			     of "calendar week", consists of 2 letters and is
 			     separated by one space character of the month calendar.
 			   */
-#if USE_DE
-			  sprintf (s3, "%-*s", j + blanks_between, "KW");
-#else /* !USE_DE */
 			  /*
 			   *** Translators, please translate this as a fixed 2-character text.
 			   *** This text should be a proper abbreviation of "Calendar Week".
 			   */
 			  sprintf (s3, "%-*s", j + blanks_between, _("CW"));
-#endif /* !USE_DE */
 			}
 		      print_text (stdout, s1);
 		    }

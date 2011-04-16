@@ -2,7 +2,7 @@
 *  hd-data.c:  All data which is composed into the eternal holiday list.
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -60,28 +60,6 @@ const Cc_struct cc_holidays[] = {
   { char *cc_id, char *cc_info, void (*Cc_hdy_handler)() },
 */
 #if HD_TOP20CC
-# if USE_DE
-  {"AU", "Australien", au_hdy},
-  {"BE", "Belgien", be_hdy},
-  {"BR", "Brasilien", br_hdy},
-  {"CA", "Kanada", ca_hdy},
-  {"CH", "Schweiz", ch_hdy},
-  {"CN", "China", cn_hdy},
-  {CC_DE, "Deutschland", de_hdy},
-  {"ES", "Spanien", es_hdy},
-  {"FR", "Frankreich", fr_hdy},
-  {CC_GB, "Gro" SZ "britannien", gb_hdy},
-  {"IL", "Israel", il_hdy},
-  {"IT", "Italien", it_hdy},
-  {"JP", "Japan", jp_hdy},
-  {"KR", "Republik Korea", kr_hdy},
-  {"MX", "Mexiko", mx_hdy},
-  {"NL", "Niederlande", nl_hdy},
-  {"NZ", "Neuseeland", nz_hdy},
-  {"PT", "Portugal", pt_hdy},
-  {"RU", "Russische F" OE "deration", ru_hdy},
-  {CC_US, "Vereinigte Staaten", us_hdy},
-# else /* !USE_DE */
   {"AU", N_("Australia"), au_hdy},
   {"BE", N_("Belgium"), be_hdy},
   {"BR", N_("Brazil"), br_hdy},
@@ -102,355 +80,7 @@ const Cc_struct cc_holidays[] = {
   {"PT", N_("Portugal"), pt_hdy},
   {"RU", N_("Russian Federation"), ru_hdy},
   {CC_US, N_("United States"), us_hdy},
-# endif	/* !USE_DE */
 #else /* !HD_TOP20CC */
-# if USE_DE
-  {"AD", "Andorra", ad_hdy},
-  {"AE", "Vereinigte Arabische Emirate", ae_hdy},
-  {"AF", "Afghanistan", af_hdy},
-  {"AG", "Antigua und Barbuda", ag_hdy},
-  {"AI", "Anguilla", ai_hdy},
-  {"AL", "Albanien", al_hdy},
-  {"AM", "Armenien", am_hdy},
-  {"AN_BO", "Niederl" AE "ndische Antillen/Bonaire", an_bo_hdy},
-  {"AN_CU", "Niederl" AE "ndische Antillen/Cura" CD "ao", an_cu_hdy},
-  {"AN_MA", "Niederl" AE "ndische Antillen/St. Maarten", an_ma_hdy},
-  {"AN_SA", "Niederl" AE "ndische Antillen/Saba und Eustatius", an_sa_hdy},
-  {"AO", "Angola #", ao_hdy},
-  {"AR", "Argentinien", ar_hdy},
-  {"AS", "Amerikanisch-Samoa", as_hdy},
-  {"AT", OOE "stereich", at_hdy},
-  {"AU_CT", "Australien/Canberra", au_ct_hdy},
-  {"AU_NT", "Australien/Nord-Territorium", au_nt_hdy},
-  {"AU_QU", "Australien/Queensland", au_qu_hdy},
-  {"AU_SA", "Australien/S" UE "d-Australien", au_sa_hdy},
-  {"AU_SW", "Australien/Neu-S" UE "d-Wales", au_sw_hdy},
-  {"AU_TA", "Australien/Tasmanien", au_ta_hdy},
-  {"AU_VI", "Australien/Victoria", au_vi_hdy},
-  {"AU_WA", "Australien/West-Australien", au_wa_hdy},
-  {"AW", "Aruba", aw_hdy},
-  {"AZ", "Aserbaidschan", az_hdy},
-  {"BA", "Bosnien-Herzegowina", ba_hdy},
-  {"BB", "Barbados", bb_hdy},
-  {"BD", "Bangladesch #", bd_hdy},
-  {"BE", "Belgien", be_hdy},
-  {"BF", "Burkina Faso", bf_hdy},
-  {"BG", "Bulgarien", bg_hdy},
-  {"BH", "Bahrain", bh_hdy},
-  {"BI", "Burundi #", bi_hdy},
-  {"BJ", "Benin #", bj_hdy},
-  {"BM", "Bermuda", bm_hdy},
-  {"BN", "Brunei", bn_hdy},
-  {"BO", "Bolivien", bo_hdy},
-  {"BR", "Brasilien", br_hdy},
-  {"BS", "Bahamas", bs_hdy},
-  {"BT", "Bhutan #", bt_hdy},
-  {"BV", "Bouvet-Insel", bv_hdy},
-  {"BW", "Botswana", bw_hdy},
-  {"BY", "Belarus (Wei" SZ "ru" SZ "land)", by_hdy},
-  {"BZ", "Belize", bz_hdy},
-  {"CA_AL", "Kanada/Alberta", ca_al_hdy},
-  {"CA_BC", "Kanada/British Columbia", ca_bc_hdy},
-  {"CA_MA", "Kanada/Manitoba", ca_ma_hdy},
-  {"CA_NB", "Kanada/Neu-Braunschweig", ca_nb_hdy},
-  {"CA_NF", "Kanada/Neufundland und Labrador", ca_nf_hdy},
-  {"CA_NS", "Kanada/Neu-Schottland", ca_ns_hdy},
-  {"CA_NW", "Kanada/Nordwest-Territorien", ca_nw_hdy},
-  {"CA_ON", "Kanada/Ontario", ca_on_hdy},
-  {"CA_PE", "Kanada/Prinz-Eduard-Insel", ca_pe_hdy},
-  {"CA_QU", "Kanada/Qu" ERA "bec", ca_qu_hdy},
-  {"CA_SA", "Kanada/Saskatchewan", ca_sa_hdy},
-  {"CA_YU", "Kanada/Yukon", ca_yu_hdy},
-  {"CC", "Kokos-Inseln (Keeling)", cc_hdy},
-  {"CD", "Demokratische Republik Kongo #", cd_hdy},
-  {"CF", "Zentralafrikanische Republik #", cf_hdy},
-  {"CG", "Republik Kongo #", cg_hdy},
-  {"CH_AG", "Schweiz/Aargau", ch_ag_hdy},
-  {"CH_AI", "Schweiz/Appenzell-Innerrhoden", ch_ai_hdy},
-  {"CH_AR", "Schweiz/Appenzell-Ausserrhoden", ch_ar_hdy},
-  {"CH_BE", "Schweiz/Bern", ch_be_hdy},
-  {"CH_BL", "Schweiz/Basel-Land", ch_bl_hdy},
-  {"CH_BS", "Schweiz/Basel-Stadt", ch_bs_hdy},
-  {"CH_FR", "Schweiz/Freiburg", ch_fr_hdy},
-  {"CH_GE", "Schweiz/Genf", ch_ge_hdy},
-  {"CH_GL", "Schweiz/Glarus", ch_gl_hdy},
-  {"CH_GR", "Schweiz/Graub" UE "nden", ch_gr_hdy},
-  {"CH_JU", "Schweiz/Jura", ch_ju_hdy},
-  {"CH_LU", "Schweiz/Luzern", ch_lu_hdy},
-  {"CH_NE", "Schweiz/Neuenburg", ch_ne_hdy},
-  {"CH_NW", "Schweiz/Nidwalden", ch_nw_hdy},
-  {"CH_OW", "Schweiz/Obwalden", ch_ow_hdy},
-  {"CH_SG", "Schweiz/St. Gallen", ch_sg_hdy},
-  {"CH_SH", "Schweiz/Schaffhausen", ch_sh_hdy},
-  {"CH_SO", "Schweiz/Solothurn", ch_so_hdy},
-  {"CH_SZ", "Schweiz/Schwyz", ch_sz_hdy},
-  {"CH_TG", "Schweiz/Thurgau", ch_tg_hdy},
-  {"CH_TI", "Schweiz/Tessin", ch_ti_hdy},
-  {"CH_UR", "Schweiz/Uri", ch_ur_hdy},
-  {"CH_VD", "Schweiz/Waadt", ch_vd_hdy},
-  {"CH_VS", "Schweiz/Wallis", ch_vs_hdy},
-  {"CH_ZG", "Schweiz/Zug", ch_zg_hdy},
-  {"CH_ZH", "Schweiz/Z" UE "rich", ch_zh_hdy},
-  {"CI", "Elfenbeink" UE "ste", ci_hdy},
-  {"CK", "Cook-Inseln", ck_hdy},
-  {"CL", "Chile", cl_hdy},
-  {"CM", "Kamerun", cm_hdy},
-  {"CN", "China", cn_hdy},
-  {"CO", "Kolumbien", co_hdy},
-  {"CR", "Costa Rica", cr_hdy},
-  {"CU", "Kuba", cu_hdy},
-  {"CV", "Kapverdische-Inseln", cv_hdy},
-  {"CX", "Christmas-Inseln", cx_hdy},
-  {"CY", "Zypern", cy_hdy},
-  {"CZ", "Tschechien", cz_hdy},
-  {"DE_BB", "Deutschland/Brandenburg", de_bb_hdy},
-  {"DE_BE", "Deutschland/Berlin", de_be_hdy},
-  {"DE_BW", "Deutschland/Baden-W" UE "rttemberg", de_bw_hdy},
-  {"DE_BY", "Deutschland/Bayern", de_by_hdy},
-  {"DE_HB", "Deutschland/Bremen", de_hb_hdy},
-  {"DE_HE", "Deutschland/Hessen", de_he_hdy},
-  {"DE_HH", "Deutschland/Hamburg", de_hh_hdy},
-  {"DE_MV", "Deutschland/Mecklenburg-Vorpommern", de_mv_hdy},
-  {"DE_NI", "Deutschland/Niedersachsen", de_ni_hdy},
-  {"DE_NW", "Deutschland/Nordrhein-Westfalen", de_nw_hdy},
-  {"DE_RP", "Deutschland/Rheinland-Pfalz", de_rp_hdy},
-  {"DE_SH", "Deutschland/Schleswig-Holstein", de_sh_hdy},
-  {"DE_SL", "Deutschland/Saarland", de_sl_hdy},
-  {"DE_SN", "Deutschland/Sachsen", de_sn_hdy},
-  {"DE_ST", "Deutschland/Sachsen-Anhalt", de_st_hdy},
-  {"DE_TH", "Deutschland/Th" UE "ringen", de_th_hdy},
-  {"DJ", "Djibouti", dj_hdy},
-  {"DK", "D" AE "nemark", dk_hdy},
-  {"DM", "Dominica", dm_hdy},
-  {"DO", "Dominikanische Republik", do_hdy},
-  {"DZ", "Algerien", dz_hdy},
-  {"EC", "Ecuador", ec_hdy},
-  {"EE", "Estland", ee_hdy},
-  {"EG", AAE "gypten", eg_hdy},
-  {"EH", "West-Sahara", eh_hdy},
-  {"ER", "Eritrea", er_hdy},
-  {"ES", "Spanien", es_hdy},
-  {"ET", AAE "thiopien", et_hdy},
-  {"FI", "Finnland", fi_hdy},
-  {"FJ", "Fidschi #", fj_hdy},
-  {"FK", "Falkland-Inseln (Malvinas)", fk_hdy},
-  {"FM", "F" OE "derierte Staaten von Mikronesien", fm_hdy},
-  {"FO", "F" AE "r" OE "er", fo_hdy},
-  {"FR", "Frankreich", fr_hdy},
-  {"GA", "Gabun #", ga_hdy},
-  {"GB_EN", "Gro" SZ "britannien/England und Wales", gb_en_hdy},
-  {"GB_NI", "Gro" SZ "britannien/Nord-Irland", gb_ni_hdy},
-  {"GB_SL", "Gro" SZ "britannien/Schottland", gb_sl_hdy},
-  {"GD", "Grenada", gd_hdy},
-  {"GE", "Georgien", ge_hdy},
-  {"GF", "Franz" OE "sisch Guayana", gf_hdy},
-  {"GH", "Ghana", gh_hdy},
-  {"GI", "Gibraltar", gi_hdy},
-  {"GL", "Gr" OE "nland", gl_hdy},
-  {"GM", "Gambia", gm_hdy},
-  {"GN", "Guinea", gn_hdy},
-  {"GP", "Guadeloupe", gp_hdy},
-  {"GQ", AAE "quatorial Guinea", gq_hdy},
-  {"GR", "Griechenland", gr_hdy},
-  {"GS", "S" UE "georgien und S" UE "d-Sandwichinseln", gs_hdy},
-  {"GT", "Guatemala", gt_hdy},
-  {"GU", "Guam", gu_hdy},
-  {"GW", "Guinea-Bissau #", gw_hdy},
-  {"GY", "Guyana #", gy_hdy},
-  {"HK", "Hongkong", hk_hdy},
-  {"HM", "Heard- und Mc Donald-Inseln", hm_hdy},
-  {"HN", "Honduras", hn_hdy},
-  {"HR", "Kroatien", hr_hdy},
-  {"HT", "Haiti", ht_hdy},
-  {"HU", "Ungarn", hu_hdy},
-  {"ID", "Indonesien #", id_hdy},
-  {"IE", "Irland", ie_hdy},
-  {"IL", "Israel", il_hdy},
-  {"IN", "Indien #", in_hdy},
-  {"IQ", "Irak", iq_hdy},
-  {"IR", "Islamische Republik Iran", ir_hdy},
-  {"IS", "Island", is_hdy},
-  {"IT", "Italien", it_hdy},
-  {"JM", "Jamaica", jm_hdy},
-  {"JO", "Jordanien", jo_hdy},
-  {"JP", "Japan", jp_hdy},
-  {"KE", "Kenia #", ke_hdy},
-  {"KG", "Kirgisien", kg_hdy},
-  {"KH", "Kambodscha #", kh_hdy},
-  {"KI", "Kiribati #", ki_hdy},
-  {"KM", "Komoren", km_hdy},
-  {"KN", "St. Kitts und Nevis", kn_hdy},
-  {"KP", "Demokratische Volksrepublik Korea", kp_hdy},
-  {"KR", "Republik Korea", kr_hdy},
-  {"KW", "Kuwait", kw_hdy},
-  {"KY", "Cayman-Inseln", ky_hdy},
-  {"KZ", "Kasachstan", kz_hdy},
-  {"LA", "Demokratische Volksrepublik Laos #", la_hdy},
-  {"LB", "Libanon", lb_hdy},
-  {"LC", "St. Lucia", lc_hdy},
-  {"LI", "Liechtenstein", li_hdy},
-  {"LK", "Sri Lanka #", lk_hdy},
-  {"LR", "Liberia", lr_hdy},
-  {"LS", "Lesotho", ls_hdy},
-  {"LT", "Litauen", lt_hdy},
-  {"LU", "Luxemburg", lu_hdy},
-  {"LV", "Lettland", lv_hdy},
-  {"LY", "Libysch-Arabische Dschamahirija (Libyen)", ly_hdy},
-  {"MA", "Marokko", ma_hdy},
-  {"MC", "Monaco", mc_hdy},
-  {"MD", "Republik Moldawien", md_hdy},
-  {"MG", "Madagaskar #", mg_hdy},
-  {"MH", "Marshall-Inseln", mh_hdy},
-  {"MK", "Fr" UE "here Yugoslawische Republik Mazedonien", mk_hdy},
-  {"ML", "Mali", ml_hdy},
-  {"MN", "Mongolei #", mn_hdy},
-  {"MO", "Macao", mo_hdy},
-  {"MP", "Nord-Marianen (Saipan)", mp_hdy},
-  {"MQ", "Martinique", mq_hdy},
-  {"MR", "Mauretanien", mr_hdy},
-  {"MS", "Montserrat", ms_hdy},
-  {"MT", "Malta", mt_hdy},
-  {"MU", "Mauritius", mu_hdy},
-  {"MV", "Malediven", mv_hdy},
-  {"MW", "Malawi", mw_hdy},
-  {"MX", "Mexiko", mx_hdy},
-  {"MY", "Malaysia #", my_hdy},
-  {"MZ", "Mo" CD "ambique", mz_hdy},
-  {"NA", "Namibia", na_hdy},
-  {"NC", "Neukaledonien", nc_hdy},
-  {"NE", "Niger", ne_hdy},
-  {"NF", "Norfolk-Inseln", nf_hdy},
-  {"NG", "Nigeria", ng_hdy},
-  {"NI", "Nicaragua", ni_hdy},
-  {"NL", "Niederlande", nl_hdy},
-  {"NM", "Myanmar (Birma) #", nm_hdy},
-  {"NO", "Norwegen", no_hdy},
-  {"NP", "Nepal #", np_hdy},
-  {"NR", "Nauru", nr_hdy},
-  {"NU", "Niue", nu_hdy},
-  {"NZ", "Neuseeland", nz_hdy},
-  {"OM", "Oman", om_hdy},
-  {"PA", "Panama", pa_hdy},
-  {"PE", "Peru", pe_hdy},
-  {"PF", "Franz" OE "sisch-Polynesien", pf_hdy},
-  {"PG", "Papua Neuguinea", pg_hdy},
-  {"PH", "Philippinen", ph_hdy},
-  {"PK", "Pakistan", pk_hdy},
-  {"PL", "Polen", pl_hdy},
-  {"PM", "Saint-Pierre und Miquelon", pm_hdy},
-  {"PN", "Pitcairn", pn_hdy},
-  {"PR", "Puerto Rico", pr_hdy},
-  {"PT", "Portugal", pt_hdy},
-  {"PW", "Palau", pw_hdy},
-  {"PY", "Paraguay", py_hdy},
-  {"QA", "Katar", qa_hdy},
-  {"RE", "R" ERA "union", re_hdy},
-  {"RO", "Rum" AE "nien", ro_hdy},
-  {"RU", "Russische F" OE "deration", ru_hdy},
-  {"RW", "Ruanda", rw_hdy},
-  {"SA", "Saudi Arabien", sa_hdy},
-  {"SB", "Salomonen", sb_hdy},
-  {"SC", "Seychellen", sc_hdy},
-  {"SD", "Sudan", sd_hdy},
-  {"SE", "Schweden", se_hdy},
-  {"SG", "Singapur #", sg_hdy},
-  {"SH", "St. Helena", sh_hdy},
-  {"SI", "Slowenien", si_hdy},
-  {"SJ", "Spitzbergen und Jan Mayen-Inseln", sj_hdy},
-  {"SK", "Slowakei", sk_hdy},
-  {"SL", "Sierra Leone", sl_hdy},
-  {"SM", "San Marino", sm_hdy},
-  {"SN", "Senegal", sn_hdy},
-  {"SO", "Somalia", so_hdy},
-  {"SR", "Surinam #", sr_hdy},
-  {"ST", "Sao Tom" ERA " und Principe", st_hdy},
-  {"SV", "El Salvador", sv_hdy},
-  {"SY", "Syrisch-Arabische Republik (Syrien)", sy_hdy},
-  {"SZ", "Swasiland", sz_hdy},
-  {"TC", "Turks- und Caicos-Inseln", tc_hdy},
-  {"TD", "Tschad", td_hdy},
-  {"TG", "Togo #", tg_hdy},
-  {"TH", "Thailand #", th_hdy},
-  {"TJ", "Tadschikistan", tj_hdy},
-  {"TK", "Tokelau", tk_hdy},
-  {"TM", "Turkmenistan", tm_hdy},
-  {"TN", "Tunesien", tn_hdy},
-  {"TO", "Tonga", to_hdy},
-  {"TR", "T" UE "rkei", tr_hdy},
-  {"TT", "Trinidad und Tobago #", tt_hdy},
-  {"TV", "Tuvalu", tv_hdy},
-  {"TW", "Taiwan", tw_hdy},
-  {"TZ", "Tansania", tz_hdy},
-  {"UA", "Ukraine", ua_hdy},
-  {"UG", "Uganda", ug_hdy},
-  {"US_AK", "Vereinigte Staaten/Alaska", us_ak_hdy},
-  {"US_AL", "Vereinigte Staaten/Alabama", us_al_hdy},
-  {"US_AR", "Vereinigte Staaten/Arkansas", us_ar_hdy},
-  {"US_AZ", "Vereinigte Staaten/Arizona", us_az_hdy},
-  {"US_CA", "Vereinigte Staaten/Kalifornien", us_ca_hdy},
-  {"US_CO", "Vereinigte Staaten/Colorado", us_co_hdy},
-  {"US_CT", "Vereinigte Staaten/Connecticut", us_ct_hdy},
-  {"US_DC", "Vereinigte Staaten/District of Columbia", us_dc_hdy},
-  {"US_DE", "Vereinigte Staaten/Delaware", us_de_hdy},
-  {"US_FL", "Vereinigte Staaten/Florida", us_fl_hdy},
-  {"US_GA", "Vereinigte Staaten/Georgia", us_ga_hdy},
-  {"US_HI", "Vereinigte Staaten/Hawaii", us_hi_hdy},
-  {"US_IA", "Vereinigte Staaten/Iowa", us_ia_hdy},
-  {"US_ID", "Vereinigte Staaten/Idaho", us_id_hdy},
-  {"US_IL", "Vereinigte Staaten/Illinois", us_il_hdy},
-  {"US_IN", "Vereinigte Staaten/Indiana", us_in_hdy},
-  {"US_KS", "Vereinigte Staaten/Kansas", us_ks_hdy},
-  {"US_KY", "Vereinigte Staaten/Kentucky", us_ky_hdy},
-  {"US_LA", "Vereinigte Staaten/Louisiana", us_la_hdy},
-  {"US_MA", "Vereinigte Staaten/Massachusetts", us_ma_hdy},
-  {"US_MD", "Vereinigte Staaten/Maryland", us_md_hdy},
-  {"US_ME", "Vereinigte Staaten/Maine", us_me_hdy},
-  {"US_MI", "Vereinigte Staaten/Michigan", us_mi_hdy},
-  {"US_MN", "Vereinigte Staaten/Minnesota", us_mn_hdy},
-  {"US_MO", "Vereinigte Staaten/Missouri", us_mo_hdy},
-  {"US_MS", "Vereinigte Staaten/Mississippi", us_ms_hdy},
-  {"US_MT", "Vereinigte Staaten/Montana", us_mt_hdy},
-  {"US_NC", "Vereinigte Staaten/Nord-Carolina", us_nc_hdy},
-  {"US_ND", "Vereinigte Staaten/Nord-Dakota", us_nd_hdy},
-  {"US_NE", "Vereinigte Staaten/Nebraska", us_ne_hdy},
-  {"US_NH", "Vereinigte Staaten/New Hampshire", us_nh_hdy},
-  {"US_NJ", "Vereinigte Staaten/New Jersey", us_nj_hdy},
-  {"US_NM", "Vereinigte Staaten/Neu-Mexiko", us_nm_hdy},
-  {"US_NV", "Vereinigte Staaten/Nevada", us_nv_hdy},
-  {"US_NY", "Vereinigte Staaten/New York", us_ny_hdy},
-  {"US_OH", "Vereinigte Staaten/Ohio", us_oh_hdy},
-  {"US_OK", "Vereinigte Staaten/Oklahoma", us_ok_hdy},
-  {"US_OR", "Vereinigte Staaten/Oregon", us_or_hdy},
-  {"US_PA", "Vereinigte Staaten/Pennsylvania", us_pa_hdy},
-  {"US_RI", "Vereinigte Staaten/Rhode Island", us_ri_hdy},
-  {"US_SC", "Vereinigte Staaten/S" UE "d-Carolina", us_sc_hdy},
-  {"US_SD", "Vereinigte Staaten/S" UE "d-Dakota", us_sd_hdy},
-  {"US_TN", "Vereinigte Staaten/Tennessee", us_tn_hdy},
-  {"US_TX", "Vereinigte Staaten/Texas", us_tx_hdy},
-  {"US_UT", "Vereinigte Staaten/Utah", us_ut_hdy},
-  {"US_VA", "Vereinigte Staaten/Virginia", us_va_hdy},
-  {"US_VT", "Vereinigte Staaten/Vermont", us_vt_hdy},
-  {"US_WA", "Vereinigte Staaten/Washington", us_wa_hdy},
-  {"US_WI", "Vereinigte Staaten/Wisconsin", us_wi_hdy},
-  {"US_WV", "Vereinigte Staaten/West-Virginia", us_wv_hdy},
-  {"US_WY", "Vereinigte Staaten/Wyoming", us_wy_hdy},
-  {"UY", "Uruguay", uy_hdy},
-  {"UZ", "Usbekistan", uz_hdy},
-  {"VC", "St. Vincent und Grenadinen", vc_hdy},
-  {"VE", "Venezuela", ve_hdy},
-  {"VG", "Britische Jungferninseln", vg_hdy},
-  {"VI", "Amerikanische Jungferninseln", vi_hdy},
-  {"VN", "Vietnam", vn_hdy},
-  {"VU", "Vanuatu", vu_hdy},
-  {"WF", "Wallis- und Futuna-Inseln", wf_hdy},
-  {"WS", "Samoa", ws_hdy},
-  {"YE", "Jemen", ye_hdy},
-  {"YT", "Mayotte", yt_hdy},
-  {"YU", "Serbien und Montenegro", yu_hdy},
-  {"ZA", "S" UE "dafrika", za_hdy},
-  {"ZM", "Sambia", zm_hdy},
-  {"ZW", "Simbabwe", zw_hdy},
-# else /* !USE_DE */
   {"AD", N_("Andorra"), ad_hdy},
   {"AE", N_("United Arab Emirates"), ae_hdy},
   {"AF", N_("Afghanistan"), af_hdy},
@@ -796,7 +426,6 @@ const Cc_struct cc_holidays[] = {
   {"ZA", N_("South Africa"), za_hdy},
   {"ZM", N_("Zambia"), zm_hdy},
   {"ZW", N_("Zimbabwe"), zw_hdy},
-# endif	/* !USE_DE */
 #endif /* !HD_TOP20CC */
   {NULL, NULL, NULL}
 };
@@ -818,566 +447,6 @@ const Ht_struct hd_text[] = {
 /*
   { int ht_id, char *ht_text },
 */
-#if USE_DE
-  {HD_1ST_ADVENT, "1'ter Advent"},
-  {HD_1ST_SUNDAY_IN_LENT, "1'ter Sonntag in Fastenzeit"},
-  {HD_2ND_ADVENT, "2'ter Advent"},
-  {HD_2ND_SUNDAY_IN_LENT, "2'ter Sonntag in Fastenzeit"},
-  {HD_3RD_ADVENT, "3'ter Advent"},
-  {HD_3RD_SUNDAY_IN_LENT, "3'ter Sonntag in Fastenzeit"},
-  {HD_4TH_ADVENT, "4'ter Advent"},
-  {HD_4TH_SUNDAY_IN_LENT, "4'ter Sonntag in Fastenzeit"},
-  {HD_7_5_3_FESTIVAL, "7-5-3 Fest"},
-  {HD_ABORIGINES_DAY, "Tag der Aborigines"},
-  {HD_ALL_FOOLS_DAY, "1'ter April"},
-  {HD_ALL_SAINTS_DAY, "Allerheiligen"},
-  {HD_ALL_SOULS_DAY, "Allerseelen"},
-  {HD_ALPHABET_DAY, "Tag des Alphabets"},
-  {HD_ANNIVERSARY_OF_AUCKLAND, "Jahrestag von Auckland"},
-  {HD_ANNIVERSARY_OF_CANTERBURY_NORTH, "Jahrestag von Canterbury-Nord"},
-  {HD_ANNIVERSARY_OF_CANTERBURY_SOUTH, "Jahrestag von Canterbury-S" UE "d"},
-  {HD_ANNIVERSARY_OF_CHATHAM_ISLANDS, "Jahrestag der Chatham-Inseln"},
-  {HD_ANNIVERSARY_OF_HAWKES_BAY, "Jahrestag von Hawkes' Bay"},
-  {HD_ANNIVERSARY_OF_MARLBOROUGH, "Jahrestag von Marlborough"},
-  {HD_ANNIVERSARY_OF_NELSON, "Jahrestag von Nelson"},
-  {HD_ANNIVERSARY_OF_OTAGO, "Jahrestag von Otago"},
-  {HD_ANNIVERSARY_OF_SOUTHLAND, "Jahrestag von Southland"},
-  {HD_ANNIVERSARY_OF_TARANAKI, "Jahrestag von Taranaki"},
-  {HD_ANNIVERSARY_OF_WELLINGTON, "Jahrestag von Wellington"},
-  {HD_ANNIVERSARY_OF_WESTLAND, "Jahrestag von Westland"},
-  {HD_ANZAC_DAY, "Anzac-Tag"},
-  {HD_ARBOR_DAY, "Tag des Baumes"},
-  {HD_ARMED_FORCES_DAY, "Tag der Streitkr" AE "fte"},
-  {HD_ARMISTICE_DAY, "Waffenstillstandstag"},
-  {HD_ASH_MONDAY, "Aschermontag/Rosenmontag"},
-  {HD_ASH_WEDNESDAY, "Aschermittwoch"},
-  {HD_BAHAI_ASCENSION_OF_ABDUL_BAHA, "Abdu'l-Bahas Himmelfahrt"},
-  {HD_BAHAI_ASCENSION_OF_BAHA_ULLAH, "Baha'u'llahs Himmelfahrt"},
-  {HD_BAHAI_BIRTH_OF_BAHA_ULLAH, "Baha'u'llahs Geburtstag"},
-  {HD_BAHAI_BIRTH_OF_THE_BAB, "Geburt des Bab"},
-  {HD_BAHAI_DAY_OF_THE_COVENANT, "Tag des Bundes"},
-  {HD_BAHAI_DECLARATION_OF_THE_BAB, "Erkl" AE "rung des Bab"},
-  {HD_BAHAI_FIRST_DAY_OF_RIDVAN, "Erster Tag des Ridvan"},
-  {HD_BAHAI_MARTYRDOM_OF_THE_BAB, "M" AE "rtyrerschaft des Bab"},
-  {HD_BAHAI_NEW_YEARS_DAY, "Bah" ARA "'i Neujahr"},
-  {HD_BAHAI_NINTH_DAY_OF_RIDVAN, "Neunter Tag des Ridvan"},
-  {HD_BAHAI_TWELFTH_DAY_OF_RIDVAN, "Zw" OE "lfter Tag des Ridvan"},
-  {HD_BANK_HOLIDAY, "Bankenfeiertag"},
-  {HD_BASQUE_NATIONAL_DAY, "Baskischer Nationalfeiertag"},
-  {HD_BATTLE_OF_BOYNE, "Schlacht von Boyne"},
-  {HD_BATTLE_OF_PUEBLA, "Schlacht von Puebla"},
-  {HD_BEGINNING_OF_FINANCIAL_YEAR, "Beginn des Finanzjahres"},
-  {HD_BENITO_JUAREZ_DAY, "Benito Ju" ARA "rez-Tag"},
-  {HD_BODHIDHARMAS_BIRTHDAY, "Bodhidharmas Geburtstag"},
-  {HD_BOSSES_DAY, "Cheftag"},
-  {HD_BOXING_DAY, "2'ter Weihnachtstag"},
-  {HD_BRINGING_HOME_THE_HERDS_DAY, "Tag des Einholens der Herden"},
-  {HD_BRINGING_IN_THE_HARVEST_DAY, "Tag des Einbringens der Ernte"},
-  {HD_BUDDHAS_BIRTHDAY, "Buddhas Geburtstag"},
-  {HD_BURNS_NIGHT, "Brandnacht"},
-  {HD_CAMOES_DAY, "Camoes-Tag"},
-  {HD_CARNIVAL, "Karneval"},
-  {HD_CELTIC_BELTANE, "Beltane"},
-  {HD_CELTIC_IMBOLG, "Imbolg"},
-  {HD_CELTIC_LUGHNASA, "Lughnasa"},
-  {HD_CELTIC_SAMHAIN, "Samhain/Keltisches Neujahr"},
-  {HD_CHILDRENS_DAY, "Tag der Kinder"},
-  {HD_CHINESE_CYCLE, "Zyklus"},
-  {HD_CHINESE_NEW_YEARS_DAY, "Chinesisches Neujahr"},
-  {HD_CHINESE_NEW_YEARS_EVE, "Chinesischer Neujahrsvorabend"},
-  {HD_CHRISTMAS_DAY, "1'ter Weihnachtstag"},
-  {HD_CHRISTMAS_EVE, "Heiligabend"},
-  {HD_CHRISTS_ASCENSION_DAY, "Christi Himmelfahrt"},
-  {HD_CHRYSANTHENUM_DAY, "Chrysanthementag"},
-  {HD_CITIZENSHIP_DAY, "B" UE "rgerrechtstag"},
-  {HD_CIVIC_HOLIDAY, "B" UE "rgerlicher Feiertag"},
-  {HD_COLUMBUS_DAY, "Kolumbustag"},
-  {HD_COMING_OF_AGE_DAY, "Tag der Vollj" AE "hrigkeit"},
-  {HD_CONFUCIUS_BIRTHDAY, "Konfuzius' Geburtstag"},
-  {HD_CONSTITUTION_ANNIVERSARY, "Jahrestag der Verfassung"},
-  {HD_COPTIC_NEW_YEARS_DAY, "Koptisches Neujahr"},
-  {HD_COSMONAUTS_DAY, "Kosmonautentag"},
-  {HD_CROSS_RAISING_DAY, "Tag der Kreuzerh" OE "hung"},
-  {HD_CULTURE_DAY, "Kulturtag"},
-  {HD_DAY_AFTER_MID_AUTUMN_FESTIVAL, "Tag nach Fest der Herbstmitte"},
-  {HD_DAY_AFTER_TOMB_SWEEPING_DAY, "Tag nach Tag des Grabkehrens"},
-  {HD_DAY_OF_ANDALUCIA, "Andalusien-Tag"},
-  {HD_DAY_OF_CATALONIA, "Katalonien-Tag"},
-  {HD_DAY_OF_GALICIA, "Galizien-Tag"},
-  {HD_DAY_OF_PRAYER_AND_REPENTANCE, "Bu" SZ "- und Bettag"},
-  {HD_DAY_OF_RECONCILIATION, "Tag der Auss" OE "hnung"},
-  {HD_DEFENDERS_OF_MOTHERLAND_DAY, "Tag der Mutterlandverteidiger"},
-  {HD_DOUBLE_9_DAY, "Tag der Doppel-9"},
-  {HD_DRAGON_BOAT_FESTIVAL, "Drachenbootfest"},
-  {HD_DYNASTY_DAY, "Tag des Herrscherhauses"},
-  {HD_EASTER_MONDAY, "Ostermontag"},
-  {HD_EASTER_SUNDAY, "Ostersonntag"},
-  {HD_ECLIPSE_LUNAR, "Mondfinsternis"},
-  {HD_ECLIPSE_SOLAR, "Sonnenfinsternis"},
-  {HD_ECLIPSE_TYPE_ANNULAR, "Ring"},
-  {HD_ECLIPSE_TYPE_PARTIAL, "Partiell"},
-  {HD_ECLIPSE_TYPE_PENUMBRAL, "Penumbral"},
-  {HD_ECLIPSE_TYPE_TOTAL, "Total"},
-  {HD_EINDHOVENS_LIBERATION, "Einhovens Befreiung"},
-  {HD_ELECTION_DAY, "Wahltag"},
-  {HD_EMPERORS_BIRTHDAY, "Geburtstag des Kaisers"},
-  {HD_EQUINOX_DAY, "Tagundnachtgleiche"},
-  {HD_ETHIOPIC_NEW_YEARS_DAY, AAE "thiopisches Neujahr"},
-  {HD_FATHERS_DAY, "Vatertag"},
-  {HD_FEAST_OF_CORPUS_CHRISTI, "Fronleichnam"},
-  {HD_FEAST_OF_FORTUNE, "Gl" UE "cksfest"},
-  {HD_FEAST_OF_HEART_JESUS, "Herz-Jesu-Fest"},
-  {HD_FESTIVAL_OF_LANTERNS, "Laternenfest"},
-  {HD_FESTIVAL_OF_SADEH, "Sadehfest"},
-  {HD_FLAG_DAY, "Tag der Flagge"},
-  {HD_FLEMISH_CULTURE_DAY, "Fl" AE "mischer Kulturtag"},
-  {HD_FOUNDING_OF_THE_COMMUNIST_PARTY, "Gr" UE "ndungstag der KP"},
-  {HD_FRENCH_CULTURE_DAY, "Franz" OE "sischer Kulturtag"},
-  {HD_FRENCH_REVOLUTIONARY, "Franz. Revolutionskalender"},
-  {HD_FRIENDSHIP_DAY, "Freundschaftstag"},
-  {HD_GERMAN_UNITY_DAY, "Tag der Deutschen Einheit"},
-  {HD_GOOD_FRIDAY, "Karfreitag"},
-  {HD_GOOD_SATURDAY, "Karsamstag/Ostervorabend"},
-  {HD_GRANDPARENTS_DAY, "Gro" SZ "eltern-Tag"},
-  {HD_GREENERY_DAY, "Tag der Umwelt"},
-  {HD_GROTTO_DAY, "Grotten-Tag"},
-  {HD_GROUNDHOG_DAY, "Murmeltier-Tag"},
-  {HD_GUADALUPE_VIRGINS_DAY, "Tag der Jungfrau von Guadalupe"},
-  {HD_GUY_FAWKES_DAY, "Guy Fawkes-Tag"},
-  {HD_HALLOWEEN, "Halloween"},
-  {HD_HEALTH_AND_SPORTS_DAY, "Gesundheits- und Sporttag"},
-  {HD_HEB_HANNUKAH, "Chanukka/Lichterfest"},
-  {HD_HEB_LAG_BOMER, "Lag Beomer/Rabbi Jochais Todestag"},
-  {HD_HEB_PESACH, "Pessach/Passahfest"},
-  {HD_HEB_PURIM, "Purim/Losfest"},
-  {HD_HEB_ROSH_HASHANA, "Rosch Haschana/Neujahr"},
-  {HD_HEB_SHAVUOT, "Schawuot/Fest der Tora-" UUE "bergabe"},
-  {HD_HEB_SHUSHAN_PURIM, "Schuschan Purim"},
-  {HD_HEB_SIMCHAT_TORAH, "Simchat Tora/Gesetzesfreudenfest"},
-  {HD_HEB_SUKKOT, "Sukkot/Laubh" UE "ttenfest"},
-  {HD_HEB_TISHA_BAV, "Tischa b'Aw/Fastentag"},
-  {HD_HEB_TU_BSHEVAT, "Tu Beschewat/Neujahr der B" AE "ume"},
-  {HD_HEB_YOM_HASHOAH, "Jom Haschoa/Holocaust-Gedenktag"},
-  {HD_HEB_YOM_HAZIKARON, "Jom Hasikaron/Soldaten-Gedenktag"},
-  {HD_HEB_YOM_HA_AZMAUT, "Jom Ha-Azmaut/Unabh" AE "ngigkeitstag"},
-  {HD_HEB_YOM_KIPPUR, "Jom Kippur/Vers" OE "hnungstag"},
-  {HD_HEB_YOM_YERUSHALAYIM, "Jom Jeruschalajim/Jerusalem-Tag"},
-  {HD_HOLY_INNOCENTS_DAY, "Tag der heiligen Unschuldigen"},
-  {HD_HOLY_TRINITY, "Dreifaltigkeitsfest"},
-  {HD_HURAVEE_DAY, "Huravee-Tag"},
-  {HD_INDEPENDENCE_DAY, "Unabh" AE "ngigkeitstag"},
-  {HD_INDEPENDENCE_MOVEMENT_DAY, "Tag der Unabh" AE "ngigkeitsbewegung"},
-  {HD_INDEPENDENCE_PROCLAMATION, "Proklamation der Unabh" AE "ngigkeit"},
-  {HD_INDIAN_NEW_YEARS_DAY, "Indisches Neujahr"},
-  {HD_ISL_AGA_KHANS_BIRTHDAY, "Aga Khans Geburtstag"},
-  {HD_ISL_ASHURA, "Ashura'"},
-  {HD_ISL_EID_AL_ADHA, "Eid-al-Adha"},
-  {HD_ISL_EID_AL_FITR, "Eid-al-Fitr"},
-  {HD_ISL_EID_I_MILAD_UN_NABI, "Eid-i-Milad-un-Nabi"},
-  {HD_ISL_GHADIR, "Ghadir"},
-  {HD_ISL_IMAMAT_DAY, "Imamat-Tag"},
-  {HD_ISL_NEW_YEARS_DAY, "Islamisches Neujahr"},
-  {HD_ISL_NUZUL_AL_QURAN, "Nuzul-al-Qur'an"},
-  {HD_ISL_QUDS_DAY, "Quds-Tag"},
-  {HD_ISL_RAMADAN, "Ramadan"},
-  {HD_ISL_SHAB_E_BARAT, "Shab-e-Bara't"},
-  {HD_ISL_SHAB_E_MIRAJ, "Shab-e-Mi'raj"},
-  {HD_ISL_SHAB_E_QADR, "Shab-e Qadr"},
-  {HD_ISL_WAQF_AL_ARAFAT, "Waqf-al-Arafat"},
-  {HD_JAPANESE_NEW_YEARS_DAY, "Japanisches Neujahr"},
-  {HD_JAPANESE_NEW_YEARS_EVE, "Japanischer Neujahrsvorabend"},
-  {HD_JESUS_CIRCUMCISION, "Beschneidung Jesu"},
-  {HD_KWANZAA, "Kwanzaa"},
-  {HD_LABOUR_DAY, "Tag der Arbeit"},
-  {HD_LABOUR_THANKSGIVING_DAY, "Arbeiter-Erntedankfest"},
-  {HD_LAO_TZES_BIRTHDAY, "Lao Tses Geburtstag"},
-  {HD_LIBERATION_DAY, "Tag der Befreiung"},
-  {HD_MARINE_DAY, "Tag der Marine"},
-  {HD_MARTINIMAS, "St. Martinstag"},
-  {HD_MARTIN_LUTHER_KINGS_DAY, "Martin L. Kings-Tag"},
-  {HD_MARTYRS_DAY, "Tag der M" AE "rtyrer"},
-  {HD_MARYS_ANNUNCIATION_DAY, "Mari" AE " Verk" UE "ndigung"},
-  {HD_MARYS_ASCENSION_DAY, "Mari" AE " Himmelfahrt"},
-  {HD_MARYS_CANDLEMAS, "Mari" AE " Lichtmess"},
-  {HD_MARYS_EXPECTATION, "Mari" AE " Erwartung"},
-  {HD_MARYS_IMMACULATE_CONCEPTION, "Mari" AE " Empf" AE "ngnis"},
-  {HD_MARYS_MATERNITY, "Mari" AE " Mutterschaft"},
-  {HD_MARYS_NAME, "Mari" AE " Namen"},
-  {HD_MARYS_NATIVITY, "Mari" AE " Geburt"},
-  {HD_MARYS_SACRIFICE, "Mari" AE " Opferung"},
-  {HD_MARYS_VISITATION, "Mari" AE " Heimsuchung"},
-  {HD_MARY_BLESSED_VIRGIN, "Mari" AE " - Mutter Gottes"},
-  {HD_MAUNDY_THURSDAY, "Gr" UE "ndonnerstag"},
-  {HD_MAY_DAY, "Maifeiertag"},
-  {HD_MIDSUMMER_DAY, "St. Johannistag/Mittsommertag"},
-  {HD_MID_AUTUMN_FESTIVAL, "Fest der Herbstmitte"},
-  {HD_MID_SPRING_FESTIVAL, "Fest der Fr" UE "hlingsmitte"},
-  {HD_MID_YEAR_FESTIVAL, "Fest der Jahresmitte"},
-  {HD_MOON_FIRST_QUARTER, "Zunehmender Halbmond"},
-  {HD_MOON_FULL, "Vollmond"},
-  {HD_MOON_LAST_QUARTER, "Abnehmender Halbmond"},
-  {HD_MOON_NEW, "Neumond"},
-  {HD_MOTHERS_DAY, "Muttertag"},
-  {HD_MOTHER_IN_LAWS_DAY, "Schwiegermutter-Tag"},
-  {HD_MUSIC_WATER_BANQUET, "Musikwasser-Bankett"},
-  {HD_NATIONAL_FOUNDATION_DAY, "Tag der Staatsgr" UE "ndung"},
-  {HD_NATIONAL_HOLIDAY, "Nationalfeiertag"},
-  {HD_NATIONAL_MOURNING_DAY, "Volkstrauertag"},
-  {HD_NEW_YEARS_DAY, "Neujahr"},
-  {HD_NURSES_DAY, "Kinderm" AE "dchen-Tag"},
-  {HD_OLD_ARMENIC_NEW_YEARS_DAY, "Altarmenisches Neujahr"},
-  {HD_OLD_EGYPTIC_NEW_YEARS_DAY, "Alt" AE "gyptisches Neujahr"},
-  {HD_ORTHODOX_NEW_YEARS_DAY, "Orthodoxes Neujahr"},
-  {HD_OUR_LADY_APARECIDA_DAY, "Tag der Jungfrau Aparecida"},
-  {HD_PALM_SUNDAY, "Palmsonntag"},
-  {HD_PARENTS_DAY, "Tag der Eltern"},
-  {HD_PASSION_SUNDAY, "Passionssonntag"},
-  {HD_PEACE_FESTIVAL, "Friedensfest"},
-  {HD_PEACH_FESTIVAL, "Pfirsichfest"},
-  {HD_PENTECOST, "Pfingstsonntag"},
-  {HD_PERSIAN_NEW_YEARS_DAY, "Noruz/Persisches Neujahr"},
-  {HD_PRAYER_DAY, "Bettag"},
-  {HD_PRESIDENTIAL_INAUGURATION, "Amtseinf" UE "hrung des Pr" AE "sidenten"},
-  {HD_PRESIDENTS_DAY, "Tag des Pr" AE "sidenten"},
-  {HD_PRESIDENTS_INFORM, "Berichtstag des Pr" AE "sidenten"},
-  {HD_PRESIDENT_LINCOLNS_BIRTHDAY, "Pr" AE "sident Lincolns Geburtstag"},
-  {HD_PRINCESS_DAY, "Prinzessin'-Tag"},
-  {HD_QUINQUAGESIMA_SUNDAY, "Quinquagesima-Sonntag"},
-  {HD_REFORMATION_DAY, "Reformationstag"},
-  {HD_REMEMBRANCE_DAY, "Gedenktag"},
-  {HD_RE_DAY, "Tag der Republik"},
-  {HD_RESPECT_FOR_THE_AGED_DAY, "Tag der Ahnenverehrung"},
-  {HD_REVOLUTION_DAY, "Jahrestag der Revolution"},
-  {HD_RIO_DE_JANEIRO_ANNIVERSARY, "Rio de Janeiro Jahrestag"},
-  {HD_ROGATION_SUNDAY, "Sonntag Rogate"},
-  {HD_SAO_PAULO_ANNIVERSARY, "Sao Paulo Jahrestag"},
-  {HD_SAPPORO_SNOW_FESTIVAL, "Sapporo-Schneefest"},
-  {HD_SEASON_CHANGE, "Jahreszeitenwechsel/Bohnenfest"},
-  {HD_SEPTUAGESIMA_SUNDAY, "Septuagesima-Sonntag"},
-  {HD_SEVEN_SLEEPERS_DAY, "Siebenschl" AE "fer"},
-  {HD_SEXAGESIMA_SUNDAY, "Sexagesima-Sonntag"},
-  {HD_SHROVE_TUESDAY, "Fasching/Fastnacht"},
-  {HD_SOLSTICE_DAY, "Sonnenwende"},
-  {HD_SOOT_SWEEPING_DAY, "Tag des Ru" SZ "kehrens"},
-  {HD_SPRING_FESTIVAL, "Fr" UE "hlingsfest"},
-  {HD_START_OF_COMMON_MONTH, "Beginn Gemeinmonat"},
-  {HD_START_OF_LEAP_MONTH, "Beginn Schaltmonat"},
-  {HD_STAR_FESTIVAL, "Sternenfest"},
-  {HD_ST_ANDREWS_DAY, "St. Andreas-Tag"},
-  {HD_ST_BARTHOLOMEW_DAY, "St. Bartholom" AE "us-Tag"},
-  {HD_ST_BERCHTOLDS_DAY, "St. Berchtolds-Tag"},
-  {HD_ST_DAVIDS_DAY, "St. Davids-Tag"},
-  {HD_ST_EDWARDS_DAY, "St. Eduards-Tag"},
-  {HD_ST_GEORGES_DAY, "St. Georgs-Tag"},
-  {HD_ST_JAMES_DAY, "St. James-Tag"},
-  {HD_ST_JOSEPHS_DAY, "St. Josephs-Tag"},
-  {HD_ST_LAURENTIUS_DAY, "St. Laurentius-Tag"},
-  {HD_ST_NICHOLAS_DAY, "St. Nikolaus-Tag"},
-  {HD_ST_NICHOLAS_EVE, "St. Nikolausvorabend"},
-  {HD_ST_PATRICKS_DAY, "St. Patricks-Tag"},
-  {HD_ST_PETER_AND_ST_PAUL, "St. Peter und St. Paul"},
-  {HD_ST_STEPHENS_DAY, "St. Stephans-Tag"},
-  {HD_ST_VALENTINES_DAY, "St. Valentins-Tag"},
-  {HD_SUNDAY_OF_THE_DEAD, "Totensonntag"},
-  {HD_SWALLOW_DAY, "Schwalben-Tag"},
-  {HD_SWEETEST_DAY, "Freundes-Tag"},
-  {HD_SYLVESTER, "Silvester/Neujahrsvorabend"},
-  {HD_TEACHERS_DAY, "Tag der Lehrer"},
-  {HD_THAI_NEW_YEARS_DAY, "Thail" AE "ndisches Neujahr"},
-  {HD_THANKSGIVING_DAY, "Erntedankfest"},
-  {HD_THE_KINGS_BIRTHDAY, "Geburtstag des K" OE "nigs"},
-  {HD_THE_QUEENS_BIRTHDAY, "Geburtstag der K" OE "nigin"},
-  {HD_THREE_KINGS_DAY, "Epiphanias/Heilige Drei K" OE "nige"},
-  {HD_TIRADENTES_DAY, "Tiradentes-Tag"},
-  {HD_TOMB_SWEEPING_DAY, "Tag des Grabkehrens"},
-  {HD_TRANSFIGURATION_DAY, "Verkl" AE "rung Christi"},
-  {HD_TYNWALD_DAY, "Tynwald-Tag"},
-  {HD_VALBORGS_EVE, "Walpurgisnacht"},
-  {HD_VENICE_CARNIVAL, "Karneval in Venedig"},
-  {HD_VETERANS_DAY, "Tag der Veteranen"},
-  {HD_VICTORIA_DAY, "Victoria-Tag"},
-  {HD_VICTORY_DAY, "Siegestag"},
-  {HD_WHIT_MONDAY, "Pfingstmontag"},
-  {HD_WOMENS_DAY, "Tag der Frauen"},
-  {HD_WOMENS_SHROVE_DAY, "Weiberfastnacht"},
-  {HD_WORLD_ANIMAL_DAY, "Welt-Tierschutztag"},
-  {HD_YOUTH_DAY, "Tag der Jugend"}
-# if !HD_TOP20CC
-  /*
-     This COMMA is necessary here!
-   */
-  ,
-  {HD_ADELAIDE_CUP_DAY, "Adelaide-Pokal-Tag"},
-  {HD_ADMISSION_DAY, "Tag der Aufnahme"},
-  {HD_ALASKA_DAY, "Alaska-Tag"},
-  {HD_ALEKSIS_KIVI_DAY, "Aleksis Kivi-Tag"},
-  {HD_ALICE_SPRINGS_SHOW_DAY, "Alice-Springs Ausstellungstag"},
-  {HD_ALL_SAINTS_EVE, "Allerheiligenvorabend"},
-  {HD_AMERICAS_DAY, "Amerika-Tag"},
-  {HD_ANGAM_DAY, "Angam-Tag"},
-  {HD_ANNIVERSARY_OF_AMIRS_SUCCESSION, "Jahrestag der Nachfolge Amirs"},
-  {HD_ANNIVERSARY_OF_ARMED_STRUGGLE, "Jahrestag des bewaffneten Kampfes"},
-  {HD_ANNIVERSARY_OF_GREEN_MARCH, "Jahrestag des gr" UE "nen Marsches"},
-  {HD_ANTILLIAN_DAY, "Tag der Antillen"},
-  {HD_ARAB_LEAGUE_DAY, "Tag der arabischen Liga"},
-  {HD_ARCHBISHOP_MAKARIOS_MEMORIAL_DAY, "Erzbischof Makarios' Gedenktag"},
-  {HD_ARCHBISHOP_MAKARIOS_NAME_DAY, "Erzbischof Makarios' Namenstag"},
-  {HD_ARENGO_ANNIVERSARY, "Jahrestag von Arengo"},
-  {HD_ARMY_COUP_DAY, "Tag des Milit" AE "rputsches"},
-  {HD_ARRIVAL_OF_THE_SWISS, "Ankunft der Schweizer"},
-  {HD_ARTIGAS_BIRTHDAY, "Artigas' Geburtstag"},
-  {HD_ASUNCION_DAY, "Asuncion-Tag"},
-  {HD_ATATURK_MEMORIAL_DAY, "Atat" UE "rk Gedenktag"},
-  {HD_AUTHORITIYS_POWER_DAY, "Tag der Amtsgewaltskraft"},
-  {HD_BAATH_REVOLUTION_DAY, "Ba'ath Revolutionstag"},
-  {HD_BARON_BLISS_DAY, "Baron Bliss-Tag"},
-  {HD_BATAAN_DAY, "Bataan-Tag"},
-  {HD_BATTLE_OF_ANGAMOS, "Schlacht von Angamos"},
-  {HD_BATTLE_OF_BOYACA, "Schlacht von Boyac" ARA},
-  {HD_BATTLE_OF_CARABOBO, "Schlacht von Carabobo"},
-  {HD_BATTLE_OF_IQUIQUE, "Schlacht von Iquique"},
-  {HD_BATTLE_OF_LAS_PIEDRAS, "Schlacht von Las Piedras"},
-  {HD_BATTLE_OF_NAEFELS, "Schlacht von N" AE "fels"},
-  {HD_BEGINNING_OF_SUMMER, "Sommeranfang"},
-  {HD_BELGRADES_DAY, "Belgrads-Tag"},
-  {HD_BENNINGTON_BATTLE_DAY, "Schlacht von Bennington"},
-  {HD_BLESSING_OF_THE_WATER, "Segnung des Wassers"},
-  {HD_BLOOMSDAY, "Bl" UE "tentag"},
-  {HD_BOGANDA_DAY, "Boganda-Tag"},
-  {HD_BONAIRE_DAY, "Bonaire-Tag"},
-  {HD_BOQUERON_BATTLE_DAY, "Schlacht von Boqueron"},
-  {HD_BOTSWANA_DAY, "Botswana-Tag"},
-  {HD_BOUNTY_DAY, "Bounty-Tag"},
-  {HD_BUNKER_HILL_DAY, "Bunker Hill-Tag"},
-  {HD_BURNING_OF_JAN_HUS, "Verbrennung des Jan Hus"},
-  {HD_CANBERRA_DAY, "Canberra-Tag"},
-  {HD_CARICOM_DAY, "Caricom-Tag"},
-  {HD_CASIMIR_PULASKIS_BIRTHDAY, "Casimir Pulaskis Geburtstag"},
-  {HD_CASSINGA_DAY, "Cassinga-Tag"},
-  {HD_CAYENNE_FESTIVAL, "Cayennefest"},
-  {HD_CESAR_CHAVEZ_DAY, "Cesar Chavez-Tag"},
-  {HD_CHARTER_DAY, "Urkunden-Tag"},
-  {HD_CHIANG_KAI_SHEKS_BIRTHDAY, "Chiang Kai-sheks Geburtstag"},
-  {HD_CHILDRENS_WHITE_SUNDAY, "Weisser Sonntag der Kinder"},
-  {HD_COLON_DAY, "Colon-Tag"},
-  {HD_COLORADO_DAY, "Colorado-Tag"},
-  {HD_COMMONWEALTH_DAY, "Tag des Commonwealth"},
-  {HD_COMPACT_DAY, "Vertragstag"},
-  {HD_CONFEDERAL_AGREEMENT_DAY, "Tag des B" UE "ndnisabkommens"},
-  {HD_CORONATION_DAY, "Kr" OE "nungstag"},
-  {HD_CUP_MATCH_DAY, "Pokalspiel-Tag"},
-  {HD_CUSTOM_CHIEFS_DAY, "Brauchtumschefs-Tag"},
-  {HD_C_MAPINDUZI_DAY, "C. Mapinduzi-Tag"},
-  {HD_DARWIN_SHOW_DAY, "Darwin Ausstellungstag"},
-  {HD_DAY_OF_GOODWILL, "Tag des Wohlwollens"},
-  {HD_DAY_OF_STUDENTS_REVOLT, "Tag der Studentenrevolte"},
-  {HD_DAY_OF_THE_FREE_LAOS, "Tag des freien Laos"},
-  {HD_DEATH_OF_H_CHRISTOPHE, "Todestag von H. Christophe"},
-  {HD_DEATH_OF_J_DESSALINES, "Todestag von J. Dessalines"},
-  {HD_DEATH_OF_PRESIDENT_ABDALLAH, "Todestag von Pr" AE "sident Abdallah"},
-  {HD_DEATH_OF_PRESIDENT_CHEIKH, "Todestag von Pr" AE "sident Cheikh"},
-  {HD_DEATH_OF_PRESIDENT_SOILIH, "Todestag von Pr" AE "sident Soilih"},
-  {HD_DEATH_OF_QAID_I_AZAM, "Todestag von Qaid-i-Azam"},
-  {HD_DEATH_OF_T_LOUVERTURE, "Todestag von T. Louverture"},
-  {HD_DEFENDERS_DAY, "Tag der Verteidiger"},
-  {HD_DIA_DEL_PADRE, "Dia del Padre"},
-  {HD_DIA_DE_LOS_MAESTROS, "Dia de los Maestros"},
-  {HD_DISCOVERY_DAY, "Tag der Entdeckung"},
-  {HD_DOWNFALL_OF_THE_DERGUE, "Sturz des Dergen"},
-  {HD_DRY_SEASON_CELEBRATION, "Feier der Trockenzeit"},
-  {HD_DR_SUN_YAT_SENS_BIRTHDAY, "Dr. Sun Yat-sens Geburtstag"},
-  {HD_DUARTES_BIRTHDAY, "Duartes Geburtstag"},
-  {HD_EASTER_TUESDAY, "Osterdienstag"},
-  {HD_ECONOMIC_LIBERATION_DAY, "Tag der wirtschaftlichen Befreiung"},
-  {HD_EIGHT_HOURS_DAY, "Acht-Stunden-Tag"},
-  {HD_ELECTIONS_FOR_NATIONAL_ASSEMBLY, "Wahl zur Nationalversammlung"},
-  {HD_ERROL_BARROW_DAY, "Errol Barrow-Tag"},
-  {HD_EVACUATION_DAY, "Tag der Aussiedlung"},
-  {HD_EVE_OF_EPIPHANY, "Epiphaniasvorabend"},
-  {HD_EXPEDITION_OF_THE_33, "Expedition der 33"},
-  {HD_E_HOSTOS_BIRTHDAY, "E. Hostos' Geburtstag"},
-  {HD_FAMILY_DAY, "Tag der Familie"},
-  {HD_FAO_DAY, "FAO-Tag"},
-  {HD_FARMERS_DAY, "Tag der Bauern"},
-  {HD_FATHER_LEVAL_DAY, "Vater Leval-Tag"},
-  {HD_FEAST_OF_OUR_THEOTOKOS, "Fest des Theotokos"},
-  {HD_FISHERMANS_DAY, "Tag der Fischer"},
-  {HD_FOUNDATION_OF_NPLA_DAY, "Gr" UE "ndungstag der NPLA"},
-  {HD_FOUNDING_OF_PEOPLES_PARTY, "Gr" UE "ndungstag der Volkspartei"},
-  {HD_GARIFUNA_DAY, "Garifuna-Tag"},
-  {HD_GENERAL_SAN_MARTINS_ANNIVERSARY, "General San Martins Jahrestag"},
-  {HD_GOSPEL_DAY, "Gospel-Tag"},
-  {HD_GUACANASTE_DAY, "Guacanaste-Tag"},
-  {HD_GUSTAVUS_ADOLPHUS_DAY, "Gustav Adolph-Tag"},
-  {HD_HERITAGE_DAY, "Tag der Erbschaft"},
-  {HD_HEROES_DAY, "Tag der Helden"},
-  {HD_HOBART_SHOW_DAY, "Hobart Ausstellungstag"},
-  {HD_HOLY_WEDNESDAY, "Mittwoch vor Ostern"},
-  {HD_HO_CHI_MINHS_BIRTHDAY, "Ho Chi Minhs Geburtstag"},
-  {HD_HUMAN_RIGHTS_DAY, "Tag der Menschenrechte"},
-  {HD_HURRICANE_SUPPLICATION_DAY, "Tag des Hurrikananflehens"},
-  {HD_HURRICANE_THANKSGIVING_DAY, "Hurrikan Erntedankfest"},
-  {HD_INDEPENDENCE_OF_CARTAGENA, "Unabh" AE "ngigkeit von Cartagena"},
-  {HD_INDEPENDENCE_OF_CUENCA, "Unabh" AE "ngigkeit von Cuenca"},
-  {HD_INDEPENDENCE_OF_GUAYAQUIL, "Unabh" AE "ngigkeit von Guayaquil"},
-  {HD_INDEPENDENCE_OF_QUITO, "Unabh" AE "ngigkeit von Quito"},
-  {HD_INDIAN_ARRIVAL_DAY, "Ankunftstag der Inder"},
-  {HD_INTERNAL_AUTONOMY_DAY, "Tag der internen Autonomie"},
-  {HD_JEFFERSON_DAVIS_BIRTHDAY, "Jefferson Davis' Geburtstag"},
-  {HD_JUNE_HOLIDAY, "Junifeiertag"},
-  {HD_J_BARBOSAS_BIRTHDAY, "J. Barbosas Geburtstag"},
-  {HD_J_CHILEMBWE_DAY, "J. Chilembwe-Tag"},
-  {HD_J_DIEGOS_BIRTHDAY, "J. Diegos Geburtstag"},
-  {HD_J_ROBERTS_BIRTHDAY, "J. Roberts Geburtstag"},
-  {HD_KAMARAMPAKA_DAY, "Kamarampaka-Tag"},
-  {HD_KARTINI_DAY, "Kartini-Tag"},
-  {HD_KATHERINE_SHOW_DAY, "Catherine Ausstellungstag"},
-  {HD_KIEV_DAY, "Kiev-Tag"},
-  {HD_KIM_IL_SUNGS_BIRTHDAY, "Kim Il-Sungs Geburtstag"},
-  {HD_KIM_JONG_ILS_BIRTHDAY, "Kim Jong-Ils Geburtstag"},
-  {HD_KING_KAMEHAMEHA_DAY, "K" OE "nig Kamehameha-Tag"},
-  {HD_KING_RAMA_I_MEMORIAL_DAY, "K" OE "nig Rama I Gedenktag/Chakri"},
-  {HD_KING_RAMA_V_MEMORIAL_DAY, "K" OE "nig Rama V Gedenktag"},
-  {HD_KNABENSCHIESSEN, "Knabenschiessen"},
-  {HD_KONSTANTIN_AND_METHODIUS, "Konstantin und Methodius"},
-  {HD_LAPP_NATIONAL_HOLIDAY, "Nationalfeiertag der Lappen"},
-  {HD_LAUNCESTON_CUP_DAY, "Launceston-Pokal-Tag"},
-  {HD_LIBERTY_DAY, "Freiheitstag"},
-  {HD_LOSS_OF_MUSLIM_NATION, "Verlust des Moslemstaats"},
-  {HD_LUXEMBOURG_CITY_KERMIS, "Luxembourg-Stadt Kirmes"},
-  {HD_LYNDON_B_JOHNSON_DAY, "Lyndon B. Johnson-Tag"},
-  {HD_L_RIVERAS_BIRTHDAY, "L. Riveras Geburtstag"},
-  {HD_MADARAKA_DAY, "Madaraka-Tag"},
-  {HD_MAHATMA_GANDHIS_BIRTHDAY, "Mahatma Gandhis Geburtstag"},
-  {HD_MALVINAS_DAY, "Malvinas-Tag"},
-  {HD_MANILA_DAY, "Manila-Tag"},
-  {HD_MAPUTO_CITY_DAY, "Maputo Stadt-Tag"},
-  {HD_MARIEN_NGOUABI_DAY, "Marien Ngouabi-Tag"},
-  {HD_MARYLAND_DAY, "Maryland-Tag"},
-  {HD_MELBOURNE_CUP_DAY, "Melbourne-Pokal-Tag"},
-  {HD_MERCHANT_DAY, "Tag des Handels"},
-  {HD_MIDSUMMERS_EVE, "St. Johannisvorabend"},
-  {HD_MISSIONARY_DAY, "Tag der Missionierung"},
-  {HD_MI_CAREME_DAY, "Mi-Car" EDG "me"},
-  {HD_MORAZAN_DAY, "Morazan-Tag"},
-  {HD_MOSHESHOES_DAY, "Mosheshoes-Tag"},
-  {HD_MOTHERHOOD_AND_BEAUTY_DAY, "Mutterschafts- und Sch" OE "nheitstag"},
-  {HD_NAMING_DAY, "Namenstag"},
-  {HD_NATIONAL_BUN_DAY, "Tag des nationalen Knotens"},
-  {HD_NATIONAL_HEROES_DAY, "Tag der Nationalhelden"},
-  {HD_NATIONAL_REDEMPTION_DAY, "Nationaler Wiedergutmachungstag"},
-  {HD_NATIONAL_RESISTANCE_DAY, "Tag des nationalen Widerstandes"},
-  {HD_NATIONAL_REVIVAL_DAY, "Tag der nationalen Erneuerung"},
-  {HD_NATIONAL_UNITY_DAY, "Tag der nationalen Einheit"},
-  {HD_NDADAYE_DAY, "Ndadaye-Tag"},
-  {HD_NEUTRALITY_DAY, "Neutralit" AE "tstag"},
-  {HD_NEVADA_DAY, "Nevada-Tag"},
-  {HD_NEW_REGIME_ANNIVERSARY, "Jahrestag der neuen Regierung"},
-  {HD_NOBEL_DAY, "Nobel-Tag"},
-  {HD_NOI_DAY, "Noi-Tag"},
-  {HD_OAU_DAY, "OAU-Tag"},
-  {HD_OCTOBER_HOLIDAY, "Oktoberfeiertag"},
-  {HD_OIL_INDUSTRY_DAY, "Tag der " OE "l-Industrie"},
-  {HD_OUR_LADY_OF_ALTAGRACIA_DAY, "Tag der Jungfrau von Altagracia"},
-  {HD_OUR_LADY_OF_CAMARIN_DAY, "Tag der Jungfrau von Camarin"},
-  {HD_OUR_LADY_OF_LAS_MERCEDES_DAY, "Tag der Jungfrau von Las Mercedes"},
-  {HD_OUR_LADY_OF_LOS_ANGELES_DAY, "Tag der Jungfrau von Los Angeles"},
-  {HD_OUR_LADY_OF_SEVEN_SORROWS, "Tag der Jungfrau der sieben Leiden"},
-  {HD_OUR_LADY_OF_VICTORIES_DAY, "Tag der Jungfrau der Siege"},
-  {HD_PANAMA_CITY_DAY, "Panama Stadt-Tag"},
-  {HD_PANAMERICAN_DAY, "Panamerikanischer-Tag"},
-  {HD_PARIS_PEACE_AGREEMENT_DAY, "Tag des Pariser Friedensabkommens"},
-  {HD_PATRIOTS_DAY, "Tag der Patrioten"},
-  {HD_PEOPLES_UPRISING_DAY, "Tag des Volksaufstands"},
-  {HD_PEOPLE_POWER_DAY, "Tag der Volksmassen"},
-  {HD_PHILIPPINE_USA_FRIENDSHIP, "Philippinen/USA Freundschaftstag"},
-  {HD_PICHINCHA_DAY, "Pichincha-Tag"},
-  {HD_PICNIC_DAY, "Picknick-Tag"},
-  {HD_PIONEER_DAY, "Tag der Pioniere"},
-  {HD_POYA_DAY, "Poya-Tag"},
-  {HD_PRINCE_KALANIANAOLE_DAY, "Prinz Kalanianaole-Tag"},
-  {HD_PRINCE_OF_WALES_BIRTHDAY, "Prinz von Wales' Geburtstag"},
-  {HD_PROCLAMATION_DAY, "Verk" UE "ndungstag"},
-  {HD_QAID_I_AZAMS_BIRTHDAY, "Qaid-i-Azams Geburtstag"},
-  {HD_RATU_SUKUMA_DAY, "Ratu Sukuma-Tag"},
-  {HD_RECREATION_DAY, "Tag der Erholung"},
-  {HD_REFERENDUM_DAY, "Tag des Volksentscheids"},
-  {HD_REGATTA_DAY, "Regattatag"},
-  {HD_REGENCY_EXCHANGE, "Wechsel der Regentschaft"},
-  {HD_RESTORATION_DAY, "Wiederherstellungstag"},
-  {HD_RETURN_DAY, "Tag der Wiederkehr"},
-  {HD_REUNIFICATION_DAY, "Tag der Wiedervereinigung"},
-  {HD_RIZAL_DAY, "Rizal-Tag"},
-  {HD_RWAGASORE_DAY, "Rwagasore-Tag"},
-  {HD_SABA_DAY, "Saba-Tag"},
-  {HD_SAN_JACINTO_DAY, "San Jacinto-Tag"},
-  {HD_SAN_JOSE_DAY, "San Jos" ERA "-Tag"},
-  {HD_SAR_ESTABLISHMENT_DAY, "Gr" UE "ndungstag des SAR-Dienstes"},
-  {HD_SCHOOL_HOLIDAY, "Schulfeiertag"},
-  {HD_SECHSELAEUTEN, "Sechsel" AE "uten"},
-  {HD_SEPARATION_DAY, "Trennungstag"},
-  {HD_SERETSE_KHAMA_DAY, "Seretse Khama-Tag"},
-  {HD_SETTLERS_DAY, "Tag der Siedler"},
-  {HD_SEWARDS_DAY, "Sewards-Tag"},
-  {HD_SHAHEED_DAY, "Shaheed-Tag"},
-  {HD_SHEEP_FESTIVAL, "Schafsfest"},
-  {HD_SHEIKH_ZAYEDS_ASCENSION_DAY, "Scheich Zayeds Himmelfahrt"},
-  {HD_SIMON_BOLIVAR_DAY, "Simon Bolivar-Tag"},
-  {HD_SINAI_LIBERATION_DAY, "Tag der Befreiung Sinais"},
-  {HD_SLAVE_LIBERATION_DAY, "Tag der Sklavenbefreiung"},
-  {HD_SNIFF_THE_BREEZE_DAY, "Tag des Briseschnupperns"},
-  {HD_SOLIDARITY_DAY, "Solidarit" AE "tstag"},
-  {HD_SOMERS_DAY, "Somers-Tag"},
-  {HD_STATIA_AMERICA_DAY, "St. Eustatius' Amerikatag"},
-  {HD_STUDENTS_DAY, "Tag der Studenten"},
-  {HD_ST_AGATA_DAY, "St. Agata-Tag"},
-  {HD_ST_CANUTES_DAY, "St. Knuts-Tag"},
-  {HD_ST_CEDILIAS_DAY, "St. Cedilias-Tag"},
-  {HD_ST_CHARLES_DAY, "St. Karls-Tag"},
-  {HD_ST_DEMETRIUS_DAY, "St. Demetrius-Tag"},
-  {HD_ST_DEVOTE_DAY, "Sainte-D" ERA "vote"},
-  {HD_ST_ELIAHS_DAY, "St. Eliahs-Tag"},
-  {HD_ST_JEAN_BAPTISTE_DAY, "St. Jean Baptiste-Tag"},
-  {HD_ST_LUCIAS_DAY, "St. Lucias-Tag"},
-  {HD_ST_MARGUERITES_DAY, "St. Marguerites-Tag"},
-  {HD_ST_MAROONS_DAY, "St. Marons-Tag"},
-  {HD_ST_MICHAELS_DAY, "St. Michaels-Tag"},
-  {HD_ST_OLAVS_DAY, "St. Olavs-Tag"},
-  {HD_ST_OLAVS_EVE, "St. Olavsvorabend"},
-  {HD_ST_PAULS_SHIPSWRECK, "St. Pauls Schiffsbruch-Tag"},
-  {HD_ST_ROSE_OF_LIMA, "Heilige Rose von Lima"},
-  {HD_ST_URSULAS_DAY, "St. Ursulas-Tag"},
-  {HD_ST_VINCENT_DE_PAULS_DAY, "St. Vincent de Pauls-Tag"},
-  {HD_SUEZ_VICTORY_DAY, "Suez Siegestag"},
-  {HD_SULTAN_QABOOS_BIRTHDAY, "Sultan Qaboos' Geburtstag"},
-  {HD_SVETITSKHOVLOBA, "Svetitskhovloba"},
-  {HD_SWEDEN_DAY, "Schweden-Tag"},
-  {HD_S_DOES_BIRTHDAY, "S. Does Geburtstag"},
-  {HD_TENNANT_CREEK_SHOW_DAY, "Tennant-Creek Ausstellungstag"},
-  {HD_TERRITORY_DAY, "Territoriumstag"},
-  {HD_THE_CROWN_PRINCESSES_BIRTHDAY, "Geburtstag der Kronprinzessin"},
-  {HD_THE_CROWN_PRINCESSES_NAME_DAY, "Namenstag der Kronprinzessin"},
-  {HD_THE_CROWN_PRINCES_BIRTHDAY, "Geburtstag des Kronprinzen"},
-  {HD_THE_KINGS_NAME_DAY, "Namenstag des K" OE "nigs"},
-  {HD_THE_QUEENS_NAME_DAY, "Namenstag der K" OE "nigin"},
-  {HD_TOPOU_I_DAY, "Topou I-Tag"},
-  {HD_TOWN_MEETING_DAY, "Tag des St" AE "dtetreffens"},
-  {HD_TRADITIONAL_DAY, "Traditionstag"},
-  {HD_TRANSFER_DAY, "Tag der " UE "bertragung"},
-  {HD_TRUMAN_DAY, "Truman-Tag"},
-  {HD_UNION_DAY, "Tag der Union"},
-  {HD_UNION_WITH_SWEDEN_DISSOLVED, "Union mit Schweden aufgel" OE "st"},
-  {HD_UNITED_NATIONS_DAY, "Tag der Vereinten Nationen"},
-  {HD_UNITY_FACTORY_DAY, "Tag der Fabrikvereinigung"},
-  {HD_VICTOR_SCHOELCHER_DAY, "Victor-Schoelcher-Tag"},
-  {HD_VIDOVDAN, "Vidovdan"},
-  {HD_WEST_VIRGINIA_DAY, "West-Virginia-Tag"},
-  {HD_WHITSUN_EVE, "Pfingstvorabend"},
-  {HD_W_TUBMANS_BIRTHDAY, "W. Tubmans Geburtstag"},
-  {HD_YAP_DAY, "Yap-Tag"},
-  {HD_DAY_OF_CZECH_STATEHOOD, "Tag der Tschechische Staatlichkeit"}
-# endif	/* !HD_TOP20CC */
-#else /* !USE_DE */
   /*
    *** Translators, please keep in mind to translate all trailing
    *** holiday texts to texts which have a maximum length of:
@@ -1669,7 +738,7 @@ const Ht_struct hd_text[] = {
   {HD_WOMENS_SHROVE_DAY, N_("Women's Shrove Day")},
   {HD_WORLD_ANIMAL_DAY, N_("World Animal Day")},
   {HD_YOUTH_DAY, N_("Youth Day")}
-# if !HD_TOP20CC
+#if !HD_TOP20CC
   /*
      This COMMA is necessary here!
    */
@@ -1946,8 +1015,7 @@ const Ht_struct hd_text[] = {
   {HD_W_TUBMANS_BIRTHDAY, N_("W. Tubman's Birthday")},
   {HD_YAP_DAY, N_("Yap Day")},
   {HD_DAY_OF_CZECH_STATEHOOD, N_("Day of Czech Statehood")}
-# endif	/* !HD_TOP20CC */
-#endif /* !USE_DE */
+#endif	/* !HD_TOP20CC */
 };
 
 
@@ -2010,16 +1078,6 @@ static const char *chi_stem[] = {
 };
 
 /* Chinese (Mandarin??) names for the heavenly branches. */
-#if USE_DE
-static const char *chi_branch[] = {
-  "Zi/Ratte", "Chou/Rind",
-  "Yin/Tiger", "Mao/Hase",
-  "Chen/Drache", "Si/Schlange",
-  "Wu/Pferd", "Wei/Schaf",
-  "Shen/Affe", "You/Hahn",
-  "Xu/Hund", "Hai/Schwein"
-};
-#else /* !USE_DE */
 static const char *chi_branch[] = {
   N_("Zi/Rat"), N_("Chou/Ox"),
   N_("Yin/Tiger"), N_("Mao/Rabbit"),
@@ -2028,7 +1086,6 @@ static const char *chi_branch[] = {
   N_("Shen/Monkey"), N_("You/Rooster"),
   N_("Xu/Dog"), N_("Hai/Pig")
 };
-#endif /* !USE_DE */
 
 
 
@@ -2224,11 +1281,7 @@ astronomical_hdy (init_data, detected, year, hd_elems, fday, count)
   auto char *ptr2_txt = (char *) NULL;
 
 
-#if USE_DE
-  ptr_cc_id = "Ast";
-#else /* !USE_DE */
   ptr_cc_id = _("Ast");
-#endif /* !USE_DE */
   /*
      Detect all equinoxes and solstices of the YEAR.
    */
@@ -2341,11 +1394,7 @@ bahai_hdy (init_data, detected, year, hd_elems, fday, count, cc)
 	cc_mode = SPECIAL_VALUE;
       else
 	abort ();		/* Error, invalid case! */
-#if USE_DE
-      ptr_cc_id = "Bah";
-#else /* !USE_DE */
       ptr_cc_id = _("Bah");
-#endif /* !USE_DE */
       doy = day_of_year (21, 3, year);
       if (year <= greg->year)
 	doy -= 12;
@@ -2428,11 +1477,7 @@ bahai_mth (init_data, detected, year, hd_elems, fday, count)
       auto int y;
 
 
-#if USE_DE
-      ptr_cc_id = "Bah";
-#else /* !USE_DE */
       ptr_cc_id = _("Bah");
-#endif /* !USE_DE */
       for (n = year - 1; n <= year; n++)
 	if (n > 1843)
 	  {
@@ -2499,11 +1544,7 @@ celtic_hdy (init_data, detected, year, hd_elems, fday, count, cc)
     cc_mode = SPECIAL_VALUE;
   else
     abort ();			/* Error, invalid case! */
-#if USE_DE
-  ptr_cc_id = "Kel";
-#else /* !USE_DE */
   ptr_cc_id = _("Cel");
-#endif /* !USE_DE */
   /*
      Manage all critical holidays, which can exceed the year bounds
      of a Julian/Gregorian calendar year.
@@ -2645,11 +1686,7 @@ chinese_hdy (init_data, detected, year, hd_elems, fday, count, cc,
       else
 	abort ();		/* Error, invalid case! */
       if (!cc_mode || cc_mode == SPECIAL_VALUE)
-#if USE_DE
-	ptr_cc_id = "Chi";
-#else /* !USE_DE */
 	ptr_cc_id = _("Chi");
-#endif /* !USE_DE */
       if (is_any_meridian)
 	{
 	  /*
@@ -2761,16 +1798,10 @@ chinese_hdy (init_data, detected, year, hd_elems, fday, count, cc,
 	   */
 	  if (warning_level >= 0)
 	    {
-#if USE_DE
-	      sprintf (s2,
-		       "Lunisolarer Kalender f%sr %d kann nicht korrekt ermittelt werden",
-		       UE, y);
-#else /* !USE_DE */
 	      sprintf (s2,
 		       _
 		       ("Cannot calculate lunisolar calendar for %d correctly"),
 		       y);
-#endif /* !USE_DE */
 	      print_text (stderr, s2);
 	      if (warning_level >= WARN_LVL_MAX)
 		my_error (ERR_INTERNAL_C_FUNC_FAILURE, __FILE__,
@@ -3188,17 +2219,9 @@ chinese_mth (init_data, detected, year, hd_elems, fday, count,
 
 
       if (do_chinese)
-#if USE_DE
-	ptr_cc_id = "Chi";
-#else /* !USE_DE */
 	ptr_cc_id = _("Chi");
-#endif /* !USE_DE */
       else
-#if USE_DE
-	ptr_cc_id = "Jap";
-#else /* !USE_DE */
 	ptr_cc_id = _("Jap");
-#endif /* !USE_DE */
       if (is_any_meridian)
 	{
 	  /*
@@ -3294,16 +2317,10 @@ chinese_mth (init_data, detected, year, hd_elems, fday, count,
 	       */
 	      if (warning_level >= 0)
 		{
-#if USE_DE
-		  sprintf (s2,
-			   "Lunisolarer Kalender f%sr %d kann nicht korrekt ermittelt werden",
-			   UE, y);
-#else /* !USE_DE */
 		  sprintf (s2,
 			   _
 			   ("Cannot calculate lunisolar calendar for %d correctly"),
 			   y);
-#endif /* !USE_DE */
 		  print_text (stderr, s2);
 		  if (warning_level >= WARN_LVL_MAX)
 		    my_error (ERR_INTERNAL_C_FUNC_FAILURE, __FILE__,
@@ -3400,11 +2417,7 @@ christian_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   register int month;
 
 
-#if USE_DE
-  ptr_cc_id = "Chr";
-#else /* !USE_DE */
   ptr_cc_id = _("Chr");
-#endif /* !USE_DE */
   holiday (*init_data, detected, _(hd_text[HD_1ST_SUNDAY_IN_LENT].ht_text),
 	   ptr_cc_id, DIS_HLS_PREF, easter - 42, 0, year, hd_elems, fday,
 	   count);
@@ -3638,11 +2651,7 @@ french_revolutionary_mth (init_data, detected, year, hd_elems, fday, count)
       auto int y;
 
 
-#if USE_DE
-      ptr_cc_id = "FRR";
-#else /* !USE_DE */
       ptr_cc_id = _("FRR");
-#endif /* !USE_DE */
       for (n = year - 1; n <= year; n++)
 	if (n > 1791)
 	  {
@@ -3763,11 +2772,7 @@ hebrew_hdy (init_data, detected, year, hd_elems, fday, count, cc)
   else
     abort ();			/* Error, invalid case! */
   if (!cc_mode || cc_mode == SPECIAL_VALUE)
-#if USE_DE
-    ptr_cc_id = "Heb";
-#else /* !USE_DE */
     ptr_cc_id = _("Heb");
-#endif /* !USE_DE */
   /*
      Manage those holidays first, which either cannot exceed the year bounds
      of a Julian/Gregorian calendar year, or do not depend on the length of
@@ -3949,12 +2954,7 @@ hebrew_mth (init_data, detected, year, hd_elems, fday, count)
   auto int m;
   auto int y;
 
-
-#if USE_DE
-  ptr_cc_id = "Heb";
-#else /* !USE_DE */
   ptr_cc_id = _("Heb");
-#endif /* !USE_DE */
   for (n = year - 1; n <= year; n++)
     {
       /*
@@ -4184,11 +3184,7 @@ islamic_hdy (init_data, detected, year, hd_elems, fday, count, cc)
       if (cc_mode == YEAR_MAX)
 	abort ();		/* Error, invalid case! */
       if (!cc_mode || cc_mode == SPECIAL_VALUE)
-#if USE_DE
-	ptr_cc_id = "Isl";
-#else /* !USE_DE */
 	ptr_cc_id = _("Isl");
-#endif /* !USE_DE */
       /*
          Manage those holidays first, which either cannot exceed
          the year bounds of a Julian/Gregorian calendar year.
@@ -4617,11 +3613,7 @@ islamic_mth (init_data, detected, year, hd_elems, fday, count)
       auto Bool check_twice = FALSE;
 
 
-#if USE_DE
-      ptr_cc_id = "Isl";
-#else /* !USE_DE */
       ptr_cc_id = _("Isl");
-#endif /* !USE_DE */
       (void) muharram_1 (year, &doy2);
       if (doy2)
 	/*
@@ -4732,11 +3724,7 @@ japanese_hdy (init_data, detected, year, hd_elems, fday, count, cc,
       else
 	abort ();		/* Error, invalid case! */
       if (!cc_mode || cc_mode == SPECIAL_VALUE)
-#if USE_DE
-	ptr_cc_id = "Jap";
-#else /* !USE_DE */
 	ptr_cc_id = _("Jap");
-#endif /* !USE_DE */
       if (is_any_meridian)
 	{
 	  /*
@@ -4846,16 +3834,10 @@ japanese_hdy (init_data, detected, year, hd_elems, fday, count, cc,
 	   */
 	  if (warning_level >= 0)
 	    {
-#if USE_DE
-	      sprintf (s2,
-		       "Lunisolarer Kalender f%sr %d kann nicht korrekt ermittelt werden",
-		       UE, y);
-#else /* !USE_DE */
 	      sprintf (s2,
 		       _
 		       ("Cannot calculate lunisolar calendar for %d correctly"),
 		       y);
-#endif /* !USE_DE */
 	      print_text (stderr, s2);
 	      if (warning_level >= WARN_LVL_MAX)
 		my_error (ERR_INTERNAL_C_FUNC_FAILURE, __FILE__,
@@ -5186,11 +4168,7 @@ multicultural_new_year_hdy (init_data, detected, year, hd_elems, fday, count)
          (Republican) calendar, based on the date of the autumnal
          equinox as it occurs in Paris, FR.
        */
-#if USE_DE
-      ptr_cc_id = "FRR";
-#else /* !USE_DE */
       ptr_cc_id = _("FRR");
-#endif /* !USE_DE */
       y = year;
       mjd = (Ulint) equinox_solstice (NH_AE, &d, &m, &y, 0, 9);
       if (mjd != (Ulint) SPECIAL_VALUE)
@@ -5260,11 +4238,7 @@ multicultural_new_year_hdy (init_data, detected, year, hd_elems, fday, count)
          Calculate the year number used in the Old-Armenic calendar,
          based on the Epoch AD 11-Jul-0552.
        */
-#if USE_DE
-      ptr_cc_id = "AMA";
-#else /* !USE_DE */
       ptr_cc_id = _("AMO");
-#endif /* !USE_DE */
       mjd = date2num (DAY_MIN, MONTH_MIN, year) - 201081L;
       x = mjd / (double) DAY_LAST;
       y = (int) x + 1;
@@ -5285,11 +4259,7 @@ multicultural_new_year_hdy (init_data, detected, year, hd_elems, fday, count)
      Calculate the year number and the Sothisperiod used in the Old-Egyptic
      calendar, based on the Epoch 19-Jul-4241 BCE.
    */
-#if USE_DE
-  ptr_cc_id = "EGA";
-#else /* !USE_DE */
   ptr_cc_id = _("EGO");
-#endif /* !USE_DE */
   mjd = date2num (DAY_MIN, MONTH_MIN, year) + MIN_BCE_TO_1_CE - 172235L;
   m = ((int) (mjd / 533256L)) + 1;
   x = mjd / (double) DAY_LAST;
@@ -5361,17 +4331,9 @@ old_egyptic_mth (init_data, detected, year, hd_elems, fday, count, do_egyptic)
 
 
       if (do_egyptic)
-#if USE_DE
-	ptr_cc_id = "EGA";
-#else /* !USE_DE */
 	ptr_cc_id = _("EGO");
-#endif /* !USE_DE */
       else
-#if USE_DE
-	ptr_cc_id = "AMA";
-#else /* !USE_DE */
 	ptr_cc_id = _("AMO");
-#endif /* !USE_DE */
       for (n = year - 1; n <= year; n++)
 	if (do_egyptic || (!do_egyptic && (n > 551)))
 	  {
@@ -5479,17 +4441,9 @@ orthodox_hdy (init_data, detected, easter, year, hd_elems, fday, count, cc,
   else
     abort ();			/* Error, invalid case! */
   if (is_new_calendar)
-#if USE_DE
-    ptr_cc_id = "OxN";
-#else /* !USE_DE */
     ptr_cc_id = _("OxN");
-#endif /* !USE_DE */
   else
-#if USE_DE
-    ptr_cc_id = "OxA";
-#else /* !USE_DE */
     ptr_cc_id = _("OxO");
-#endif /* !USE_DE */
   /*
      Process the holiday data.
    */
@@ -5690,11 +4644,7 @@ persian_hdy (init_data, detected, year, hd_elems, fday, count, cc)
       else
 	abort ();		/* Error, invalid case! */
       if (!cc_mode || cc_mode == SPECIAL_VALUE)
-#if USE_DE
-	ptr_cc_id = "Per";
-#else /* !USE_DE */
 	ptr_cc_id = _("Per");
-#endif /* !USE_DE */
       /*
          Detect the Persian_New_Year/Noruz, which is around the vernal equinox.
          The calculation of the vernal equinox is based on Iraq local time,
@@ -5823,12 +4773,7 @@ persian_mth (init_data, detected, year, hd_elems, fday, count)
       auto int m;
       auto int y;
 
-
-#if USE_DE
-      ptr_cc_id = "Per";
-#else /* !USE_DE */
       ptr_cc_id = _("Per");
-#endif /* !USE_DE */
       for (n = year - 1; n <= year; n++)
 	if (n > 621)
 	  {
@@ -5896,11 +4841,7 @@ zodiacal_marker_hdy (init_data, detected, year, hd_elems, fday, count)
   auto int y = year;
 
 
-#if USE_DE
-  ptr_cc_id = "Zod";
-#else /* !USE_DE */
   ptr_cc_id = _("Zod");
-#endif /* !USE_DE */
   /*
      All major zodiacal/solar term/Zhong-Qi seasonal markers.
    */

@@ -128,16 +128,6 @@ usage_msg (fp, prgr_name, exit_status)
      terminates the program with `exit_status'.
 */
 {
-#if USE_DE
-  fprintf (fp, "Aufruf:  %s  [--%s | --%s] | [TEXTDATEI | -] [DATUMTEIL]\n",
-	   prgr_name, help_option_name, version_option_name);
-  if (exit_status == EXIT_SUCCESS)
-    {
-      S_NEWLINE (fp);
-      fprintf (fp, "Fehlerberichte via eMail an <%s>", BUG_REPORT_ADR1);
-      S_NEWLINE (fp);
-    }
-#else /* !USE_DE */
   fprintf (fp, _("Usage:  %s  [--%s | --%s] | [TEXT-FILE | -] [DATE-PART]\n"),
 	   prgr_name, help_option_name, version_option_name);
   if (exit_status == EXIT_SUCCESS)
@@ -146,7 +136,6 @@ usage_msg (fp, prgr_name, exit_status)
       fprintf (fp, _("Email bug reports to <%s>"), BUG_REPORT_ADR1);
       S_NEWLINE (fp);
     }
-#endif /* !USE_DE */
   exit (exit_status);
 }
 
@@ -164,17 +153,6 @@ version_msg (fp, prgr_name, exit_status)
 {
   fprintf (fp, "%s (GNU cal %s)\n", prgr_name, PACKAGE_VERSION);
   fprintf (fp, "%s\n", COPYRIGHT_TXT);
-#if USE_DE
-  fprintf (fp,
-	   "Dies ist freie Software; in den Quellen befindet sich die Lizenz-");
-  S_NEWLINE (fp);
-  fprintf (fp,
-	   "und Kopierbedingung.  Es gibt KEINERLEI Garantie, nicht einmal f%sr",
-	   UE);
-  S_NEWLINE (fp);
-  fprintf (fp,
-	   "die TAUGLICHKEIT oder die VERWENDBARKEIT ZU EINEM ANGEGEBENEN ZWECK.");
-#else /* !USE_DE */
   fprintf (fp,
 	   _
 	   ("This is free software; see the source for copying conditions."));
@@ -183,7 +161,6 @@ version_msg (fp, prgr_name, exit_status)
 	   _("There is NO warranty, without even the implied warranty of"));
   S_NEWLINE (fp);
   fprintf (fp, _("MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."));
-#endif /* !USE_DE */
   S_NEWLINE (fp);
   exit (exit_status);
 }
@@ -279,29 +256,9 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
      and terminates the program with status `exit_status'.
 */
 {
-#if USE_DE
-  fprintf (stderr, "\n%s: Abbruch, ", prgr_name);
-#else /* !USE_DE */
   fprintf (stderr, _("\n%s: abort, "), prgr_name);
-#endif /* !USE_DE */
   switch (exit_status)
     {
-#if USE_DE
-    case ERR_NO_MEMORY_AVAILABLE:
-      fprintf (stderr,
-	       "`%s' Zeile %ld: virtueller Speicher ersch%spft (%s=%d)",
-	       module_name, module_line, OE, var_name, var_contents);
-      break;
-    case ERR_INTERNAL_TABLE_CRASH:
-      fprintf (stderr,
-	       "`%s' Zeile %ld: (`%s') ung%sltiger Wert f%sr Tabellengr%s%se `sizeof %s>%d'",
-	       module_name, module_line, INTERNAL_TXT, UE, UE, OE, SZ,
-	       var_name, var_contents);
-      break;
-    default:
-      fprintf (stderr, "`%s' Zeile %ld: (`%s') unbehandelter Fehler (%d)",
-	       module_name, module_line, INTERNAL_TXT, exit_status);
-#else /* !USE_DE */
     case ERR_NO_MEMORY_AVAILABLE:
       fprintf (stderr, _("`%s' line %ld: virtual memory exhausted (%s=%d)"),
 	       module_name, module_line, var_name, var_contents);
@@ -316,7 +273,6 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
     default:
       fprintf (stderr, _("`%s' line %ld: (`%s') unmanaged error (%d)"),
 	       module_name, module_line, _("Internal"), exit_status);
-#endif /* !USE_DE */
     }
   S_NEWLINE (stderr);
   exit (exit_status);
@@ -335,13 +291,8 @@ handle_signal (the_signal)
 */
 {
   fflush (stdout);
-# if USE_DE
-  fprintf (stderr, "\n%s: Programmabbruch durch Signal %d\n", prgr_name,
-	   the_signal);
-# else /* !USE_DE */
   fprintf (stderr, _("\n%s: program aborted by signal %d\n"), prgr_name,
 	   the_signal);
-# endif	/* !USE_DE */
   exit (ERR_TERMINATION_BY_SIGNAL);
 }
 #endif /* HAVE_SIGNAL && (SIGINT || SIGTERM || SIGHUP) */
@@ -762,13 +713,8 @@ main (argc, argv)
 	      /*
 	         Error, unknown long-style option given.
 	       */
-#if USE_DE
-	      fprintf (stderr, "%s: unbekannte Option `%s'", prgr_name,
-		       argv[1]);
-#else /* !USE_DE */
 	      fprintf (stderr, _("%s: unrecognized option `%s'"), prgr_name,
 		       argv[1]);
-#endif /* !USE_DE */
 	      S_NEWLINE (stderr);
 	      usage_msg (stderr, prgr_name, ERR_INVALID_OPTION);
 	    }
@@ -806,20 +752,12 @@ main (argc, argv)
       sprintf (s1, "%s: `%s' ", prgr_name, argv[1]);
 #if HAVE_ERRNO_H
       if (!is_regular_file)
-# if USE_DE
-	fprintf (stderr, "%s: keine regul%sre Datei\n", s1, AE);
-# else /* !USE_DE */
 	fprintf (stderr, _("%s: no regular file\n"), s1);
-# endif	/* !USE_DE */
       else
 	perror (s1);
       exit (EXIT_FAILURE);
 #else /* !HAVE_ERRNO_H */
-# if USE_DE
-      fprintf (stderr, "%s: Datei nicht gefunden\n", s1);
-# else /* !USE_DE */
       fprintf (stderr, _("%s: file not found\n"), s1);
-# endif	/* !USE_DE */
       exit (ERR_FILE_NOT_FOUND);
 #endif /* !HAVE_ERRNO_H */
     }

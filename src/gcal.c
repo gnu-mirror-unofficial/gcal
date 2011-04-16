@@ -2,7 +2,7 @@
 *  gcal.c:  Main part which controls the extended calendar program.
 *
 *
-*  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+*  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -344,16 +344,12 @@ const Lopt_struct lopt[] = {
    "date-format",
    {"!\001", "!\002", "!\003", /* e.g.: "!\004", */ "!", NULL},
    LARG_ONE_OR_ARG,
-#if USE_DE
-   {CC_DE, CC_US, CC_GB, /* e.g.: "OTHER", */ LARG_TXT, NULL}
-#else /* !USE_DE */
    {CC_DE, CC_US, CC_GB,	/* e.g.: "OTHER", */
     /*
      *** Translators, please translate this as a fixed 3-character text.
      *** This text should be a proper abbreviation of "ARGUMENT".
      */
     N_("ARG"), NULL}
-#endif /* !USE_DE */
    },
 #if USE_RC
   {
@@ -519,16 +515,12 @@ const Lopt_struct lopt[] = {
    "gregorian-reform",
    {"$\001", "$\002", "$\003", "$\004", "$", NULL},
    LARG_ONE_OR_ARG,
-#if USE_DE
-   {"1582", "1700", "1752", "1753", LARG_TXT, NULL}
-#else /* !USE_DE */
    {"1582", "1700", "1752", "1753",
     /*
      *** Translators, please translate this as a fixed 3-character text.
      *** This text should be a proper abbreviation of "ARGUMENT".
      */
     N_("ARG"), NULL}
-#endif /* !USE_DE */
    },
 #if USE_RC
   {
@@ -1085,15 +1077,9 @@ Df_struct supported_date_format[LARG_MAX - 1] = {
 /*
   { char *df_id, char *df_info, char *df_format },
 */
-#if USE_DE
-  {CC_DE, "Deutschland", "%<2#K,  %1%>2*D%2 %<3#U %>04*Y"},
-  {CC_US, "USA", "%<3#K, %<3#U  %1%>2&*D%2 %>04*Y"},
-  {CC_GB, "Gro" SZ "britannien", "%<3#K,  %1%>2&*D%2 %<3#U %>04*Y"},
-#else /* !USE_DE */
   {CC_DE, N_("Germany"), "%<2#K,  %1%>2*D%2 %<3#U %>04*Y"},
   {CC_US, N_("U.S.A."), "%<3#K, %<3#U  %1%>2&*D%2 %>04*Y"},
   {CC_GB, N_("Great Britain"), "%<3#K,  %1%>2&*D%2 %<3#U %>04*Y"},
-#endif /* !USE_DE */
 /*
    The next table field can be provided with further data!
    If more "burned-in" data is needed, LARG_MAX must be increased accordingly,
@@ -1691,31 +1677,23 @@ main (argc, argv)
   assert ((Uint) HD_ELEMS_MAX <= testval);
   assert (FWIDTH_MAX > 0);
 #endif /* HAVE_ASSERT_H */
-#if USE_DE
-  /*
-     USE_DE means German texts and territory specifics by default.
-   */
-  special_calsheet_flag = FALSE;
-  iso_week_number = TRUE;
-  out_rows = S_OUT_ROWS;
-#else /* !USE_DE */
-# ifdef GCAL_NLS
+#ifdef GCAL_NLS
   /*
      Now initialize the NLS functions.
    */
-#  if HAVE_SETLOCALE
+# if HAVE_SETLOCALE
   setlocale (LC_ALL, "");
-#  endif
-#  ifndef LOCALEEDIR
-#   define LOCALEEDIR  NULL
-#  endif
+# endif
+# ifndef LOCALEEDIR
+#  define LOCALEEDIR  NULL
+# endif
   bindtextdomain (PACKAGE, LOCALEDIR);
   textdomain (PACKAGE);
   /*
      Now check whether we use a native language message catalog
      or the internal default (==English) language texts!
    */
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
   /*
      Detect whether the $LANGUAGE environment variable (GNU specific) is set.
    */
@@ -1733,7 +1711,7 @@ main (argc, argv)
 	if (!*ptr_char)
 	  ptr_char = (char *) NULL;
     }
-#   if HAVE_LC_MESSAGES
+#  if HAVE_LC_MESSAGES
   if (ptr_char == (char *) NULL)
     {
       /*
@@ -1744,7 +1722,7 @@ main (argc, argv)
 	if (!*ptr_char)
 	  ptr_char = (char *) NULL;
     }
-#   endif
+#  endif
   if (ptr_char == (char *) NULL)
     {
       /*
@@ -1795,7 +1773,7 @@ main (argc, argv)
     /*
        No environment variable defined.
      */
-#  endif /* !AMIGA || __GNUC__ */
+# endif /* !AMIGA || __GNUC__ */
     /*
        We use English texts and U.S.A. territory specifics by default!
      */
@@ -1819,7 +1797,7 @@ main (argc, argv)
          Set the date format to U.S.A. style (table index 1 !!)
        */
       date_format++;
-#  if !defined(AMIGA) || defined(__GNUC__)
+# if !defined(AMIGA) || defined(__GNUC__)
       /*
          Now check whether if we have to use the British date format.
        */
@@ -1846,7 +1824,7 @@ main (argc, argv)
 		  date_format++;
 	      }
 	  }
-#  endif /* !AMIGA || __GNUC__ */
+# endif /* !AMIGA || __GNUC__ */
     }
   else
     {
@@ -1858,10 +1836,7 @@ main (argc, argv)
       iso_week_number = TRUE;
       out_rows = S_OUT_ROWS;
     }
-# else /* !GCAL_NLS */
-  /*
-     !USE_DE means English texts and U.S.A. territory specifics by default.
-   */
+#else /* !GCAL_NLS */
   special_calsheet_flag = TRUE;
   iso_week_number = FALSE;
   out_rows = J_OUT_ROWS;
@@ -1873,19 +1848,14 @@ main (argc, argv)
      Set the date format to U.S.A. style (table index 1 !!)
    */
   date_format++;
-# endif	/* !GCAL_NLS */
-#endif /* !USE_DE */
+#endif	/* !GCAL_NLS */
   /*
      Test if the default date format is valid.
    */
   if (!is_correct_date_format
       (date_format->df_format, &use_day_suffix, &use_short3_day_name,
        &use_day_zeroleaded, &use_year_zeroleaded))
-#if USE_DE
-    errtxt_dformat = "Grundeinstellung";
-#else /* !USE_DE */
     errtxt_dformat = _("default");
-#endif /* !USE_DE */
   /*
      Test if the program output is redirected or piped.
    */
@@ -1979,24 +1949,17 @@ main (argc, argv)
   /*
      Assign the character which is used for separating the time HH:MM.
    */
-#if USE_DE
-  time_sep = TIME_SEP;
-#else /* !USE_DE */
+
   /*
    *** Translators, please translate this as a fixed 1-character text.
    *** This is the character which is used for separating the time HH:MM.
    */
   time_sep = _(":");
-#endif /* !USE_DE */
+
   /*
      Initialize the basic meta texts.
    */
-#if USE_DE
-  y_txt = "J";
-  m_txt = "M";
-  w_txt = "W";
-  d_txt = "T";
-#else /* !USE_DE */
+
   /*
    *** Translators, please translate this as a fixed 1-character text.
    *** This text should be a proper abbreviation of "Year".
@@ -2017,7 +1980,7 @@ main (argc, argv)
    *** This text should be a proper abbreviation of "Day".
    */
   d_txt = _("D");
-#endif /* !USE_DE */
+
   /*
      Initial memory allocation and initialization of the variables
      which contain the "YY", "YYYY", "MM", "WWW" and "DD" literals.
@@ -2057,15 +2020,13 @@ main (argc, argv)
   larg_lit = (char *) my_malloc (4, ERR_NO_MEMORY_AVAILABLE,
 				 __FILE__, ((long) __LINE__) - 1L,
 				 "larg_lit", 0);
-#if USE_DE
-  strncpy (larg_lit, LARG_TXT, 4);
-#else /* !USE_DE */
+
   /*
    *** Translators, please translate this as a fixed 3-character text.
    *** This text should be a proper abbreviation of "ARGUMENT".
    */
   strncpy (larg_lit, _("ARG"), 4);
-#endif /* !USE_DE */
+
   larg_lit[3] = '\0';
   /*
      Initial memory allocation for the `my_argv[]' table.
@@ -2109,11 +2070,8 @@ main (argc, argv)
   /*
      Initial memory allocation for the fixed date list title text.
    */
-# if USE_DE
-  ptr_char = RC_LIST_TITLE;
-# else /* !USE_DE */
   ptr_char = _("Fixed date list:");
-# endif	/* !USE_DE */
+
   rc_heading_text = (char *) my_malloc (strlen (ptr_char) + 1 + 2,
 					ERR_NO_MEMORY_AVAILABLE,
 					__FILE__, ((long) __LINE__) - 2L,
@@ -2129,11 +2087,8 @@ main (argc, argv)
   if (ptr_char != (char *) NULL)
     if (*ptr_char)
       {
-# if USE_DE
-	users_date_format.df_info = "Umgebungsvariable";
-# else /* !USE_DE */
 	users_date_format.df_info = _("environment variable");
-# endif	/* !USE_DE */
+
 	users_date_format.df_format =
 	  (char *) my_malloc (strlen (ptr_char) + 1, ERR_NO_MEMORY_AVAILABLE,
 			      __FILE__, ((long) __LINE__) - 2L,
@@ -2146,11 +2101,9 @@ main (argc, argv)
 	if (!is_correct_date_format
 	    (date_format->df_format, &use_day_suffix, &use_short3_day_name,
 	     &use_day_zeroleaded, &use_year_zeroleaded))
-# if USE_DE
-	  errtxt_dformat = "Umgebungsvariable";
-# else /* !USE_DE */
+
 	  errtxt_dformat = _("environment variable");
-# endif	/* !USE_DE */
+
 	else
 	  errtxt_dformat = (char *) NULL;
       }
@@ -2316,18 +2269,12 @@ main (argc, argv)
 		      /*
 		         Error, argument is a command.
 		       */
-# if USE_DE
-		      fprintf (stderr,
-			       "%s: Kommando in Umgebungsvariable `%s' angegeben -- %s\n%s\n%s\n",
-			       prgr_name, ENV_VAR_GCAL, s1, usage_msg (),
-			       lopt_msg ());
-# else /* !USE_DE */
 		      fprintf (stderr,
 			       _
 			       ("%s: command in environment variable `%s' found -- %s\n%s\n%s\n"),
 			       prgr_name, ENV_VAR_GCAL, s1, usage_msg (),
 			       lopt_msg ());
-# endif	/* !USE_DE */
+
 		      exit (ERR_INVALID_OPTION);
 		    }
 		}
@@ -2511,11 +2458,7 @@ main (argc, argv)
 			}
 		      s1[j] = '\0';
 		      pseudo_blank_conversion (&s1);
-# if USE_DE
-		      set_tvar (s1, INTERNAL_TXT, 0L, GLobal);
-# else /* !USE_DE */
 		      set_tvar (s1, _("Internal"), 0L, GLobal);
-# endif	/* !USE_DE */
 		      if (*ptr_char)
 			ptr_char++;
 		    }
@@ -2543,11 +2486,7 @@ main (argc, argv)
 			  s1[j++] = *ptr_char++;
 			}
 		      s1[j] = '\0';
-# if USE_DE
-		      set_dvar (s1, lineptrs, INTERNAL_TXT, 0L, GLobal);
-# else /* !USE_DE */
 		      set_dvar (s1, lineptrs, _("Internal"), 0L, GLobal);
-# endif	/* !USE_DE */
 		      if (*ptr_char)
 			ptr_char++;
 		    }
@@ -2928,26 +2867,16 @@ main (argc, argv)
      I.e. check whether a response file must be written.
    */
   if (rsp_filename != (char *) NULL)
-#if USE_DE
-    write_log_file (rsp_filename, REsponse, RESPONSE_TXT, CREATED_TXT,
-		    my_argc, my_argv);
-#else /* !USE_DE */
     write_log_file (rsp_filename, REsponse, _("response file"), _("Created"),
 		    my_argc, my_argv);
-#endif /* !USE_DE */
 #ifdef GCAL_SHELL
   /*
      Log contents of command line:
      i.e. check whether a shell script must be written
    */
   if (shl_filename != (char *) NULL)
-# if USE_DE
-    write_log_file (shl_filename, SCript, SCRIPT_TXT, CREATED_TXT, my_argc,
-		    my_argv);
-# else /* !USE_DE */
     write_log_file (shl_filename, SCript, _("shell script"), _("Created"),
 		    my_argc, my_argv);
-# endif	/* !USE_DE */
 #endif /* GCAL_SHELL */
 #ifdef GCAL_EPAGER
   if (is_tty1
@@ -3157,15 +3086,9 @@ main (argc, argv)
 	}
       if (i)
 	{
-# if USE_DE
-	  sprintf (s2, "Post von \\`%s' (%02d-%s-%04d %02d%s%02d%s%02d",
-		   prgr_name, true_day, short_month_name (true_month),
-		   true_year, act_hour, time_sep, act_min, time_sep, act_sec);
-# else /* !USE_DE */
 	  sprintf (s2, _("Mail from \\`%s' (%02d-%s-%04d %02d%s%02d%s%02d"),
 		   prgr_name, true_day, short_month_name (true_month),
 		   true_year, act_hour, time_sep, act_min, time_sep, act_sec);
-# endif	/* !USE_DE */
 	  if (tz != (char *) NULL)
 	    {
 	      sprintf (s1, " %s", tz);
@@ -3213,16 +3136,11 @@ main (argc, argv)
 	    }
 	}
       else
-# if USE_DE
-	fprintf (stderr,
-		 "%s: Warnung, eMail mit leerem Textk%srper nicht an <%s> versandt.\n",
-		 prgr_name, OE, email_adr);
-# else /* !USE_DE */
 	fprintf (stderr,
 		 _
 		 ("%s: warning, eMail with empty message body not sent to <%s>.\n"),
 		 prgr_name, email_adr);
-# endif	/* !USE_DE */
+
       i = unlink (tfn);
       if (i)
 	/*
@@ -4867,12 +4785,7 @@ check_command_line (argc, argv)
 		    break;
 		  case 'i':
 		    option++;
-#if USE_DE
-		    special_calsheet_flag = TRUE;
-		    if (!year_flag)
-		      out_rows = J_OUT_ROWS;
-#else /* !USE_DE */
-# ifdef GCAL_NLS
+#ifdef GCAL_NLS
 		    if (is_en)
 		      {
 			special_calsheet_flag = FALSE;
@@ -4885,12 +4798,12 @@ check_command_line (argc, argv)
 			if (!year_flag)
 			  out_rows = J_OUT_ROWS;
 		      }
-# else /* !GCAL_NLS */
+#else /* !GCAL_NLS */
 		    special_calsheet_flag = FALSE;
 		    if (!year_flag)
 		      out_rows = S_OUT_ROWS;
-# endif	/* !GCAL_NLS */
-#endif /* !USE_DE */
+#endif	/* !GCAL_NLS */
+
 		    if (*option)
 		      {
 			if (*option == '-')
@@ -5035,11 +4948,7 @@ check_command_line (argc, argv)
 			    /*
 			       Respect this given argument now.
 			     */
-#if USE_DE
-			    users_date_format.df_info = "Kommandozeile";
-#else /* !USE_DE */
 			    users_date_format.df_info = _("command line");
-#endif /* !USE_DE */
 			    if (users_date_format.df_format == (char *) NULL)
 			      users_date_format.df_format
 				= (char *) my_malloc (strlen (option) + 1,
@@ -5072,11 +4981,7 @@ check_command_line (argc, argv)
 				(date_format->df_format, &use_day_suffix,
 				 &use_short3_day_name, &use_day_zeroleaded,
 				 &use_year_zeroleaded))
-#if USE_DE
-			      errtxt_dformat = "Kommandozeile";
-#else /* !USE_DE */
 			      errtxt_dformat = _("command line");
-#endif /* !USE_DE */
 			    else
 			      errtxt_dformat = (char *) NULL;
 			  }
@@ -5992,47 +5897,6 @@ check_command_line (argc, argv)
 		   */
 		  switch (opt_error)
 		    {
-#if USE_DE
-		    case 1:
-		      sprintf (s1, "%s: Option `%s' ist nicht eindeutig",
-			       prgr_name, ptr_char);
-		      break;
-		    case 2:
-		      if (is_longopt)
-			sprintf (s1, "%s: unbekannte Option `%s'",
-				 prgr_name, ptr_char);
-		      else
-			sprintf (s1, "%s: ung%sltige Option -- %s",
-				 prgr_name, UE, ptr_char);
-		      break;
-		    case 3:
-		      if (is_longopt)
-			sprintf (s1,
-				 "%s: Option `--%s' erlaubt kein Argument",
-				 prgr_name, option);
-		      else
-			sprintf (s1, "%s: Option `%s' erlaubt kein Argument",
-				 prgr_name, ptr_char);
-		      break;
-		    case 4:
-		      if (is_longopt)
-			sprintf (s1, "%s: Option `%s' ben%stigt ein Argument",
-				 prgr_name, ptr_char, OE);
-		      else
-			sprintf (s1,
-				 "%s: Option ben%stigt ein Argument -- %s",
-				 prgr_name, OE, ptr_char);
-		      break;
-		    case 5:
-		      sprintf (s1,
-			       "%s: Option mit unzul%sssigem Argument -- %s",
-			       prgr_name, AE, ptr_char);
-		      break;
-		    case 6:
-		      sprintf (s1,
-			       "%s: Option mit nicht eindeutigem Argument -- %s",
-			       prgr_name, ptr_char);
-#else /* !USE_DE */
 		    case 1:
 		      sprintf (s1, _("%s: option `%s' is ambiguous"),
 			       prgr_name, ptr_char);
@@ -6076,7 +5940,6 @@ check_command_line (argc, argv)
 		      sprintf (s1,
 			       _("%s: option with ambiguous argument -- %s"),
 			       prgr_name, ptr_char);
-#endif /* !USE_DE */
 		      break;
 		    default:
 		      /*
@@ -6135,14 +5998,8 @@ check_command_line (argc, argv)
       /*
          Error, invalid actual date modifier %DATE given.
        */
-# if USE_DE
-      fprintf (stderr, "%s: ung%sltiges Datum angegeben -- %c%s\n%s\n%s\n",
-	       prgr_name, UE, RC_ADATE_CHAR, rc_adate, usage_msg (),
-	       lopt_msg ());
-# else /* !USE_DE */
       fprintf (stderr, _("%s: invalid date given -- %c%s\n%s\n%s\n"),
 	       prgr_name, RC_ADATE_CHAR, rc_adate, usage_msg (), lopt_msg ());
-# endif	/* !USE_DE */
       my_exit (ERR_INVALID_OPTION);
     }
 #else /* !USE_RC */
@@ -6166,15 +6023,11 @@ check_command_line (argc, argv)
       /*
          Set starting day of week to language/territory default value.
        */
-#if USE_DE
-      start_day = DAY_MIN;
-#else /* !USE_DE */
-# if defined GCAL_NLS && defined _NL_TIME_FIRST_WEEKDAY
+#if defined GCAL_NLS && defined _NL_TIME_FIRST_WEEKDAY
       start_day = (nl_langinfo (_NL_TIME_FIRST_WEEKDAY)[0] + 5) % 7 + 1;
-# else /* !GCAL_NLS */
+#else /* !GCAL_NLS */
       start_day = DAY_MAX;
-# endif	/* !GCAL_NLS */
-#endif /* !USE_DE */
+#endif	/* !GCAL_NLS */
     }
   /*
      Post-process a time offset argument, which is based relative to
@@ -6373,17 +6226,10 @@ check_command_line (argc, argv)
 		         The `rc_get_date()' arguments `wmax', `hc' and `i' are
 		         only dummys and must be given.  They are not respected!
 		       */
-# if USE_DE
-		      (void) rc_get_date (s2, lineptrs, FALSE,
-					  &is_weekday_mode, &day, &month, &y,
-					  &n, &wmax, &hc, &i, &i,
-					  INTERNAL_TXT, -1L, s2, FALSE);
-# else /* !USE_DE */
 		      (void) rc_get_date (s2, lineptrs, FALSE,
 					  &is_weekday_mode, &day, &month, &y,
 					  &n, &wmax, &hc, &i, &i,
 					  _("Internal"), -1L, s2, FALSE);
-# endif	/* !USE_DE */
 		      if (y != SPECIAL_VALUE)
 			{
 			  if (!dvar)

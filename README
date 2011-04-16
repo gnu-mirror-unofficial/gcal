@@ -153,9 +153,9 @@ Files you might look into
 
    * See `HISTORY' for a complete summary of changes.
 
-   * See `INSTALL' and `SYMBOLS' for compilation and installation
-     instructions.  Some answers to frequently asked questions are
-     given in the file `INSTALL', please read it!
+   * See `INSTALL' for compilation and installation instructions.
+     Some answers to frequently asked questions are given in the
+     file `INSTALL', please read it!
 
    * And see the file `systems/README' for some hints how to compile
      Gcal on some special machines and operating systems.

@@ -54,7 +54,6 @@ static const char *get_longopt_description __P_ ((const int longopt_symbolic,
 static void my_bug_report_address __P_ ((FILE * fp));
 static void my_copyright __P_ ((FILE * fp, const Bool with_short_licence));
 static void my_help_head_text __P_ ((FILE * fp));
-static void my_help_tail_text __P_ ((FILE * fp));
 static void print_compiler_info __P_ ((FILE * fp));
 __END_DECLARATIONS
 /*
@@ -2263,7 +2262,7 @@ my_extended_help (fp, longopt_symbolic)
     {
       print_text (fp, s1);
       print_text (fp, s1);
-      my_help_tail_text (fp);
+      my_bug_report_address (fp);
     }
 }
 
@@ -2564,6 +2563,10 @@ my_bug_report_address (fp)
   print_text (fp, s1);
   sprintf (s1, _("Email bug reports to <%s>"), BUG_REPORT_ADR1);
   print_text (fp, s1);
+  sprintf (s1, _("GNU gcal home page: <%s>"), HOMEPAGE);
+  print_text (fp, s1);
+  sprintf (s1, _("General help using GNU software: <%s>"), HOMEPAGE_GNU_SOFTWARE);
+  print_text (fp, s1);
 }
 
 
@@ -2628,42 +2631,6 @@ my_help_head_text (fp)
   print_text (fp, s1);
   strcpy (s1, usage_msg ());
   print_text (fp, s1);
-  print_text (fp, s1);
-}
-
-
-
-static void
-my_help_tail_text (fp)
-     FILE *fp;
-/*
-   Prints the help tail text to file `fp' using the central output function
-     `print_text()', and uses the global text buffer `s1' internally.
-*/
-{
-  *s1 = '\0';
-  print_text (fp, s1);
-  sprintf (s1,
-	   _
-	   ("   +++  If you specify two digits for the year I DON'T assume %2d%s  +++"),
-	   act_year / 100, yy_lit);
-  print_text (fp, s1);
-  sprintf (s1, _("   +++  `%s' is free software, enjoy   =8^)  +++"),
-	   prgr_name);
-
-  print_text (fp, s1);
-  print_text (fp, s1);
-  strcpy (s1,
-	  "------------------------oOO      \\\\\\_''/      OOo---------------------------");
-  print_text (fp, s1);
-  strcpy (s1, "Thomas Esken               O     (/o-o\\)     O  eMail: ");
-  strcat (s1, BUG_REPORT_ADR1);
-  print_text (fp, s1);
-  strcpy (s1,
-	  "Im Hagenfeld 84                 ((  ^  ))       Phone: +49 251 232585");
-  print_text (fp, s1);
-  strcpy (s1,
-	  "D-48147 Muenster; Germany    \\____) ~ (____/    MotD : 2old2live, 2young2die");
   print_text (fp, s1);
 }
 

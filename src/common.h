@@ -780,6 +780,9 @@ extern char *getenv __P_ ((const char *env_var));
 "Copyright (c) 2010 Free Software Foundation, Inc."
 # define BUG_REPORT_ADR1  "bug-gcal@gnu.org"
 
+# define HOMEPAGE "http://www.gnu.org/software/gcal"
+# define HOMEPAGE_GNU_SOFTWARE "http://www.gnu.org/gethelp/"
+
 
 
 /*

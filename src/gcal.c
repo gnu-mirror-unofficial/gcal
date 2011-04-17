@@ -553,7 +553,7 @@ const Lopt_struct lopt[] = {
    {NULL}
    },
   {
-   SYM_HELP,
+   SYM_LONG_HELP1,
    "help",
    {"h", NULL},
    LARG_NO,

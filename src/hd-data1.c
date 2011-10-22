@@ -307,11 +307,8 @@ ca_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 	   ptr_cc_id, DIS_HLS_PREF, DAY_MIN, 4, year, hd_elems, fday, count);
   if (*init_data)
     *init_data = FALSE;
-  day = 25;
-  if (weekday_of_date (day, MONTH_MAX, year) == DAY_MAX)
-    day++;
   holiday (*init_data, detected, _(hd_text[HD_CHRISTMAS_DAY].ht_text),
-	   ptr_cc_id, "+", day, MONTH_MAX, year, hd_elems, fday, count);
+	   ptr_cc_id, "+", 25, MONTH_MAX, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_CHRISTMAS_EVE].ht_text),
 	   ptr_cc_id, DIS_HLS_PREF, 24, MONTH_MAX, year, hd_elems, fday,
 	   count);

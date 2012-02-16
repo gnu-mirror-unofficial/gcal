@@ -39,6 +39,9 @@
 #  include <config.h>
 # endif
 
+# include <unistd.h>
+# include <stdlib.h>
+
 # define GCAL_NLS
 # include <locale.h>
 

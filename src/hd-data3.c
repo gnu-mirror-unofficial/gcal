@@ -186,8 +186,6 @@ de_bw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   de_nw_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
-  holiday (*init_data, detected, _(hd_text[HD_ALL_SAINTS_DAY].ht_text),
-	   ptr_cc_id, "+", DAY_MIN, 11, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_THREE_KINGS_DAY].ht_text),
 	   ptr_cc_id, "+", 6, MONTH_MIN, year, hd_elems, fday, count);
 }
@@ -334,8 +332,6 @@ de_rp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   de_nw_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
-  holiday (*init_data, detected, _(hd_text[HD_ALL_SAINTS_DAY].ht_text),
-	   ptr_cc_id, "+", DAY_MIN, 11, year, hd_elems, fday, count);
 }
 
 

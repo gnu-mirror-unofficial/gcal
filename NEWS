@@ -2,6 +2,10 @@ NEWS file for `gcal'.
 
 User-visible changes.
 
+Major changes in release X.Y.Z
+
+* Remove duplicate for All Saints Day for DE_BW and DE_RP.
+
 Major changes in release 3.6.3
 
 * Remove duplicate for All Saints Day for DE_BY.

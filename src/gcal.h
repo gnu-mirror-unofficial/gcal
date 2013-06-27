@@ -1,10 +1,11 @@
 #ifndef __GCAL_H
 # define __GCAL_H
-/*
-*  gcal.h:  Get and process the program options
+/*!
+*  \file gcal.h
+*  \brief Get and process the program options
 *           and lauch the extended calendar program header file.
-*
-*
+*/
+/*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

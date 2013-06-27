@@ -1,8 +1,9 @@
-/*
-*  hd-data3.c:  All other D-L countries data which is composed into the
+/*!
+*  \file hd-data3.c
+*  \brief All other D-L countries data which is composed into the
 *               eternal holiday list.
-*
-*
+*/
+/*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -64,7 +65,7 @@ de_by_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Bavaria.
 */
 {
@@ -92,7 +93,7 @@ de_bb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Brandenburg.
 */
 {
@@ -124,7 +125,7 @@ de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Berlin.
 */
 {
@@ -155,7 +156,7 @@ de_hb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Bremen.
 */
 {
@@ -177,7 +178,7 @@ de_bw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Baden-W"urttemberg.
 */
 {
@@ -201,7 +202,7 @@ de_hh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Hamburg.
 */
 {
@@ -223,7 +224,7 @@ de_he_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Hessen.
 */
 {
@@ -248,7 +249,7 @@ de_mv_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Mecklenburg-Vorpommern.
 */
 {
@@ -269,7 +270,7 @@ de_ni_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Lower Saxony.
 */
 {
@@ -291,7 +292,7 @@ de_nw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/North Rhine-Westphalia.
 */
 {
@@ -323,7 +324,7 @@ de_rp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Rhineland Palatinate.
 */
 {
@@ -345,7 +346,7 @@ de_st_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Saxony-Anhalt.
 */
 {
@@ -368,7 +369,7 @@ de_sh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Schleswig-Holstein.
 */
 {
@@ -390,7 +391,7 @@ de_sl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Saar.
 */
 {
@@ -418,7 +419,7 @@ de_sn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Saxony.
 */
 {
@@ -457,7 +458,7 @@ de_th_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Germany/Thuringia.
 */
 {
@@ -486,7 +487,7 @@ dj_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Djibouti.
 */
 {
@@ -515,7 +516,7 @@ dk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Denmark.
 */
 {
@@ -572,7 +573,7 @@ dm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Dominica.
 */
 {
@@ -622,7 +623,7 @@ do_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Dominican Republic.
 */
 {
@@ -678,7 +679,7 @@ dz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Algeria.
 */
 {
@@ -709,7 +710,7 @@ ec_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Ecuador.
 */
 {
@@ -773,7 +774,7 @@ ee_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Estonia.
 */
 {
@@ -823,7 +824,7 @@ eg_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Egypt.
 */
 {
@@ -916,7 +917,7 @@ eh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Western Sahara.
 */
 {
@@ -937,7 +938,7 @@ er_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Eritrea.
 */
 {
@@ -1018,7 +1019,7 @@ et_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Ethiopia.
 */
 {
@@ -1087,7 +1088,7 @@ fi_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Finland.
 */
 {
@@ -1177,7 +1178,7 @@ fj_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Fiji.
 */
 {
@@ -1238,7 +1239,7 @@ fk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Falkland Islands.
 */
 {
@@ -1274,7 +1275,7 @@ fm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Federation States of Micronesia.
 */
 {
@@ -1333,7 +1334,7 @@ fo_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Faroes.
 */
 {
@@ -1379,7 +1380,7 @@ ga_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Gabon.
 */
 {
@@ -1432,7 +1433,7 @@ gb_en_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Great Britain/England and Wales.
 */
 {
@@ -1457,7 +1458,7 @@ gb_ni_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Great Britain/Northern Ireland.
 */
 {
@@ -1495,7 +1496,7 @@ gb_sl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Great Britain/Scotland.
 */
 {
@@ -1537,7 +1538,7 @@ gd_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Grenada.
 */
 {
@@ -1595,7 +1596,7 @@ ge_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Georgia.
 */
 {
@@ -1664,7 +1665,7 @@ gf_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in French Guiana.
 */
 {
@@ -1695,7 +1696,7 @@ gh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Ghana.
 */
 {
@@ -1746,7 +1747,7 @@ gi_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Gibraltar.
 */
 {
@@ -1826,7 +1827,7 @@ gl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Greenland.
 */
 {
@@ -1854,7 +1855,7 @@ gm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Gambia.
 */
 {
@@ -1893,7 +1894,7 @@ gn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Guinea.
 */
 {
@@ -1922,7 +1923,7 @@ gp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Guadeloupe.
 */
 {
@@ -1949,7 +1950,7 @@ gq_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Equatorial Guinea.
 */
 {
@@ -2001,7 +2002,7 @@ gr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Greece.
 */
 {
@@ -2065,7 +2066,7 @@ gs_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in South Georgia and South Sandwich Islands.
 */
 {
@@ -2087,7 +2088,7 @@ gt_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Guatemala.
 */
 {
@@ -2139,7 +2140,7 @@ gu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Guam.
 */
 {
@@ -2180,7 +2181,7 @@ gw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Guinea-Bissau.
 */
 {
@@ -2213,7 +2214,7 @@ gy_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Guyana.
 */
 {
@@ -2271,7 +2272,7 @@ hk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Hong Kong.
 */
 {
@@ -2331,7 +2332,7 @@ hm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Heard and Mc Donald Islands.
 */
 {
@@ -2352,7 +2353,7 @@ hn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Honduras.
 */
 {
@@ -2400,7 +2401,7 @@ hr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Croatia.
 */
 {
@@ -2453,7 +2454,7 @@ ht_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Haiti.
 */
 {
@@ -2533,7 +2534,7 @@ hu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Hungary.
 */
 {
@@ -2586,7 +2587,7 @@ id_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Indonesia.
 */
 {
@@ -2630,7 +2631,7 @@ ie_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Ireland.
 */
 {
@@ -2713,7 +2714,7 @@ in_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in India.
 */
 {
@@ -2762,7 +2763,7 @@ iq_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Iraq.
 */
 {
@@ -2799,7 +2800,7 @@ ir_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Iran.
 */
 {
@@ -2829,7 +2830,7 @@ is_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Iceland.
 */
 {
@@ -2878,7 +2879,7 @@ jm_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Jamaica.
 */
 {
@@ -2933,7 +2934,7 @@ jo_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Jordan.
 */
 {
@@ -2991,7 +2992,7 @@ ke_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Kenya.
 */
 {
@@ -3037,7 +3038,7 @@ kg_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Kyrgyzstan.
 */
 {
@@ -3119,7 +3120,7 @@ kh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Cambodia.
 */
 {
@@ -3167,7 +3168,7 @@ ki_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Kiribati.
 */
 {
@@ -3213,7 +3214,7 @@ km_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Comoros.
 */
 {
@@ -3251,7 +3252,7 @@ kn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in St Kitts and Nevis.
 */
 {
@@ -3305,7 +3306,7 @@ kp_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in North Korea.
 */
 {
@@ -3378,7 +3379,7 @@ kw_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Kuwait.
 */
 {
@@ -3406,7 +3407,7 @@ ky_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Caiman Islands.
 */
 {
@@ -3459,7 +3460,7 @@ kz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Kazakhstan.
 */
 {
@@ -3536,7 +3537,7 @@ la_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Laos.
 */
 {
@@ -3579,7 +3580,7 @@ lb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Lebanon.
 */
 {
@@ -3675,7 +3676,7 @@ lc_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in St Lucia.
 */
 {
@@ -3762,7 +3763,7 @@ li_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Liechtenstein.
 */
 {
@@ -3818,7 +3819,7 @@ lk_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Sri Lanka.
 */
 {
@@ -4027,7 +4028,7 @@ lr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Liberia.
 */
 {
@@ -4084,7 +4085,7 @@ ls_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Lesotho.
 */
 {
@@ -4134,7 +4135,7 @@ lt_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Lithuania.
 */
 {
@@ -4190,7 +4191,7 @@ lu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Luxembourg.
 */
 {
@@ -4248,7 +4249,7 @@ lv_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Latvia.
 */
 {
@@ -4313,7 +4314,7 @@ ly_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Manages all specific holidays celebrated in Libyan Arab Jamahiriya.
 */
 {

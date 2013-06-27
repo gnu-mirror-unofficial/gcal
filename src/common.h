@@ -1,9 +1,10 @@
 #ifndef __COMMON_H
 # define __COMMON_H
+/*!
+*  \file common.h
+*  \brief Basic program specific statements, macros and typedefs...
+*/
 /*
-*  common.h:  Basic program specific statements, macros and typedefs...
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011, 2012 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -243,7 +244,7 @@ extern char *getenv __P_ ((const char *env_var));
 
 
 
-/*
+/*!
 *  Preprocessor statements for the exit codes.
 */
 # define ERR_NONE                      0
@@ -287,37 +288,37 @@ extern char *getenv __P_ ((const char *env_var));
 /*
 *  Program specific preprocessor statements.
 */
-/* Maximum length of a file block buffer. */
+/*! Maximum length of a file block buffer. */
 # ifndef BUF_LEN
 #  define BUF_LEN           16384
 # endif
 
-/* Default length of a "string" text buffer. */
+/*! Default length of a "string" text buffer. */
 # ifndef MAXLEN_MAX
 #  define MAXLEN_MAX       1024
 # endif
 
-/* Default number of command line arguments in `my_argv[]' table. */
+/*! Default number of command line arguments in `my_argv[]' table. */
 # ifndef MY_ARGC_MAX
 #  define MY_ARGC_MAX      64
 # endif
 
-/* Gcal's exit status on: help, version, license. */
+/*! Gcal's exit status on: help, version, license. */
 # ifndef EXIT_STAT_HELP
 #  define EXIT_STAT_HELP   EXIT_SUCCESS
 # endif
 
-/* Default length of a displayed (native language translated) text line. */
+/*! Default length of a displayed (native language translated) text line. */
 # ifndef LEN_SINGLE_LINE
 #  define LEN_SINGLE_LINE  200
 # endif
 
-/* Maximum amount of debug/warning levels. */
+/*! Maximum amount of debug/warning levels. */
 # define WARN_LVL_MAX     4
 
 
 
-/*
+/*!
 *  Preprocessor statements for long options `Lopt_struct' field `symbolic_name'.
 */
 # define SYM_NIL                         0
@@ -403,7 +404,7 @@ extern char *getenv __P_ ((const char *env_var));
 # ifdef GCAL_EMAIL
 #  define SYM_MAIL                        101
 # endif
-/*
+/*!
 *  Configuration dependent values.
 */
 # if USE_PAGER
@@ -415,25 +416,25 @@ extern char *getenv __P_ ((const char *env_var));
 /*
 *  Preprocessor statements for long options `Lopt_struct' field `larg_mode'.
 */
-/* `--foo'. */
+/*! `--foo'. */
 # define LARG_NO          0
 
-/* `--foo' or `--foo=BAR'. */
+/*! `--foo' or `--foo=BAR'. */
 # define LARG_NO_OR_ONE   1
 
-/* `--foo=BAR'. */
+/*! `--foo=BAR'. */
 # define LARG_ONE         2
 
-/* `--foo=BAR' or `--foo=ARG'. */
+/*! `--foo=BAR' or `--foo=ARG'. */
 # define LARG_ONE_OR_ARG  3
 
 /*
 *  Further preprocessor statements used for long-style options.
 */
-/* Maximum number of arguments a long option may have. */
+/*! Maximum number of arguments a long option may have. */
 # define LARG_MAX        6
 
-/* Argument separator of a long option, e.g. `--foo=BAR'. */
+/*! Argument separator of a long option, e.g. `--foo=BAR'. */
 # define LARG_SEP        "="
 
 
@@ -441,17 +442,17 @@ extern char *getenv __P_ ((const char *env_var));
 /*
 *  Some other common environment variable names.
 */
-/* Name of the timezone environment variable. */
+/*! Name of the timezone environment variable. */
 # define ENV_VAR_TZ    "TZ"
 
 # if USE_PAGER
-/* Name of number of terminal rows environment variable. */
+/*! Name of number of terminal rows environment variable. */
 #  define ENV_VAR_LI    "GCAL_LINES"
 
-/* Name of number of terminal columns environment variable. */
+/*! Name of number of terminal columns environment variable. */
 #  define ENV_VAR_CO    "GCAL_COLUMNS"
 
-/* Name of number of terminal rows environment variable. */
+/*! Name of number of terminal rows environment variable. */
 #  define ENV_VAR_LI2   "LINES"
 
 /* Name of number of terminal columns environment variable. */
@@ -463,156 +464,156 @@ extern char *getenv __P_ ((const char *env_var));
 /*
 *  Further preprocessor symbols.
 */
-/* Comment character of a resource/response file line. */
+/*! Comment character of a resource/response file line. */
 # define REM_CHAR          ';'
 
-/* Marker character of a response file (@FILE). */
+/*! Marker character of a response file (@FILE). */
 # define RSP_CHAR          '@'
 
-/* Character used to quote a newline character etc. */
+/*! Character used to quote a newline character etc. */
 # define QUOTE_CHAR        '\\'
 
-/* Character used to replace a QUOTE_CHAR. */
+/*! Character used to replace a QUOTE_CHAR. */
 # define PSEUDO_QUOTE      '\001'
 
-/* Used to insert a blank (' ') in places the OS normally forbits its use. */
+/*! Used to insert a blank (' ') in places the OS normally forbits its use. */
 # define PSEUDO_BLANK      '_'
 
-/* Separator of user defined sequences: `-HSEQ:SEQ...' `-vARG:ARG...' `-rARG:ARG...'. */
+/*! Separator of user defined sequences: `-HSEQ:SEQ...' `-vARG:ARG...' `-rARG:ARG...'. */
 # define SEP               ":"
 
-/* Separator used for splitting lists, e.g. `-P e[DATE][,e[DATE],...]. */
+/*! Separator used for splitting lists, e.g. `-P e[DATE][,e[DATE],...]. */
 # define SPLIT_SEP         ","
 
-/* Separator used for connecting lists, e.g. `--cc-holidays=CC[+CC+...]'. */
+/*! Separator used for connecting lists, e.g. `--cc-holidays=CC[+CC+...]'. */
 # define CONNECT_SEP       "+"
 
-/* Default switch char, which defines an command line option. */
+/*! Default switch char, which defines an command line option. */
 # define SWITCH            "-"
 
-/* First additional switch char. */
+/*! First additional switch char. */
 # define SWITCH2           "/"
 
-/* Separator of a list of months (MM,MM). */
+/*! Separator of a list of months (MM,MM). */
 # define MLIST_SEP         ","
 
-/* Separator of a range of months (MM-MM). */
+/*! Separator of a range of months (MM-MM). */
 # define MRANGE_SEP        "-"
 
-/* Separator of a list of years (YYYY;YYYY). */
+/*! Separator of a list of years (YYYY;YYYY). */
 # define YLIST_SEP         ";"
 
-/* Separator of a range of years (YYYY+YYYY). */
+/*! Separator of a range of years (YYYY+YYYY). */
 # define YRANGE_SEP        "+"
 
-/* Separator of a standard year (MM/YYYY). */
+/*! Separator of a standard year (MM/YYYY). */
 # define YEAR_SEP          "/"
 
-/* Separator of a fiscal year (MM:YYYY). */
+/*! Separator of a fiscal year (MM:YYYY). */
 # define FYEAR_SEP         ":"
 
-/* Command for enabling 3-month mode (.|..|.+|.-). */
+/*! Command for enabling 3-month mode (.|..|.+|.-). */
 # define MONTH3_LIT        "."
 
-/* Prefix to disable highlighting of a holiday. */
+/*! Prefix to disable highlighting of a holiday. */
 # define DIS_HLS_PREF      "-"
 
-/* Prefix to disable highlighting of a holiday. */
+/*! Prefix to disable highlighting of a holiday. */
 # define DIS_HLS_PREF2     "*"
 
-/* Modifier for moving ascending/forwards in date/PLUS sign. */
+/*! Modifier for moving ascending/forwards in date/PLUS sign. */
 # define ASC_LIT           "+"
 
-/* Modifier for moving descending/backwards in date/MINUS sign. */
+/*! Modifier for moving descending/backwards in date/MINUS sign. */
 # define DES_LIT           "-"
 
-/* Identifier for actual local time based time offsets used in the `--time_offset=ARG' option. */
+/*! Identifier for actual local time based time offsets used in the `--time_offset=ARG' option. */
 # if !USE_RC
 #  define staticTIME_CHAR    't'
 # endif	/* USE_RC */
 
-/* Default time separator for scanning HH:MM time expressions. */
+/*! Default time separator for scanning HH:MM time expressions. */
 # define DEFAULT_TIME_SEP  ":"
 
-/* Mininum length of a day "cell" used in calendar sheets. */
+/*! Mininum length of a day "cell" used in calendar sheets. */
 # define FORMAT_LEN_MIN    3
 
-/* Minimum length of a textual day name. */
+/*! Minimum length of a textual day name. */
 # define TXTLEN_DAY        2
 
-/* Minimum length of a textual month name. */
+/*! Minimum length of a textual month name. */
 # define TXTLEN_MONTH      3
 
-/* Number of standard calsheet format default rows standard date. */
+/*! Number of standard calsheet format default rows standard date. */
 # define S_OUT_ROWS        3
 
-/* Number of standard calsheet format default columns standard date. */
+/*! Number of standard calsheet format default columns standard date. */
 # define S_OUT_COLS        4
 
-/* Number of standard calsheet format default rows special date. */
+/*! Number of standard calsheet format default rows special date. */
 # define J_OUT_ROWS        4
 
-/* Number of standard calsheet format default columns special date. */
+/*! Number of standard calsheet format default columns special date. */
 # define J_OUT_COLS        3
 
-/* Number of standard calsheet format default rows both dates. */
+/*! Number of standard calsheet format default rows both dates. */
 # define B_OUT_ROWS        12
 
-/* Number of standard calsheet format default columns both dates. */
+/*! Number of standard calsheet format default columns both dates. */
 # define B_OUT_COLS        1
 
-/* Number of special calsheet format default rows standard date. */
+/*! Number of special calsheet format default rows standard date. */
 # define SI_OUT_ROWS       4
 
-/* Number of special calsheet format default columns standard date. */
+/*! Number of special calsheet format default columns standard date. */
 # define SI_OUT_COLS       3
 
-/* Number of special calsheet format default rows special date. */
+/*! Number of special calsheet format default rows special date. */
 # define JI_OUT_ROWS       6
 
-/* Number of special calsheet format default columns special date. */
+/*! Number of special calsheet format default columns special date. */
 # define JI_OUT_COLS       2
 
-/* Number of special calsheet format default rows both dates. */
+/*! Number of special calsheet format default rows both dates. */
 # define BI_OUT_ROWS       B_OUT_ROWS
 
-/* Number of special calsheet format default columns both dates. */
+/*! Number of special calsheet format default columns both dates. */
 # define BI_OUT_COLS       B_OUT_COLS
 
-/* No of standard calsheet format default 3-month mode rows standard date. */
+/*! No of standard calsheet format default 3-month mode rows standard date. */
 # define S3_OUT_ROWS       1
 
-/* No of standard calsheet format default 3-month mode columns standard date. */
+/*! No of standard calsheet format default 3-month mode columns standard date. */
 # define S3_OUT_COLS       3
 
-/* No of standard calsheet format default 3-month mode rows special date. */
+/*! No of standard calsheet format default 3-month mode rows special date. */
 # define J3_OUT_ROWS       S3_OUT_ROWS
 
-/* No of standard calsheet format default 3-month mode columns special date. */
+/*! No of standard calsheet format default 3-month mode columns special date. */
 # define J3_OUT_COLS       S3_OUT_COLS
 
-/* No of standard calsheet format default 3-month mode rows both dates. */
+/*! No of standard calsheet format default 3-month mode rows both dates. */
 # define B3_OUT_ROWS       3
 
-/* No of standard calsheet format default 3-month mode columns both dates. */
+/*! No of standard calsheet format default 3-month mode columns both dates. */
 # define B3_OUT_COLS       1
 
-/* No of special calsheet format default 3-month mode rows standard date. */
+/*! No of special calsheet format default 3-month mode rows standard date. */
 # define SI3_OUT_ROWS      S3_OUT_ROWS
 
-/* No of special calsheet format default 3-month mode columns standard date. */
+/*! No of special calsheet format default 3-month mode columns standard date. */
 # define SI3_OUT_COLS      S3_OUT_COLS
 
-/* No of special calsheet format default 3-month mode rows special date. */
+/*! No of special calsheet format default 3-month mode rows special date. */
 # define JI3_OUT_ROWS      B3_OUT_ROWS
 
-/* No of special calsheet format default 3-month mode columns special date. */
+/*! No of special calsheet format default 3-month mode columns special date. */
 # define JI3_OUT_COLS      B3_OUT_COLS
 
-/* No of special calsheet format default 3-month mode rows both dates. */
+/*! No of special calsheet format default 3-month mode rows both dates. */
 # define BI3_OUT_ROWS      B3_OUT_ROWS
 
-/* No of special calsheet format default 3-month mode columns both dates. */
+/*! No of special calsheet format default 3-month mode columns both dates. */
 # define BI3_OUT_COLS      B3_OUT_COLS
 
 
@@ -620,28 +621,28 @@ extern char *getenv __P_ ((const char *env_var));
 /*
 *  Characters used for ordering a displayed date.
 */
-/* Identifier leading the character used for ordering a displayed date. */
+/*! Identifier leading the character used for ordering a displayed date. */
 # define DFORMAT_CHAR    '%'
 
-/* %weekday name. */
+/*! %weekday name. */
 # define WDNAME_CHAR     'K'
 
-/* %day number. */
+/*! %day number. */
 # define DAYNR_CHAR      'D'
 
-/* %month name. */
+/*! %month name. */
 # define MONTHNAME_CHAR  'U'
 
-/* %month number. */
+/*! %month number. */
 # define MONTHNR_CHAR    'M'
 
-/* %year number. */
+/*! %year number. */
 # define YEARNR_CHAR     'Y'
 
-/* %highlighting sequence 1 enable. */
+/*! %highlighting sequence 1 enable. */
 # define HLS1S_CHAR      '1'
 
-/* %highlighting sequence 1 disable. */
+/*! %highlighting sequence 1 disable. */
 # define HLS1E_CHAR      '2'
 
 
@@ -656,91 +657,91 @@ extern char *getenv __P_ ((const char *env_var));
 # define FSTYLE_LOWER  2
 # define FSTYLE_WORD   4
 
-/* Minimum width of a field. */
+/*! Minimum width of a field. */
 # define FWIDTH_MIN    1
 
-/* Maximum width of a field. */
+/*! Maximum width of a field. */
 # define FWIDTH_MAX    256
 
-/* Field contents is aligned left. */
+/*! Field contents is aligned left. */
 # define FLEFT_CHAR    '<'
 
-/* Field contents is centered. */
+/*! Field contents is centered. */
 # define FCENTER_CHAR  ':'
 
-/* Field contents is aligned right. */
+/*! Field contents is aligned right. */
 # define FRIGHT_CHAR   '>'
 
-/* Provides numerical field contents with leading sign. */
+/*! Provides numerical field contents with leading sign. */
 # define FSIGN_CHAR    '+'
 
-/* Provides numerical field contents with leading zero(es) */
+/*! Provides numerical field contents with leading zero(es) */
 # define FLZERO_CHAR   '0'
 
-/* Field contents is converted to upper-case letters. */
+/*! Field contents is converted to upper-case letters. */
 # define FUPPER_CHAR   'u'
 
-/* Field contents is converted to lower-case letters. */
+/*! Field contents is converted to lower-case letters. */
 # define FLOWER_CHAR   'l'
 
-/* Field contents is converted to capitalized words. */
+/*! Field contents is converted to capitalized words. */
 # define FWORD_CHAR    'w'
 
-/* Appends ordinal number suffix to numerical field contents. */
+/*! Appends ordinal number suffix to numerical field contents. */
 # define FSUFFIX_CHAR  '&'
 
-/* Variable length field format. */
+/*! Variable length field format. */
 # define FVAR_CHAR     '*'
 
-/* Fixed length field format. */
+/*! Fixed length field format. */
 # define FFIX_CHAR     '#'
 
 /*
 *  Important preprocessor symbols for the internal ranges.
 */
-/* Minimum day of week/month/year. */
+/*! Minimum day of week/month/year. */
 # define DAY_MIN     1
 
-/* Maximum day/amount of days of week. */
+/*! Maximum day/amount of days of week. */
 # define DAY_MAX     7
 
-/* Last day in a NON leap year. */
+/*! Last day in a NON leap year. */
 # define DAY_LAST    365
 
-/* Maximum week number of year. */
+/*! Maximum week number of year. */
 # define WEEK_MAX    52
 
-/* Minimum month of year. */
+/*! Minimum month of year. */
 # define MONTH_MIN   1
 
-/* Maximum month of year. */
+/*! Maximum month of year. */
 # define MONTH_MAX   12
 
-/* Highest day number in a month. */
+/*! Highest day number in a month. */
 # define MONTH_LAST  31
 
-/* Minimum year able to compute. */
+/*! Minimum year able to compute. */
 # define YEAR_MIN    1
 
-/* Maximum year able to compute. */
+/*! Maximum year able to compute. */
 # define YEAR_MAX    9999
 
-/* Operating system standard starting century, DON'T change! */
+/*! Operating system standard starting century, DON'T change! */
 # define CENTURY     1900
 
-/* Minimum year for computing Easter Sunday (29+1). */
+/*! Minimum year for computing Easter Sunday (29+1). */
 # define EASTER_MIN  30
 
-/* Maximum year for computing Easter Sunday. */
+/*! Maximum year for computing Easter Sunday. */
 # define EASTER_MAX  YEAR_MAX
 
-/* Maximum number of columns of a month. */
+/*! Maximum number of columns of a month. */
 # define MONTH_COLS  6
 
-/* Maximum number of elements per month (DAY_MAX*MONTH_COLS). */
+/*! Maximum number of elements per month (DAY_MAX*MONTH_COLS). */
 # define VEC_BLOCK   42
 
-/* Maximum number of elements per year (VEC_BLOCK*MONTH_MAX). */
+/*! Maximum number of elements per year (VEC_BLOCK*MONTH_MAX). */
 # define VEC_ELEMS   504
 
 
@@ -785,7 +786,7 @@ extern char *getenv __P_ ((const char *env_var));
 
 
 
-/*
+/*!
 *  Number of days between 1.5-Jan-4713 BCE and 1.5-Jan-0001 CE.
 */
 # define MIN_BCE_TO_1_CE   1721424L
@@ -840,42 +841,42 @@ extern char *getenv __P_ ((const char *env_var));
 /*
 *  Some useful mathematical functions.
 */
-/*
+/*!
 *  Reduce a degree value to a value within circle range.
 */
 # ifdef FIXANGLE
 #  undef FIXANGLE
 # endif
 # define FIXANGLE(a)  ((a) - 360.0 * (floor((a) / 360.0)))
-/*
+/*!
 *  Degrees to Radians := degree_value * Pi / 180.
 */
 # ifdef TORAD
 #  undef TORAD
 # endif
 # define TORAD(r)  ((r)*0.017453292519943295769)
-/*
+/*!
 *  Radians to Degrees := radian_value * 180 / Pi.
 */
 # ifdef TODEG
 #  undef TODEG
 # endif
 # define TODEG(d)  ((d)*57.295779513082320877)
-/*
+/*!
 *  Absolute value of a number := |x|.
 */
 # ifdef abs
 #  undef  abs
 # endif
 # define abs(x)       (((x) < 0) ? (-(x)) : (x))
-/*
+/*!
 *  Sign of a number.
 */
 # ifdef SGN
 #  undef  SGN
 # endif
 # define SGN(x)       (((x) < 0) ? -1 : (((x) > 0) ? 1 : 0))
-/*
+/*!
 *  Round-up factor.
 */
 # ifdef ROUND
@@ -909,99 +910,99 @@ extern char *getenv __P_ ((const char *env_var));
 /*
 *  Some degree to time and vice-versa conversion functions.
 */
-/*
+/*!
 *  Degrees to Days := degree_value / 360.0 (15 degrees * 24 hours [2 Pi]).
 */
 # define DEG2DAY(d)      ((d) / DEGS_PER_24_HOURS)
-/*
+/*!
 *  Degrees to Hours := degree_value / 15.0 (360 degrees / 24 hours).
 */
 # define DEG2HH(d)       ((d) / DEGS_PER_HOUR)
-/*
+/*!
 *  Degrees to Minutes := degree_value * 60.0.
 */
 # define DEG2MM(d)       ((d) * (double)MINS_PER_HOUR)
-/*
+/*!
 *  Degrees to Seconds := degree_value * 3600.0 (60 minutes * 60 seconds).
 */
 # define DEG2SS(d)       ((d) * (double)SECS_PER_HOUR)
-/*
+/*!
 *  Days to Degrees := day_value * 360.0 (15 degrees * 24 hours [2 Pi]).
 */
 # define DAY2DEG(x)      ((x) * DEGS_PER_24_HOURS)
-/*
+/*!
 *  Hours to Degrees := hour_value * 15.0 (360 degrees / 24 hours).
 */
 # define HH2DEG(h)       ((h) * DEGS_PER_HOUR)
-/*
+/*!
 *  Minutes to Degrees := minute_value / 60.0.
 */
 # define MM2DEG(m)       ((m) / (double)MINS_PER_HOUR)
-/*
+/*!
 *  Seconds to Degrees := second_value / 3600.0 (60 minutes * 60 seconds).
 */
 # define SS2DEG(s)       ((s) / (double)SECS_PER_HOUR)
-/*
+/*!
 *  Hours to Days := hour_value / 24.0.
 */
 # define HH2DAY(h)       ((h) / (double)HOURS_PER_DAY)
-/*
+/*!
 *  Minutes to Days := minute_value / 1440.0 (24 hours * 60 minutes).
 */
 # define MM2DAY(m)       ((m) / (double)MINS_PER_DAY)
-/*
+/*!
 *  Seconds to Days := second_value / 86400.0 (24 hours * 3600 seconds).
 */
 # define SS2DAY(s)       ((s) / (double)SECS_PER_DAY)
-/*
+/*!
 *  Days to Hours := day_value * 24.0.
 */
 # define DAY2HH(x)       ((x) * (double)HOURS_PER_DAY)
-/*
+/*!
 *  Days to Minutes := day_value * 1440.0 (24 hours * 60 minutes).
 */
 # define DAY2MM(x)       ((x) * (double)MINS_PER_DAY)
-/*
+/*!
 *  Days to Seconds := day_value * 86400.0 (24 hours * 3600 seconds).
 */
 # define DAY2SS(x)       ((x) * (double)SECS_PER_DAY)
-/*
+/*!
 *  Hours and Minutes to Days := (hour_value * 60 + min_value) / 1440.0.
 */
 # define HHMM2DAY(h, m)  (((h) * MINS_PER_HOUR + (m)) / (double)MINS_PER_DAY)
-/*
+/*!
 *  Hours and Minutes to Hours := hour_value + min_value / 60.0.
 */
 # define HHMM2HH(h, m)   ((h) + (m) / (double)MINS_PER_HOUR)
-/*
+/*!
 *  Hours and Minutes to Minutes := hour_value * 60 + min_value.
 */
 # define HHMM2MM(h, m)   ((h) * MINS_PER_HOUR + (m))
-/*
+/*!
 *  Hours and Minutes to Seconds := hour_value * 3600 + min_value * 60.
 */
 # define HHMM2SS(h, m)   ((h) * SECS_PER_HOUR + (m) * SECS_PER_MIN)
-/*
+/*!
 *  Hours to Minutes.
 */
 # define HH2MM(x)        DEG2MM(x)
-/*
+/*!
 *  Hours to Seconds.
 */
 # define HH2SS(x)        DEG2SS(x)
-/*
+/*!
 *  Minutes to Hours.
 */
 # define MM2HH(x)        MM2DEG(x)
-/*
+/*!
 *  Minutes to Seconds.
 */
 # define MM2SS(x)        DEG2MM(x)
-/*
+/*!
 *  Seconds to Hours.
 */
 # define SS2HH(x)        SS2DEG(x)
-/*
+/*!
 *  Seconds to Minutes.
 */
 # define SS2MM(x)        MM2DEG(x)
@@ -1164,19 +1165,19 @@ typedef
 
 typedef int Bool;
 
-/*
+/*!
 *  The quicksort (`qsort()') compare function type.
 */
 typedef int (*Cmp_func) __P_ ((const VOID_PTR, const VOID_PTR));
 
 # if HAVE_SIGNAL && (defined(SIGINT) || defined(SIGTERM) || defined(SIGHUP))
-/*
+/*!
 *  The signal (`signal()') handler function return type.
 */
 typedef RETSIGTYPE (*Sig_type) __P_ ((int));
 # endif
 
-/*
+/*!
 *  The long option record, see file `gcal.c' for a detailed description of it!
 */
 typedef struct long_option_type
@@ -1189,7 +1190,7 @@ typedef struct long_option_type
 }
 Lopt_struct;
 
-/*
+/*!
 *  The highlighting sequence record.
 */
 typedef struct hls_type
@@ -1199,7 +1200,7 @@ typedef struct hls_type
 }
 Hls_struct;
 
-/*
+/*!
 *  The list/range of months/years record.
 */
 typedef struct ml_type
@@ -1209,7 +1210,7 @@ typedef struct ml_type
 }
 Ml_struct;
 
-/*
+/*!
 *  The supported date format record.
 */
 typedef struct date_format_type
@@ -1226,7 +1227,7 @@ typedef struct date_format_type
 Df_struct;
 
 
-/*
+/*!
 *  The Gregorian Reformation date record.
 */
 typedef struct greg_type
@@ -1245,7 +1246,7 @@ typedef struct greg_type
 }
 Greg_struct;
 
-/*
+/*!
 *  General purpose enumerations.
 */
 typedef enum compare_mode

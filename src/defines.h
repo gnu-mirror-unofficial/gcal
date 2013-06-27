@@ -1,9 +1,10 @@
 #ifndef __DEFINES_H
 # define __DEFINES_H
+/*!
+*  \file defines.h
+*  \brief Program name, release number and modification symbols.
+*/
 /*
-*  defines.h:  Program name, release number and modification symbols.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

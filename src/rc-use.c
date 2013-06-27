@@ -1,8 +1,9 @@
-/*
-*  rc-use.c:  Central function, manages the resource file handling
+/*!
+*  \file rc-use.c
+*  \brief Central function, manages the resource file handling
 *             and displays the results.
-*
-*
+*/
+/*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -81,326 +82,326 @@ __END_DECLARATIONS
 /*
 *  GLOBAL variables definitions.
 */
-/* Date variables a[=MMDD]...z[] (YYYY@{a|b|...|z}[[-]N]). */
+/*! Date variables a[=MMDD]...z[] (YYYY@{a|b|...|z}[[-]N]). */
   Dvar_struct rc_dvar[RC_DVAR_MAX];
 
-/* Text variables $a[=TEXT]...$z[]. */
+/*! Text variables $a[=TEXT]...$z[]. */
 Tvar_struct rc_tvar[RC_TVAR_MAX];
 
-/* Local co-ordinates used by both the %distance and %sun* special texts. */
+/*! Local co-ordinates used by both the %distance and %sun* special texts. */
 Coor_struct lcoor1;
 
-/* Points to the local co-ordinates 1. */
+/*! Points to the local co-ordinates 1. */
 Coor_struct *coor1 = &lcoor1;
 
-/* Local co-ordinates used by the %distance special text. */
+/*! Local co-ordinates used by the %distance special text. */
 Coor_struct lcoor2;
 
-/* Points to the local co-ordinates 2. */
+/*! Points to the local co-ordinates 2. */
 Coor_struct *coor2 = &lcoor2;
 
-/* Pointers to different parts of a (resource file) line. */
+/*! Pointers to different parts of a (resource file) line. */
 Line_struct *lineptrs = (Line_struct *) NULL;
 
-/* Pointers to different parts of a (resource file) line. */
+/*! Pointers to different parts of a (resource file) line. */
 Line_struct *lptrs = (Line_struct *) NULL;
 
-/* Pointers to different parts of a (resource file) line. */
+/*! Pointers to different parts of a (resource file) line. */
 Line_struct *lptrs2 = (Line_struct *) NULL;
 
-/* Pointers to different parts of a (resource file) line. */
+/*! Pointers to different parts of a (resource file) line. */
 Line_struct *lptrs3 = (Line_struct *) NULL;
 
-/* Temporary file used when a command is assigned to a TVAR. */
+/*! Temporary file used when a command is assigned to a TVAR. */
 FILE *rc_tvar_tfp = (FILE *) NULL;
 
-/* Temporary file used for managing `--here=ARG' options. */
+/*! Temporary file used for managing `--here=ARG' options. */
 FILE *rc_here_fp = (FILE *) NULL;
 
-/* Time displacement value in days used by %sun* and %moon*
+/*! Time displacement value in days used by %sun* and %moon*
    (also used as cycle-starting time value for %sun* and %moon* special texts). */
 double time_offset = 0.0;
 
-/* Atmospheric pressure in millibar (`--atmosphere=PRESSURE,TEMPERATURE'). */
+/*! Atmospheric pressure in millibar (`--atmosphere=PRESSURE,TEMPERATURE'). */
 double atm_pressure = DEFAULT_PRESSURE;
 
-/* Atmospheric temperature in degrees Celsius (`--atmosphere=PRESSURE,TEMPERATURE'). */
+/*! Atmospheric temperature in degrees Celsius (`--atmosphere=PRESSURE,TEMPERATURE'). */
 double atm_temperature = DEFAULT_TEMPERATURE;
 
-/* Adjust rise/set-based reference altitude resp. shadow length factor (`--adjust-value=NUMBER'). */
+/*! Adjust rise/set-based reference altitude resp. shadow length factor (`--adjust-value=NUMBER'). */
 double adjust_value = DEGS_PER_24_HOURS;
 
-/* Actual size of `rc_elems_table[]'. */
+/*! Actual size of `rc_elems_table[]'. */
 Uint rc_elems_max = RC_ELEMS_MAX;
 
-/* Amount of period of fixed dates. */
+/*! Amount of period of fixed dates. */
 int rc_period = 0;
 
-/* Amount of resource file entries. */
+/*! Amount of resource file entries. */
 int rc_elems = 0;
 
-/* Starting index of dummy resource file entries in table. */
+/*! Starting index of dummy resource file entries in table. */
 int rc_zero_pos = 0;
 
-/* `-cd'. */
+/*! `-cd'. */
 int rc_have_today_in_list = 0;
 
-/* Length of a single axis of a biorhythm text graphics bar. */
+/*! Length of a single axis of a biorhythm text graphics bar. */
 int rc_bio_axis_len = BIO_AXIS_DEF;
 
-/* Number of lines of a Moon phase text graphics image. */
+/*! Number of lines of a Moon phase text graphics image. */
 int rc_moonimage_lines = MOONIMAGE_DEF;
 
-/* Filler length of week number text. */
+/*! Filler length of week number text. */
 int len_fil_wt = 0;
 
-/* Actual size of text buffer of "text"-part of a line. */
+/*! Actual size of text buffer of "text"-part of a line. */
 int len_the_text = 0;
 
-/* Cycle-ending time value in minutes for %sun* and %moon* special texts. */
+/*! Cycle-ending time value in minutes for %sun* and %moon* special texts. */
 int loop_end = SPECIAL_VALUE;
 
-/* Cycle-timestep value in minutes for %sun* and %moon* special texts. */
+/*! Cycle-timestep value in minutes for %sun* and %moon* special texts. */
 int loop_step = DEFAULT_CYCLE_STEP;
 
-/* Actual GMT minute. */
+/*! Actual GMT minute. */
 int gmt_min = 0;
 
-/* Actual GMT hour. */
+/*! Actual GMT hour. */
 int gmt_hour = 0;
 
-/* Buffer of actual GMT day. */
+/*! Buffer of actual GMT day. */
 int buf_gd = 0;
 
-/* Buffer of actual GMT month. */
+/*! Buffer of actual GMT month. */
 int buf_gm = 0;
 
-/* Buffer of actual GMT year. */
+/*! Buffer of actual GMT year. */
 int buf_gy = 0;
 
-/* Day difference of GMT and local date. */
+/*! Day difference of GMT and local date. */
 int gmt_loc_diff = 0;
 
-/* Indicates whether event also appears in next year. */
+/*! Indicates whether event also appears in next year. */
 int incr_year = 0;
 
-/* Indicates whether event also appears in previous year. */
+/*! Indicates whether event also appears in previous year. */
 int decr_year = 0;
 
-/* Day of event found in line. */
+/*! Day of event found in line. */
 int d = 0;
 
-/* Month of event found in line. */
+/*! Month of event found in line. */
 int m = 0;
 
-/* Year of event found in line. */
+/*! Year of event found in line. */
 int y = 0;
 
-/* Buffered day of event. */
+/*! Buffered day of event. */
 int d_buf = 0;
 
-/* Buffered month of event. */
+/*! Buffered month of event. */
 int m_buf = 0;
 
-/* The `N'th weekday of month' displacement value. */
+/*! The `N'th weekday of month' displacement value. */
 int hn = 0;
 
-/* The weekday number of `N'th weekday of month'. */
+/*! The weekday number of `N'th weekday of month'. */
 int hwd = 0;
 
-/* Name of tempfile used when a command is assigned to a TVAR. */
+/*! Name of tempfile used when a command is assigned to a TVAR. */
 char *rc_tvar_tfn = (char *) NULL;
 
-/* Name of tempfile used for managing `--here=ARG' options. */
+/*! Name of tempfile used for managing `--here=ARG' options. */
 char *rc_here_fn = (char *) NULL;
 
-/* Text buffer of "text"-part of a line. */
+/*! Text buffer of "text"-part of a line. */
 char *the_text = (char *) NULL;
 
-/* General purpose text buffer 5. */
+/*! General purpose text buffer 5. */
 char *s5 = (char *) NULL;
 
-/* General purpose text buffer 6. */
+/*! General purpose text buffer 6. */
 char *s6 = (char *) NULL;
 
-/* General purpose text buffer 7. */
+/*! General purpose text buffer 7. */
 char *s7 = (char *) NULL;
 
-/* Text buffer of a line read from a resource file. */
+/*! Text buffer of a line read from a resource file. */
 char *line_buffer = (char *) NULL;
 
-/* Stores the valid fixed date texts. */
+/*! Stores the valid fixed date texts. */
 char **rc_elems_table = (char **) NULL;
 
-/* Text of modified actual date %DATE. */
+/*! Text of modified actual date %DATE. */
 char *rc_adate = (char *) NULL;
 
-/* Name of alternative resource file(s) `-f|F<NAME[+...]>'. */
+/*! Name of alternative resource file(s) `-f|F<NAME[+...]>'. */
 char *rc_filename = (char *) NULL;
 
-/* Argument used for filtering fixed date days. */
+/*! Argument used for filtering fixed date days. */
 char *rc_filter_day = (char *) NULL;
 
-/* Argument used for filtering fixed date periods. */
+/*! Argument used for filtering fixed date periods. */
 char *rc_filter_period = (char *) NULL;
 
-/* REGEX used for filtering fixed date texts. */
+/*! REGEX used for filtering fixed date texts. */
 char *rc_filter_text = (char *) NULL;
 
-/* Fixed date list grouping separator `-cg[TEXT]'. */
+/*! Fixed date list grouping separator `-cg[TEXT]'. */
 char *rc_grp_sep = (char *) NULL;
 
-/* Fixed date list heading text `--heading-text=TEXT'. */
+/*! Fixed date list heading text `--heading-text=TEXT'. */
 char *rc_heading_text = (char *) NULL;
 
-/* The biorhythm's "Emo" text. */
+/*! The biorhythm's "Emo" text. */
 char *rc_bio_emo_lit = (char *) NULL;
 
-/* The biorhythm's "Int" text. */
+/*! The biorhythm's "Int" text. */
 char *rc_bio_int_lit = (char *) NULL;
 
-/* The biorhythm's "Phy" text. */
+/*! The biorhythm's "Phy" text. */
 char *rc_bio_phy_lit = (char *) NULL;
 
-/* The mode specifying character. */
+/*! The mode specifying character. */
 char hc = '\0';
 
-/* `-jc'. */
+/*! `-jc'. */
 Bool rc_special_flag = FALSE;
 
-/* `-jcb'. */
+/*! `-jcb'. */
 Bool rc_both_dates_flag = FALSE;
 
-/* `-c'. */
+/*! `-c'. */
 Bool rc_use_flag = FALSE;
 
-/* `-C[]' or `-C[][T|W|M|Y]' or `-c[][T|W|M|Y]' or `-F<>'. */
+/*! `-C[]' or `-C[][T|W|M|Y]' or `-c[][T|W|M|Y]' or `-F<>'. */
 Bool rc_all_dates_flag = FALSE;
 
-/* `-c-'. */
+/*! `-c-'. */
 Bool rc_sort_des_flag = FALSE;
 
-/* `-ca'. */
+/*! `-ca'. */
 Bool rc_enable_fn_flag = FALSE;
 
-/* `-cA'. */
+/*! `-cA'. */
 Bool rc_alternative_format_flag = FALSE;
 
-/* `--execute-command'. */
+/*! `--execute-command'. */
 Bool rc_execute_command = FALSE;
 
-/* `-ce'. */
+/*! `-ce'. */
 Bool rc_enable_hda_flag = FALSE;
 
-/* `-cE'. */
+/*! `-cE'. */
 Bool rc_enable_hdl_flag = FALSE;
 
-/* `-ck'. */
+/*! `-ck'. */
 Bool rc_week_number_flag = FALSE;
 
-/* `-cl'. */
+/*! `-cl'. */
 Bool rc_period_list = FALSE;
 
-/* `-co'. */
+/*! `-co'. */
 Bool rc_omit_date_flag = FALSE;
 
-/* `-cU'. */
+/*! `-cU'. */
 Bool rc_suppr_date_part_flag = FALSE;
 
-/* `-cQ'. */
+/*! `-cQ'. */
 Bool rc_suppr_list_sep_flag = FALSE;
 
-/* `-cJ'. */
+/*! `-cJ'. */
 Bool rc_suppr_text_part_flag = FALSE;
 
-/* `-cx'. */
+/*! `-cx'. */
 Bool rc_title_flag = TRUE;
 
-/* `-cz'. */
+/*! `-cz'. */
 Bool rc_count_flag = FALSE;
 
-/* `-cZ'. */
+/*! `-cZ'. */
 Bool rc_zero_dates_flag = FALSE;
 
-/* `-cN[d|w|+|-]|MMDD|MMWW[W]N'. */
+/*! `-cN[d|w|+|-]|MMDD|MMWW[W]N'. */
 Bool rc_period_flag = FALSE;
 
-/* `-c]t'. */
+/*! `-c]t'. */
 Bool rc_tomorrow_flag = FALSE;
 
-/* `-c]w'. */
+/*! `-c]w'. */
 Bool rc_week_flag = FALSE;
 
-/* `-c]m'. */
+/*! `-c]m'. */
 Bool rc_month_flag = FALSE;
 
-/* `-c]y'. */
+/*! `-c]y'. */
 Bool rc_year_flag = FALSE;
 
-/* `-cNw'. */
+/*! `-cNw'. */
 Bool rc_week_year_flag = FALSE;
 
-/* `-c<N|w|m|y>+'. */
+/*! `-c<N|w|m|y>+'. */
 Bool rc_forwards_flag = FALSE;
 
-/* Buffers the state of `rc_forwards_flag'. */
+/*! Buffers the state of `rc_forwards_flag'. */
 Bool rc_fwdf_buffer = FALSE;
 
-/* `-c<N|w|m|y>-'. */
+/*! `-c<N|w|m|y>-'. */
 Bool rc_backwards_flag = FALSE;
 
-/* Buffers the state of `rc_backwards_flag'. */
+/*! Buffers the state of `rc_backwards_flag'. */
 Bool rc_bwdf_buffer = FALSE;
 
-/* `--leap-day=february'. */
+/*! `--leap-day=february'. */
 Bool rc_feb_29_to_feb_28 = FALSE;
 
-/* `--leap-day=march'. */
+/*! `--leap-day=march'. */
 Bool rc_feb_29_to_mar_01 = FALSE;
 
-/* `--precise' to display precise, non-rounded, times and data. */
+/*! `--precise' to display precise, non-rounded, times and data. */
 Bool rc_precise = FALSE;
 
-/* `--export-date-variables'. */
+/*! `--export-date-variables'. */
 Bool rc_export_ldvar_flag = FALSE;
 
-/* `--export-text-variables'. */
+/*! `--export-text-variables'. */
 Bool rc_export_ltvar_flag = FALSE;
 
-/* `--ignore-case' to ignore case distinctions in PATTERN. */
+/*! `--ignore-case' to ignore case distinctions in PATTERN. */
 Bool rc_ignore_case_flag = FALSE;
 
-/* `--limit' to calculate rise/set times limited to the current day only. */
+/*! `--limit' to calculate rise/set times limited to the current day only. */
 Bool rc_limit = FALSE;
 
-/* `--revert-match' to select non-matching PATTERN lines. */
+/*! `--revert-match' to select non-matching PATTERN lines. */
 Bool rc_revert_match_flag = FALSE;
 
-/* Is a command (explicit date) given in the command line? */
+/*! Is a command (explicit date) given in the command line? */
 Bool is_date_given = FALSE;
 
-/* Does the command enables a year implicitly? */
+/*! Does the command enables a year implicitly? */
 Bool date_enables_year = FALSE;
 
-/* Stores whether a %shell escape special text is run. */
+/*! Stores whether a %shell escape special text is run. */
 Bool shell_escape_done = FALSE;
 
-/* `-cNw' and complete week is in month. */
+/*! `-cNw' and complete week is in month. */
 Bool is_1month_mode = FALSE;
 
-/* `-cNw' and only part of week is in month. */
+/*! `-cNw' and only part of week is in month. */
 Bool is_2month_mode = FALSE;
 
-/* Reference to a date variable found in line. */
+/*! Reference to a date variable found in line. */
 Bool is_2dvar = FALSE;
 
-/* Reference to Easter Sundays date found in line. */
+/*! Reference to Easter Sundays date found in line. */
 Bool is_2easter = FALSE;
 
-/* `-cNw' and actual date modified. */
+/*! `-cNw' and actual date modified. */
 Bool adate_set = FALSE;
 
-/* Remove highlighting sequences before searching PATTERN? */
+/*! Remove highlighting sequences before searching PATTERN? */
 Bool remove_hls_in_regex = FALSE;
 
 
@@ -426,28 +427,28 @@ int re_pattern = 0;
 /*
 *  static variables definitions.
 */
-/* Table of resource/include file buffers. */
+/*! Table of resource/include file buffers. */
 static File_struct **rc_files_table = (File_struct **) NULL;
 
-/* Actual size of `rc_files_table[]'. */
+/*! Actual size of `rc_files_table[]'. */
 static Uint rc_files_max = RC_FILES_MAX;
 
-/* Amount of resource file buffers. */
+/*! Amount of resource file buffers. */
 static int rc_files = 0;
 
-/* Number of characters in `line_buffer'. */
+/*! Number of characters in `line_buffer'. */
 static int line_length = 0;
 
-/* An include statement is found in file. */
+/*! An include statement is found in file. */
 static Bool is_include = FALSE;
 
-/* A date variable statement is found in file. */
+/*! A date variable statement is found in file. */
 static Bool is_dvar = FALSE;
 
-/* A text variable statement is found in file. */
+/*! A text variable statement is found in file. */
 static Bool is_tvar = FALSE;
 
-/* File contains an invalid include file name? */
+/*! File contains an invalid include file name? */
 static Bool bad_sys_include = FALSE;
 
 
@@ -457,7 +458,7 @@ static Bool bad_sys_include = FALSE;
 */
 void
 rc_use ()
-/*
+/*!
    Processes a standard/special resource file and displays the valid fixed
    dates found resp., the valid fixed dates of eternal holiday list.
 */
@@ -1513,7 +1514,7 @@ static void
 try_to_include_file (ed, wd)
      int ed;
      int wd;
-/*
+/*!
    Manages an include file.
 */
 {
@@ -1785,7 +1786,7 @@ display_table (tmp_ad, tmp_am, tmp_ay, day, ed, wd)
      int day;
      int ed;
      int wd;
-/*
+/*!
    Displays all entries in `rc_elems_table[]' in sorted order.
 */
 {
@@ -2658,7 +2659,7 @@ static int
 fn_asc_sort (a, b)
      const char **a;
      const char **b;
-/*
+/*!
    The (q)sort compare function for fixed dates which texts
      have an included resource "file name"; ascending order.
 */
@@ -2763,7 +2764,7 @@ static int
 fn_des_sort (a, b)
      const char **a;
      const char **b;
-/*
+/*!
    The (q)sort compare function for fixed dates which texts
      have an included resource "file name"; descending order.
 */

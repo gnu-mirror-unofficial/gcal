@@ -1,9 +1,10 @@
 #ifndef __UTILS_H
 # define __UTILS_H
+/*!
+*  \file utils.h
+*  \brief Pool of common functions header file.
+*/
 /*
-*  utils.h:  Pool of common functions header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

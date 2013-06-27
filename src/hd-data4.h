@@ -1,10 +1,11 @@
 #ifndef __HD_DATA4_H
 # define __HD_DATA4_H
-/*
-*  hd-data4.h:  All other M-S countries data which is composed into the
+/*!
+*  \file hd-data4.h
+*  \brief All other M-S countries data which is composed into the
 *               eternal holiday list header file.
-*
-*
+*/
+/*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

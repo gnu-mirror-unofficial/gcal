@@ -1,8 +1,9 @@
-/*
-*  rc-check.c:  Checks if a line (of a resource file)
+/*!
+*  \file rc-check.c
+*  \brief Checks if a line (of a resource file)
 *               must be inserted into `rc_elems_table[]'.
-*
-*
+*/
+/*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -66,10 +67,10 @@ __END_DECLARATIONS
 /*
 *  static variables definitions.
 */
-/* Textual weekday name is found and must be respected. */
+/*! Textual weekday name is found and must be respected. */
 static Bool is_weekday_mode = FALSE;
 
-/* No explicit month command is given in the command line. */
+/*! No explicit month command is given in the command line. */
 static Bool changed_month = FALSE;
 
 
@@ -88,7 +89,7 @@ rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed,
      const int day;
      const int ed;
      const int wd;
-/*
+/*!
    Checks whether a single line of a resource file resp.,
      eternal holiday must be displayed.
 */
@@ -1730,7 +1731,7 @@ date_matches_period (print_twice, day, ed, wd)
      int day;
      int ed;
      const int wd;
-/*
+/*!
    Checks if a given date (module global variables `d' for the day, `m' for
      the month and `y' for the year) matches a given period, which starts at
      absolute day of year `day' and ends at absolute day of year `ed' (the
@@ -2325,7 +2326,7 @@ date_matches_period (print_twice, day, ed, wd)
 static int
 get_number (string)
      char **string;
-/*
+/*!
    Returns the absolute value of a "repeat for N days since..." field or
      "for each N'th day since..." field using the global `s6' text buffer.
 */

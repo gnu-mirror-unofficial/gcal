@@ -1,7 +1,8 @@
+/*!
+*  \file utils.c
+*  \brief Pool of common functions.
+*/
 /*
-*  utils.c:  Pool of common functions.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -89,7 +90,7 @@ my_malloc (amount, exit_status, module_name, module_line, var_name,
      const long module_line;
      const char *var_name;
      const int var_contents;
-/*
+/*!
    Allocates AMOUNT bytes of memory dynamically, with error checking.
      Calls `my_error()' and terminates the program if any errors occur.
      AMOUNT is limited to `int' range instead of `size_t' range;
@@ -127,7 +128,7 @@ my_realloc (ptr_memblock, amount, exit_status, module_name, module_line,
      const long module_line;
      const char *var_name;
      const int var_contents;
-/*
+/*!
    Changes the size of an allocated block of memory PTR_MEMBLOCK to AMOUNT
      bytes, with error checking.  Calls `my_error()' and terminates the program
      if any errors occur.  AMOUNT is limited to `int' range instead of `size_t'
@@ -162,7 +163,7 @@ allocate_all_strings (amount, module_name, module_line)
      const int amount;
      const char *module_name;
      const long module_line;
-/*
+/*!
    Initially allocates AMOUNT bytes of memory dynamically for all string
      vectors used, with error checking.  Calls `my_error()' indirectly and
      terminates the program if any errors occur.  AMOUNT is limited to `int'
@@ -213,7 +214,7 @@ resize_all_strings (amount, with_line_buffer, module_name, module_line)
      const Bool with_line_buffer;
      const char *module_name;
      const long module_line;
-/*
+/*!
    Changes the size of all string vectors used to AMOUNT bytes, with error
      checking.  Calls `my_error()' indirectly and terminates the program
      if any errors occur. AMOUNT is limited to `int' range instead of `size_t'
@@ -263,7 +264,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
      const long module_line;
      const char *var_name;
      const int var_contents;
-/*
+/*!
    Displays a specific error message on STDERR channel
      and terminates the program with status `exit_status'.
 */
@@ -393,7 +394,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 RETSIGTYPE
 handle_signal (the_signal)
      int the_signal;
-/*
+/*!
    Signal handler function which displays the numeric ID of the
      received signal on STDERR channel and terminates the program
      with ERR_TERMINATION_BY_SIGNAL exit status.
@@ -411,7 +412,7 @@ handle_signal (the_signal)
 void
 my_exit (exit_status)
      const int exit_status;
-/*
+/*!
    Tries to erase all temporary files before without error checking
      and quits the program by calling the systems `exit()' function.
 */
@@ -440,7 +441,7 @@ my_exit (exit_status)
 int
 my_atoi (string)
      const char *string;
-/*
+/*!
    Converts given `string' to a positiv integer value
      skipping leading zeroes and returns values in
      range 0...YEAR_MAX only (invalid values are set to 0).
@@ -459,7 +460,7 @@ my_atoi (string)
 int
 my_system (command)
      const char *command;
-/*
+/*!
    Wrapper for the system() function.
 */
 {
@@ -477,7 +478,7 @@ char *
 my_strstr (text, pattern)
      const char *text;
      const char *pattern;
-/*
+/*!
    Search the `pattern' needle in haystack `text'   =8^)
      (emulates the ANSI C strstr() function; not very well optimized).
 */
@@ -511,7 +512,7 @@ int
 my_strcspn (s1, s2)
      const char *s1;
      const char *s2;
-/*
+/*!
    Find length of initial segment of `s1' consisting entirely
    of characters not from `s2' (emulates the ANSI C strcspn() function).
 */
@@ -540,7 +541,7 @@ int
 my_strcasecmp (s1, s2)
      const char *s1;
      const char *s2;
-/*
+/*!
    Same as the ANSI C `strcmp()' function, but case insensitive.
 */
 {
@@ -573,7 +574,7 @@ my_strncasecmp (s1, s2, len)
      const char *s1;
      const char *s2;
      int len;
-/*
+/*!
    Same as the ANSI C `strncmp()' function, but case insensitive.
 */
 {
@@ -604,7 +605,7 @@ my_strncasecmp (s1, s2, len)
 
 Bool
 get_actual_date ()
-/*
+/*!
    Gets the actual local/GMT date and time from the system resp.,
      evaluates the "actual" date from global `rc_adate'-ptr to string.
      Returns TRUE if it's possible to evaluate `rc_adate', otherwise FALSE.
@@ -898,7 +899,7 @@ int
 compare_d_m_name (string, mode)
      const char *string;
      const Cmode_enum mode;
-/*
+/*!
    Compares the given day/month name `string' with built-in names and
      returns (1...7|1...12) either if `string' matches partly (until `\0'
      or first digit found in `string') or `string' matches complete.
@@ -983,7 +984,7 @@ int
 asc_sort (a, b)
      const char **a;
      const char **b;
-/*
+/*!
    The (q)sort compare function; ascending order.
 */
 {
@@ -996,7 +997,7 @@ int
 des_sort (a, b)
      const char **a;
      const char **b;
-/*
+/*!
    The (q)sort compare function; descending order.
 */
 {
@@ -1009,7 +1010,7 @@ Bool
 is_presorted (table, elems)
      char **table;
      int elems;
-/*
+/*!
    Checks whether the textual entries in `&table[]' are presorted in
       ascending sort order.  Returns TRUE if the entries in `table'
       are presorted, otherwise FALSE.
@@ -1040,7 +1041,7 @@ void
 reverse_order (table, elems)
      char **table;
      const int elems;
-/*
+/*!
    Rearranges (reverts) the sort order of the textual entries in
      `&table[]' from  ascending sort order to descending sort order
      by swapping the `table' pointers.
@@ -1069,7 +1070,7 @@ reverse_order (table, elems)
 const char *
 day_suffix (day)
      int day;
-/*
+/*!
    Returns the ordinal suffix (st, nd, rd or th) which is added to a single day number.
 */
 {
@@ -1115,7 +1116,7 @@ day_suffix (day)
 const char *
 short3_day_name (day)
      const int day;
-/*
+/*!
    Returns the short name of the day using the `printf()' format "%-3s".
 */
 {
@@ -1166,7 +1167,7 @@ short3_day_name (day)
 const char *
 short_day_name (day)
      const int day;
-/*
+/*!
    Returns the short name of the day using the `printf()' format "%-2s".
 */
 {
@@ -1217,7 +1218,7 @@ short_day_name (day)
 const char *
 day_name (day)
      const int day;
-/*
+/*!
    Returns the complete name of the day.
 */
 {
@@ -1235,7 +1236,7 @@ day_name (day)
 const char *
 short_month_name (month)
      const int month;
-/*
+/*!
    Returns the short name of the month using the `printf()' format "%-3s".
 */
 {
@@ -1312,7 +1313,7 @@ short_month_name (month)
 const char *
 month_name (month)
      const int month;
-/*
+/*!
    Returns the complete name of the month.
 */
 {
@@ -1377,7 +1378,7 @@ date2num (day, month, year)
      const int day;
      const int month;
      const int year;
-/*
+/*!
    Returns the absolute number of days of the given date since
      00010101(==YYYYMMDD) respecting the missing period of the
      Gregorian Reformation.
@@ -1415,7 +1416,7 @@ num2date (mjd, day, month, year)
      int *day;
      int *month;
      int *year;
-/*
+/*!
    Converts a delivered absolute number of days `mjd' to a standard
      date (since 00010101(==YYYYMMDD), returned in `&day', `&month' and `&year')
      respecting the missing period of the Gregorian Reformation.
@@ -1478,7 +1479,7 @@ doy2date (doy, is_leap_year, day, month)
      const int is_leap_year;
      int *day;
      int *month;
-/*
+/*!
    Converts a given number of days of a year to a standard date
      (returned in `&day' and `&month') and returns:
        TRUE in case the `day_of_year' number is valid;
@@ -1533,7 +1534,7 @@ weekday_of_date (day, month, year)
      const int day;
      const int month;
      const int year;
-/*
+/*!
    Returns the weekday of a Gregorian/Julian calendar date
      (month must be 1...12) and returns 1...7 (1==mo, 2==tu...7==su).
 */
@@ -1550,7 +1551,7 @@ day_of_year (day, month, year)
      const int day;
      const int month;
      const int year;
-/*
+/*!
    Returns the day of the year of a Gregorian or Julian calendar date
      (month must be 1...12) and returns 1...365|366.
 */
@@ -1571,7 +1572,7 @@ day_of_year (day, month, year)
 int
 days_of_february (year)
      const int year;
-/*
+/*!
    Returns the number of days in February --- respecting the Gregorian
      Reformation period likewise the leap year rule as used by the
      Eastern Orthodox churches.
@@ -1611,7 +1612,7 @@ valid_date (day, month, year)
      const int day;
      const int month;
      const int year;
-/*
+/*!
    Checks whether a delivered date is valid.
 */
 {
@@ -1633,7 +1634,7 @@ prev_date (day, month, year)
      int *day;
      int *month;
      int *year;
-/*
+/*!
    Sets a delivered date back by one day (to yesterday's date)
      respecting the missing period of the Gregorian Reformation.
      Returns FALSE in case a date was within the missing period
@@ -1678,7 +1679,7 @@ next_date (day, month, year)
      int *day;
      int *month;
      int *year;
-/*
+/*!
    Sets the delivered date forwards by one day (to tomorrow's date)
      respecting the missing period of the Gregorian Reformation.
      Returns FALSE in case a date was in the missing period
@@ -1723,7 +1724,7 @@ week_number (day, month, year, is_iso_week, start_day_of_week)
      const int year;
      const Bool is_iso_week;
      const int start_day_of_week;
-/*
+/*!
    Returns either a ISO-8601:1988 standard week number of the given date
      if the `is_iso_week' variable is TRUE, or a special value for marking
      a special event, which can be managed by the caller in a special way
@@ -1819,7 +1820,7 @@ weekno2doy (week, year, is_iso_week, start_day_of_week)
      const int year;
      const Bool is_iso_week;
      const int start_day_of_week;
-/*
+/*!
    Returns the "day_of_year" number of a Julian or Gregorian calendar year,
      the given week number (either ISO-8601:1988 or non-ISO) starts at.
      Week number may be:
@@ -1895,7 +1896,7 @@ weekno2doy (week, year, is_iso_week, start_day_of_week)
 int
 knuth_easter_formula (year)
      const int year;
-/*
+/*!
    This procedure calculates the day and month of Easter giving the year.
    It returns the "actual day_of_year date" of Western Eastern (not the
    Eastern Easter of the Eastern Orthodox churches) after AD 463.
@@ -2010,7 +2011,7 @@ julian_gregorian_diff (day, month, year)
      const int day;
      const int month;
      const int year;
-/*
+/*!
    Returns the day difference between the given Gregorian calendar date
      and the according Julian calendar date, i.e. the amount of days,
      the Julian calendar is past the Gregorian calendar.
@@ -2034,7 +2035,7 @@ gregorian2julian (day, month, year)
      int *day;
      int *month;
      int *year;
-/*
+/*!
    Converts a Gregorian date to a Julian date.
 */
 {
@@ -2088,7 +2089,7 @@ raw_week_number (day, month, year, is_iso_week, start_day_of_week)
      const int year;
      const Bool is_iso_week;
      const int start_day_of_week;
-/*
+/*!
    Returns either the raw ISO-8601:1988 standard week number of the given
      date if the `is_iso_week' variable is TRUE.  Note that an ISO week
      starts on a Monday(=1) and ends on a Sunday(=7), and the first week
@@ -2166,7 +2167,7 @@ raw_week_number (day, month, year, is_iso_week, start_day_of_week)
 static const char *
 dflt_day_name (day)
      const int day;
-/*
+/*!
    Returns the complete default (==English) name of the day
      (needed by the `compare_d_m_name()' function if another native language
      other than English must be supported).
@@ -2186,7 +2187,7 @@ dflt_day_name (day)
 static const char *
 dflt_month_name (month)
      const int month;
-/*
+/*!
    Returns the complete default (==English) name of the month
      (needed by the `compare_d_m_name()' function if another native lanuage
      other than English must be supported).

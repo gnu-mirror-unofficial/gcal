@@ -1,7 +1,8 @@
+/*!
+*  \file hd-use.c
+*  \brief Manage the eternal holiday list.
+*/
 /*
-*  hd-use.c:  Manage the eternal holiday list.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -46,13 +47,13 @@
 /*
 *  GLOBAL variables definitions.
 */
-/* Stores the fixed eternal holiday list texts. */
+/*! Stores the fixed eternal holiday list texts. */
 char *hd_table[HD_ELEMS_MAX] = { (char *) NULL };
 
-/* Vector of holiday dates (legal days). */
+/*! Vector of holiday dates (legal days). */
 char hd_ldays[HD_MAX] = { '\0' };
 
-/* Vector of holiday dates (memorial days). */
+/*! Vector of holiday dates (memorial days). */
 char hd_mdays[HD_MAX] = { '\0' };
 
 
@@ -67,7 +68,7 @@ eval_holiday (day, month, year, wd, forwards)
      const int year;
      const int wd;
      const Bool forwards;
-/*
+/*!
    Detects first (FORWARDS==TRUE) or last (FORWARDS==FALSE) appearance
      of weekday `wd' in given date starting the search at `day'
      and returns the day number of `wd' in month.
@@ -106,7 +107,7 @@ orthodox_easter (year, greg_diff, greg_year, greg_month, greg_first_day,
      const int greg_month;
      const int greg_first_day;
      const int greg_last_day;
-/*
+/*!
    Calculates the day and month of Orthodox Easter giving the year
      and the specific Gregorian Reformation date.  It returns the
      "actual day_of_year number" of Eastern Easter of the Eastern Orthodox
@@ -188,7 +189,7 @@ orthodox_easter (year, greg_diff, greg_year, greg_month, greg_first_day,
 int
 tishri_1 (year)
      const int year;
-/*
+/*!
    Returns the `day_of_year' number of the (arithmetical lunisolar)
      Hebrew/Jewish Hebrew_New_Year/Rosh_Hashana/Tishri_1 for the
      given Julian/Gregorian year YEAR.
@@ -241,7 +242,7 @@ int
 muharram_1 (year, doy)
      const int year;
      int *doy;
-/*
+/*!
    Returns the `day_of_year' number of the (arithmetical lunar)
      Islamic *CIVIL* calendar's Islamic_New_Year/MuHarram_1 for the
      given Julian/Gregorian year YEAR, which must be greater than AD 621.
@@ -391,7 +392,7 @@ find_chinese_leap_month (conjunction_vector, nh_ws_prev_year, year, hour, min)
      const int year;
      const int hour;
      const int min;
-/*
+/*!
    Calculates the leap month of the Chinese calendar (based on the method
      used since AD 1645, which implemented the use of true -- astronomically
      detected -- Sun), which occurs in the given Julian/Gregorian year YEAR.
@@ -649,7 +650,7 @@ decode_date_format (format_txt, result_txt, day, month, year, doy,
      const Bool hls1_set;
      const Bool hls2_set;
      const Bool fixed_length_names;
-/*
+/*!
    Concatenates the elements of a date (inclusive highlighting) in formatted
      manner to `&result_txt' according to the order of format specifiers, which
      are given in the `format_txt.  The core area of the string vector
@@ -1176,7 +1177,7 @@ decode_format (format_txt, pos, is_cformat, is_lformat, is_sign,
      Bool *is_fformat;
      int *fstyle;
      int *fwidth;
-/*
+/*!
    Checks for an optional format instruction which can either be used
      in case a TVAR or a `%...' special text is referenced.  The template
      of such a format is:  [ ALIGNMENT [SIGN] [LZERO] WIDTH [STYLE] [SUFFIX] FORMAT ],
@@ -1343,7 +1344,7 @@ use_format (result_txt, pos, string, value, is_numeric, is_cformat,
      const int fstyle;
      const int fwidth;
      const int extra_len;
-/*
+/*!
    Formats either the text `string' points to, or the number stored in `value'
      and returns the effective length of the text formatted.
      If `is_numeric' is set to TRUE, `value' is formatted, otherwise `string'.
@@ -1733,7 +1734,7 @@ void
 print_all_holidays (init_data, detected)
      Bool init_data;
      const Bool detected;
-/*
+/*!
    Generate and display all holidays (global `hd_table') in sorted manner.
 */
 {
@@ -2130,7 +2131,7 @@ holiday (init_data, detected, holiday_name, country_code, holiday_prefix,
      int *hd_elems;
      const int fday;
      const int count;
-/*
+/*!
    Generates a single holiday date text in formatted manner and stores the
      result into global `hd_table[]'.
      ONLY if `holiday_prefix' is a '-' (DIS_HLS_PREF) or '*' (DIS_HLS_PREF2)

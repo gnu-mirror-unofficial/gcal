@@ -1,9 +1,10 @@
 #ifndef __FILE_IO_H
 # define __FILE_IO_H
+/*!
+*  \file file-io.h
+*  \brief Managing and accessing resource, include and response files header file.
+*/
 /*
-*  file-io.h:  Managing and accessing resource, include and response files header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

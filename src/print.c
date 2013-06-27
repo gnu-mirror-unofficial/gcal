@@ -1,7 +1,8 @@
+/*!
+*  \file print.c
+*  \brief Create, construct and print the calendar sheet(s).
+*/
 /*
-*  print.c:  Create, construct and print the calendar sheet(s).
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -61,10 +62,10 @@ __END_DECLARATIONS
 /*
 *  static variables definitions.
 */
-/* Standard or special year dates. */
+/*! Standard or special year dates. */
 static int year_vector[VEC_ELEMS];
 
-/* Special year dates only. */
+/*! Special year dates only. */
 static int special_vector[VEC_ELEMS];
 
 
@@ -74,7 +75,7 @@ static int special_vector[VEC_ELEMS];
 */
 void
 print_calendar ()
-/*
+/*!
    Prints one or more single month/year calendar(s).
 */
 {
@@ -1374,7 +1375,7 @@ print_calendar ()
 static void
 fill_year_vector (year)
      int year;
-/*
+/*!
    Builds the "standard" year vector and the "special" year vector
      according to the delivered `year'.
 */
@@ -1464,7 +1465,7 @@ fill_year_vector (year)
 static Bool
 print_unhighlighted_date (marker_flag)
      Bool marker_flag;
-/*
+/*!
    Prints a date in NON-highlighted manner.
      If the MARKER_FLAG is set to TRUE when entering this function, this
      indicates, that a highlighting sequence/marking character pair was
@@ -1550,7 +1551,7 @@ print_highlighted_date (last_item, marker_flag, hls_start, hls_slen, hls_end,
      const int hls_slen;
      const char *hls_end;
      const int hls_elen;
-/*
+/*!
    Prints a date in highlighted manner using the given highlighting sequence,
      which consists of the "starting" highlighting sequence HLS_START and the
      "ending/final" highlighting sequence HLS_END, for distinguishing whether

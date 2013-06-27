@@ -1,9 +1,11 @@
 #ifndef __RC_CHECK_H
 # define __RC_CHECK_H
+/*!
+*  \file rc-check.h
+*  \brief Checks if a line (of a resource file) must be 
+*  			inserted into `rc_elems_table[]' header file.
+*/
 /*
-*  rc-check.h:  Checks if a line (of a resource file) must be inserted into `rc_elems_table[]' header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

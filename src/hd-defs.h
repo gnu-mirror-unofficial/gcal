@@ -1,9 +1,11 @@
 #ifndef __HD_DEFS_H
 # define __HD_DEFS_H
+/*!
+*  \file hd-defs.h  
+*  \brief Holiday dates specific statements, macros, typedefs, 
+*  				global variable declarations...
+*/
 /*
-*  hd-defs.h:  Holiday dates specific statements, macros, typedefs, global variable declarations...
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -34,51 +36,51 @@
 /*
 *  Program specific preprocessor statements.
 */
-/* Maximum number of holidays per year (MONTH_MAX*MONTH_LAST). */
+/*! Maximum number of holidays per year (MONTH_MAX*MONTH_LAST). */
 # define HD_MAX           372
 
-/* Maximum amount of eternal holidays in the table. */
+/*! Maximum amount of eternal holidays in the table. */
 # if HD_TOP20CC
 #  define HD_ELEMS_MAX     1280
 # else /* !HD_TOP20CC */
 #  define HD_ELEMS_MAX     8192
 # endif	/* !HD_TOP20CC */
 
-/* Maximum length of a holiday name inclusive `\0' ==> 31 characters effective textlength maximum. */
+/*! Maximum length of a holiday name inclusive `\0' ==> 31 characters effective textlength maximum. */
 # define LEN_HD_NAME      40
 
-/* Identification for the Multicultural New Year's Day holidays. */
+/*! Identification for the Multicultural New Year's Day holidays. */
 # define HD_MCNY          "MCNY"
 
 
 /*
 *  U.S. holidays observance MODE constants.
 */
-/*
+/*!
 *  Holiday is not observed:
 *    Saturday -> Saturday
 *    Sunday   -> Sunday
 */
 # define SASA_SUSU    0
-/*
+/*!
 *  Holiday is observed:
 *    Saturday -> Saturday
 *    Sunday   -> next Monday
 */
 # define SASA_SUMO    1
-/*
+/*!
 *  Holiday is observed:
 *    Saturday -> next Monday
 *    Sunday   -> next Monday
 */
 # define SAMO_SUMO    2
-/*
+/*!
 *  Holiday is observed:
 *    Saturday -> preceding Friday
 *    Sunday   -> next Monday
 */
 # define SAFR_SUMO    3
-/*
+/*!
 *  Holiday is observed:
 *    Saturday -> preceding Friday (Veterans' Day only in US_CA)
 *    Saturday -> Saturday (otherwise)
@@ -705,18 +707,18 @@ __P_ ((Bool *, const Bool, int, const int, int *, const int, const int));
 /*
 *  GLOBAL variables declarations.
 */
-/* The table of country specific holidays. */
+/*! The table of country specific holidays. */
 extern const Cc_struct cc_holidays[];
 
-/* The table which contains all the holiday texts. */
+/*! The table which contains all the holiday texts. */
 extern const Ht_struct hd_text[];
 
-/* U.S. holidays observance mode. */
+/*! U.S. holidays observance mode. */
 extern int observe_us_hdy;
 
-/* The ISO-3166 character code used in the country specific `hdy_*()' functions. */
+/*! The ISO-3166 character code used in the country specific `hdy_*()' functions. */
 extern char *ptr_cc_id;
 
-/* Toggle which indicates to use a different CC in output. */
+/*! Toggle which indicates to use a different CC in output. */
 extern Bool use_other_cc;
 #endif /* __HD_DEFS_H */

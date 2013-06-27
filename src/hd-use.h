@@ -1,9 +1,10 @@
 #ifndef __HD_USE_H
 # define __HD_USE_H
+/*!
+*  \file hd-use.h
+*  \brief Manage the eternal holiday list header file.
+*/
 /*
-*  hd-use.h:  Manage the eternal holiday list header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

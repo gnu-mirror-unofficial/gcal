@@ -1,9 +1,10 @@
 #ifndef __HELP_H
 # define __HELP_H
+/*!
+*  \file help.h
+*  \brief The help, version and license screens header file.
+*/
 /*
-*  help.h:  The help, version and license screens header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -34,24 +35,24 @@
 /*
 *  Type definitions.
 */
-/*
+/*!
 *  The supported date format information record.
 */
 typedef struct date_format_information_type
 {
-  /* Information text of the format. */
+  /*! Information text of the format. */
   char *di_info;
 
-  /* First character of the format. */
+  /*! First character of the format. */
   char di_1format;
 
-  /* Second character of the format. */
+  /*! Second character of the format. */
   char di_2format;
 }
 Di_struct;
 
 # if USE_RC
-/*
+/*!
 *  The exclusion date information record.
 */
 typedef struct exclusion_date_type

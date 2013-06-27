@@ -1,9 +1,10 @@
 #ifndef __PRINT_H
 # define __PRINT_H
+/*!
+*  \file print.h
+*  \brief Create, construct and print the calendar sheet(s) header file.
+*/
 /*
-*  print.h:  Create, construct and print the calendar sheet(s) header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

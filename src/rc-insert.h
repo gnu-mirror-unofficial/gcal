@@ -1,9 +1,11 @@
 #ifndef __RC_INSERT_H
 # define __RC_INSERT_H
+/*!
+*  \file rc-insert.h
+*  \brief Inserts a line (of a resource file) 
+*  			into `rc_elems_table[]' header file.
+*/
 /*
-*  rc-insert.h:  Inserts a line (of a resource file) into `rc_elems_table[]' header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

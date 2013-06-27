@@ -1,11 +1,13 @@
-/*
-*  tcal.c:  Start `gcal' with date set ONE day ahead (default mode,
-*             like the `--shift=1' long-style option is passed to it).
-*             Useful if you call this program in `~/.profile' and you
-*             want to see all fixed dates related to tomorrow + 1 day
-*             (advanced  -ct  respectively  --period-of-fixed-dates=t  option).
-*             Works *only* for Gregorian years!
+/*!
+*  \file tcal.c
+*  \brief Start `gcal' with date set ONE day ahead 
 *
+*  (default mode, like the `--shift=1' long-style option is passed to it).
+*  Useful if you call this program in `~/.profile' and you want to see all
+*  fixed dates related to tomorrow + 1 day (advanced  -ct respectively
+*  --period-of-fixed-dates=t  option).  Works *only* for Gregorian years!
+*/
+/*
 *  Copyright (c) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008,
 *  2009, 2010, 2011, 2013 Free Software Foundation, Inc.
 *  Copyright (c) 1995, 96, 1997, 2000 Thomas Esken
@@ -122,18 +124,18 @@ __END_DECLARATIONS
 /*
 *  static variables definitions.
 */
-/*
+/*!
    Number of days in months.
 */
 static const int dvec[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-/*
+/*!
    Number of past days of month.
 */
 static const int mvec[] =
   { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
 
-/*
+/*!
    The Gregorian Reformation dates table is an unterminated vector
      of `Greg_struct'.
 */
@@ -145,30 +147,30 @@ static Greg_struct greg_reform_date[] = {
   {1752, 9, 3, 13}
 };
 
-/* Points to the used Gregorian Reformation date. */
+/*! Points to the used Gregorian Reformation date. */
 static Greg_struct *greg = greg_reform_date;
 
 #ifdef DJG
-/* Set to SHRT_MAX for checking the maximum table range. */
+/*! Set to SHRT_MAX for checking the maximum table range. */
 static Usint testval = (Usint) 0;
 #else
-/* Set to INT_MAX for checking the maximum table range. */
+/*! Set to INT_MAX for checking the maximum table range. */
 static Uint testval = (Uint) 0;
 #endif
 
-/* Actual length of all strings. */
+/*! Actual length of all strings. */
 static Uint maxlen_max = MAXLEN_MAX;
 
-/* The name of this executable. */
+/*! The name of this executable. */
 static char *prgr_name = (char *) NULL;
 
-/* Text of `--help' option name. */
+/*! Text of `--help' option name. */
 static char *help_option_name = "help";
 
-/* Text of `--version' option name. */
+/*! Text of `--version' option name. */
 static char *version_option_name = "version";
 
-/* Text of `--shift' option name. */
+/*! Text of `--shift' option name. */
 static char *shift_option_name = "shift";
 
 
@@ -181,7 +183,7 @@ usage_msg (fp, prgr_name, exit_status)
      FILE *fp;
      const char *prgr_name;
      int exit_status;
-/*
+/*!
    Writes the program "usage" text to file `fp' and
      terminates the program with `exit_status'.
 */
@@ -207,7 +209,7 @@ version_msg (fp, prgr_name, exit_status)
      FILE *fp;
      const char *prgr_name;
      int exit_status;
-/*
+/*!
    Writes the program "version" text to file `fp' and
      terminates the program with `exit_status'.
 */
@@ -237,7 +239,7 @@ my_malloc (amount, exit_status, module_name, module_line, var_name,
      const long module_line;
      const char *var_name;
      const int var_contents;
-/*
+/*!
    Allocate AMOUNT bytes of memory dynamically, with error checking.
      Calls `my_error()' and terminates the program if any errors occur.
      AMOUNT is limited to `int' range instead of `size_t' range;
@@ -275,7 +277,7 @@ my_realloc (ptr_memblock, amount, exit_status, module_name, module_line,
      const long module_line;
      const char *var_name;
      const int var_contents;
-/*
+/*!
    Change the size of an allocated block of memory PTR_MEMBLOCK to AMOUNT
      bytes, with error checking.  Calls `my_error()' and terminates the program
      if any errors occur.  AMOUNT is limited to `int' range instead of `size_t'
@@ -312,7 +314,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
      const long module_line;
      const char *var_name;
      const int var_contents;
-/*
+/*!
    Displays a specific error message on STDERR channel
      and terminates the program with status `exit_status'.
 */
@@ -348,7 +350,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 static RETSIGTYPE
 handle_signal (the_signal)
      int the_signal;
-/*
+/*!
    Signal handler function which displays the numeric ID of the
      received signal on STDERR channel and terminates the program
      with ERR_TERMINATION_BY_SIGNAL exit status.
@@ -369,7 +371,7 @@ my_strncasecmp (s1, s2, len)
      const char *s1;
      const char *s2;
      int len;
-/*
+/*!
    Same as the ANSI C `strncmp()' function, but case insensitive.
 */
 {
@@ -401,7 +403,7 @@ my_strncasecmp (s1, s2, len)
 static int
 days_of_february (year)
      const int year;
-/*
+/*!
    Computes the number of days in February --- respecting
      the Gregorian Reformation period --- and returns them.
 */
@@ -433,7 +435,7 @@ doy2date (doy, is_leap_year, day, month)
      const int is_leap_year;
      int *day;
      int *month;
-/*
+/*!
    Converts a given number of days of a year to a standard date
      (returned in &day and &month) and returns:
        TRUE in case the `day_of_year' number is valid;
@@ -473,7 +475,7 @@ date2num (day, month, year)
      const int day;
      const int month;
      const int year;
-/*
+/*!
    Computes the absolute number of days of the given date since
      00010101(==YYYYMMDD) respecting the missing period of the
      Gregorian Reformation.
@@ -511,7 +513,7 @@ num2date (mjd, day, month, year)
      int *day;
      int *month;
      int *year;
-/*
+/*!
    Converts a delivered absolute number of days `mjd' to a standard
      date (since 00010101(==YYYYMMDD), returned in &day, &month and &year)
      respecting the missing period of the Gregorian Reformation.
@@ -573,7 +575,7 @@ get_actual_date (day, month, year)
      int *day;
      int *month;
      int *year;
-/*
+/*!
    Gets the actual date from the system.
 */
 {
@@ -596,7 +598,7 @@ int
 main (argc, argv)
      int argc;
      char *argv[];
-/*
+/*!
    Starts Gcal with date set one day ahead (default mode, like the `--shift=1'
      long-style option is passed to it) and all other arguments which are given
      in the command line.  The program first tries to use the `gcal' executable

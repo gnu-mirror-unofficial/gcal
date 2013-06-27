@@ -1,9 +1,11 @@
 #ifndef __HD_ASTRO_H
 # define __HD_ASTRO_H
+/*!
+*  \file hd-astro.h
+*  \brief Astronomical and support functions for the 
+*  				eternal holiday list header file.
+*/
 /*
-*  hd-astro.h:  Astronomical and support functions for the eternal holiday list header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

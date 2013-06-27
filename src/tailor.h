@@ -1,9 +1,10 @@
 #ifndef __TAILOR_H
 # define __TAILOR_H
+/*!
+*  \file tailor.h
+*  \brief Machine/target dependent definitions.
+*/
 /*
-*  tailor.h:  Machine/target dependent definitions.
-*
-*
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *
@@ -494,21 +495,21 @@
 #  endif
 # endif
 
-/*
+/*!
 *  Writing a shell script is only allowed on these systems.
 */
 # if defined(UNIX) && !defined(DJG)
 #  define GCAL_SHELL
 # endif
 
-/*
+/*!
 *  Using an external pager is only allowed on these systems.
 */
 # if defined(UNIX) && !defined(DJG) && USE_PAGER
 #  define GCAL_EPAGER
 # endif
 
-/*
+/*!
 *  Email option is only allowed on these systems.
 */
 # if defined(__GNUC__) || defined(UNIX) || defined(OS2) || defined(MSDOS) || defined(DJG) || defined(WIN32)
@@ -528,53 +529,53 @@
 # endif
 
 # ifdef GCAL_SHELL
-/* The comment character used by shell scripts. */
+/*! The comment character used by shell scripts. */
 #  define SHL_REM  "#"
 
-/* The escape character used by shell scripts. */
+/*! The escape character used by shell scripts. */
 #  define SHL_ESC       "\\"
 
-/* Name of default `chmod' program. */
+/*! Name of default `chmod' program. */
 #  ifndef CHMOD_PRGR
 #   define CHMOD_PRGR  "chmod"
 #  endif
 
-/* Make created shell script executable for all users. */
+/*! Make created shell script executable for all users. */
 #  define CHMOD_OPTS  "+x"
 
-/* ID for the first line of a shell script. */
+/*! ID for the first line of a shell script. */
 #  if HAVE_SYS_INTERPRETER && !defined(SHELL)
 #   define SHELL  "! /bin/sh"
 #  endif
 # endif
 
 # ifdef GCAL_EMAIL
-/* Input redirection symbol. */
+/*! Input redirection symbol. */
 #  ifndef REDIRECT_IN
 #   define REDIRECT_IN        "<"
 #  endif
 
-/* Stores the name of default mailer program in environment. */
+/*! Stores the name of default mailer program in environment. */
 #  ifndef ENV_VAR_MAILPROG
 #   define ENV_VAR_MAILPROG  "MAILPROG"
 #  endif
 
-/* Name of default eMail address environment variable 1. */
+/*! Name of default eMail address environment variable 1. */
 #  ifndef ENV_VAR_MAILTO
 #   define ENV_VAR_MAILTO    "MAILTO"
 #  endif
 
-/* Name of default eMail address environment variable 2. */
+/*! Name of default eMail address environment variable 2. */
 #  ifndef ENV_VAR_USER
 #   define ENV_VAR_USER      "USER"
 #  endif
 
-/* Name of default eMail address environment variable 3. */
+/*! Name of default eMail address environment variable 3. */
 #  ifndef ENV_VAR_LOGNAME
 #   define ENV_VAR_LOGNAME   "LOGNAME"
 #  endif
 
-/* Name of default mailer if $MAILPROG is not set. */
+/*! Name of default mailer if $MAILPROG is not set. */
 #  ifndef MAIL_PRGR
 #   define MAIL_PRGR         "mail"
 #  endif
@@ -611,7 +612,7 @@ static char *_tmpfn ()
 
 
 
-/* Default number of terminal columns, unconditional. */
+/*! Default number of terminal columns, unconditional. */
 # ifndef SCREEN_COLS
 #  define SCREEN_COLS   80
 # endif
@@ -619,26 +620,26 @@ static char *_tmpfn ()
 
 
 # if USE_PAGER
-/* Default number of terminal rows. */
+/*! Default number of terminal rows. */
 #  ifndef SCREEN_ROWS
 #   define SCREEN_ROWS    24
 #  endif
 
 #  ifdef GCAL_EPAGER
-/* Name of external pager program environment variable. */
+/*! Name of external pager program environment variable. */
 #   define ENV_VAR_PAGER  "PAGER"
 
-/* Name of preferred external pager program. */
+/*! Name of preferred external pager program. */
 #   ifndef PAGER1_PROG
 #    define PAGER1_PROG    "less"
 #   endif
 
-/* Name of alternative external pager program. */
+/*! Name of alternative external pager program. */
 #   ifndef PAGER2_PROG
 #    define PAGER2_PROG    "more"
 #   endif
 
-/* Name of second alternative external pager program. */
+/*! Name of second alternative external pager program. */
 #   ifndef PAGER3_PROG
 #    define PAGER3_PROG    "pg"
 #   endif
@@ -648,64 +649,64 @@ static char *_tmpfn ()
 
 
 # ifdef GCAL_NLS
-/* Name of first used national language environment variable. */
+/*! Name of first used national language environment variable. */
 #  define ENV_VAR_LANGUAGE     "LANGUAGE"
 
-/* Name of second used national language environment variable. */
+/*! Name of second used national language environment variable. */
 #  define ENV_VAR_LC_ALL       "LC_ALL"
 
-/* Name of third used national language environment variable. */
+/*! Name of third used national language environment variable. */
 #  if HAVE_LC_MESSAGES
 #   define ENV_VAR_LC_MESSAGES  "LC_MESSAGES"
 #  endif
 
-/* Name of fourth used national language environment variable. */
+/*! Name of fourth used national language environment variable. */
 #  define ENV_VAR_LANG         "LANG"
 # endif
 
 
 
-/* The character used to specify the actual directory folder. */
+/*! The character used to specify the actual directory folder. */
 # ifndef ACTUAL_DIR
 #  define ACTUAL_DIR    "."
 # endif
 
-/* Default directory/folder separator. */
+/*! Default directory/folder separator. */
 # ifndef DIR_SEP
 #  define DIR_SEP       "/"
 # endif
 
-/* Default path separator. */
+/*! Default path separator. */
 # ifndef PATH_SEP
 #  define PATH_SEP      ":"
 # endif
 
-/* Name of home directory environment variable. */
+/*! Name of home directory environment variable. */
 # ifndef ENV_VAR_HOME
 #  define ENV_VAR_HOME  "HOME"
 # endif
 
-/* Name of program search path environment variable. */
+/*! Name of program search path environment variable. */
 # ifndef ENV_VAR_PATH
 #  define ENV_VAR_PATH  "PATH"
 # endif
 
-/* Name of data search path environment variable. */
+/*! Name of data search path environment variable. */
 # ifndef ENV_VAR_GCALPATH
 #  define ENV_VAR_GCALPATH  "GCALPATH"
 # endif
 
-/* Name of programs default options variable. */
+/*! Name of programs default options variable. */
 # ifndef ENV_VAR_GCAL
 #  define ENV_VAR_GCAL  "GCAL"
 # endif
 
-/* Name of variable for setting ANSI-sequences to default. */
+/*! Name of variable for setting ANSI-sequences to default. */
 # ifndef ENV_VAR_GCALANSI
 #  define ENV_VAR_GCALANSI  "GCALANSI"
 # endif
 
-/* Name of variable for ordering the date. */
+/*! Name of variable for ordering the date. */
 # ifndef ENV_VAR_GCAL_DATE_FORMAT
 #  define ENV_VAR_GCAL_DATE_FORMAT  "GCAL_DATE_FORMAT"
 # endif
@@ -783,13 +784,13 @@ static char *_tmpfn ()
 #     define EDG         "\210"
 #     define ODG         "\223"
 #     define CD          "\207"
-	   /* Marking character 1 start (current day). */
+	   /*! Marking character 1 start (current day). */
 #     define BUF_HLS1S   "\021"
-	   /* Marking character 1 end (current day). */
+	   /*! Marking character 1 end (current day). */
 #     define BUF_HLS1E   "\020"
-	   /* Marking character 2 start (holiday). */
+	   /*! Marking character 2 start (holiday). */
 #     define BUF_HLS2S   "\256"
-	   /* Marking character 2 end (holiday). */
+	   /*! Marking character 2 end (holiday). */
 #     define BUF_HLS2E   "\257"
 #    else /* !IBM PC character set. */
 	   /* (defined(UNIX) && !defined(SCO) && !defined(COHERENT) && !defined(NeXT)) || defined(AMIGA) || ... */
@@ -808,13 +809,13 @@ static char *_tmpfn ()
 #     define EDG         "\352"
 #     define ODG         "\364"
 #     define CD          "\347"
-	   /* Marking character 1 start (current day). */
+	   /*! Marking character 1 start (current day). */
 #     define BUF_HLS1S   "<"
-	   /* Marking character 1 end (current day). */
+	   /*! Marking character 1 end (current day). */
 #     define BUF_HLS1E   ">"
-	   /* Marking character 2 start (holiday). */
+	   /*! Marking character 2 start (holiday). */
 #     define BUF_HLS2S   ":"
-	   /* Marking character 2 end (holiday). */
+	   /*! Marking character 2 end (holiday). */
 #     define BUF_HLS2E   ":"
 #    endif /* !IBM PC character set. */
 #   endif /* Atari character set. */
@@ -834,13 +835,13 @@ static char *_tmpfn ()
 #  define EDG         "^e"
 #  define ODG         "^o"
 #  define CD          ",c"
-     /* Marking character 1 start (current day). */
+     /*! Marking character 1 start (current day). */
 #  define BUF_HLS1S    "<"
-     /* Marking character 1 end (current day). */
+     /*! Marking character 1 end (current day). */
 #  define BUF_HLS1E    ">"
-     /* Marking character 2 start (holiday). */
+     /*! Marking character 2 start (holiday). */
 #  define BUF_HLS2S    ":"
-     /* Marking character 2 end (holiday). */
+     /*! Marking character 2 end (holiday). */
 #  define BUF_HLS2E    ":"
 # endif	/* !USE_EASC */
 
@@ -851,41 +852,41 @@ static char *_tmpfn ()
 */
 # if USE_HLS
 #  if defined(MSDOS) || defined(OS2) || defined(LINUX) || defined(DJG)
-       /* Highlighting sequence 1 start (current day). */
+       /*! Highlighting sequence 1 start (current day). */
 #   define HLS1S  "\033[1m"
-       /* Highlighting sequence 2 start (holiday). */
+       /*! Highlighting sequence 2 start (holiday). */
 #   define HLS2S  "\033[36m"
 #  else	/* !MSDOS && !OS2 && !LINUX && !DJG */
-       /* Highlighting sequence 1 start (current day). */
+       /*! Highlighting sequence 1 start (current day). */
 #   define HLS1S  "\033[7m"
-       /* Highlighting sequence 2 start (holiday). */
+       /*! Highlighting sequence 2 start (holiday). */
 #   define HLS2S  "\033[1m"
 #  endif /* !MSDOS && !OS2 && !LINUX && !DJG */
-     /* Highlighting sequence 1 end (current day). */
+     /*! Highlighting sequence 1 end (current day). */
 #  define HLS1E       "\033[0m"
-     /* Highlighting sequence 2 end (holiday). */
+     /*! Highlighting sequence 2 end (holiday). */
 #  define HLS2E       "\033[0m"
-     /* Termcap mode character HLS 1 start (current day). */
+     /*! Termcap mode character HLS 1 start (current day). */
 #  define TC_MC_HL1S  "mr"
-     /* Termcap mode character HLS 1 end (current day). */
+     /*! Termcap mode character HLS 1 end (current day). */
 #  define TC_MC_HL1E  "me"
-     /* Termcap mode character HLS 2 start (holiday). */
+     /*! Termcap mode character HLS 2 start (holiday). */
 #  define TC_MC_HL2S  "md"
-     /* Termcap mode character HLS 2 end (holiday). */
+     /*! Termcap mode character HLS 2 end (holiday). */
 #  define TC_MC_HL2E  "me"
 # else /* !USE_HLS */
-     /* Highlighting sequence 1 start (current day). */
+     /*! Highlighting sequence 1 start (current day). */
 #  define HLS1S       BUF_HLS1S
-     /* Highlighting sequence 1 end (current day). */
+     /*! Highlighting sequence 1 end (current day). */
 #  define HLS1E       BUF_HLS1E
-     /* Highlighting sequence 2 start (holiday). */
+     /*! Highlighting sequence 2 start (holiday). */
 #  define HLS2S       BUF_HLS2S
-     /* Highlighting sequence 2 end (holiday). */
+     /*! Highlighting sequence 2 end (holiday). */
 #  define HLS2E       BUF_HLS2E
 # endif	/* !USE_HLS */
-/* Maximum number of termcap mode chars/single HL sequences used. */
+/*! Maximum number of termcap mode chars/single HL sequences used. */
 # define TC_MC_MAX  4
-/* Print blank character if highlighting is disabled. */
+/*! Print blank character if highlighting is disabled. */
 # define NO_HLS  " "
 
 #endif /* __TAILOR_H */

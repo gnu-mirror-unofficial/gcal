@@ -1,8 +1,9 @@
-/*
-*  rc-utils.c:  Pool of special functions necessary for managing
+/*!
+*  \file rc-utils.c
+*  \brief Pool of special functions necessary for managing
 *               the fixed dates.
-*
-*
+*/
+/*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -84,7 +85,7 @@ rc_valid_day (date_text, day, month, year)
      const int day;
      const int month;
      const int year;
-/*
+/*!
    Checks the `date_text' for "%? special texts without argument", which
      disables a fixed dates and which is stored in `date_text' without a
      leading '%' character, and stores them into maps.  The `date_text'
@@ -321,7 +322,7 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
      const int y;
      const int incr_year;
      const int decr_year;
-/*
+/*!
    Checks the `date_text' for "%? special texts with date argument", which
      disables a fixed dates and which is stored in `date_text' without a
      leading '%' character, but separated by ',' colon characters, and stores
@@ -771,7 +772,7 @@ rc_valid_period (date_text, d, m, y, incr_year, decr_year)
 
 void
 rc_clean_flags ()
-/*
+/*!
    Cleans all global flags (except `rc_period_list')
      which are related to the fixed date period.
 */
@@ -802,7 +803,7 @@ rc_get_date (the_line, lineptrs, is_rc_file, is_weekday_mode, d, m, y, n, len,
      const long line_number;
      const char *line_buffer;
      const Bool on_error_exit;
-/*
+/*!
    Converts the textual/string `date' of a RC-file line into a numerical date
      and returns a pointer struct to the "day"-part and the "text"-part of the
      line indicating whether the "day"-part contains a list or a range of days;
@@ -1502,7 +1503,7 @@ precomp_nth_wd (diff, wd, n, day, month, year, mode)
      int *month;
      int *year;
      const Cmode_enum mode;
-/*
+/*!
    Precomputes the date of the "N'th absolute weekday" `wd' of the year
      or the date of weekday `wd' of the "N'th absolute week" of the year
      (returned in `&day', `&month' and `&year'; if `&year' is not concrete
@@ -1668,7 +1669,7 @@ precomp_date (diff, wd, day, month, year, mode)
      int *month;
      const int year;
      const Cmode_enum mode;
-/*
+/*!
    Precomputes the date relative to Easter Sunday's date (mode==EAster),
      relative to today's date (mode==TOday) or relative to date variables
      date (mode==DVar) plus displacement `diff' or displacement `diff' `wd'
@@ -1814,7 +1815,7 @@ set_dvar (line_buffer, lineptrs, filename, line_number, mode)
      const char *filename;
      const long line_number;
      const Var_enum mode;
-/*
+/*!
    Scans given string `line_buffer' and tries to detect a valid date variable
      reference, which can be:
        1) DVAR=``NOTHING''     --> Undefine local DVAR so we are able to use
@@ -2248,7 +2249,7 @@ set_tvar (line_buffer, filename, line_number, mode)
      const char *filename;
      const long line_number;
      const Var_enum mode;
-/*
+/*!
    Scans given string `line_buffer' and tries to detect a valid text variable
      reference, which is:
        1) $TVAR=[TEXT]  --> Assignment of a constant text expression TEXT
@@ -2986,7 +2987,7 @@ nth_weekday_of_month (d, m, y, n, is_weekday_mode)
      int *y;
      const int *n;
      Bool *is_weekday_mode;
-/*
+/*!
    If "N'th weekday of month" field is encoded:
      Compute the according date and return it in `&d', `&m' and `&y'.
      If a conversion error occurs, return SPECIAL_VALUE in `&y'.
@@ -3159,7 +3160,7 @@ d_between (d1, m1, y1, d2, m2, y2)
      const int d2;
      const int m2;
      const int y2;
-/*
+/*!
    Computes the amount of days between date1(base date) and date2
      exclusive date1 and date2, and adds 1 to the result.
 */
@@ -3177,7 +3178,7 @@ w_between (d1, m1, y1, d2, m2, y2)
      const int d2;
      const int m2;
      const int y2;
-/*
+/*!
    Computes the amount of weeks between date1(base date) and date2
      exclusive date1 and date2, and adds 1 to the result.
 */
@@ -3206,7 +3207,7 @@ m_between (m1, y1, m2, y2)
      const int y1;
      const int m2;
      const int y2;
-/*
+/*!
    Computes the amount of months between date1(base date) and date2
      exclusive date1 and date2, and adds 1 to the result.
 */
@@ -3224,7 +3225,7 @@ manage_leap_day (day, month, year, line_buffer, filename, line_number)
      const char *line_buffer;
      const char *filename;
      const long line_number;
-/*
+/*!
    Tries to set the leap day (29-Feb) either to "28-Feb" or "1-Mar"
      and prints a informational message in case this date modification is
      performed successfully (only if `--debug[=ARG]' option is given).
@@ -3305,7 +3306,7 @@ biorhythm (create_bar, axis_len, string,
      int *critical_day;
      int *positive_day;
      int *negative_day;
-/*
+/*!
    Computes the biorhythm for a date and creates a text graphics bar line
      according to the computed values in case `create_bar' is set to TRUE.
      Uses the delivered `string' for storing such a line and returns it.
@@ -3477,7 +3478,7 @@ double
 compute_distance (coor1, coor2)
      const Coor_struct *coor1;
      const Coor_struct *coor2;
-/*
+/*!
    Returns the air line distance in Kilometers between the two geographical
      point locations which are delivered in the COOR1 and COOR2 structures
      if the member variable `the_mode' is set to zero.
@@ -3612,7 +3613,7 @@ var_warning (exit_status, var_name, line_buffer, filename, line_number)
      const char *line_buffer;
      const char *filename;
      const long line_number;
-/*
+/*!
    Prints an informational message on STDERR channel in case an operation
      on a date or text variable is invalid.  Terminates the program if
      `warning_level' is set to "WARN_LVL_MAX"  with delivered `exit_status'.

@@ -1,7 +1,8 @@
+/*!
+*  \file rc-insert.c
+*  \brief Inserts a line (of a resource file) into `rc_elems_table[]'.
+*/
 /*
-*  rc-insert.c:  Inserts a line (of a resource file) into `rc_elems_table[]'.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -65,7 +66,7 @@
 /*
 *  static variables definitions.
 */
-/*
+/*!
    The table containing the codes that define the output and error format
    types used for formatting the data of the %sun* and %moon* special texts.
 */
@@ -171,7 +172,7 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems,
      int *rc_elems;
      int len_date;
      int print_twice;
-/*
+/*!
    Inserts a line into `rc_elems_table[]',
      but before this the line is checked and evaluated first
      for TVAR text variables and then for %?... special texts.

@@ -1,9 +1,10 @@
 #ifndef __HD_DATA_H
 # define __HD_DATA_H
+/*!
+*  \file hd-data.h
+*  \brief All data which is composed into the eternal holiday list header file.
+*/
 /*
-*  hd-data.h:  All data which is composed into the eternal holiday list header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

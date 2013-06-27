@@ -1,7 +1,8 @@
+/*!
+*  \file gcal2txt.c
+*  \brief Creates a verbatim text file from a Gcal resource file.
+*/
 /*
-*  gcal2txt.c:  Creates a verbatim text file from a Gcal resource file.
-*
-*
 *  Copyright (c) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008,
 *  2009, 2010, 2011, 2013 Free Software Foundation, Inc.
 *  Copyright (c) 1996, 1997, 2000 Thomas Esken
@@ -94,23 +95,23 @@ __END_DECLARATIONS
 *  static variables definitions.
 */
 #ifdef DJG
-/* Set to SHRT_MAX for checking the maximum table range. */
+/*! Set to SHRT_MAX for checking the maximum table range. */
 static Usint testval = (Usint) 0;
 #else
-/* Set to INT_MAX for checking the maximum table range. */
+/*! Set to INT_MAX for checking the maximum table range. */
 static Uint testval = (Uint) 0;
 #endif
 
-/* Actual length of all strings. */
+/*! Actual length of all strings. */
 static Uint maxlen_max = MAXLEN_MAX;
 
-/* The name of this executable. */
+/*! The name of this executable. */
 static char *prgr_name = (char *) NULL;
 
-/* Text of `--help' option name. */
+/*! Text of `--help' option name. */
 static char *help_option_name = "help";
 
-/* Text of `--version' option name. */
+/*! Text of `--version' option name. */
 static char *version_option_name = "version";
 
 
@@ -123,7 +124,7 @@ usage_msg (fp, prgr_name, exit_status)
      FILE *fp;
      const char *prgr_name;
      int exit_status;
-/*
+/*!
    Writes the program "usage" text to file `fp' and
      terminates the program with `exit_status'.
 */
@@ -146,7 +147,7 @@ version_msg (fp, prgr_name, exit_status)
      FILE *fp;
      const char *prgr_name;
      int exit_status;
-/*
+/*!
    Writes the program "version" text to file `fp' and
      terminates the program with `exit_status'.
 */
@@ -176,7 +177,7 @@ my_malloc (amount, exit_status, module_name, module_line, var_name,
      const long module_line;
      const char *var_name;
      const int var_contents;
-/*
+/*!
    Allocate AMOUNT bytes of memory dynamically, with error checking.
      Calls `my_error()' and terminates the program if any errors occur.
      AMOUNT is limited to `int' range instead of `size_t' range;
@@ -214,7 +215,7 @@ my_realloc (ptr_memblock, amount, exit_status, module_name, module_line,
      const long module_line;
      const char *var_name;
      const int var_contents;
-/*
+/*!
    Change the size of an allocated block of memory PTR_MEMBLOCK to AMOUNT
      bytes, with error checking.  Calls `my_error()' and terminates the program
      if any errors occur.  AMOUNT is limited to `int' range instead of `size_t'
@@ -251,7 +252,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
      const long module_line;
      const char *var_name;
      const int var_contents;
-/*
+/*!
    Displays a specific error message on STDERR channel
      and terminates the program with status `exit_status'.
 */
@@ -284,7 +285,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 static RETSIGTYPE
 handle_signal (the_signal)
      int the_signal;
-/*
+/*!
    Signal handler function which displays the numeric ID of the
      received signal on STDERR channel and terminates the program
      with ERR_TERMINATION_BY_SIGNAL exit status.
@@ -305,7 +306,7 @@ my_strncasecmp (s1, s2, len)
      const char *s1;
      const char *s2;
      int len;
-/*
+/*!
    Same as the ANSI C `strncmp()' function, but case insensitive.
 */
 {
@@ -341,7 +342,7 @@ decode_format (fp, is_eof, flen, fwidth, ch)
      int *flen;
      int *fwidth;
      int *ch;
-/*
+/*!
    Simplified check for an optional format instruction taken from `fp' stream
      which can either be used in case a TVAR or a `%...' special text is
      referenced. The template of such a format is:
@@ -550,7 +551,7 @@ int
 main (argc, argv)
      int argc;
      char *argv[];
-/*
+/*!
    Creates a verbatim text file from a Gcal resource file (optional argument 1)
      and displays the results on the STDOUT channel.  If no text file name or
      only a dash '-' is given, read input from STDIN channel.

@@ -1,7 +1,8 @@
+/*!
+*  \file help.c
+*  \brief The help, version and license screens.
+*/
 /*
-*  help.c:  The help, version and license screens.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -59,11 +60,11 @@ __END_DECLARATIONS
 /*
 *  static variables definitions.
 */
-/* Compiler infotext. */
+/*! Compiler infotext. */
 static const char *compiler_info[] =
   { N_("Compiled with %s%s for %s%s%s%s") };
 
-/*
+/*!
    The table used to inform about the supported date formats is a vector of
      `Di_struct' terminated by an element containing a `di_info' which is zero!
 */
@@ -117,7 +118,7 @@ static const Di_struct info_date_format[] = {
 };
 
 #if USE_RC
-/*
+/*!
    The table used to inform about the characters used in the
      %? inclusive/exclusive day special texts is a vector of
      `Ed_struct' terminated by an element containing an `ed_info' which is zero!
@@ -152,7 +153,7 @@ my_help_on_help (fp, longopt, lopt_ambig, cols)
      const char *longopt;
      const Bool lopt_ambig;
      const int cols;
-/*
+/*!
    Prints the "help on help" text to file `fp' using the central output
      function `print_text()', and uses the global text buffer `s1' internally.
      If delivered `lopt_ambig' is TRUE, only display the names of all
@@ -217,7 +218,7 @@ void
 my_extended_help (fp, longopt_symbolic)
      FILE *fp;
      const int longopt_symbolic;
-/*
+/*!
    Prints the "extended help" text to file `fp' using the central
      output function `print_text()', and uses the global text buffers
      `s1' and `s2' internally.
@@ -2271,7 +2272,7 @@ my_extended_help (fp, longopt_symbolic)
 void
 my_basic_help (fp)
      FILE *fp;
-/*
+/*!
    Prints the "basic help" text to file `fp' using the central
      output function `print_text()' and uses global text buffer
      `s1' internally.
@@ -2326,7 +2327,7 @@ my_basic_help (fp)
 void
 my_license (fp)
      FILE *fp;
-/*
+/*!
    Prints the program-id and the license text to file `fp' using
      the central output function `print_text()', and uses the global
      text buffer `s1' internally.
@@ -2383,7 +2384,7 @@ my_license (fp)
 void
 my_version (fp)
      FILE *fp;
-/*
+/*!
    Prints the program-id and all compilation flags to file `fp'
      using the central output function `print_text()', and
      uses the global text buffers `s1' and `s2' internally.
@@ -2405,7 +2406,7 @@ my_version (fp)
 
 char *
 usage_msg ()
-/*
+/*!
    Creates the usage text `usg_text' and includes the actual program name.
 */
 {
@@ -2433,7 +2434,7 @@ usage_msg ()
 
 char *
 lopt_msg ()
-/*
+/*!
    Returns the `lopt_text' description text of the long-style options
      including the actual program name, and uses the global text
      buffer `s3' internally.
@@ -2469,7 +2470,7 @@ lopt_msg ()
 static int
 gmt_timezone_value (hour)
      int hour;
-/*
+/*!
    Returns the given HOUR offset value as an offset value N
      within the range -12...-1...[0]...+1...+12, which is
      based on the Greenwich Mean Time timezone `GMT[[+|-]N]'.
@@ -2493,7 +2494,7 @@ static const char *
 get_longopt_description (longopt_symbolic, with_larglist)
      const int longopt_symbolic;
      const Bool with_larglist;
-/*
+/*!
    Returns a description text of given `longopt_symbolic' long-style option
      in global text buffer `s2'.  If `with_larglist' is TRUE, the returned
      description text contains the argument list text (if any) too, otherwise
@@ -2555,7 +2556,7 @@ get_longopt_description (longopt_symbolic, with_larglist)
 static void
 my_bug_report_address (fp)
      FILE *fp;
-/*
+/*!
    Prints the bug report address to file `fp' using the central output
    function `print_text()', and uses the global text buffer `s1' internally.
 */
@@ -2575,7 +2576,7 @@ static void
 my_copyright (fp, with_short_license)
      FILE *fp;
      const Bool with_short_license;
-/*
+/*!
    Prints the program-id and copyright text to file `fp' using
      the central output function `print_text()', and uses the global
      text buffer `s1' internally.
@@ -2607,7 +2608,7 @@ my_copyright (fp, with_short_license)
 static void
 my_help_head_text (fp)
      FILE *fp;
-/*
+/*!
    Prints the help heading text to file `fp' using the central
      output function `print_text()', and uses the global text buffer
      `s1' internally.

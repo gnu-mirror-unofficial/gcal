@@ -1,7 +1,8 @@
+/*!
+*  \file rc-astro.c
+*  \brief Astronomical functions necessary for managing the fixed dates.
+*/
 /*
-*  rc-astro.c:  Astronomical functions necessary for managing the fixed dates.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -75,7 +76,7 @@ atmospheric_refraction (altitude, pressure, temperature)
      const double altitude;
      double pressure;
      const double temperature;
-/*
+/*!
    Returns the approximate atmospheric refraction for the given true radians
      ALTITUDE in radians, the atmospheric PRESSURE in Newton per sqare meter
      (Nm^-2), and the atmospheric TEMPERATURE in degrees Celsius, which results
@@ -169,7 +170,7 @@ static int
 moon_charpos (x, lines)
      const double x;
      const int lines;
-/*
+/*!
    Computes the position where to place the next character
      of the Moon text graphics image.
 */
@@ -193,7 +194,7 @@ gd_latitude2gc_latitude (gd_latitude, meters_above_sea_level, gc_latitude)
      const double gd_latitude;
      const int meters_above_sea_level;
      double *gc_latitude;
-/*
+/*!
    Reduces the geodetic latitude GD_LATITUDE of the Earth (which must be
      given in radians) to a geocentric latitude respecting the altitude
      of the location above/below sea level by using METERS_ABOVE_SEA_LEVEL.
@@ -240,7 +241,7 @@ sun_rise_set (event, is_limited, day, month, year, coordinates)
      const int month;
      const int year;
      Coor_struct *coordinates;
-/*
+/*!
    Returns the approximate timezone-based (local time) rise time of a definite
      Sun altitude for the given date in hours plus fraction if EVENT is `RIse',
      otherwise the approximate timezone-based (local time) set time of a
@@ -1441,7 +1442,7 @@ moon_rise_set (event, day, month, year, coordinates)
      int month;
      int year;
      Coor_struct *coordinates;
-/*
+/*!
    Driver/wrapper function to calculate timezone-based (local time)
      rise/set times of the Moon correctly.
      See the `internal_moon_rise_set()' function for more details!
@@ -1526,7 +1527,7 @@ internal_moon_rise_set (event, day, month, year, coordinates)
      int month;
      int year;
      Coor_struct *coordinates;
-/*
+/*!
    Returns the approximate UT/GMT-based rise time of a definite Moon altitude
      for the given date in hours plus fraction if EVENT is `RIse', otherwise
      the approximate UT/GMT-based set time of a definite Moon altitude for the
@@ -3325,7 +3326,7 @@ moondisk (is_full_new, day, month, year, hour, min)
      int year;
      const int hour;
      const int min;
-/*
+/*!
    Calculates the approximate illuminated fraction of the Moon's disk for
      the given Julian/Gregorian date (range 00010101...99991231) and returns
      it represented by an integer value within the range of -100...0...+100,
@@ -3408,7 +3409,7 @@ draw_moon (age, lines, string)
      const int age;
      const int lines;
      char **string;
-/*
+/*!
    Creates a text graphics image of the Moon according to its `age', which is
      expressed as the illuminated fraction of the Moon's disk as a value within
      the range of -100...0...+100, which has a negative sign in case the Moon

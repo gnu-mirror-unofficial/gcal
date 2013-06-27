@@ -1,10 +1,11 @@
 #ifndef __HD_DATA3_H
 # define __HD_DATA3_H
-/*
-*  hd-data3.h:  All other D-L countries data which is composed into the
+/*!
+*  \file hd-data3.h
+*  \brief All other D-L countries data which is composed into the
 *               eternal holiday list header file.
-*
-*
+*/
+/*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

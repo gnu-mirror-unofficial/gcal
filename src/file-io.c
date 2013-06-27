@@ -1,7 +1,8 @@
+/*!
+*  \file file-io.c
+*  \brief Managing and accessing resource, include and response files.
+*/
 /*
-*  file-io.c:  Managing and accessing resource, include and response files.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -85,7 +86,7 @@ __END_DECLARATIONS
        mode;
      Bool *
        bad_sys_include;
-/*
+/*!
    Tries to open a resource/response file (MODE == `REsource', `REsponse')
      in the following order:
        1) $GCALPATH
@@ -493,7 +494,7 @@ __END_DECLARATIONS
   Bool *is_include;
   Bool *is_dvar;
   Bool *is_tvar;
-/*
+/*!
    Reads a line of a delivered resource/response file into `&line_buffer'
      using the delivered char vector `pool', which must be allocated by caller
      with size BUF_LEN+1 (BUF_LEN should be "A POWER OF 2", e.g., 4096).
@@ -1298,7 +1299,7 @@ __END_DECLARATIONS
   Uint *my_argc_max;
   int *my_argc;
   char *my_argv[];
-/*
+/*!
    Tries to manage a response file @FILE argument given in the command line.
      Inserts the options and commands found in file @FILE (name delivered
      in `filename' and its file pointer in `fp') into `my_argv[]' and sets
@@ -1420,7 +1421,7 @@ __END_DECLARATIONS
   const char *created_txt;
   const int argc;
   char *argv[];
-/*
+/*!
    Writes the contents of the environment variable $GCAL, which is already
      stored in `argc' and the arguments of command line either into a
      response file (MODE==REsponse) or into a shell script (MODE==SCript);
@@ -1598,7 +1599,7 @@ __END_DECLARATIONS
     char **absolute_filename;
   const char *directory;
   const char *filename;
-/*
+/*!
    Creates an absolute file name (directory+file name) of a delivered
      file name and directory and returns it in delivered `&absolute_filename'.
 */
@@ -1625,7 +1626,7 @@ __END_DECLARATIONS
   const int level;
   const Fmode_enum mode;
   Bool *is_first;
-/*
+/*!
    Tries to open the file (with optional diagnostic messages on STDERR channel
      in case the `--debug[=0...WARN_LVL_MAX]' option is set) and returns a
      valid file pointer of that file, or NULL if this fails.

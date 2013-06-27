@@ -1,9 +1,10 @@
 #ifndef __TTY_H
 # define __TTY_H
+/*!
+*  \file tty.h
+*  \brief Screen support functions and major output function header file.
+*/
 /*
-*  tty.h:  Screen support functions and major output function header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

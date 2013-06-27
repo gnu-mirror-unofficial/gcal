@@ -1,9 +1,11 @@
 #ifndef __RC_USE_H
 # define __RC_USE_H
+/*!
+*  \file rc-use.h
+*  \brief Central function, manages the resource file handling and 
+*  			displays the results file header.
+*/
 /*
-*  rc-use.h:  Central function, manages the resource file handling and displays the results file header.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

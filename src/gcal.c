@@ -1,7 +1,8 @@
+/*!
+*  \file gcal.c
+*  \brief Main part which controls the extended calendar program.
+*/
 /*
-*  gcal.c:  Main part which controls the extended calendar program.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -124,13 +125,14 @@ __END_DECLARATIONS
 /*
 *  GLOBAL variables definitions.
 */
-/* Number of days in Julian/Gregorian month. */
+
+/*! Number of days in Julian/Gregorian month. */
 const int dvec[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-/* Number of past days of Julian/Gregorian month. */
+/*! Number of past days of Julian/Gregorian month. */
 const int mvec[] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
 
-/*
+/*!
    The long option table is a vector of `Lopt_struct' terminated by an element
      containing a `long_name' which is zero!
    All initialization strings of the structure member `long_name' CAN be
@@ -1060,7 +1062,7 @@ const Lopt_struct lopt[] = {
   {SYM_NIL, NULL, {NULL}, LARG_NO, {NULL}}
 };
 
-/*
+/*!
    The supported date formats table is a vector of `Df_struct'
      terminated by an element containing a `df_info' which is zero!
    If you extend this table by some more date formats, please extend the
@@ -1124,388 +1126,388 @@ Greg_struct greg_reform_date[LARG_MAX - 1] = {
   {0, 0, 0, 0}
 };
 
-/* Points to the used Gregorian Reformation date. */
+/*! Points to the used Gregorian Reformation date. */
 Greg_struct *greg = greg_reform_date;
 
-/* User defined Gregorian Reformation date. */
+/*! User defined Gregorian Reformation date. */
 Greg_struct users_greg;
 
 #ifdef GCAL_EMAIL
-/* Temporary file which is send by the mailer. */
+/*! Temporary file which is send by the mailer. */
 FILE *tfp = (FILE *) NULL;
 #endif
 
-/* Used if a list/range of months/years is given. */
+/*! Used if a list/range of months/years is given. */
 Ml_struct *month_list = (Ml_struct *) NULL;
 
-/* Effective hls 1 start (current day). */
+/*! Effective hls 1 start (current day). */
 Hls_struct ehls1s;
 
-/* Effective hls 1 end (current day). */
+/*! Effective hls 1 end (current day). */
 Hls_struct ehls1e;
 
-/* Effective hls 2 start (holiday). */
+/*! Effective hls 2 start (holiday). */
 Hls_struct ehls2s;
 
-/* Effective hls 2 end (holiday). */
+/*! Effective hls 2 end (holiday). */
 Hls_struct ehls2e;
 
 #ifdef DJG
-/* Set to SHRT_MAX for checking the maximum table range. */
+/*! Set to SHRT_MAX for checking the maximum table range. */
 Usint testval = (Usint) 0;
 #else
-/* Set to INT_MAX for checking the maximum table range. */
+/*! Set to INT_MAX for checking the maximum table range. */
 Uint testval = (Uint) 0;
 #endif
 
-/* Actual size of all string vectors. */
+/*! Actual size of all string vectors. */
 Uint maxlen_max = MAXLEN_MAX;
 
-/* String length of the maximum year able to compute. */
+/*! String length of the maximum year able to compute. */
 int len_year_max = 0;
 
-/* Maximum string length of a textual day_name(). */
+/*! Maximum string length of a textual day_name(). */
 int len_dayname_max = 0;
 
-/* Maximum string length of a textual month_name(). */
+/*! Maximum string length of a textual month_name(). */
 int len_monthname_max = 0;
 
-/* Maximum string length of a textual day_suffix() [if any]. */
+/*! Maximum string length of a textual day_suffix() [if any]. */
 int len_suffix_max = 0;
 
-/* `--debug[=0...WARN_LVL_MAX]', SPECIAL VALUE at startup. */
+/*! `--debug[=0...WARN_LVL_MAX]', SPECIAL VALUE at startup. */
 int warning_level = SPECIAL_VALUE;
 
-/* `-s<0,1...7|day name>'. */
+/*! `-s<0,1...7|day name>'. */
 int start_day = 0;
 
-/* `--transform-year=BASE_YEAR'. */
+/*! `--transform-year=BASE_YEAR'. */
 int transform_year = 0;
 
-/* `--time-offset=t|@|[t|@][+|-]MMMM|HH:[MM]' for correcting astronomically based data. */
+/*! `--time-offset=t|@|[t|@][+|-]MMMM|HH:[MM]' for correcting astronomically based data. */
 int time_hour_offset = 0;
 
-/* `--time-offset=t|@|[t|@][+|-]MMMM|HH:[MM]' for correcting astronomically based data. */
+/*! `--time-offset=t|@|[t|@][+|-]MMMM|HH:[MM]' for correcting astronomically based data. */
 int time_min_offset = 0;
 
-/* Current day. */
+/*! Current day. */
 int day = 0;
 
-/* Current month. */
+/*! Current month. */
 int month = 0;
 
-/* Current year. */
+/*! Current year. */
 int year = 0;
 
-/* Actual second. */
+/*! Actual second. */
 int act_sec = 0;
 
-/* Actual minute. */
+/*! Actual minute. */
 int act_min = 0;
 
-/* Actual hour. */
+/*! Actual hour. */
 int act_hour = 0;
 
-/* Actual day. */
+/*! Actual day. */
 int act_day = 0;
 
-/* Actual month. */
+/*! Actual month. */
 int act_month = 0;
 
-/* Actual year. */
+/*! Actual year. */
 int act_year = 0;
 
-/* Buffer of actual day. */
+/*! Buffer of actual day. */
 int buf_ad = 0;
 
-/* Buffer of actual month. */
+/*! Buffer of actual month. */
 int buf_am = 0;
 
-/* Buffer of actual year. */
+/*! Buffer of actual year. */
 int buf_ay = 0;
 
-/* True actual day as reported by the operating system. */
+/*! True actual day as reported by the operating system. */
 int true_day = 0;
 
-/* True actual month as reported by the operating system. */
+/*! True actual month as reported by the operating system. */
 int true_month = 0;
 
-/* True actual year as reported by the operating system. */
+/*! True actual year as reported by the operating system. */
 int true_year = 0;
 
-/* Starting month of a fiscal year. */
+/*! Starting month of a fiscal year. */
 int fiscal_month = MONTH_MIN;
 
-/* Is output displayed on a terminal? */
+/*! Is output displayed on a terminal? */
 int is_tty = 0;
 
-/* Is output directed to channel 1? */
+/*! Is output directed to channel 1? */
 int is_tty1 = 0;
 
-/* Is output directed to channel 2? */
+/*! Is output directed to channel 2? */
 int is_tty2 = 0;
 
 #if USE_PAGER
-/* Number of tty rows, SPECIAL_VALUE at startup. */
+/*! Number of tty rows, SPECIAL_VALUE at startup. */
 int tty_rows = SPECIAL_VALUE;
 
-/* Number of tty columns, SPECIAL_VALUE at startup. */
+/*! Number of tty columns, SPECIAL_VALUE at startup. */
 int tty_cols = SPECIAL_VALUE;
 #endif
 
-/* Number of month rows of a year calendar. */
+/*! Number of month rows of a year calendar. */
 int out_rows = 0;
 
-/* Number of month columns of a year calendar. */
+/*! Number of month columns of a year calendar. */
 int out_cols = 0;
 
-/* Format length of a standard/special/both day. */
+/*! Format length of a standard/special/both day. */
 int format_len = 0;
 
-/* Is current year a leap year? */
+/*! Is current year a leap year? */
 int is_leap_year = 0;
 
 #ifdef GCAL_EMAIL
-/* Name of tempfile used by the mailer. */
+/*! Name of tempfile used by the mailer. */
 char *tfn = (char *) NULL;
 
-/* Email address Gcal's output is send to. */
+/*! Email address Gcal's output is send to. */
 char *email_adr = (char *) NULL;
 #endif
 
-/* `--cc-holidays=CC[+CC+...]'. */
+/*! `--cc-holidays=CC[+CC+...]'. */
 char *cc = (char *) NULL;
 
-/* The "YY" text. */
+/*! The "YY" text. */
 char *yy_lit = (char *) NULL;
 
-/* The "YYYY" text. */
+/*! The "YYYY" text. */
 char *yyyy_lit = (char *) NULL;
 
-/* The "MM" text. */
+/*! The "MM" text. */
 char *mm_lit = (char *) NULL;
 
-/* The "WWW" text. */
+/*! The "WWW" text. */
 char *www_lit = (char *) NULL;
 
-/* The "DD" text. */
+/*! The "DD" text. */
 char *dd_lit = (char *) NULL;
 
-/* The "ARG" text. */
+/*! The "ARG" text. */
 char *larg_lit = (char *) NULL;
 
-/* General purpose text buffer 1. */
+/*! General purpose text buffer 1. */
 char *s1 = (char *) NULL;
 
-/* General purpose text buffer 2. */
+/*! General purpose text buffer 2. */
 char *s2 = (char *) NULL;
 
-/* General purpose text buffer 3. */
+/*! General purpose text buffer 3. */
 char *s3 = (char *) NULL;
 
-/* General purpose text buffer 4. */
+/*! General purpose text buffer 4. */
 char *s4 = (char *) NULL;
 
-/* Stores the actual program name. */
+/*! Stores the actual program name. */
 char *prgr_name = (char *) NULL;
 
-/* Character for separating HH:MM time values. */
+/*! Character for separating HH:MM time values. */
 char *time_sep = (char *) NULL;
 
-/* `--translate-string=CHARACTER_PAIR...'. */
+/*! `--translate-string=CHARACTER_PAIR...'. */
 char *translate_string = (char *) NULL;
 
-/* Pointer to the $TZ (timezone) environment variable. */
+/*! Pointer to the $TZ (timezone) environment variable. */
 char *tz = (char *) NULL;
 
 #ifdef GCAL_EPAGER
-/* Name of external pager program. */
+/*! Name of external pager program. */
 char *ext_pager = (char *) NULL;
 #endif
 
-/* Day suffix format specifier given in date format?. */
+/*! Day suffix format specifier given in date format?. */
 Bool use_day_suffix = FALSE;
 
-/* 3 char day name format specifier given in date format? */
+/*! 3 char day name format specifier given in date format? */
 Bool use_short3_day_name = FALSE;
 
-/* Day number leaded with zeroes format specifier given in date format? */
+/*! Day number leaded with zeroes format specifier given in date format? */
 Bool use_day_zeroleaded = FALSE;
 
-/* Year number leaded with zeroes format specifier given in date format? */
+/*! Year number leaded with zeroes format specifier given in date format? */
 Bool use_year_zeroleaded = FALSE;
 
-/* Don't use Astronomical holidays by default. */
+/*! Don't use Astronomical holidays by default. */
 Bool hdy_astronomical = FALSE;
 
-/* Don't use Bahai calendar holidays by default. */
+/*! Don't use Bahai calendar holidays by default. */
 Bool hdy_bahai = FALSE;
 
-/* Don't use Celtic calendar holidays by default. */
+/*! Don't use Celtic calendar holidays by default. */
 Bool hdy_celtic = FALSE;
 
-/* Don't use Chinese calendar holidays by default. */
+/*! Don't use Chinese calendar holidays by default. */
 Bool hdy_chinese = FALSE;
 
-/* Don't use Chinese flexible calendar holidays by default. */
+/*! Don't use Chinese flexible calendar holidays by default. */
 Bool hdy_chinese_flexible = FALSE;
 
-/* Don't use Christian Western churches calendar holidays by default. */
+/*! Don't use Christian Western churches calendar holidays by default. */
 Bool hdy_christian = FALSE;
 
-/* Don't use Hebrew calendar holidays by default. */
+/*! Don't use Hebrew calendar holidays by default. */
 Bool hdy_hebrew = FALSE;
 
-/* Don't use Islamic CIVIL calendar holidays by default. */
+/*! Don't use Islamic CIVIL calendar holidays by default. */
 Bool hdy_islamic = FALSE;
 
-/* Don't use Japanese calendar holidays by default. */
+/*! Don't use Japanese calendar holidays by default. */
 Bool hdy_japanese = FALSE;
 
-/* Don't use Japanese flexible calendar holidays by default. */
+/*! Don't use Japanese flexible calendar holidays by default. */
 Bool hdy_japanese_flexible = FALSE;
 
-/* Don't use Multicultural New_Year's_Day holidays by default. */
+/*! Don't use Multicultural New_Year's_Day holidays by default. */
 Bool hdy_multicultural_new_year = FALSE;
 
-/* Don't use Orthodox Christian Eastern churches NEW calendar holidays by default. */
+/*! Don't use Orthodox Christian Eastern churches NEW calendar holidays by default. */
 Bool hdy_orthodox_new = FALSE;
 
-/* Don't use Orthodox Christian Eastern churches OLD calendar holidays by default. */
+/*! Don't use Orthodox Christian Eastern churches OLD calendar holidays by default. */
 Bool hdy_orthodox_old = FALSE;
 
-/* Don't use Persian Jalaali calendar holidays by default. */
+/*! Don't use Persian Jalaali calendar holidays by default. */
 Bool hdy_persian = FALSE;
 
-/* Don't use Zodiacal Marker holidays by default. */
+/*! Don't use Zodiacal Marker holidays by default. */
 Bool hdy_zodiacal_marker = FALSE;
 
-/* Don't use Bahai calendar months by default. */
+/*! Don't use Bahai calendar months by default. */
 Bool mth_bahai = FALSE;
 
-/* Don't use Chinese calendar months by default. */
+/*! Don't use Chinese calendar months by default. */
 Bool mth_chinese = FALSE;
 
-/* Don't use Chinese flexible calendar months by default. */
+/*! Don't use Chinese flexible calendar months by default. */
 Bool mth_chinese_flexible = FALSE;
 
-/* Don't use Coptic calendar months by default. */
+/*! Don't use Coptic calendar months by default. */
 Bool mth_coptic = FALSE;
 
-/* Don't use Ethiopic calendar months by default. */
+/*! Don't use Ethiopic calendar months by default. */
 Bool mth_ethiopic = FALSE;
 
-/* Don't use French Revolutionary calendar months by default. */
+/*! Don't use French Revolutionary calendar months by default. */
 Bool mth_french_revolutionary = FALSE;
 
-/* Don't use Hebrew calendar months by default. */
+/*! Don't use Hebrew calendar months by default. */
 Bool mth_hebrew = FALSE;
 
-/* Don't use Indian CIVIL calendar months by default. */
+/*! Don't use Indian CIVIL calendar months by default. */
 Bool mth_indian_civil = FALSE;
 
-/* Don't use Islamic CIVIL calendar months by default. */
+/*! Don't use Islamic CIVIL calendar months by default. */
 Bool mth_islamic = FALSE;
 
-/* Don't use Japanese calendar months by default. */
+/*! Don't use Japanese calendar months by default. */
 Bool mth_japanese = FALSE;
 
-/* Don't use Japanese flexible calendar months by default. */
+/*! Don't use Japanese flexible calendar months by default. */
 Bool mth_japanese_flexible = FALSE;
 
-/* Don't use Old-Armenic calendar months by default. */
+/*! Don't use Old-Armenic calendar months by default. */
 Bool mth_old_armenic = FALSE;
 
-/* Don't use Old-Egyptic calendar months by default. */
+/*! Don't use Old-Egyptic calendar months by default. */
 Bool mth_old_egyptic = FALSE;
 
-/* Don't use Persian Jalaali calendar months by default. */
+/*! Don't use Persian Jalaali calendar months by default. */
 Bool mth_persian = FALSE;
 
-/* `-O' (compute leap years as done by Eastern churches). */
+/*! `-O' (compute leap years as done by Eastern churches). */
 Bool orthodox_calendar = FALSE;
 
-/* `-u'. */
+/*! `-u'. */
 Bool suppr_cal_flag = FALSE;
 
-/* `-H<yes>|<no>'. */
+/*! `-H<yes>|<no>'. */
 Bool highlight_flag = TRUE;
 
-/* `--iso-week-number=<yes>|<no>'. */
+/*! `--iso-week-number=<yes>|<no>'. */
 Bool iso_week_number = FALSE;
 
-/* `-K'. */
+/*! `-K'. */
 Bool cal_with_week_number = FALSE;
 
-/* `-j'. */
+/*! `-j'. */
 Bool cal_special_flag = FALSE;
 
-/* `-jb'. */
+/*! `-jb'. */
 Bool cal_both_dates_flag = FALSE;
 
-/* `-n|N'. */
+/*! `-n|N'. */
 Bool holiday_flag = FALSE;
 
-/* `-N'. */
+/*! `-N'. */
 Bool hd_legal_days_only = FALSE;
 
-/* `-n|N-'. */
+/*! `-n|N-'. */
 Bool hd_sort_des_flag = FALSE;
 
-/* `-jn'. */
+/*! `-jn'. */
 Bool hd_special_flag = FALSE;
 
-/* `-jnb'. */
+/*! `-jnb'. */
 Bool hd_both_dates_flag = FALSE;
 
-/* `-G'. */
+/*! `-G'. */
 Bool hd_suppr_list_sep_flag = FALSE;
 
-/* `-X'. */
+/*! `-X'. */
 Bool hd_title_flag = TRUE;
 
-/* ':' char found in argument (MM:YYYY). */
+/*! ':' char found in argument (MM:YYYY). */
 Bool is_fiscal_year = FALSE;
 
-/* Argument is `.' or `.+' or `.-'. */
+/*! Argument is `.' or `.+' or `.-'. */
 Bool is_3month_mode = FALSE;
 
-/* Argument is `..' -> current quarter of actual year. */
+/*! Argument is `..' -> current quarter of actual year. */
 Bool is_3month_mode2 = FALSE;
 
-/* Is an extended list/range of years given? */
+/*! Is an extended list/range of years given? */
 Bool is_ext_year = FALSE;
 
-/* Is an extended list of months/years given? */
+/*! Is an extended list of months/years given? */
 Bool is_ext_list = FALSE;
 
-/* Is an extended range of months/years given? */
+/*! Is an extended range of months/years given? */
 Bool is_ext_range = FALSE;
 
-/* Is a special range of a selected month of years given? */
+/*! Is a special range of a selected month of years given? */
 Bool is_special_range = FALSE;
 
-/* Is a special range of selected months of years given? */
+/*! Is a special range of selected months of years given? */
 Bool is_multi_range = FALSE;
 
 #ifdef GCAL_NLS
-/* Support of English language? */
+/*! Support of English language? */
 Bool is_en = FALSE;
 #endif
 
-/* `-i[-]'. */
+/*! `-i[-]'. */
 Bool special_calsheet_flag = FALSE;
 
 #if USE_HLS
-/* Must we emulate the highlighting sequences? */
+/*! Must we emulate the highlighting sequences? */
 Bool emu_hls = FALSE;
 #else /* !USE_HLS */
-/* Must we emulate the highlighting sequences? */
+/*! Must we emulate the highlighting sequences? */
 Bool emu_hls = TRUE;
 #endif /* !USE_HLS */
 
 #if USE_PAGER
-/* `-p'. */
+/*! `-p'. */
 Bool pager_flag = FALSE;
 #endif
 
@@ -1515,38 +1517,38 @@ Bool pager_flag = FALSE;
 *  static variables definitions.
 */
 #ifdef GCAL_EPAGER
-/* Child process id of external pager. */
+/*! Child process id of external pager. */
 static pid_t child_pid;
 
-/* Pipe file descriptors. */
+/*! Pipe file descriptors. */
 static int pipe_fd[2];
 
-/* Buffer of system file descriptors 0 and 1. */
+/*! Buffer of system file descriptors 0 and 1. */
 static int sys_fd[2];
 #endif
 
-/* User defined date format. */
+/*! User defined date format. */
 static Df_struct users_date_format;
 
-/* Maximum number of `month_list[]' table elems. */
+/*! Maximum number of `month_list[]' table elems. */
 static Uint month_list_max = MONTH_MAX + 1;
 
-/* The index value of a long option. */
+/*! The index value of a long option. */
 static int lopt_id = 0;
 
-/* Termination status on `--help', `--version' etc... */
+/*! Termination status on `--help', `--version' etc... */
 static int exit_stat_help = EXIT_STAT_HELP;
 
-/* Buffers default value of `-s<ARG>' option. */
+/*! Buffers default value of `-s<ARG>' option. */
 static int buf_start_day = 0;
 
 #ifdef GCAL_EPAGER
-/*
+/*!
    Possible options passed to the $PAGER external pager program.
 */
 static char **pg_argv = (char **) NULL;
 
-/*
+/*!
    The external pager program names table is a vector of char pointer
      elements, which must be terminated by a NULL element!
 */
@@ -1555,20 +1557,20 @@ static char *pagers[] = { PAGER1_PROG, PAGER2_PROG, PAGER3_PROG, NULL };
 
 
 #ifdef GCAL_SHELL
-/* File name of shell script to write `-S<NAME>'. */
+/*! File name of shell script to write `-S<NAME>'. */
 static char *shl_filename = (char *) NULL;
 #endif
 
-/* Name of response file to read (@FILE) or write (-R<NAME>). */
+/*! Name of response file to read (@FILE) or write (-R<NAME>). */
 static char *rsp_filename = (char *) NULL;
 
-/* Text containing user defined highlighting sequences `-H<>'. */
+/*! Text containing user defined highlighting sequences `-H<>'. */
 static char *hl_seq = (char *) NULL;
 
-/* Points to "date format error location" description text. */
+/*! Points to "date format error location" description text. */
 static char *errtxt_dformat = (char *) NULL;
 
-/* `-b<1|2|3|4|6|12>'. */
+/*! `-b<1|2|3|4|6|12>'. */
 static Bool year_flag = FALSE;
 
 
@@ -1580,7 +1582,7 @@ int
 main (argc, argv)
      int argc;
      char *argv[];
-/*
+/*!
    The Gcal program entry point   =8^)
 */
 {
@@ -3187,7 +3189,7 @@ int
 eval_longopt (longopt, longopt_symbolic)
      char *longopt;
      int *longopt_symbolic;
-/*
+/*!
    Evaluates a long option and returns -2...0 if success, +1...+6 if fails:
      -2 == Given `longopt' successfully parsed and completed `long_name' with argument returned.
      -1 == Given `longopt' successfully parsed and completed `long_name' returned only.
@@ -3553,7 +3555,7 @@ is_correct_date_format (format_txt, use_day_suffix, use_short3_day_name,
      Bool *use_short3_day_name;
      Bool *use_day_zeroleaded;
      Bool *use_year_zeroleaded;
-/*
+/*!
    Checks whether the delivered `format_txt' contains valid format directives
      (see the `decode_date_format()' function for a more brief description of
      all used format specifiers).  Returns FALSE in case any invalid format
@@ -3691,7 +3693,7 @@ rearrange_argv (opt_list, argc, argv)
      const char *opt_list;
      int *argc;
      char *argv[];
-/*
+/*!
    Rearranges `argv[]' internally.
      This means all short-style options which need an argument,
      that is separated by a whitespace character in the command line
@@ -3834,7 +3836,7 @@ static void
 check_command_line (argc, argv)
      int argc;
      char *argv[];
-/*
+/*!
    Gets and manages the arguments from the command line.
 */
 {
@@ -6796,7 +6798,7 @@ check_command_line (argc, argv)
 static void
 build_month_list (argv)
      char *argv[];
-/*
+/*!
    If more than a single month/year is wanted (means list or ranges of
      months or years), fill the global data structure `month_list[]'; which
      is used in the `print_calendar()' function; according the values found
@@ -7153,7 +7155,7 @@ build_month_list (argv)
 
 static void
 eliminate_invalid_data ()
-/*
+/*!
    Eliminates invalid command line argument values
      and sets some internal variables according to the command line arguments.
 */
@@ -7360,7 +7362,7 @@ eliminate_invalid_data ()
 static void
 pseudo_blank_conversion (text)
      char **text;
-/*
+/*!
    Perform conversion of quoted or unquoted PSEUDO_BLANK characters
      in TEXT to real ' ' blank characters.
 */
@@ -7403,7 +7405,7 @@ pseudo_blank_conversion (text)
 static int
 further_check (option)
      char **option;
-/*
+/*!
    Checks whether invalid characters trail the
      argument of the `--period-of-fixed-dates=ARG' option.
      If so, return a non-zero value, otherwise zero.

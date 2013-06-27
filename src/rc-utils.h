@@ -1,9 +1,11 @@
 #ifndef __RC_UTILS_H
 # define __RC_UTILS_H
+/*!
+*  \file rc-utils.h
+*  \brief Pool of special functions necessary for managing 
+*  			the fixed dates header file.
+*/
 /*
-*  rc-utils.h:  Pool of special functions necessary for managing the fixed dates header file.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *

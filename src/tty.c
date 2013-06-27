@@ -1,7 +1,8 @@
+/*!
+*  \file tty.c
+*  \brief Screen support functions and major output function.
+*/
 /*
-*  tty.c:  Screen support functions and major output function.
-*
-*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
 *  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
 *
@@ -128,26 +129,26 @@ __END_DECLARATIONS
 */
 #if USE_PAGER || USE_HLS
 # ifdef GCAL_TCAP
-/* Module global Termcap buffer. */
+/*! Module global Termcap buffer. */
 static char tc_buf[TC_BUFLEN];
 
-/* Termcap access error occurred. */
+/*! Termcap access error occurred. */
 static Bool tc_no_error = TRUE;
 
 #  if USE_HLS
-/* Module global file which is used by the `tputs()' function. */
+/*! Module global file which is used by the `tputs()' function. */
 static FILE *fp_outchar = (FILE *) NULL;
 
-/* Stores whether padding is used or not. */
+/*! Stores whether padding is used or not. */
 static Bool is_padding = FALSE;
 #  endif
 # endif	/* GCAL_TCAP */
 
 # if USE_PAGER
-/* Terminal has automatic margins. */
+/*! Terminal has automatic margins. */
 static Bool tty_am = TRUE;
 
-/* Terminal ignores newline after wrap. */
+/*! Terminal ignores newline after wrap. */
 static Bool tty_xn = FALSE;
 # endif	/* USE_PAGER */
 #endif /* USE_PAGER || USE_HLS */
@@ -161,7 +162,7 @@ void
 print_text (fp, text_line)
      FILE *fp;
      char *text_line;
-/*
+/*!
    This is the central tty output function, which works according to
      actual display mode.  It prints a line of text given in `text_line'
      with newline to file `fp' with paging option (very poor and simple
@@ -521,7 +522,7 @@ print_text (fp, text_line)
 void
 get_tty_hls (sequence_str)
      const char *sequence_str;
-/*
+/*!
    Reads the colors/highlighting sequences from Termcap and assigns them
      to the according variables.  If Termcap isn't present, defaults are used.
 */
@@ -744,7 +745,7 @@ void
 get_tty_scr_size (rows, cols)
      int *rows;
      int *cols;
-/*
+/*!
    Detects the number of rows and columns of a tty
      and stores the values found in `&rows' and `&cols'.
 */
@@ -950,7 +951,7 @@ get_tty_scr_size (rows, cols)
 static char *
 skip_leading_padding_info (sequence_str)
      char *sequence_str;
-/*
+/*!
    Skips the leading padding information part of a highlighting sequence.
 */
 {
@@ -979,7 +980,7 @@ skip_leading_padding_info (sequence_str)
 # ifdef GCAL_TCAP
 static Bool
 open_termcap ()
-/*
+/*!
    Tries to open the Termcap library and returns the terminal entry found
      in the module global vector `tc_buf[]'.  I cannot rely that we use the
      access functions of the GNU Termcap library --- which allows to pass
@@ -1089,7 +1090,7 @@ open_termcap ()
 #  if USE_HLS
 static void
 get_ospeed ()
-/*
+/*!
    Tries to detect the terminal speed and store its value to
      Termcap's global `ospeed' variable.
 */
@@ -1240,7 +1241,7 @@ get_ospeed ()
 static int
 outchar (ch)
      int ch;
-/*
+/*!
    Termcap's `tputs()' function prints a character to the module local defined
      file `fp_outchar', which must be assigned before using `tputs()' itself.
 */
@@ -1254,7 +1255,7 @@ static Bool
 get_termcap_hls (hls1_set, hls2_set)
      Bool *hls1_set;
      Bool *hls2_set;
-/*
+/*!
    Inspects the Termcap buffer `tc_buf' to detect the tty color/highlighting
      sequences.  The module global vector `tc_buf[]' must be filled previously.
      May be called only once.
@@ -1343,7 +1344,7 @@ static Bool
 get_termcap_scr_attrib (rows, cols)
      int *rows;
      int *cols;
-/*
+/*!
    Inspects the Termcap buffer `tc_buf' to detect first the amount of rows and
      columns of the tty, next whether the terminal wraps the line automatically
      at right margin.  If Termcap isn't present, internal default values are
@@ -1385,7 +1386,7 @@ static Uchar
 peek_byte (segment, offset)
      Uint segment;
      Uint offset;
-/*
+/*!
    Gets a byte of IBM/PC-memory from address (segment:offset).
 */
 {
@@ -1411,7 +1412,7 @@ get_hl_seq (sequence_str, hls1_set, hls2_set)
      const char *sequence_str;
      Bool *hls1_set;
      Bool *hls2_set;
-/*
+/*!
    Highlighting sequences/marking characters are given in command line
    (`-H<seq1_start:seq1_end:seq2_start:seq2_end>' option set),
    i.e.:  the colon separated string `sequence_str', which should contain
@@ -1689,7 +1690,7 @@ static int
 sbyte2int (string, base)
      const char *string;
      const int base;
-/*
+/*!
    Converts a textual b-adic string `string', which contains the absolute
      textual representation of a byte given in number base `base' (2-16)
      to decimal base, and returns its decimal value.

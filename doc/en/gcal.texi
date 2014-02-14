@@ -11,6 +11,7 @@
 @c gcal.texi:  American-English Texinfo source of info/html/dvi/text file
 @c
 @c Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken
+@c Copyright (c) 2014 Free Software Foundation Inc.
 @c
 @c
 @c Permission is granted to make and distribute verbatim copies of
@@ -18342,7 +18343,7 @@ in @w{@code{@var{hh}:@var{mm}}} @w{@emph{12-hours}} format with time suffix
 Base time as time value in hours and minutes
 in @w{@code{@var{hh}h@var{mm}'}} format
 
-@itemx %o*t@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}
+@item %o*t@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}
 @itemx %s*t@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}
 @cindex Sun, base time @code{%o*t@var{argument}} special text
 @cindex Sun, base time @code{%s*t@var{argument}} special text
@@ -19502,7 +19503,7 @@ in @w{@code{@var{hh}:@var{mm}}} @w{@emph{12-hours}} format with time suffix
 Base time as time value in hours and minutes
 in @w{@code{@var{hh}h@var{mm}'}} format
 
-@itemx %(*x@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}
+@item %(*x@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}
 @itemx %)*x@var{@acronym{ISO}-6709:1983-co-ordinate}@r{[},@r{[}+@r{|}-@r{]}@var{mmmm}@r{|}@var{hh}:@r{[}@var{mm}@r{]]}
 @cindex Moon, base time @code{%(*x@var{argument}} special text
 @cindex Moon, base time @code{%)*x@var{argument}} special text

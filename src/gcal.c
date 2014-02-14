@@ -6025,9 +6025,10 @@ check_command_line (argc, argv)
       /*
          Set starting day of week to language/territory default value.
        */
-#if defined GCAL_NLS && defined _NL_TIME_FIRST_WEEKDAY
+#if defined GCAL_NLS
       start_day = (nl_langinfo (_NL_TIME_FIRST_WEEKDAY)[0] + 5) % 7 + 1;
 #else /* !GCAL_NLS */
+#error MUST USE _NL_TIME_FIRST_WEEKDAY !
       start_day = DAY_MAX;
 #endif	/* !GCAL_NLS */
     }

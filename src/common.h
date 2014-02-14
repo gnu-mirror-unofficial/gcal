@@ -6,7 +6,7 @@
 */
 /*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011, 2012 Thomas Esken
-*  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
+*  Copyright (c) 2010, 2011, 2013, 2014 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -778,7 +778,7 @@ extern char *getenv __P_ ((const char *env_var));
 *  And last but not least...
 */
 # define COPYRIGHT_TXT    "Copyright (c) 1994, 95, 96, 1997, 2000 Thomas Esken\n" \
-"Copyright (c) 2010, 2011, 2012 Free Software Foundation, Inc."
+"Copyright (c) 2010, 2011, 2012, 2014 Free Software Foundation, Inc."
 # define BUG_REPORT_ADR1  "bug-gcal@gnu.org"
 
 # define HOMEPAGE "http://www.gnu.org/software/gcal"

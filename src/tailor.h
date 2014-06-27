@@ -47,8 +47,6 @@
 # include <locale.h>
 
 # include <langinfo.h>
-/* FIXME: this is just a quick hack. Avoid the redefinition of ERA.  */
-# undef ERA
 
 # include <gettext.h>
 
@@ -228,6 +226,7 @@
 #    define HAVE_TERMIOS_H 1
 #    define HAVE_TERMIOS_FUNCS 1
 #    define HAVE_UNISTD_H 1
+#    define HAVE_FCNTL_H 1
 #    define HAVE_SYS_IOCTL_H 1
 #    define HAVE_SYS_STREAM_H 1
 #    define HAVE_SYS_TIME_H 1
@@ -727,7 +726,7 @@ static char *_tmpfn ()
 #   define OOE         "\333"
 #   define UUE         "\232"
 #   define ARA         "\251"
-#   define ERA         "\301"
+#   define ERA_M       "\301"
 #   define ELA         "\312"
 #   define ADG         "\302"
 #   define EDG         "\310"
@@ -752,7 +751,7 @@ static char *_tmpfn ()
 #    define OOE         "\231"
 #    define UUE         "\232"
 #    define ARA         "\240"
-#    define ERA         "\202"
+#    define ERA_M       "\202"
 #    define ELA         "\212"
 #    define ADG         "\203"
 #    define EDG         "\210"
@@ -777,7 +776,7 @@ static char *_tmpfn ()
 #     define OOE         "\231"
 #     define UUE         "\232"
 #     define ARA         "\240"
-#     define ERA         "\202"
+#     define ERA_M       "\202"
 #     define ELA         "\212"
 #     define ADG         "\203"
 #     define EDG         "\210"
@@ -802,7 +801,7 @@ static char *_tmpfn ()
 #     define OOE         "\326"
 #     define UUE         "\334"
 #     define ARA         "\301"
-#     define ERA         "\351"
+#     define ERA_M       "\351"
 #     define ELA         "\350"
 #     define ADG         "\342"
 #     define EDG         "\352"
@@ -828,7 +827,7 @@ static char *_tmpfn ()
 #  define OOE         "\"O"
 #  define UUE         "\"U"
 #  define ARA         "'a"
-#  define ERA         "'e"
+#  define ERA_M       "'e"
 #  define ELA         "`e"
 #  define ADG         "^a"
 #  define EDG         "^e"

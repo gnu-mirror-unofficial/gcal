@@ -124,13 +124,6 @@ extern char *getenv __P_ ((const char *env_var));
 # ifndef RETSIGTYPE
 #  define RETSIGTYPE      void
 # endif
-# ifndef NULL
-#  if !defined(__cplusplus) || defined(__GNUC__)
-#   define NULL            ((VOID_PTR)0)
-#  else	/* __cplusplus && !__GNUC__ */
-#   define NULL            (0)
-#  endif /* __cplusplus && !__GNUC__ */
-# endif
 # if !HAVE_STRSTR
 #  ifndef strstr
 #   define strstr          my_strstr
@@ -275,12 +268,6 @@ extern char *getenv __P_ ((const char *env_var));
 */
 # ifndef EXIT_FATAL
 #  define EXIT_FATAL                    2
-# endif
-# ifndef EXIT_FAILURE
-#  define EXIT_FAILURE                  1
-# endif
-# ifndef EXIT_SUCCESS
-#  define EXIT_SUCCESS                  ERR_NONE
 # endif
 
 

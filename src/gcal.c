@@ -57,12 +57,6 @@
 # if HAVE_SYS_WAIT_H
 #  include <sys/wait.h>
 # endif
-# ifndef WEXITSTATUS
-#  define WEXITSTATUS(stat_val) ((unsigned int)(stat_val) >> 8)
-# endif
-# ifndef WIFEXITED
-#  define WIFEXITED(stat_val)   (((stat_val) & 0xff) == 0)
-# endif
 #endif /* GCAL_EPAGER */
 #include "common.h"
 #if USE_RC

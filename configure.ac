@@ -30,10 +30,9 @@ AC_INIT([gcal],
         [bug-gcal@gnu.org])
 AC_PREREQ(2.65)
 
+AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([gnu])
-
-AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE([1.9])
 
 AC_CONFIG_SRCDIR([src/gcal.c])
 
@@ -68,8 +67,6 @@ AC_PROG_RANLIB
 
 gl_EARLY
 
-gl_INIT
-
 AC_FUNC_ALLOCA
 
 dnl
@@ -95,7 +92,7 @@ AC_ARG_ENABLE(unicode,
   gcal_cv_use_unicode=no)
 AC_MSG_RESULT($gcal_cv_use_unicode)
 if test "$gcal_cv_use_unicode" = yes; then
-  AC_DEFINE(USE_UNICODE, [1], [Enable unicode.])
+  AC_DEFINE([USE_UNICODE], [1], [Enable unicode.])
 fi
 dnl
 AC_MSG_CHECKING(whether extended ASCII character set is required)
@@ -105,7 +102,7 @@ AC_ARG_ENABLE(easc,
   gcal_cv_use_easc=no)
 AC_MSG_RESULT($gcal_cv_use_easc)
 if test "$gcal_cv_use_easc" = yes; then
-  AC_DEFINE(USE_EASC, [1], [Enable displaying using the extended ASCII character set.])
+  AC_DEFINE([USE_EASC], [1], [Enable displaying using the extended ASCII character set.])
 fi
 dnl
 AC_MSG_CHECKING(whether all available country specific holidays are required)
@@ -117,7 +114,7 @@ AC_MSG_RESULT($gcal_cv_use_cc_holidays)
 if test "$gcal_cv_use_cc_holidays" = yes; then
   GCAL_HD_OBJS="\$(GCAL_HD_OBJS)"
 else
-  AC_DEFINE(HD_TOP20CC, [1], [Enable a small selection of country specific holidays only.])
+  AC_DEFINE([HD_TOP20CC], [1], [Enable a small selection of country specific holidays only.])
 fi
 AC_SUBST(GCAL_HD_OBJS)
 dnl
@@ -128,7 +125,7 @@ AC_ARG_ENABLE(hls,
   gcal_cv_use_hls=yes)
 AC_MSG_RESULT($gcal_cv_use_hls)
 if test "$gcal_cv_use_hls" = yes; then
-  AC_DEFINE(USE_HLS, [1], [Enable highlighting sequences.])
+  AC_DEFINE([USE_HLS], [1], [Enable highlighting sequences.])
 fi
 dnl
 AC_MSG_CHECKING(whether pager feature is required)
@@ -138,7 +135,7 @@ AC_ARG_ENABLE(pager,
   gcal_cv_use_pager=yes)
 AC_MSG_RESULT($gcal_cv_use_pager)
 if test "$gcal_cv_use_pager" = yes; then
-  AC_DEFINE(USE_PAGER, [1], [Enable simple internal pager feature.])
+  AC_DEFINE([USE_PAGER], [1], [Enable simple internal pager feature.])
 fi
 dnl
 AC_MSG_CHECKING(whether fixed date feature is required)
@@ -149,7 +146,7 @@ AC_ARG_ENABLE(rc,
 AC_MSG_RESULT($gcal_cv_use_rc)
 if test "$gcal_cv_use_rc" = yes; then
   GCAL_RC_OBJS="\$(GCAL_RC_OBJS)"
-  AC_DEFINE(USE_RC, [1], [Enable fixed date feature.])
+  AC_DEFINE([USE_RC], [1], [Enable fixed date feature.])
 fi
 AC_SUBST(GCAL_RC_OBJS)
 dnl
@@ -239,11 +236,11 @@ if test "$gcal_cv_use_pager" = yes; then
   dnl Checks for ``external'' pager programs (less, more, pg).
   dnl
   AC_CHECK_PROG(PAGER1, less, less)
-  AC_DEFINE_UNQUOTED(PAGER1_PROG, "$PAGER1", [Enable preferred external pager program (`less').])
+  AC_DEFINE_UNQUOTED([PAGER1_PROG], "$PAGER1", [Enable preferred external pager program (`less').])
   AC_CHECK_PROG(PAGER2, more, more)
-  AC_DEFINE_UNQUOTED(PAGER2_PROG, "$PAGER2", [Enable alternative external pager program (`more').])
+  AC_DEFINE_UNQUOTED([PAGER2_PROG], "$PAGER2", [Enable alternative external pager program (`more').])
   AC_CHECK_PROG(PAGER3, pg, pg)
-  AC_DEFINE_UNQUOTED(PAGER3_PROG, "$PAGER3", [Enable second alternative external pager program (`pg').])
+  AC_DEFINE_UNQUOTED([PAGER3_PROG], "$PAGER3", [Enable second alternative external pager program (`pg').])
 fi
 dnl
 dnl Checks for cp.
@@ -264,11 +261,6 @@ if test -n "$ac_cv_prog_CP"; then
   fi
   AC_SUBST(CP)
 fi
-
-dnl
-dnl Checks for install program/script.
-dnl
-AM_PROG_INSTALL
 
 dnl
 dnl Checks whether `ln -s' works.
@@ -331,7 +323,7 @@ if test "$gcal_cv_use_term" = yes; then
     [tgetent(0); tgetflag(0); tgetnum(0); tgetstr(0);],
     [gcal_ttylibs_ok=yes])
   if test "$gcal_ttylibs_ok" = yes; then
-    AC_DEFINE(HAVE_TTYLIBS, [1], [Link -lncurses or -ltermcap or -ltermlib to executable.])
+    AC_DEFINE([HAVE_TTYLIBS], [1], [Link -lncurses or -ltermcap or -ltermlib to executable.])
     AC_MSG_RESULT(using $TTYLIBS)
   else
     if test "$TTYLIBS" = "-lncurses"; then
@@ -346,7 +338,7 @@ if test "$gcal_cv_use_term" = yes; then
         [tgetent(0); tgetflag(0); tgetnum(0); tgetstr(0);],
         [gcal_ttylibs_ok=yes])
       if test "$gcal_ttylibs_ok" = yes; then
-        AC_DEFINE(HAVE_TTYLIBS, [1], [Link -lncurses or -ltermcap or -ltermlib to executable.])
+        AC_DEFINE([HAVE_TTYLIBS], [1], [Link -lncurses or -ltermcap or -ltermlib to executable.])
         AC_MSG_RESULT(using $TTYLIBS)
       else
         AC_MSG_RESULT(using $TTYLIBS fails)
@@ -363,7 +355,7 @@ if test "$gcal_cv_use_term" = yes; then
             [tgetent(0); tgetflag(0); tgetnum(0); tgetstr(0);],
             [gcal_libtermlib_ok=yes])
           if test "$gcal_libtermlib_ok" = yes; then
-            AC_DEFINE(HAVE_TTYLIBS, [1], [Link -lncurses or -ltermcap or -ltermlib to executable.])
+            AC_DEFINE([HAVE_TTYLIBS], [1], [Link -lncurses or -ltermcap or -ltermlib to executable.])
             AC_MSG_RESULT(using $TTYLIBS)
           fi
         fi
@@ -376,7 +368,7 @@ if test "$gcal_cv_use_term" = yes; then
           [tgetent(0); tgetflag(0); tgetnum(0); tgetstr(0);],
           [gcal_libtermlib_ok=yes])
         if test "$gcal_libtermlib_ok" = yes; then
-            AC_DEFINE(HAVE_TTYLIBS, [1], [Link -lncurses or -ltermcap or -ltermlib to executable.])
+            AC_DEFINE([HAVE_TTYLIBS], [1], [Link -lncurses or -ltermcap or -ltermlib to executable.])
           AC_MSG_RESULT(using $TTYLIBS)
         fi
       fi
@@ -402,7 +394,7 @@ dnl
 AC_CHECK_LIB(m,
   cos,
   [LIBM="-lm"
-   AC_DEFINE(HAVE_LIBM, [1], [Define if you have the m library (-lm)])
+   AC_DEFINE([HAVE_LIBM], [1], [Define if you have the m library (-lm)])
    have_libm=yes],
   [have_libm=no])
 AC_SUBST(LIBM)
@@ -461,7 +453,7 @@ AC_CACHE_VAL(gcal_cv_type_time_t,
     [gcal_cv_type_time_t=yes],
     [gcal_cv_type_time_t=no]))
 if test "$gcal_cv_type_time_t" = yes; then
-  AC_DEFINE(HAVE_TIME_T, [1], [Type time_t is predefined.])
+  AC_DEFINE([HAVE_TIME_T], [1], [Type time_t is predefined.])
 fi
 AC_MSG_RESULT($gcal_cv_type_time_t)
 
@@ -480,7 +472,7 @@ AC_CACHE_VAL(gcal_cv_c_void,
     [gcal_cv_c_void=yes],
     [gcal_cv_c_void=no]))
 if test "$gcal_cv_c_void" = yes; then
-  AC_DEFINE(HAVE_VOID, [1], [Identifier void exists.])
+  AC_DEFINE([HAVE_VOID], [1], [Identifier void exists.])
 fi
 AC_MSG_RESULT($gcal_cv_c_void)
 
@@ -497,7 +489,7 @@ AC_CHECK_FUNCS([signal strtol strstr strchr strrchr strcspn strcasecmp strncasec
 dnl
 dnl Some systems have termios.h but not the corresponding functions.
 dnl
-AC_CHECK_FUNC(tcgetattr, AC_DEFINE(HAVE_TERMIOS_FUNCS, [1], [All termios functions are available.]))
+AC_CHECK_FUNC(tcgetattr, AC_DEFINE([HAVE_TERMIOS_FUNCS], [1], [All termios functions are available.]))
 dnl
 dnl Check for working system() function.
 dnl
@@ -520,7 +512,7 @@ AC_CACHE_VAL(gcal_cv_func_system_ok,
     gcal_cv_func_system_ok=no))
 AC_MSG_RESULT($gcal_cv_func_system_ok)
 if test "$gcal_cv_func_system_ok" = yes; then
-  AC_DEFINE(HAVE_SYSTEM, [1], [Define if you have a working system function])
+  AC_DEFINE([HAVE_SYSTEM], [1], [Define if you have a working system function])
 fi
 if test "$gcal_cv_use_included_regexps" = no; then
   dnl
@@ -534,7 +526,7 @@ if test "$gcal_cv_use_included_regexps" = no; then
   dnl
   AC_CHECK_FUNC(re_compile_pattern,
     AC_MSG_RESULT(using GNU re_compile_pattern)
-    AC_DEFINE(HAVE_GNU_RE_COMPILE_PATTERN, [1], [GNU re_compile_pattern() and regex.h])
+    AC_DEFINE([HAVE_GNU_RE_COMPILE_PATTERN], [1], [GNU re_compile_pattern() and regex.h])
     have_regexp=yes)
   if test "$have_regexp" = no; then
     have_posix_regexp=unknown
@@ -564,7 +556,7 @@ if test "$gcal_cv_use_included_regexps" = no; then
       have_posix_regexp=unknown)
     if test "$have_posix_regexp" = yes; then
       AC_MSG_RESULT(using POSIX regcomp)
-      AC_DEFINE(HAVE_POSIX_REGCOMP, [1], [POSIX regcomp() and regex.h])
+      AC_DEFINE([HAVE_POSIX_REGCOMP], [1], [POSIX regcomp() and regex.h])
       have_regexp=yes
     else
       if test "$have_posix_regexp" = unknown; then
@@ -578,14 +570,14 @@ if test "$gcal_cv_use_included_regexps" = no; then
           [regex_t *r;
            regfree(r);],
           AC_MSG_RESULT(using POSIX regcomp)
-          AC_DEFINE(HAVE_POSIX_REGCOMP, [1], [POSIX regcomp() and regex.])
+          AC_DEFINE([HAVE_POSIX_REGCOMP], [1], [POSIX regcomp() and regex.])
           have_regexp=yes)
       fi
     fi
     if test "$have_regexp" = no; then
       AC_CHECK_FUNC(re_comp,
         AC_MSG_RESULT(using BSD re_comp)
-        AC_DEFINE(HAVE_RE_COMP, [1], [BSD re_comp()])
+        AC_DEFINE([HAVE_RE_COMP], [1], [BSD re_comp()])
         have_regexp=yes)
     fi
   fi
@@ -606,7 +598,7 @@ AC_CACHE_VAL(gcal_cv_func_upper_lower,
     [gcal_cv_func_upper_lower=yes],
     [gcal_cv_func_upper_lower=no]))
 if test "$gcal_cv_func_upper_lower" = yes; then
-  AC_DEFINE(HAVE_UPPER_LOWER, [1], [Functions/macros toupper(), tolower(), isupper() and islower() are found.])
+  AC_DEFINE([HAVE_UPPER_LOWER], [1], [Functions/macros toupper(), tolower(), isupper() and islower() are found.])
 fi
 AC_MSG_RESULT($gcal_cv_func_upper_lower)
 dnl
@@ -620,7 +612,7 @@ AC_CACHE_VAL(gcal_cv_func_isdigit,
     [gcal_cv_func_isdigit=yes],
     [gcal_cv_func_isdigit=no]))
 if test "$gcal_cv_func_isdigit" = yes; then
-  AC_DEFINE(HAVE_ISDIGIT, [1], [Function/macro isdigit() is found.])
+  AC_DEFINE([HAVE_ISDIGIT], [1], [Function/macro isdigit() is found.])
 fi
 AC_MSG_RESULT($gcal_cv_func_isdigit)
 dnl
@@ -634,7 +626,7 @@ AC_CACHE_VAL(gcal_cv_func_isalpha,
     [gcal_cv_func_isalpha=yes],
     [gcal_cv_func_isalpha=no]))
 if test "$gcal_cv_func_isalpha" = yes; then
-  AC_DEFINE(HAVE_ISALPHA, [1], [Have isalpha])
+  AC_DEFINE([HAVE_ISALPHA], [1], [Have isalpha])
 fi
 AC_MSG_RESULT($gcal_cv_func_isalpha)
 dnl
@@ -648,7 +640,7 @@ AC_CACHE_VAL(gcal_cv_func_isalnum,
     [gcal_cv_func_isalnum=yes],
     [gcal_cv_func_isalnum=no]))
 if test "$gcal_cv_func_isalnum" = yes; then
-  AC_DEFINE(HAVE_ISALNUM, [1], [Have isalnum])
+  AC_DEFINE([HAVE_ISALNUM], [1], [Have isalnum])
 fi
 AC_MSG_RESULT($gcal_cv_func_isalnum)
 dnl
@@ -662,7 +654,7 @@ AC_CACHE_VAL(gcal_cv_func_isspace,
     [gcal_cv_func_isspace=yes],
     [gcal_cv_func_isspace=no]))
 if test "$gcal_cv_func_isspace" = yes; then
-  AC_DEFINE(HAVE_ISSPACE, [1], [Have isspace])
+  AC_DEFINE([HAVE_ISSPACE], [1], [Have isspace])
 fi
 AC_MSG_RESULT($gcal_cv_func_isspace)
 
@@ -697,9 +689,9 @@ if test "$gcal_cv_use_term" = yes; then
           [gcal_cv_var_ospeed_test_2=no]))
     fi
     if test "$gcal_cv_var_ospeed_test_1" = yes || test "$gcal_cv_var_ospeed_test_2" = yes; then
-      AC_DEFINE(HAVE_OSPEED, [1], [The ospeed variable is defined in -lncurses or -ltermcap or -ltermlib])
+      AC_DEFINE([HAVE_OSPEED], [1], [The ospeed variable is defined in -lncurses or -ltermcap or -ltermlib])
       if test "$gcal_cv_var_ospeed_test_2" = yes; then
-        AC_DEFINE(MUST_DCL_OSPEED, [1], [We must declare the ospeed variable])
+        AC_DEFINE([MUST_DCL_OSPEED], [1], [We must declare the ospeed variable])
       fi
       AC_MSG_RESULT(yes)
     else
@@ -718,11 +710,13 @@ AC_EXEEXT
 AC_OBJEXT
 AC_SYS_INTERPRETER
 if test "$ac_cv_sys_interpreter" = yes; then
-  AC_DEFINE(HAVE_SYS_INTERPRETER, [1], [Shell can interpret `#!' in first line of a shell script.])
+  AC_DEFINE([HAVE_SYS_INTERPRETER], [1], [Shell can interpret `#!' in first line of a shell script.])
 fi
 
+AM_GNU_GETTEXT_VERSION([0.17])
 AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.16])
+
+gl_INIT
 
 dnl
 dnl Ending operations.
@@ -744,6 +738,9 @@ dnl
 changequote([, ])dnl
 dnl
 AC_MSG_RESULT()
+
+AC_CONFIG_HEADERS([config.h])
+
 AC_OUTPUT([Makefile \
            install-inf \
            data/Makefile \

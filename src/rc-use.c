@@ -5,7 +5,7 @@
 */
 /*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
-*  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
+*  Copyright (c) 2010, 2011, 2013, 2014 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -1493,7 +1493,7 @@ rc_use ()
 	    free (rc_tvar[i].tvar_local.tvar_text);
 	    rc_tvar[i].tvar_local.tvar_text = (char *) NULL;
 	  }
-      free ((VOID_PTR) rc_files_table[rc_files]);
+      free (rc_files_table[rc_files]);
       fiscal_month = tmp_fiscal_month;
       /*
          Now display the constructed contents of `rc_elems_table[]'.
@@ -1769,7 +1769,7 @@ try_to_include_file (ed, wd)
      Now deallocate the include file buffers.
    */
   free (rc_files_table[rc_files]->filename);
-  free ((VOID_PTR) rc_files_table[rc_files]);
+  free (rc_files_table[rc_files]);
   /*
      And back to the previous include file resp., main resource file.
    */

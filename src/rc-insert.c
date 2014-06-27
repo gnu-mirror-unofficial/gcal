@@ -3768,7 +3768,7 @@ insert_line_into_table (line_buffer, filename, line_number, rc_elems,
 	      /*
 	         Hmm, seems the user forgot to give the right %highlighting
 	         special text for disabling a highlighting sequence already
-	         enabled, let's do this for him/her/it/PER/or or or...  hehehe!
+	         enabled, let's do this for him/her/it/PER/or...  hehehe!
 	       */
 	      if (hls1_set)
 		{

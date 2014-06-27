@@ -1432,7 +1432,7 @@ rc_check (line_buffer, filename, line_number, line_length, rc_elems, day, ed,
 				  else
 				    {
 				      /*
-				         Check whether this single event also occurs in in next year.
+				         Check whether this single event also occurs in next year.
 				       */
 				      j =
 					day_of_year (i, fiscal_month - 1,

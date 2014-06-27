@@ -201,4 +201,3 @@ contains unwanted Gcal special texts or some of the required Gcal
 special texts are crippled or protected by a `\' character.  In this
 case, you have to edit the resulting file manually to correct the
 broken text.  Sorry!
-

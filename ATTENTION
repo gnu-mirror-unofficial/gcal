@@ -167,4 +167,3 @@ Table of incompatibilities:
           $ awk -f old2v220.awk FILE-OLD.rc > FILE-v220.rc
           or
           $ perl old2v220.pl FILE-OLD.rc > FILE-v220.rc
-

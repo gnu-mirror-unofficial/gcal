@@ -444,4 +444,3 @@ ftp from <ftp://ftp.gnu.org>, or from any of the `gnu' mirror sites:
 Some ftp servers can automatically make a `tar.Z' or a `tar.gz' from a
 `tar' file.  If you are getting Gcal for the first time, you can ask
 for a `tar.Z' or `tar.gz' file instead of the much larger `tar' file.
-

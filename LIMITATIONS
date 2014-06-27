@@ -94,4 +94,3 @@ Here are all internal limitations of `gcal':
    * Maximum number of different locations for which course angles and
      air line distance values, respectively, can be calculated
         == more than 2.8e+32
-

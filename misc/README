@@ -169,4 +169,3 @@ them for more information:
      implemented in the X Windows Systems.  Especially the alias data
      base file can be shared.  Normally this file is found at something
      like `/usr/lib/X11/locale/locale.alias'.
-

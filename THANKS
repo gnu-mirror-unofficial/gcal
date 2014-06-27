@@ -70,4 +70,3 @@ And lots of thanks to Steven L. Moshier <moshier@mediaone.net> for his
 great `aa.arc' ephemeris calculation software, which inspired me to
 implement astronomical functions into Gcal to calculate the various data
 and times of Sun and Moon.
-

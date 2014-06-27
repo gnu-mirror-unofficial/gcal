@@ -10211,8 +10211,7 @@ software:
 
 @noindent
 Try @w{@samp{gcal --version}} for detecting the kind of regular expression
-programming library respectively method that is burned-in in your Gcal
-program!
+programming library respectively method that is burned in your Gcal program!
 
 @node Regexp Usage, Regexp Operators, Regular Expressions, Regular Expressions
 @appendixsec How to Use Regular Expressions

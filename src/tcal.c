@@ -9,7 +9,7 @@
 */
 /*
 *  Copyright (c) 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008,
-*  2009, 2010, 2011, 2013 Free Software Foundation, Inc.
+*  2009, 2010, 2011, 2013, 2014 Free Software Foundation, Inc.
 *  Copyright (c) 1995, 96, 1997, 2000 Thomas Esken
 *
 *  This software doesn't claim completeness, correctness or usability.
@@ -330,7 +330,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
       fprintf (stderr,
 	       _
 	       ("`%s' line %ld: (`%s') invalid value for table size `sizeof %s>%d'"),
-	       module_name, module_line, _("Internal"), var_name,
+	       module_name, module_line, _("internal"), var_name,
 	       var_contents);
       break;
     case EXIT_FATAL:
@@ -338,7 +338,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
       break;
     default:
       fprintf (stderr, _("`%s' line %ld: (`%s') unmanaged error (%d)"),
-	       module_name, module_line, _("Internal"), exit_status);
+	       module_name, module_line, _("internal"), exit_status);
     }
   S_NEWLINE (stderr);
   exit (exit_status);

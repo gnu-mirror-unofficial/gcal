@@ -4,7 +4,7 @@
 */
 /*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
-*  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
+*  Copyright (c) 2010, 2011, 2013, 2014 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -382,7 +382,7 @@ my_error (exit_status, module_name, module_line, var_name, var_contents)
 #endif	/* USE_RC */
     default:
       fprintf (stderr, _("`%s' line %ld: (`%s') unmanaged error (%d)"),
-	       module_name, module_line, _("Internal"), exit_status);
+	       module_name, module_line, _("internal"), exit_status);
     }
   S_NEWLINE (stderr);
   my_exit (exit_status);

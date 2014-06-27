@@ -1,27 +1,29 @@
 NEWS file for `gcal'.
 
+Copyright (C) 1994-2014 Free Software Foundation, Inc.
+
 User-visible changes.
 
 Major changes in release X.Y.Z
 
 * Remove duplicate for All Saints Day for DE_BW and DE_RP.
-
+
 Major changes in release 3.6.3
 
 * Remove duplicate for All Saints Day for DE_BY.
 * Inherit some portability fixes from gnulib.
-
+
 Major changes in release 3.6.2
 
 * Report correctly the Christmas day in Canada.
-
+
 Major changes in release 3.6.1
 
 * Include All Saints' day in HU
 * Fix build issue under solaris 10 / studio 12.1
 * Unicode support
 * Make --help a synonym for --long-help
-
+
 Major changes in release 3.6
 
 *  Work properly when the -1 timezone is specified

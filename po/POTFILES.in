@@ -7,15 +7,18 @@
 # List of files containing translatable strings.
 
 # Package source files
+lib/error.c
+lib/regcomp.c
+lib/spawn-pipe.c
+lib/w32spawn.h
+lib/wait-process.c
+lib/xalloc-die.c
 src/file-io.c
 src/gcal.c
-src/hd-astro.c
 src/hd-data.c
 src/hd-use.c
 src/help.c
 src/print.c
-src/rc-astro.c
-src/rc-check.c
 src/rc-insert.c
 src/rc-use.c
 src/rc-utils.c

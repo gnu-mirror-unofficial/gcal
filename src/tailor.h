@@ -228,7 +228,6 @@
 #    define HAVE_TERMIOS_H 1
 #    define HAVE_TERMIOS_FUNCS 1
 #    define HAVE_UNISTD_H 1
-#    define HAVE_FCNTL_H 1
 #    define HAVE_SYS_IOCTL_H 1
 #    define HAVE_SYS_STREAM_H 1
 #    define HAVE_SYS_TIME_H 1

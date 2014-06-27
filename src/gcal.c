@@ -4,7 +4,7 @@
 */
 /*
 *  Copyright (c) 1994, 95, 96, 1997, 2000, 2011 Thomas Esken
-*  Copyright (c) 2010, 2011, 2013 Free Software Foundation, Inc.
+*  Copyright (c) 2010, 2011, 2013, 2014 Free Software Foundation, Inc.
 *
 *  This software doesn't claim completeness, correctness or usability.
 *  On principle I will not be liable for ANY damages or losses (implicit
@@ -47,14 +47,12 @@
 # include <sys/stat.h>
 #endif
 #ifdef GCAL_EPAGER
-# if HAVE_FCNTL_H
-#  include <fcntl.h>
-#  if !HAVE_DUP
-#   define dup(old)        (fcntl(old, F_DUPFD, 0))
-#  endif
-#  if !HAVE_DUP2
-#   define dup2(old, new)  (close(new), fcntl(old, F_DUPFD, new))
-#  endif
+# include <fcntl.h>
+# if !HAVE_DUP
+#  define dup(old)        (fcntl(old, F_DUPFD, 0))
+# endif
+# if !HAVE_DUP2
+#  define dup2(old, new)  (close(new), fcntl(old, F_DUPFD, new))
 # endif
 # if HAVE_SYS_WAIT_H
 #  include <sys/wait.h>

@@ -1,4 +1,4 @@
-export VC_LIST_EXCEPT_DEFAULT=^(lib/.*|m4/.*|md5/.*|build-aux/.*|src/gettext\.h|.*ChangeLog)$$
+export VC_LIST_EXCEPT_DEFAULT=^(lib/.*|m4/.*|md5/.*|build-aux/.*|src/gettext\.h|.*ChangeLog|data/.*\.rc)$$
 
 local-checks-to-skip = \
     prohibit_always-defined_macros \
@@ -25,7 +25,6 @@ local-checks-to-skip = \
     sc_program_name \
     sc_obsolete_symbols \
     sc_prohibit_always_true_header_tests \
-    sc_prohibit_empty_lines_at_EOF \
     sc_prohibit_have_config_h \
     sc_prohibit_magic_number_exit \
     sc_prohibit_strncpy \

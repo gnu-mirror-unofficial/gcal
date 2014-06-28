@@ -6,11 +6,11 @@
 @group
 @cartouche
 $ gcal %19960101 -H no -x -f ./tvar-2.rc
-@print{} 
+@print{}
 @print{} Mo,   1 Jan 1996: $a:0@@e foo
 @print{} Mo,   1 Jan 1996: $b:0@@e
 $ gcal %19960101 -H no -x -f ./tvar-2.rc -y
-@print{} 
+@print{}
 @print{} So,   7 Apr 1996: $b
 @print{} So,   7 Apr 1996: foo bar
 @end cartouche

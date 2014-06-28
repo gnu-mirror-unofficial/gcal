@@ -6,12 +6,12 @@
 @group
 @cartouche
 $ gcal %1777 -H no -x -v z=1212 -f ./dvar-1.rc -y
-@print{} 
+@print{}
 @print{} So,   2 Feb 1777: Das lokal an `z' zugewiesene Datum
 @print{} Fr,   4 Apr 1777: Das lokal an `z' zugewiesene Datum
 @print{} Fr,  12 Dez 1777: Das global an `z' zugewiesene Datum
 $ gcal %1777 -H no -x -f ./dvar-1.rc -y
-@print{} 
+@print{}
 @print{} So,   2 Feb 1777: Das lokal an `z' zugewiesene Datum
 @print{} Fr,   4 Apr 1777: Das lokal an `z' zugewiesene Datum
 @end cartouche

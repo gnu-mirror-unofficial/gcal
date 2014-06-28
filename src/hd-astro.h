@@ -2,7 +2,7 @@
 # define __HD_ASTRO_H
 /*!
 *  \file hd-astro.h
-*  \brief Astronomical and support functions for the 
+*  \brief Astronomical and support functions for the
 *  				eternal holiday list header file.
 */
 /*

@@ -2,7 +2,7 @@
 # define __RC_UTILS_H
 /*!
 *  \file rc-utils.h
-*  \brief Pool of special functions necessary for managing 
+*  \brief Pool of special functions necessary for managing
 *  			the fixed dates header file.
 */
 /*

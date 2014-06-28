@@ -1,6 +1,6 @@
 /*!
 *  \file tcal.c
-*  \brief Start `gcal' with date set ONE day ahead 
+*  \brief Start `gcal' with date set ONE day ahead
 *
 *  (default mode, like the `--shift=1' long-style option is passed to it).
 *  Useful if you call this program in `~/.profile' and you want to see all

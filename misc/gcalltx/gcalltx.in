@@ -11,7 +11,7 @@
 #
 # This script calls gcalltx.sed to convert 'gcal -n -u %0001 year' output to
 # LaTeX tabular output.
-# 
+#
 # UN*X solution.
 #
 packagedatamiscdir=@srcdir@

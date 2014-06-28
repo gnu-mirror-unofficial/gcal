@@ -7626,7 +7626,7 @@ vor dessen Datum stehen:
 @multitable @columnfractions .15 .85
 @item @strong{Zeichen}
 @tab @strong{Beschreibung}
-@item @ 
+@item @
 @item @code{+}
 @tab Gesetzlicher Feiertag, der im gesamten Land g@"ultig ist.  Wird
 automatisch mit Hervorhebungssequenzen bzw.@: Markierungszeichen versehen.
@@ -9641,7 +9641,7 @@ werden.  Diese sind:
 @item @strong{Operation}
 @tab @strong{Beschreibung}
 @ifnottex
-@item @ 
+@item @
 @end ifnottex
 @item @code{@var{dvar}++}
 @cindex Datumvariablen, einfache Inkrementierung von
@@ -10007,7 +10007,7 @@ werden, sofern diese einen ganzzahligen Inhalt haben.  Diese sind:
 @multitable @columnfractions .2 .8
 @item @strong{Operation}
 @tab @strong{Beschreibung}
-@item @ 
+@item @
 @item @code{@var{tvar}++}
 @cindex Textvariablen, einfache Inkrementierung von
 @cindex Einfache Inkrementierung von Textvariablen
@@ -10608,7 +10608,7 @@ Gcal @value{GCAL-VERSION} unterst@"utzt:
 @multitable @columnfractions .33 .66
 @item @strong{Landessprache}
 @tab @strong{Sprachkode}
-@item @ 
+@item @
 @item Englisch
 @tab @code{en}
 @item Deutsch
@@ -10973,7 +10973,7 @@ absteigender Priorit@"at hinsichtlich ihrer Auswahl angegeben sind:
 @item @strong{Nr.}
 @tab @strong{Funktion}
 @tab @strong{Symbol}
-@item @ 
+@item @
 @item 1.
 @tab GNU @code{re_compile_pattern()} und @file{regex.h}
 @tab @code{GNU-REGEX}
@@ -13790,7 +13790,7 @@ die durch die Zeichen @w{@samp{0}@dots{}@samp{2}} repr@"asentiert sind:
 @cindex Statute Meilen
 @item @strong{Modus}
 @tab @strong{Beschreibung}
-@item @ 
+@item @
 @item @code{0}
 @cindex Geographische Distanz @w{@code{%b0@var{Argument}}} Spezialtext
 @cindex Geographische Distanz @w{@code{%b*0@var{Argument}}} Spezialtext
@@ -13806,7 +13806,7 @@ Kilometer entspricht.
 Falls Gcal nicht imstande ist, die ungef@"ahre Distanz zwischen den beiden
 geographischen Orten zu berechnen, da das @var{Argument} fehlerhaft angegeben
 wurde, so wird anstelle des Distanzwertes ein @w{@code{??}} Text erzeugt.
-@item @ 
+@item @
 @item @code{1}
 @cindex Rechtweisender Kurswinkel @w{@code{%b1@var{Argument}}} Spezialtext
 @cindex Rechtweisender Kurswinkel @w{@code{%b*1@var{Argument}}} Spezialtext
@@ -13826,7 +13826,7 @@ d.h.@: im @w{@code{@var{ggg}.@var{g}@dots{}}} Format.
 Falls Gcal nicht imstande ist, den ungef@"ahren Kurswinkel zwischen den beiden
 geographischen Orten zu berechnen, da das @var{Argument} fehlerhaft angegeben
 wurde, so wird anstelle des Kurswinkels ein @w{@code{???g??'}} Text erzeugt.
-@item @ 
+@item @
 @item @code{2}
 @cindex Rechtweisender Kurswinkel @w{@code{%b2@var{Argument}}} Spezialtext
 @cindex Rechtweisender Kurswinkel @w{@code{%b*2@var{Argument}}} Spezialtext
@@ -13980,7 +13980,7 @@ ausl@"osen, wie er in der Tabelle beschrieben ist:
 @item @strong{Modus}
 @tab @strong{Spezialtext}
 @tab @strong{Beschreibung}
-@item @ 
+@item @
 @item @code{0}
 @cindex Sonne, Mitternachtzeitpunkt @code{%o0@var{Argument}} Spezialtext
 @cindex Sonne, Mitternachtzeitpunkt @code{%s0@var{Argument}} Spezialtext
@@ -14007,7 +14007,7 @@ Zu dieser Uhrzeit befindet sich die Sonne nahe ihres @dfn{unteren
 Kulminationspunktes}, d.h.@: nahe des niedrigsten Punktes unter-
 oder oberhalb der Horizontalebene, der vom Mittelpunkt der Sonne
 an diesem Tag durchlaufen wird.
-@item @ 
+@item @
 @item @code{1}
 @cindex Sonne, Mittagzeitpunkt @code{%o1@var{Argument}} Spezialtext
 @cindex Sonne, Mittagzeitpunkt @code{%s1@var{Argument}} Spezialtext
@@ -14053,7 +14053,7 @@ verglichen wird.
 und
 @ref{x-Sonne-Asr-2, , Islamische Asr-2 Gebetszeit},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{2}
 @cindex Sonnenmittelpunkt, Aufgangszeit geometrisch @code{%o2@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Aufgangszeit geometrisch @code{%o*2@var{Argument}} Spezialtext
@@ -14069,7 +14069,7 @@ wird diejenige Horizontalebene bezeichnet, die durch den Erdmittelpunkt
 verl@"auft.  Im weiteren Kontext wird aber einfach nur noch der k@"urzere
 Begriff @emph{mathematischer Horizont} benutzt, der eigentlich den
 mathematisch-geozentrischen Horizont meint.
-@item @ 
+@item @
 @item @code{2}
 @cindex Sonnenmittelpunkt, Untergangszeit geometrisch @code{%s2@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Untergangszeit geometrisch @code{%s*2@var{Argument}} Spezialtext
@@ -14077,7 +14077,7 @@ mathematisch-geozentrischen Horizont meint.
 @tab Die ungef@"ahre Uhrzeit berechnen, zu der der Mittelpunkt der Sonne
 eine Referenzh@"ohe von 0 Grad auf einem mathematischen Horizont am Abend
 durchschreitet; also untergeht.
-@item @ 
+@item @
 @item @code{2}
 @cindex Sonnenmittelpunkt, Sichtbarkeit geometrisch @code{%u2@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Sichtbarkeit geometrisch @code{%u*2@var{Argument}} Spezialtext
@@ -14085,7 +14085,7 @@ durchschreitet; also untergeht.
 @tab Die ungef@"ahre Zeitdauer berechnen, w@"ahrend der der Mittelpunkt
 der Sonne eine Referenzh@"ohe von 0 Grad auf einem mathematischen Horizont
 @"uberschreitet; also sichtbar ist.
-@item @ 
+@item @
 @item @code{2}
 @cindex Sonnenmittelpunkt, Nichtsichtbarkeit geometrisch @code{%z2@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Nichtsichtbarkeit geometrisch @code{%z*2@var{Argument}} Spezialtext
@@ -14093,7 +14093,7 @@ der Sonne eine Referenzh@"ohe von 0 Grad auf einem mathematischen Horizont
 @tab Die ungef@"ahre Zeitdauer berechnen, w@"ahrend der der Mittelpunkt
 der Sonne eine Referenzh@"ohe von 0 Grad auf einem mathematischen Horizont
 unterschreitet; also nicht sichtbar ist.
-@item @ 
+@item @
 @item @code{3}
 @cindex Sonnenoberrand, Aufgangszeit geometrisch @code{%o3@var{Argument}} Spezialtext
 @cindex Sonnenoberrand, Aufgangszeit geometrisch @code{%o*3@var{Argument}} Spezialtext
@@ -14106,7 +14106,7 @@ g@"ultigen Wert des Sonnenradius'.
 Wenn die auf den oberen Rand der Sonnenscheibe bezogene Referenzh@"ohe auf
 den Sonnenmittelpunkt umgerechnet wird, so liegt diese bei etwa 16 Altminuten
 unterhalb des geozentrischen Horizonts.
-@item @ 
+@item @
 @item @code{3}
 @cindex Sonnenoberrand, Untergangszeit geometrisch @code{%s3@var{Argument}} Spezialtext
 @cindex Sonnenoberrand, Untergangszeit geometrisch @code{%s*3@var{Argument}} Spezialtext
@@ -14116,7 +14116,7 @@ eine Referenzh@"ohe von 0 Grad auf einem mathematischen Horizont
 am Abend durchschreitet; also untergeht.
 Die hier genannte Referenzh@"ohe errechnet sich aus dem zu dieser Uhrzeit
 g@"ultigen Wert des Sonnenradius'.
-@item @ 
+@item @
 @item @code{3}
 @cindex Sonnenoberrand, Sichtbarkeit geometrisch @code{%u3@var{Argument}} Spezialtext
 @cindex Sonnenoberrand, Sichtbarkeit geometrisch @code{%u*3@var{Argument}} Spezialtext
@@ -14124,7 +14124,7 @@ g@"ultigen Wert des Sonnenradius'.
 @tab Den ungef@"ahre Zeitdauer berechnen, w@"ahrend der der obere Rand der
 Sonnenscheibe eine Referenzh@"ohe von 0 Grad auf einem mathematischen Horizont
 @"uberschreitet; also sichtbar ist.
-@item @ 
+@item @
 @item @code{3}
 @cindex Sonnenoberrand, Nichtsichtbarkeit geometrisch @code{%z3@var{Argument}} Spezialtext
 @cindex Sonnenoberrand, Nichtsichtbarkeit geometrisch @code{%z*3@var{Argument}} Spezialtext
@@ -14132,7 +14132,7 @@ Sonnenscheibe eine Referenzh@"ohe von 0 Grad auf einem mathematischen Horizont
 @tab Die ungef@"ahre Zeitdauer berechnen, w@"ahrend der der obere Rand der
 Sonnenscheibe eine Referenzh@"ohe von 0 Grad auf einem mathematischen Horizont
 unterschreitet; also nicht sichtbar ist.
-@item @ 
+@item @
 @item @code{4}
 @cindex Sonnenmittelpunkt, Aufgangszeit @code{%o4@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Aufgangszeit @code{%o*4@var{Argument}} Spezialtext
@@ -14148,7 +14148,7 @@ Erdatmosph@"are ergibt, wird hierbei bereits mit dem Standardwert von
 wie die Basisdaten der Atmosph@"are ge@"andert werden k@"onnen, so da@ss{}
 die dann definierten atmosph@"arischen Bedingungen zur Refraktionsberechnung
 verwendet werden.
-@item @ 
+@item @
 @item @code{4}
 @cindex Sonnenmittelpunkt, Untergangszeit @code{%s4@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Untergangszeit @code{%s*4@var{Argument}} Spezialtext
@@ -14160,7 +14160,7 @@ Die Refraktion, die sich in der Realit@"at durch den Einflu@ss{} der
 Erdatmosph@"are ergibt, wird hierbei bereits mit dem Standardwert von
 34 Altminuten ber@"ucksichtigt, der aber indirekt durch die Benutzung der
 @w{@option{--atmosphere}} Option ver@"andert werden kann.
-@item @ 
+@item @
 @item @code{4}
 @cindex Sonnenmittelpunkt, Sichtbarkeit @code{%u4@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Sichtbarkeit @code{%u*4@var{Argument}} Spezialtext
@@ -14168,7 +14168,7 @@ Erdatmosph@"are ergibt, wird hierbei bereits mit dem Standardwert von
 @tab Die ungef@"ahre Zeitdauer berechnen, w@"ahrend der der Mittelpunkt
 der Sonne eine Referenzh@"ohe @"uberschreitet, die bei 34 Altminuten
 unterhalb des geozentrischen Horizonts liegt; also sichtbar ist.
-@item @ 
+@item @
 @item @code{4}
 @cindex Sonnenmittelpunkt, Nichtsichtbarkeit @code{%z4@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Nichtsichtbarkeit @code{%z*4@var{Argument}} Spezialtext
@@ -14176,7 +14176,7 @@ unterhalb des geozentrischen Horizonts liegt; also sichtbar ist.
 @tab Die ungef@"ahre Zeitdauer berechnen, w@"ahrend der der Mittelpunkt
 der Sonne eine Referenzh@"ohe unterschreitet, die bei 34 Altminuten
 unterhalb des geozentrischen Horizonts liegt; also nicht sichtbar ist.
-@item @ 
+@item @
 @item @code{5}
 @cindex Sonnenoberrand, Aufgangszeit Standard @code{%o5@var{Argument}} Spezialtext
 @cindex Sonnenoberrand, Aufgangszeit Standard @code{%o*5@var{Argument}} Spezialtext
@@ -14202,7 +14202,7 @@ jeweilig g@"ultigen Werten von Sonnenradius und (Standard) Refraktion.
 Wenn die auf den oberen Rand der Sonnenscheibe bezogene Referenzh@"ohe auf
 den Sonnenmittelpunkt umgerechnet wird, so liegt diese bei etwa 50 Altminuten
 unterhalb des geozentrischen Horizonts.
-@item @ 
+@item @
 @item @code{5}
 @cindex Sonnenoberrand, Untergangszeit Standard @code{%s5@var{Argument}} Spezialtext
 @cindex Sonnenoberrand, Untergangszeit Standard @code{%s*5@var{Argument}} Spezialtext
@@ -14227,7 +14227,7 @@ jeweilig g@"ultigen Werten von Sonnenradius und (Standard) Refraktion.
 Personen islamischen Glaubens beten normalerweise zum vorletzten Mal
 am Tag zu, oder kurz nach, dieser Uhrzeit.  Dieser Personenkreis
 bezeichnet diese Gebetszeit auch gemeinhin mit @dfn{Maghrib}.
-@item @ 
+@item @
 @item @code{5}
 @cindex Sonnenoberrand, Sichtbarkeit Standard @code{%u5@var{Argument}} Spezialtext
 @cindex Sonnenoberrand, Sichtbarkeit Standard @code{%u*5@var{Argument}} Spezialtext
@@ -14239,7 +14239,7 @@ der Sonnenscheibe eine Referenzh@"ohe @"uberschreitet, die bei 34 Altminuten
 unterhalb des geozentrischen Horizonts liegt; also sichtbar ist.
 Diese Art der Zeitdauerberechnung der Sichtbarkeit entspricht der
 Standardberechnungsmethode, wie sie im allgemeinen international benutzt wird.
-@item @ 
+@item @
 @item @code{5}
 @cindex Sonnenoberrand, Nichtsichtbarkeit Standard @code{%z5@var{Argument}} Spezialtext
 @cindex Sonnenoberrand, Nichtsichtbarkeit Standard @code{%z*5@var{Argument}} Spezialtext
@@ -14251,7 +14251,7 @@ der Sonnenscheibe eine Referenzh@"ohe unterschreitet, die bei 34 Altminuten
 unterhalb des geozentrischen Horizonts liegt; also nicht sichtbar ist.
 Diese Art der Zeitdauerberechnung der Nichtsichtbarkeit entspricht der
 Standardberechnungsmethode, wie sie im allgemeinen international benutzt wird.
-@item @ 
+@item @
 @item @code{6}
 @cindex Sonnenmittelpunkt, D@"ammerungsbeginn b@"urgerlich @code{%o6@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, D@"ammerungsbeginn b@"urgerlich @code{%o*6@var{Argument}} Spezialtext
@@ -14266,7 +14266,7 @@ liegt, am Morgen durchschreitet; also der Beginn der
 Das Restlicht der Sonne, da@ss{} zu Beginn der b@"urgerlichen D@"ammerungsphase
 verbleibt, reicht im allgemeinen noch nicht dazu aus, um au@ss{}er Haus ohne
 k@"unstliche Beleuchtung lesen zu k@"onnen.
-@item @ 
+@item @
 @item @code{6}
 @cindex Sonnenmittelpunkt, D@"ammerungsende b@"urgerlich @code{%s6@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, D@"ammerungsende b@"urgerlich @code{%s*6@var{Argument}} Spezialtext
@@ -14278,7 +14278,7 @@ k@"unstliche Beleuchtung lesen zu k@"onnen.
 eine Referenzh@"ohe, die bie 6 Grad unterhalb eines mathematischen Horizonts
 liegt, am Abend durchschreitet; also das Ende der
 b@"urgerlichen D@"ammerung.
-@item @ 
+@item @
 @item @code{6}
 @cindex Sonnenmittelpunkt, Zeitspanne oberhalb D@"ammerungsh@"ohe b@"urgerlich @code{%u6@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Zeitspanne oberhalb D@"ammerungsh@"ohe b@"urgerlich @code{%u*6@var{Argument}} Spezialtext
@@ -14287,7 +14287,7 @@ b@"urgerlichen D@"ammerung.
 der Sonne eine Referenzh@"ohe @"uberschreitet, die bei 6 Grad unterhalb eines
 mathematischen Horizonts liegt; also die Zeitspanne,
 w@"ahrend der sich der Sonnenmittelpunkt stets oberhalb -6 Grad befindet.
-@item @ 
+@item @
 @item @code{6}
 @cindex Sonnenmittelpunkt, Zeitspanne unterhalb D@"ammerungsh@"ohe b@"urgerlich @code{%z6@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Zeitspanne unterhalb D@"ammerungsh@"ohe b@"urgerlich @code{%z*6@var{Argument}} Spezialtext
@@ -14296,7 +14296,7 @@ w@"ahrend der sich der Sonnenmittelpunkt stets oberhalb -6 Grad befindet.
 der Sonne eine Referenzh@"ohe unterschreitet, die bei 6 Grad unterhalb eines
 mathematischen Horizonts liegt; also die Zeitspanne,
 w@"ahrend der sich der Sonnenmittelpunkt stets unterhalb -6 Grad befindet.
-@item @ 
+@item @
 @item @code{7}
 @cindex Sonnenmittelpunkt, D@"ammerungsbeginn nautisch @code{%o7@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, D@"ammerungsbeginn nautisch @code{%o*7@var{Argument}} Spezialtext
@@ -14311,7 +14311,7 @@ liegt, am Morgen durchschreitet; also der Beginn der
 Das Restlicht der Sonne, da@ss{} zu Beginn der nautischen D@"ammerungsphase
 verbleibt, reicht im allgemeinen noch nicht dazu aus, um Navigation betreiben
 zu k@"onnen, die sich an einem Meereshorizont orientiert.
-@item @ 
+@item @
 @item @code{7}
 @cindex Sonnenmittelpunkt, D@"ammerungsende nautisch @code{%s7@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, D@"ammerungsende nautisch @code{%s*7@var{Argument}} Spezialtext
@@ -14323,7 +14323,7 @@ zu k@"onnen, die sich an einem Meereshorizont orientiert.
 eine Referenzh@"ohe, die bei 12 Grad unterhalb eines mathematischen Horizonts
 liegt, am Abend durchschreitet; also das Ende der
 nautischen D@"ammerung.
-@item @ 
+@item @
 @item @code{7}
 @cindex Sonnenmittelpunkt, Zeitspanne oberhalb D@"ammerungsh@"ohe nautisch @code{%u7@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Zeitspanne oberhalb D@"ammerungsh@"ohe nautisch @code{%u*7@var{Argument}} Spezialtext
@@ -14332,7 +14332,7 @@ nautischen D@"ammerung.
 der Sonne eine Referenzh@"ohe @"uberschreitet, die bei 12 Grad unterhalb eines
 mathematischen Horizonts liegt; also die Zeitspanne,
 w@"ahrend der sich der Sonnenmittelpunkt stets oberhalb -12 Grad befindet.
-@item @ 
+@item @
 @item @code{7}
 @cindex Sonnenmittelpunkt, Zeitspanne unterhalb D@"ammerungsh@"ohe nautisch @code{%z7@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Zeitspanne unterhalb D@"ammerungsh@"ohe nautisch @code{%z*7@var{Argument}} Spezialtext
@@ -14341,7 +14341,7 @@ w@"ahrend der sich der Sonnenmittelpunkt stets oberhalb -12 Grad befindet.
 der Sonne eine Referenzh@"ohe unterschreitet, die bei 12 Grad unterhalb eines
 mathematischen Horizonts liegt; also die Zeitspanne,
 w@"ahrend der sich der Sonnenmittelpunkt stets unterhalb -12 Grad befindet.
-@item @ 
+@item @
 @item @code{8}
 @cindex Sonnenmittelpunkt, D@"ammerungsbeginn amateur-astronomisch @code{%o8@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, D@"ammerungsbeginn amateur-astronomisch @code{%o*8@var{Argument}} Spezialtext
@@ -14356,7 +14356,7 @@ liegt, am Morgen durchschreitet; also der Beginn der
 Das Restlicht der Sonne, da@ss{} zu Beginn der amateur-astronomischen
 D@"ammerungsphase verbleibt, ist im allgemeinen noch so schwach, da@ss{}
 die meisten astronomischen Beobachtungen vorgenommen werden k@"onnen.
-@item @ 
+@item @
 @item @code{8}
 @cindex Sonnenmittelpunkt, D@"ammerungsende amateur-astronomisch @code{%s8@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, D@"ammerungsende amateur-astronomisch @code{%s*8@var{Argument}} Spezialtext
@@ -14368,7 +14368,7 @@ die meisten astronomischen Beobachtungen vorgenommen werden k@"onnen.
 eine Referenzh@"ohe, die bei 15 Grad unterhalb eines mathematischen Horizonts
 liegt, am Abend durchschreitet; also das Ende der
 amateur-astronomischen D@"ammerung.
-@item @ 
+@item @
 @item @code{8}
 @cindex Sonnenmittelpunkt, Zeitspanne oberhalb D@"ammerungsh@"ohe amateur-astronomisch @code{%u8@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Zeitspanne oberhalb D@"ammerungsh@"ohe amateur-astronomisch @code{%u*8@var{Argument}} Spezialtext
@@ -14377,7 +14377,7 @@ amateur-astronomischen D@"ammerung.
 der Sonne eine Referenzh@"ohe @"uberschreitet, die bei 15 Grad unterhalb eines
 mathematischen Horizonts liegt; also die Zeitspanne,
 w@"ahrend der sich der Sonnenmittelpunkt stets oberhalb -15 Grad befindet.
-@item @ 
+@item @
 @item @code{8}
 @cindex Sonnenmittelpunkt, Zeitspanne unterhalb D@"ammerungsh@"ohe amateur-astronomisch @code{%z8@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Zeitspanne unterhalb D@"ammerungsh@"ohe amateur-astronomisch @code{%z*8@var{Argument}} Spezialtext
@@ -14386,7 +14386,7 @@ w@"ahrend der sich der Sonnenmittelpunkt stets oberhalb -15 Grad befindet.
 der Sonne eine Referenzh@"ohe unterschreitet, die bei 15 Grad unterhalb eines
 mathematischen Horizonts liegt; also die Zeitspanne,
 w@"ahrend der sich der Sonnenmittelpunkt stets unterhalb -15 Grad befindet.
-@item @ 
+@item @
 @item @code{9}
 @cindex Sonnenmittelpunkt, D@"ammerungsbeginn astronomisch @code{%o9@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, D@"ammerungsbeginn astronomisch @code{%o*9@var{Argument}} Spezialtext
@@ -14409,7 +14409,7 @@ und der Uhrzeit des Standard-Sonnenaufgangs liegt.  Dieser Personenkreis
 bezeichnet diese Gebetszeit auch gemeinhin mit @dfn{Fajr}.
 @xref{x-Sonne-Standardaufgang, , Standard-Aufgangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{9}
 @cindex Sonnenmittelpunkt, D@"ammerungsende astronomisch @code{%s9@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, D@"ammerungsende astronomisch @code{%s*9@var{Argument}} Spezialtext
@@ -14427,7 +14427,7 @@ astronomischen D@"ammerung.
 Personen islamischen Glaubens beten normalerweise zum letzten Mal
 am Tag zu, oder kurz nach, dieser Uhrzeit.  Dieser Personenkreis
 bezeichnet diese Gebetszeit auch gemeinhin mit @dfn{Isha}.
-@item @ 
+@item @
 @item @code{9}
 @cindex Sonnenmittelpunkt, Zeitspanne oberhalb D@"ammerungsh@"ohe astronomisch @code{%u9@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Zeitspanne oberhalb D@"ammerungsh@"ohe astronomisch @code{%u*9@var{Argument}} Spezialtext
@@ -14436,7 +14436,7 @@ bezeichnet diese Gebetszeit auch gemeinhin mit @dfn{Isha}.
 der Sonne eine Referenzh@"ohe @"uberschreitet, die bei 18 Grad unterhalb eines
 mathematischen Horizonts liegt; also die Zeitspanne,
 @"ahrend der sich der Sonnenmittelpunkt stets oberhalb -18 Grad befindet.
-@item @ 
+@item @
 @item @code{9}
 @cindex Sonnenmittelpunkt, Zeitspanne unterhalb D@"ammerungsh@"ohe astronomisch @code{%z9@var{Argument}} Spezialtext
 @cindex Sonnenmittelpunkt, Zeitspanne unterhalb D@"ammerungsh@"ohe astronomisch @code{%z*9@var{Argument}} Spezialtext
@@ -14445,7 +14445,7 @@ mathematischen Horizonts liegt; also die Zeitspanne,
 der Sonne eine Referenzh@"ohe unterschreitet, die bei 18 Grad unterhalb eines
 mathematischen Horizonts liegt; also die Zeitspanne,
 w@"ahrend der sich der Sonnenmittelpunkt stets unterhalb -18 Grad befindet.
-@item @ 
+@item @
 @item @code{a}
 @cindex Sonne, H@"ohe topozentrisch @code{%oa@var{Argument}} Spezialtext
 @cindex Sonne, H@"ohe topozentrisch @code{%sa@var{Argument}} Spezialtext
@@ -14476,7 +14476,7 @@ Da sich die Erdkugel zu den Polkappen hin abflacht und somit nicht als
 ideale Kugelgestalt aufgefa@ss{}t werden kann, hat der individuelle Erdradius,
 der sich zwischen Beobachtungsstandort und Erdmittelpunkt ergibt, auch noch
 Einflu@ss{} auf die Berechnung von topozentrisch-basierten Daten.
-@item @ 
+@item @
 @item @code{b}
 @cindex Sonne, Azimut topozentrisch @code{%ob@var{Argument}} Spezialtext
 @cindex Sonne, Azimut topozentrisch @code{%sb@var{Argument}} Spezialtext
@@ -14486,7 +14486,7 @@ Einflu@ss{} auf die Berechnung von topozentrisch-basierten Daten.
 @tab Das ungef@"ahre, scheinbare, topozentrische Azimut
 der Sonne in Grad und Altminuten berechnen,
 das sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{c}
 @cindex Sonne, Deklination topozentrisch @code{%oc@var{Argument}} Spezialtext
 @cindex Sonne, Deklination topozentrisch @code{%sc@var{Argument}} Spezialtext
@@ -14503,7 +14503,7 @@ Ergebnisse mit negativem Vorzeichen besagen, da@ss{} sich der momentane
 Sonnenmittelpunkt unterhalb des Himmels@"aquators befindet, und Ergebnisse
 mit positivem Vorzeichen besagen, da@ss{} sich der momentane Sonnenmittelpunkt
 oberhalb des Himmels@"aquators befindet.
-@item @ 
+@item @
 @item @code{d}
 @cindex Sonne, ekliptischer L@"angengrad topozentrisch @code{%od@var{Argument}} Spezialtext
 @cindex Sonne, ekliptischer L@"angengrad topozentrisch @code{%sd@var{Argument}} Spezialtext
@@ -14521,7 +14521,7 @@ Sonnenmittelpunkt und Fr@"uhlingspunkt auf der @dfn{Ekliptik} (der
 Tierkreislinie oder Sonnenbahn),
 in Grad und Altminuten berechnen,
 der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{e}
 @cindex Sonne, Rektazension topozentrisch @code{%oe@var{Argument}} Spezialtext
 @cindex Sonne, Rektazension topozentrisch @code{%se@var{Argument}} Spezialtext
@@ -14535,7 +14535,7 @@ der Sonne, also den horizontalen Winkelabstand zwischen Sonnenmittelpunkt
 und dem durch den Fr@"uhlingspunkt auf der Ekliptik verlaufenden Stundenkreis,
 als Zeitwert in Stunden und Minuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{f}
 @cindex Sonne, Entfernung topozentrisch @code{%of@var{Argument}} Spezialtext
 @cindex Sonne, Entfernung topozentrisch @code{%sf@var{Argument}} Spezialtext
@@ -14550,7 +14550,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 Eine Astronomische Einheit, abgek@"urzt @acronym{AE}, entspricht der
 mittleren Entfernung der Sonne von der Erde, die etwa @w{149.597.870,691}
 Kilometer betr@"agt.
-@item @ 
+@item @
 @item @code{g}
 @cindex Sonne, Horizontalparallaxe topozentrisch @code{%og@var{Argument}} Spezialtext
 @cindex Sonne, Horizontalparallaxe topozentrisch @code{%sg@var{Argument}} Spezialtext
@@ -14563,7 +14563,7 @@ der Sonne in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 Die Horizontalparallaxe der Sonne gibt den Durchmesser der Erde an,
 so wie er von der Sonnenoberfl@"ache aus zu sehen ist.
-@item @ 
+@item @
 @item @code{h}
 @cindex Sonne, Radius topozentrisch @code{%oh@var{Argument}} Spezialtext
 @cindex Sonne, Radius topozentrisch @code{%sh@var{Argument}} Spezialtext
@@ -14573,7 +14573,7 @@ so wie er von der Sonnenoberfl@"ache aus zu sehen ist.
 @tab Den ungef@"ahren, scheinbaren, topozentrischen Sonnenradius
 in Grad und Altminuten berechnen,
 der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{i}
 @cindex Sonne, Refraktion @code{%oi@var{Argument}} Spezialtext
 @cindex Sonne, Refraktion @code{%si@var{Argument}} Spezialtext
@@ -14583,7 +14583,7 @@ der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Die ungef@"ahre Refraktion der Erdatmosph@"are
 in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{j}
 @cindex Sonne, H@"ohe geozentrisch @code{%oj@var{Argument}} Spezialtext
 @cindex Sonne, H@"ohe geozentrisch @code{%sj@var{Argument}} Spezialtext
@@ -14597,7 +14597,7 @@ Ergebnisse mit negativem Vorzeichen besagen, da@ss{} sich der momentane
 Sonnenmittelpunkt unterhalb des Horizonts befindet, und Ergebnisse mit
 positivem Vorzeichen besagen, da@ss{} sich der momentane Sonnenmittelpunkt
 oberhalb des Horizonts befindet.
-@item @ 
+@item @
 @item @code{k}
 @cindex Sonne, Azimut geozentrisch @code{%ok@var{Argument}} Spezialtext
 @cindex Sonne, Azimut geozentrisch @code{%sk@var{Argument}} Spezialtext
@@ -14607,7 +14607,7 @@ oberhalb des Horizonts befindet.
 @tab Das ungef@"ahre, scheinbare, geozentrische Azimut
 der Sonne in Grad und Altminuten berechnen,
 das sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{l}
 @cindex Sonne, Deklination geozentrisch @code{%ol@var{Argument}} Spezialtext
 @cindex Sonne, Deklination geozentrisch @code{%sl@var{Argument}} Spezialtext
@@ -14621,7 +14621,7 @@ Ergebnisse mit negativem Vorzeichen besagen, da@ss{} sich der momentane
 Sonnenmittelpunkt unterhalb des Himmels@"aquators befindet, und Ergebnisse mit
 positivem Vorzeichen besagen, da@ss{} sich der momentane Sonnenmittelpunkt
 oberhalb des Himmels@"aquators befindet.
-@item @ 
+@item @
 @item @code{m}
 @cindex Sonne, ekliptischer L@"angengrad geozentrisch @code{%om@var{Argument}} Spezialtext
 @cindex Sonne, ekliptischer L@"angengrad geozentrisch @code{%sm@var{Argument}} Spezialtext
@@ -14631,7 +14631,7 @@ oberhalb des Himmels@"aquators befindet.
 @tab Den ungef@"ahren, scheinbaren, geozentrischen, ekliptischen L@"angengrad
 der Sonne in Grad und Altminuten berechnen,
 der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{n}
 @cindex Sonne, Rektazension geozentrisch @code{%on@var{Argument}} Spezialtext
 @cindex Sonne, Rektazension geozentrisch @code{%sn@var{Argument}} Spezialtext
@@ -14641,7 +14641,7 @@ der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Die ungef@"ahre, scheinbare, geozentrische Rektazension
 der Sonne als Zeitwert in Stunden und Minuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{o}
 @cindex Sonne, Entfernung geozentrisch @code{%oo@var{Argument}} Spezialtext
 @cindex Sonne, Entfernung geozentrisch @code{%so@var{Argument}} Spezialtext
@@ -14651,7 +14651,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Die ungef@"ahre, geozentrische Entfernung
 der Sonne von der Erde in Astronomischen Einheiten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{p}
 @cindex Sonne, Horizontalparallaxe geozentrisch @code{%op@var{Argument}} Spezialtext
 @cindex Sonne, Horizontalparallaxe geozentrisch @code{%sp@var{Argument}} Spezialtext
@@ -14661,7 +14661,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Die ungef@"ahre, scheinbare, geozentrische Horizontalparallaxe
 der Sonne in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{q}
 @cindex Sonne, Radius geozentrisch @code{%oq@var{Argument}} Spezialtext
 @cindex Sonne, Radius geozentrisch @code{%sq@var{Argument}} Spezialtext
@@ -14671,7 +14671,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Den ungef@"ahren, scheinbaren, geozentrischen Sonnenradius
 in Grad und Altminuten berechnen,
 der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{r}
 @cindex Sonne, delta-d @code{%or@var{Argument}} Spezialtext
 @cindex Sonne, delta-d @code{%sr@var{Argument}} Spezialtext
@@ -14688,7 +14688,7 @@ Als delta-t wird die Differenz zwischen der Terrestrischen Dynamischen Zeit
 fr@"uher auch unter dem Begriff @emph{Ephemeridenzeit} (@acronym{ET}) bekannt
 war) und der Weltzeit (@acronym{UT}) bezeichnet.
 Also, @w{@samp{delta-t @equiv{} TDT - UT}}@.
-@item @ 
+@item @
 @item @code{s}
 @cindex Sonne, lokale Siderische Uhrzeit @code{%os@var{Argument}} Spezialtext
 @cindex Sonne, lokale Siderische Uhrzeit @code{%ss@var{Argument}} Spezialtext
@@ -14710,7 +14710,7 @@ Zeitspanne, die zwischen der letzten oberen Kulmination des Fr@"uhlingspunktes
 im Merdian des Beobachtungsstandortes verflossen ist (der momentane
 Stundenwinkel des Fr@"uhlingspunktes), also die momentane Rektazension
 der Gestirne im Beobachtungsmeridian.
-@item @ 
+@item @
 @item @code{t}
 @cindex Sonne, Basiszeit @code{%ot@var{Argument}} Spezialtext
 @cindex Sonne, Basiszeit @code{%st@var{Argument}} Spezialtext
@@ -14729,7 +14729,7 @@ astronomischen Sonnendaten und Zeiten stets f@"ur 0 Uhr Weltzeit @w{(UTC/GMT)}
 berechnet.
 @ref{x-time-offset, , Kalender Option @option{--time-offset=@var{Argument}}},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{u}
 @cindex Sonne, Julianisches Datum @code{%ou@var{Argument}} Spezialtext
 @cindex Sonne, Julianisches Datum @code{%su@var{Argument}} Spezialtext
@@ -14740,7 +14740,7 @@ f@"ur weitere Details.
 das sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @xref{Julianische Tageszahl},
 f@"ur weitere Informationen zum Julianischen Datum.
-@item @ 
+@item @
 @item @code{v}
 @cindex Sonne, Julianisches Ephemeridendatum @code{%ov@var{Argument}} Spezialtext
 @cindex Sonne, Julianisches Ephemeridendatum @code{%sv@var{Argument}} Spezialtext
@@ -14753,7 +14753,7 @@ f@"ur weitere Informationen zum Julianischen Datum.
 also ein um @emph{delta-t} korrigiertes Julianisches Datum,
 in Tagen berechnen,
 das sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{w}
 @cindex Sonne, Zeitgleichung @code{%ow@var{Argument}} Spezialtext
 @cindex Sonne, Zeitgleichung @code{%sw@var{Argument}} Spezialtext
@@ -14791,7 +14791,7 @@ laufen und bezieht die mittlere Sonnenzeit auf diese.
 Also, diese Zeitdifferenz ist eine Auswirkung des elliptischen und geneigten
 Erdorbits um die Sonne, das die scheinbar ungleichf@"ormige Sonnenbewegung
 verursacht.
-@item @ 
+@item @
 @item @code{x}
 @cindex Sonne/Mond, delta H@"ohe topozentrisch @code{%ox@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta H@"ohe topozentrisch @code{%sx@var{Argument}} Spezialtext
@@ -14810,7 +14810,7 @@ Ergebnisse mit positivem Vorzeichen besagen, da@ss{} sich der momentane
 Sonnenmittelpunkt auf einer H@"ohe befindet, die oberhalb der momentanen
 H@"ohe des Mondmittelpunktes liegt;
 also die Sonne steht h@"oher als der Mond.
-@item @ 
+@item @
 @item @code{y}
 @cindex Sonne/Mond, delta Azimut topozentrisch @code{%oy@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta Azimut topozentrisch @code{%sy@var{Argument}} Spezialtext
@@ -14833,7 +14833,7 @@ Und ein Ergebnis mit positivem Vorzeichen bedeutet, da@ss{} der Mond
 links (gegen den Uhrzeigersinn) der Sonne steht, wenn man zur Sonne schaut ---
 oder alternativ gesagt, da@ss{} die Sonne rechts (im Uhrzeigersinn)
 des Mondes steht.
-@item @ 
+@item @
 @item @code{z}
 @cindex Sonne/Mond, delta H@"ohe geozentrisch @code{%oz@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta H@"ohe geozentrisch @code{%sz@var{Argument}} Spezialtext
@@ -14844,7 +14844,7 @@ des Mondes steht.
 von Sonne und Mond, wobei die Sonne den Bezugspunkt darstellt,
 in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{A}
 @cindex Sonne/Mond, delta Azimut geozentrisch @code{%oA@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta Azimut geozentrisch @code{%sA@var{Argument}} Spezialtext
@@ -14855,7 +14855,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 von Sonne und Mond, wobei die Sonne den Bezugspunkt darstellt,
 in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{B}
 @cindex Sonne/Mond, delta H@"ohe Sonnenaufgang topozentrisch @code{%oB@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta H@"ohe Sonnenaufgang topozentrisch @code{%o*B@var{Argument}} Spezialtext
@@ -14866,7 +14866,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Sonnenaufgangs ergibt.
 @xref{x-Sonne-Standardaufgang, , Standard-Aufgangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{B}
 @cindex Sonne/Mond, delta H@"ohe Sonnenuntergang topozentrisch @code{%sB@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta H@"ohe Sonnenuntergang topozentrisch @code{%s*B@var{Argument}} Spezialtext
@@ -14877,7 +14877,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Sonnenuntergangs ergibt.
 @xref{x-Sonne-Standarduntergang, , Standard-Untergangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{C}
 @cindex Sonne/Mond, delta Azimut Sonnenaufgang topozentrisch @code{%oC@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta Azimut Sonnenaufgang topozentrisch @code{%o*C@var{Argument}} Spezialtext
@@ -14888,7 +14888,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Sonnenaufgangs ergibt.
 @xref{x-Sonne-Standardaufgang, , Standard-Aufgangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{C}
 @cindex Sonne/Mond, delta Azimut Sonnenuntergang topozentrisch @code{%sC@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta Azimut Sonnenuntergang topozentrisch @code{%s*C@var{Argument}} Spezialtext
@@ -14899,7 +14899,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Sonnenuntergangs ergibt.
 @xref{x-Sonne-Standarduntergang, , Standard-Untergangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{D}
 @cindex Sonne/Mond, delta H@"ohe Sonnenaufgang geozentrisch @code{%oD@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta H@"ohe Sonnenaufgang geozentrisch @code{%o*D@var{Argument}} Spezialtext
@@ -14910,7 +14910,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Sonnenaufgangs ergibt.
 @xref{x-Sonne-Standardaufgang, , Standard-Aufgangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{D}
 @cindex Sonne/Mond, delta H@"ohe Sonnenuntergang geozentrisch @code{%sD@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta H@"ohe Sonnenuntergang geozentrisch @code{%s*D@var{Argument}} Spezialtext
@@ -14921,7 +14921,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Sonnenuntergangs ergibt.
 @xref{x-Sonne-Standarduntergang, , Standard-Untergangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{E}
 @cindex Sonne/Mond, delta Azimut Sonnenaufgang geozentrisch @code{%oE@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta Azimut Sonnenaufgang geozentrisch @code{%o*E@var{Argument}} Spezialtext
@@ -14932,7 +14932,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Sonnenaufgangs ergibt.
 @xref{x-Sonne-Standardaufgang, , Standard-Aufgangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{E}
 @cindex Sonne/Mond, delta Azimut Sonnenuntergang geozentrisch @code{%sE@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta Azimut Sonnenuntergang geozentrisch @code{%s*E@var{Argument}} Spezialtext
@@ -14943,7 +14943,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Sonnenuntergangs ergibt.
 @xref{x-Sonne-Standarduntergang, , Standard-Untergangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{F}
 @cindex Sonne/Mond, delta Mitternachtzeitpunkt @code{%oF@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta Mitternachtzeitpunkt @code{%sF@var{Argument}} Spezialtext
@@ -14966,7 +14966,7 @@ also die solare Mitternacht findet nach der lunaren Mitternacht statt.
 und
 @ref{x-Mond-Mitternacht, , Astronomischer Mitternachtzeitpunkt des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{G}
 @cindex Sonne/Mond, delta Mittagzeitpunkt @code{%oG@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta Mittagzeitpunkt @code{%sG@var{Argument}} Spezialtext
@@ -14989,7 +14989,7 @@ also der solare Mittag findet nach dem lunaren Mittag statt.
 und
 @ref{x-Mond-Mittag, , Astronomischer Mittagzeitpunkt des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{H}
 @cindex Sonne/Mond, delta Aufgangszeit Standard @code{%oH@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta Aufgangszeit Standard @code{%o*H@var{Argument}} Spezialtext
@@ -15008,7 +15008,7 @@ also der Sonnenaufgang findet nach dem Mondaufgang statt.
 und
 @ref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{H}
 @cindex Sonne/Mond, delta Untergangszeit Standard @code{%sH@var{Argument}} Spezialtext
 @cindex Sonne/Mond, delta Untergangszeit Standard @code{%s*H@var{Argument}} Spezialtext
@@ -15027,7 +15027,7 @@ also der Sonnenuntergang findet nach dem Monduntergang statt.
 und
 @ref{x-Mond-Standarduntergang, , Standard-Untergangszeit des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{I}
 @cindex Sonne, H@"ohe Mitternachtzeitpunkt topozentrisch @code{%oI@var{Argument}} Spezialtext
 @cindex Sonne, H@"ohe Mitternachtzeitpunkt topozentrisch @code{%sI@var{Argument}} Spezialtext
@@ -15042,7 +15042,7 @@ die sich zum astronomischen Mitternachtzeitpunkt der Sonne ergibt
 (topozentrische @dfn{Mitternachtsh@"ohe})@.
 @xref{x-Sonne-Mitternacht, , Astronomischer Mitternachtzeitpunkt der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{J}
 @cindex Sonne, H@"ohe Mittagzeitpunkt topozentrisch @code{%oJ@var{Argument}} Spezialtext
 @cindex Sonne, H@"ohe Mittagzeitpunkt topozentrisch @code{%sJ@var{Argument}} Spezialtext
@@ -15057,7 +15057,7 @@ die sich zum astronomischen Mittagzeitpunkt der Sonne ergibt
 (topozentrische @dfn{Mittagsh@"ohe})@.
 @xref{x-Sonne-Mittag, , Astronomischer Mittagzeitpunkt der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{K}
 @cindex Sonne, H@"ohe Aufgangszeit Standard topozentrisch @code{%oK@var{Argument}} Spezialtext
 @cindex Sonne, H@"ohe Aufgangszeit Standard topozentrisch @code{%o*K@var{Argument}} Spezialtext
@@ -15070,7 +15070,7 @@ die sich zur Uhrzeit des Standard-Sonnenaufgangs ergibt
 (topozentrische @dfn{Aufgangsh@"ohe})@.
 @xref{x-Sonne-Standardaufgang, , Standard-Aufgangszeit der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{K}
 @cindex Sonne, H@"ohe Untergangszeit Standard topozentrisch @code{%sK@var{Argument}} Spezialtext
 @cindex Sonne, H@"ohe Untergangszeit Standard topozentrisch @code{%s*K@var{Argument}} Spezialtext
@@ -15083,7 +15083,7 @@ die sich zur Uhrzeit des Standard-Sonnenuntergangs ergibt
 (topozentrische @dfn{Untergangsh@"ohe})@.
 @xref{x-Sonne-Standarduntergang, , Standard-Untergangszeit der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{L}
 @cindex Sonne, Azimut Aufgangszeit Standard topozentrisch @code{%oL@var{Argument}} Spezialtext
 @cindex Sonne, Azimut Aufgangszeit Standard topozentrisch @code{%o*L@var{Argument}} Spezialtext
@@ -15100,7 +15100,7 @@ Der horizontale Winkelabstand zwischen dem topozentrischen Aufgangsazimut und
 der Ostrichtung wird auch topozentrische @dfn{Morgenweite} der Sonne genannt.
 @xref{x-Sonne-Standardaufgang, , Standard-Aufgangszeit der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{L}
 @cindex Sonne, Azimut Untergangszeit Standard topozentrisch @code{%sL@var{Argument}} Spezialtext
 @cindex Sonne, Azimut Untergangszeit Standard topozentrisch @code{%s*L@var{Argument}} Spezialtext
@@ -15117,7 +15117,7 @@ Der horizontale Winkelabstand zwischen dem topozentrischen Untergangsazimut und
 der Westrichtung wird auch topozentrische @dfn{Abendweite} der Sonne genannt.
 @xref{x-Sonne-Standarduntergang, , Standard-Untergangszeit der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{M}
 @cindex Sonne, H@"ohe Mitternachtzeitpunkt geozentrisch @code{%oM@var{Argument}} Spezialtext
 @cindex Sonne, H@"ohe Mitternachtzeitpunkt geozentrisch @code{%sM@var{Argument}} Spezialtext
@@ -15132,7 +15132,7 @@ die sich zum astronomischen Mitternachtzeitpunkt der Sonne ergibt
 (geozentrische @dfn{Mitternachtsh@"ohe})@.
 @xref{x-Sonne-Mitternacht, , Astronomischer Mitternachtzeitpunkt der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{N}
 @cindex Sonne, H@"ohe Mittagzeitpunkt geozentrisch @code{%oN@var{Argument}} Spezialtext
 @cindex Sonne, H@"ohe Mittagzeitpunkt geozentrisch @code{%sN@var{Argument}} Spezialtext
@@ -15147,7 +15147,7 @@ die sich zum astronomischen Mittagzeitpunkt der Sonne ergibt
 (geozentrische @dfn{Mittagsh@"ohe})@.
 @xref{x-Sonne-Mittag, , Astronomischer Mittagzeitpunkt der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{O}
 @cindex Sonne, H@"ohe Aufgangszeit Standard geozentrisch @code{%oO@var{Argument}} Spezialtext
 @cindex Sonne, H@"ohe Aufgangszeit Standard geozentrisch @code{%o*O@var{Argument}} Spezialtext
@@ -15160,7 +15160,7 @@ die sich zur Uhrzeit des Standard-Sonnenaufgangs ergibt
 (geozentrische @dfn{Aufgangsh@"ohe})@.
 @xref{x-Sonne-Standardaufgang, , Standard-Aufgangszeit der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{O}
 @cindex Sonne, H@"ohe Untergangszeit Standard geozentrisch @code{%sO@var{Argument}} Spezialtext
 @cindex Sonne, H@"ohe Untergangszeit Standard geozentrisch @code{%s*O@var{Argument}} Spezialtext
@@ -15173,7 +15173,7 @@ die sich zur Uhrzeit des Standard-Sonnenuntergangs ergibt
 (geozentrische @dfn{Untergangsh@"ohe})@.
 @xref{x-Sonne-Standarduntergang, , Standard-Untergangszeit der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{P}
 @cindex Sonne, Azimut Aufgangszeit Standard geozentrisch @code{%oP@var{Argument}} Spezialtext
 @cindex Sonne, Azimut Aufgangszeit Standard geozentrisch @code{%o*P@var{Argument}} Spezialtext
@@ -15190,7 +15190,7 @@ Der horizontale Winkelabstand zwischen dem geozentrischen Aufgangsazimut und
 der Ostrichtung wird auch geozentrische @dfn{Morgenweite} der Sonne genannt.
 @xref{x-Sonne-Standardaufgang, , Standard-Aufgangszeit der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{P}
 @cindex Sonne, Azimut Untergangszeit Standard geozentrisch @code{%sP@var{Argument}} Spezialtext
 @cindex Sonne, Azimut Untergangszeit Standard geozentrisch @code{%s*P@var{Argument}} Spezialtext
@@ -15207,7 +15207,7 @@ Der horizontale Winkelabstand zwischen dem geozentrischen Untergangsazimut und
 der Westrichtung wird auch geozentrische @dfn{Abendweite} der Sonne genannt.
 @xref{x-Sonne-Standarduntergang, , Standard-Untergangszeit der Sonne},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Sonne, einfache Schattenl@"ange am Vormittag @code{%oQ@var{Argument}} Spezialtext
 @cindex Sonne, einfache Schattenl@"ange am Vormittag @code{%o*Q@var{Argument}} Spezialtext
@@ -15222,7 +15222,7 @@ astronomischen Mittagzeitpunkt wirft, von der der Schattenl@"ange subtrahiert,
 bevor dieser mit der L@"ange des Stabes verglichen wird.
 @xref{x-adjust-value, , Termin Option @option{--adjust-value=@var{Argument}}},
 wie der Schattenl@"angenfaktor ver@"andert werden kann.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Sonne, einfache Schattenl@"ange am Nachmittag @code{%sQ@var{Argument}} Spezialtext
 @cindex Sonne, einfache Schattenl@"ange am Nachmittag @code{%s*Q@var{Argument}} Spezialtext
@@ -15246,7 +15246,7 @@ Dieser Personenkreis bezeichnet diese Gebetszeit auch gemeinhin mit @dfn{Asr}.
 f@"ur mehr Informationen.  Und siehe
 @ref{x-adjust-value, , Termin Option @option{--adjust-value=@var{Argument}}},
 wie der Schattenl@"angenfaktor ver@"andert werden kann.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Sonne, einfache oder k@"urzere Schattenl@"ange Zeitdauer @code{%uQ@var{Argument}} Spezialtext
 @cindex Sonne, einfache oder k@"urzere Schattenl@"ange Zeitdauer @code{%u*Q@var{Argument}} Spezialtext
@@ -15256,7 +15256,7 @@ wie der Schattenl@"angenfaktor ver@"andert werden kann.
 @tab Die ungef@"ahre Zeitdauer berechnen, w@"ahrend der der Sonnenmittelpunkt
 diejenige Referenzh@"ohe @"uberschreitet, bei der ein senkrechter Stab einen
 Schatten wirft, der genauso lang oder k@"urzer ist als der Stab selbst.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Sonne, l@"anger als einfache Schattenl@"ange Zeitdauer @code{%zQ@var{Argument}} Spezialtext
 @cindex Sonne, l@"anger als einfache Schattenl@"ange Zeitdauer @code{%z*Q@var{Argument}} Spezialtext
@@ -15267,7 +15267,7 @@ Schatten wirft, der genauso lang oder k@"urzer ist als der Stab selbst.
 diejenige Referenzh@"ohe unterschreitet, bei der ein senkrechter Stab
 entweder keinen Schatten mehr wirft, oder einen Schatten wirft, der l@"anger
 ist als der Stab selbst.
-@item @ 
+@item @
 @item @code{R}
 @cindex Sonne, zweifache Schattenl@"ange am Vormittag @code{%oR@var{Argument}} Spezialtext
 @cindex Sonne, zweifache Schattenl@"ange am Vormittag @code{%o*R@var{Argument}} Spezialtext
@@ -15282,7 +15282,7 @@ astronomischen Mittagzeitpunkt wirft, von der der Schattenl@"ange subtrahiert,
 bevor diese mit der L@"ange des Stabes verglichen wird.
 @xref{x-adjust-value, , Termin Option @option{--adjust-value=@var{Argument}}},
 wie der Schattenl@"angenfaktor ver@"andert werden kann.
-@item @ 
+@item @
 @item @code{R}
 @cindex Sonne, zweifache Schattenl@"ange am Nachmittag @code{%sR@var{Argument}} Spezialtext
 @cindex Sonne, zweifache Schattenl@"ange am Nachmittag @code{%s*R@var{Argument}} Spezialtext
@@ -15306,7 +15306,7 @@ Dieser Personenkreis bezeichnet diese Gebetszeit auch gemeinhin mit @dfn{Asr}.
 f@"ur mehr Informationen.  Und siehe
 @ref{x-adjust-value, , Termin Option @option{--adjust-value=@var{Argument}}},
 wie der Schattenl@"angenfaktor ver@"andert werden kann.
-@item @ 
+@item @
 @item @code{R}
 @cindex Sonne, zweifache oder k@"urzere Schattenl@"ange Zeitdauer @code{%uR@var{Argument}} Spezialtext
 @cindex Sonne, zweifache oder k@"urzere Schattenl@"ange Zeitdauer @code{%u*R@var{Argument}} Spezialtext
@@ -15316,7 +15316,7 @@ wie der Schattenl@"angenfaktor ver@"andert werden kann.
 @tab Die ungef@"ahre Zeitdauer berechnen, w@"ahrend der der Sonnenmittelpunkt
 diejenige Referenzh@"ohe @"uberschreitet, bei der ein senkrechter Stab einen
 Schatten wirft, der zweimal so lang oder k@"urzer ist als der Stab selbst.
-@item @ 
+@item @
 @item @code{R}
 @cindex Sonne, l@"anger als zweifache Schattenl@"ange Zeitdauer @code{%zR@var{Argument}} Spezialtext
 @cindex Sonne, l@"anger als zweifache Schattenl@"ange Zeitdauer @code{%z*R@var{Argument}} Spezialtext
@@ -15651,7 +15651,7 @@ beeinflu@ss{}t:
 @tab @strong{Dynamisch}
 @tab @strong{Ortskoordinate}
 @tab @strong{Zeitzone}
-@item @ 
+@item @
 @item @code{0}
 @tab 3
 @tab Nein
@@ -16157,7 +16157,7 @@ ausl@"osen, wie er in der Tabelle beschrieben ist:
 @item @strong{Modus}
 @tab @strong{Spezialtext}
 @tab @strong{Beschreibung}
-@item @ 
+@item @
 @item @code{0}
 @cindex Mond, Mitternachtzeitpunkt @code{%(0@var{Argument}} Spezialtext
 @cindex Mond, Mitternachtzeitpunkt @code{%)0@var{Argument}} Spezialtext
@@ -16193,7 +16193,7 @@ aufeinanderfolgenden @dfn{Konjunktionen} (oder Neumondphasen)---, keine
 lunare Mitternacht statt, da der Mond eine durchschnittliche Umlaufdauer
 um die Erde von 24 Stunden 50 Minuten hat --- was zudem bedeutet, da@ss{}
 der Mond jeden Tag um durchschnittlich etwa 50 Minuten sp@"ater aufgeht.
-@item @ 
+@item @
 @item @code{1}
 @cindex Mond, Mittagzeitpunkt @code{%(1@var{Argument}} Spezialtext
 @cindex Mond, Mittagzeitpunkt @code{%)1@var{Argument}} Spezialtext
@@ -16215,7 +16215,7 @@ unterhalb der Horizontalebene, der vom Mittelpunkt des Mondes an diesem
 Tag durchlaufen wird.
 Allerdings findet an genau einem Tag eines synodischen Monats kein
 lunarer Mittag statt.
-@item @ 
+@item @
 @item @code{2}
 @cindex Mondmittelpunkt, Aufgangszeit geometrisch @code{%(2@var{Argument}} Spezialtext
 @cindex Mondmittelpunkt, Aufgangszeit geometrisch @code{%(*2@var{Argument}} Spezialtext
@@ -16239,7 +16239,7 @@ Die hier genannte Referenzh@"ohe errechnet sich aus dem zu dieser Uhrzeit
 g@"ultigen Wert der Mondparallaxe.
 Allerdings findet an genau einem Tag eines synodischen Monats kein solcher
 Mondaufgang statt.
-@item @ 
+@item @
 @item @code{2}
 @cindex Mondmittelpunkt, Untergangszeit geometrisch @code{%)2@var{Argument}} Spezialtext
 @cindex Mondmittelpunkt, Untergangszeit geometrisch @code{%)*2@var{Argument}} Spezialtext
@@ -16252,7 +16252,7 @@ Die hier genannte Referenzh@"ohe errechnet sich aus dem zu dieser Uhrzeit
 g@"ultigen Wert der Mondparallaxe.
 Allerdings findet an genau einem Tag eines synodischen Monats kein solcher
 Monduntergang statt.
-@item @ 
+@item @
 @item @code{2}
 @cindex Mondmittelpunkt, Sichtbarkeit geometrisch @code{%[2@var{Argument}} Spezialtext
 @cindex Mondmittelpunkt, Sichtbarkeit geometrisch @code{%[*2@var{Argument}} Spezialtext
@@ -16261,7 +16261,7 @@ Monduntergang statt.
 Mondes eine Referenzh@"ohe @"uberschreitet, die etwa zwischen 54 und 61
 Altminuten oberhalb eines mathematischen Horizonts liegt;
 also sichtbar ist.
-@item @ 
+@item @
 @item @code{2}
 @cindex Mondmittelpunkt, Nichtsichtbarkeit geometrisch @code{%]2@var{Argument}} Spezialtext
 @cindex Mondmittelpunkt, Nichtsichtbarkeit geometrisch @code{%]*2@var{Argument}} Spezialtext
@@ -16270,7 +16270,7 @@ also sichtbar ist.
 Mondes eine Referenzh@"ohe unterschreitet, die etwa zwischen 54 und 61
 Altminuten oberhalb eines mathematischen Horizonts liegt;
 also nicht sichtbar ist.
-@item @ 
+@item @
 @item @code{3}
 @cindex Mondoberrand, Aufgangszeit geometrisch @code{%(3@var{Argument}} Spezialtext
 @cindex Mondoberrand, Aufgangszeit geometrisch @code{%(*3@var{Argument}} Spezialtext
@@ -16286,7 +16286,7 @@ den Mondmittelpunkt umgerechnet wird, so liegt diese etwa zwischen
 39 und 44 Altminuten oberhalb des geozentrischen Horizonts.
 Allerdings findet an genau einem Tag eines synodischen Monats kein solcher
 Mondaufgang statt.
-@item @ 
+@item @
 @item @code{3}
 @cindex Mondoberrand, Untergangszeit geometrisch @code{%)3@var{Argument}} Spezialtext
 @cindex Mondoberrand, Untergangszeit geometrisch @code{%)*3@var{Argument}} Spezialtext
@@ -16299,7 +16299,7 @@ Die hier genannte Referenzh@"ohe errechnet sich aus den zu dieser Uhrzeit
 jeweilig g@"ultigen Werten von Mondradius und Mondparallaxe.
 Allerdings findet an genau einem Tag eines synodischen Monats kein solcher
 Monduntergang statt.
-@item @ 
+@item @
 @item @code{3}
 @cindex Mondoberrand, Sichtbarkeit geometrisch @code{%[3@var{Argument}} Spezialtext
 @cindex Mondoberrand, Sichtbarkeit geometrisch @code{%[*3@var{Argument}} Spezialtext
@@ -16308,7 +16308,7 @@ Monduntergang statt.
 Mondscheibe eine Referenzh@"ohe @"uberschreitet, die etwa zwischen
 54 und 61 Altminuten oberhalb eines mathematischen Horizonts liegt;
 also sichtbar ist.
-@item @ 
+@item @
 @item @code{3}
 @cindex Mondoberrand, Nichtsichtbarkeit geometrisch @code{%]3@var{Argument}} Spezialtext
 @cindex Mondoberrand, Nichtsichtbarkeit geometrisch @code{%]*3@var{Argument}} Spezialtext
@@ -16317,7 +16317,7 @@ also sichtbar ist.
 Mondscheibe eine Referenzh@"ohe unterschreitet, die etwa zwischen
 54 und 61 Altminuten oberhalb eines mathematischen Horizont liegt;
 also nicht sichtbar ist.
-@item @ 
+@item @
 @item @code{4}
 @cindex Mondmittelpunkt, Aufgangszeit @code{%(4@var{Argument}} Spezialtext
 @cindex Mondmittelpunkt, Aufgangszeit @code{%(*4@var{Argument}} Spezialtext
@@ -16338,7 +16338,7 @@ Die hier genannte Referenzh@"ohe errechnet sich aus den zu dieser Uhrzeit
 jeweilig g@"ultigen Werten von Mondparallaxe und (Standard) Refraktion.
 Allerdings findet an genau einem Tag eines synodischen Monats kein solcher
 Mondaufgang statt.
-@item @ 
+@item @
 @item @code{4}
 @cindex Mondmittelpunkt, Untergangszeit @code{%)4@var{Argument}} Spezialtext
 @cindex Mondmittelpunkt, Untergangszeit @code{%)*4@var{Argument}} Spezialtext
@@ -16355,7 +16355,7 @@ Die hier genannte Referenzh@"ohe errechnet sich aus den zu dieser Uhrzeit
 jeweilig g@"ultigen Werten von Mondparallaxe und (Standard) Refraktion.
 Allerdings findet an genau einem Tag eines synodischen Monats kein solcher
 Monduntergang statt.
-@item @ 
+@item @
 @item @code{4}
 @cindex Mondmittelpunkt, Sichtbarkeit @code{%[4@var{Argument}} Spezialtext
 @cindex Mondmittelpunkt, Sichtbarkeit @code{%[*4@var{Argument}} Spezialtext
@@ -16364,7 +16364,7 @@ Monduntergang statt.
 des Mondes eine Referenzh@"ohe @"uberschreitet, die etwa zwischen
 20 und 27 Altminuten oberhalb des geozentrischen Horizont liegt;
 also sichtbar ist.
-@item @ 
+@item @
 @item @code{4}
 @cindex Mondmittelpunkt, Nichtsichtbarkeit @code{%]4@var{Argument}} Spezialtext
 @cindex Mondmittelpunkt, Nichtsichtbarkeit @code{%]*4@var{Argument}} Spezialtext
@@ -16373,7 +16373,7 @@ also sichtbar ist.
 des Mondes eine Referenzh@"ohe unterschreitet, die etwa zwischen
 20 und 27 Altminuten oberhalb des geozentrischen Horizonts liegt;
 also nicht sichtbar ist.
-@item @ 
+@item @
 @item @code{5}
 @cindex Mondoberrand, Aufgangszeit Standard @code{%(5@var{Argument}} Spezialtext
 @cindex Mondoberrand, Aufgangszeit Standard @code{%(*5@var{Argument}} Spezialtext
@@ -16403,7 +16403,7 @@ den Mondmittelpunkt umgerechnet wird, so liegt diese etwa zwischen
 5 und 10 Altminuten oberhalb des geozentrischen Horizonts.
 Allerdings findet an genau einem Tag eines synodischen Monats kein solcher
 Mondaufgang statt.
-@item @ 
+@item @
 @item @code{5}
 @cindex Mondoberrand, Untergangszeit Standard @code{%)5@var{Argument}} Spezialtext
 @cindex Mondoberrand, Untergangszeit Standard @code{%)*5@var{Argument}} Spezialtext
@@ -16426,7 +16426,7 @@ jeweilig g@"ultigen Werten von Mondradius, Mondparallaxe und (Standard)
 Refraktion.
 Allerdings findet an genau einem Tag eines synodischen Monats kein solcher
 Monduntergang statt.
-@item @ 
+@item @
 @item @code{5}
 @cindex Mondoberrand, Sichtbarkeit Standard @code{%[5@var{Argument}} Spezialtext
 @cindex Mondoberrand, Sichtbarkeit Standard @code{%[*5@var{Argument}} Spezialtext
@@ -16439,7 +16439,7 @@ Mondscheibe eine Referenzh@"ohe @"uberschreitet, die etwa zwischen
 also sichtbar ist.
 Diese Art der Zeitdauerberechnung der Sichtbarkeit entspricht der
 Standardberechnungsmethode, wie sie im allgemeinen international benutzt wird.
-@item @ 
+@item @
 @item @code{5}
 @cindex Mondoberrand, Nichtsichtbarkeit Standard @code{%]5@var{Argument}} Spezialtext
 @cindex Mondoberrand, Nichtsichtbarkeit Standard @code{%]*5@var{Argument}} Spezialtext
@@ -16452,7 +16452,7 @@ Mondscheibe eine Referenzh@"ohe unterschreitet, die etwa zwischen
 also nicht sichtbar ist.
 Diese Art der Zeitdauerberechnung der Nichtsichtbarkeit entspricht der
 Standardberechnungsmethode, wie sie im allgemeinen international benutzt wird.
-@item @ 
+@item @
 @item @code{6}
 @cindex Mond, Horizontalparallaxe topozentrisch @code{%(6@var{Argument}} Spezialtext
 @cindex Mond, Horizontalparallaxe topozentrisch @code{%)6@var{Argument}} Spezialtext
@@ -16479,7 +16479,7 @@ Da sich die Erdkugel zu den Polkappen hin abflacht und somit nicht als
 ideale Kugelgestalt aufgefa@ss{}t werden kann, hat der individuelle Erdradius,
 der sich zwischen Beobachtungsstandort und Erdmittelpunkt ergibt, auch noch
 Einflu@ss{} auf die Berechnung von topozentrisch-basierten Daten.
-@item @ 
+@item @
 @item @code{7}
 @cindex Mond, Radius topozentrisch @code{%(7@var{Argument}} Spezialtext
 @cindex Mond, Radius topozentrisch @code{%)7@var{Argument}} Spezialtext
@@ -16489,7 +16489,7 @@ Einflu@ss{} auf die Berechnung von topozentrisch-basierten Daten.
 @tab Den ungef@"ahren, scheinbaren, topozentrischen Mondradius
 in Grad und Altminuten berechnen,
 der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{8}
 @cindex Mond, Helligkeit topozentrisch @code{%(8@var{Argument}} Spezialtext
 @cindex Mond, Helligkeit topozentrisch @code{%)8@var{Argument}} Spezialtext
@@ -16510,7 +16510,7 @@ Eine negative Gr@"o@ss{}e bezeichnet einen sehr hellen Stern, zum Beispiel hat
 die Sonne nahezu @w{-27@acronym{m}}, w@"ahrend der kaum sichtbare Planet Pluto
 eine Helligkeit von etwas @"uber @w{+14@acronym{m}} hat.  Der Vollmond hat eine
 visuelle Helligkeit von circa @w{-12@acronym{m},55}@.
-@item @ 
+@item @
 @item @code{9}
 @cindex Mond, Phasenwinkel topozentrisch @code{%(9@var{Argument}} Spezialtext
 @cindex Mond, Phasenwinkel topozentrisch @code{%)9@var{Argument}} Spezialtext
@@ -16520,7 +16520,7 @@ visuelle Helligkeit von circa @w{-12@acronym{m},55}@.
 @tab Den ungef@"ahren, scheinbaren, topozentrischen Phasenwinkel
 des Mondes im Bereich @w{0.0@dots{}1.0} berechnen,
 der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{a}
 @cindex Mond, H@"ohe topozentrisch @code{%(a@var{Argument}} Spezialtext
 @cindex Mond, H@"ohe topozentrisch @code{%)a@var{Argument}} Spezialtext
@@ -16537,7 +16537,7 @@ Ergebnisse mit negativem Vorzeichen besagen, da@ss{} sich der momentane
 Mondmittelpunkt unterhalb des Horizonts befindet, und Ergebnisse mit
 positivem Vorzeichen besagen, da@ss{} sich der momentane Mondmittelpunkt
 oberhalb des Horizonts befindet.
-@item @ 
+@item @
 @item @code{b}
 @cindex Mond, Azimut topozentrisch @code{%(b@var{Argument}} Spezialtext
 @cindex Mond, Azimut topozentrisch @code{%)b@var{Argument}} Spezialtext
@@ -16547,7 +16547,7 @@ oberhalb des Horizonts befindet.
 @tab Das ungef@"ahre, scheinbare, topozentrische Azimut
 des Mondes in Grad und Altminuten berechnen,
 das sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{c}
 @cindex Mond, Deklination topozentrisch @code{%(c@var{Argument}} Spezialtext
 @cindex Mond, Deklination topozentrisch @code{%)c@var{Argument}} Spezialtext
@@ -16564,7 +16564,7 @@ Ergebnisse mit negativem Vorzeichen besagen, da@ss{} sich der momentane
 Mondmittelpunkt unterhalb des Himmels@"aquators befindet, und Ergebnisse mit
 positivem Vorzeichen besagen, da@ss{} sich der momentane Mondmittelpunkt
 oberhalb des Himmels@"aquators befindet.
-@item @ 
+@item @
 @item @code{d}
 @cindex Mond, ekliptischer L@"angengrad topozentrisch @code{%(d@var{Argument}} Spezialtext
 @cindex Mond, ekliptischer L@"angengrad topozentrisch @code{%)d@var{Argument}} Spezialtext
@@ -16582,7 +16582,7 @@ Mondmittelpunkt und Fr@"uhlingspunkt auf der @dfn{Ekliptik} (der
 Tierkreislinie oder Sonnenbahn),
 in Grad und Altminuten berechnen,
 der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{e}
 @cindex Mond, ekliptischer Breitengrad topozentrisch @code{%(e@var{Argument}} Spezialtext
 @cindex Mond, ekliptischer Breitengrad topozentrisch @code{%)e@var{Argument}} Spezialtext
@@ -16602,7 +16602,7 @@ Ergebnisse mit negativem Vorzeichen besagen, da@ss{} sich der momentane
 Mondmittelpunkt n@"ordlich der Ekliptik befindet, und Ergebnisse mit
 positivem Vorzeichen besagen, da@ss{} sich der momentane Mondmittelpunkt
 s@"udlich der Ekliptik befindet.
-@item @ 
+@item @
 @item @code{f}
 @cindex Mond, Rektazension topozentrisch @code{%(f@var{Argument}} Spezialtext
 @cindex Mond, Rektazension topozentrisch @code{%)f@var{Argument}} Spezialtext
@@ -16616,7 +16616,7 @@ des Mondes, also den horizontalen Winkelabstand zwischen Mondmittelpunkt
 und dem durch den Fr@"uhlingspunkt auf der Ekliptik verlaufenden Stundenkreis,
 als Zeitwert in Stunden und Minuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{g}
 @cindex Mond, Entfernung topozentrisch @code{%(g@var{Argument}} Spezialtext
 @cindex Mond, Entfernung topozentrisch @code{%)g@var{Argument}} Spezialtext
@@ -16630,7 +16630,7 @@ des Mondes von der Erde in mittleren @dfn{Erd@"aquatorradien} berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 Der mittlere Radius der Erde am @"Aquator betr@"agt etwa @w{6.378,137}
 Kilometer.
-@item @ 
+@item @
 @item @code{h}
 @cindex Mond, Elongation topozentrisch @code{%(h@var{Argument}} Spezialtext
 @cindex Mond, Elongation topozentrisch @code{%)h@var{Argument}} Spezialtext
@@ -16642,7 +16642,7 @@ Kilometer.
 also den horizontalen Winkelabstand zwischen Mondmittelpunkt und
 Sonnenmittelpunkt, in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{i}
 @cindex Mond, Refraktion @code{%(i@var{Argument}} Spezialtext
 @cindex Mond, Refraktion @code{%)i@var{Argument}} Spezialtext
@@ -16652,7 +16652,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Die ungef@"ahre Refraktion der Erdatmosph@"are
 in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{j}
 @cindex Mond, Horizontalparallaxe geozentrisch @code{%(j@var{Argument}} Spezialtext
 @cindex Mond, Horizontalparallaxe geozentrisch @code{%)j@var{Argument}} Spezialtext
@@ -16662,7 +16662,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Die ungef@"ahre, scheinbare, geozentrische Horizontalparallaxe
 des Mondes in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{k}
 @cindex Mond, Radius geozentrisch @code{%(k@var{Argument}} Spezialtext
 @cindex Mond, Radius geozentrisch @code{%)k@var{Argument}} Spezialtext
@@ -16672,7 +16672,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Den ungef@"ahren, scheinbaren, geozentrischen Mondradius
 in Grad und Altminuten berechnen,
 der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{l}
 @cindex Mond, Helligkeit geozentrisch @code{%(l@var{Argument}} Spezialtext
 @cindex Mond, Helligkeit geozentrisch @code{%)l@var{Argument}} Spezialtext
@@ -16682,7 +16682,7 @@ der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Die ungef@"ahre, scheinbare, geozentrische Helligkeit
 des Mondes in Gr@"o@ss{}enklassen berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{m}
 @cindex Mond, Phasenwinkel geozentrisch @code{%(m@var{Argument}} Spezialtext
 @cindex Mond, Phasenwinkel geozentrisch @code{%)m@var{Argument}} Spezialtext
@@ -16692,7 +16692,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Den ungef@"ahren, scheinbaren, geozentrischen Phasenwinkel
 des Mondes im Bereich @w{0.0@dots{}1.0} berechnen,
 der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{n}
 @cindex Mond, H@"ohe geozentrisch @code{%(n@var{Argument}} Spezialtext
 @cindex Mond, H@"ohe geozentrisch @code{%)n@var{Argument}} Spezialtext
@@ -16706,7 +16706,7 @@ Ergebnisse mit negativem Vorzeichen besagen, da@ss{} sich der momentane
 Mondmittelpunkt unterhalb des Horizonts befindet, und Ergebnisse mit
 positivem Vorzeichen besagen, da@ss{} sich der momentane Mondmittelpunkt
 oberhalb des Horizonts befindet.
-@item @ 
+@item @
 @item @code{o}
 @cindex Mond, Azimut geozentrisch @code{%(o@var{Argument}} Spezialtext
 @cindex Mond, Azimut geozentrisch @code{%)o@var{Argument}} Spezialtext
@@ -16716,7 +16716,7 @@ oberhalb des Horizonts befindet.
 @tab Das ungef@"ahre, scheinbare, geozentrische Azimut
 des Mondes in Grad und Altminuten berechnen,
 das sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{p}
 @cindex Mond, Deklination geozentrisch @code{%(p@var{Argument}} Spezialtext
 @cindex Mond, Deklination geozentrisch @code{%)p@var{Argument}} Spezialtext
@@ -16730,7 +16730,7 @@ Ergebnisse mit negativem Vorzeichen besagen, da@ss{} sich der momentane
 Mondmittelpunkt unterhalb des Himmels@"aquators befindet, und Ergebnisse mit
 positivem Vorzeichen besagen, da@ss{} sich der momentane Mondmittelpunkt
 oberhalb des Himmels@"aquators befindet.
-@item @ 
+@item @
 @item @code{q}
 @cindex Mond, ekliptischer L@"angengrad geozentrisch @code{%(q@var{Argument}} Spezialtext
 @cindex Mond, ekliptischer L@"angengrad geozentrisch @code{%)q@var{Argument}} Spezialtext
@@ -16740,7 +16740,7 @@ oberhalb des Himmels@"aquators befindet.
 @tab Den ungef@"ahren, scheinbaren, geozentrischen, ekliptischen L@"angengrad
 des Mondes in Grad und Altminuten berechnen,
 der sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{r}
 @cindex Mond, ekliptischer Breitengrad geozentrisch @code{%(r@var{Argument}} Spezialtext
 @cindex Mond, ekliptischer Breitengrad geozentrisch @code{%)r@var{Argument}} Spezialtext
@@ -16754,7 +16754,7 @@ Ergebnisse mit negativem Vorzeichen besagen, da@ss{} sich der momentane
 Mondmittelpunkt n@"ordlich der Ekliptik befindet, und Ergebnisse mit
 positivem Vorzeichen besagen, da@ss{} sich der momentane Mondmittelpunkt
 s@"udlich der Ekliptik befindet.
-@item @ 
+@item @
 @item @code{s}
 @cindex Mond, Rektazension geozentrisch @code{%(s@var{Argument}} Spezialtext
 @cindex Mond, Rektazension geozentrisch @code{%)s@var{Argument}} Spezialtext
@@ -16764,7 +16764,7 @@ s@"udlich der Ekliptik befindet.
 @tab Die ungef@"ahre, scheinbare, geozentrische Rektazension
 des Mondes als Zeitwert in Stunden und Minuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{t}
 @cindex Mond, Entfernung geozentrisch @code{%(t@var{Argument}} Spezialtext
 @cindex Mond, Entfernung geozentrisch @code{%)t@var{Argument}} Spezialtext
@@ -16774,7 +16774,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Die ungef@"ahre, geozentrische Entfernung des Mondes
 von der Erde in mittleren Erd@"aquatorradien berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{u}
 @cindex Mond, Elongation geozentrisch @code{%(u@var{Argument}} Spezialtext
 @cindex Mond, Elongation geozentrisch @code{%)u@var{Argument}} Spezialtext
@@ -16784,7 +16784,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @tab Die ungef@"ahre geozentrische Elongation des Mondes
 in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{v}
 @cindex Mond, delta-t @code{%(v@var{Argument}} Spezialtext
 @cindex Mond, delta-t @code{%)v@var{Argument}} Spezialtext
@@ -16801,7 +16801,7 @@ Als delta-t wird die Differenz zwischen der Terrestrischen Dynamischen Zeit
 fr@"uher auch unter dem Begriff @emph{Ephemeridenzeit} (@acronym{ET}) bekannt
 war) und der Weltzeit (@acronym{UT}) bezeichnet.
 Also, @w{@samp{delta-t @equiv{} TDT - UT}}@.
-@item @ 
+@item @
 @item @code{w}
 @cindex Mond, lokale Siderische Uhrzeit @code{%(w@var{Argument}} Spezialtext
 @cindex Mond, lokale Siderische Uhrzeit @code{%)w@var{Argument}} Spezialtext
@@ -16823,7 +16823,7 @@ Zeitspanne, die zwischen der letzten oberen Kulmination des Fr@"uhlingspunktes
 im Merdian des Beobachtungsstandortes verflossen ist (der momentane
 Stundenwinkel des Fr@"uhlingspunktes), also die momentane Rektazension
 der Gestirne im Beobachtungsmeridian.
-@item @ 
+@item @
 @item @code{x}
 @cindex Mond, Basiszeit @code{%(x@var{Argument}} Spezialtext
 @cindex Mond, Basiszeit @code{%)x@var{Argument}} Spezialtext
@@ -16842,7 +16842,7 @@ astronomischen Monddaten und Zeiten stets f@"ur 0 Uhr Weltzeit @w{(UTC/GMT)}
 berechnet.
 @ref{x-time-offset, , Kalender Option @option{--time-offset=@var{Argument}}},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{y}
 @cindex Mond, Julianisches Datum @code{%(y@var{Argument}} Spezialtext
 @cindex Mond, Julianisches Datum @code{%)y@var{Argument}} Spezialtext
@@ -16853,7 +16853,7 @@ f@"ur weitere Details.
 das sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 @xref{Julianische Tageszahl},
 f@"ur weitere Informationen zum Julianischen Datum.
-@item @ 
+@item @
 @item @code{z}
 @cindex Mond, Julianisches Ephemeridendatum @code{%(z@var{Argument}} Spezialtext
 @cindex Mond, Julianisches Ephemeridendatum @code{%)z@var{Argument}} Spezialtext
@@ -16866,7 +16866,7 @@ f@"ur weitere Informationen zum Julianischen Datum.
 also ein um @emph{delta-t} korrigiertes Julianische Datum,
 in Tagen berechnen,
 das sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{A}
 @cindex Mond/Sonne, delta H@"ohe topozentrisch @code{%(A@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta H@"ohe topozentrisch @code{%)A@var{Argument}} Spezialtext
@@ -16885,7 +16885,7 @@ Ergebnisse mit positivem Vorzeichen besagen, da@ss{} sich der momentane
 Mondmittelpunkt auf einer H@"ohe befindet, die oberhalb der momentanen
 H@"ohe des Sonnenmittelpunktes liegt;
 also der Mond steht h@"oher als die Sonne.
-@item @ 
+@item @
 @item @code{B}
 @cindex Mond/Sonne, delta Azimut topozentrisch @code{%(B@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta Azimut topozentrisch @code{%)B@var{Argument}} Spezialtext
@@ -16908,7 +16908,7 @@ Und ein Ergebnis mit positivem Vorzeichen bedeutet, da@ss{} die Sonne
 links (gegen den Uhrzeigersinn) des Mondes steht, wenn man zum Mond schaut ---
 oder alternativ gesagt, da@ss{} der Mond rechts (im Uhrzeigersinn)
 der Sonne steht.
-@item @ 
+@item @
 @item @code{C}
 @cindex Mond/Sonne, delta H@"ohe geozentrisch @code{%(C@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta H@"ohe geozentrisch @code{%)C@var{Argument}} Spezialtext
@@ -16919,7 +16919,7 @@ der Sonne steht.
 von Mond und Sonne, wobei der Mond den Bezugspunkt darstellt,
 in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{D}
 @cindex Mond/Sonne, delta Azimut geozentrisch @code{%(D@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta Azimut geozentrisch @code{%)D@var{Argument}} Spezialtext
@@ -16930,7 +16930,7 @@ die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
 von Mond und Sonne, wobei der Mond den Bezugspunkt darstellt,
 in Grad und Altminuten berechnen,
 die sich zum b@"urgerlichen Mitternachtzeitpunkt ergibt.
-@item @ 
+@item @
 @item @code{E}
 @cindex Mond/Sonne, delta H@"ohe Mondaufgang topozentrisch @code{%(E@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta H@"ohe Mondaufgang topozentrisch @code{%(*E@var{Argument}} Spezialtext
@@ -16941,7 +16941,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Mondaufgangs ergibt.
 @xref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{E}
 @cindex Mond/Sonne, delta H@"ohe Monduntergang topozentrisch @code{%)E@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta H@"ohe Monduntergang topozentrisch @code{%)*E@var{Argument}} Spezialtext
@@ -16952,7 +16952,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Monduntergangs ergibt.
 @xref{x-Mond-Standarduntergang, , Standard-Untergangszeit des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{F}
 @cindex Mond/Sonne, delta Azimut Mondaufgang topozentrisch @code{%(F@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta Azimut Mondaufgang topozentrisch @code{%(*F@var{Argument}} Spezialtext
@@ -16963,7 +16963,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Mondaufgangs ergibt.
 @xref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{F}
 @cindex Mond/Sonne, delta Azimut Monduntergang topozentrisch @code{%)F@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta Azimut Monduntergang topozentrisch @code{%)*F@var{Argument}} Spezialtext
@@ -16974,7 +16974,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Monduntergangs ergibt.
 @xref{x-Mond-Standarduntergang, , Standard-Untergangszeit des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{G}
 @cindex Mond/Sonne, delta H@"ohe Mondaufgang geozentrisch @code{%(G@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta H@"ohe Mondaufgang geozentrisch @code{%(*G@var{Argument}} Spezialtext
@@ -16985,7 +16985,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Mondaufgangs ergibt.
 @xref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{G}
 @cindex Mond/Sonne, delta H@"ohe Monduntergang geozentrisch @code{%)G@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta H@"ohe Monduntergang geozentrisch @code{%)*G@var{Argument}} Spezialtext
@@ -16996,7 +16996,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Monduntergangs ergibt.
 @xref{x-Mond-Standarduntergang, , Standard-Untergangszeit des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{H}
 @cindex Mond/Sonne, delta Azimut Mondaufgang geozentrisch @code{%(H@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta Azimut Mondaufgang geozentrisch @code{%(*H@var{Argument}} Spezialtext
@@ -17007,7 +17007,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Mondaufgangs ergibt.
 @xref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{H}
 @cindex Mond/Sonne, delta Azimut Monduntergang geozentrisch @code{%)H@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta Azimut Monduntergang geozentrisch @code{%)*H@var{Argument}} Spezialtext
@@ -17018,7 +17018,7 @@ in Grad und Altminuten berechnen,
 die sich zu der Uhrzeit des Standard-Monduntergangs ergibt.
 @xref{x-Mond-Standarduntergang, , Standard-Untergangszeit des Mondes},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{I}
 @cindex Mond/Sonne, delta Mitternachtzeitpunkt @code{%(I@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta Mitternachtzeitpunkt @code{%)I@var{Argument}} Spezialtext
@@ -17041,7 +17041,7 @@ also die lunare Mitternacht findet nach der solaren Mitternacht statt.
 und
 @ref{x-Sonne-Mitternacht, , Astronomischer Mitternachtzeitpunkt der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{J}
 @cindex Mond/Sonne, delta Mittagzeitpunkt @code{%(J@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta Mittagzeitpunkt @code{%)J@var{Argument}} Spezialtext
@@ -17064,7 +17064,7 @@ also der lunare Mittag findet nach dem solaren Mittag statt.
 und
 @ref{x-Sonne-Mittag, , Astronomischer Mittagzeitpunkt der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{K}
 @cindex Mond/Sonne, delta Aufgangszeit Standard @code{%(K@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta Aufgangszeit Standard @code{%(*K@var{Argument}} Spezialtext
@@ -17083,7 +17083,7 @@ also der Mondaufgang findet nach dem Sonnenaufgang statt.
 und
 @ref{x-Sonne-Standardaufgang, , Standard-Aufgangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{K}
 @cindex Mond/Sonne, delta Untergangszeit Standard @code{%)K@var{Argument}} Spezialtext
 @cindex Mond/Sonne, delta Untergangszeit Standard @code{%)*K@var{Argument}} Spezialtext
@@ -17102,7 +17102,7 @@ also der Monduntergang findet nach dem Sonnenuntergang statt.
 und
 @ref{x-Sonne-Standarduntergang, , Standard-Untergangszeit der Sonne},
 f@"ur weitere Details.
-@item @ 
+@item @
 @item @code{L}
 @cindex Mond, H@"ohe Mitternachtzeitpunkt topozentrisch @code{%(L@var{Argument}} Spezialtext
 @cindex Mond, H@"ohe Mitternachtzeitpunkt topozentrisch @code{%)L@var{Argument}} Spezialtext
@@ -17117,7 +17117,7 @@ die sich zum astronomischen Mitternachtzeitpunkt des Mondes ergibt
 (topozentrische @dfn{Mitternachtsh@"ohe})@.
 @xref{x-Mond-Mitternacht, , Astronomischer Mitternachtzeitpunkt des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{M}
 @cindex Mond, Phasenwinkel Mitternachtzeitpunkt topozentrisch @code{%(M@var{Argument}} Spezialtext
 @cindex Mond, Phasenwinkel Mitternachtzeitpunkt topozentrisch @code{%)M@var{Argument}} Spezialtext
@@ -17132,7 +17132,7 @@ der sich zum astronomischen Mitternachtzeitpunkt des Mondes ergibt
 (topozentrischer @dfn{Mitternachtsphasenwinkel})@.
 @xref{x-Mond-Mitternacht, , Astronomischer Mitternachtzeitpunkt des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{N}
 @cindex Mond, H@"ohe Mittagzeitpunkt topozentrisch @code{%(N@var{Argument}} Spezialtext
 @cindex Mond, H@"ohe Mittagzeitpunkt topozentrisch @code{%)N@var{Argument}} Spezialtext
@@ -17147,7 +17147,7 @@ die sich zum astronomischen Mittagzeitpunkt des Mondes ergibt
 (topozentrische @dfn{Mittagsh@"ohe})@.
 @xref{x-Mond-Mittag, , Astronomischer Mittagzeitpunkt des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{O}
 @cindex Mond, Phasenwinkel Mittagzeitpunkt topozentrisch @code{%(O@var{Argument}} Spezialtext
 @cindex Mond, Phasenwinkel Mittagzeitpunkt topozentrisch @code{%)O@var{Argument}} Spezialtext
@@ -17162,7 +17162,7 @@ der sich zum astronomischen Mittagzeitpunkt des Mondes ergibt
 (topozentrischer @dfn{Mittagsphasenwinkel})@.
 @xref{x-Mond-Mittag, , Astronomischer Mittagzeitpunkt des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{P}
 @cindex Mond, H@"ohe Aufgangszeit Standard topozentrisch @code{%(P@var{Argument}} Spezialtext
 @cindex Mond, H@"ohe Aufgangszeit Standard topozentrisch @code{%(*P@var{Argument}} Spezialtext
@@ -17175,7 +17175,7 @@ die sich zur Uhrzeit des Standard-Mondaufgangs ergibt
 (topozentrische @dfn{Aufgangsh@"ohe})@.
 @xref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{P}
 @cindex Mond, H@"ohe Untergangszeit Standard topozentrisch @code{%)P@var{Argument}} Spezialtext
 @cindex Mond, H@"ohe Untergangszeit Standard topozentrisch @code{%)*P@var{Argument}} Spezialtext
@@ -17188,7 +17188,7 @@ die sich zur Uhrzeit des Standard-Monduntergangs ergibt
 (topozentrische @dfn{Untergangsh@"ohe})@.
 @xref{x-Mond-Standarduntergang, , Standard-Untergangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Mond, Azimut Aufgangszeit Standard topozentrisch @code{%(Q@var{Argument}} Spezialtext
 @cindex Mond, Azimut Aufgangszeit Standard topozentrisch @code{%(*Q@var{Argument}} Spezialtext
@@ -17206,7 +17206,7 @@ und der Ostrichtung wird auch topozentrische @dfn{Aufgangsweite} des Mondes
 genannt.
 @xref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Mond, Azimut Untergangszeit Standard topozentrisch @code{%)Q@var{Argument}} Spezialtext
 @cindex Mond, Azimut Untergangszeit Standard topozentrisch @code{%)*Q@var{Argument}} Spezialtext
@@ -17224,7 +17224,7 @@ und der Westrichtung wird auch topozentrische @dfn{Untergangsweite} des Mondes
 genannt.
 @xref{x-Mond-Standarduntergang, , Standard-Untergangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{R}
 @cindex Mond, Phasenwinkel Aufgangszeit Standard topozentrisch @code{%(R@var{Argument}} Spezialtext
 @cindex Mond, Phasenwinkel Aufgangszeit Standard topozentrisch @code{%(*R@var{Argument}} Spezialtext
@@ -17237,7 +17237,7 @@ der sich zur Uhrzeit des Standard-Mondaufgangs ergibt
 (topozentrischer @dfn{Aufgangsphasenwinkel})@.
 @xref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{R}
 @cindex Mond, Phasenwinkel Untergangszeit Standard topozentrisch @code{%)R@var{Argument}} Spezialtext
 @cindex Mond, Phasenwinkel Untergangszeit Standard topozentrisch @code{%)*R@var{Argument}} Spezialtext
@@ -17250,7 +17250,7 @@ der sich zur Uhrzeit des Standard-Monduntergangs ergibt
 (topozentrischer @dfn{Untergangsphasenwinkel})@.
 @xref{x-Mond-Standarduntergang, , Standard-Untergangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{S}
 @cindex Mond, H@"ohe Mitternachtzeitpunkt geozentrisch @code{%(S@var{Argument}} Spezialtext
 @cindex Mond, H@"ohe Mitternachtzeitpunkt geozentrisch @code{%)S@var{Argument}} Spezialtext
@@ -17265,7 +17265,7 @@ die sich zum astronomischen Mitternachtzeitpunkt des Mondes ergibt
 (geozentrische @dfn{Mitternachtsh@"ohe})@.
 @xref{x-Mond-Mitternacht, , Astronomischer Mitternachtzeitpunkt des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{T}
 @cindex Mond, Phasenwinkel Mitternachtzeitpunkt geozentrisch @code{%(T@var{Argument}} Spezialtext
 @cindex Mond, Phasenwinkel Mitternachtzeitpunkt geozentrisch @code{%)T@var{Argument}} Spezialtext
@@ -17280,7 +17280,7 @@ der sich zum astronomischen Mitternachtzeitpunkt des Mondes ergibt
 (geozentrischer @dfn{Mitternachtsphasenwinkel})@.
 @xref{x-Mond-Mitternacht, , Astronomischer Mitternachtzeitpunkt des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{U}
 @cindex Mond, H@"ohe Mittagzeitpunkt geozentrisch @code{%(U@var{Argument}} Spezialtext
 @cindex Mond, H@"ohe Mittagzeitpunkt geozentrisch @code{%)U@var{Argument}} Spezialtext
@@ -17295,7 +17295,7 @@ die sich zum astronomischen Mittagzeitpunkt des Mondes ergibt
 (geozentrische @dfn{Mittagsh@"ohe})@.
 @xref{x-Mond-Mittag, , Astronomischer Mittagzeitpunkt des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{V}
 @cindex Mond, Phasenwinkel Mittagzeitpunkt geozentrisch @code{%(V@var{Argument}} Spezialtext
 @cindex Mond, Phasenwinkel Mittagzeitpunkt geozentrisch @code{%)V@var{Argument}} Spezialtext
@@ -17310,7 +17310,7 @@ der sich zum astronomischen Mittagzeitpunkt des Mondes ergibt
 (geozentrischer @dfn{Mittagsphasenwinkel})@.
 @xref{x-Mond-Mittag, , Astronomischer Mittagzeitpunkt des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{W}
 @cindex Mond, H@"ohe Aufgangszeit Standard geozentrisch @code{%(W@var{Argument}} Spezialtext
 @cindex Mond, H@"ohe Aufgangszeit Standard geozentrisch @code{%(*W@var{Argument}} Spezialtext
@@ -17323,7 +17323,7 @@ die sich zur Uhrzeit des Standard-Mondaufgangs ergibt
 (geozentrische @dfn{Aufgangsh@"ohe})@.
 @xref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{W}
 @cindex Mond, H@"ohe Untergangszeit Standard geozentrisch @code{%)W@var{Argument}} Spezialtext
 @cindex Mond, H@"ohe Untergangszeit Standard geozentrisch @code{%)*W@var{Argument}} Spezialtext
@@ -17336,7 +17336,7 @@ die sich zur Uhrzeit des Standard-Monduntergangs ergibt
 (geozentrische @dfn{Untergangsh@"ohe})@.
 @xref{x-Mond-Standarduntergang, , Standard-Untergangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{X}
 @cindex Mond, Azimut Aufgangszeit Standard geozentrisch @code{%(X@var{Argument}} Spezialtext
 @cindex Mond, Azimut Aufgangszeit Standard geozentrisch @code{%(*X@var{Argument}} Spezialtext
@@ -17354,7 +17354,7 @@ und der Ostrichtung wird auch geozentrische @dfn{Aufgangsweite} des Mondes
 genannt.
 @xref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{X}
 @cindex Mond, Azimut Untergangszeit Standard geozentrisch @code{%)X@var{Argument}} Spezialtext
 @cindex Mond, Azimut Untergangszeit Standard geozentrisch @code{%)*X@var{Argument}} Spezialtext
@@ -17372,7 +17372,7 @@ und der Westrichtung wird auch geozentrische @dfn{Untergangsweite} des Mondes
 genannt.
 @xref{x-Mond-Standarduntergang, , Standard-Untergangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{Y}
 @cindex Mond, Phasenwinkel Aufgangszeit Standard geozentrisch @code{%(Y@var{Argument}} Spezialtext
 @cindex Mond, Phasenwinkel Aufgangszeit Standard geozentrisch @code{%(*Y@var{Argument}} Spezialtext
@@ -17385,7 +17385,7 @@ der sich zur Uhrzeit des Standard-Mondaufgangs ergibt
 (geozentrischer @dfn{Aufgangsphasenwinkel})@.
 @xref{x-Mond-Standardaufgang, , Standard-Aufgangszeit des Mondes},
 f@"ur mehr Informationen.
-@item @ 
+@item @
 @item @code{Y}
 @cindex Mond, Phasenwinkel Untergangszeit Standard geozentrisch @code{%)Y@var{Argument}} Spezialtext
 @cindex Mond, Phasenwinkel Untergangszeit Standard geozentrisch @code{%)*Y@var{Argument}} Spezialtext
@@ -17465,7 +17465,7 @@ beeinflu@ss{}t:
 @tab @strong{Dynamisch}
 @tab @strong{Ortskoordinate}
 @tab @strong{Zeitzone}
-@item @ 
+@item @
 @item @code{0}
 @tab 3
 @tab Nein
@@ -21341,7 +21341,7 @@ benutzt wird.
 @tab
 @tab @strong{Neuer Stil}
 @ifnottex
-@item @ 
+@item @
 @end ifnottex
 @item %Vollst@"andiger Wochentagsname
 @tab @code{%o}
@@ -21522,7 +21522,7 @@ benutzt wird.
 @tab @strong{Alter Stil}
 @tab
 @tab @strong{Neuer Stil}
-@item @ 
+@item @
 @item %Tagesnummer
 @tab @code{%d}
 @tab @equiv{}
@@ -21631,7 +21631,7 @@ benutzt wird.
 @tab @strong{Alter Stil}
 @tab
 @tab @strong{Neuer Stil}
-@item @ 
+@item @
 @item DE
 @tab @code{%w,  %1%D%2 %b %y}
 @tab @equiv{}
@@ -21685,7 +21685,7 @@ Komponenten der Formatanweisung setzen sich wie folgt zusammen:
 @multitable @columnfractions .15 .85
 @item @strong{Zeichen}
 @tab @strong{Beschreibung der Komponenten}
-@item @ 
+@item @
 @item
 @tab @var{Ausrichtung}-Gruppe (genau ein Mitglied mu@ss{} definiert werden):
 @item @code{<}
@@ -21694,22 +21694,22 @@ Komponenten der Formatanweisung setzen sich wie folgt zusammen:
 @tab Feldinhalt mittig stellen im Feld der Breite @var{Breite}
 @item @code{>}
 @tab Feldinhalt rechtsb@"undig stellen im Feld der Breite @var{Breite}
-@item @ 
+@item @
 @item
 @tab @var{Vorzeichen} (darf definiert werden):
 @item @code{+}
 @tab Numerischen Wert mit f@"uhrendem Vorzeichen ausstatten
-@item @ 
+@item @
 @item
 @tab @var{Null} (darf definiert werden):
 @item @code{0}
 @tab Numerischen Wert mit f@"uhrender Null bzw.@: f@"uhrenden Nullen auff@"ullen
-@item @ 
+@item @
 @item
 @tab @var{Breite} (mu@ss{} definiert werden):
 @item @var{n}
 @tab Feld hat die Breite @var{n} (derzeit im Bereich 1@dots{}256)
-@item @ 
+@item @
 @item
 @tab @var{Stil}-Gruppe (genau ein Mitglied darf definiert werden):
 @item @code{u}
@@ -21718,12 +21718,12 @@ Komponenten der Formatanweisung setzen sich wie folgt zusammen:
 @tab Feldinhalt in Kleinbuchstaben umwandeln
 @item @code{w}
 @tab Feldinhalt in Wortgro@ss{}schreibung umwandeln
-@item @ 
+@item @
 @item
 @tab @var{Anhang} (darf definiert werden):
 @item @code{&}
 @tab Numerischen Wert mit Ordnungszahlanhang ausstatten
-@item @ 
+@item @
 @item
 @tab @var{Format}-Gruppe (genau ein Mitglied mu@ss{} definiert werden):
 @item @code{*}
@@ -21845,7 +21845,7 @@ Die
 @multitable @columnfractions .35 .65
 @item @strong{Datumteil}
 @tab @strong{Kurzoption @option{-c@r{|}C@r{[]}}}
-@item @ 
+@item @
 @item @code{00000000}
 @tab @w{@code{-c@var{n}+@r{|}-}}
 @item @code{000000@var{tt}}
@@ -21990,7 +21990,7 @@ von einem Datum im @emph{Datumteil} einer Ressourcendatei gegen@"ubergestellt.
 @multitable @columnfractions .35 .65
 @item @strong{Kurzoption @option{-c@r{|}C@r{[]}}}
 @tab @strong{Datumteil}
-@item @ 
+@item @
 @item @code{-c}
 @item @code{-ct}
 @item @code{-c@var{n}d@r{|}+@r{|}-}

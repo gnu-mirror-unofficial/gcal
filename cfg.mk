@@ -30,7 +30,6 @@ local-checks-to-skip = \
     sc_prohibit_magic_number_exit \
     sc_prohibit_strncpy \
     sc_texinfo_acronym \
-    sc_trailing_blank \
 
 #SHELL=bash -x
 show-vc-list-except:

@@ -6,7 +6,7 @@
 @group
 @cartouche
 $ gcal -H no -u -x -r '$b=08:$f=demo-3.rc' -f ./include.rc Aug 1996
-@print{} 
+@print{}
 @print{} Do,   1 Aug 1996: Werktag
 @print{} Fr,   2 Aug 1996: Werktag
 @print{} Mo,   5 Aug 1996: Werktag

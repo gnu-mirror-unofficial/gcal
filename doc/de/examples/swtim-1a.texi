@@ -6,7 +6,7 @@
 @group
 @cartouche
 $ LANGUAGE=en gcal %1998 -Hno -xy -f ./swtim-1.rc
-@print{} 
+@print{}
 @print{} Fri, Mar  27th 1998: Sommerzeitumstellung am Sonntag
 @print{}                      +1 Std. (02:00 --> 03:00 Uhr)
 @print{} Sat, Mar  28th 1998: Sommerzeitumstellung am Sonntag

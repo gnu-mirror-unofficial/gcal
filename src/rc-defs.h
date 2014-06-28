@@ -2,7 +2,7 @@
 # define __RC_DEFS_H
 /*!
 *  \file rc-defs.h
-*  \brief Fixed dates/resource file specific statements, macros, 
+*  \brief Fixed dates/resource file specific statements, macros,
 *  			typedefs, global variable declarations...
 */
 /*

@@ -2,7 +2,7 @@
 # define __RC_CHECK_H
 /*!
 *  \file rc-check.h
-*  \brief Checks if a line (of a resource file) must be 
+*  \brief Checks if a line (of a resource file) must be
 *  			inserted into `rc_elems_table[]' header file.
 */
 /*

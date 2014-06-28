@@ -7,9 +7,9 @@
 @cartouche
 $ gcal2txt tdemo-1.rc
 @print{}         Hallo Freunde,
-@print{} 
+@print{}
 @print{} Ich bin der Demotext, der lustige Zeichen und Zeichensequenzen
-@print{} enthaelt wie ~~ \~ % %% $a $1 %%%\ 
+@print{} enthaelt wie ~~ \~ % %% $a $1 %%%\
 @print{} %\ %s %%foo %bar \%Baz \\~ \~\ und so weiter...
 @print{} Ich bin gespannt darauf, wie ich von `txt2gcal' umgesetzt werde.
 @end cartouche

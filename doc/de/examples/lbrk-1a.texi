@@ -6,9 +6,9 @@
 @group
 @cartouche
 $ gcal %00000101 --resource-file=./lbrk-1.rc --disable-highlighting
-@print{} 
+@print{}
 @print{} Terminliste:
-@print{} 
+@print{}
 @print{} Sa,   1 Jan 2000: Bin ich ein kurzer Text? Weiss nicht...
 @print{} Sa,   1 Jan 2000: Ich hoffe ich bin auch lang genug
 @print{} hier, ein Zeilenumbruch

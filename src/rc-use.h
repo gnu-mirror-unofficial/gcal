@@ -2,7 +2,7 @@
 # define __RC_USE_H
 /*!
 *  \file rc-use.h
-*  \brief Central function, manages the resource file handling and 
+*  \brief Central function, manages the resource file handling and
 *  			displays the results file header.
 */
 /*

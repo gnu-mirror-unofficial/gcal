@@ -8,7 +8,7 @@
 $ gcal %20000420 -Hno -f/dev/null -xdt -g::: \
 >      --here='0*d1#999_%ot+00+000_:_%oa+5158+00738,120' \
 >      --cycle-end=12:05 --time=12:00
-@print{} 
+@print{}
 @print{} Thu, Apr  20th 2000: +12h00': +045d58'
 @print{} Thu, Apr  20th 2000: +12h01': +046d03'
 @print{} Thu, Apr  20th 2000: +12h02': +046d07'

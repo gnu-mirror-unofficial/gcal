@@ -504,7 +504,7 @@ China:          The Gregorian calendar replaced the Chinese calendar
                 in 1912, but the Gregorian calendar was not used
                 throughout the country until the communist revolution
                 of 1949.
-                               
+
 Czechoslovakia (i.e. Bohemia and Moravia):
                  6 Jan 1584 was followed by 17 Jan 1584
 
@@ -518,7 +518,7 @@ Estonia:        31 Jan 1918 was followed by 14 Feb 1918
 Finland: Then part of Sweden. (Note, however, that Finland later
                 became part of Russia, which then still used the
                 Julian calendar. The Gregorian calendar remained
-                official in Finland, but some use of the Julian 
+                official in Finland, but some use of the Julian
                 calendar was made.)
 
 France:         9 Dec 1582 was followed by 20 Dec 1582
@@ -561,7 +561,7 @@ Netherlands (including Belgium):
         Zeeland, Brabrant:
                 14 Dec 1582 was followd by 25 Dec 1582
         Holland:
-                1 Jan 1583 was followd by 12 Jan 1583   
+                1 Jan 1583 was followd by 12 Jan 1583
         Limburg and the southern provinces (currently Belgium):
                 21 Dec 1582 was followed by 1 Jan 1583
         Groningen:
@@ -1084,7 +1084,7 @@ The Epact is a measure of the age of the moon (i.e. the number of days
 that have passed since an "official" new moon) on a particular date.
 
 In the Julian calendar, 8 + the Epact is the age of the moon at the
-start of the year.  
+start of the year.
 In the Gregorian calendar, the Epact is the age of the moon at the
 start of the year.
 
@@ -1094,7 +1094,7 @@ Under the Julian calendar, 19 years were assumed to be exactly an
 integral number of synodic months, and the following relationship
 exists between the Golden Number and the Epact:
 
-        Epact = (11 * (GoldenNumber-1)) mod 30 
+        Epact = (11 * (GoldenNumber-1)) mod 30
 
 If this formula yields zero, the Epact is by convention frequently
 designated by the symbol * and its value is said to be 30. Weird?
@@ -1111,7 +1111,7 @@ relationship between the Golden Number and the Epact.
 
 In the Gregorian calendar the Epact should be calculated thus (the
 divisions are integer divisions, in which remainders are discarded):
-        
+
 1) Use the Julian formula:
       Epact = (11 * (GoldenNumber-1)) mod 30
 
@@ -1365,7 +1365,7 @@ calculations were disputed at a very early stage.
 
 When people started dating years before 754 AUC using the term "Before
 Christ", they let the year 1 BC immediately precede AD 1 with no
-intervening year zero. 
+intervening year zero.
 
 Note, however, that astronomers frequently use another way of
 numbering the years BC. Instead of 1 BC they use 0, instead of 2 BC
@@ -1512,7 +1512,7 @@ Indictions may be identified:
 --------------------------------
 
 The Julian period (and the Julian day number) must not be confused
-with the Julian calendar. 
+with the Julian calendar.
 
 The French scholar Joseph Justus Scaliger (1540-1609) was interested
 in assigning a positive number to every year without having to worry
@@ -1631,7 +1631,7 @@ namely either 1998-12-25 or 19981225.
 
 In all of these systems, the first two digits of the year are
 frequently omitted:
-   25.12.98   12/25/98   98-12-25   
+   25.12.98   12/25/98   98-12-25
 
 This confusion leads to misunderstandings. What is 02-03-04? To most
 people it is 2 Mar 2004; to an American it is 3 Feb 2004; and to a
@@ -1807,7 +1807,7 @@ The new moon of any particular year is calculated by extrapolating
 from this time, using a synodic month of 29 days 12 hours and 793
 parts.
 
-Note that 18:00 Jerusalem time (15:39 UTC) is used instead of sunset in 
+Note that 18:00 Jerusalem time (15:39 UTC) is used instead of sunset in
 all these calculations.
 
 
@@ -2141,7 +2141,7 @@ number (as defined in IS-8601)?
 [There must be ways to simplify this calculation. Please write to me
 if you have a better algorithm.]
 
- 
+
 5.9. Do weeks of different lengths exist?
 -----------------------------------------
 
@@ -2391,7 +2391,7 @@ The names of the month were:
         4. Zotz         10. Yax         16. Pax
         5. Tzec         11. Zac         17. Kayab
         6. Xul          12. Ceh         18. Cumku
-        
+
 Since each month was 20 days long, monthnames changed only every 20
 days instead of daily; so the day after 4 Zotz would be 5 Zotz,
 followed by 6 Zotz ... up to 19 Zotz, which is followed by 0 Tzec.
@@ -2620,7 +2620,7 @@ answers questions that I am often asked about this document.
 ---------------------------------------------
 
 I am frequently asked to add a chapter describing the Persian calendar,
-the Japanese calendar, the Ethiopian calendar, the Hindu calendar, etc. 
+the Japanese calendar, the Ethiopian calendar, the Hindu calendar, etc.
 
 But I have to stop somewhere. I have discovered that the more calendars
 I include in the FAQ, the more difficult it becomes to ensure that the
@@ -2688,7 +2688,7 @@ This version 2.2 of this document was finished on
         Domini MM, indict. VIII, epacta XXIV, luna V, anno post
         Margaretam Reginam Daniae natam LX, on the feast of Saint
         Waudru.
-       
+
         The 4th day of Nisan, Anno Mundi 5760.
 
         The 4th day of Muharram, Anno Hegirae 1421.

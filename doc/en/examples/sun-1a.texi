@@ -6,7 +6,7 @@
 @group
 @cartouche
 $ gcal -fsun-1.rc -Ux -Hno
-@print{} 
+@print{}
 @print{} 18:53/12-Sep-1999 actual local time in Muenster
 @print{} 23:53/12-Sep-1999 actual local time in Bangkok
 @print{} Sun:

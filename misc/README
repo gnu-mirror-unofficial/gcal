@@ -8,7 +8,7 @@ changed the default behavior of the script.  If so, try running the
 script again by using an "empty" `GCAL' environment variable like this:
 
      for Bourne Shell:  GCAL= ./SCRIPTNAME
-     
+
      or:                env GCAL= ./SCRIPTNAME
 
 If this does not help, check whether you have set a reference to the
@@ -17,7 +17,7 @@ running the script again by using a proper value for Gcal's search path
 for files, like:
 
      for Bourne Shell:  GCALPATH=. ./SCRIPTNAME
-     
+
      or:                env GCALPATH=. ./SCRIPTNAME
 
 

@@ -6,23 +6,23 @@
 @group
 @cartouche
 $ LANGUAGE=en gcal -H no -u -x -f ./demo-2.rc 1996+2002
-@print{} 
+@print{}
 @print{} Sun, Sep   1st 1996: Freitag der 13'te ist am 13-Sep-1996
 @print{} Sun, Dec   1st 1996: Freitag der 13'te ist am 13-Dec-1996
-@print{} 
+@print{}
 @print{} Sun, Jun   1st 1997: Freitag der 13'te ist am 13-Jun-1997
-@print{} 
+@print{}
 @print{} Sun, Feb   1st 1998: Freitag der 13'te ist am 13-Feb-1998
 @print{} Sun, Mar   1st 1998: Freitag der 13'te ist am 13-Mar-1998
 @print{} Sun, Nov   1st 1998: Freitag der 13'te ist am 13-Nov-1998
-@print{} 
+@print{}
 @print{} Sun, Aug   1st 1999: Freitag der 13'te ist am 13-Aug-1999
-@print{} 
+@print{}
 @print{} Sun, Oct   1st 2000: Freitag der 13'te ist am 13-Oct-2000
-@print{} 
+@print{}
 @print{} Sun, Apr   1st 2001: Freitag der 13'te ist am 13-Apr-2001
 @print{} Sun, Jul   1st 2001: Freitag der 13'te ist am 13-Jul-2001
-@print{} 
+@print{}
 @print{} Sun, Sep   1st 2002: Freitag der 13'te ist am 13-Sep-2002
 @print{} Sun, Dec   1st 2002: Freitag der 13'te ist am 13-Dec-2002
 @end cartouche

@@ -31,7 +31,7 @@ $ cat remark.rc
 @print{}    `vmmnv\%vmmmmnv\%vnmmmmmmmmnvvnmmmmmmnv\%vnmmmv\%vnmmmmv'^\
 @print{}      `vmvn\%vmmmmnv\%vnmmmmmmmnvvnmmmmmnv\%vnmmmm\%vnmmmv'^\
 @print{}          `v\%mmmmmn%:\%vnmnmmmmn\%vnmmmnv%:\%vnmv\%nmv'
-@print{} 
+@print{}
 @print{} ; Ein Zeilenkommentar
 @print{}       ; Ebenfalls ein Zeilenkommentar
 @print{} ;     Ein                              \

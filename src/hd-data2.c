@@ -3992,7 +3992,7 @@ cz_hdy (init_data, detected, easter, year, hd_elems, fday, count)
    *  1. 1.            +       +       +       +       +       +
    *  Easter           +       +       +       +       +       +
    *  1. 5.            +       +       +       +       +       +
-   *  5. 5.                            
+   *  5. 5.
    *  8. 5.                                            +       +
    *  9. 5.            +       +       +       +
    *  5. 7.                            +       +       +       +

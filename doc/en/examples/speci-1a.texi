@@ -6,7 +6,7 @@
 @group
 @cartouche
 $ gcal --resource-file=speci-1.rc -H no -ox
-@print{} 
+@print{}
 @print{} Mon, Oct   4th 1999: 1. Today is MONDAY, 04th October 1999!
 @print{}                      2. It's the 277th day of the year.
 @print{}                      3. The actual week number is: 40.

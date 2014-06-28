@@ -1,8 +1,8 @@
 #ifndef __HD_DEFS_H
 # define __HD_DEFS_H
 /*!
-*  \file hd-defs.h  
-*  \brief Holiday dates specific statements, macros, typedefs, 
+*  \file hd-defs.h
+*  \brief Holiday dates specific statements, macros, typedefs,
 *  				global variable declarations...
 */
 /*

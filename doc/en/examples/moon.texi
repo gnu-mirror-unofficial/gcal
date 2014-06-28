@@ -6,7 +6,7 @@
 @group
 @cartouche
 $ gcal -f/dev/null -#0*d1#999_%Z__%O %19950407 -x --moon=8
-@print{} 
+@print{}
 @print{} Fri, Apr < 7th>1995:          (    @@@@@@@@@@
 @print{}                          (           @@@@@@@@@@@@@@@@
 @print{}                       (              @@@@@@@@@@@@@@@@@@@@@@

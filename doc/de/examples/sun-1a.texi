@@ -6,7 +6,7 @@
 @group
 @cartouche
 $ gcal -fsun-1.rc -Ux -Hno
-@print{} 
+@print{}
 @print{} 18:49/12-Sep-1999 aktuelle Ortszeit in Muenster
 @print{} 23:49/12-Sep-1999 aktuelle Ortszeit in Bangkok
 @print{} Sonne:

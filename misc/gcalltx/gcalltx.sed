@@ -7,7 +7,7 @@
 # of the GNU public license.
 #
 # This simple sed script converts 'gcal -n -u %0001 year' output to LaTeX
-# tabular output for gcal. Any but default configuration might confuse 
+# tabular output for gcal. Any but default configuration might confuse
 # this script.  It comes along with a UN*X script gcalltx and a DOS batch
 # gcalltx.bat which supports the correct usage. This program has been
 # tested with the German, English and French catalogs of gcal under

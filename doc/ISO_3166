@@ -1,10 +1,10 @@
 <ftp://ftp.ripe.net/iso3166-countrycodes>:
 
-Some Codes from ISO 3166 
+Some Codes from ISO 3166
 
 Updated by the RIPE Network Coordination Centre.
 
-Source: ISO 3166 Maintenance Agency 
+Source: ISO 3166 Maintenance Agency
 
 Latest change: Tue Jan  7 15:57:16 MET 1997
 
@@ -20,16 +20,16 @@ ANGUILLA                                        AI      AIA     660
 ANTARCTICA                                      AQ      ATA     010
 ANTIGUA AND BARBUDA                             AG      ATG     028
 ARGENTINA                                       AR      ARG     032
-ARMENIA                                         AM      ARM     051  
+ARMENIA                                         AM      ARM     051
 ARUBA                                           AW      ABW     533
 AUSTRALIA                                       AU      AUS     036
 AUSTRIA                                         AT      AUT     040
-AZERBAIJAN                                      AZ      AZE     031  
+AZERBAIJAN                                      AZ      AZE     031
 BAHAMAS                                         BS      BHS     044
 BAHRAIN                                         BH      BHR     048
 BANGLADESH                                      BD      BGD     050
 BARBADOS                                        BB      BRB     052
-BELARUS                                         BY      BLR     112  
+BELARUS                                         BY      BLR     112
 BELGIUM                                         BE      BEL     056
 BELIZE                                          BZ      BLZ     084
 BENIN                                           BJ      BEN     204
@@ -62,10 +62,10 @@ CONGO                                           CG      COG     178
 COOK ISLANDS                                    CK      COK     184
 COSTA RICA                                      CR      CRI     188
 COTE D'IVOIRE                                   CI      CIV     384
-CROATIA (local name: Hrvatska)                  HR      HRV     191      
+CROATIA (local name: Hrvatska)                  HR      HRV     191
 CUBA                                            CU      CUB     192
 CYPRUS                                          CY      CYP     196
-CZECH REPUBLIC                                  CZ      CZE     203  
+CZECH REPUBLIC                                  CZ      CZE     203
 DENMARK                                         DK      DNK     208
 DJIBOUTI                                        DJ      DJI     262
 DOMINICA                                        DM      DMA     212
@@ -76,20 +76,20 @@ EGYPT                                           EG      EGY     818
 EL SALVADOR                                     SV      SLV     222
 EQUATORIAL GUINEA                               GQ      GNQ     226
 ERITREA                                         ER	ERI     232
-ESTONIA                                         EE      EST     233  
+ESTONIA                                         EE      EST     233
 ETHIOPIA                                        ET      ETH     231
 FALKLAND ISLANDS (MALVINAS)                     FK      FLK     238
 FAROE ISLANDS                                   FO      FRO     234
 FIJI                                            FJ      FJI     242
 FINLAND                                         FI      FIN     246
 FRANCE                                          FR      FRA     250
-FRANCE, METROPOLITAN                            FX      FXX     249  
+FRANCE, METROPOLITAN                            FX      FXX     249
 FRENCH GUIANA                                   GF      GUF     254
 FRENCH POLYNESIA                                PF      PYF     258
 FRENCH SOUTHERN TERRITORIES                     TF      ATF     260
 GABON                                           GA      GAB     266
 GAMBIA                                          GM      GMB     270
-GEORGIA                                         GE      GEO     268  
+GEORGIA                                         GE      GEO     268
 GERMANY                                         DE      DEU     276
 GHANA                                           GH      GHA     288
 GIBRALTAR                                       GI      GIB     292
@@ -119,24 +119,24 @@ ITALY                                           IT      ITA     380
 JAMAICA                                         JM      JAM     388
 JAPAN                                           JP      JPN     392
 JORDAN                                          JO      JOR     400
-KAZAKHSTAN                                      KZ      KAZ     398  
+KAZAKHSTAN                                      KZ      KAZ     398
 KENYA                                           KE      KEN     404
 KIRIBATI                                        KI      KIR     296
 KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF          KP      PRK     408
 KOREA, REPUBLIC OF                              KR      KOR     410
 KUWAIT                                          KW      KWT     414
-KYRGYZSTAN                                      KG      KGZ     417  
+KYRGYZSTAN                                      KG      KGZ     417
 LAO PEOPLE'S DEMOCRATIC REPUBLIC                LA      LAO     418
-LATVIA                                          LV      LVA     428  
+LATVIA                                          LV      LVA     428
 LEBANON                                         LB      LBN     422
 LESOTHO                                         LS      LSO     426
 LIBERIA                                         LR      LBR     430
 LIBYAN ARAB JAMAHIRIYA                          LY      LBY     434
 LIECHTENSTEIN                                   LI      LIE     438
-LITHUANIA                                       LT      LTU     440  
+LITHUANIA                                       LT      LTU     440
 LUXEMBOURG                                      LU      LUX     442
 MACAU                                           MO      MAC     446
-MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF      MK      MKD     807 
+MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF      MK      MKD     807
 MADAGASCAR                                      MG      MDG     450
 MALAWI                                          MW      MWI     454
 MALAYSIA                                        MY      MYS     458
@@ -147,10 +147,10 @@ MARSHALL ISLANDS                                MH      MHL     584
 MARTINIQUE                                      MQ      MTQ     474
 MAURITANIA                                      MR      MRT     478
 MAURITIUS                                       MU      MUS     480
-MAYOTTE                                         YT      MYT     175  
+MAYOTTE                                         YT      MYT     175
 MEXICO                                          MX      MEX     484
 MICRONESIA, FEDERATED STATES OF                 FM      FSM     583
-MOLDOVA, REPUBLIC OF                            MD      MDA     498  
+MOLDOVA, REPUBLIC OF                            MD      MDA     498
 MONACO                                          MC      MCO     492
 MONGOLIA                                        MN      MNG     496
 MONTSERRAT                                      MS      MSR     500
@@ -199,8 +199,8 @@ SENEGAL                                         SN      SEN     686
 SEYCHELLES                                      SC      SYC     690
 SIERRA LEONE                                    SL      SLE     694
 SINGAPORE                                       SG      SGP     702
-SLOVAKIA (Slovak Republic)                      SK      SVK     703  
-SLOVENIA                                        SI      SVN     705  
+SLOVAKIA (Slovak Republic)                      SK      SVK     703
+SLOVENIA                                        SI      SVN     705
 SOLOMON ISLANDS                                 SB      SLB     090
 SOMALIA                                         SO      SOM     706
 SOUTH AFRICA                                    ZA      ZAF     710
@@ -217,7 +217,7 @@ SWEDEN                                          SE      SWE     752
 SWITZERLAND                                     CH      CHE     756
 SYRIAN ARAB REPUBLIC                            SY      SYR     760
 TAIWAN, PROVINCE OF CHINA                       TW      TWN     158
-TAJIKISTAN                                      TJ      TJK     762  
+TAJIKISTAN                                      TJ      TJK     762
 TANZANIA, UNITED REPUBLIC OF                    TZ      TZA     834
 THAILAND                                        TH      THA     764
 TOGO                                            TG      TGO     768
@@ -226,7 +226,7 @@ TONGA                                           TO      TON     776
 TRINIDAD AND TOBAGO                             TT      TTO     780
 TUNISIA                                         TN      TUN     788
 TURKEY                                          TR      TUR     792
-TURKMENISTAN                                    TM      TKM     795  
+TURKMENISTAN                                    TM      TKM     795
 TURKS AND CAICOS ISLANDS                        TC      TCA     796
 TUVALU                                          TV      TUV     798
 UGANDA                                          UG      UGA     800
@@ -236,7 +236,7 @@ UNITED KINGDOM                                  GB      GBR     826
 UNITED STATES                                   US      USA     840
 UNITED STATES MINOR OUTLYING ISLANDS            UM      UMI     581
 URUGUAY                                         UY      URY     858
-UZBEKISTAN                                      UZ      UZB     860  
+UZBEKISTAN                                      UZ      UZB     860
 VANUATU                                         VU      VUT     548
 VENEZUELA                                       VE      VEN     862
 VIET NAM                                        VN      VNM     704
@@ -413,11 +413,11 @@ Angola, changing information not included in this file. Offical name
 change to Republic of Angola
 
 Newsletter III-53, 1993-07-12
-Madagascar, changing information not included in this file. Official 
+Madagascar, changing information not included in this file. Official
 name change to Republic of Madagascar
 
 Newsletter III-54, 1993-07-23
-South Georgia and the South Sandwich Islands, previously covered by 
+South Georgia and the South Sandwich Islands, previously covered by
 Falkland Islands
 
 Newsletter III-55, 1993-07-16
@@ -429,11 +429,11 @@ Previously covered by the entry ET
 
 Newsletter III-57, 1993-07-16
 Macedonia, the former Yugolslav Republic of,
-Previously covered by the entry YU  
+Previously covered by the entry YU
 
 Newsletter III-58, 1993-07-16
 Afghanistan, changing information not included in this file
-Official name change to Islamic State of Afghanistan  
+Official name change to Islamic State of Afghanistan
 
 Newsletter III-32, 1993-07-25 ammendment
 Kyrgyzstan, changing information not included in this file. Offical name
@@ -449,7 +449,7 @@ change to Kingdom of Cambodia
 
 Announcement, 1994-02-02
 At this point the fourth edition of ISO 3166 appears. It can *now* be
-ordered from national standards institutions. 
+ordered from national standards institutions.
 The RIPE NCC will continue tracking changes.
 
 Newsletter IV-1, 1996-04-03
@@ -471,5 +471,4 @@ the Internet confronts ISO3166/MA with formerly unknown problems.  One
 among these problems is that more and more "non-country-entities" as
 e.g. organisations, interest groups or groupings of countries request
 ISO3166 code elements.  The scope of the standard does not allow for
-allocation of code elements to such "groups". 
-
+allocation of code elements to such "groups".

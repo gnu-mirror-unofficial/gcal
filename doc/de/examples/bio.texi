@@ -8,7 +8,7 @@
 $ cat bio.rc
 @print{} 0*d1#999 %;19620921
 $ gcal -fbio.rc %19961212 -s0 -xw --biorhythm-axis=19
-@print{} 
+@print{}
 @print{} Do, <12>Dez 1996: 0- G       P1 E        +0
 @print{} Fr,  13 Dez 1996: 0-  G   P   1          +0
 @print{} Sa,  14 Dez 1996: 0-    @@   E 0          +0

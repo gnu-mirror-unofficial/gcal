@@ -57,25 +57,25 @@
 ; So use an editor that does not delete the tabs when configuring this file.
 ; This file is 8 bit -- modify for your codepage if needed.
 ;....................................german...................................
-$c=~erzeugender Komet:			
-$d=~internationaler Code:			
+$c=~erzeugender Komet:
+$d=~internationaler Code:
 $m=~%1Maximum der Fallhäufigkeit%2
-$n=~maximale Anzahl von Objekten:		
+$n=~maximale Anzahl von Objekten:
 $r=~Lage des Radianten:
 $s=-Meteorstrom
-$v=~mittl. Geschw. rel. Erde:		
+$v=~mittl. Geschw. rel. Erde:
 $x=den
 $y=variabel
 $j=Nördliche
 $k=Südliche
 ;................................anglo-american...............................
-;$c=~producing comet:			
-;$d=~international 3-letter-code:	
+;$c=~producing comet:
+;$d=~international 3-letter-code:
 ;$m=~%1maximum of falling%2
-;$n=~maximal number of objects:		
+;$n=~maximal number of objects:
 ;$r=~position of radiant:
 ;$s=-meteoric shower
-;$v=~mean velocity rel. to earth:		
+;$v=~mean velocity rel. to earth:
 ;$x=ds
 ;$y=variable
 ;$j=Northern

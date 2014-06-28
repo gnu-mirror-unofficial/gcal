@@ -6,9 +6,9 @@
 @group
 @cartouche
 $ gcal %00000101 --resource-file=./lbrk-1.rc --disable-highlighting
-@print{} 
+@print{}
 @print{} Fixed date list:
-@print{} 
+@print{}
 @print{} Sat, Jan   1st 2000: Am I another short text? Dunno...
 @print{} Sat, Jan   1st 2000: I hope I'm also long enough
 @print{} here, a line break-up

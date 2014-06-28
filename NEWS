@@ -361,7 +361,7 @@ Major changes in release 2.50 (inofficial alpha testing release)
     +LZ ==  With leading zero(es)
     +LS ==  With leading space(s)
     ONS ==  With Ordinal Number suffix
-* By reason of implementing the optional format instruction 
+* By reason of implementing the optional format instruction
     which can be used by many special texts in the text part of
     a resource file line now, some of these special texts are
     obsolete now and are changed to:

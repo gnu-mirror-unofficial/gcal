@@ -3,10 +3,10 @@
 % Load plain if necessary, i.e., if running under initex.
 \expandafter\ifx\csname fmtname\endcsname\relax\input plain\fi
 %
-\def\texinfoversion{2000-05-28.15}
+\def\texinfoversion{2014-06-28.12}
 %
 % Copyright (C) 1985, 1986, 1988, 1990, 1991, 1992, 1993, 1994, 1995,
-% 1996, 1997, 1998, 1999, 2010, 2011, 2013 Free Software Foundation,
+% 1996, 1997, 1998, 1999, 2010, 2011, 2013, 2014 Free Software Foundation,
 % Inc.
 %
 % This texinfo.tex file is free software; you can redistribute it and/or
@@ -746,7 +746,7 @@ where each line of input produces a line of output.}
 % @paragraphindent NCHARS
 % We'll use ems for NCHARS, close enough.
 % We cannot implement @paragraphindent asis, though.
-% 
+%
 \def\asisword{asis} % no translation, these are keywords
 \def\noneword{none}
 %
@@ -904,11 +904,11 @@ where each line of input produces a line of output.}
   \def\pdfmakeoutlines{{%
     \openin 1 \jobname.toc
     \ifeof 1\else\bgroup
-      \closein 1 
+      \closein 1
       \indexnofonts
       \def\tt{}
       \let\_ = \normalunderscore
-      % Thanh's hack / proper braces in bookmarks  
+      % Thanh's hack / proper braces in bookmarks
       \edef\mylbrace{\iftrue \string{\else}\fi}\let\{=\mylbrace
       \edef\myrbrace{\iffalse{\else\string}\fi}\let\}=\myrbrace
       %
@@ -948,7 +948,7 @@ where each line of input produces a line of output.}
       \let\nextmakelinks=\makelinks
       \ifnum\lnkcount>0,\fi
       \picknum{#1}%
-      \startlink attr{/Border [0 0 0]} 
+      \startlink attr{/Border [0 0 0]}
         goto name{\pdfmkpgn{\the\pgn}}%
       \linkcolor #1%
       \advance\lnkcount by 1%
@@ -1002,7 +1002,7 @@ where each line of input produces a line of output.}
     \ifx\first0\adn0
     \else\ifx\first1\adn1 \else\ifx\first2\adn2 \else\ifx\first3\adn3
     \else\ifx\first4\adn4 \else\ifx\first5\adn5 \else\ifx\first6\adn6
-    \else\ifx\first7\adn7 \else\ifx\first8\adn8 \else\ifx\first9\adn9 
+    \else\ifx\first7\adn7 \else\ifx\first8\adn8 \else\ifx\first9\adn9
     \else
       \ifnum0=\countA\else\makelink\fi
       \ifx\first.\let\next=\done\else
@@ -1017,7 +1017,7 @@ where each line of input produces a line of output.}
   \def\pdflink#1{%
     \startlink attr{/Border [0 0 0]} goto name{\mkpgn{#1}}
     \linkcolor #1\endlink}
-  \def\mkpgn#1{#1@} 
+  \def\mkpgn#1{#1@}
   \def\done{\edef\st{\global\noexpand\toksA={\the\toksB}}\st}
 \fi % \ifx\pdfoutput
 
@@ -1405,7 +1405,7 @@ where each line of input produces a line of output.}
 
 % rms does not like angle brackets --karl, 17may97.
 % So now @email is just like @uref, unless we are pdf.
-% 
+%
 %\def\email#1{\angleleft{\tt #1}\angleright}
 \ifpdf
   \def\email#1{\doemail#1,,\finish}
@@ -2681,7 +2681,7 @@ width0pt\relax} \fi
 \def\@{@}% will be @@ when we switch to @ as escape char.
 % Need these in case \tex is in effect and \{ is a \delimiter again.
 % But can't use \lbracecmd and \rbracecmd because texindex assumes
-% braces and backslashes are used only as delimiters.  
+% braces and backslashes are used only as delimiters.
 \let\{ = \mylbrace
 \let\} = \myrbrace
 \def\_{{\realbackslash _}}%
@@ -4445,7 +4445,7 @@ width0pt\relax} \fi
 % to account for this both in the \...x definition and in parsing the
 % input at hand.  Thus also need a control sequence (passed as #5) for
 % the \E... definition to assign the category name to.
-% 
+%
 \def\deftypeopparsebody#1#2#3#4#5 #6 {\begingroup\inENV
   \medbreak
   \def#1{\endgraf\endgroup\medbreak}%
@@ -4829,7 +4829,7 @@ width0pt\relax} \fi
 
 % These definitions are used if you use @defunx (etc.)
 % anywhere other than immediately after a @defun or @defunx.
-% 
+%
 \def\defcvx#1 {\errmessage{@defcvx in invalid context}}
 \def\deffnx#1 {\errmessage{@deffnx in invalid context}}
 \def\defivarx#1 {\errmessage{@defivarx in invalid context}}
@@ -5641,7 +5641,7 @@ width0pt\relax} \fi
         \nobreak\bigskip
         % Usually we'll have text after the image which will insert
         % \parskip glue, so insert it here too to equalize the space
-        % above and below. 
+        % above and below.
         \nobreak\vskip\parskip
         \nobreak
         \centerline{\epsfbox{#1.eps}}%
@@ -5980,7 +5980,7 @@ should work if nowhere else does.}
 % Say @foo, not \foo, in error messages.
 @escapechar = `@@
 
-% These look ok in all fonts, so just make them not special.  
+% These look ok in all fonts, so just make them not special.
 @catcode`@& = @other
 @catcode`@# = @other
 @catcode`@% = @other

@@ -2,7 +2,7 @@
 # define __RC_INSERT_H
 /*!
 *  \file rc-insert.h
-*  \brief Inserts a line (of a resource file) 
+*  \brief Inserts a line (of a resource file)
 *  			into `rc_elems_table[]' header file.
 */
 /*

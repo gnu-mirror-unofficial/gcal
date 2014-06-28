@@ -7146,7 +7146,7 @@ an entry in the eternal holiday list, i.e.@: directly lead its date:
 @multitable @columnfractions .18 .82
 @item @strong{Character}
 @tab @strong{Description}
-@item @ 
+@item @
 @item @code{+}
 @tab Legal holiday which is valid in the whole country.
 Is automatically provided with highlighting sequences respectively marking
@@ -9011,7 +9011,7 @@ Some basic operations can be performed on date variables.  These are:
 @multitable @columnfractions .2 .8
 @item @strong{Operation}
 @tab @strong{Description}
-@item @ 
+@item @
 @item @code{@var{dvar}++}
 @cindex Date variables, simple increment
 @cindex Simple increment of date variables
@@ -9338,7 +9338,7 @@ in case they contain integer values.  These are:
 @multitable @columnfractions .2 .8
 @item @strong{Operation}
 @tab @strong{Description}
-@item @ 
+@item @
 @item @code{@var{tvar}++}
 @cindex Text variables, simple increment
 @cindex Simple increment of text variables
@@ -9856,7 +9856,7 @@ the following native languages:
 @multitable @columnfractions .33 .66
 @item @strong{Native Language}
 @tab @strong{Language Code}
-@item @ 
+@item @
 @item English
 @tab @code{en}
 @item German
@@ -10188,7 +10188,7 @@ software:
 @item @strong{No.}
 @tab @strong{Function}
 @tab @strong{Symbol}
-@item @ 
+@item @
 @item 1.
 @tab GNU @code{re_compile_pattern()} and @file{regex.h}
 @tab @code{GNU-REGEX}
@@ -12818,7 +12818,7 @@ exactly three different modes can be used that are represented by the
 @cindex Statute mile
 @item @strong{Mode}
 @tab @strong{Description}
-@item @ 
+@item @
 @item @code{0}
 @cindex Geographical distance @w{@code{%b0@var{argument}}} special text
 @cindex Geographical distance @w{@code{%b*0@var{argument}}} special text
@@ -12832,7 +12832,7 @@ Gcal to display the distance value for another quantity, and that in
 kilometer.  If Gcal is unable to compute the approximate distance between
 the two geographic point locations by reason of a misspecified @var{argument},
 a @w{@code{??}} text will be created instead of the distance value.
-@item @ 
+@item @
 @item @code{1}
 @cindex Course angle (true track) @w{@code{%b1@var{argument}}} special text
 @cindex Course angle (true track) @w{@code{%b*1@var{argument}}} special text
@@ -12848,7 +12848,7 @@ the course angle value using another style; and that in decimal degrees.
 If Gcal is unable to compute the approximate course angle between the two
 geographic point locations by reason of a misspecified @var{argument}, a
 @w{@code{???d??'}} text will be created instead of the course angle value.
-@item @ 
+@item @
 @item @code{2}
 @cindex Course angle (true track) @w{@code{%b2@var{argument}}} special text
 @cindex Course angle (true track) @w{@code{%b*2@var{argument}}} special text
@@ -12989,7 +12989,7 @@ value as it is described in the table:
 @item @strong{Mode}
 @tab @strong{Special text}
 @tab @strong{Description}
-@item @ 
+@item @
 @item @code{0}
 @cindex Sun, astronomical midnight time @code{%o0@var{argument}} special text
 @cindex Sun, astronomical midnight time @code{%s0@var{argument}} special text
@@ -13014,7 +13014,7 @@ the season and the geographical location.
 At that clocktime, the Sun is close its @dfn{lowest culmination point},
 i.e.@: close the lowest point below or above the horizontal plane the
 Sun transits during this day.
-@item @ 
+@item @
 @item @code{1}
 @cindex Sun, astronomical noon time @code{%o1@var{argument}} special text
 @cindex Sun, astronomical noon time @code{%s1@var{argument}} special text
@@ -13057,7 +13057,7 @@ length of the shadow before comparing it with the length of the pole.
 and
 @ref{x-Sun-asr-2, , Islamic Asr-2 prayer time},
 for further details.
-@item @ 
+@item @
 @item @code{2}
 @cindex Sun's center, geometrical rise time @code{%o2@var{argument}} special text
 @cindex Sun's center, geometrical rise time @code{%o*2@var{argument}} special text
@@ -13072,7 +13072,7 @@ horizontal plane that passes through the Earth's center, orthogonal
 to the observer's local vertical.  In the further context, the shorter
 term @emph{mathematical horizon} is used which actually means the
 mathematical-geocentric horizon.
-@item @ 
+@item @
 @item @code{2}
 @cindex Sun's center, geometrical set time @code{%s2@var{argument}} special text
 @cindex Sun's center, geometrical set time @code{%s*2@var{argument}} special text
@@ -13080,7 +13080,7 @@ mathematical-geocentric horizon.
 @tab Calculates the approximate time when the center of the Sun
 passes a reference altitude of 0 degrees on a mathematical horizon
 in the evening; thus setting.
-@item @ 
+@item @
 @item @code{2}
 @cindex Sun's center, geometrical visibility @code{%u2@var{argument}} special text
 @cindex Sun's center, geometrical visibility @code{%u*2@var{argument}} special text
@@ -13088,7 +13088,7 @@ in the evening; thus setting.
 @tab Calculates the approximate period while the center of the Sun
 is above a reference altitude of 0 degrees on a mathematical horizon;
 thus is visible.
-@item @ 
+@item @
 @item @code{2}
 @cindex Sun's center, geometrical non-visibility @code{%z2@var{argument}} special text
 @cindex Sun's center, geometrical non-visibility @code{%z*2@var{argument}} special text
@@ -13096,7 +13096,7 @@ thus is visible.
 @tab Calculates the approximate period while the center of the Sun
 is below a reference altitude of 0 degrees on a mathematical horizon;
 thus is non-visible.
-@item @ 
+@item @
 @item @code{3}
 @cindex Sun's upper limb, geometrical rise time @code{%o3@var{argument}} special text
 @cindex Sun's upper limb, geometrical rise time @code{%o*3@var{argument}} special text
@@ -13109,7 +13109,7 @@ value of the Sun's semidiameter as it appear at that clocktime.
 If the reference altitude that is referring to the Sun's upper limb is
 converted to a reference altitude that is referring to the Sun's center,
 this results in a value of about 16 arcminutes below the geocentric horizon.
-@item @ 
+@item @
 @item @code{3}
 @cindex Sun's upper limb, geometrical set time @code{%s3@var{argument}} special text
 @cindex Sun's upper limb, geometrical set time @code{%s*3@var{argument}} special text
@@ -13119,7 +13119,7 @@ passes a reference altitude of 0 degrees on a mathematical horizon
 in the evening; thus setting.
 The above mentioned reference altitude is computed from the
 value of the Sun's semidiameter as it appear at that clocktime.
-@item @ 
+@item @
 @item @code{3}
 @cindex Sun's upper limb, geometrical visibility @code{%u3@var{argument}} special text
 @cindex Sun's upper limb, geometrical visibility @code{%u*3@var{argument}} special text
@@ -13127,7 +13127,7 @@ value of the Sun's semidiameter as it appear at that clocktime.
 @tab Calculates the approximate period while the upper limb of the Sun
 is above a reference altitude of 0 degrees on a mathematical horizon;
 thus is visible.
-@item @ 
+@item @
 @item @code{3}
 @cindex Sun's upper limb, geometrical non-visibility @code{%z3@var{argument}} special text
 @cindex Sun's upper limb, geometrical non-visibility @code{%z*3@var{argument}} special text
@@ -13135,7 +13135,7 @@ thus is visible.
 @tab Calculates the approximate period while the upper limb of the Sun
 is below a reference altitude of 0 degrees on a mathematical horizon;
 thus is non-visible.
-@item @ 
+@item @
 @item @code{4}
 @cindex Sun's center, rise time @code{%o4@var{argument}} special text
 @cindex Sun's center, rise time @code{%o*4@var{argument}} special text
@@ -13150,7 +13150,7 @@ value of 34 arcminutes, which can indirectly be changed by using the
 @ref{x-atmosphere, , Fixed dates option @option{--atmosphere=@var{air-pressure}@r{[,}@var{temperature}@r{]}}},
 how to change the base data of the atmosphere, so that the atmospheric
 conditions as defined by it are used to calculate the amount of refraction.
-@item @ 
+@item @
 @item @code{4}
 @cindex Sun's center, set time @code{%s4@var{argument}} special text
 @cindex Sun's center, set time @code{%s*4@var{argument}} special text
@@ -13162,7 +13162,7 @@ The phenomenon of refraction is already respected in this as it arises in
 reality by the influence of the Earth's atmosphere, and that with the standard
 value of 34 arcminutes, which can indirectly be changed by using the
 @w{@option{--atmosphere}} option.
-@item @ 
+@item @
 @item @code{4}
 @cindex Sun's center, visibility @code{%u4@var{argument}} special text
 @cindex Sun's center, visibility @code{%u*4@var{argument}} special text
@@ -13170,7 +13170,7 @@ value of 34 arcminutes, which can indirectly be changed by using the
 @tab Calculates the approximate period while the center of the Sun
 is above a reference altitude of 34 arcminutes below the geocentric
 horizon; thus is visible.
-@item @ 
+@item @
 @item @code{4}
 @cindex Sun's center, non-visibility @code{%z4@var{argument}} special text
 @cindex Sun's center, non-visibility @code{%z*4@var{argument}} special text
@@ -13178,7 +13178,7 @@ horizon; thus is visible.
 @tab Calculates the approximate period while the center of the Sun
 is below a reference altitude of 34 arcminutes below the geocentric
 horizon; thus is non-visible.
-@item @ 
+@item @
 @item @code{5}
 @cindex Sun's upper limb, standard rise time @code{%o5@var{argument}} special text
 @cindex Sun's upper limb, standard rise time @code{%o*5@var{argument}} special text
@@ -13204,7 +13204,7 @@ at that clocktime.
 If the reference altitude that is referring to the Sun's upper limb is
 converted to a reference altitude that is referring to the Sun's center,
 this results in a value of about 50 arcminutes below the geocentric horizon.
-@item @ 
+@item @
 @item @code{5}
 @cindex Sun's upper limb, standard set time @code{%s5@var{argument}} special text
 @cindex Sun's upper limb, standard set time @code{%s*5@var{argument}} special text
@@ -13230,7 +13230,7 @@ at that clocktime.
 People of Islamic faith normally pray for the second-last time on the
 day at this clocktime, or some minutes later.  These people commonly
 use the term @dfn{Maghrib} for this prayer time.
-@item @ 
+@item @
 @item @code{5}
 @cindex Sun's upper limb, standard visibility @code{%u5@var{argument}} special text
 @cindex Sun's upper limb, standard visibility @code{%u*5@var{argument}} special text
@@ -13242,7 +13242,7 @@ is above a reference altitude of 34 arcminutes below the geocentric
 horizon; thus is visible.
 This kind of visibility period calculation is done according to the standard
 calculation method as it is commonly used internationally.
-@item @ 
+@item @
 @item @code{5}
 @cindex Sun's upper limb, standard non-visibility @code{%z5@var{argument}} special text
 @cindex Sun's upper limb, standard non-visibility @code{%z*5@var{argument}} special text
@@ -13254,7 +13254,7 @@ is above a reference altitude of 34 arcminutes below the geocentric
 horizon; thus is non-visible.
 This kind of non-visibility period calculation is done according to the
 standard calculation method as it is commonly used internationally.
-@item @ 
+@item @
 @item @code{6}
 @cindex Sun's center, begin of civil twilight @code{%o6@var{argument}} special text
 @cindex Sun's center, begin of civil twilight @code{%o*6@var{argument}} special text
@@ -13268,7 +13268,7 @@ in the morning; thus the beginning of @dfn{civil twilight}.
 The scattered light of the Sun that is remaining at the beginning of the
 civil twilight phase is in general not yet sufficient for reading outside
 without artificial illumination.
-@item @ 
+@item @
 @item @code{6}
 @cindex Sun's center, end of civil twilight @code{%s6@var{argument}} special text
 @cindex Sun's center, end of civil twilight @code{%s*6@var{argument}} special text
@@ -13279,7 +13279,7 @@ without artificial illumination.
 @tab Calculates the approximate time when the center of the Sun
 passes a reference altitude of 6 degrees below a mathematical horizon
 in the evening; thus the ending of civil twilight.
-@item @ 
+@item @
 @item @code{6}
 @cindex Sun's center, period above civil twilight reference altitude @code{%u6@var{argument}} special text
 @cindex Sun's center, period above civil twilight reference altitude @code{%u*6@var{argument}} special text
@@ -13287,7 +13287,7 @@ in the evening; thus the ending of civil twilight.
 @tab Calculates the approximate period while the center of the Sun
 is above a reference altitude of 6 degrees below a mathematical horizon;
 thus the period, while the center of the Sun is always above -6 degrees.
-@item @ 
+@item @
 @item @code{6}
 @cindex Sun's center, period below civil twilight reference altitude @code{%z6@var{argument}} special text
 @cindex Sun's center, period below civil twilight reference altitude @code{%z*6@var{argument}} special text
@@ -13295,7 +13295,7 @@ thus the period, while the center of the Sun is always above -6 degrees.
 @tab Calculates the approximate period while the center of the Sun
 is below a reference altitude of 6 degrees below a mathematical horizon;
 thus the period, while the center of the Sun is always below -6 degrees.
-@item @ 
+@item @
 @item @code{7}
 @cindex Sun's center, begin of nautical twilight @code{%o7@var{argument}} special text
 @cindex Sun's center, begin of nautical twilight @code{%o*7@var{argument}} special text
@@ -13309,7 +13309,7 @@ in the morning; thus the beginning of @dfn{nautical twilight}.
 The scattered light of the Sun that is remaining at the beginning of the
 nautical twilight phase is in general not yet sufficient for navigation
 using a sea horizon.
-@item @ 
+@item @
 @item @code{7}
 @cindex Sun's center, end of nautical twilight @code{%s7@var{argument}} special text
 @cindex Sun's center, end of nautical twilight @code{%s*7@var{argument}} special text
@@ -13320,7 +13320,7 @@ using a sea horizon.
 @tab Calculates the approximate time when the center of the Sun
 passes a reference altitude of 12 degrees below a mathematical horizon
 in the evening; thus the ending of nautical twilight.
-@item @ 
+@item @
 @item @code{7}
 @cindex Sun's center, period above nautical twilight reference altitude @code{%u7@var{argument}} special text
 @cindex Sun's center, period above nautical twilight reference altitude @code{%u*7@var{argument}} special text
@@ -13328,7 +13328,7 @@ in the evening; thus the ending of nautical twilight.
 @tab Calculates the approximate period while the center of the Sun
 is above a reference altitude of 12 degrees below a mathematical horizon;
 thus the period, while the center of the Sun is always above -12 degrees.
-@item @ 
+@item @
 @item @code{7}
 @cindex Sun's center, period below nautical twilight reference altitude @code{%z7@var{argument}} special text
 @cindex Sun's center, period below nautical twilight reference altitude @code{%z*7@var{argument}} special text
@@ -13336,7 +13336,7 @@ thus the period, while the center of the Sun is always above -12 degrees.
 @tab Calculates the approximate period while the center of the Sun
 is below a reference altitude of 12 degrees below a mathematical horizon;
 thus the period, while the center of the Sun is always below -12 degrees.
-@item @ 
+@item @
 @item @code{8}
 @cindex Sun's center, begin of amateur-astronomical twilight @code{%o8@var{argument}} special text
 @cindex Sun's center, begin of amateur-astronomical twilight @code{%o*8@var{argument}} special text
@@ -13350,7 +13350,7 @@ in the morning; thus the beginning of @dfn{amateur-astronomical twilight}.
 The scattered light of the Sun that is remaining at the beginning of the
 amateur-astronomical twilight phase is in general yet so faint that most
 astronomical observations can be made.
-@item @ 
+@item @
 @item @code{8}
 @cindex Sun's center, end of amateur-astronomical twilight @code{%s8@var{argument}} special text
 @cindex Sun's center, end of amateur-astronomical twilight @code{%s*8@var{argument}} special text
@@ -13361,7 +13361,7 @@ astronomical observations can be made.
 @tab Calculates the approximate time when the center of the Sun
 passes a reference altitude of 15 degrees below a mathematical horizon
 in the evening; thus the ending of amateur-astronomical twilight.
-@item @ 
+@item @
 @item @code{8}
 @cindex Sun's center, period above amateur-astronomical twilight reference altitude @code{%u8@var{argument}} special text
 @cindex Sun's center, period above amateur-astronomical twilight reference altitude @code{%u*8@var{argument}} special text
@@ -13369,7 +13369,7 @@ in the evening; thus the ending of amateur-astronomical twilight.
 @tab Calculates the approximate period while the center of the Sun
 is above a reference altitude of 15 degrees below a mathematical horizon;
 thus the period, while the center of the Sun is always above -15 degrees.
-@item @ 
+@item @
 @item @code{8}
 @cindex Sun's center, period below amateur-astronomical twilight reference altitude @code{%z8@var{argument}} special text
 @cindex Sun's center, period below amateur-astronomical twilight reference altitude @code{%z*8@var{argument}} special text
@@ -13377,7 +13377,7 @@ thus the period, while the center of the Sun is always above -15 degrees.
 @tab Calculates the approximate period while the center of the Sun
 is below a reference altitude of 15 degrees below a mathematical horizon;
 thus the period, while the center of the Sun is always below -15 degrees.
-@item @ 
+@item @
 @item @code{8}
 @cindex Sun's center, begin of astronomical twilight @code{%o9@var{argument}} special text
 @cindex Sun's center, begin of astronomical twilight @code{%o*9@var{argument}} special text
@@ -13399,7 +13399,7 @@ standard sunrise.  These people commonly use the term @dfn{Fajr}
 for this prayer time.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{9}
 @cindex Sun's center, end of astronomical twilight @code{%s9@var{argument}} special text
 @cindex Sun's center, end of astronomical twilight @code{%s*9@var{argument}} special text
@@ -13416,7 +13416,7 @@ in the evening; thus the ending of astronomical twilight.
 People of Islamic faith normally pray for the last time on the
 day at this clocktime, or some minutes later.  These people commonly
 use the term @dfn{Isha} for this prayer time.
-@item @ 
+@item @
 @item @code{9}
 @cindex Sun's center, period above astronomical twilight reference altitude @code{%u9@var{argument}} special text
 @cindex Sun's center, period above astronomical twilight reference altitude @code{%u*9@var{argument}} special text
@@ -13424,7 +13424,7 @@ use the term @dfn{Isha} for this prayer time.
 @tab Calculates the approximate period while the center of the Sun
 is above a reference altitude of 18 degrees below a mathematical horizon;
 thus the period, while the center of the Sun is always above -18 degrees.
-@item @ 
+@item @
 @item @code{9}
 @cindex Sun's center, period below astronomical twilight reference altitude @code{%z9@var{argument}} special text
 @cindex Sun's center, period below astronomical twilight reference altitude @code{%z*9@var{argument}} special text
@@ -13432,7 +13432,7 @@ thus the period, while the center of the Sun is always above -18 degrees.
 @tab Calculates the approximate period while the center of the Sun
 is below a reference altitude of 18 degrees below a mathematical horizon;
 thus the period, while the center of the Sun is always below -18 degrees.
-@item @ 
+@item @
 @item @code{a}
 @cindex Sun, topocentric elevation @code{%oa@var{argument}} special text
 @cindex Sun, topocentric elevation @code{%sa@var{argument}} special text
@@ -13462,7 +13462,7 @@ flattens towards the pole caps and therefore cannot be taken as an ideally
 shaped sphere, the individual Earth radius between the observer's location
 and the center of the Earth also affects the computation of
 topocentrically based data.
-@item @ 
+@item @
 @item @code{b}
 @cindex Sun, topocentric azimuth @code{%ob@var{argument}} special text
 @cindex Sun, topocentric azimuth @code{%sb@var{argument}} special text
@@ -13472,7 +13472,7 @@ topocentrically based data.
 @tab Calculates the approximate topocentric, apparent azimuth
 of the Sun in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{c}
 @cindex Sun, topocentric declination @code{%oc@var{argument}} special text
 @cindex Sun, topocentric declination @code{%sc@var{argument}} special text
@@ -13488,7 +13488,7 @@ as it happen at civil midnight time.
 Results with a negative sign signify that the Sun's center is below the
 celestial equator at the moment, and results with a positive sign mean
 that the momentary center of the Sun is below the celestial equator.
-@item @ 
+@item @
 @item @code{d}
 @cindex Sun, topocentric ecliptic longitude @code{%od@var{argument}} special text
 @cindex Sun, topocentric ecliptic longitude @code{%sd@var{argument}} special text
@@ -13507,7 +13507,7 @@ the vernal equinox point on the @dfn{ecliptic} (the zodiacal line or Sun's
 orbit),
 in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{e}
 @cindex Sun, topocentric right ascension @code{%oe@var{argument}} special text
 @cindex Sun, topocentric right ascension @code{%se@var{argument}} special text
@@ -13521,7 +13521,7 @@ of the Sun, thus the horizontal angular distance between the Sun's center and
 the hour circle that passes through the vernal equinox point on the ecliptic,
 as time value in hours and minutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{f}
 @cindex Sun, topocentric distance @code{%of@var{argument}} special text
 @cindex Sun, topocentric distance @code{%sf@var{argument}} special text
@@ -13536,7 +13536,7 @@ as it happen at civil midnight time.
 An astronomical unit, abbreviated by @acronym{ae}, is equal to the mean
 distance of the Sun from the Earth, which is about @w{149,597,870.691}
 kilometers.
-@item @ 
+@item @
 @item @code{g}
 @cindex Sun, topocentric horizontal parallax @code{%og@var{argument}} special text
 @cindex Sun, topocentric horizontal parallax @code{%sg@var{argument}} special text
@@ -13549,7 +13549,7 @@ of the Sun in degrees and arcminutes
 as it happen at civil midnight time.
 The horizontal parallax of the Sun specifies the diameter of the Earth
 as it is seen from the surface of the Sun.
-@item @ 
+@item @
 @item @code{h}
 @cindex Sun, topocentric semidiameter @code{%oh@var{argument}} special text
 @cindex Sun, topocentric semidiameter @code{%sh@var{argument}} special text
@@ -13559,7 +13559,7 @@ as it is seen from the surface of the Sun.
 @tab Calculates the approximate topocentric, apparent semidiameter
 of the Sun in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{i}
 @cindex Sun, refraction @code{%oi@var{argument}} special text
 @cindex Sun, refraction @code{%si@var{argument}} special text
@@ -13569,7 +13569,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate refraction of the Earth's atmosphere
 in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{j}
 @cindex Sun, geocentric elevation @code{%oj@var{argument}} special text
 @cindex Sun, geocentric elevation @code{%sj@var{argument}} special text
@@ -13582,7 +13582,7 @@ as it happen at civil midnight time.
 Results with a negative sign signify that the Sun's center is below the
 horizon at the moment, and results with a positive sign mean that the
 momentary center of the Sun is above the horizon.
-@item @ 
+@item @
 @item @code{k}
 @cindex Sun, geocentric azimuth @code{%ok@var{argument}} special text
 @cindex Sun, geocentric azimuth @code{%sk@var{argument}} special text
@@ -13592,7 +13592,7 @@ momentary center of the Sun is above the horizon.
 @tab Calculates the approximate geocentric, apparent azimuth
 of the Sun in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{l}
 @cindex Sun, geocentric declination @code{%ol@var{argument}} special text
 @cindex Sun, geocentric declination @code{%sl@var{argument}} special text
@@ -13605,7 +13605,7 @@ as it happen at civil midnight time.
 Results with a negative sign signify that the Sun's center is below the
 celestial equator at the moment, and results with a positive sign mean
 that the momentary center of the Sun is above the celestial equator.
-@item @ 
+@item @
 @item @code{m}
 @cindex Sun, geocentric ecliptic longitude @code{%om@var{argument}} special text
 @cindex Sun, geocentric ecliptic longitude @code{%sm@var{argument}} special text
@@ -13615,7 +13615,7 @@ that the momentary center of the Sun is above the celestial equator.
 @tab Calculates the approximate geocentric, apparent ecliptic longitude
 of the Sun in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{n}
 @cindex Sun, geocentric right ascension @code{%on@var{argument}} special text
 @cindex Sun, geocentric right ascension @code{%sn@var{argument}} special text
@@ -13625,7 +13625,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate geocentric, apparent right ascension
 of the Sun as time value in hours and minutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{o}
 @cindex Sun, geocentric distance @code{%oo@var{argument}} special text
 @cindex Sun, geocentric distance @code{%so@var{argument}} special text
@@ -13635,7 +13635,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate geocentric, apparent distance
 of the Sun from the Earth in astronomical units
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{p}
 @cindex Sun, geocentric horizontal parallax @code{%op@var{argument}} special text
 @cindex Sun, geocentric horizontal parallax @code{%sp@var{argument}} special text
@@ -13645,7 +13645,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate geocentric, apparent horizontal parallax
 of the Sun in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{q}
 @cindex Sun, geocentric semidiameter @code{%oq@var{argument}} special text
 @cindex Sun, geocentric semidiameter @code{%sq@var{argument}} special text
@@ -13655,7 +13655,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate geocentric, apparent semidiameter
 of the Sun in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{r}
 @cindex Sun, delta-t @code{%or@var{argument}} special text
 @cindex Sun, delta-t @code{%sr@var{argument}} special text
@@ -13671,7 +13671,7 @@ Delta-t is the difference between the Terrestrial Dynamical time
 (abbreviated by @acronym{TDT}), that was formerly known as @emph{Ephemeris
 time} (abbreviated by @acronym{ET}), and the Universal time (@acronym{UT}).
 Thus, @w{@samp{delta-t @equiv{} TDT - UT}}@.
-@item @ 
+@item @
 @item @code{s}
 @cindex Sun, local sidereal time @code{%os@var{argument}} special text
 @cindex Sun, local sidereal time @code{%ss@var{argument}} special text
@@ -13693,7 +13693,7 @@ which is past between the last upper culmination of the vernal equinox
 point in the meridian of the observer's location (the momentary hour angle
 of the vernal equinox point), thus the right ascension of the stars in the
 observer's meridian at the moment.
-@item @ 
+@item @
 @item @code{t}
 @cindex Sun, base time @code{%ot@var{argument}} special text
 @cindex Sun, base time @code{%st@var{argument}} special text
@@ -13712,7 +13712,7 @@ the astronomical data and times of the Sun are always calculated
 for 0 @w{o'clock} Universal time @w{(UTC/GMT)}@.
 @xref{x-time-offset, , Calendar option @option{--time-offset=@var{argument}}},
 for further details.
-@item @ 
+@item @
 @item @code{u}
 @cindex Sun, Julian date @code{%ou@var{argument}} special text
 @cindex Sun, Julian date @code{%su@var{argument}} special text
@@ -13723,7 +13723,7 @@ for further details.
 as it happen at civil midnight time.
 @xref{Julian day number},
 for further information about the Julian date.
-@item @ 
+@item @
 @item @code{v}
 @cindex Sun, Julian Ephemeris date @code{%ov@var{argument}} special text
 @cindex Sun, Julian Ephemeris date @code{%sv@var{argument}} special text
@@ -13735,7 +13735,7 @@ for further information about the Julian date.
 @tab Calculates the approximate @dfn{Julian Ephemeris date},
 thus a Julian date that is corrected by @emph{delta-t}, in days
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{w}
 @cindex Sun, equation of time @code{%ow@var{argument}} special text
 @cindex Sun, equation of time @code{%sw@var{argument}} special text
@@ -13771,7 +13771,7 @@ the celestial equator is used for deriving the mean solar time.
 So, this difference in time is a consequence of the ellipticity and tilt
 of the Earth's orbit, causing the irregular apparent movement of the Sun
 across the sky.
-@item @ 
+@item @
 @item @code{x}
 @cindex Sun/Moon, delta topocentric elevation @code{%ox@var{argument}} special text
 @cindex Sun/Moon, delta topocentric elevation @code{%sx@var{argument}} special text
@@ -13789,7 +13789,7 @@ thus the Sun is lower than the Moon.
 Results with a positive sign signify that the momentary center of the Sun is
 at an elevation that is above the momentary elevation of the Moon's center;
 thus the Sun is higher than the Moon.
-@item @ 
+@item @
 @item @code{y}
 @cindex Sun/Moon, delta topocentric azimuth @code{%oy@var{argument}} special text
 @cindex Sun/Moon, delta topocentric azimuth @code{%sy@var{argument}} special text
@@ -13811,7 +13811,7 @@ expressed, that the Sun is to the left (anti-clockwise) of the Moon.
 Results with a positive sign signify that the Moon is to the left
 (anti-clockwise) of the Sun if one looks to the Sun --- or alternatively
 expressed, that the Sun is to the right (clockwise) of the Moon.
-@item @ 
+@item @
 @item @code{z}
 @cindex Sun/Moon, delta geocentric elevation @code{%oz@var{argument}} special text
 @cindex Sun/Moon, delta geocentric elevation @code{%sz@var{argument}} special text
@@ -13823,7 +13823,7 @@ apparent elevation of Sun and Moon (delta),
 at which the Sun is used as the reference point,
 in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{A}
 @cindex Sun/Moon, delta geocentric azimuth @code{%oA@var{argument}} special text
 @cindex Sun/Moon, delta geocentric azimuth @code{%sA@var{argument}} special text
@@ -13835,7 +13835,7 @@ apparent azimuth of Sun and Moon (delta),
 at which the Sun is used as the reference point,
 in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{B}
 @cindex Sun/Moon, delta topocentric elevation at standard sunrise time @code{%oB@var{argument}} special text
 @cindex Sun/Moon, delta topocentric elevation at standard sunrise time @code{%o*B@var{argument}} special text
@@ -13847,7 +13847,7 @@ in degrees and arcminutes
 as it happen at standard rise time of the Sun.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{B}
 @cindex Sun/Moon, delta topocentric elevation at standard sunset time @code{%sB@var{argument}} special text
 @cindex Sun/Moon, delta topocentric elevation at standard sunset time @code{%s*B@var{argument}} special text
@@ -13859,7 +13859,7 @@ in degrees and arcminutes
 as it happen at standard set time of the Sun.
 @xref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{C}
 @cindex Sun/Moon, delta topocentric azimuth at standard sunrise time @code{%oC@var{argument}} special text
 @cindex Sun/Moon, delta topocentric azimuth at standard sunrise time @code{%o*C@var{argument}} special text
@@ -13871,7 +13871,7 @@ in degrees and arcminutes
 as it happen at standard rise time of the Sun.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{C}
 @cindex Sun/Moon, delta topocentric azimuth at standard sunset time @code{%sC@var{argument}} special text
 @cindex Sun/Moon, delta topocentric azimuth at standard sunset time @code{%s*C@var{argument}} special text
@@ -13883,7 +13883,7 @@ in degrees and arcminutes
 as it happen at standard set time of the Sun.
 @xref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{D}
 @cindex Sun/Moon, delta geocentric elevation at standard sunrise time @code{%oD@var{argument}} special text
 @cindex Sun/Moon, delta geocentric elevation at standard sunrise time @code{%o*D@var{argument}} special text
@@ -13895,7 +13895,7 @@ in degrees and arcminutes
 as it happen at standard rise time of the Sun.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{D}
 @cindex Sun/Moon, delta geocentric elevation at standard sunset time @code{%sD@var{argument}} special text
 @cindex Sun/Moon, delta geocentric elevation at standard sunset time @code{%s*D@var{argument}} special text
@@ -13907,7 +13907,7 @@ in degrees and arcminutes
 as it happen at standard set time of the Sun.
 @xref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{E}
 @cindex Sun/Moon, delta geocentric azimuth at standard sunrise time @code{%oE@var{argument}} special text
 @cindex Sun/Moon, delta geocentric azimuth at standard sunrise time @code{%o*E@var{argument}} special text
@@ -13919,7 +13919,7 @@ in degrees and arcminutes
 as it happen at standard rise time of the Sun.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{E}
 @cindex Sun/Moon, delta geocentric azimuth at standard sunset time @code{%sE@var{argument}} special text
 @cindex Sun/Moon, delta geocentric azimuth at standard sunset time @code{%s*E@var{argument}} special text
@@ -13931,7 +13931,7 @@ in degrees and arcminutes
 as it happen at standard set time of the Sun.
 @xref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{F}
 @cindex Sun/Moon, delta astronomical midnight time @code{%oF@var{argument}} special text
 @cindex Sun/Moon, delta astronomical midnight time @code{%sF@var{argument}} special text
@@ -13953,7 +13953,7 @@ thus the solar midnight is after the lunar midnight.
 and
 @ref{x-Moon-midnight, , Astronomical midnight time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{G}
 @cindex Sun/Moon, delta astronomical noon time @code{%oG@var{argument}} special text
 @cindex Sun/Moon, delta astronomical noon time @code{%sG@var{argument}} special text
@@ -13975,7 +13975,7 @@ thus the solar noon is after the lunar noon.
 and
 @ref{x-Moon-noon, , Astronomical noon time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{H}
 @cindex Sun/Moon, delta standard rise time @code{%oH@var{argument}} special text
 @cindex Sun/Moon, delta standard rise time @code{%o*H@var{argument}} special text
@@ -13995,7 +13995,7 @@ thus the sunrise is after the moonrise.
 and
 @ref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{H}
 @cindex Sun/Moon, delta standard set time @code{%sH@var{argument}} special text
 @cindex Sun/Moon, delta standard set time @code{%s*H@var{argument}} special text
@@ -14015,7 +14015,7 @@ thus the sunset is after the moonset.
 and
 @ref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{I}
 @cindex Sun, topocentric elevation at Sun's astronomical midnight time @code{%oI@var{argument}} special text
 @cindex Sun, topocentric elevation at Sun's astronomical midnight time @code{%sI@var{argument}} special text
@@ -14030,7 +14030,7 @@ as it happen at astronomical midnight time of the Sun
 (topocentric @dfn{midnight height})@.
 @xref{x-Sun-midnight, , Astronomical midnight time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{J}
 @cindex Sun, topocentric elevation at Sun's astronomical noon time @code{%oJ@var{argument}} special text
 @cindex Sun, topocentric elevation at Sun's astronomical noon time @code{%sJ@var{argument}} special text
@@ -14045,7 +14045,7 @@ as it happen at astronomical midnight time of the Sun
 (topocentric @dfn{midnight height})@.
 @xref{x-Sun-noon, , Astronomical noon time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{K}
 @cindex Sun, topocentric elevation at standard rise time @code{%oK@var{argument}} special text
 @cindex Sun, topocentric elevation at standard rise time @code{%o*K@var{argument}} special text
@@ -14058,7 +14058,7 @@ as it happen at standard rise time of the Sun
 (topocentric @dfn{rise height})@.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{K}
 @cindex Sun, topocentric elevation at standard set time @code{%sK@var{argument}} special text
 @cindex Sun, topocentric elevation at standard set time @code{%s*K@var{argument}} special text
@@ -14071,7 +14071,7 @@ as it happen at standard set time of the Sun
 (topocentric @dfn{set height})@.
 @xref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{L}
 @cindex Sun, topocentric azimuth at standard rise time @code{%oL@var{argument}} special text
 @cindex Sun, topocentric azimuth at standard rise time @code{%o*L@var{argument}} special text
@@ -14088,7 +14088,7 @@ between the topocentric rise azimuth and the East direction is also
 known as the topocentric @dfn{morning width} of the Sun.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{L}
 @cindex Sun, topocentric azimuth at standard set time @code{%sL@var{argument}} special text
 @cindex Sun, topocentric azimuth at standard set time @code{%s*L@var{argument}} special text
@@ -14105,7 +14105,7 @@ between the topocentric set azimuth and the West direction is also
 known as the topocentric @dfn{evening width} of the Sun.
 @xref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{M}
 @cindex Sun, geocentric elevation at Sun's astronomical midnight time @code{%oM@var{argument}} special text
 @cindex Sun, geocentric elevation at Sun's astronomical midnight time @code{%sM@var{argument}} special text
@@ -14120,7 +14120,7 @@ as it happen at astronomical midnight time of the Sun
 (geocentric @dfn{midnight height})@.
 @xref{x-Sun-midnight, , Astronomical midnight time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{N}
 @cindex Sun, geocentric elevation at Sun's astronomical noon time @code{%oN@var{argument}} special text
 @cindex Sun, geocentric elevation at Sun's astronomical noon time @code{%sN@var{argument}} special text
@@ -14135,7 +14135,7 @@ as it happen at astronomical midnight time of the Sun
 (geocentric @dfn{midnight height})@.
 @xref{x-Sun-noon, , Astronomical noon time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{O}
 @cindex Sun, geocentric elevation at standard rise time @code{%oO@var{argument}} special text
 @cindex Sun, geocentric elevation at standard rise time @code{%o*O@var{argument}} special text
@@ -14148,7 +14148,7 @@ as it happen at standard rise time of the Sun
 (geocentric @dfn{rise height})@.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{O}
 @cindex Sun, geocentric elevation at standard set time @code{%sO@var{argument}} special text
 @cindex Sun, geocentric elevation at standard set time @code{%s*O@var{argument}} special text
@@ -14161,7 +14161,7 @@ as it happen at standard set time of the Sun
 (geocentric @dfn{set height})@.
 @xref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{P}
 @cindex Sun, geocentric azimuth at standard rise time @code{%oP@var{argument}} special text
 @cindex Sun, geocentric azimuth at standard rise time @code{%o*P@var{argument}} special text
@@ -14178,7 +14178,7 @@ between the geocentric rise azimuth and the East direction is also
 known as the geocentric @dfn{morning width} of the Sun.
 @xref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{P}
 @cindex Sun, geocentric azimuth at standard set time @code{%sP@var{argument}} special text
 @cindex Sun, geocentric azimuth at standard set time @code{%s*P@var{argument}} special text
@@ -14195,7 +14195,7 @@ between the geocentric set azimuth and the West direction is also
 known as the geocentric @dfn{evening width} of the Sun.
 @xref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Sun, single shadow length time at forenoon @code{%oQ@var{argument}} special text
 @cindex Sun, single shadow length time at forenoon @code{%o*Q@var{argument}} special text
@@ -14208,7 +14208,7 @@ Nevertheless, the minimum length of the shadow is subtracted from the
 length of the shadow before comparing it with the length of the pole.
 @xref{x-adjust-value, , Fixed dates option @option{--adjust-value=@var{argument}}},
 how to change the shadow length factor.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Sun, single shadow length time at afternoon @code{%sQ@var{argument}} special text
 @cindex Sun, single shadow length time at afternoon @code{%s*Q@var{argument}} special text
@@ -14231,7 +14231,7 @@ the term @dfn{Asr} for this prayer time.
 for more information.  And note
 @ref{x-adjust-value, , Fixed dates option @option{--adjust-value=@var{argument}}},
 how to change the shadow length factor.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Sun, period of single or shorter shadow length @code{%uQ@var{argument}} special text
 @cindex Sun, period of single or shorter shadow length @code{%u*Q@var{argument}} special text
@@ -14241,7 +14241,7 @@ how to change the shadow length factor.
 @tab Calculates the approximate period while the center of the Sun
 is above a reference altitude, at which the length of the shadow cast
 by a vertical pole is of single or shorter length than the pole itself.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Sun, period of longer than single shadow length @code{%zQ@var{argument}} special text
 @cindex Sun, period of longer than single shadow length @code{%z*Q@var{argument}} special text
@@ -14252,7 +14252,7 @@ by a vertical pole is of single or shorter length than the pole itself.
 is below a reference altitude, at which a vertical pole either casts no
 shadow anymore, or casts a shadow that is longer than the single length
 of the pole itself.
-@item @ 
+@item @
 @item @code{R}
 @cindex Sun, double shadow length time at forenoon @code{%oR@var{argument}} special text
 @cindex Sun, double shadow length time at forenoon @code{%o*R@var{argument}} special text
@@ -14265,7 +14265,7 @@ Nevertheless, the minimum length of the shadow is subtracted from the
 length of the shadow before comparing it with the length of the pole.
 @xref{x-adjust-value, , Fixed dates option @option{--adjust-value=@var{argument}}},
 how to change the shadow length factor.
-@item @ 
+@item @
 @item @code{R}
 @cindex Sun, double shadow length time at afternoon @code{%sR@var{argument}} special text
 @cindex Sun, double shadow length time at afternoon @code{%s*R@var{argument}} special text
@@ -14288,7 +14288,7 @@ the term @dfn{Asr} for this prayer time.
 for more information.  And note
 @ref{x-adjust-value, , Fixed dates option @option{--adjust-value=@var{argument}}},
 how to change the shadow length factor.
-@item @ 
+@item @
 @item @code{R}
 @cindex Sun, period of double or shorter shadow length @code{%uR@var{argument}} special text
 @cindex Sun, period of double or shorter shadow length @code{%u*R@var{argument}} special text
@@ -14298,7 +14298,7 @@ how to change the shadow length factor.
 @tab Calculates the approximate period while the center of the Sun
 is above a reference altitude, at which the length of the shadow cast
 by a vertical pole is of double or shorter length than the pole itself.
-@item @ 
+@item @
 @item @code{R}
 @cindex Sun, period of longer than double shadow length @code{%zR@var{argument}} special text
 @cindex Sun, period of longer than double shadow length @code{%z*R@var{argument}} special text
@@ -14617,7 +14617,7 @@ values determination:
 @tab @strong{Dynamical}
 @tab @strong{Co-ordinate}
 @tab @strong{Timezone}
-@item @ 
+@item @
 @item @code{0}
 @tab 3
 @tab No
@@ -15102,7 +15102,7 @@ value as it is described in the table:
 @item @strong{Mode}
 @tab @strong{Special text}
 @tab @strong{Description}
-@item @ 
+@item @
 @item @code{0}
 @cindex Moon, astronomical midnight time @code{%(0@var{argument}} special text
 @cindex Moon, astronomical midnight time @code{%)0@var{argument}} special text
@@ -15136,7 +15136,7 @@ lunation) ---i.e.@: the mean time between two consecutive @dfn{conjunctions}
 (or New Moon phases)--- at which no lunar midnight happens, because the Moon
 revolves the Earth within 24 hours and 50 minutes on the average --- which
 also means, that the Moon rises on the average 50 minutes later each day.
-@item @ 
+@item @
 @item @code{1}
 @cindex Moon, astronomical noon time @code{%(1@var{argument}} special text
 @cindex Moon, astronomical noon time @code{%)1@var{argument}} special text
@@ -15157,7 +15157,7 @@ i.e.@: close the highest point above or below the horizontal plane the
 Moon transits during this day.
 Nevertheless, there is exactly one day during a synodic month at which
 no lunar noon happens.
-@item @ 
+@item @
 @item @code{2}
 @cindex Moon's center, geometrical rise time @code{%(2@var{argument}} special text
 @cindex Moon's center, geometrical rise time @code{%(*2@var{argument}} special text
@@ -15181,7 +15181,7 @@ The above mentioned reference altitude is computed from the
 value of the Moon's parallax as it appear at that clocktime.
 Nevertheless, there is exactly one day during a synodic month
 at which no such moonrise happens.
-@item @ 
+@item @
 @item @code{2}
 @cindex Moon's center, geometrical set time @code{%)2@var{argument}} special text
 @cindex Moon's center, geometrical set time @code{%)*2@var{argument}} special text
@@ -15194,7 +15194,7 @@ The above mentioned reference altitude is computed from the
 value of the Moon's parallax as it appear at that clocktime.
 Nevertheless, there is exactly one day during a synodic month
 at which no such moonset happens.
-@item @ 
+@item @
 @item @code{2}
 @cindex Moon's center, geometrical visibility @code{%[2@var{argument}} special text
 @cindex Moon's center, geometrical visibility @code{%[*2@var{argument}} special text
@@ -15202,7 +15202,7 @@ at which no such moonset happens.
 @tab Calculates the approximate period while the center of the Moon
 is above a reference altitude which is between about 54 and 61 arcminutes
 above a mathematical horizon; thus is visible.
-@item @ 
+@item @
 @item @code{2}
 @cindex Moon's center, geometrical non-visibility @code{%]2@var{argument}} special text
 @cindex Moon's center, geometrical non-visibility @code{%]*2@var{argument}} special text
@@ -15210,7 +15210,7 @@ above a mathematical horizon; thus is visible.
 @tab Calculates the approximate period while the center of the Moon
 is below a reference altitude which is between about 54 and 61 arcminutes
 above a mathematical horizon; thus is non-visible.
-@item @ 
+@item @
 @item @code{3}
 @cindex Moon's upper limb, geometrical rise time @code{%(3@var{argument}} special text
 @cindex Moon's upper limb, geometrical rise time @code{%(*3@var{argument}} special text
@@ -15227,7 +15227,7 @@ this results in a value which is between about 39 and 44 arcminutes
 above the geocentric horizon.
 Nevertheless, there is exactly one day during a synodic month at which
 no such moonrise happens.
-@item @ 
+@item @
 @item @code{3}
 @cindex Moon's upper limb, geometrical set time @code{%)3@var{argument}} special text
 @cindex Moon's upper limb, geometrical set time @code{%)*3@var{argument}} special text
@@ -15240,7 +15240,7 @@ values of the Moon's semidiameter and Moon's parallax as they appear
 at that clocktime.
 Nevertheless, there is exactly one day during a synodic month at which
 no such moonset happens.
-@item @ 
+@item @
 @item @code{3}
 @cindex Moon's upper limb, geometrical visibility @code{%[3@var{argument}} special text
 @cindex Moon's upper limb, geometrical visibility @code{%[*3@var{argument}} special text
@@ -15248,7 +15248,7 @@ no such moonset happens.
 @tab Calculates the approximate period while the upper limb of the Moon
 is above a reference altitude which is between about 54 and 61 arcminutes
 above a mathematical horizon; thus is visible.
-@item @ 
+@item @
 @item @code{3}
 @cindex Moon's upper limb, geometrical non-visibility @code{%]3@var{argument}} special text
 @cindex Moon's upper limb, geometrical non-visibility @code{%]*3@var{argument}} special text
@@ -15256,7 +15256,7 @@ above a mathematical horizon; thus is visible.
 @tab Calculates the approximate period while the upper limb of the Moon
 is below a reference altitude which is between about 54 and 61 arcminutes
 above a mathematical horizon; thus is non-visible.
-@item @ 
+@item @
 @item @code{4}
 @cindex Moon's center, rise time @code{%(4@var{argument}} special text
 @cindex Moon's center, rise time @code{%(*4@var{argument}} special text
@@ -15276,7 +15276,7 @@ values of the Moon's parallax and (standard) refraction as they appear
 at that clocktime.
 Nevertheless, there is exactly one day during a synodic month at which
 no such moonrise happens.
-@item @ 
+@item @
 @item @code{4}
 @cindex Moon's center, set time @code{%)4@var{argument}} special text
 @cindex Moon's center, set time @code{%)*4@var{argument}} special text
@@ -15293,7 +15293,7 @@ values of the Moon's parallax and (standard) refraction as they appear
 at that clocktime.
 Nevertheless, there is exactly one day during a synodic month at which
 no such moonset happens.
-@item @ 
+@item @
 @item @code{4}
 @cindex Moon's center, visibility @code{%[4@var{argument}} special text
 @cindex Moon's center, visibility @code{%[*4@var{argument}} special text
@@ -15301,7 +15301,7 @@ no such moonset happens.
 @tab Calculates the approximate period while the center of the Moon
 is above a reference altitude which is between about 20 and 27 arcminutes
 above the geocentric horizon; thus is visible.
-@item @ 
+@item @
 @item @code{4}
 @cindex Moon's center, non-visibility @code{%]4@var{argument}} special text
 @cindex Moon's center, non-visibility @code{%]*4@var{argument}} special text
@@ -15309,7 +15309,7 @@ above the geocentric horizon; thus is visible.
 @tab Calculates the approximate period while the center of the Moon
 is below a reference altitude which is between about 20 and 27 arcminutes
 above the geocentric horizon; thus is non-visible.
-@item @ 
+@item @
 @item @code{5}
 @cindex Moon's upper limb, standard rise time @code{%(5@var{argument}} special text
 @cindex Moon's upper limb, standard rise time @code{%(*5@var{argument}} special text
@@ -15338,7 +15338,7 @@ this results in a value which is between about 5 and 10 arcminutes above
 the geocentric horizon.
 Nevertheless, there is exactly one day during a synodic month at which
 no such moonrise happens.
-@item @ 
+@item @
 @item @code{5}
 @cindex Moon's upper limb, standard set time @code{%)5@var{argument}} special text
 @cindex Moon's upper limb, standard set time @code{%)*5@var{argument}} special text
@@ -15360,7 +15360,7 @@ values of the Moon's semidiameter, Moon's parallax and (standard) refraction
 as they appear at that clocktime.
 Nevertheless, there is exactly one day during a synodic month at which
 no such moonset happens.
-@item @ 
+@item @
 @item @code{5}
 @cindex Moon's upper limb, standard visibility @code{%[5@var{argument}} special text
 @cindex Moon's upper limb, standard visibility @code{%[*5@var{argument}} special text
@@ -15372,7 +15372,7 @@ is above a reference altitude which is between about 20 and 27 arcminutes
 above the geocentric horizon; thus is visible.
 This kind of visibility period calculation is done according to the standard
 calculation method as it is commonly used internationally.
-@item @ 
+@item @
 @item @code{5}
 @cindex Moon's upper limb, standard non-visibility @code{%]5@var{argument}} special text
 @cindex Moon's upper limb, standard non-visibility @code{%]*5@var{argument}} special text
@@ -15384,7 +15384,7 @@ is below a reference altitude which is between about 20 and 27 arcminutes
 above the geocentric horizon; thus is non-visible.
 This kind of non-visibility period calculation is done according to the
 standard calculation method as it is commonly used internationally.
-@item @ 
+@item @
 @item @code{6}
 @cindex Moon's center, topocentric horizontal parallax @code{%(6@var{argument}} special text
 @cindex Moon's center, topocentric horizontal parallax @code{%)6@var{argument}} special text
@@ -15412,7 +15412,7 @@ flattens towards the pole caps and therefore cannot be taken as an ideally
 shaped sphere, the individual Earth radius between the observer's location
 and the center of the Earth also affects the computation of
 topocentrically based data.
-@item @ 
+@item @
 @item @code{7}
 @cindex Moon's center, topocentric semidiameter @code{%(7@var{argument}} special text
 @cindex Moon's center, topocentric semidiameter @code{%)7@var{argument}} special text
@@ -15422,7 +15422,7 @@ topocentrically based data.
 @tab Calculates the approximate topocentric, apparent semidiameter
 of the Moon in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{8}
 @cindex Moon's center, topocentric brightness @code{%(8@var{argument}} special text
 @cindex Moon's center, topocentric brightness @code{%)8@var{argument}} special text
@@ -15442,7 +15442,7 @@ a star of @w{2@acronym{m}}@.  A negative magnitude denotes a very bright star,
 for example almost @w{-27@acronym{m}} for the Sun, whereas the hardly visible
 planet Pluto has a magnitude of a bit more than @w{+14@acronym{m}}@.  The Full
 Moon has a visual brightness of about @w{-12@acronym{m}.55}@.
-@item @ 
+@item @
 @item @code{9}
 @cindex Moon's center, topocentric phase angle @code{%(9@var{argument}} special text
 @cindex Moon's center, topocentric phase angle @code{%)9@var{argument}} special text
@@ -15452,7 +15452,7 @@ Moon has a visual brightness of about @w{-12@acronym{m}.55}@.
 @tab Calculates the approximate topocentric, apparent phase angle
 of the Moon in range @w{0.0@dots{}1.0}
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{a}
 @cindex Moon, topocentric elevation @code{%(a@var{argument}} special text
 @cindex Moon, topocentric elevation @code{%)a@var{argument}} special text
@@ -15467,7 +15467,7 @@ as it happen at civil midnight time.
 Results with a negative sign signify that the Moon's center is below the
 horizon at the moment, and results with a positive sign mean that the
 momentary center of the Moon is above the horizon.
-@item @ 
+@item @
 @item @code{b}
 @cindex Moon, topocentric azimuth @code{%(b@var{argument}} special text
 @cindex Moon, topocentric azimuth @code{%)b@var{argument}} special text
@@ -15477,7 +15477,7 @@ momentary center of the Moon is above the horizon.
 @tab Calculates the approximate topocentric, apparent azimuth
 of the Moon in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{c}
 @cindex Moon, topocentric declination @code{%(c@var{argument}} special text
 @cindex Moon, topocentric declination @code{%)c@var{argument}} special text
@@ -15493,7 +15493,7 @@ as it happen at civil midnight time.
 Results with a negative sign signify that the Moon's center is below the
 celestial equator at the moment, and results with a positive sign mean that
 the momentary center of the Moon is above the celestial equator.
-@item @ 
+@item @
 @item @code{d}
 @cindex Moon, topocentric ecliptic longitude @code{%(d@var{argument}} special text
 @cindex Moon, topocentric ecliptic longitude @code{%)d@var{argument}} special text
@@ -15512,7 +15512,7 @@ the vernal equinox point on the @dfn{ecliptic} (the zodiacal line or Sun's
 orbit),
 in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{e}
 @cindex Moon, topocentric ecliptic latitude @code{%(e@var{argument}} special text
 @cindex Moon, topocentric ecliptic latitude @code{%)e@var{argument}} special text
@@ -15532,7 +15532,7 @@ as it happen at civil midnight time.
 Results with a negative sign signify that the Moon's center is North
 of the ecliptic at the moment, and results with a positive sign mean
 that the momentary center of the Moon is South of the ecliptic.
-@item @ 
+@item @
 @item @code{f}
 @cindex Moon, topocentric right ascension @code{%(f@var{argument}} special text
 @cindex Moon, topocentric right ascension @code{%)f@var{argument}} special text
@@ -15546,7 +15546,7 @@ of the Moon, thus the horizontal angular distance between the Moon's center
 and the hour circle that passes through the vernal equinox point on the
 ecliptic, as time value in hours and minutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{g}
 @cindex Moon, topocentric distance @code{%(g@var{argument}} special text
 @cindex Moon, topocentric distance @code{%)g@var{argument}} special text
@@ -15559,7 +15559,7 @@ as it happen at civil midnight time.
 of the Moon from the Earth in mean @dfn{Earth equator radii}
 as it happen at civil midnight time.
 The mean radius of Earth at the equator is about @w{6,378.137} kilometer.
-@item @ 
+@item @
 @item @code{h}
 @cindex Moon, topocentric elongation @code{%(h@var{argument}} special text
 @cindex Moon, topocentric elongation @code{%)h@var{argument}} special text
@@ -15572,7 +15572,7 @@ of the Moon, thus the horizontal angular distance between the Moon's center
 and the Sun's center,
 in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{i}
 @cindex Moon, refraction @code{%(i@var{argument}} special text
 @cindex Moon, refraction @code{%)i@var{argument}} special text
@@ -15582,7 +15582,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate refraction of the Earth's atmosphere
 in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{j}
 @cindex Moon's center, geocentric horizontal parallax @code{%(j@var{argument}} special text
 @cindex Moon's center, geocentric horizontal parallax @code{%)j@var{argument}} special text
@@ -15592,7 +15592,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate geocentric, apparent
 horizontal parallax of the Moon in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{k}
 @cindex Moon's center, geocentric semidiameter @code{%(k@var{argument}} special text
 @cindex Moon's center, geocentric semidiameter @code{%)k@var{argument}} special text
@@ -15602,7 +15602,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate geocentric, apparent semidiameter
 of the Moon in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{l}
 @cindex Moon's center, geocentric brightness @code{%(l@var{argument}} special text
 @cindex Moon's center, geocentric brightness @code{%)l@var{argument}} special text
@@ -15612,7 +15612,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate geocentric, apparent brightness
 of the Moon in magnitude units
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{m}
 @cindex Moon's center, geocentric phase angle @code{%(m@var{argument}} special text
 @cindex Moon's center, geocentric phase angle @code{%)m@var{argument}} special text
@@ -15622,7 +15622,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate geocentric, apparent phase angle
 of the Moon in range @w{0.0@dots{}1.0}
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{n}
 @cindex Moon, geocentric elevation @code{%(n@var{argument}} special text
 @cindex Moon, geocentric elevation @code{%)n@var{argument}} special text
@@ -15635,7 +15635,7 @@ as it happen at civil midnight time.
 Results with a negative sign signify that the Moon's center is below the
 horizon at the moment, and results with a positive sign mean that the
 momentary center of the Moon is above the horizon.
-@item @ 
+@item @
 @item @code{o}
 @cindex Moon, geocentric azimuth @code{%(o@var{argument}} special text
 @cindex Moon, geocentric azimuth @code{%)o@var{argument}} special text
@@ -15645,7 +15645,7 @@ momentary center of the Moon is above the horizon.
 @tab Calculates the approximate geocentric, apparent azimuth
 of the Moon in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{p}
 @cindex Moon, geocentric declination @code{%(p@var{argument}} special text
 @cindex Moon, geocentric declination @code{%)p@var{argument}} special text
@@ -15658,7 +15658,7 @@ as it happen at civil midnight time.
 Results with a negative sign signify that the Moon's center is below the
 celestial equator at the moment, and results with a positive sign mean that
 the momentary center of the Moon is above the celestial equator.
-@item @ 
+@item @
 @item @code{q}
 @cindex Moon, geocentric ecliptic longitude @code{%(q@var{argument}} special text
 @cindex Moon, geocentric ecliptic longitude @code{%)q@var{argument}} special text
@@ -15668,7 +15668,7 @@ the momentary center of the Moon is above the celestial equator.
 @tab Calculates the approximate geocentric, apparent ecliptic longitude
 of the Moon in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{r}
 @cindex Moon, geocentric ecliptic latitude @code{%(r@var{argument}} special text
 @cindex Moon, geocentric ecliptic latitude @code{%)r@var{argument}} special text
@@ -15681,7 +15681,7 @@ as it happen at civil midnight time.
 Results with a negative sign signify that the Moon's center is North
 of the ecliptic at the moment, and results with a positive sign mean
 that the momentary center of the Moon is South of the ecliptic.
-@item @ 
+@item @
 @item @code{s}
 @cindex Moon, geocentric right ascension @code{%(s@var{argument}} special text
 @cindex Moon, geocentric right ascension @code{%)s@var{argument}} special text
@@ -15691,7 +15691,7 @@ that the momentary center of the Moon is South of the ecliptic.
 @tab Calculates the approximate geocentric, apparent right ascension
 of the Moon as time value in hours and minutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{t}
 @cindex Moon, geocentric distance @code{%(t@var{argument}} special text
 @cindex Moon, geocentric distance @code{%)t@var{argument}} special text
@@ -15701,7 +15701,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate geocentric, apparent distance
 of the Moon from the Earth in mean Earth equator radii
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{u}
 @cindex Moon, geocentric elongation @code{%(u@var{argument}} special text
 @cindex Moon, geocentric elongation @code{%)u@var{argument}} special text
@@ -15711,7 +15711,7 @@ as it happen at civil midnight time.
 @tab Calculates the approximate geocentric, apparent elongation
 of the Moon in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{v}
 @cindex Moon, delta-t @code{%(v@var{argument}} special text
 @cindex Moon, delta-t @code{%)v@var{argument}} special text
@@ -15727,7 +15727,7 @@ Delta-t is the difference between the Terrestrial Dynamical time
 (abbreviated by @acronym{TDT}), that was formerly known as @emph{Ephemeris
 time} (abbreviated by @acronym{ET}), and the Universal time (@acronym{UT}).
 Thus, @w{@samp{delta-t @equiv{} TDT - UT}}@.
-@item @ 
+@item @
 @item @code{w}
 @cindex Moon, local sidereal time @code{%(w@var{argument}} special text
 @cindex Moon, local sidereal time @code{%)w@var{argument}} special text
@@ -15749,7 +15749,7 @@ which is past between the last upper culmination of the vernal equinox
 point in the meridian of the observer's location (the momentary hour angle
 of the vernal equinox point), thus the right ascension of the stars in the
 observer's meridian at the moment.
-@item @ 
+@item @
 @item @code{x}
 @cindex Moon, base time @code{%(x@var{argument}} special text
 @cindex Moon, base time @code{%)x@var{argument}} special text
@@ -15768,7 +15768,7 @@ the astronomical data and times of the Moon are always calculated
 for 0 @w{o'clock} Universal time @w{(UTC/GMT)}@.
 @xref{x-time-offset, , Calendar option @option{--time-offset=@var{argument}}},
 for further details.
-@item @ 
+@item @
 @item @code{y}
 @cindex Moon, Julian date @code{%(y@var{argument}} special text
 @cindex Moon, Julian date @code{%)y@var{argument}} special text
@@ -15779,7 +15779,7 @@ for further details.
 as it happen at civil midnight time.
 @xref{Julian day number},
 for further information about the Julian date.
-@item @ 
+@item @
 @item @code{z}
 @cindex Moon, Julian Ephemeris date @code{%(z@var{argument}} special text
 @cindex Moon, Julian Ephemeris date @code{%)z@var{argument}} special text
@@ -15791,7 +15791,7 @@ for further information about the Julian date.
 @tab Calculates the approximate @dfn{Julian Ephemeris date},
 thus a Julian date that is corrected by @emph{delta-t}, in days
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{A}
 @cindex Moon/Sun, delta topocentric elevation @code{%(A@var{argument}} special text
 @cindex Moon/Sun, delta topocentric elevation @code{%)A@var{argument}} special text
@@ -15809,7 +15809,7 @@ thus the Moon is lower than the Sun.
 Results with a positive sign signify that the momentary center of the Moon is
 at an elevation that is above the momentary elevation of the Sun's center;
 thus the Moon is higher than the Sun.
-@item @ 
+@item @
 @item @code{B}
 @cindex Moon/Sun, delta topocentric azimuth @code{%(B@var{argument}} special text
 @cindex Moon/Sun, delta topocentric azimuth @code{%)B@var{argument}} special text
@@ -15831,7 +15831,7 @@ expressed, that the Moon is to the left (anti-clockwise) of the Sun.
 Results with a positive sign signify that the Sun is to the left
 (anti-clockwise) of the Moon if one looks to the Moon --- or alternatively
 expressed, that the Moon is to the right (clockwise) of the Sun.
-@item @ 
+@item @
 @item @code{C}
 @cindex Moon/Sun, delta geocentric elevation @code{%(C@var{argument}} special text
 @cindex Moon/Sun, delta geocentric elevation @code{%)C@var{argument}} special text
@@ -15843,7 +15843,7 @@ apparent elevation of Moon and Sun (delta),
 at which the Moon is used as the reference point,
 in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{D}
 @cindex Moon/Sun, delta geocentric azimuth @code{%(D@var{argument}} special text
 @cindex Moon/Sun, delta geocentric azimuth @code{%)D@var{argument}} special text
@@ -15855,7 +15855,7 @@ apparent azimuth of Moon and Sun (delta),
 at which the Moon is used as the reference point,
 in degrees and arcminutes
 as it happen at civil midnight time.
-@item @ 
+@item @
 @item @code{E}
 @cindex Moon/Sun, delta topocentric elevation at standard moonrise time @code{%(E@var{argument}} special text
 @cindex Moon/Sun, delta topocentric elevation at standard moonrise time @code{%(*E@var{argument}} special text
@@ -15867,7 +15867,7 @@ in degrees and arcminutes
 as it happen at standard rise time of the Moon.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{E}
 @cindex Moon/Sun, delta topocentric elevation at standard moonset time @code{%)E@var{argument}} special text
 @cindex Moon/Sun, delta topocentric elevation at standard moonset time @code{%)*E@var{argument}} special text
@@ -15879,7 +15879,7 @@ in degrees and arcminutes
 as it happen at standard set time of the Moon.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{F}
 @cindex Moon/Sun, delta topocentric azimuth at standard moonrise time @code{%(F@var{argument}} special text
 @cindex Moon/Sun, delta topocentric azimuth at standard moonrise time @code{%(*F@var{argument}} special text
@@ -15891,7 +15891,7 @@ in degrees and arcminutes
 as it happen at standard rise time of the Moon.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{F}
 @cindex Moon/Sun, delta topocentric azimuth at standard moonset time @code{%)F@var{argument}} special text
 @cindex Moon/Sun, delta topocentric azimuth at standard moonset time @code{%)*F@var{argument}} special text
@@ -15903,7 +15903,7 @@ in degrees and arcminutes
 as it happen at standard set time of the Moon.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{G}
 @cindex Moon/Sun, delta geocentric elevation at standard moonrise time @code{%(G@var{argument}} special text
 @cindex Moon/Sun, delta geocentric elevation at standard moonrise time @code{%(*G@var{argument}} special text
@@ -15915,7 +15915,7 @@ in degrees and arcminutes
 as it happen at standard rise time of the Moon.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{G}
 @cindex Moon/Sun, delta geocentric elevation at standard moonset time @code{%)G@var{argument}} special text
 @cindex Moon/Sun, delta geocentric elevation at standard moonset time @code{%)*G@var{argument}} special text
@@ -15927,7 +15927,7 @@ in degrees and arcminutes
 as it happen at standard set time of the Moon.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{H}
 @cindex Moon/Sun, delta geocentric azimuth at standard moonrise time @code{%(H@var{argument}} special text
 @cindex Moon/Sun, delta geocentric azimuth at standard moonrise time @code{%(*H@var{argument}} special text
@@ -15939,7 +15939,7 @@ in degrees and arcminutes
 as it happen at standard rise time of the Moon.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{H}
 @cindex Moon/Sun, delta geocentric azimuth at standard moonset time @code{%)H@var{argument}} special text
 @cindex Moon/Sun, delta geocentric azimuth at standard moonset time @code{%)*H@var{argument}} special text
@@ -15951,7 +15951,7 @@ in degrees and arcminutes
 as it happen at standard set time of the Moon.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{I}
 @cindex Moon/Sun, delta astronomical midnight time @code{%(I@var{argument}} special text
 @cindex Moon/Sun, delta astronomical midnight time @code{%)I@var{argument}} special text
@@ -15973,7 +15973,7 @@ thus the lunar midnight is after the solar midnight.
 and
 @ref{x-Sun-midnight, , Astronomical midnight time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{J}
 @cindex Moon/Sun, delta astronomical noon time @code{%(J@var{argument}} special text
 @cindex Moon/Sun, delta astronomical noon time @code{%)J@var{argument}} special text
@@ -15995,7 +15995,7 @@ thus the lunar noon is after the solar noon.
 and
 @ref{x-Sun-noon, , Astronomical noon time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{K}
 @cindex Sun/Moon, delta standard rise time @code{%(K@var{argument}} special text
 @cindex Sun/Moon, delta standard rise time @code{%(*K@var{argument}} special text
@@ -16015,7 +16015,7 @@ thus the moonrise is after the sunrise.
 and
 @ref{x-Sun-standard-rise, , Standard rise time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{K}
 @cindex Sun/Moon, delta standard set time @code{%)K@var{argument}} special text
 @cindex Sun/Moon, delta standard set time @code{%)*K@var{argument}} special text
@@ -16035,7 +16035,7 @@ thus the moonset is after the sunset.
 and
 @ref{x-Sun-standard-set, , Standard set time of the Sun},
 for further details.
-@item @ 
+@item @
 @item @code{L}
 @cindex Moon, topocentric elevation at Moon's astronomical midnight time @code{%(L@var{argument}} special text
 @cindex Moon, topocentric elevation at Moon's astronomical midnight time @code{%)L@var{argument}} special text
@@ -16050,7 +16050,7 @@ as it happen at astronomical midnight time of the Moon
 (topocentric @dfn{midnight height})@.
 @xref{x-Moon-midnight, , Astronomical midnight time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{M}
 @cindex Moon, topocentric phase angle at Moon's astronomical midnight time @code{%(M@var{argument}} special text
 @cindex Moon, topocentric phase angle at Moon's astronomical midnight time @code{%)M@var{argument}} special text
@@ -16065,7 +16065,7 @@ as it happen at astronomical midnight time of the Moon
 (topocentric @dfn{midnight phase angle})@.
 @xref{x-Moon-midnight, , Astronomical midnight time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{N}
 @cindex Moon, topocentric elevation at Moon's astronomical noon time @code{%(N@var{argument}} special text
 @cindex Moon, topocentric elevation at Moon's astronomical noon time @code{%)N@var{argument}} special text
@@ -16080,7 +16080,7 @@ as it happen at astronomical noon time of the Moon
 (topocentric @dfn{noon height})@.
 @xref{x-Moon-noon, , Astronomical noon time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{O}
 @cindex Moon, topocentric phase angle at Moon's astronomical noon time @code{%(O@var{argument}} special text
 @cindex Moon, topocentric phase angle at Moon's astronomical noon time @code{%)O@var{argument}} special text
@@ -16095,7 +16095,7 @@ as it happen at astronomical noon time of the Moon
 (topocentric @dfn{noon phase angle})@.
 @xref{x-Moon-noon, , Astronomical noon time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{P}
 @cindex Moon, topocentric elevation at standard rise time @code{%(P@var{argument}} special text
 @cindex Moon, topocentric elevation at standard rise time @code{%(*P@var{argument}} special text
@@ -16108,7 +16108,7 @@ as it happen at standard rise time of the Moon
 (topocentric @dfn{rise height})@.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{P}
 @cindex Moon, topocentric elevation at standard set time @code{%)P@var{argument}} special text
 @cindex Moon, topocentric elevation at standard set time @code{%)*P@var{argument}} special text
@@ -16121,7 +16121,7 @@ as it happen at standard set time of the Moon
 (topocentric @dfn{set height})@.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Moon, topocentric azimuth at standard rise time @code{%(Q@var{argument}} special text
 @cindex Moon, topocentric azimuth at standard rise time @code{%(*Q@var{argument}} special text
@@ -16138,7 +16138,7 @@ between the topocentric rise azimuth and the East direction is also
 known as the topocentric @dfn{rise width} of the Moon.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{Q}
 @cindex Moon, topocentric azimuth at standard set time @code{%)Q@var{argument}} special text
 @cindex Moon, topocentric azimuth at standard set time @code{%)*Q@var{argument}} special text
@@ -16155,7 +16155,7 @@ between the topocentric set azimuth and the West direction is also
 known as the topocentric @dfn{set width} of the Moon.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{R}
 @cindex Moon, topocentric phase angle at standard rise time @code{%(R@var{argument}} special text
 @cindex Moon, topocentric phase angle at standard rise time @code{%(*R@var{argument}} special text
@@ -16168,7 +16168,7 @@ as it happen at standard rise time of the Moon
 (topocentric @dfn{rise phase angle})@.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{R}
 @cindex Moon, topocentric phase angle at standard set time @code{%)R@var{argument}} special text
 @cindex Moon, topocentric phase angle at standard set time @code{%)*R@var{argument}} special text
@@ -16181,7 +16181,7 @@ as it happen at standard set time of the Moon
 (topocentric @dfn{set phase angle})@.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{S}
 @cindex Moon, geocentric elevation at Moon's astronomical midnight time @code{%(S@var{argument}} special text
 @cindex Moon, geocentric elevation at Moon's astronomical midnight time @code{%)S@var{argument}} special text
@@ -16196,7 +16196,7 @@ as it happen at astronomical midnight time of the Moon
 (geocentric @dfn{midnight height})@.
 @xref{x-Moon-midnight, , Astronomical midnight time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{T}
 @cindex Moon, geocentric phase angle at Moon's astronomical midnight time @code{%(T@var{argument}} special text
 @cindex Moon, geocentric phase angle at Moon's astronomical midnight time @code{%)T@var{argument}} special text
@@ -16211,7 +16211,7 @@ as it happen at astronomical midnight time of the Moon
 (geocentric @dfn{midnight phase angle})@.
 @xref{x-Moon-midnight, , Astronomical midnight time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{U}
 @cindex Moon, geocentric elevation at Moon's astronomical noon time @code{%(U@var{argument}} special text
 @cindex Moon, geocentric elevation at Moon's astronomical noon time @code{%)U@var{argument}} special text
@@ -16226,7 +16226,7 @@ as it happen at astronomical noon time of the Moon
 (geocentric @dfn{noon height})@.
 @xref{x-Moon-noon, , Astronomical noon time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{V}
 @cindex Moon, geocentric phase angle at Moon's astronomical noon time @code{%(V@var{argument}} special text
 @cindex Moon, geocentric phase angle at Moon's astronomical noon time @code{%)V@var{argument}} special text
@@ -16241,7 +16241,7 @@ as it happen at astronomical noon time of the Moon
 (geocentric @dfn{noon phase angle})@.
 @xref{x-Moon-noon, , Astronomical noon time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{W}
 @cindex Moon, geocentric elevation at standard rise time @code{%(W@var{argument}} special text
 @cindex Moon, geocentric elevation at standard rise time @code{%(*W@var{argument}} special text
@@ -16254,7 +16254,7 @@ as it happen at standard rise time of the Moon
 (geocentric @dfn{rise height})@.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{W}
 @cindex Moon, geocentric elevation at standard set time @code{%)W@var{argument}} special text
 @cindex Moon, geocentric elevation at standard set time @code{%)*W@var{argument}} special text
@@ -16267,7 +16267,7 @@ as it happen at standard set time of the Moon
 (geocentric @dfn{set height})@.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{X}
 @cindex Moon, geocentric azimuth at standard rise time @code{%(X@var{argument}} special text
 @cindex Moon, geocentric azimuth at standard rise time @code{%(*X@var{argument}} special text
@@ -16284,7 +16284,7 @@ between the geocentric rise azimuth and the East direction is also
 known as the geocentric @dfn{rise width} of the Moon.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{X}
 @cindex Moon, geocentric azimuth at standard set time @code{%)X@var{argument}} special text
 @cindex Moon, geocentric azimuth at standard set time @code{%)*X@var{argument}} special text
@@ -16301,7 +16301,7 @@ between the geocentric set azimuth and the West direction is also
 known as the geocentric @dfn{set width} of the Moon.
 @xref{x-Moon-standard-set, , Standard set time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{Y}
 @cindex Moon, geocentric phase angle at standard rise time @code{%(Y@var{argument}} special text
 @cindex Moon, geocentric phase angle at standard rise time @code{%(*Y@var{argument}} special text
@@ -16314,7 +16314,7 @@ as it happen at standard rise time of the Moon
 (geocentric @dfn{rise phase angle})@.
 @xref{x-Moon-standard-rise, , Standard rise time of the Moon},
 for further details.
-@item @ 
+@item @
 @item @code{Y}
 @cindex Moon, geocentric phase angle at standard set time @code{%)Y@var{argument}} special text
 @cindex Moon, geocentric phase angle at standard set time @code{%)*Y@var{argument}} special text
@@ -16388,7 +16388,7 @@ determination:
 @tab @strong{Dynamical}
 @tab @strong{Co-ordinate}
 @tab @strong{Timezone}
-@item @ 
+@item @
 @item @code{0}
 @tab 3
 @tab No
@@ -20211,7 +20211,7 @@ and their new representation, as used by Gcal @value{GCAL-VERSION} now:
 @tab @strong{Old-style}
 @tab
 @tab @strong{New-style}
-@item @ 
+@item @
 @item %complete weekday name
 @tab @code{%o}
 @tab @equiv{}
@@ -20388,7 +20388,7 @@ and their new representation, as used by Gcal @value{GCAL-VERSION} now:
 @tab @strong{Old-style}
 @tab
 @tab @strong{New-style}
-@item @ 
+@item @
 @item %day number
 @tab @code{%d}
 @tab @equiv{}
@@ -20495,7 +20495,7 @@ and their new representation, as used by Gcal @value{GCAL-VERSION} now:
 @tab @strong{Old-style}
 @tab
 @tab @strong{New-style}
-@item @ 
+@item @
 @item DE
 @tab @code{%w,  %1%D%2 %b %y}
 @tab @equiv{}
@@ -20545,7 +20545,7 @@ components of the format instruction are assembled as follows:
 @multitable @columnfractions .15 .85
 @item @strong{Character}
 @tab @strong{Description of the components}
-@item @ 
+@item @
 @item
 @tab @var{Alignment} group (exactly one member must be defined):
 @item @code{<}
@@ -20557,22 +20557,22 @@ by using the width @var{width}
 @item @code{>}
 @tab Field contents is placed at the right margin of the field
 by using the width @var{width}
-@item @ 
+@item @
 @item
 @tab @var{Sign} (may be defined):
 @item @code{+}
 @tab Numerical value is provided with leading sign
-@item @ 
+@item @
 @item
 @tab @var{Zero} (may be defined):
 @item @code{0}
 @tab Numerical value is filled with leading zero(es)
-@item @ 
+@item @
 @item
 @tab @var{Width} (must be defined):
 @item @var{n}
 @tab Field has the width @var{n} (actual range 1@dots{}256)@.
-@item @ 
+@item @
 @item
 @tab @var{Style} group (exactly one member may be defined):
 @item @code{u}
@@ -20581,12 +20581,12 @@ by using the width @var{width}
 @tab Field contents is converted to lower-case letters
 @item @code{w}
 @tab Field contents is converted to capitalized words
-@item @ 
+@item @
 @item
 @tab @var{Suffix} (may be defined):
 @item @code{&}
 @tab Numerical value is provided with an Ordinal Number suffix
-@item @ 
+@item @
 @item
 @tab @var{Format} group (exactly one member must be defined):
 @item @code{*}
@@ -20698,7 +20698,7 @@ The
 @multitable @columnfractions .35 .65
 @item @strong{Date part}
 @tab @strong{Short-style option @option{-c@r{|}C@r{[]}}}
-@item @ 
+@item @
 @item @code{00000000}
 @tab @w{@code{-c@var{n}+@r{|}-}}
 @item @code{000000@var{dd}}
@@ -20842,7 +20842,7 @@ date given in the @emph{date part} of resource file.
 @multitable @columnfractions .35 .65
 @item @strong{Short-style option @option{-c@r{|}C@r{[]}}}
 @tab @strong{Date part}
-@item @ 
+@item @
 @item @code{-c}
 @item @code{-ct}
 @item @code{-c@var{n}d@r{|}+@r{|}-}

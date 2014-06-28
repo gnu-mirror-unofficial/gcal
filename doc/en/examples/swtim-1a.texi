@@ -6,7 +6,7 @@
 @group
 @cartouche
 $ gcal %1998 -Hno -xy -f ./swtim-1.rc
-@print{} 
+@print{}
 @print{} Fri, Mar  27th 1998: Summer daylight-saving time starts Sunday
 @print{}                      +1 hrs. (02:00 --> 03:00 h.)
 @print{} Sat, Mar  28th 1998: Summer daylight-saving time starts Sunday

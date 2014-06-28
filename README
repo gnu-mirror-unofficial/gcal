@@ -278,7 +278,7 @@ once and for all define in your `profile'/`cshrc' the variable
 `LINGUAS':
 
      (Bourne Shell)          LINGUAS="de fr nl"; export LINGUAS
-     
+
      (C Shell)               setenv LINGUAS "de fr nl"
 
 or specify it directly while configuring

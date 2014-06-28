@@ -7,14 +7,14 @@
 @cartouche
 $ gcal %20000506 -f/dev/null -cxl4+ \
 >      -#'0*d1#999_%s9+5158+00738,120'
-@print{} 
+@print{}
 @print{} Sun, May   7th 2000: 23:52
 @print{} Mon, May   8th 2000: 23:57
 @print{} Tue, May   9th 2000: 00:01
 @print{} Wed, May  10th 2000: 00:06
 $ gcal %20000506 -f/dev/null -cxl4+ --limit \
 >      -#'0*d1#999_%s9+5158+00738,120'
-@print{} 
+@print{}
 @print{} Sun, May   7th 2000: 23:52
 @print{} Mon, May   8th 2000: 23:57
 @print{} Tue, May   9th 2000: **:**

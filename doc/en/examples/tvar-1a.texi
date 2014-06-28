@@ -6,11 +6,11 @@
 @group
 @cartouche
 $ gcal %19960101 -H no -x -r '$A=FROBOZZ:$x=' -f ./tvar-1.rc
-@print{} 
+@print{}
 @print{} Mon, Jan   1st 1996:    \ \\ And this... works too!
 @print{} Mon, Jan   1st 1996: $a:1=foo
 @print{} Mon, Jan   1st 1996: $a:2=bar foo bar foo baz foo booz
-@print{} Mon, Jan   1st 1996: $a=--- 0 
+@print{} Mon, Jan   1st 1996: $a=--- 0
 @print{}                       1
 @print{}                      2
 @print{}                      $3

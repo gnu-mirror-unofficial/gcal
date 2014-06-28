@@ -15,13 +15,13 @@
 #             providing each line of this output with the proper Texinfo
 #             command(s).
 #             But at last, it's not very convenient to work like this.
-#             It would be much better, if, on the one hand, there would be a 
+#             It would be much better, if, on the one hand, there would be a
 #             shell script file which allows the user to ``test'' this program
 #             example by himself.  And, on the other hand, it would be also
 #             very fine to insert all the required texts (which are Texinfo
 #             commands, the above mentioned shell prompt line and the created
 #             output) only by using a simple `@include FILE.texi' command into
-#             the document. 
+#             the document.
 #             This shell script can help you to solve this task!  It comes
 #             along with two small SED script files, `mks1sed.in' (expanded to
 #             `mksamp-1.sed'), and `mks2sed.in' (expanded to `mksamp-2.sed').

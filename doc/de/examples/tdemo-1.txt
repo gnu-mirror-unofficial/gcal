@@ -4,4 +4,3 @@ Ich bin der Demotext, der lustige Zeichen und Zeichensequenzen
 enthaelt wie ~~ \~ % %% $a $1 %%%\
 %\ %s %%foo %bar \%Baz \\~ \~\ und so weiter...
 Ich bin gespannt darauf, wie ich von `txt2gcal' umgesetzt werde.
-

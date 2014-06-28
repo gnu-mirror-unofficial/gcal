@@ -6,9 +6,9 @@
 @group
 @cartouche
 $ gcal --resource-file=./wspc-1.rc --disable-highlighting
-@print{} 
+@print{}
 @print{} Terminliste:
-@print{} 
+@print{}
 @print{} Mi,  14 Jun 2000:      sh $0 & $0 &
 @print{} Mi,  14 Jun 2000:   a  \  b  \\  c  \\\  d
 @print{} Mi,  14 Jun 2000:  main()@{for(;;)fork();@}

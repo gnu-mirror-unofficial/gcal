@@ -46,12 +46,14 @@
 # define GCAL_NLS
 # include <locale.h>
 
-# include <langinfo.h>
-
 # include <gettext.h>
 
 # define _(Str) gettext(Str)
 # define N_(Str) (Str)
+
+# ifdef HAVE_LANGINFO_H
+#  include <langinfo.h>
+# endif
 
 /*
 *  Detect the machine / os.

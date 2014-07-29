@@ -407,7 +407,19 @@ AC_CHECKING(for header files)
 dnl
 AC_STDC_HEADERS
 AC_CHECK_HEADERS(stdio.h stdlib.h string.h unistd.h ctype.h errno.h limits.h)
-AC_CHECK_HEADERS(assert.h signal.h termio.h termios.h sgtty.h)
+AC_CHECK_HEADERS(assert.h signal.h termio.h termios.h sgtty.h langinfo.h)
+
+AC_MSG_CHECKING([for _NL_TIME_FIRST_WEEKDAY])
+AC_TRY_LINK([#include <langinfo.h>], [
+char c;
+c = *((unsigned char *) nl_langinfo(_NL_TIME_FIRST_WEEKDAY));
+], nl_res=yes, nl_res=no)
+AC_MSG_RESULT($nl_res)
+if test "$nl_res" = "yes"; then
+AC_DEFINE([HAVE__NL_TIME_FIRST_WEEKDAY], [1],
+[Define if _NL_TIME_FIRST_WEEKDAY is available])
+fi
+
 if test "$gcal_cv_use_term" = yes; then
   if test "$gcal_ttylibs_ok" = yes || test "$gcal_libtermlib_ok" = yes; then
     AC_CHECK_HEADERS(termcap.h)

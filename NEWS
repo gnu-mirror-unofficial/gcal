@@ -498,7 +498,7 @@ Major changes in release 2.41 (inofficial alpha testing release)
     with ``large'' displacement values.
 * Changed the upper-case metatexts indicating the year (yyyy), month (mm) etc.
     to lower-case texts in Gcal's help screens.
-* The new `misc/dst/*' files convert ZONEINFO Daylight Saving Time informations
+* The new `misc/dst/*' files convert ZONEINFO Daylight Saving Time information
     into Gcal's fixed date format.
 * The fixed date modifier [a] (== `--include-resource-file-name') also puts the
     line number of the fixed date into output.

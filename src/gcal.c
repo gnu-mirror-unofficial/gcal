@@ -1072,7 +1072,7 @@ Df_struct supported_date_format[LARG_MAX - 1] = {
   { char *df_id, char *df_info, char *df_format },
 */
   {CC_DE, N_("Germany"), "%<2#K,  %1%>2*D%2 %<3#U %>04*Y"},
-  {CC_US, N_("U.S.A."), "%<3#K, %<3#U  %1%>2&*D%2 %>04*Y"},
+  {CC_US, N_("U.S.A."), "%<3#K,  %<3#U %1%>2&*D%2 %>04*Y"},
   {CC_GB, N_("Great Britain"), "%<3#K,  %1%>2&*D%2 %<3#U %>04*Y"},
 /*
    The next table field can be provided with further data!

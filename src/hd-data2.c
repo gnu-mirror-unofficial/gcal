@@ -2742,7 +2742,7 @@ ch_bl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      const int fday;
      const int count;
 /*!
-   Manages all specific holidays celebrated in Switzerland/Basel-Land.
+   Manages all specific holidays celebrated in Switzerland/Basel-Landschaft.
 */
 {
   ptr_cc_id = "CH_BL";

@@ -146,7 +146,7 @@ const Cc_struct cc_holidays[] = {
   {"CH_AI", N_("Switzerland/Appenzell Innerrhoden"), ch_ai_hdy},
   {"CH_AR", N_("Switzerland/Appenzell Ausserrhoden"), ch_ar_hdy},
   {"CH_BE", N_("Switzerland/Bern"), ch_be_hdy},
-  {"CH_BL", N_("Switzerland/Basel-Land"), ch_bl_hdy},
+  {"CH_BL", N_("Switzerland/Basel-Landschaft"), ch_bl_hdy},
   {"CH_BS", N_("Switzerland/Basel-Stadt"), ch_bs_hdy},
   {"CH_FR", N_("Switzerland/Fribourg"), ch_fr_hdy},
   {"CH_GE", N_("Switzerland/Genève"), ch_ge_hdy},

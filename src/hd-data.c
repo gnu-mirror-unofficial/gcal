@@ -192,7 +192,7 @@ const Cc_struct cc_holidays[] = {
   {"DE_NW", N_("Germany/North Rhine-Westphalia"), de_nw_hdy},
   {"DE_RP", N_("Germany/Rhineland Palatinate"), de_rp_hdy},
   {"DE_SH", N_("Germany/Schleswig-Holstein"), de_sh_hdy},
-  {"DE_SL", N_("Germany/Saar"), de_sl_hdy},
+  {"DE_SL", N_("Germany/Saarland"), de_sl_hdy},
   {"DE_SN", N_("Germany/Saxony"), de_sn_hdy},
   {"DE_ST", N_("Germany/Saxony-Anhalt"), de_st_hdy},
   {"DE_TH", N_("Germany/Thuringia"), de_th_hdy},

@@ -392,7 +392,7 @@ de_sl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      const int fday;
      const int count;
 /*!
-   Manages all specific holidays celebrated in Germany/Saar.
+   Manages all specific holidays celebrated in Germany/Saarland.
 */
 {
   ptr_cc_id = "DE_SL";

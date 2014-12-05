@@ -1824,7 +1824,7 @@ Canada/Newfoundland and Labrador
 Canada/Nova Scotia
 
 @item CA_NW
-Canada/Nordwest Territories
+Canada/Northwest Territories
 
 @item CA_ON
 Canada/Ontario

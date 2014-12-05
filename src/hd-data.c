@@ -132,7 +132,7 @@ const Cc_struct cc_holidays[] = {
   {"CA_NB", N_("Canada/New Brunswick"), ca_nb_hdy},
   {"CA_NF", N_("Canada/Newfoundland and Labrador"), ca_nf_hdy},
   {"CA_NS", N_("Canada/Nova Scotia"), ca_ns_hdy},
-  {"CA_NW", N_("Canada/Nordwest Territories"), ca_nw_hdy},
+  {"CA_NW", N_("Canada/Northwest Territories"), ca_nw_hdy},
   {"CA_ON", N_("Canada/Ontario"), ca_on_hdy},
   {"CA_PE", N_("Canada/Prince Edward Island"), ca_pe_hdy},
   {"CA_QU", N_("Canada/Québec"), ca_qu_hdy},

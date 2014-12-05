@@ -1492,7 +1492,7 @@ nl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      const int fday;
      const int count;
 /*!
-   Manages all specific holidays celebrated in Netherlands.
+   Manages all specific holidays celebrated in the Netherlands.
 */
 {
   register int day;
@@ -1529,8 +1529,15 @@ nl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   holiday (*init_data, detected, _(hd_text[HD_ST_NICHOLAS_DAY].ht_text),
 	   ptr_cc_id, DIS_HLS_PREF, 5, MONTH_MAX, year, hd_elems, fday,
 	   count);
-  holiday (*init_data, detected, _(hd_text[HD_THE_QUEENS_BIRTHDAY].ht_text),
-	   ptr_cc_id, "+", dvec[4 - 1], 4, year, hd_elems, fday, count);
+  if (year > 1890 && year < 1949)
+    holiday (*init_data, detected, _(hd_text[HD_THE_QUEENS_BIRTHDAY].ht_text),
+	     ptr_cc_id, "+", 31, 8, year, hd_elems, fday, count);
+  else if (year > 1948 && year < 2014)
+    holiday (*init_data, detected, _(hd_text[HD_THE_QUEENS_BIRTHDAY].ht_text),
+	     ptr_cc_id, "+", 30, 4, year, hd_elems, fday, count);
+  else if (year > 2013)
+    holiday (*init_data, detected, _(hd_text[HD_THE_KINGS_BIRTHDAY].ht_text),
+	     ptr_cc_id, "+", 27, 4, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_REMEMBRANCE_DAY].ht_text),
 	   ptr_cc_id, DIS_HLS_PREF, 4, 5, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_SYLVESTER].ht_text), ptr_cc_id,

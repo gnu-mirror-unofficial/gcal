@@ -580,7 +580,7 @@ const Ht_struct hd_text[] = {
   {HD_GROTTO_DAY, N_("Grotto Day")},
   {HD_GROUNDHOG_DAY, N_("Groundhog Day")},
   {HD_GUADALUPE_VIRGINS_DAY, N_("Guadalupe Virgin's Day")},
-  {HD_GUY_FAWKES_DAY, N_("Guy Fawke's Day")},
+  {HD_GUY_FAWKES_DAY, N_("Guy Fawkes Day")},
   {HD_HALLOWEEN, N_("Halloween")},
   {HD_HEALTH_AND_SPORTS_DAY, N_("Health and Sport's Day")},
   {HD_HEB_HANNUKAH, N_("Hannukah/Festival of Lights")},

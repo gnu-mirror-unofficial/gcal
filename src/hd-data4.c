@@ -1128,7 +1128,7 @@ nf_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      const int fday;
      const int count;
 /*!
-   Manages all specific holidays celebrated in Norfolk Islands.
+   Manages all specific holidays celebrated in Norfolk Island.
 */
 {
   register int day;

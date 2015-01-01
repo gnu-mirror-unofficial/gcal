@@ -2316,7 +2316,7 @@ New Caledonia
 Niger
 
 @item NF
-Norfolk Islands
+Norfolk Island
 
 @item NG
 Nigeria

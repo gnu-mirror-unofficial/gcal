@@ -296,7 +296,7 @@ const Cc_struct cc_holidays[] = {
   {"NA", N_("Namibia"), na_hdy},
   {"NC", N_("New Caledonia"), nc_hdy},
   {"NE", N_("Niger"), ne_hdy},
-  {"NF", N_("Norfolk Islands"), nf_hdy},
+  {"NF", N_("Norfolk Island"), nf_hdy},
   {"NG", N_("Nigeria"), ng_hdy},
   {"NI", N_("Nicaragua"), ni_hdy},
   {"NL", N_("Netherlands"), nl_hdy},

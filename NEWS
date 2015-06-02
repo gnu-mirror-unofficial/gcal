@@ -4,9 +4,19 @@ Copyright (C) 1994-2014 Free Software Foundation, Inc.
 
 User-visible changes.
 
-Major changes in release X.Y.Z
+Major changes in release 4
 
 * Remove duplicate for All Saints Day for DE_BW and DE_RP.
+* Spell the name of Norfolk Island correctly.
+* Spell the name of Guy Fawkes correctly -- Fawkes, not Fawke.
+* Correct the name of Canada's Northwest Territories
+* Improve the computation of the Dutch Queen's and King's days
+* Name of german federal state Saarland corrected.
+* Name of swiss federal state Basel-Landschaft corrected.
+* Alignment error for --date-format US fixed.
+* Fix build on FreeBSD.
+* Use _NL_TIME_FIRST_WEEKDAY to get correct defaults for -s N option.
+
 
 Major changes in release 3.6.3
 

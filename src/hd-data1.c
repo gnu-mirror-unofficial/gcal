@@ -649,6 +649,10 @@ de_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 	   "+", DAY_MIN, 5, year, hd_elems, fday, count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
 		      count);
+  if (year == 2017)
+    holiday (*init_data, detected, _(hd_text[HD_REFORMATION_DAY].ht_text),
+	     ptr_cc_id, "+", dvec[10 - 1], 10, year, hd_elems, fday,
+	     count);
 }
 
 

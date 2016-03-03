@@ -106,7 +106,7 @@ de_bb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
     }
   else
     de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
-  if (year > 1516)
+  if (year > 1516 && year != 2017)
     holiday (*init_data, detected, _(hd_text[HD_REFORMATION_DAY].ht_text),
 	     ptr_cc_id, "+", dvec[10 - 1], 10, year, hd_elems, fday, count);
   if (year > 1989)
@@ -438,10 +438,9 @@ de_sn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   holiday (*init_data, detected,
 	   _(hd_text[HD_DAY_OF_PRAYER_AND_REPENTANCE].ht_text), ptr_cc_id,
 	   "+", day, 11, year, hd_elems, fday, count);
-  if (year > 1516)
+  if (year > 1516 && year != 2017)
     holiday (*init_data, detected, _(hd_text[HD_REFORMATION_DAY].ht_text),
-	     ptr_cc_id, DIS_HLS_PREF2, dvec[10 - 1], 10, year, hd_elems, fday,
-	     count);
+	     ptr_cc_id, "+", dvec[10 - 1], 10, year, hd_elems, fday, count);
   if (year > 1989)
     holiday (*init_data, detected, _(hd_text[HD_GERMAN_UNITY_DAY].ht_text),
 	     ptr_cc_id, "+", 3, 10, year, hd_elems, fday, count);

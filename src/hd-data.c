@@ -1219,7 +1219,7 @@ binsearch_cc_id (id)
 
 
 void
-base_christian_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+base_christian_hdy (init_data, detected, easter, year, hd_elems, fday, count, cc)
      Bool *init_data;
      const Bool detected;
      int easter;
@@ -1227,6 +1227,7 @@ base_christian_hdy (init_data, detected, easter, year, hd_elems, fday, count)
      int *hd_elems;
      const int fday;
      const int count;
+     const char *cc;
 /*!
    Manages all base Christian Western churches calendar based holidays.
 */
@@ -1241,8 +1242,9 @@ base_christian_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 	   ptr_cc_id, "+", DAY_MIN, MONTH_MIN, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_PENTECOST].ht_text),
 	   ptr_cc_id, "+", easter + 49, 0, year, hd_elems, fday, count);
-  holiday (*init_data, detected, _(hd_text[HD_WHIT_MONDAY].ht_text),
-	   ptr_cc_id, "+", easter + 50, 0, year, hd_elems, fday, count);
+  if (strcmp (cc, "SE") != 0)
+    holiday (*init_data, detected, _(hd_text[HD_WHIT_MONDAY].ht_text),
+	     ptr_cc_id, "+", easter + 50, 0, year, hd_elems, fday, count);
 }
 
 

@@ -190,7 +190,7 @@ be_hdy (init_data, detected, easter, year, hd_elems, fday, count)
     holiday (*init_data, detected, _(hd_text[HD_ARMISTICE_DAY].ht_text),
 	     ptr_cc_id, "+", 11, 11, year, hd_elems, fday, count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
-		      count);
+		      count, ptr_cc_id);
 }
 
 
@@ -648,7 +648,7 @@ de_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   holiday (*init_data, detected, _(hd_text[HD_LABOUR_DAY].ht_text), ptr_cc_id,
 	   "+", DAY_MIN, 5, year, hd_elems, fday, count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
-		      count);
+		      count, ptr_cc_id);
   if (year == 2017)
     holiday (*init_data, detected, _(hd_text[HD_REFORMATION_DAY].ht_text),
 	     ptr_cc_id, "+", dvec[10 - 1], 10, year, hd_elems, fday,
@@ -783,7 +783,7 @@ fr_hdy (init_data, detected, easter, year, hd_elems, fday, count)
     holiday (*init_data, detected, _(hd_text[HD_VICTORY_DAY].ht_text),
 	     ptr_cc_id, "+", 8, 5, year, hd_elems, fday, count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
-		      count);
+		      count, ptr_cc_id);
 }
 
 
@@ -1551,7 +1551,7 @@ nl_hdy (init_data, detected, easter, year, hd_elems, fday, count)
     holiday (*init_data, detected, _(hd_text[HD_LIBERATION_DAY].ht_text),
 	     ptr_cc_id, "+", 5, 5, year, hd_elems, fday, count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
-		      count);
+		      count, ptr_cc_id);
 }
 
 

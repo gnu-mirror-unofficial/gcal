@@ -45,7 +45,8 @@ extern void
 			    const Bool detected,
 			    int easter,
 			    const int year,
-			    int *hd_elems, const int fday, const int count));
+			    int *hd_elems, const int fday, const int count,
+			    const char *cc));
 extern void
   astronomical_hdy __P_ ((Bool * init_data,
 			  const Bool detected,

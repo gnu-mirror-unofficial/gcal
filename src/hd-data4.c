@@ -158,7 +158,7 @@ mc_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 	   DIS_HLS_PREF2, dvec[MONTH_MAX - 1], MONTH_MAX, year, hd_elems,
 	   fday, count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
-		      count);
+		      count, ptr_cc_id);
 }
 
 
@@ -605,7 +605,7 @@ mq_hdy (init_data, detected, easter, year, hd_elems, fday, count)
     holiday (*init_data, detected, _(hd_text[HD_ARMISTICE_DAY].ht_text),
 	     ptr_cc_id, "+", 11, 11, year, hd_elems, fday, count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
-		      count);
+		      count, ptr_cc_id);
 }
 
 
@@ -688,7 +688,7 @@ ms_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 	       ptr_cc_id, "+", day, 8, year, hd_elems, fday, count);
     }
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
-		      count);
+		      count, ptr_cc_id);
 }
 
 
@@ -1370,7 +1370,7 @@ no_hdy (init_data, detected, easter, year, hd_elems, fday, count)
     holiday (*init_data, detected, _(hd_text[HD_LIBERATION_DAY].ht_text),
 	     ptr_cc_id, DIS_HLS_PREF, 8, 5, year, hd_elems, fday, count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
-		      count);
+		      count, ptr_cc_id);
 }
 
 
@@ -2488,7 +2488,8 @@ se_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   holiday (*init_data, detected, _(hd_text[HD_MOTHERS_DAY].ht_text),
 	   ptr_cc_id, DIS_HLS_PREF, day, 5, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_NATIONAL_HOLIDAY].ht_text),
-	   ptr_cc_id, DIS_HLS_PREF2, 6, 6, year, hd_elems, fday, count);
+	   ptr_cc_id, year >= 2005 ? "+" : DIS_HLS_PREF2, 6, 6, year, hd_elems,
+	   fday, count);
   holiday (*init_data, detected, _(hd_text[HD_THE_QUEENS_BIRTHDAY].ht_text),
 	   ptr_cc_id, DIS_HLS_PREF, 23, MONTH_MAX, year, hd_elems, fday,
 	   count);
@@ -2506,7 +2507,10 @@ se_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 	   ptr_cc_id, DIS_HLS_PREF, dvec[4 - 1], 4, year, hd_elems, fday,
 	   count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
-		      count);
+		      count, ptr_cc_id);
+  holiday (*init_data, detected, _(hd_text[HD_WHIT_MONDAY].ht_text),
+	   ptr_cc_id, year < 2005 ? "+" : DIS_HLS_PREF2, easter + 50, 0, year,
+	   hd_elems, fday, count);
 }
 
 
@@ -2862,7 +2866,7 @@ sn_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 	   DIS_HLS_PREF, dvec[MONTH_MAX - 1], MONTH_MAX, year, hd_elems, fday,
 	   count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
-		      count);
+		      count, ptr_cc_id);
 }
 
 

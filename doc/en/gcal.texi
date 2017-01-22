@@ -42,10 +42,10 @@
 @c
 @c Some necessary constant definitions
 @c
-@set EDITION 4
+@set EDITION 4.1
 @set UPDATE-DATE 24 June 2000
 @set UPDATE-MONTH June 2000
-@set GCAL-VERSION 4
+@set GCAL-VERSION 4.1
 @c
 @settitle Gcal @value{GCAL-VERSION}
 @c

@@ -4,6 +4,11 @@ Copyright (C) 1994-2014 Free Software Foundation, Inc.
 
 User-visible changes.
 
+Major changes in release 4.1
+
+* National holiday replaced Pentecost Monday as a Swedish holiday 2005
+* Report Reformation Day as an holiday everywhere in Germany in 2017
+
 Major changes in release 4
 
 * Remove duplicate for All Saints Day for DE_BW and DE_RP.

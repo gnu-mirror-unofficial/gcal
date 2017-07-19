@@ -3001,8 +3001,9 @@ ke_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   use_other_cc = !use_other_cc;
   holiday (*init_data, detected, _(hd_text[HD_MADARAKA_DAY].ht_text),
 	   ptr_cc_id, "+", DAY_MIN, 6, year, hd_elems, fday, count);
-  holiday (*init_data, detected, _(hd_text[HD_NOI_DAY].ht_text),
-	   ptr_cc_id, "+", 10, 10, year, hd_elems, fday, count);
+  if (year < 2010)
+    holiday (*init_data, detected, _(hd_text[HD_MOI_DAY].ht_text),
+             ptr_cc_id, "+", 10, 10, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_ARMED_FORCES_DAY].ht_text),
 	   ptr_cc_id, "+", 20, 10, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_CHRISTMAS_DAY].ht_text),

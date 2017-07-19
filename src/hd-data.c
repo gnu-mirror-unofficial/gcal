@@ -914,7 +914,7 @@ const Ht_struct hd_text[] = {
   {HD_NEVADA_DAY, N_("Nevada Day")},
   {HD_NEW_REGIME_ANNIVERSARY, N_("New Regime Anniversary")},
   {HD_NOBEL_DAY, N_("Nobel Day")},
-  {HD_NOI_DAY, N_("Noi Day")},
+  {HD_MOI_DAY, N_("Moi Day")},
   {HD_OAU_DAY, N_("OAU Day")},
   {HD_OCTOBER_HOLIDAY, N_("October Holiday")},
   {HD_OIL_INDUSTRY_DAY, N_("Oil Industry Day")},

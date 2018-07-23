@@ -793,6 +793,9 @@ at_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   holiday (*init_data, detected,
 	   _(hd_text[HD_FEAST_OF_CORPUS_CHRISTI].ht_text), ptr_cc_id, "+",
 	   easter + 60, 0, year, hd_elems, fday, count);
+  holiday (*init_data, detected, _(hd_text[HD_ASH_WEDNESDAY].ht_text),
+	   ptr_cc_id, DIS_HLS_PREF, easter - 46, 0, year, hd_elems, fday,
+	   count);
   holiday (*init_data, detected, _(hd_text[HD_GOOD_FRIDAY].ht_text),
 	   ptr_cc_id, DIS_HLS_PREF2, easter - 2, 0, year, hd_elems, fday,
 	   count);
@@ -805,13 +808,191 @@ at_hdy (init_data, detected, easter, year, hd_elems, fday, count)
 	   8, MONTH_MAX, year, hd_elems, fday, count);
   holiday (*init_data, detected, _(hd_text[HD_NATIONAL_HOLIDAY].ht_text),
 	   ptr_cc_id, "+", 26, 10, year, hd_elems, fday, count);
+  holiday (*init_data, detected, _(hd_text[HD_CHRISTMAS_EVE].ht_text),
+	   ptr_cc_id, DIS_HLS_PREF2, 24, MONTH_MAX, year, hd_elems, fday,
+	   count);
   holiday (*init_data, detected, _(hd_text[HD_SYLVESTER].ht_text), ptr_cc_id,
-	   DIS_HLS_PREF, dvec[MONTH_MAX - 1], MONTH_MAX, year, hd_elems, fday,
+	   DIS_HLS_PREF2, dvec[MONTH_MAX - 1], MONTH_MAX, year, hd_elems, fday,
 	   count);
   holiday (*init_data, detected, _(hd_text[HD_THREE_KINGS_DAY].ht_text),
 	   ptr_cc_id, "+", 6, MONTH_MIN, year, hd_elems, fday, count);
   base_christian_hdy (init_data, detected, easter, year, hd_elems, fday,
 		      count, ptr_cc_id);
+}
+
+void
+at_vo_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+     Bool *init_data;
+     const Bool detected;
+     int easter;
+     const int year;
+     int *hd_elems;
+     const int fday;
+     const int count;
+/*!
+   Manages all specific holidays celebrated in Austria/Vorarlberg.
+*/
+{
+  at_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  ptr_cc_id = "AT_V";
+  holiday (*init_data, detected, _(hd_text[HD_ST_JOSEPHS_DAY].ht_text),
+     ptr_cc_id, "#", 19, 3, year, hd_elems, fday, count);
+}
+
+void
+at_ti_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+     Bool *init_data;
+     const Bool detected;
+     int easter;
+     const int year;
+     int *hd_elems;
+     const int fday;
+     const int count;
+/*!
+   Manages all specific holidays celebrated in Austria/Tyrol.
+*/
+{
+  at_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  ptr_cc_id = "AT_T";
+  holiday (*init_data, detected, _(hd_text[HD_ST_JOSEPHS_DAY].ht_text),
+     ptr_cc_id, "#", 19, 3, year, hd_elems, fday, count);
+}
+
+void
+at_st_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+     Bool *init_data;
+     const Bool detected;
+     int easter;
+     const int year;
+     int *hd_elems;
+     const int fday;
+     const int count;
+/*!
+   Manages all specific holidays celebrated in Austria/Styria.
+*/
+{
+  at_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  ptr_cc_id = "AT_ST";
+  holiday (*init_data, detected, _(hd_text[HD_ST_JOSEPHS_DAY].ht_text),
+     ptr_cc_id, "#", 19, 3, year, hd_elems, fday, count);
+}
+
+void
+at_ka_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+     Bool *init_data;
+     const Bool detected;
+     int easter;
+     const int year;
+     int *hd_elems;
+     const int fday;
+     const int count;
+/*!
+   Manages all specific holidays celebrated in Austria/Carinthia.
+*/
+{
+  at_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  ptr_cc_id = "AT_K";
+  holiday (*init_data, detected, _(hd_text[HD_ST_JOSEPHS_DAY].ht_text),
+     ptr_cc_id, "#", 19, 3, year, hd_elems, fday, count);
+  // Tag der Volksabstimmung https://en.wikipedia.org/wiki/Carinthian_plebiscite,_1920
+  holiday (*init_data, detected, _(hd_text[HD_DAY_OF_THE_REFERENDUM].ht_text),
+     ptr_cc_id, "#", 10, 10, year, hd_elems, fday, count);
+}
+
+void
+at_oo_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+     Bool *init_data;
+     const Bool detected;
+     int easter;
+     const int year;
+     int *hd_elems;
+     const int fday;
+     const int count;
+/*!
+   Manages all specific holidays celebrated in Austria/Upper Austria.
+*/
+{
+  at_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  ptr_cc_id = "AT_OO";
+  if (year >= 2004)
+    holiday (*init_data, detected, _(hd_text[HD_SAINT_FLORIAN].ht_text),
+       ptr_cc_id, "#", 4, 5, year, hd_elems, fday, count);
+}
+
+void
+at_bu_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+     Bool *init_data;
+     const Bool detected;
+     int easter;
+     const int year;
+     int *hd_elems;
+     const int fday;
+     const int count;
+/*!
+   Manages all specific holidays celebrated in Austria/Burgenland
+*/
+{
+  at_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  ptr_cc_id = "AT_B";
+  holiday (*init_data, detected, _(hd_text[HD_MARTINIMAS].ht_text),
+     ptr_cc_id, "#", 11, 11, year, hd_elems, fday, count);
+}
+
+void
+at_no_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+     Bool *init_data;
+     const Bool detected;
+     int easter;
+     const int year;
+     int *hd_elems;
+     const int fday;
+     const int count;
+/*!
+   Manages all specific holidays celebrated in Austria/Lower Austria
+*/
+{
+  at_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  ptr_cc_id = "AT_NO";
+  holiday (*init_data, detected, _(hd_text[HD_SAINT_LEOPOLD_III].ht_text),
+     ptr_cc_id, "#", 15, 11, year, hd_elems, fday, count);
+}
+
+void
+at_wi_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+     Bool *init_data;
+     const Bool detected;
+     int easter;
+     const int year;
+     int *hd_elems;
+     const int fday;
+     const int count;
+/*!
+   Manages all specific holidays celebrated in Austria/Vienna
+*/
+{
+  at_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  ptr_cc_id = "AT_W";
+  holiday (*init_data, detected, _(hd_text[HD_SAINT_LEOPOLD_III].ht_text),
+     ptr_cc_id, "#", 15, 11, year, hd_elems, fday, count);
+}
+
+void
+at_sa_hdy (init_data, detected, easter, year, hd_elems, fday, count)
+     Bool *init_data;
+     const Bool detected;
+     int easter;
+     const int year;
+     int *hd_elems;
+     const int fday;
+     const int count;
+/*!
+   Manages all specific holidays celebrated in Austria/Salzburg
+*/
+{
+  at_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  ptr_cc_id = "AT_S";
+  holiday (*init_data, detected, _(hd_text[HD_RUPERT_OF_SALZBURG].ht_text),
+     ptr_cc_id, "#", 24, 9, year, hd_elems, fday, count);
 }
 
 

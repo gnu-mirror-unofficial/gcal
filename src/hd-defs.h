@@ -655,6 +655,10 @@
 #  define HD_W_TUBMANS_BIRTHDAY                 549
 #  define HD_YAP_DAY                            550
 #  define HD_DAY_OF_CZECH_STATEHOOD             551
+#  define HD_DAY_OF_THE_REFERENDUM              552
+#  define HD_SAINT_FLORIAN                      553
+#  define HD_RUPERT_OF_SALZBURG                 554
+#  define HD_SAINT_LEOPOLD_III                  555
 # endif	/* !HD_TOP20CC */
 
 

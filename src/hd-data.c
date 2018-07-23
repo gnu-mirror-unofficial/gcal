@@ -97,6 +97,15 @@ const Cc_struct cc_holidays[] = {
   {"AR", N_("Argentina"), ar_hdy},
   {"AS", N_("American Samoa"), as_hdy},
   {"AT", N_("Austria"), at_hdy},
+  {"AT_B", N_("Austria/Burgenland"), at_bu_hdy},
+  {"AT_K", N_("Austria/Carinthia"), at_ka_hdy},
+  {"AT_NO", N_("Austria/Lower Austria"), at_no_hdy},
+  {"AT_OO", N_("Austria/Upper Austria"), at_oo_hdy},
+  {"AT_S", N_("Austria/Salzburg"), at_sa_hdy},
+  {"AT_ST", N_("Austria/Styria"), at_st_hdy},
+  {"AT_T", N_("Austria/Tyrol"), at_ti_hdy},
+  {"AT_V", N_("Austria/Vorarlberg"), at_vo_hdy},
+  {"AT_W", N_("Austria/Vienna"), at_wi_hdy},
   {"AU_CT", N_("Australia/Canberra"), au_ct_hdy},
   {"AU_NT", N_("Australia/Northern Territory"), au_nt_hdy},
   {"AU_QU", N_("Australia/Queensland"), au_qu_hdy},
@@ -1015,7 +1024,11 @@ const Ht_struct hd_text[] = {
   {HD_WHITSUN_EVE, N_("Whitsun Eve")},
   {HD_W_TUBMANS_BIRTHDAY, N_("W. Tubman's Birthday")},
   {HD_YAP_DAY, N_("Yap Day")},
-  {HD_DAY_OF_CZECH_STATEHOOD, N_("Day of Czech Statehood")}
+  {HD_DAY_OF_CZECH_STATEHOOD, N_("Day of Czech Statehood")},
+  {HD_DAY_OF_THE_REFERENDUM, N_("Day of the referendum")},
+  {HD_SAINT_FLORIAN, N_("Saint Florian")},
+  {HD_RUPERT_OF_SALZBURG, N_("Rupert of Salzburg")},
+  {HD_SAINT_LEOPOLD_III, N_("Saint Leopold III")}
 #endif	/* !HD_TOP20CC */
 };
 

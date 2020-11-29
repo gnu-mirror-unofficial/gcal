@@ -1354,7 +1354,7 @@ month_name (month)
 
 
 	  len = (int) strlen (s) - 1;
-	  mayname = (char *) my_malloc (len,
+	  mayname = (char *) my_malloc (len + 2,
 					ERR_NO_MEMORY_AVAILABLE,
 					__FILE__, ((long) __LINE__) - 2L,
 					"mayname", 0);

@@ -165,6 +165,9 @@ de_hb_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  if (year > 2017)
+    holiday (*init_data, detected, _(hd_text[HD_REFORMATION_DAY].ht_text),
+	     ptr_cc_id, "+", dvec[10 - 1], 10, year, hd_elems, fday, count);
 }
 
 
@@ -211,6 +214,9 @@ de_hh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  if (year > 2017)
+    holiday (*init_data, detected, _(hd_text[HD_REFORMATION_DAY].ht_text),
+	     ptr_cc_id, "+", dvec[10 - 1], 10, year, hd_elems, fday, count);
 }
 
 
@@ -279,6 +285,9 @@ de_ni_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  if (year > 2017)
+    holiday (*init_data, detected, _(hd_text[HD_REFORMATION_DAY].ht_text),
+	     ptr_cc_id, "+", dvec[10 - 1], 10, year, hd_elems, fday, count);
 }
 
 
@@ -378,6 +387,9 @@ de_sh_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   de_be_hdy (init_data, detected, easter, year, hd_elems, fday, count);
   use_other_cc = !use_other_cc;
   de_hdy (init_data, detected, easter, year, hd_elems, fday, count);
+  if (year > 2017)
+    holiday (*init_data, detected, _(hd_text[HD_REFORMATION_DAY].ht_text),
+	     ptr_cc_id, "+", dvec[10 - 1], 10, year, hd_elems, fday, count);
 }
 
 

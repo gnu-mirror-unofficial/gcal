@@ -659,6 +659,7 @@
 #  define HD_SAINT_FLORIAN                      553
 #  define HD_RUPERT_OF_SALZBURG                 554
 #  define HD_SAINT_LEOPOLD_III                  555
+#  define HD_DAY_OF_REMEMBRANCE_AND_RECOGNITION 556
 # endif	/* !HD_TOP20CC */
 
 
@@ -672,7 +673,7 @@
 typedef struct country_code_type
 {
   /*
-     The ISO-3166 2-characters country code identifer,
+     The ISO-3166 2-characters country code identifier,
      plus an optionally trailing territory text `_TT'.
    */
   char *cc_id;

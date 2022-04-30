@@ -1028,7 +1028,8 @@ const Ht_struct hd_text[] = {
   {HD_DAY_OF_THE_REFERENDUM, N_("Day of the referendum")},
   {HD_SAINT_FLORIAN, N_("Saint Florian")},
   {HD_RUPERT_OF_SALZBURG, N_("Rupert of Salzburg")},
-  {HD_SAINT_LEOPOLD_III, N_("Saint Leopold III")}
+  {HD_SAINT_LEOPOLD_III, N_("Saint Leopold III")},
+  {HD_DAY_OF_REMEMBRANCE_AND_RECOGNITION, N_("Day of Remembrance and Recognition")}
 #endif	/* !HD_TOP20CC */
 };
 

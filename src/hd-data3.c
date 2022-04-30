@@ -2712,6 +2712,9 @@ ie_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   if (year > 1903)
     holiday (*init_data, detected, _(hd_text[HD_BLOOMSDAY].ht_text),
 	     ptr_cc_id, DIS_HLS_PREF, 16, 6, year, hd_elems, fday, count);
+  if (year == 2022)
+    holiday (*init_data, detected, _(hd_text[HD_DAY_OF_REMEMBRANCE_AND_RECOGNITION].ht_text),
+	     ptr_cc_id, "+", 18, 3, year, hd_elems, fday, count);
 }
 
 

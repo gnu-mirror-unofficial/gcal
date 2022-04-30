@@ -2142,7 +2142,7 @@ holiday (init_data, detected, holiday_name, country_code, holiday_prefix,
      holiday is only valid in some parts of the country, but is stored
      into global `hd_ldays' and will be highlighted in the generated list.
      If `holiday_prefix' is a '\0' or any other character, the same rules
-     concering to '#' character applies.
+     concerning to '#' character applies.
      If `month' is set to zero, it's assumed that the delivered date is a
      date relative to the Easter Sunday's date (`day' contains the according
      day_of_year number), otherwise the date is an absolute date of the `year'.

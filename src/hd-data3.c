@@ -2715,6 +2715,11 @@ ie_hdy (init_data, detected, easter, year, hd_elems, fday, count)
   if (year == 2022)
     holiday (*init_data, detected, _(hd_text[HD_DAY_OF_REMEMBRANCE_AND_RECOGNITION].ht_text),
 	     ptr_cc_id, "+", 18, 3, year, hd_elems, fday, count);
+  if (year >= 2023)
+      holiday (*init_data, detected, _(hd_text[HD_ST_BRIGIDS_DAY].ht_text),
+               ptr_cc_id, "+",
+               weekday_of_date(1, 2, year) == 5 ? 1 : eval_holiday(DAY_MIN, 2, year, DAY_MIN, TRUE),
+               2, year, hd_elems, fday, count);
 }
 
 

@@ -660,6 +660,7 @@
 #  define HD_RUPERT_OF_SALZBURG                 554
 #  define HD_SAINT_LEOPOLD_III                  555
 #  define HD_DAY_OF_REMEMBRANCE_AND_RECOGNITION 556
+#  define HD_ST_BRIGIDS_DAY                     557
 # endif	/* !HD_TOP20CC */
 
 
